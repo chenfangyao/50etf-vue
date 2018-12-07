@@ -1,0 +1,16 @@
+{
+  "name": "etf50",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "LinChengShu",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^4.2.0-rc.2",
+    "mpvue-echarts": "^0.2.7"
+  }
+}
