@@ -27,15 +27,15 @@ var option = {
   legend:{
     padding:0
   },
+  grid:{
+    left:0,
+    right:0,
+    top:3,
+    bottom:3
+  },
   yAxis: {
     show: false,
     type: 'value',
-    min: function (value) {
-      return value.min - 30;
-    },
-    max: function (value) {
-      return value.max + 30;
-    }
   },
   series: [{
     data: [15, 20, 36, 14, 10, 26],
