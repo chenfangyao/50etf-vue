@@ -9,8 +9,8 @@
         <text>0.6%</text>
       </text>
     </view>
-    <button @click="handleClick">111</button>
-    <button @click="handleClick2">2</button>
+    <button @tap="handleClick">111</button>
+    <button @tap="handleClick2">2</button>
   </view>
 </template>
 

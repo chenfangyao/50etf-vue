@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="list-cell" hover-class="uni-list-cell-hover" @click="bindClick">
+        <view class="list-cell" hover-class="uni-list-cell-hover" @tap="bindClick">
             <view class="media-list" v-if="data.title">
                 <view :class="[isImgRight?'media-image-right':'',isImgLeft?'media-image-left':'']">
                     <text :class="['media-title',isImgRight||isImgLeft?'media-title2':'']">{{data.title}}</text>
@@ -17,7 +17,7 @@
                         <text class="info-text">{{data.comment_count}}条评论</text>
                         <text class="info-text">{{data.datetime}}</text>
                     </view>
-                    <view class="max-close-view" @click.stop="close">
+                    <view class="max-close-view" @tap.stop="close">
                         <view class="close-view"><text class="close">×</text></view>
                     </view>
                 </view>

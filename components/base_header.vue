@@ -11,7 +11,6 @@
 </template>
 
 <script>
-//hello world
 export default {
   props: ['title']
 }
@@ -19,7 +18,7 @@ export default {
 
 <style lang="scss">
 view.h44 {
-  height: 44px; 
+  height: 44px;
 }
 .headerContainer {
   position: fixed;

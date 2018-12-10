@@ -1,6 +1,6 @@
 <template>
   <view class="wrap " >
-    <image src='/static/arrow/l.png' @click="back"/>
+    <image src='/static/arrow/l.png' @tap="back"/>
     <view>
       <h4>{{name1}}</h4>
       <h5>{{name2}}</h5>

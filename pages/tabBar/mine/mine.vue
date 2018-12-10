@@ -2,54 +2,54 @@
   <view class="wrap">
     <headerCard></headerCard>
     <view class="items">
-      <view class="uni-flex" hover-class="self-hover" >
-        <image src="/static/mineImg/01.png"/>
+      <view class="uni-flex" hover-class="self-hover">
+        <image src="/static/mineImg/01.png" />
         <text>资金流水</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex" hover-class="self-hover">
-        <image src="/static/mineImg/02.png"/>
+        <image src="/static/mineImg/02.png" />
         <text>银行卡</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
 
       </view>
       <view class="uni-flex bb6" hover-class="self-hover">
-        <image src="/static/mineImg/03.png"/>
+        <image src="/static/mineImg/03.png" />
         <text>交易规则</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex" hover-class="self-hover">
-        <image src="/static/mineImg/04.png"/>
+        <image src="/static/mineImg/04.png" />
         <text>我的红包</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex bb6" hover-class="self-hover">
-        <image src="/static/mineImg/05.png"/>
+        <image src="/static/mineImg/05.png" />
         <text>邀请好友</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex" hover-class="self-hover">
-        <image src="/static/mineImg/06.png"/>
+        <image src="/static/mineImg/06.png" />
         <text>联系客服</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex" hover-class="self-hover">
-        <image src="/static/mineImg/07.png"/>
+        <image src="/static/mineImg/07.png" />
         <text>50ETF</text>
         <text class="tip" v-if="false"></text>
-        <image src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
       <view class="uni-flex" hover-class="self-hover">
-        <image src="/static/mineImg/08.png"/>
+        <image src="/static/mineImg/08.png" />
         <text>关于我们</text>
         <text class="tip" v-if="true"></text>
-        <image  src="../../../static/mineImg/arrow.png"/>
+        <image src="../../../static/mineImg/arrow.png" />
       </view>
     </view>
   </view>
@@ -59,9 +59,7 @@
 import headerCard from '@/components/mineSub/headerCard.vue'
 export default {
   data() {
-    return {
-
-    };
+    return {}
   },
   components: {
     headerCard
@@ -72,7 +70,7 @@ export default {
 <style scoped lang="scss">
 view.wrap {
   background-color: #f5f5f5;
-  height:calc( 100vh - 70upx);
+  height: calc(100vh - 70upx);
   view.items {
     margin-top: 130upx;
     view {

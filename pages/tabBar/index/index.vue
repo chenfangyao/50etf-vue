@@ -35,12 +35,12 @@ export default {
       data:{},//发送给服务端的数据
       methods:'POST',//请求方法全部大写，默认GET
     }
-    this.$httpReq(options).then((res)=>{
-      //请求成功的回调
-      //res为服务端返回数据的根对象
-    }).catch((err)=>{
-      //请求失败的回调
-    })
+    // this.$httpReq(options).then((res)=>{
+    //   请求成功的回调
+    //   res为服务端返回数据的根对象
+    // }).catch((err)=>{
+    //   请求失败的回调
+    // })
   }
 }
 </script>

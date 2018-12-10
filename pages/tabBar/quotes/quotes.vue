@@ -3,7 +3,7 @@
     <base-header title="行情"></base-header>
     <stock-tip-bar></stock-tip-bar>
     <view class="uni-tab-bar">
-        <view id="tab-bar" class="swiper-tab uni-flex" >
+        <view  class="swiper-tab uni-flex" >
             <view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']"
                 :id="tab.id" :data-current="index" @tap="tapTab">{{tab.name}}</view>
         </view>

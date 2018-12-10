@@ -1,6 +1,6 @@
 <template>
 <view>
-  <view class="uni-flex wrap" v-for="(item,i) in aa" @click="go" :key="i">
+  <view class="uni-flex wrap" v-for="(item,i) in aa" @tap="go" :key="i">
     <text class="txtred">7.09%</text>
     <text class="txtred">0.1881</text>
     <view class="uni-flex">
