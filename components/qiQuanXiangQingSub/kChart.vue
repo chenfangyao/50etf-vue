@@ -5,6 +5,7 @@
         <view v-for="(tab,index) in tabBars" :key="index" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']" :data-current="index" @tap="tapTab">{{tab.name}}</view>
       </view>
     </view>
+    <view class="h556"></view>
   </view>
 </template>
 <script>
@@ -60,5 +61,8 @@ view.uni-tab-bar {
       color: #707680;
     }
   }
+}
+view.h556{
+  height: 556upx;
 }
 </style>
