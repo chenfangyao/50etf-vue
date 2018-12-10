@@ -4,7 +4,7 @@
     <stock-tip-bar></stock-tip-bar>
     <view class="uni-tab-bar">
         <view  class="swiper-tab uni-flex" >
-            <view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']"
+             <view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']"
                 :id="tab.id" :data-current="index" @tap="tapTab">{{tab.name}}</view>
         </view>
         <futures-title></futures-title>
