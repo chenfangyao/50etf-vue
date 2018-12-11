@@ -9,6 +9,7 @@
     <view class="uni-flex newsViewTitle">
       <text>资讯</text>
       <text>更多></text>
+      <text>更多,,,,></text>
     </view>
     <news-view></news-view>
   </view>
