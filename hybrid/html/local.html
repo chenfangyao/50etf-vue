@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    #d1 {
+      margin-top: 25px;
+    }
+  </style>
+  <title>全屏图表</title>
+</head>
+
+<body>
+  <div id="d1">45465343</div>
+  <script>
+    document.addEventListener('UniAppJSBridgeReady', function () {
+
+     
+    }, false);
+    document.addEventListener('plusReady', function () {
+      plus.screen.lockOrientation("landscape-primary");
+      plus.key.addEventListener("backbutton", function () {
+        plus.screen.lockOrientation("portrait-primary");
+        // uni.navigateBack(2)//todo
+      })
+    })
+  </script>
+</body>
+
+</html>

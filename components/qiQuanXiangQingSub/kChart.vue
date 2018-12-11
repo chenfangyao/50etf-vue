@@ -6,7 +6,7 @@
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view class="h556">
+    <view class="h556" @tap='go'>
       <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="m-canvas"/>
     </view>
     <!-- #endif -->
@@ -155,6 +155,14 @@ export default {
     }
   },
   methods: {
+    go() {
+      //#ifdef APP-PLUS
+
+      uni.navigateTo({
+        url: '/platforms/app-plus/fullscreen/fullscreen',
+      });
+      //#endif
+    },
     tapTab(e) { //点击tab-bar
       if (this.tabIndex === e.target.dataset.current) {
         return false;
