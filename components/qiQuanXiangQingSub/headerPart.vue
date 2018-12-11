@@ -1,5 +1,4 @@
 
-// 期权详情，页面上部分交易信息板块
 <template>
   <view>
     <view class="uni-flex">
@@ -42,8 +41,8 @@
         </view>
       </view>
     </view>
-    <header-part-detail :class="{'isshow':isshowDetail}"></header-part-detail>
-    <view class="arrowImg" @tap="isshowDetail = !isshowDetail">
+    <header-part-detail :isshowDetail="isshowDetail"></header-part-detail>
+    <view class="arrowImg" @tap="showPartDetail">
       <image v-show="isshowDetail" src="/static/arrow/b.png"></image>
       <image v-show="!isshowDetail" src="/static/arrow/t.png"></image>
     </view>
@@ -55,11 +54,14 @@ import headerPartDetail from './headerPartDetail.vue'
 export default {
   data() {
     return {
-      isshowDetail: true,
+      isshowDetail:true
     }
   },
   components: { headerPartDetail },
   methods: {
+    showPartDetail(){
+      this.isshowDetail = !this.isshowDetail
+    }
   }
 }
 </script>
@@ -82,6 +84,7 @@ view.leftPart {
       font-size: 12px;
       line-height: 15px;
       font-weight: 400;
+      
     }
   }
   view.leftBottom {
@@ -128,9 +131,5 @@ view.arrowImg {
     height: 17upx;
   }
 }
-.isshow {
-  height: 0 !important;
-  margin-top: 0 !important;
-  // display: none;
-}
+
 </style>

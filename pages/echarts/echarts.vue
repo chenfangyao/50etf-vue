@@ -1,7 +1,7 @@
 <template>
   <view class="echarts-wrap">
     <!-- #ifndef H5 -->
-    <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="demo-canvas"/>
+    <mpvue-echarts  :echarts="echarts" :onInit="onInit"  canvasId="demo-canvas2"/>
     <!-- #endif -->
     <!-- #ifdef H5 -->
     <view>在h5环境显示此文本</view>
@@ -43,7 +43,6 @@ var dataMA5 = calculateMA(5, data);
 var dataMA10 = calculateMA(10, data);
 var dataMA20 = calculateMA(20, data);
 var option = {
-    animation: false,
     color: colorList,
     title: {
       left: 'center',

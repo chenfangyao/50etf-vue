@@ -8,7 +8,8 @@ const store = new Vuex.Store({
 		hasLogin: false,
 		loginProvider: "",
     openid: null,
-    isWhite:true
+    isWhite:true,
+    sid:''
 	},
 	mutations: {
 		login(state, provider) {
@@ -24,7 +25,10 @@ const store = new Vuex.Store({
 		},
 		setOpenid(state, openid) {
 			state.openid = openid
-		}
+    },
+		setsid(state, data) {
+			state.sid = data
+    },
 	},
 })
 

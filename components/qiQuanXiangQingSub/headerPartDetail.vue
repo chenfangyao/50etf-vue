@@ -1,5 +1,5 @@
 <template>
-  <view class="wrap">
+  <view :class="[{'isshow':isshowDetail},'wrap' ]">
     <view class="line1 uni-flex">
       <view>
         <text>最高</text>
@@ -30,6 +30,21 @@
     </view>
   </view>
 </template>
+<script>
+export default {
+  data() {
+    return {
+
+    }
+  },
+  props: {
+    isshowDetail: {
+      default: true,
+    },
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 view.wrap {
   margin: 22upx 0 0 25upx;
@@ -58,5 +73,10 @@ view.wrap {
       justify-content: space-between;
     }
   }
+}
+.isshow {
+  height: 0 !important;
+  margin-top: 0 !important;
+  // display: none;
 }
 </style>
