@@ -5,9 +5,10 @@ export default function (obj) {
       url: baseUrl + obj.url,
       method: obj.method || 'GET',
       data: obj.data || {},
-     // header: { 'content-type': ' application/json' },
+      header: obj.header || {},
+			context:obj.context || '',
       success: res => {
-        resolve(res)
+        resolve(res.data)
       },
       fail: () => { reject() },
     });
