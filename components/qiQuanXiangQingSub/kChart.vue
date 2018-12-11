@@ -11,7 +11,7 @@
     </view>
     <!-- #endif -->
      <!-- #ifdef H5 -->
-    <view class="h556" id="canvas1">k线图</view>
+    <view class="h556" id="canvas1">k线图2</view>
     <!-- #endif -->
 
   </view>
