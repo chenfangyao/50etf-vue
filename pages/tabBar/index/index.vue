@@ -53,9 +53,6 @@
 					// res为服务端返回数据的根对象
 					console.log(res)
 					if(res.status==1){
-						console.log('data',res.data)
-						console.log('type',typeof(res.data))
-						console.log('sid',res.data.sid)
 						localStorage.setItem('sid',res.data.sid)
 						var ss=localStorage.getItem('sid')
 						this.getuserinfo()
@@ -85,6 +82,27 @@
 			getuserinfo(){
 				var options = {
 					url: '/Sapi/User/info', //请求接口
+					method: 'GET', //请求方法全部大写，默认GET
+					context:'',
+					header: {
+						clienttype: 'web',
+						ver: 'v1.0',
+						sid:localStorage.getItem("sid") || ""
+					},
+				}
+				this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log('用户信息',res)
+				}).catch((err) => {
+					// 请求失败的回调
+					alert(err)
+				})
+			},
+			// 获取配置信息
+			getconfinfo(){
+				var options = {
+					url: '/Sapi/Soft/conf', //请求接口
 					method: 'GET', //请求方法全部大写，默认GET
 					context:'',
 					header: {
