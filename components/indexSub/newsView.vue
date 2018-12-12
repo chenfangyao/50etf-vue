@@ -75,35 +75,15 @@
 			},
 
 			timeformates(timestr) {
-				return new Date(parseInt(timestr) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
-				// return 33; 
+				// return new Date(parseInt(timestr) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+				return util.formateTimeStr(timestr); 
 			},
 			// 获取文章详情
 			getartdetil(artid) {
 				uni.navigateTo({
-					url: '/pages/index_sub/new_xiang_qing/new_xiang_qing'
+					url: '/pages/index_sub/new_xiang_qing/new_xiang_qing?id='+artid+''
+					// url: '/pages/test_uni/test_uni/test_uni'
 				});
-				var options = {
-					url: '/Sapi/Article/cont', //请求接口
-					method: 'GET', //请求方法全部大写，默认GET
-					data: {
-						id: artid
-					},
-					context: '',
-					header: {
-						clienttype: 'web',
-						ver: 'v1.0',
-						sid: this.sid || ""
-					},
-				}
-				this.$httpReq(options).then((res) => {
-					// 请求成功的回调
-					// res为服务端返回数据的根对象
-					console.log('文章详情', res)
-				}).catch((err) => {
-					// 请求失败的回调
-					alert(err)
-				})
 			}
 
 		},

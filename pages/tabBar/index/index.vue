@@ -160,8 +160,6 @@ export default {
 	    	},
 	    	context: '',
 	    	header: {
-	    		clienttype: 'web',
-	    		ver: 'v1.0',
 	    		sid: this.sid || ""
 	    	},
 	    }
