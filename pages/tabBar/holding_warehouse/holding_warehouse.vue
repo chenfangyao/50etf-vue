@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import baseHeader from '@/components/base_header.vue'
 
 export default {
   data() {
@@ -23,6 +22,7 @@ export default {
 
     };
   },
+  
   methods:{
     handleClick() {
       //#ifdef APP-PLUS

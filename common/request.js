@@ -1,3 +1,4 @@
+import { mapState, mapMutations } from 'vuex';
 export default function (obj) {
   var p = new Promise((resolve, reject) => {
     var baseUrl = 'http://47.100.226.135:8040'

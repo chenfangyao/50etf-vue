@@ -1,14 +1,14 @@
 <template>
   <view class="uni-flex">
-    <view class="v1" hover-class="tap-hover">开仓</view>
-    <view class="v2" hover-class="tap-hover">平仓</view>
+    <view class="v1" @tap="go" hover-class="tap-hover">开仓</view>
+    <view class="v2" @tap="go" hover-class="tap-hover">平仓</view>
   </view>
 </template>
 <style lang="scss" scoped>
 @import "../../common/customize.scss";
 
-$v1bg:#409de5;
-$v2bg:#e6aa12;
+$v1bg: #409de5;
+$v2bg: #e6aa12;
 view.uni-flex {
   position: fixed;
   bottom: 0;
@@ -22,11 +22,11 @@ view.uni-flex {
     background-color: $v1bg;
     width: 50%;
   }
-  .v1.tap-hover{
-    background:darken($v1bg,5%);
+  .v1.tap-hover {
+    background: darken($v1bg, 5%);
   }
-  .v2.tap-hover{
-    background:darken($v2bg,5%);
+  .v2.tap-hover {
+    background: darken($v2bg, 5%);
   }
   .v2 {
     line-height: 98upx;
@@ -36,3 +36,15 @@ view.uni-flex {
   color: rgba(255, 255, 255, 1);
 }
 </style>
+<script>
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    go() {
+      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close' })
+    }
+  }
+}
+</script>

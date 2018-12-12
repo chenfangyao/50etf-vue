@@ -62,19 +62,26 @@
                 "scrollIndicator" : "none"
             }
         },
-		{
-			"path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
-			"style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
-		},
+        {
+            "path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
         {
             "path" : "platforms/app-plus/fullscreen/fullscreen",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/quotes_sub/open_close/open_close",
+            "style" : {
+              "titleNView" : false,
+              "scrollIndicator" : "none"
+            }
         }
     ],
     "tabBar" : {
