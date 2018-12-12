@@ -63,11 +63,7 @@
             }
         },
         {
-<<<<<<< HEAD
-            "path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
-=======
             "path" : "platforms/app-plus/fullscreen/fullscreen",
->>>>>>> remotes/origin/master
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
