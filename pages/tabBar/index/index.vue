@@ -8,7 +8,7 @@
 		<three-securities></three-securities>
 		<view class="uni-flex newsViewTitle">
 			<text>资讯</text>
-			<text>更多></text>
+			<text @click="getmoreart()">更多></text>
 		</view>
 		<news-view></news-view>
 	</view>
@@ -29,7 +29,7 @@ export default {
     threeSecurities,
     fourTips
   },
-  computed: mapState(['isWhite']),
+  computed: mapState(['isWhite','sid']),
   methods: {
     // 登录
     ...mapMutations(['setsid']),
@@ -51,11 +51,13 @@ export default {
         // res为服务端返回数据的根对象
         console.log(res)
         if (res.status == 1) {
-          // localStorage.setItem('sid', res.data.sid)
           this.setsid(res.data.sid)
-
-          var ss = localStorage.getItem('sid')
+					// 获取用户信息
           this.getuserinfo()
+					// 获取指数信息,未确定接口
+					// this.getmarkinfo()
+					// 获取文章列表
+					// this.getartlelist()
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -108,7 +110,7 @@ export default {
         header: {
           clienttype: 'web',
           ver: 'v1.0',
-          sid: localStorage.getItem("sid") || ""
+          sid: this.sid || ""
         },
       }
       this.$httpReq(options).then((res) => {
@@ -121,8 +123,63 @@ export default {
       })
     },
 
+// 获取指数信息
+    getmarkinfo() {
+      var options = {
+        url: '/stockStat/getCommonSelectStock', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+				data:{
+					stockTradeMins:''
+				},
+        context: '',
+        header: {
+          clienttype: 'web',
+          ver: 'v1.0',
+          sid: this.sid || ""
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        // 请求成功的回调
+        // res为服务端返回数据的根对象
+        console.log('指数信息', res)
+      }).catch((err) => {
+        // 请求失败的回调
+        alert(err)
+      })
+    },
 
-  },
+// 获取更多文章
+    getmoreart(){
+	    var options = {
+	    	url: '/Sapi/Article/notice', //请求接口
+	    	method: 'POST', //请求方法全部大写，默认GET
+	    	data:{
+	    		page_index:0,
+	    		page_size:10,
+	    		cate_id:29
+	    	},
+	    	context: '',
+	    	header: {
+	    		clienttype: 'web',
+	    		ver: 'v1.0',
+	    		sid: this.sid || ""
+	    	},
+	    }
+	    this.$httpReq(options).then((res) => {
+	    	// 请求成功的回调
+	    	// res为服务端返回数据的根对象
+	    	console.log('文章列表', res)
+	    	// this.timeformates()
+	    	this.newsItem=res.data.list
+	    }).catch((err) => {
+	    	// 请求失败的回调
+	    	alert(err)
+	    })	
+	
+	}
+	
+
+	},
   created() {
     this.loginin()
     // 			this.loginout()

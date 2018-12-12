@@ -58,6 +58,13 @@
         {
             "path" : "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
             "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
+            "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
