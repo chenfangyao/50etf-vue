@@ -6,7 +6,7 @@
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view class="h556">
+    <view class="h556" @tap='go'>
       <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="m-canvas"/>
     </view>
     <!-- #endif -->
@@ -52,27 +52,28 @@ var option = {
     padding: 0,
   },
   color: '#4AB9BB',
-  yAxis: [{
-    axisLine: {
-      show: false
-    },
-    position: 'left',
-    nameLocation: 'start',
-    axisTick: { show: false },
-    axisLabel: {
-      inside: true,
-      margin: 3,
-    }
+  yAxis: [
+    {
+      axisLine: {
+        show: false
+      },
+      position: 'left',
+      nameLocation: 'start',
+      axisTick: { show: false },
+      axisLabel: {
+        inside: true,
+        margin: 3,
+      }
 
-  }, {
-    scale: true,
-    gridIndex: 1,
-    splitNumber: 2,
-    axisLabel: { show: false },
-    axisLine: { show: false },
-    axisTick: { show: false },
-    splitLine: { show: false }
-  },],
+    }, {
+      scale: true,
+      gridIndex: 1,
+      splitNumber: 2,
+      axisLabel: { show: false },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { show: false }
+    },],
   grid: [
     {
       left: 10,
@@ -87,41 +88,42 @@ var option = {
       bottom: 10
     },
   ],
-  series: [{
-    data: [15, 20, 36, 26, 2, 11, 12, 14, 10, 26, 2, 11, 12],
-    areaStyle: {
-      opacity: 0.5,
-      color: {
-        type: 'linear',
-        x: 0,
-        y: 0,
-        x2: 0,
-        y2: 1,
-        colorStops: [{
-          offset: 0, color: '#54DDDC' // 0% 处的颜色
-        }, {
-          offset: 1, color: '#ffffff' // 100% 处的颜色
-        }],
-        globalCoord: false // 缺省为 false
-      }
-    },
-    type: 'line',
-    symbol: 'none'
-  },
-  {
-    type: 'bar',
-    xAxisIndex: 1,
-    yAxisIndex: 1,
-    itemStyle: {
-      normal: {
-        color: '#7fbe9e'
+  series: [
+    {
+      data: [15, 20, 36, 26, 2, 11, 12, 14, 100, 26, 2, 11, 12],
+      areaStyle: {
+        opacity: 0.5,
+        color: {
+          type: 'linear',
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [{
+            offset: 0, color: '#54DDDC' // 0% 处的颜色
+          }, {
+            offset: 1, color: '#ffffff' // 100% 处的颜色
+          }],
+          globalCoord: false // 缺省为 false
+        }
       },
-      emphasis: {
-        color: '#140'
-      }
+      type: 'line',
+      symbol: 'none'
     },
-    data: volumes
-  }
+    {
+      type: 'bar',
+      xAxisIndex: 1,
+      yAxisIndex: 1,
+      itemStyle: {
+        normal: {
+          color: '#7fbe9e'
+        },
+        emphasis: {
+          color: '#140'
+        }
+      },
+      data: volumes
+    }
   ]
 }
 function initChart(canvas, width, height) {
@@ -155,6 +157,13 @@ export default {
     }
   },
   methods: {
+    go() {
+      //#ifdef APP-PLUS
+      uni.navigateTo({
+        url: '/platforms/app-plus/fullscreen/fullscreen',
+      });
+      //#endif
+    },
     tapTab(e) { //点击tab-bar
       if (this.tabIndex === e.target.dataset.current) {
         return false;

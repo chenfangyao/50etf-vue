@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import "./common/uni.css";
 page>view {
   padding-top: var(--status-bar-height);

@@ -1,10 +1,14 @@
 <template>
   <view class="uni-flex">
-    <view class="v1" hover-class="self-hover">开仓</view>
-    <view class="v2" hover-class="self-hover">平仓</view>
+    <view class="v1" hover-class="tap-hover">开仓</view>
+    <view class="v2" hover-class="tap-hover">平仓</view>
   </view>
 </template>
 <style lang="scss" scoped>
+@import "../../common/customize.scss";
+
+$v1bg:#409de5;
+$v2bg:#e6aa12;
 view.uni-flex {
   position: fixed;
   bottom: 0;
@@ -15,13 +19,19 @@ view.uni-flex {
   text-align: center;
   .v1 {
     line-height: 98upx;
-    background-color: #409de5;
+    background-color: $v1bg;
     width: 50%;
+  }
+  .v1.tap-hover{
+    background:darken($v1bg,5%);
+  }
+  .v2.tap-hover{
+    background:darken($v2bg,5%);
   }
   .v2 {
     line-height: 98upx;
     width: 50%;
-    background-color: #e6aa12;
+    background-color: $v2bg;
   }
   color: rgba(255, 255, 255, 1);
 }
