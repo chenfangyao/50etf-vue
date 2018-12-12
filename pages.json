@@ -62,6 +62,13 @@
                 "scrollIndicator" : "none"
             }
         },
+		{
+			"path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
+			"style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+		},
         {
             "path" : "platforms/app-plus/fullscreen/fullscreen",
             "style" : {

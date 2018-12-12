@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<base-header title="资讯详情"></base-header>
+		<base-header title="资讯详情" :hasBack='true'></base-header>
 	</view>
 </template>
 
@@ -8,7 +8,7 @@
 	export default {
 		data() {
 			return {
-				
+
 			};
 		}
 	}
