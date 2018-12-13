@@ -9,7 +9,8 @@ const store = new Vuex.Store({
 		loginProvider: "",
     openid: null,
     isWhite:true,
-    sid:''
+    sid:'',
+    loadingFlag:false
 	},
 	mutations: {
 		login(state, provider) {
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
 		logout(state) {
 			state.hasLogin = false
 			state.openid = null
+		},
+		setloadingFlag(state,data) {
+			state.loadingFlag = data
 		},
 		setOpenid(state, openid) {
 			state.openid = openid
