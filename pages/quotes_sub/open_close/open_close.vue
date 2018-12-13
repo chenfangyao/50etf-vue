@@ -5,7 +5,9 @@
     <contain-chart></contain-chart>
     <view class="h12 bg"></view>
     <mini-table></mini-table>
+    <view class="h12 bg"></view>
     <new-price></new-price>
+    <view class="h12 bg"></view>
     <total-cost></total-cost>
     <bottom-btn></bottom-btn>
 	</view>
