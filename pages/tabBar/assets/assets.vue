@@ -66,7 +66,7 @@
 				var options = {
 					url: '/Sapi/User/asset', //请求接口
 					header: {
-						sid: this.sid || ""
+						// sid: this.sid || ""
 					},
 					method: 'GET', //请求方法全部大写，默认GET
 				}

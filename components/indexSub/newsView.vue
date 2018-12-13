@@ -70,7 +70,7 @@
 					this.newsItem = res.data.list
 				}).catch((err) => {
 					// 请求失败的回调
-					alert(err)
+					console.log(err)
 				})
 			},
 

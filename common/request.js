@@ -10,14 +10,20 @@ export default function (obj) {
     }
   }, 500);
   if (obj.method === 'GET') {
+	  obj.header=obj.header||{}
     Object.assign(obj.header, {
       clienttype: 'web',
       ver: 'v1.0',
       sid: store.state.sid || ""
     })
   }
+	var baseUrl = 'http://47.100.226.135:8040'
+	if(obj.url.indexOf('/Sapi')!=-1){
+		baseUrl = 'http://47.100.226.135:8040'
+	}else if(obj.url.indexOf('/fiftyEtf')!=-1){
+		baseUrl = 'http://47.100.174.65:8011'
+	}
   var p = new Promise((resolve, reject) => {
-    var baseUrl = 'http://47.100.226.135:8040'
     uni.request({
       url: baseUrl + obj.url,
       method: obj.method || 'GET',

@@ -26,6 +26,29 @@ export default {
   components: {
     headerTitle, containChart, miniTable, newPrice, totalCost, bottomBtn
   },
+	methods:{
+		// 买入卖出合约详细
+		getartlelist() {
+			var options = {
+				url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
+				method: 'POST', //请求方法全部大写，默认GET
+				data: {
+					Symbol:10001472,
+				},
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				// res为服务端返回数据的根对象
+				console.log('买入卖出详细', res)
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		},
+	},
+	onShow(){
+		this.getartlelist()
+	},
 }
 </script>
 
