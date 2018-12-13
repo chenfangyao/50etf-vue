@@ -14,7 +14,10 @@ function formatTime(time) {
 		return n[1] ? n : '0' + n
 	}).join(':')
 }
-
+// 自定义时间戳格式化
+function formateTimeStr(timestr){
+	return new Date(parseInt(timestr) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+}
 function formatLocation(longitude, latitude) {
 	if (typeof longitude === 'string' && typeof latitude === 'string') {
 		longitude = parseFloat(longitude)
@@ -69,5 +72,6 @@ var dateUtils = {
 module.exports = {
 	formatTime: formatTime,
 	formatLocation: formatLocation,
-	dateUtils: dateUtils
+	dateUtils: dateUtils,
+	formateTimeStr:formateTimeStr
 }

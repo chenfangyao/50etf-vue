@@ -2,23 +2,23 @@
   <view class="subWrap ">
     <view class="panel1">
       <h2>可用资金（元）</h2>
-      <h1>1,104,612.65</h1>
+      <h1>{{transmoney.enable_money}}</h1>
       <view class="h3">
         <text>总资产</text>
-        <text>100000000000元</text>
+        <text>{{transmoney.dta_money}}</text>
       </view>
     </view>
     <view class="panel2 uni-flex">
       <view>
-        <h4>500.000</h4>
+        <h4>{{transmoney.royalty_money}}</h4>
         <h4>权益金</h4>
       </view>
       <view>
-        <h4>500.000</h4>
+        <h4>{{transmoney.freeze_money}}</h4>
         <h4>冻结金</h4>
       </view>
       <view>
-        <h4>500.000</h4>
+        <h4>{{transmoney.add_fee_money}}</h4>
         <h4>管理费</h4>
       </view>
     </view>
@@ -34,6 +34,24 @@
     </view>
   </view>
 </template>
+<script>
+	
+	export default{
+		data(){
+			return {
+				
+			}
+		},
+		props:['transmoney'],
+		methods:{
+	
+		},
+		created(){
+			
+		},
+		
+	}
+</script>
 <style lang="scss" scoped>
 view.subWrap {
   margin: 12upx 22upx;
