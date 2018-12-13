@@ -6,7 +6,7 @@
         <text>数量</text>
         <text class="w71">价格</text>
       </view>
-      <view class="datas" v-for="(item ,i) in buyData">
+      <view class="datas" v-for="(item ,i) in buyData" :key="i">
         <text>{{i}}</text>
         <text>20</text>
         <text class="w71">0.2326</text>
@@ -19,7 +19,7 @@
         <text>数量</text>
         <text>卖</text>
       </view>
-       <view class="datas" v-for="(item ,i) in sellData">
+       <view class="datas" v-for="(item ,i) in sellData" :key="i">
         <text class="w71">0.2326</text>
         <text>20</text>
         <text>{{i}}</text>

@@ -28,7 +28,6 @@
 </template>
 
 <script>
-	import baseHeader from '@/components/base_header.vue'
 	import headerCard from '@/components/assetsSub/headerCard.vue'
 	import {
 		mapState,
@@ -57,7 +56,6 @@
 		},
 		// props:{aa:'res_data'},
 		components: {
-			baseHeader,
 			headerCard
 		},
 		methods: {

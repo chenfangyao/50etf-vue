@@ -1,8 +1,8 @@
 <template>
   <view class="wrap">
     <headerCard></headerCard>
-    <view class="items">
-      <view class="uni-flex" hover-class="self-hover">
+    <view class="items" @tap='go'>
+      <view class="uni-flex" hover-class="self-hover"  @tap="go('capital_flow/capital_flow')" >
         <image src="/static/mineImg/01.png" />
         <text>资金流水</text>
         <text class="tip" v-if="false"></text>
@@ -33,7 +33,7 @@
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover">
+      <view class="uni-flex" hover-class="self-hover"  @tap="go('my_customer_service/my_customer_service')">
         <image src="/static/mineImg/06.png" />
         <text>联系客服</text>
         <text class="tip" v-if="false"></text>
@@ -45,7 +45,7 @@
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover">
+      <view class="uni-flex" hover-class="self-hover" @tap="go('about_us/about_us')" >
         <image src="/static/mineImg/08.png" />
         <text>关于我们</text>
         <text class="tip" v-if="true"></text>
@@ -60,6 +60,11 @@ import headerCard from '@/components/mineSub/headerCard.vue'
 export default {
   data() {
     return {}
+  },
+  methods: {
+    go(href) {
+      uni.navigateTo({ url:'/pages/mine_sub/'+href })
+    }
   },
   components: {
     headerCard
@@ -76,7 +81,7 @@ view.wrap {
     view {
       justify-content: space-between;
       background-color: #fff;
-      font-size: 26upx;
+      font-size: 13px;
       font-family: MicrosoftYaHei;
       font-weight: 400;
       color: rgba(24, 28, 40, 1);

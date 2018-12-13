@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import baseHeader from '@/components/base_header.vue'
 import stockTipBar from '@/components/quotesSub/stockTips.vue'
 import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
 import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
@@ -29,7 +28,7 @@ import uniLoadMore from '@/components/uni-load-more.vue';
 
 export default {
   components: {
-    baseHeader, mediaList, uniLoadMore, stockTipBar, futuresTitle, futuresDatas
+     mediaList, uniLoadMore, stockTipBar, futuresTitle, futuresDatas
   },
   data() {
     return {
