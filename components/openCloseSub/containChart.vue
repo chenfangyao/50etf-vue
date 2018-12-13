@@ -121,7 +121,7 @@ view.wrap {
     }
   }
   view.df_wh {
-    height: 122upx;
+    height: 80px;
     flex-grow: 1;
   }
 }

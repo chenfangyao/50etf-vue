@@ -19,58 +19,47 @@
 </template>
 
 <script>
-	import baseHeader from '@/components/base_header.vue'
-	import stockTipBar from '@/components/quotesSub/stockTips.vue'
-	import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
-	import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
+import stockTipBar from '@/components/quotesSub/stockTips.vue'
+import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
+import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
 
 	import mediaList from '@/components/tab-nvue/mediaList.vue';
 	import uniLoadMore from '@/components/uni-load-more.vue';
 
-	export default {
-		components: {
-			baseHeader,
-			mediaList,
-			uniLoadMore,
-			stockTipBar,
-			futuresTitle,
-			futuresDatas
-		},
-		data() {
-			return {
-				loadingText: {
-					contentdown: "上拉显示更多",
-					contentrefresh: "正在加载...",
-					contentnomore: "没有更多数据了"
-				},
-				scrollLeft: 0,
-				isClickChange: false,
-				tabIndex: 0,
-				newsitems: [1, 2, 3, 4],
-				tabBars: [{
-					name: '1811(0)',
-					id: 'guanzhu'
-				}, {
-					name: '1812(28)',
-					id: 'tuijian'
-				}, {
-					name: '1903(131)',
-					id: 'tiyu'
-				}, {
-					name: '1906(211)',
-					id: 'redian'
-				}, ]
-			}
-		},
-		created(){
-			
-		},
-		onShow(){
-			this.getartlelist()
-		},
-		methods: {
-			loadMore(e) {
-				console.log(4555);
+export default {
+  components: {
+     mediaList, uniLoadMore, stockTipBar, futuresTitle, futuresDatas
+  },
+  data() {
+    return {
+      loadingText: {
+        contentdown: "上拉显示更多",
+        contentrefresh: "正在加载...",
+        contentnomore: "没有更多数据了"
+      },
+      scrollLeft: 0,
+      isClickChange: false,
+      tabIndex: 0,
+      newsitems: [1, 2, 3, 4],
+      tabBars: [{
+        name: '1811(0)',
+        id: 'guanzhu'
+      }, {
+        name: '1812(28)',
+        id: 'tuijian'
+      }, {
+        name: '1903(131)',
+        id: 'tiyu'
+      }, {
+        name: '1906(211)',
+        id: 'redian'
+      },
+      ]
+    }
+  },
+  methods: {
+    loadMore(e) {
+      console.log(4555);
 
 				// setTimeout(() => {
 				//   this.addData(e);

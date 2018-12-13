@@ -22,14 +22,15 @@ export default {
   data() {
     return {
       tabActive: false
+
     }
   },
   methods: {
     back() {
       uni.navigateBack({ delta: 1 });
     },
-    tapChange(val){
-      this.tabActive=val
+    tapChange(val) {
+      this.tabActive = val
     }
   }
 }
@@ -66,17 +67,18 @@ view.h44 {
       border-radius: 13px;
       margin: 0 auto;
       align-self: center;
-      border: 1px solid rgba(168, 168, 168, .7);
+      border: 1px solid rgba(168, 168, 168, 0.7);
       position: relative;
       .slider {
         position: absolute;
         width: 52%;
         border-radius: 13px;
         bottom: 0;
-        top:0;
+        top: 0;
         left: -1%;
         background-color: #409de5;
         color: #fff;
+        transition: left 80ms ;
       }
       > view {
         flex-grow: 1;
@@ -87,8 +89,8 @@ view.h44 {
         color: #707680;
       }
       > view.active.slider {
-        background-color: #E6AA12;
-        left:50%;
+        left: 50%;
+        background-color: #e6aa12;
       }
     }
   }

@@ -79,9 +79,30 @@
         {
             "path" : "pages/quotes_sub/open_close/open_close",
             "style" : {
-              "titleNView" : false,
-              "scrollIndicator" : "none"
+                "titleNView" : false,
+                "scrollIndicator" : "none"
             }
+        },
+        {
+            "path" : "pages/mine_sub/about_us/about_us",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/capital_flow/capital_flow",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+        },
+        {
+            "path" : "pages/mine_sub/my_customer_service/my_customer_service",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
     ],
     "tabBar" : {

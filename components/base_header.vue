@@ -3,9 +3,9 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-      <image src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
-
+        <image class="left"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
         <text>{{title}}</text>
+        <image class="right" src='/static/mineImg/datePicker.png' @tap="rightTap" v-if="showDatepick"/>
       </view>
     </view>
     <view class="h44"></view>
@@ -20,11 +20,17 @@ export default {
     },
     hasBack: {
       default: false
+    },
+    showDatepick:{
+      default: false
     }
   },
   methods: {
     back() {
       uni.navigateBack({ delta: 1 });
+    },
+    rightTap(){
+      this.$emit('rightTap')
     }
   }
 }
@@ -50,10 +56,17 @@ view.h44 {
       width: 13px;
       height: 15px;
       align-self: center;
-      left: 20upx;
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
+    }
+    image.right {
+      right: 20upx;
+      width: 15px;
+      height: 17px;
+    }
+    image.left {
+      left: 20upx;
     }
   }
   .occupy {
