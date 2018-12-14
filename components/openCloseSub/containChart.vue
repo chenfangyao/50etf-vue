@@ -91,7 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 view.wrap {
-  margin: 26upx;
+  padding: 26upx;
   view.info {
     view.line1 {
       font-size: 13px;

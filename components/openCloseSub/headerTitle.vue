@@ -18,10 +18,12 @@
 <script>
 export default {
   props: {
+    tabActive:{
+      require:true
+    }
   },
   data() {
     return {
-      tabActive: false
 
     }
   },
@@ -30,7 +32,7 @@ export default {
       uni.navigateBack({ delta: 1 });
     },
     tapChange(val) {
-      this.tabActive = val
+      this.$emit('change-close' ,val)
     }
   }
 }

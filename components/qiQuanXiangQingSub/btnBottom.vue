@@ -1,7 +1,7 @@
 <template>
   <view class="uni-flex">
-    <view class="v1" @tap="go" hover-class="tap-hover">开仓</view>
-    <view class="v2" @tap="go" hover-class="tap-hover">平仓</view>
+    <view class="v1" @tap="go(0)" hover-class="tap-hover">开仓</view>
+    <view class="v2" @tap="go(1)" hover-class="tap-hover">平仓</view>
   </view>
 </template>
 <style lang="scss" scoped>
@@ -42,8 +42,8 @@ export default {
     return {}
   },
   methods: {
-    go() {
-      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close' })
+    go(val) {
+      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val })
     }
   }
 }
