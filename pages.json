@@ -93,17 +93,25 @@
         {
             "path" : "pages/mine_sub/capital_flow/capital_flow",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
         },
         {
             "path" : "pages/mine_sub/my_customer_service/my_customer_service",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/index_sub/new_list/new_list",
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
         }
+   
     ],
     "tabBar" : {
         "color" : "#7A7E83",

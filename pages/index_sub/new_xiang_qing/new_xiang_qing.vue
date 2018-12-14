@@ -9,7 +9,7 @@
 				</view>
 				<view class="artlittle uni-flex newsViewTitle">
 					<text>{{artlittle}}</text>
-					<text>{{timeformates(update_time)}}</text>
+					<text>{{$formatetimestr(update_time)}}</text>
 				</view>
 				<view class="artwenan">
 					<text>{{artwenan}}</text>

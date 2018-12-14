@@ -150,6 +150,12 @@ export default {
 
 // 获取更多文章
     getmoreart(){
+			uni.navigateTo({
+				url: '/pages/index_sub/new_list/new_list',
+				success: res => {},
+				fail: () => {},
+				complete: () => {}
+			});
 	    var options = {
 	    	url: '/Sapi/Article/notice', //请求接口
 	    	method: 'POST', //请求方法全部大写，默认GET

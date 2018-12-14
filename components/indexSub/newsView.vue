@@ -5,7 +5,7 @@
 			<view class="uni-flex">
 				<text>{{item.source}}</text>
 				<text>
-					<text class="newsTime">{{timeformates(item.update_time)}}</text>
+					<text class="newsTime">{{$formatetimestr(item.update_time)}}</text>
 					<!-- <text class="newsTime">{{item.update_time}}</text> -->
 				</text>
 			</view>
@@ -82,7 +82,6 @@
 			getartdetil(artid) {
 				uni.navigateTo({
 					url: '/pages/index_sub/new_xiang_qing/new_xiang_qing?id='+artid+''
-					// url: '/pages/test_uni/test_uni/test_uni'
 				});
 			}
 

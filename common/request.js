@@ -30,6 +30,7 @@ export default function (obj) {
       data: obj.data || {},
       header: obj.header || {},
       context: obj.context || '',
+	  dataType:obj.dataType || '',
       success: res => {
         resolve(res.data)
       },

@@ -10,6 +10,9 @@ Vue.component('baseHeader',baseHeader)
 
 Vue.prototype.$httpReq = request
 Vue.prototype.$store = store
+Vue.prototype.$formatetimestr = function(str){
+	return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+}
 
 const app = new Vue({
     ...App,

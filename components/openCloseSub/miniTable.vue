@@ -11,6 +11,26 @@
         <text>20</text>
         <text class="w71">0.2326</text>
       </view>
+			<!-- <view class="datas" >
+				<text>0</text>
+				<text>{{hydetils.buyAmount1}}</text>
+				<text class="w71">{{hydetils.buyPrice1}}</text>
+			</view>
+			<view class="datas" >
+				<text>1</text>
+				<text>{{hydetils.buyAmount2}}</text>
+				<text class="w71">{{hydetils.buyPrice2}}</text>
+			</view>
+			<view class="datas" >
+				<text>2</text>
+				<text>{{hydetils.buyAmount3}}</text>
+				<text class="w71">{{hydetils.buyPrice3}}</text>
+			</view>
+			<view class="datas" >
+				<text>3</text>
+				<text>{{hydetils.buyAmount4}}</text>
+				<text class="w71">{{hydetils.buyPrice4}}</text>
+			</view> -->
 
     </view>
     <view class="right">
@@ -24,6 +44,26 @@
         <text>20</text>
         <text>{{i}}</text>
       </view>
+			<!-- <view class="datas" >
+				<text class="w71">{{hydetils.salePrice1}}</text>
+				<text>{{hydetils.saleAmount1}}</text>
+				<text>0</text>
+			</view>
+			<view class="datas" >
+				<text class="w71">{{hydetils.salePrice2}}</text>
+				<text>{{hydetils.saleAmount2}}</text>
+				<text>1</text>
+			</view>
+			<view class="datas" >
+				<text class="w71">{{hydetils.salePrice3}}</text>
+				<text>{{hydetils.saleAmount3}}</text>
+				<text>2</text>
+			</view>
+			<view class="datas" >
+				<text class="w71">{{hydetils.salePrice4}}</text>
+				<text>{{hydetils.saleAmount4}}</text>
+				<text>3</text>
+			</view> -->
     </view>
   </view>
 </template>
@@ -31,10 +71,11 @@
 export default {
   data() {
     return {
-      buyData: [, , , ,],
+      buyData: [, , , , ,],
       sellData: [, , , ,]
     }
-  }
+  },
+	props:['hydetils']
 
 }
 </script>
