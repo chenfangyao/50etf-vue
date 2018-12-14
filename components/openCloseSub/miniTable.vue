@@ -6,12 +6,12 @@
         <text>数量</text>
         <text class="w71">价格</text>
       </view>
-      <view class="datas" v-for="(item ,i) in buyData" :key="i">
+      <!-- <view class="datas" v-for="(item ,i) in buyData" :key="i">
         <text>{{i}}</text>
         <text>20</text>
         <text class="w71">0.2326</text>
-      </view>
-			<!-- <view class="datas" >
+      </view> -->
+			<view class="datas" >
 				<text>0</text>
 				<text>{{hydetils.buyAmount1}}</text>
 				<text class="w71">{{hydetils.buyPrice1}}</text>
@@ -30,8 +30,12 @@
 				<text>3</text>
 				<text>{{hydetils.buyAmount4}}</text>
 				<text class="w71">{{hydetils.buyPrice4}}</text>
-			</view> -->
-
+			</view>
+      <view class="datas" >
+      	<text>4</text>
+      	<text>{{hydetils.buyAmount5}}</text>
+      	<text class="w71">{{hydetils.buyPrice5}}</text>
+      </view>
     </view>
     <view class="right">
       <view class="title">
@@ -39,12 +43,12 @@
         <text>数量</text>
         <text>卖</text>
       </view>
-       <view class="datas" v-for="(item ,i) in sellData" :key="i">
+       <!-- <view class="datas" v-for="(item ,i) in sellData" :key="i">
         <text class="w71">0.2326</text>
         <text>20</text>
         <text>{{i}}</text>
-      </view>
-			<!-- <view class="datas" >
+      </view> -->
+			<view class="datas" >
 				<text class="w71">{{hydetils.salePrice1}}</text>
 				<text>{{hydetils.saleAmount1}}</text>
 				<text>0</text>
@@ -63,7 +67,12 @@
 				<text class="w71">{{hydetils.salePrice4}}</text>
 				<text>{{hydetils.saleAmount4}}</text>
 				<text>3</text>
-			</view> -->
+			</view>
+			<view class="datas" >
+				<text class="w71">{{hydetils.salePrice5}}</text>
+				<text>{{hydetils.saleAmount5}}</text>
+				<text>4</text>
+			</view>
     </view>
   </view>
 </template>

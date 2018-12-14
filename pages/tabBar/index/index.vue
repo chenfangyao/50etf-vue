@@ -10,7 +10,7 @@
 			<text>资讯</text>
 			<text @click="getmoreart()">更多></text>
 		</view>
-		<news-view></news-view>
+		<news-view :newlists="newsItem"></news-view>
 	</view>
 </template>
 
@@ -22,17 +22,19 @@ import fourTips from '@/components/indexSub/tips4.vue'
 
 export default {
   data() {
-    return {}
+    return {
+			newsItem:[]
+		}
   },
   components: {
     newsView,
     threeSecurities,
     fourTips
   },
-  computed: mapState(['isWhite','sid']),
+  computed: mapState(['isWhite','sid','username','mobile']),
   methods: {
     // 登录
-    ...mapMutations(['setsid']),
+    ...mapMutations(['setsid','setusername','setmobile']),
     loginin() {
       var options = {
         url: '/Sapi/Login/index', //请求接口
@@ -57,7 +59,7 @@ export default {
 					// 获取指数信息,未确定接口
 					// this.getmarkinfo()
 					// 获取文章列表
-					// this.getartlelist()
+					this.getartlelist()
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -96,6 +98,14 @@ export default {
         // 请求成功的回调
         // res为服务端返回数据的根对象
         console.log('用户信息', res)
+				if(res.status){
+					this.setusername(res.data.user_name)
+					this.setmobile(res.data.mobile)
+					console.log('user_name',res.data.user_name)
+					console.log('mobile',res.data.mobile)
+					console.log('1',this.username)
+					console.log('2',this.mobile)
+				}
       }).catch((err) => {
         // 请求失败的回调
         alert(err)
@@ -147,39 +157,43 @@ export default {
         alert(err)
       })
     },
+		// 获取文章信息
+		getartlelist() {
+			var options = {
+				url: '/Sapi/Article/notice', //请求接口
+				method: 'POST', //请求方法全部大写，默认GET
+				data: {
+					page_index: 0,
+					page_size: 3,
+					cate_id: 29
+				},
+				context: '',
+				header: {
+					clienttype: 'web',
+					ver: 'v1.0',
+					sid: this.sid || ""
+				},
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				// res为服务端返回数据的根对象
+				console.log('文章列表', res)
+				// this.timeformates()
+				this.newsItem = res.data.list
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		},
 
 // 获取更多文章
     getmoreart(){
 			uni.navigateTo({
-				url: '/pages/index_sub/new_list/new_list',
+				url: '/pages/index_sub/new_list/new_list?symbol=1',
 				success: res => {},
 				fail: () => {},
 				complete: () => {}
 			});
-	    var options = {
-	    	url: '/Sapi/Article/notice', //请求接口
-	    	method: 'POST', //请求方法全部大写，默认GET
-	    	data:{
-	    		page_index:0,
-	    		page_size:10,
-	    		cate_id:29
-	    	},
-	    	context: '',
-	    	header: {
-	    		sid: this.sid || ""
-	    	},
-	    }
-	    this.$httpReq(options).then((res) => {
-	    	// 请求成功的回调
-	    	// res为服务端返回数据的根对象
-	    	console.log('文章列表', res)
-	    	// this.timeformates()
-	    	this.newsItem=res.data.list
-	    }).catch((err) => {
-	    	// 请求失败的回调
-	    	alert(err)
-	    })	
-	
 	}
 	
 

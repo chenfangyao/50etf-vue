@@ -9,8 +9,8 @@
 		<view class="listsContainer" v-for="(item,i) in monetlist" :key="i">
 			<view class="line1 uni-flex">
 				<view>
-					<text class="txt1">沽11月2500</text>
-					<text class="txt2">100145</text>
+					<text class="txt1">{{item.stock_name}}</text>
+					<text class="txt2">{{item.stock_code}}</text>
 				</view>
 				<view class="timetxt">
 					<text>{{$formatetimestr(item.create_time)}}</text>
@@ -41,18 +41,6 @@
 		data() {
 			return {
 				showPick: false,
-				// 				id: "流水号",
-				// 				create_time: "交易时间",
-				// 				pre_money: "发生前金额",
-				// 				bal_money: "发生后余额",
-				// 				pay_money: "发生金额",
-				// 				bean_money: "发生抵用券",
-				// 				dpt_money: "保证金及其它",
-				// 				fee_money: "综合手续费",
-				// 				remark: "备注",
-				// 				stock_code: "证券代码",
-				// 				stock_name: "证券名称",
-				// 				is_in: "资金方向，1=入",
 				monetlist: []
 			}
 		},
@@ -63,7 +51,11 @@
 			},
 			getTime(val) {
 				this.showPick = false;
-				console.log(val);
+				var starttime=this.$timestamp(val.starttime)
+				var endtime=this.$timestamp(val.endtime)
+				console.log('start',starttime);
+				console.log('end',endtime);
+        this.capicalflow(starttime, endtime)
 			},
 			// 资金流水
 			capicalflow(starttime, endtime) {
