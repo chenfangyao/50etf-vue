@@ -199,4 +199,5 @@ view.Bigwrap {
 			}
 		}
 	}
+	}
 </style>
