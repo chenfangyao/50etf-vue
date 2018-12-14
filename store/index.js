@@ -10,6 +10,8 @@ const store = new Vuex.Store({
     openid: null,
     isWhite:true,
     sid:'',
+		username:'',
+		mobile:'',
     loadingFlag:false
 	},
 	mutations: {
@@ -33,6 +35,12 @@ const store = new Vuex.Store({
 		setsid(state, data) {
 			state.sid = data
     },
+		setusername(state,data){
+			state.username=data
+		},
+		setmobile(state,data){
+			state.mobile=data
+		},
 	},
 })
 

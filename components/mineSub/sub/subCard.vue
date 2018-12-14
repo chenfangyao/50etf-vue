@@ -4,12 +4,24 @@
       <image src="/static/mineImg/touxiang.png"/>
     </view>
     <view>
-      <h2>用户名123456</h2>
-      <h3>159****2312</h3>
+      <h2>用户名{{username}}</h2>
+      <h3>{{mobile}}</h3>
       <button hover-class='self-hover'>实名认证</button>
     </view>
   </view>
 </template>
+<script>
+	import { mapState, mapMutations } from 'vuex';
+	export default {
+	  data(){
+			return{
+			}
+		},
+		computed: mapState(['sid','username','mobile']),
+		created(){
+		}
+	}
+</script>
 <style lang="scss">
 view.subCard {
   padding: 22upx 0 34upx 50upx;

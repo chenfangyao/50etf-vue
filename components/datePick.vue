@@ -94,7 +94,8 @@ export default {
         this.showTips = true
         return
       }
-      this.$emit('select-complete', '此处传回后端需要的时间数据')
+			var times={starttime:this.year+'-'+this.month+'-'+this.day,endtime:this.year2+'-'+this.month2+'-'+this.day2}
+      this.$emit('select-complete', times)
     },
 
   }
