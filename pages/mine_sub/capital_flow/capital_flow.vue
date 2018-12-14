@@ -1,6 +1,11 @@
 <template>
 	<view class="Bigwrap">
-		<base-header :hasBack="true" title='资金流水' @rightTap="showDatepick" :show-datepick="true"></base-header>
+		<base-header :hasBack="true" title='资金流水'></base-header>
+    <view class="line1 uni-flex">
+      <text>此处放文案</text>
+       <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png' />
+    </view>
+
     <view class="listsContainer" v-for="(item,i) in lists" :key="i">
       <view class="line1 uni-flex">
         <view>
@@ -8,7 +13,7 @@
           <text class="txt2">100145</text>
         </view>
         <view class="timetxt">
-          <text>2017-12-06</text>
+          <text class="mr5">2017-12-06</text>
           <text>14:52:11</text>
         </view>
       </view>
@@ -26,7 +31,7 @@
         </view>
       </view>
     </view>
-    <date-pick  v-if="showPick"></date-pick>
+    <date-pick  v-if="showPick" @select-complete='getTime'></date-pick>
 	</view>
 </template>
 
@@ -36,14 +41,17 @@ export default {
   data() {
     return {
       lists: [, , , ,],
-      showPick:false
+      showPick: false
     }
   },
   methods: {
     showDatepick() {
-      console.log('fd');
       this.showPick = true
     },
+    getTime(val) {
+      this.showPick = false;
+      console.log(val);
+    }
   },
   components: {
     datePick
@@ -55,6 +63,18 @@ export default {
 view.Bigwrap {
   min-height: 100vh;
   background-color: #f5f5f5;
+  view.line1 {
+    height: 88upx;
+    justify-content: space-between;
+    padding: 0 26upx;
+    background-color: #fff;
+    align-items: center;
+    margin-top: 1px;
+    image.right{
+      width: 15px;
+      height: 17px;
+    }
+  }
   view.listsContainer {
     background-color: #fff;
     margin: 12upx 0;
@@ -81,6 +101,9 @@ view.Bigwrap {
         font-family: ArialMT;
         color: rgba(130, 133, 151, 1);
         line-height: 72upx;
+        text.mr5 {
+          margin-right: 5px;
+        }
       }
     }
     view.line2 {

@@ -1,7 +1,7 @@
 <template>
   <view class="wrap">
     <headerCard></headerCard>
-    <view class="items" @tap='go'>
+    <view class="items">
       <view class="uni-flex" hover-class="self-hover"  @tap="go('capital_flow/capital_flow')" >
         <image src="/static/mineImg/01.png" />
         <text>资金流水</text>

@@ -3,9 +3,9 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <image class="left"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
+        <image class="left commonStyle"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
         <text>{{title}}</text>
-        <image class="right" src='/static/mineImg/datePicker.png' @tap="rightTap" v-if="showDatepick"/>
+        <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="showRight">确定</text>
       </view>
     </view>
     <view class="h44"></view>
@@ -21,7 +21,7 @@ export default {
     hasBack: {
       default: false
     },
-    showDatepick:{
+    showRight:{
       default: false
     }
   },
@@ -30,7 +30,7 @@ export default {
       uni.navigateBack({ delta: 1 });
     },
     rightTap(){
-      this.$emit('rightTap')
+      this.$emit('right-tap')
     }
   }
 }
@@ -45,28 +45,27 @@ view.h44 {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 2000;
+  z-index: 500;
   background-color: #fff;
   view.wrap {
     text-align: center;
     height: 44px;
     line-height: 44px;
     position: relative;
-    image {
-      width: 13px;
-      height: 15px;
+    .commonStyle {
+      
       align-self: center;
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
     }
-    image.right {
+    text.right {
       right: 20upx;
-      width: 15px;
-      height: 17px;
     }
     image.left {
       left: 20upx;
+      width: 13px;
+      height: 15px;
     }
   }
   .occupy {
