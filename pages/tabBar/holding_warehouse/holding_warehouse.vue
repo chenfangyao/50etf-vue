@@ -11,6 +11,8 @@
     </view>
     <button @tap="handleClick">111</button>
     <button @tap="handleClick2">2</button>
+    <button @tap="go(1)">注册</button>
+    <button @tap="go(2)">登录2</button>
   </view>
 </template>
 
@@ -22,12 +24,16 @@ export default {
 
     };
   },
-  
-  methods:{
+
+  methods: {
     handleClick() {
       //#ifdef APP-PLUS
       plus.screen.lockOrientation('portrait-primary');
       //#endif
+    },
+    go(i) {
+      i == 1 && uni.navigateTo({ url: '/pages/register/register' });
+      i == 2 && uni.navigateTo({ url: '/pages/login/login' });
     },
     handleClick2() {
       //#ifdef APP-PLUS

@@ -59,7 +59,6 @@ var option = {
       },
       position: 'left',
       nameLocation: 'start',
-      axisTick: { show: false },
       axisLabel: {
         inside: true,
         margin: 3,
@@ -208,7 +207,7 @@ view.uni-tab-bar {
     }
   }
 }
-view.h556 {
-  height: 556upx;
-}
+  view.h556 {
+    height: 556upx;
+  }
 </style>
