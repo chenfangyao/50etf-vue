@@ -63,7 +63,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        alert(err)
+        console.log(err)
       })
     },
     // 登出
@@ -87,13 +87,8 @@ export default {
       var options = {
         url: '/Sapi/User/info', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
-        context: '',
-        header: {
-          clienttype: 'web',
-          ver: 'v1.0',
-          sid: localStorage.getItem("sid") || ""
-        },
       }
+      
       this.$httpReq(options).then((res) => {
         // 请求成功的回调
         // res为服务端返回数据的根对象
@@ -101,10 +96,6 @@ export default {
 				if(res.status){
 					this.setusername(res.data.user_name)
 					this.setmobile(res.data.mobile)
-					console.log('user_name',res.data.user_name)
-					console.log('mobile',res.data.mobile)
-					console.log('1',this.username)
-					console.log('2',this.mobile)
 				}
       }).catch((err) => {
         // 请求失败的回调
@@ -166,12 +157,6 @@ export default {
 					page_index: 0,
 					page_size: 3,
 					cate_id: 29
-				},
-				context: '',
-				header: {
-					clienttype: 'web',
-					ver: 'v1.0',
-					sid: this.sid || ""
 				},
 			}
 			this.$httpReq(options).then((res) => {

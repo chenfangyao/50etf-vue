@@ -2,7 +2,7 @@
   <view class="uni-flex wrap">
     <view class="info">
       <view class="line1">
-        <text>购11月2250</text>
+        <text>购12月2250</text>
         <text>10001493</text>
       </view>
       <view class="uni-flex line2">
@@ -16,7 +16,7 @@
     </view>
    <!-- #ifndef H5 -->
     <view class="df_wh">
-        <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="canvas2"/>
+        <mpvue-echarts  :echarts="echarts" :onInit="onInit" canvasId="canvas2"/>
     </view>
   <!-- #endif -->
   <!-- #ifdef H5 -->
@@ -92,6 +92,7 @@ export default {
 <style lang="scss" scoped>
 view.wrap {
   padding: 26upx;
+  background-color: #fff;
   view.info {
     view.line1 {
       font-size: 13px;

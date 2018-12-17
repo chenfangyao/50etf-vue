@@ -107,11 +107,17 @@
         {
             "path" : "pages/index_sub/new_list/new_list",
             "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/quotes_sub/entrust_succ/entrust_succ",
+            "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
         }
-   
     ],
     "tabBar" : {
         "color" : "#7A7E83",

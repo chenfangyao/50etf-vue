@@ -1,10 +1,10 @@
 <template>
-	<view>
+	<view >
 		<base-header title="资讯详情" :hasBack='true'></base-header>
 		<view class='grayline'></view>
 		<view class='artconent'>
 			<view>
-				<view class="arttitle ">
+				<view class="arttitle">
 					<text>{{arttitle}}</text>
 				</view>
 				<view class="artlittle uni-flex newsViewTitle">
@@ -12,7 +12,8 @@
 					<text>{{$formatetimestr(update_time)}}</text>
 				</view>
 				<view class="artwenan">
-					<text>{{artwenan}}</text>
+					<!-- <text>{{artwenan}}</text> -->
+           <rich-text :nodes="artwenan"></rich-text>
 				</view>
 			</view>
 		</view>
@@ -102,10 +103,10 @@
 		font-size: 18px;
 		font-family: MicrosoftYaHei;
 	}
-
 	view.artwenan {
-		justify-content: space-between;
 		font-size: 16px;
+    text-align: left;
+    text-indent:2em;
 		font-family: MicrosoftYaHei;
 		color: #a8a8a8;
 		margin: 40upx 0;

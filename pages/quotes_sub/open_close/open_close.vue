@@ -8,9 +8,10 @@
     <view class="h12 "></view>
     <new-price :on-close="onClose"></new-price>
     <view class="h12 "></view>
+
     <total-cost v-if="!onClose"></total-cost>
     <view class="h12 " v-if="!onClose"></view>
-    <bottom-btn></bottom-btn>
+    <bottom-btn :on-close="onClose"></bottom-btn>
 	</view>
 </template>
 
@@ -78,12 +79,8 @@ view.h1 {
 .wrap_op {
   background-color: #ededed;
   min-height: 100vh;
-  >view{
-    background-color: #fff;
-  }
 }
-.h12 ,.h1{
+.h12 {
   height: 12upx;
-  background-color: transparent !important;
 }
 </style>

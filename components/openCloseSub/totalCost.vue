@@ -25,6 +25,7 @@ export default {
 <style lang="scss" scoped>
 view.wrap {
   padding: 30upx 33upx;
+  background-color: #fff;
   view.title {
     font-size: 16px;
     font-weight: bold;

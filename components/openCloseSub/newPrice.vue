@@ -4,18 +4,27 @@
     <view class="uni-flex line2">
       <view class="newPrice">2.4789</view>
       <view class="uni-flex btn3">
-        <view v-for="(item,i) in btn3Arr" :class="{active:btn3_i==i}" :data-i='i' @tap='changePriceType(i)'>{{item}}</view>
+        <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i}" :data-i='i' @tap='changePriceType(i)'>{{item}}</view>
       </view>
     </view>
     <view v-show="onClose">
       <view class="entrustType">
         <text class="type commonStyle1">委托类型</text>
-        <text class="commonStyle2">持仓笔数 <text class="commonStyle2">1</text></text>
+        <text class="commonStyle2">持仓笔数 1</text>
       </view>
-      <view class="tabOpen uni-flex">
-        <view  @tap='tapChange(false)'>合并</view>
-        <view @tap='tapChange(true)'>分笔</view>
-        <view :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</view>
+      <view class="chooseType uni-flex">
+        <view class="tabOpen uni-flex">
+          <view @tap='tapChange(false)'>合并</view>
+          <view @tap='tapChange(true)'>分笔</view>
+          <view :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</view>
+        </view>
+        <view class="chooseCount">
+          <view v-show="!tabActive">13张</view>
+          <view v-show="tabActive" @tap='showPicker'>
+            {{pickerText}}
+            <text class="arrowDown"></text>
+          </view>
+        </view>
       </view>
     </view>
     <view class="uni-flex entrustCount">
@@ -29,6 +38,7 @@
         <text class="commonStyle2">21</text>
       </view>
     </view>
+    <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]" @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
     <view class="sliderPart uni-flex">
       <view>
         <image @tap='plusStep(-1)' src='/static/openCloseImg/minus.png'></image>
@@ -36,25 +46,45 @@
         <image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
       </view>
       <view class="sliderItem">
-        <slider @changing="slidering" max='100' min='1' :value='sliderVal' backgroundColor='#e6e6e6' block-size='18' activeColor='#409de5'/>
+        <slider @changing="slidering" @change="slidering" max='100' min='1' :value='sliderVal' backgroundColor='#e6e6e6' block-size='18' activeColor='#409de5' />
       </view>
-
     </view>
   </view>
 </template>
 <script>
+import mpvuePicker from '@/components/mpvuePicker.vue';
 export default {
   props: {
     onClose: {
       require: true
     }
   },
+  components: { mpvuePicker },
   data() {
     return {
       tabActive: false,
       btn3Arr: ['最新', '对手', '排队',],
       btn3_i: 0,
-      sliderVal: 1
+      sliderVal: 1,
+      pickerText:'',//选择的值,默认取lists的第一个值，从后端获取后初始化
+      pickerValueArray: [//后端获得lists替换此处
+        {
+          label: '第1笔 13张',
+          value: 1
+        },
+        {
+          label: '第2笔 30张',
+          value: 2
+        },
+        {
+          label: '第3笔 3张',
+          value: 3
+        },
+        {
+          label: '第4笔 6张',
+          value: 4
+        }
+      ],
     }
   },
   methods: {
@@ -67,15 +97,26 @@ export default {
     slidering(e) {
       this.sliderVal = e.detail.value
     },
-    plusStep(i){
-      this.sliderVal+=i
-    }
+    plusStep(i) {
+      this.sliderVal += i
+    },
+    onCancel(e) {
+      // console.log(e)
+    },
+    onConfirm(val) {
+      this.pickerText = val.label
+    },
+    // 单列
+    showPicker() {
+      this.$refs.typePick.show()
+    },
   }
 }
 </script>
 <style lang="scss" scoped>
 view.wrap {
   padding: 30upx 32upx;
+  background-color: #fff;
   .commonStyle1 {
     line-height: 16px;
     height: 16px;
@@ -134,6 +175,31 @@ view.wrap {
       color: rgba(102, 102, 102, 1);
     }
   }
+  view.chooseType {
+    justify-content: space-between;
+    align-items: center;
+    view.chooseCount {
+      width: 173upx;
+      height: 50upx;
+      line-height: 50upx;
+      text-align: center;
+      font-size: 12px;
+      font-family: Adobe Heiti Std R;
+      font-weight: normal;
+      color: rgba(102, 102, 102, 1);
+      line-height: 43px;
+      background: rgba(239, 239, 239, 1);
+      border-radius: 8upx;
+      text.arrowDown {
+        display: inline-block;
+        width: 17upx;
+        border: 9upx solid #666;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+  }
   view.tabOpen {
     width: 180upx;
     height: 60upx;
@@ -180,12 +246,15 @@ view.wrap {
   view.sliderPart {
     justify-content: space-between;
     margin: 35upx 0 14upx;
+    align-items: center;
     text.countxt {
       font-size: 24px;
       font-family: ArialMT;
-      margin: 0 65upx;
       color: rgba(51, 51, 51, 1);
       line-height: 24px;
+      width: 136upx;
+      text-align: center;
+      display: inline-block;
     }
     image {
       width: 18px;

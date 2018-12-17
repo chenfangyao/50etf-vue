@@ -1,20 +1,34 @@
 <template>
-<view>
+  <view>
 
-  <view class="wrap uni-flex">
+    <view class="wrap uni-flex">
       <view class="txt">
         <text class="total">合计：</text>
         <text class="totalPrice">￥1399.00</text>
       </view>
-      <view class="buyBtn" hover-class='tap-hover'>购买</view>
+      <view class="buyBtn" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
+    </view>
+    <view class="h98"></view>
+    <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop'></order-pop>
   </view>
-  <view class="h98"></view>
-</view>
 </template>
 <script>
+import orderPop from './orderPop.vue'
 export default {
   data() {
-    return {}
+    return {
+      popShow:false
+    }
+  },
+  props:['onClose'],
+  components:{orderPop},
+  methods:{
+    showPop(){
+      this.popShow=true
+    },
+    closePop(){
+      this.popShow=false
+    },
   }
 
 }
@@ -24,7 +38,6 @@ view.h98 {
   height: 1px;
   margin-top: 98upx;
   background-color: #ededed;
-
 }
 view.wrap {
   height: 98upx;
@@ -32,7 +45,7 @@ view.wrap {
   left: 0;
   right: 0;
   bottom: 0;
-
+  z-index: 10;
   view.txt {
     width: 500upx;
     background-color: #fff;
@@ -56,10 +69,8 @@ view.wrap {
     color: rgba(255, 255, 255, 1);
     line-height: 98upx;
   }
-  .buyBtn.tap-hover{
+  .buyBtn.tap-hover {
     background: darken(rgb(64, 157, 229), 5%);
-
   }
-
 }
 </style>

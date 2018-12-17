@@ -3,7 +3,7 @@
       <text class="stockNmae">50ETF</text>
       <!-- #ifndef H5 -->
       <view class="df_wh">
-        <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="mini-canvas"/>
+        <mpvue-echarts  :echarts="echarts" :onInit="onInit"  canvasId="mini-canvas"/>
       </view>
       <!-- #endif -->
        <!-- #ifdef H5 -->

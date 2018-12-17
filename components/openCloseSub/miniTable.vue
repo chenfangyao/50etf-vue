@@ -6,36 +6,30 @@
         <text>数量</text>
         <text class="w71">价格</text>
       </view>
-      <!-- <view class="datas" v-for="(item ,i) in buyData" :key="i">
-        <text class="serialNum">{{i+1}}</text>
-        <text>20</text>
-        <text class="w71 buyPrice">0.2326</text>
-      </view> -->
-      <!-- 记得加相应的class -->
-			<view class="datas" >
-				<text>0</text>
-				<text>{{hydetils.buyAmount1}}</text>
-				<text class="w71">{{hydetils.buyPrice1}}</text>
-			</view>
-			<view class="datas" >
-				<text>1</text>
-				<text>{{hydetils.buyAmount2}}</text>
-				<text class="w71">{{hydetils.buyPrice2}}</text>
-			</view>
-			<view class="datas" >
-				<text>2</text>
-				<text>{{hydetils.buyAmount3}}</text>
-				<text class="w71">{{hydetils.buyPrice3}}</text>
-			</view>
-			<view class="datas" >
-				<text>3</text>
-				<text>{{hydetils.buyAmount4}}</text>
-				<text class="w71">{{hydetils.buyPrice4}}</text>
-			</view>
-      <view class="datas" >
-      	<text>4</text>
-      	<text>{{hydetils.buyAmount5}}</text>
-      	<text class="w71">{{hydetils.buyPrice5}}</text>
+      <view class="datas">
+        <text>1</text>
+        <text>{{hydetils.buyAmount1}}</text>
+        <text class="w71">{{hydetils.buyPrice1}}</text>
+      </view>
+      <view class="datas">
+        <text>2</text>
+        <text>{{hydetils.buyAmount2}}</text>
+        <text class="w71">{{hydetils.buyPrice2}}</text>
+      </view>
+      <view class="datas">
+        <text>3</text>
+        <text>{{hydetils.buyAmount3}}</text>
+        <text class="w71">{{hydetils.buyPrice3}}</text>
+      </view>
+      <view class="datas">
+        <text>4</text>
+        <text>{{hydetils.buyAmount4}}</text>
+        <text class="w71">{{hydetils.buyPrice4}}</text>
+      </view>
+      <view class="datas">
+        <text>5</text>
+        <text>{{hydetils.buyAmount5}}</text>
+        <text class="w71">{{hydetils.buyPrice5}}</text>
       </view>
     </view>
     <view class="right">
@@ -44,42 +38,31 @@
         <text>数量</text>
         <text>卖</text>
       </view>
-       <!-- <view class="datas" v-for="(item ,i) in sellData" :key="i">
-        <text class="w71 sellPrice" >0.2326</text>
-        <text>20</text>
-        <text class="serialNum">{{i+1}}</text>
-      </view> -->
-			<!-- <view class="datas" >
-       <view class="datas" v-for="(item ,i) in sellData" :key="i">
-        <text class="w71">0.2326</text>
-        <text>20</text>
-        <text>{{i}}</text>
-      </view> -->
-			<view class="datas" >
-				<text class="w71">{{hydetils.salePrice1}}</text>
-				<text>{{hydetils.saleAmount1}}</text>
-				<text>0</text>
-			</view>
-			<view class="datas" >
-				<text class="w71">{{hydetils.salePrice2}}</text>
-				<text>{{hydetils.saleAmount2}}</text>
-				<text>1</text>
-			</view>
-			<view class="datas" >
-				<text class="w71">{{hydetils.salePrice3}}</text>
-				<text>{{hydetils.saleAmount3}}</text>
-				<text>2</text>
-			</view>
-			<view class="datas" >
-				<text class="w71">{{hydetils.salePrice4}}</text>
-				<text>{{hydetils.saleAmount4}}</text>
-				<text>3</text>
-			</view>
-			<view class="datas" >
-				<text class="w71">{{hydetils.salePrice5}}</text>
-				<text>{{hydetils.saleAmount5}}</text>
-				<text>4</text>
-			</view>
+      <view class="datas">
+        <text class="w71">{{hydetils.salePrice1}}</text>
+        <text>{{hydetils.saleAmount1}}</text>
+        <text>1</text>
+      </view>
+      <view class="datas">
+        <text class="w71">{{hydetils.salePrice2}}</text>
+        <text>{{hydetils.saleAmount2}}</text>
+        <text>2</text>
+      </view>
+      <view class="datas">
+        <text class="w71">{{hydetils.salePrice3}}</text>
+        <text>{{hydetils.saleAmount3}}</text>
+        <text>3</text>
+      </view>
+      <view class="datas">
+        <text class="w71">{{hydetils.salePrice4}}</text>
+        <text>{{hydetils.saleAmount4}}</text>
+        <text>4</text>
+      </view>
+      <view class="datas">
+        <text class="w71">{{hydetils.salePrice5}}</text>
+        <text>{{hydetils.saleAmount5}}</text>
+        <text>5</text>
+      </view>
     </view>
   </view>
 </template>
@@ -98,8 +81,17 @@ export default {
 <style lang="scss" scoped>
 view.wrap {
   padding: 26upx;
+  background-color: #fff;
   view.left {
     margin-right: 18upx;
+    view.datas {
+      text:first-child {
+        color: #999;
+      }
+      text:last-child {
+        color: #3aba8f;
+      }
+    }
   }
   > view {
     flex-grow: 1;
@@ -122,14 +114,15 @@ view.wrap {
       color: rgba(24, 28, 40, 1);
       line-height: 26px;
     }
-    .sellPrice {
-      color: #ec605e;
-    }
-    .buyPrice {
-      color: #3aba8f;
-    }
-    .serialNum{
-      color: #999;
+  }
+  view.right {
+    view.datas {
+      text:last-child {
+        color: #999;
+      }
+      text:first-child {
+        color: #ec605e;
+      }
     }
   }
 }
