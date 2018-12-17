@@ -149,7 +149,6 @@ view.Bigwrap {
         line-height: 26px;
         margin: 32upx 0 25upx;
       }
-
       view.info {
         justify-content: space-between;
         font-size: 14px;
