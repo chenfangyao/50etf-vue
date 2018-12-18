@@ -43,6 +43,8 @@ var option = {
     top: 3,
     bottom: 3
   },
+  animation: false,
+
   yAxis: {
     show: false,
     type: 'value',

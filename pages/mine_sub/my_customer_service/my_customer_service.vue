@@ -1,7 +1,8 @@
 <template>
 	<view class="wrap">
 		<base-header :hasBack="true" title='我的客服'></base-header>
-    <view class="btn bigBtn" hover-class='self-hover' @tap="showPop">电话客服</view>
+    <view class="h50"></view>
+    <btn-block txt='电话客服' @v-tap='showPop'></btn-block>
     <view class="h577"></view>
 		<view class="telPop" v-show="telShow">
       <view class="fixed"  @tap="showPop"></view>
@@ -15,12 +16,14 @@
 </template>
 
 <script>
+import btnBlock from '@/components/btnBlock.vue'
 export default {
   data() {
     return {
       telShow: false,
     };
   },
+  components:{btnBlock},
   methods: {
     showPop() {
       this.telShow = !this.telShow
@@ -38,6 +41,9 @@ export default {
 view.wrap {
   background-color: #f5f5f5;
   height: 100vh;
+  view.h50{
+    height: 50upx;
+  }
   view.telPop {
     view.fixed {
       position: fixed;
@@ -81,10 +87,6 @@ view.wrap {
     color: rgba(255, 255, 255, 1);
     line-height: 98upx;
     text-align: center;
-  }
-  view.btn.bigBtn {
-    color: #ededed;
-    border-radius: 4upx;
   }
   view.h577 {
     height: 577upx;

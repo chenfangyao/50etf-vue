@@ -110,14 +110,12 @@
 				justify-content: space-between;
 				padding: 0 26upx;
 				margin-bottom: 1px;
-				font-size: 30upx;
-				font-family: MicrosoftYaHei;
+				font-size: 15px;
 				color: rgba(24, 28, 40, 1);
 			}
 
 			>view:first-child {
-				font-size: 26upx;
-				font-family: MicrosoftYaHei;
+				font-size: 13px;
 				color: rgba(112, 118, 128, 1);
 			}
 

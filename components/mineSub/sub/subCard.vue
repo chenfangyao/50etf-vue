@@ -6,7 +6,7 @@
     <view>
       <h2>用户名{{username}}</h2>
       <h3>{{mobile}}</h3>
-      <button hover-class='self-hover'>实名认证</button>
+      <button hover-class='self-hover' @tap='go'>实名认证</button>
     </view>
   </view>
 </template>
@@ -16,7 +16,12 @@
 	  data(){
 			return{
 			}
-		},
+    },
+    methods:{
+      go(){
+        uni.navigateTo({url:'/pages/mine_sub/credentials_upload/tep1/tep1'})
+      }
+    },
 		computed: mapState(['sid','username','mobile']),
 		created(){
 		}

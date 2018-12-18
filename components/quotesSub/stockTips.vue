@@ -3,7 +3,7 @@
       <text class="stockNmae">50ETF</text>
       <!-- #ifndef H5 -->
       <view class="df_wh">
-        <mpvue-echarts  :echarts="echarts" :onInit="onInit"  canvasId="mini-canvas"/>
+        <mpvue-echarts  :echarts="echarts" :onInit="onInit"  canvasId="mini-canvas2"/>
       </view>
       <!-- #endif -->
        <!-- #ifdef H5 -->
@@ -24,14 +24,15 @@ var option = {
     data: [],
     show: false,
   },
-  legend:{
-    padding:0
+  legend: {
+    padding: 0
   },
-  grid:{
-    left:0,
-    right:0,
-    top:3,
-    bottom:3
+  animation:false,
+  grid: {
+    left: 0,
+    right: 0,
+    top: 3,
+    bottom: 3
   },
   yAxis: {
     show: false,
@@ -44,9 +45,6 @@ var option = {
   }]
 }
 function initChart(canvas, width, height) {
-
-
-
   chart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -88,11 +86,7 @@ view.stock50 {
   padding: 0 27upx;
   border-top: 1px solid #ededed;
   border-bottom: 12upx solid #ededed;
-  .df_wh {
-    width: 124upx;
-    height: 47upx;
-    align-self: center;
-  }
+
   text.stockNmae {
     font-size: 34upx;
     font-family: ArialMT;
@@ -110,5 +104,10 @@ view.stock50 {
     font-weight: 400;
     color: rgba(240, 95, 92, 1);
   }
+}
+view.df_wh {
+  width: 124upx;
+  height: 47upx;
+  align-self: center;
 }
 </style>

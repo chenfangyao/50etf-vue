@@ -12,8 +12,7 @@
 					<text>{{$formatetimestr(update_time)}}</text>
 				</view>
 				<view class="artwenan">
-					<!-- <text>{{artwenan}}</text> -->
-           <rich-text :nodes="artwenan"></rich-text>
+           <rich-text :nodes="artwenan" ></rich-text>
 				</view>
 			</view>
 		</view>
@@ -41,7 +40,7 @@
 			timeformates(timestr) {
 				// return new Date(parseInt(timestr) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
 				return util.formateTimeStr(timestr);
-			},
+      },
 		},
 		created() {
 			// this.getartdetil()
@@ -65,7 +64,7 @@
 				console.log('文章详情', res)
 				this.arttitle = res.data.title
 				this.artlittle = res.data.source
-				this.artwenan = res.data.content
+				this.artwenan = res.data.content.replace(/<br \/>/g, "<br/> <span style='margin-left:2em'></span>")
 				this.update_time = res.data.update_time
 			}).catch((err) => {
 				// 请求失败的回调
