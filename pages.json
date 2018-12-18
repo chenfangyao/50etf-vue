@@ -1,205 +1,219 @@
 {
-  "pages": [
-    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    {
-      "path": "pages/tabBar/index/index",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
+    "pages" : [
+        //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        {
+            "path" : "pages/tabBar/index/index",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/tabBar/quotes/quotes",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/tabBar/holding_warehouse/holding_warehouse",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/tabBar/assets/assets",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/tabBar/mine/mine",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/echarts/echarts",
+            "style" : {
+                "app-plus" : {
+                    "titleNView" : false,
+                    "scrollIndicator" : "none"
+                }
+            }
+        },
+        {
+            "path" : "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/index_sub/new_xiang_qing/new_xiang_qing",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "platforms/app-plus/fullscreen/fullscreen",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/quotes_sub/open_close/open_close",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/about_us/about_us",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/capital_flow/capital_flow",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/my_customer_service/my_customer_service",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/index_sub/new_list/new_list",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/quotes_sub/entrust_succ/entrust_succ",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/login/login",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/register/register",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/risk_book/risk_book",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/forget_pwd/tep1/tep1",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+        },
+        {
+            "path" : "pages/forget_pwd/tep2/tep2",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+        },
+        {
+            "path" : "pages/forget_pwd/tep3/tep3",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
-      }
+    ],
+    "tabBar" : {
+        "color" : "#7A7E83",
+        "selectedColor" : "#409DE5",
+        "borderStyle" : "white",
+        "backgroundColor" : "#fefefe",
+        "list" : [
+            {
+                "pagePath" : "pages/tabBar/index/index",
+                "iconPath" : "./static/tabBarImg/index.png",
+                "selectedIconPath" : "static/tabBarImg/index_selected.png",
+                "text" : "首页"
+            },
+            {
+                "pagePath" : "pages/tabBar/quotes/quotes",
+                "iconPath" : "static/tabBarImg/quotes.png",
+                "selectedIconPath" : "static/tabBarImg/quotes_seleted.png",
+                "text" : "行情"
+            },
+            {
+                "pagePath" : "pages/tabBar/holding_warehouse/holding_warehouse",
+                "iconPath" : "static/tabBarImg/holding_warehouse.png",
+                "selectedIconPath" : "static/tabBarImg/holding_warehouse_selected.png",
+                "text" : "持仓"
+            },
+            {
+                "pagePath" : "pages/tabBar/assets/assets",
+                "iconPath" : "static/tabBarImg/assets.png",
+                "selectedIconPath" : "static/tabBarImg/assets_selected.png",
+                "text" : "资产"
+            },
+            {
+                "pagePath" : "pages/tabBar/mine/mine",
+                "iconPath" : "static/tabBarImg/mine.png",
+                "selectedIconPath" : "static/tabBarImg/mine_selected.png",
+                "text" : "我的"
+            }
+        ]
     },
-    {
-      "path": "pages/tabBar/quotes/quotes",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
+    "globalStyle" : {
+        "navigationBarTextStyle" : "black",
+        "navigationBarTitleText" : "应用",
+        "navigationBarBackgroundColor" : "#F8F8F8",
+        "backgroundColor" : "#F8F8F8"
     },
-    {
-      "path": "pages/tabBar/holding_warehouse/holding_warehouse",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/tabBar/assets/assets",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/tabBar/mine/mine",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/echarts/echarts",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
-      "path": "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/index_sub/new_xiang_qing/new_xiang_qing",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "platforms/app-plus/fullscreen/fullscreen",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/quotes_sub/open_close/open_close",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/mine_sub/about_us/about_us",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/mine_sub/capital_flow/capital_flow",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/mine_sub/my_customer_service/my_customer_service",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/index_sub/new_list/new_list",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/quotes_sub/entrust_succ/entrust_succ",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/login/login",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/register/register",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/forget_pwd/forget_pwd",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/risk_book/risk_book",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
+    "condition" : {
+        //模式配置，仅开发期间生效
+        "current" : 0, //当前激活的模式（list 的索引项）
+        "list" : [
+            {
+                "name" : "test", //模式名称
+                "path" : "pages/tabBar/index/index", //启动页面，必选
+                "query" : "newsid=5158607" //启动参数，在页面的onLoad函数里面得到。
+            }
+        ]
     }
-  ],
-  "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#409DE5",
-    "borderStyle": "white",
-    "backgroundColor": "#fefefe",
-    "list": [
-      {
-        "pagePath": "pages/tabBar/index/index",
-        "iconPath": "./static/tabBarImg/index.png",
-        "selectedIconPath": "static/tabBarImg/index_selected.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/tabBar/quotes/quotes",
-        "iconPath": "static/tabBarImg/quotes.png",
-        "selectedIconPath": "static/tabBarImg/quotes_seleted.png",
-        "text": "行情"
-      },
-      {
-        "pagePath": "pages/tabBar/holding_warehouse/holding_warehouse",
-        "iconPath": "static/tabBarImg/holding_warehouse.png",
-        "selectedIconPath": "static/tabBarImg/holding_warehouse_selected.png",
-        "text": "持仓"
-      },
-      {
-        "pagePath": "pages/tabBar/assets/assets",
-        "iconPath": "static/tabBarImg/assets.png",
-        "selectedIconPath": "static/tabBarImg/assets_selected.png",
-        "text": "资产"
-      },
-      {
-        "pagePath": "pages/tabBar/mine/mine",
-        "iconPath": "static/tabBarImg/mine.png",
-        "selectedIconPath": "static/tabBarImg/mine_selected.png",
-        "text": "我的"
-      }
-    ]
-  },
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "应用",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
-  "condition": {
-    //模式配置，仅开发期间生效
-    "current": 0, //当前激活的模式（list 的索引项）
-    "list": [
-      {
-        "name": "test", //模式名称
-        "path": "pages/tabBar/index/index", //启动页面，必选
-        "query": "newsid=5158607" //启动参数，在页面的onLoad函数里面得到。
-      }
-    ]
-  }
 }

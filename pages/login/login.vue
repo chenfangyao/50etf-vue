@@ -4,9 +4,9 @@
     <view class="h1"></view>
     <view class="img"><image src='/static/loginResgImg/logo.png'></image></view>
     <view class="container">
-      <input-item placeholderTxt='手机号 / 账号' v-model="uName"></input-item>
-      <input-item placeholderTxt='密码' :isPwd='true' v-model='pwd'></input-item>
-      <view class="tip">{{tipContent}}</view>
+      <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur'></input-item>
+      <input-item placeholderTxt='密码' :isPwd='true' v-model='pwd' @now-blur='handleBlur'></input-item>
+      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
       <view class="txt2 uni-flex">
         <text @tap='go(1)'>注册用户</text>
@@ -23,6 +23,7 @@
 <script>
 import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import inputItem from '@/components/commonResgLog/inputItem.vue'
+import errTip from '@/components/commonResgLog/errtip.vue'
 export default {
   data() {
     return {
@@ -31,24 +32,29 @@ export default {
       pwd: '',
       uName: '',
       openEye: false,
-      focusInput: false
+      focusInput: false,
+      showErr:false
     };
   },
-  components: { submitBtn ,inputItem},
+  components: { submitBtn ,inputItem,errTip},
   methods: {
     go(i) {
       let url = ''
       switch (i) {
         case 1: url = '/pages/register/register'
           break
-        case 2: url = '/pages/forget_pwd/forget_pwd'
+        case 2: url = '/pages/forget_pwd/tep1/tep1'
           break
         case 3: url = '/pages/risk_book/risk_book'
       }
       uni.navigateTo({ url })
     },
     handleLogin() {
-      console.log('465433');
+      console.log(this.uName);
+    },
+    handleBlur(){
+      console.log('input失去焦点时触发');
+      this.showErr=true
     }
   },
 }
@@ -73,12 +79,6 @@ view.wrap {
   }
   view.container {
     margin: 0 55upx;
-    view.tip {
-      font-size: 13px;
-      color: rgba(240, 95, 92, 1);
-      margin: 16upx 0 32upx;
-      height: 36upx;
-    }
     view.txt2 {
       justify-content: space-between;
       text {
