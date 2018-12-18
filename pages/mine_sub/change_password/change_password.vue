@@ -1,10 +1,11 @@
 <template>
 	<view>
 		<base-header has-back='1'></base-header>
-    <view class="title">设置您的密码</view>
+    <view class="title">修改密码</view>
     <view class="container">
 
-      <input-item placeholderTxt='密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd1"></input-item>
+      <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd1"></input-item>
+      <input-item placeholderTxt='新密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd1"></input-item>
       <input-item placeholderTxt='确认密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd2"></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
@@ -53,5 +54,13 @@ view.title {
 }
 view.container {
   margin: 0 55upx;
+  view.txt2 {
+    justify-content: space-between;
+    text {
+      text-decoration: underline;
+      font-size: 13px;
+      color: rgba(132, 134, 137, 1);
+    }
+  }
 }
 </style>

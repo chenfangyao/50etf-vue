@@ -4,13 +4,18 @@
       <text>消息</text>
       <uni-badge text="2" type="danger"></uni-badge>
     </view>
-    <text class="set">设置</text>
+    <text class="set" @tap='go'>设置</text>
   </view>
 </template>
 <script>
 import uniBadge from "@/components/uni-badge.vue"
 export default {
-  components: { uniBadge }
+  components: { uniBadge },
+  methods:{
+    go(){
+      uni.navigateTo({url:'/pages/mine_sub/setting/setting'})
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
