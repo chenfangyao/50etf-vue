@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     go(val) {
-      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val })
+      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val+'&datas=10001441'})
     }
   }
 }

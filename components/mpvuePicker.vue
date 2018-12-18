@@ -244,6 +244,7 @@
                     value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
                     label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label
                 };
+                console.log(pickObj)
                 this.$emit('onConfirm', pickObj);
             },
             showPickerView() {

@@ -8,8 +8,8 @@
         <text>冻结权利金：</text>
       </view>
       <view class="uni-flex col">
-        <text>￥0.2</text>
-        <text>￥24000</text>
+        <text>￥{{feemoney.feemoney}}</text>
+        <text>￥{{feemoney.djmoney}}</text>
       </view>
     </view>
   </view>
@@ -18,7 +18,8 @@
 export default {
   data() {
     return {}
-  }
+  },
+    props:['feemoney']
 
 }
 </script>
