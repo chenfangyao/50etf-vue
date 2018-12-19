@@ -81,7 +81,7 @@ view.wrap {
     view {
       justify-content: space-between;
       background-color: #fff;
-      font-size: 13px;
+      font-size: 15px;
       font-family: MicrosoftYaHei;
       font-weight: 400;
       color: rgba(24, 28, 40, 1);

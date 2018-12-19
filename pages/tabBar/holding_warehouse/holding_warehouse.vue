@@ -1,21 +1,13 @@
 <template>
-  <view>
-    <base-header title="持仓"></base-header>
-    <view class="secondTitle">
-      <text>50etf</text>
-      <text>
-        <text>0.2236</text>
-        <text>2.3336</text>
-        <text>0.6%</text>
-      </text>
-    </view>
-    <button @tap="handleClick">111</button>
-    <button @tap="handleClick2">2</button>
-    <button @tap="go(2)">登录</button>
+  <view class="wrap">
+    <header-tab @tab-tap='tabTap'></header-tab>
+    <filter-list></filter-list>
   </view>
 </template>
 
 <script>
+import headerTab from '@/components/holdingSub/headerTab.vue'
+import filterList from '@/components/holdingSub/filterList.vue'
 
 export default {
   data() {
@@ -23,32 +15,34 @@ export default {
 
     };
   },
-
-  methods: {
-    handleClick() {
-      //#ifdef APP-PLUS
-      plus.screen.lockOrientation('portrait-primary');
-      //#endif
-    },
-    go(i) {
-      i == 2 && uni.navigateTo({ url: '/pages/login/login' });
-    },
-    handleClick2() {
-      //#ifdef APP-PLUS
-      plus.screen.lockOrientation("landscape-primary");
-      //#endif
-      uni.navigateTo({
-        url: '/pages/echarts/echarts'
-      });
-    },
+  components: { headerTab ,filterList},
+  methods:{
+    tabTap(i){
+      console.log(i);
+    }
   },
+  onShow(){
+    var options = {
+				url: '/Sapi/Squery/list_fbcc', //请求接口
+				data: {
+					page_index: 0,
+					page_size: 3,
+        },
+        method : 'GET'
+			}
+			this.$httpReq(options).then((res) => {
+				console.log('11', res)
+				this.newsItem = res.data.list
+			}).catch((err) => {
+				console.err(err)
+			})
+  }
 }
 </script>
 
-<style>
-view.secondTitle {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 13px;
+<style lang="scss" scoped>
+view.wrap {
+  min-height: 100vh;
+  background-color: #f5f5f5;
 }
 </style>

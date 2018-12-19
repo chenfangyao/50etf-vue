@@ -7,10 +7,10 @@
         <view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']" :id="tab.id" :data-current="index" @tap="tapTab">{{tab.name}}</view>
       </view>
       <futures-title></futures-title>
-      <scroll-view class="list2" scroll-y @scrolltolower="loadMore(1)">
+      <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
         <futures-datas></futures-datas>
         <view class="uni-tab-bar-loading">
-          <uni-load-more :loadingType="0" :contentText="loadingText"></uni-load-more>
+          <uni-load-more :loading-type="resquestState" ></uni-load-more>
         </view>
       </scroll-view>
     </view>
@@ -30,14 +30,10 @@ export default {
   },
   data() {
     return {
-      loadingText: {
-        contentdown: "上拉显示更多",
-        contentrefresh: "正在加载...",
-        contentnomore: "没有更多数据了"
-      },
       scrollLeft: 0,
       isClickChange: false,
       tabIndex: 0,
+      resquestState: 0,
       newsitems: [1, 2, 3, 4],
       tabBars: [{
         name: '1811(0)',
@@ -57,11 +53,11 @@ export default {
   },
   methods: {
     loadMore(e) {
-      console.log(4555);
-
-      // setTimeout(() => {
-      //   this.addData(e);
-      // }, 1200);
+      this.resquestState = 1
+      setTimeout(() => {
+        // this.addData(e);
+        this.resquestState = 0
+      }, 1200);
     },
     addData(e) {
       if (this.newsitems[e].data.length > 30) {
@@ -95,10 +91,10 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        res为服务端返回数据的根对象
+        // res为服务端返回数据的根对象
         console.log('合约列表', res)
       }).catch((err) => {
-        请求失败的回调
+        // 请求失败的回调
         console.log(err)
       })
     },
@@ -114,7 +110,7 @@ export default {
 
 view.uni-tab-bar {
   .list2 {
-    height: 400px;
+    height: calc(100vh - 200px);
   }
 
   .swiper-tab {

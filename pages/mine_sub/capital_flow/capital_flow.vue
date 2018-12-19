@@ -46,15 +46,12 @@ export default {
   },
   methods: {
     showDatepick() {
-      console.log('fd');
       this.showPick = true
     },
     getTime(val) {
       this.showPick = false;
       var starttime = this.$timestamp(val.starttime)
       var endtime = this.$timestamp(val.endtime)
-      console.log('start', starttime);
-      console.log('end', endtime);
       this.capicalflow(starttime, endtime)
     },
     // 资金流水
@@ -72,7 +69,6 @@ export default {
 
       }
       this.$httpReq(options).then((res) => {
-        console.log('资金流水', res)
         if (res.status) {
           this.monetlist = res.data.list
         }
