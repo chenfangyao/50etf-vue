@@ -5,7 +5,7 @@
       <view class="wrap">
         <image class="left commonStyle"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
         <text>{{title}}</text>
-        <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="showRight">确定</text>
+        <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="rightTxt">{{rightTxt}}</text>
       </view>
     </view>
     <view class="h44"></view>
@@ -21,8 +21,8 @@ export default {
     hasBack: {
       default: false
     },
-    showRight:{
-      default: false
+    rightTxt:{
+      default:''
     }
   },
   methods: {
@@ -50,6 +50,7 @@ view.h44 {
   view.wrap {
     text-align: center;
     height: 44px;
+    font-size: 16px;
     line-height: 44px;
     position: relative;
     .commonStyle {
@@ -61,6 +62,7 @@ view.h44 {
     }
     text.right {
       right: 20upx;
+      font-size: 14px;
     }
     image.left {
       left: 20upx;
