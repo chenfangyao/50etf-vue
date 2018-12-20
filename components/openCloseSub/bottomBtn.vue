@@ -4,7 +4,7 @@
     <view class="wrap uni-flex">
       <view class="txt">
         <text class="total">合计：</text>
-        <text class="totalPrice">￥1399.00</text>
+        <text class="totalPrice">￥{{totalmoney}}</text>
       </view>
       <view class="buyBtn" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
     </view>
@@ -20,7 +20,7 @@ export default {
       popShow:false
     }
   },
-  props:['onClose'],
+  props:['onClose','totalmoney'],
   components:{orderPop},
   methods:{
     showPop(){

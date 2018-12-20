@@ -50,7 +50,7 @@
                 <image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
             </view>
             <view class="sliderItem">
-                <slider  @change="slidering" :max='maxprice.maxcounts' min='1' :value='sliderVal'
+                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='1' :value='sliderVal'
                         backgroundColor='#e6e6e6' block-size='18' activeColor='#409de5'/>
             </view>
         </view>
@@ -110,9 +110,20 @@
             }
         },
         methods: {
+            // 合并分笔
             tapChange(val) {
                 this.tabActive = val
+                this.sliderVal=1
+                if(val==true){
+                    var picktext=this.pickerText
+                    picktext=picktext.split(' ')
+                    picktext=picktext[1]
+                    picktext=picktext.replace('张','')
+                    this.maxprice.maxcounts=parseInt(picktext)
+                }
+                this.$emit('hbfb-switch' ,{val:val,picktext:parseInt(picktext)})
             },
+            // 最新、对手、排队价格
             changePriceType(i,item) {
                 this.btn3_i = i
                 this.pricetitle=item
@@ -150,10 +161,15 @@
                 }
                 this.$emit('price-step' ,{num:this.sliderVal,price:this.pricevalue})
             },
+            // 滑块滑动事件
             slidering(e) {
                 this.sliderVal = e.detail.value
-                // this.$emit('price-step' ,{num:this.sliderVal,price:this.pricevalue})
+                this.$emit('price-step' ,{num:this.sliderVal,price:this.pricevalue})
             },
+            sliders(e) {
+                this.sliderVal = e.detail.value
+            },
+            // 修改委托数量
             plusStep(i) {
                 if(i==-1){
                     if(this.sliderVal==1){
@@ -166,7 +182,7 @@
                 }
                 this.sliderVal=parseInt(this.sliderVal)
                 this.sliderVal += i
-                // this.$emit('plus-step' ,{num:this.sliderVal,price:this.pricevalue})
+                this.$emit('plus-step' ,{num:this.sliderVal,price:this.pricevalue})
             },
             onCancel(e) {
                 // console.log(e)
@@ -174,10 +190,10 @@
             onConfirm(val) {
                 this.pickerText = val.label
                 if(this.onClose){
-                    console.log(val.value[0])
                     this.maxprice.maxcounts=parseInt(val.value[0])
                 }
                 this.sliderVal=1
+                this.$emit('fb-num' ,parseInt(val.value[0]))
             },
             // 单列
             showPicker() {
@@ -193,10 +209,7 @@
             fbcclist(val){
                 if(val){
                     this.fbcclength=this.fbcclist.length
-                }
-            },
-            hbcclist(val){
-                if(val){
+                    console.log(777)
                     this.hbcclength=this.hbcclist.length
                     this.pickerValueArray=[]
                     var cc=[
@@ -207,20 +220,23 @@
                         {enable_amount:14},
                     ]
                     this.pickerText='第1笔 '+cc[0].enable_amount+'张'
-                    for(var i=0;i<cc.length;i++){
-                        var pickobj=new Object()
-
-                        pickobj.label='第'+parseInt(i+1)+'笔'+' '+cc[i].enable_amount+'张'
-                        pickobj.value=cc[i].enable_amount
-                        this.pickerValueArray.push(pickobj)
-                    }
-                    // for(var i=0;i<this.hbcclist.length;i++){
+                    // for(var i=0;i<cc.length;i++){
                     //     var pickobj=new Object()
-                    //     pickobj.label='第'+i+'笔'+' '+this.hbcclist[i].enable_amount+'张'
-                    //     pickobj.value=this.hbcclist[i].enable_amount
+                    //     pickobj.label='第'+parseInt(i+1)+'笔'+' '+cc[i].enable_amount+'张'
+                    //     pickobj.value=cc[i].enable_amount
                     //     this.pickerValueArray.push(pickobj)
                     // }
+                    for(var i=0;i<this.fbcclist.length;i++){
+                        var pickobj=new Object()
+                        pickobj.label='第'+parseInt(i+1)+'笔'+' '+this.fbcclist[i].enable_amount+'张'
+                        pickobj.value=this.fbcclist[i].enable_amount
+                        this.pickerValueArray.push(pickobj)
+                    }
                     console.log('this.pickerValueArray',this.pickerValueArray)
+                }
+            },
+            hbcclist(val){
+                if(val){
                 }
             }
         },

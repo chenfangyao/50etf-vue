@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       tipContent: '您的账号和密码错误，请重新输入',
-      verifyYes: false,//验证通过，把它至为true,登录按钮才会变色且启用
+      verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
       pwd: '',
       uName: '',
       openEye: false,

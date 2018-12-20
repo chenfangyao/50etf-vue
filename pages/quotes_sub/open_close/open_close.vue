@@ -6,12 +6,12 @@
         <view class="h12 "></view>
         <mini-table :hydetils='QuotationMsg'></mini-table>
         <view class="h12 "></view>
-        <new-price :on-close="onClose" :maxprice="maxbuy" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @plus-step="plusStepNum" @price-step="priceStep"></new-price>
+        <new-price :on-close="onClose" :maxprice="maxbuy" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @fb-num="fbNum" @hbfb-switch="hbfbSwitch" @plus-step="plusStepNum" @price-step="priceStep"></new-price>
         <view class="h12 "></view>
 
         <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
         <view class="h12 " v-if="!onClose"></view>
-        <bottom-btn :on-close="onClose"></bottom-btn>
+        <bottom-btn :on-close="onClose" :totalmoney="totalmoney"></bottom-btn>
     </view>
 </template>
 
@@ -29,20 +29,31 @@
             return {
                 QuotationMsg: [],
                 onClose: false,
-                maxbuy:'',
+                maxbuy:{},
                 feemoney:'',
                 getdatainter:'',
-                hycode:'',
+                // hycode:'',
                 hbcclist:[],
                 fbcclist:[],
+                totalmoney:'',
+                hbfbswitch:false,
+                fbnum:'',
                 // cclist:{},
             };
         },
-        computed: mapState(['sid']),
+        computed: mapState(['sid','hycode']),
         components: {
             headerTitle, containChart, miniTable, newPrice, totalCost, bottomBtn
         },
         methods: {
+            // 合并、分笔
+            hbfbSwitch(val){
+                this.hbfbswitch=val.val
+                this.fbnum=val.picktext
+            },
+            fbNum(val){
+                this.fbnum=val
+            },
             // 买入卖出合约详细
             getartlelist() {
                 var options = {
@@ -81,11 +92,9 @@
                 }
             },
             plusStepNum(val){
-                console.log('num',val)
                 this.getmaxbuy(this.hycode,val.price,val.num)
             },
             priceStep(val){
-               console.log('price',val)
                 this.getmaxbuy(10001471,val.price,val.num)
             },
             // 获取最大可买数量
@@ -113,10 +122,28 @@
                     console.log('最大可买数量', res)
                     if(res.status){
                         this.maxbuy=res.data
+                        // 开仓
                         if(!this.onClose){
                             this.maxbuy.maxcounts=parseInt(this.maxbuy.maxcount)
                         }
-                        this.feemoney={feemoney:res.data.fee_money,djmoney:1300,own_amount:res.data.own_amount,enable_amount:res.data.enable_amount}
+                        // 平仓
+                        else{
+                            // 合并
+                            if(!this.hbfbswitch){
+                                this.maxbuy.maxcounts=parseInt(this.maxbuy.own_amount)
+                            }
+                            // 分笔
+                            else{
+                                this.maxbuy.maxcounts=this.fbnum
+                            }
+                        }
+                        var djmoney=parseInt(parseInt(amounts)*parseFloat(prices)*10000)
+                        this.feemoney={
+                            feemoney:res.data.fee_money,
+                            djmoney:djmoney,
+                            own_amount:res.data.own_amount,
+                            enable_amount:res.data.enable_amount}
+                        this.totalmoney=djmoney+parseInt(res.data.fee_money)
                     }
                 }).catch((err) => {
                     // 请求失败的回调
@@ -140,8 +167,6 @@
                                 this.fbcclist.push(res.data.list[i])
                             }
                         }
-                        // this.cclist.fbcclist=fbcclist
-                        console.log('this.fbcclist',this.fbcclist)
                     }
                 }).catch((err) => {
                     // 请求失败的回调
@@ -165,7 +190,6 @@
                                 this.hbcclist.push(res.data.list[i])
                             }
                         }
-                        console.log('this.hbcclist',this.hbcclist)
                     }
                 }).catch((err) => {
                     // 请求失败的回调
@@ -181,7 +205,7 @@
         },
         onLoad(option) {
             this.getartlelist()
-            this.hycode=option.datas
+            // this.hycode=option.datas
             this.getdatainter=setInterval(()=>{
                 this.getartlelist()
             },50000)
@@ -211,6 +235,6 @@
     }
 
     .h12 {
-        height: 12 upx;
+        height: 12upx;
     }
 </style>
