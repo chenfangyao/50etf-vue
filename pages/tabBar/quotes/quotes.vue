@@ -110,7 +110,7 @@ export default {
 
 view.uni-tab-bar {
   .list2 {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 400upx);
   }
 
   .swiper-tab {

@@ -3,7 +3,7 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <text @tap='tabTap' :class="{now:currentI==i}" :data-tabi='i'  v-for='(item,i) in titleList'>{{item}}</text>
+        <text @tap='tabTap' :class="{now:currentI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</text>
       </view>
     </view>
     <view class="h44"></view>
@@ -12,11 +12,9 @@
 
 <script>
 export default {
-  props: {
-  },
+  props: ['titleList'],
   data() {
     return {
-      titleList: ['分笔', '合并', '委托', '撤单'],
       currentI:0
     }
   },

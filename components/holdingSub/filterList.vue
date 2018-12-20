@@ -2,7 +2,7 @@
 <view>
 
   <view class="uni-flex container">
-    <view>总计：13笔</view>
+    <view>总计：{{total}}笔</view>
     <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png' />
   </view>
   <date-pick v-if="showPick" @select-complete='getTime'></date-pick>
@@ -14,7 +14,7 @@ import datePick from '@/components/datePick.vue'
 
 export default {
   components: { datePick },
-  props:[],
+  props:['total'],
   data() {
     return {
       showPick: false
