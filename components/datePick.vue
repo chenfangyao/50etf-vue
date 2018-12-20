@@ -1,6 +1,6 @@
 <template>
     <view class="wrap">
-      <base-header :hasBack='true' title="选择时间" @right-tap='handleConfirm' :show-right='true'></base-header>
+      <base-header :hasBack='true' title="选择时间" @right-tap='handleConfirm' rightTxt='确定'></base-header>
 			<view class="uni-title self">
         <text :class="{active:inLeft}" @tap="changeActive(true)">{{year}}-{{month}}-{{day}}</text> 至
         <text :class="{active:!inLeft}" @tap="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</text>

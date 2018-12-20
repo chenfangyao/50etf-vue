@@ -51,6 +51,8 @@ var option = {
   legend: {
     padding: 0,
   },
+  animation: false,
+
   color: '#4AB9BB',
   yAxis: [
     {

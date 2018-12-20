@@ -189,8 +189,25 @@
             }
         },
         {
-            "path" : "pages/mine_sub/credentials_upload/abc/abc",
-            "style" : {}
+            "path" : "pages/mine_sub/credentials_upload/tep3/tep3",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/bank_card/card_list/card_list",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+        },
+        {
+            "path" : "pages/mine_sub/bank_card/add_card/add_card",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
     ],
     "tabBar" : {

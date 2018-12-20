@@ -3,9 +3,7 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <image class="left commonStyle"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
-        <text>{{title}}</text>
-        <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="rightTxt">{{rightTxt}}</text>
+        <text @tap='tabTap' :class="{now:currentI==i}" :data-tabi='i'  v-for='(item,i) in titleList'>{{item}}</text>
       </view>
     </view>
     <view class="h44"></view>
@@ -15,22 +13,20 @@
 <script>
 export default {
   props: {
-    title: {
-      default: ''
-    },
-    hasBack: {
-      default: false
-    },
-    rightTxt:{
-      default:''
+  },
+  data() {
+    return {
+      titleList: ['分笔', '合并', '委托', '撤单'],
+      currentI:0
     }
   },
   methods: {
     back() {
       uni.navigateBack({ delta: 1 });
     },
-    rightTap(){
-      this.$emit('right-tap')
+    tabTap(e) {
+      this.$emit('tab-tap',e.target.dataset.tabi)
+      this.currentI=e.target.dataset.tabi
     }
   }
 }
@@ -53,21 +49,16 @@ view.h44 {
     font-size: 16px;
     line-height: 44px;
     position: relative;
-    .commonStyle {
-      
-      align-self: center;
-      top: 50%;
-      transform: translateY(-50%);
-      position: absolute;
+    text {
+      margin: 0 25upx;
+      font-size: 15px;
+      color: rgba(153, 153, 153, 1);
+      line-height: 44px;
     }
-    text.right {
-      right: 20upx;
-      font-size: 14px;
-    }
-    image.left {
-      left: 20upx;
-      width: 13px;
-      height: 15px;
+    text.now {
+      padding-bottom: 24upx;
+      border-bottom: 4upx solid #409DE5;
+      color: #409de5;
     }
   }
   .occupy {

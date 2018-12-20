@@ -8,7 +8,7 @@
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover">
+      <view class="uni-flex" hover-class="self-hover" @tap="go('bank_card/card_list/card_list')">
         <image src="/static/mineImg/02.png" />
         <text>银行卡</text>
         <text class="tip" v-if="false"></text>
@@ -81,7 +81,7 @@ view.wrap {
     view {
       justify-content: space-between;
       background-color: #fff;
-      font-size: 13px;
+      font-size: 15px;
       font-family: MicrosoftYaHei;
       font-weight: 400;
       color: rgba(24, 28, 40, 1);
