@@ -198,12 +198,33 @@
         {
             "path" : "pages/mine_sub/bank_card/card_list/card_list",
             "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/bank_card/add_card/add_card",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/holding_sub/clinch/clinch",
+            "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
         },
         {
-            "path" : "pages/mine_sub/bank_card/add_card/add_card",
+            "path" : "pages/holding_sub/ping_c_list/ping_c_list",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
+        },
+        {
+            "path" : "pages/holding_sub/ping_c_item/ping_c_item",
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"

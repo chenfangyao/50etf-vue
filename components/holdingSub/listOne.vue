@@ -1,13 +1,13 @@
 <template>
 <view>
-
-  <view v-for='(item,i) in list' class="list1Item " hover-class='self-hover' :key="i">
+<fenbi-pop v-if="showFenbiPop" @close-me='closePop'></fenbi-pop>
+  <view v-for='(item,i) in list' class="list1Item " @tap='popShow' hover-class='self-hover' :key="i">
     <view class="line1 uni-flex">
         <view >
           <text class="nameTxt">{{item.stock_name}}</text>
           <text class="codeTxt">{{item.stock_code}}</text>
         </view>
-        <view class="timeTxt" v-if="item.in_time">{{$formatetimestr(item.in_time)}}</view>
+        <view class="timeTxt" v-if="item.in_time">{{create_time[i]}}</view>
     </view>
     <view class="line2 uni-flex">
       <view class='uni-flex leftPart'>
@@ -38,25 +38,38 @@
 </view>
 </template>
 <script>
+import hebingPop from '@/components/holdingSub/hebingPop.vue'
+import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 export default {
-  props: ['list','tabI'],
+  props: ['list', 'tabI'],
   data() {
     return {
-      moneyColor: []
+      moneyColor: [],
+      create_time: [],
+      showHebingPop: false,
+      showFenbiPop: false,
+    }
+  },
+  components: { hebingPop, fenbiPop },
+  methods: {
+    popShow() {
+      this.showFenbiPop = true
+    },
+    closePop(){
+      
+      this.showFenbiPop = false
     }
   },
   watch: {
     list(val) {
+      if (!val) return;
       val.forEach((item, i) => {
         this.moneyColor.push(parseInt(item.profit_money) < 0)
+        this.create_time.push(this.$formatetimestr(item.in_time))
+
       });
     }
   },
-  methods: {
-    filterMoney(val) {
-      return parseInt(val) < 0
-    }
-  }
 }
 </script>
 
