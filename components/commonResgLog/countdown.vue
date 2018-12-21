@@ -19,6 +19,7 @@ export default {
     },
     sendCode() {
       this.timer || this.countdownFun()
+        this.$emit('v-yzm')
     }
   },
   props:['initTxt'],

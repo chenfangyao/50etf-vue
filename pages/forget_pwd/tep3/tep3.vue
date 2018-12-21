@@ -40,6 +40,34 @@ export default {
       console.log('input失去焦点时触发');
       this.showErr = true
     },
+      // 注册
+    loginfun(){
+          var options = {
+              url: '/Sapi/Reg/index', //请求接口
+              data: {
+                  mobile: this.tel,
+                  user_name: ''
+              }, //发送给服务端的数据
+              method: 'POST', //请求方法全部大写，默认GET
+          }
+          this.$httpReq(options).then((res) => {
+              // 请求成功的回调
+              // res为服务端返回数据的根对象
+              console.log(res)
+              if (res.status == 1) {
+              }else{
+                  if(res.info){
+                      this.tipContent=res.info
+                  }else{
+                      this.tipContent='账号或密码错误'
+                  }
+                  return
+              }
+          }).catch((err) => {
+              // 请求失败的回调
+              console.log(err)
+          })
+      },
   }
 }
 </script>

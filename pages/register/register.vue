@@ -9,7 +9,7 @@
         <view>
           <input-item placeholderTxt='验证码' @now-blur='handleBlur' v-model="verificationCode"></input-item>
         </view>
-        <count-down init-txt='发送验证码'></count-down>
+        <count-down init-txt='发送验证码' @v-yzm="getyamfunc" ></count-down>
       </view>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
@@ -34,7 +34,7 @@ export default {
       uName: '',
       tel: '',
       verificationCode: '',//验证码
-      verifyYes: false,
+      verifyYes: true,
       tipContent: '您注册的账号已存在，请重新输入重新输入',
       showErr: false
     };
@@ -46,12 +46,74 @@ export default {
       uni.navigateTo({ url })
     },
     handleLogin() {
-      console.log('点击事件，this.verifyYes==true时才会触发！！');
+
+        this.phoneisLogin()
     },
     handleBlur() {
-      console.log('input失去焦点时触发');
       this.showErr = true
     },
+      // 手机是否被注册
+      phoneisLogin(){
+          this.verifyYes=false
+          var options = {
+              url: '/Sapi/Reg/existsmobile', //请求接口
+              data: {
+                  mobile: this.tel,
+                  user_name: this.uName
+              }, //发送给服务端的数据
+              method: 'POST', //请求方法全部大写，默认GET
+          }
+          this.$httpReq(options).then((res) => {
+              // 请求成功的回调
+              // res为服务端返回数据的根对象
+              console.log(res)
+              this.verifyYes=true
+              if (res.status == 1) {
+                  uni.navigateTo({
+                      url:'/pages/forget_pwd/tep3/tep3'
+                  })
+              }else{
+                  this.showErr=true
+                  if(res.info){
+                      this.tipContent=res.info
+                  }else{
+                      this.tipContent='手机已被注册'
+                  }
+                  // return
+              }
+          }).catch((err) => {
+              // 请求失败的回调
+              console.log(err)
+          })
+      },
+      // 获取验证码
+      getyamfunc(){
+          var options = {
+              url: '/Sapi/Code/sendex', //请求接口
+              data: {
+                  mobile: this.tel,
+                  type: 'register'
+              }, //发送给服务端的数据
+              method: 'POST', //请求方法全部大写，默认GET
+          }
+          this.$httpReq(options).then((res) => {
+              // 请求成功的回调
+              // res为服务端返回数据的根对象
+              console.log(res)
+              if (res.status == 1) {
+              }else{
+                  if(res.info){
+                      // this.tipContent=res.info
+                  }else{
+                      // this.tipContent='获取验证码失败'
+                  }
+                  // return
+              }
+          }).catch((err) => {
+              // 请求失败的回调
+              console.log(err)
+          })
+      }
   },
 }
 </script>

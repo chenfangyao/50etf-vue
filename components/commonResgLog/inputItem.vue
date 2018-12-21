@@ -1,7 +1,7 @@
 <template>
   <view class=" _input" :class="{input6}">
-        <input type="number"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus'  :maxlength='input6?6:11' v-model="valtxt">
-        <input type="text" v-else :password='!openEye&&isPwd' @focus="getFocus(1)" @blur='getFocus'  maxlength='20' v-model="valtxt">
+        <input type="number"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
+        <input type="text" v-else :password='!openEye&&isPwd' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
         <text :class="{inputFocus:focusInput}" class='absTxt'>{{placeholderTxt}}</text>
         <image v-show='!openEye' v-if="isPwd" @tap='tabOpen' class='closeImg' src='/static/loginResgImg/close.png'></image>
         <image v-show='openEye' v-if="isPwd" @tap='tabOpen' class='openImg' src='/static/loginResgImg/open.png'></image>
@@ -34,6 +34,10 @@ export default {
     tabOpen() {
       this.openEye = !this.openEye
     },
+    getChange(){
+        // console.log(333)
+        this.$emit('now-change')
+      }
   }
 }
 </script>

@@ -21,6 +21,30 @@ Vue.prototype.$timestamp = function(str){
 	timestamp=timestamp.toString().slice(0,10)
 	return parseInt(timestamp)
 }
+// 输入验证
+Vue.prototype.$validata = function(str,mode){
+    if(str==''){
+        return '您输入的不能为空'
+    }
+    switch(mode){
+        // 用户名
+        case 0:
+            if(str.length<6){
+                return '您输入的用户名不能小于6位'
+            }
+            return 1;
+            break;
+            // 密码
+        case 1:
+            if(str.length<5){
+                return '您输入的密码不能小于6位'
+            }
+            return 1;
+            break;
+
+    }
+    return 1
+}
 const app = new Vue({
     ...App,
     store

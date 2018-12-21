@@ -56,10 +56,6 @@ export default {
           this.setsid(res.data.sid)
 					// 获取用户信息
           this.getuserinfo()
-					// 获取指数信息,未确定接口
-					// this.getmarkinfo()
-					// 获取文章列表
-					this.getartlelist()
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -180,12 +176,15 @@ export default {
 				complete: () => {}
 			});
 	}
-	
 
 	},
   created() {
-    this.loginin()
-    // 			this.loginout()
+    // this.loginin()
+      // 获取指数信息,未确定接口
+      // this.getmarkinfo()
+      // 获取文章列表
+      this.getartlelist()
+    // this.loginout()
   }
 }
 </script>
