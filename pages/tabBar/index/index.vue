@@ -39,7 +39,7 @@ export default {
       var options = {
         url: '/Sapi/Login/index', //请求接口
         data: {
-          user_name: 'test008',
+          user_name: 'lcs001',
           user_pwd: '123456'
         }, //发送给服务端的数据
         header: {
