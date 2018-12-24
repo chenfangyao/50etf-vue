@@ -3,7 +3,7 @@
     <header-title></header-title>
     <header-part></header-part>
     <view class="h12"></view>
-    <k-chart></k-chart>
+    <k-chart chart-height='278'></k-chart>
     <view class="h12"></view>
     <pan></pan>
     <btn-bottom></btn-bottom>

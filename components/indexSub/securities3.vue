@@ -1,6 +1,6 @@
 <template>
   <section class="uni-flex">
-    <view>
+    <view v-for='(item,i) in stockList' :key="i" @tap='go'>
       <h5>3409.4800</h5>
       <view>
         <text>17.73</text>
@@ -8,24 +8,24 @@
       </view>
       <h4>上证指数</h4>
     </view>
-    <view>
-      <h5>3409.4800</h5>
-      <view>
-        <text>17.73</text>
-        <text>+0.52%</text>
-      </view>
-      <h4>上证指数</h4>
-    </view>
-    <view>
-      <h5>3409.4800</h5>
-      <view>
-        <text>17.73</text>
-        <text>+0.52%</text>
-      </view>
-      <h4>上证指数</h4>
-    </view>
+    
   </section>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      stockList:[,,,]
+    }
+  },
+  methods:{
+    go(){
+      uni.navigateTo({url:'/pages/stock_detail/stock_detail'})
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 section {
   text-align: center;

@@ -1,5 +1,5 @@
 <template>
-  <view class="stock50 uni-flex">
+  <view class="stock50 uni-flex" @tap='go'>
       <text class="stockNmae">50ETF</text>
       <!-- #ifndef H5 -->
       <view class="df_wh">
@@ -27,7 +27,7 @@ var option = {
   legend: {
     padding: 0
   },
-  animation:false,
+  animation: false,
   grid: {
     left: 0,
     right: 0,
@@ -68,6 +68,9 @@ export default {
     showH5Echarts() {
       var myChart = echarts.init(document.getElementById('mini-canvas'));
       myChart.setOption(option);
+    },
+    go() {
+      uni.navigateTo({ url: '/pages/stock_detail/stock_detail' })
     }
   },
   mounted() {

@@ -71,7 +71,10 @@
     </view>
     <view class="bottomTip uni-flex">
       <view>自动延期</view>
-      <view @tap='openPop(2)'>√</view>
+      <view>
+
+      <uni-icon type="checkmarkempty" size="16" @tap='openPop(2)' color='#409DE5'></uni-icon>
+      </view>
     </view>
     <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle'> </ping-c-pop>
     <extension-pop v-if="showPop2" @yes-tap='yesHandle(2)' @cancle-tap='yesHandle(2)'></extension-pop>
@@ -81,6 +84,7 @@
 import btnBlock from '@/components/btnBlock.vue'
 import pingCPop from '@/components/openCloseSub/orderPop.vue'
 import extensionPop from '@/components/holdingSub/extensionPop.vue'
+import uniIcon from "@/components/uni-icon.vue"
 export default {
   data() {
     return {
@@ -88,7 +92,7 @@ export default {
       showPop2: false,
     }
   },
-  components: { btnBlock, pingCPop, extensionPop },
+  components: { btnBlock, pingCPop, extensionPop, uniIcon },
   methods: {
     closeMe() {
       this.$emit('close-me')
@@ -271,6 +275,10 @@ view.fixWrap {
       font-size: 11px;
       line-height: 80upx;
       color: rgba(255, 255, 255, 1);
+    }
+    view.uni-icon.uni-icon-checkmarkempty {
+      border: solid 1px #409de5;
+      align-self: center;
     }
   }
 }

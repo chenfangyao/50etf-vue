@@ -21,15 +21,15 @@ export default {
     hasBack: {
       default: false
     },
-    rightTxt:{
-      default:''
-    }
+    rightTxt: {
+      default: ''
+    },
   },
   methods: {
     back() {
       uni.navigateBack({ delta: 1 });
     },
-    rightTap(){
+    rightTap() {
       this.$emit('right-tap')
     }
   }
@@ -54,7 +54,6 @@ view.h44 {
     line-height: 44px;
     position: relative;
     .commonStyle {
-      
       align-self: center;
       top: 50%;
       transform: translateY(-50%);

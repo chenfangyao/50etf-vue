@@ -23,11 +23,11 @@
       </view>
     </view>
     <view class="uni-flex btn2">
-      <view class="hasBorder">
+      <view class="hasBorder" @tap='go(1)'>
         <image src="/static/assetsImg/recharge.png"/>
         <text>充值</text>
       </view>
-      <view>
+      <view  @tap='go'>
         <image src="/static/assetsImg/withdraw.png"/>
         <text>提现</text>
       </view>
@@ -35,22 +35,27 @@
   </view>
 </template>
 <script>
-	
-	export default{
-		data(){
-			return {
-				
-			}
-		},
-		props:['transmoney'],
-		methods:{
-	
-		},
-		created(){
-			
-		},
-		
-	}
+
+export default {
+  data() {
+    return {
+
+    }
+  },
+  props: ['transmoney'],
+  methods: {
+    go(i) {
+      switch(i){
+        case 1:
+        uni.navigateTo({url:'/pages/assets_sub/recharge/recharge'})
+      }
+     }
+  },
+  created() {
+
+  },
+
+}
 </script>
 <style lang="scss" scoped>
 view.subWrap {
