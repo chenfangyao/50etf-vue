@@ -6,7 +6,7 @@
         <text>10001493</text>
       </view>
       <view class="uni-flex line2">
-        <view>0.2527</view>
+        <view>{{newprices}}</view>
         <view>
           <h6>-0.00095</h6>
           <h6>-4.75%</h6>
@@ -76,6 +76,7 @@ export default {
     return {
       echarts,
       onInit: initChart, //异步获取数据后，不能在回调中传该函数
+			newprices:'0.2527'
     }
   },
   methods: {

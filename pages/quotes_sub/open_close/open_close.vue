@@ -95,7 +95,7 @@
                 this.getmaxbuy(this.hycode,val.price,val.num)
             },
             priceStep(val){
-                this.getmaxbuy(10001471,val.price,val.num)
+                this.getmaxbuy(this.hycode,val.price,val.num)
             },
             // 获取最大可买数量
             getmaxbuy(codes,prices,amounts) {
@@ -111,11 +111,6 @@
                         // 委托数量,默认设置为1
                         amount: amounts
                     },
-                    header: {
-                        clienttype: 'web',
-                        ver: 'v1.0',
-                        sid: '8l53rmjgcr9shsut6vu9e1siq1'
-                    }
                 }
                 this.$httpReq(options).then((res) => {
                     // 请求成功的回调

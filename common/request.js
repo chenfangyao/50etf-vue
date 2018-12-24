@@ -9,7 +9,7 @@ export default function (obj) {
       store.commit("setloadingFlag", true);
     }
   }, 500);
-  if (obj.method === 'GET') {
+  // if (obj.method === 'GET') {
     let sid;
     //#ifndef H5
     sid = store.state.sid || ""
@@ -18,14 +18,13 @@ export default function (obj) {
     sid = sessionStorage.getItem('etf_sid') || ""
     // #endif
 
-
     obj.header = obj.header || {}
     Object.assign(obj.header, {
       clienttype: 'web',
       ver: 'v1.0',
       sid,
     })
-  }
+  // }
   var baseUrl = 'http://47.100.226.135:8040'
   if (obj.url.indexOf('/Sapi') != -1) {
     baseUrl = 'http://47.100.226.135:8040'

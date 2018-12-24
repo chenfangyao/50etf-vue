@@ -3,7 +3,7 @@
 		<base-header has-back='1'></base-header>
     <view class="title">输入验证码</view>
     <view class="subTitle ">
-      我们已向 {{'137 **** **79'}}发送验证码短信，请查看短信并输入验证码。
+      我们已向 {{tel}}发送验证码短信，请查看短信并输入验证码。
     </view>
     <view class="container">
       <view class="uni-flex">
@@ -32,19 +32,24 @@ export default {
       verifyYes: true,
       focus_i: 1,
       showErr: false,
+			tel:'',
+			uName:'',
     };
   },
   components: { submitBtn, inputItem, errTip, countDown },
   methods: {
     handleNext() {
-      uni.navigateTo({ url: '/pages/forget_pwd/tep3/tep3' })
+      uni.navigateTo({ url: '/pages/forget_pwd/tep3/tep3?username='+this.uName+'&tel='+this.tel+'&verificationCode='+this.vCode+'&type=0' })
       console.log('点击事件，this.verifyYes==true时才会触发！！');
     },
     handleBlur() {
       console.log('input失去焦点时触发');
-      this.showErr = true
+      // this.showErr = true
     },
   },
+	onLoad(opt){
+		this.tel=opt.uName
+	}
 }
 </script>
 

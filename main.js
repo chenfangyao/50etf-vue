@@ -56,6 +56,13 @@ Vue.prototype.$validata = function(str,mode){
             }
             return 1;
             break;
+            // 手机号
+        case 2:
+            if(str.length<11){
+                return '您输入的手机号不正确'
+            }
+            return 1;
+            break;
 
     }
     return 1

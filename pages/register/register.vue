@@ -46,7 +46,17 @@ export default {
       uni.navigateTo({ url })
     },
     handleLogin() {
-
+        // 验证输入信息
+        if(this.$validata(this.uName,0)!=1){
+            this.showErr=true
+            this.tipContent=this.$validata(this.uName,0)
+            return
+        }
+        if(this.$validata(this.tel,2)!=1){
+            this.showErr=true
+            this.tipContent=this.$validata(this.tel,2)
+            return
+        }
         this.phoneisLogin()
     },
     handleBlur() {
@@ -70,7 +80,8 @@ export default {
               this.verifyYes=true
               if (res.status == 1) {
                   uni.navigateTo({
-                      url:'/pages/forget_pwd/tep3/tep3'
+                      url:'/pages/forget_pwd/tep3/tep3?username='+this.uName+'&tel='+this.tel+'&verificationCode='+this.verificationCode+'&type=1'
+                      // url:'/pages/forget_pwd/tep3/tep3?username='+this.uName+''
                   })
               }else{
                   this.showErr=true

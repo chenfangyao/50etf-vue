@@ -55,10 +55,6 @@ export default {
     handleLogin() {
         this.verifyYes=false
         this.showErr=false
-        // var eee=this.$validata(this.uName,0)
-        // var eee=this.$validata(this.pwd,0)
-        //
-        // console.log('(this.uName,0)',this.$validata(this.uName,0))
           // 验证输入信息
         if(this.$validata(this.uName,0)!=1){
             this.showErr=true

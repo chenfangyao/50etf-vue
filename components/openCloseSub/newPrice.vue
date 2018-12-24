@@ -84,7 +84,7 @@
                 btn3Arr: ['最新', '对手', '排队',],
                 btn3_i: 0,
                 sliderVal: 1,
-                pickerText: '第一笔 13张',//选择的值,默认取lists的第一个值，从后端获取后初始化
+                pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
                 pickerValueArray: [//后端获得lists替换此处
                     {
                         label: '第1笔 13张',
@@ -197,7 +197,9 @@
             },
             // 单列
             showPicker() {
-                this.$refs.typePick.show()
+							if(this.pickerValueArray[0]){
+								this.$refs.typePick.show()
+							} 
             },
         },
         watch:{
@@ -209,30 +211,19 @@
             fbcclist(val){
                 if(val){
                     this.fbcclength=this.fbcclist.length
-                    console.log(777)
                     this.hbcclength=this.hbcclist.length
                     this.pickerValueArray=[]
-                    var cc=[
-                        {enable_amount:10},
-                        {enable_amount:11},
-                        {enable_amount:12},
-                        {enable_amount:13},
-                        {enable_amount:14},
-                    ]
-                    this.pickerText='第1笔 '+cc[0].enable_amount+'张'
-                    // for(var i=0;i<cc.length;i++){
-                    //     var pickobj=new Object()
-                    //     pickobj.label='第'+parseInt(i+1)+'笔'+' '+cc[i].enable_amount+'张'
-                    //     pickobj.value=cc[i].enable_amount
-                    //     this.pickerValueArray.push(pickobj)
-                    // }
-                    for(var i=0;i<this.fbcclist.length;i++){
-                        var pickobj=new Object()
-                        pickobj.label='第'+parseInt(i+1)+'笔'+' '+this.fbcclist[i].enable_amount+'张'
-                        pickobj.value=this.fbcclist[i].enable_amount
-                        this.pickerValueArray.push(pickobj)
-                    }
-                    console.log('this.pickerValueArray',this.pickerValueArray)
+										this.pickerText='0'
+                    if(this.fbcclist[0]){
+											this.pickerText='第1笔 '+this.fbcclist[0].enable_amount+'张'
+											for(var i=0;i<this.fbcclist.length;i++){
+													var pickobj=new Object()
+													pickobj.label='第'+parseInt(i+1)+'笔'+' '+this.fbcclist[i].enable_amount+'张'
+													pickobj.value=this.fbcclist[i].enable_amount
+													this.pickerValueArray.push(pickobj)
+											}
+											console.log('this.pickerValueArray',this.pickerValueArray)
+										}   
                 }
             },
             hbcclist(val){
