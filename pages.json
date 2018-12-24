@@ -261,12 +261,19 @@
         {
             "path" : "pages/msg_common/list/list",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
         },
         {
             "path" : "pages/msg_common/detail/detail",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/stock_detail/stock_detail",
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"

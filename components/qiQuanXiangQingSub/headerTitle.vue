@@ -15,7 +15,7 @@ export default {
       default: '50ETF购11月2250'
     },
     name2: {
-      default: '10001493'
+      default: '22336666'
     }
   },
   methods: {

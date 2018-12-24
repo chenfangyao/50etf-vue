@@ -1,6 +1,6 @@
 <template>
     <view class="wrap_op">
-        <header-title :tab-active="onClose" @change-close="changeClose"></header-title>
+        <header-title :tab-active="onClose" @change-close="changeClose" ></header-title>
         <view class="h1 "></view>
         <contain-chart></contain-chart>
         <view class="h12 "></view>

@@ -75,7 +75,7 @@ export default {
 <style scoped lang="scss">
 view.wrap {
   background-color: #f5f5f5;
-  height: calc(100vh - 70upx);
+  min-height: 100vh;
   view.items {
     margin-top: 130upx;
     view {
