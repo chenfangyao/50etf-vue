@@ -69,6 +69,7 @@ view._input {
     letter-spacing: 2px;
     position: absolute;
     bottom: 10upx;
+    left: 10upx;
     transition: font-size 300ms, bottom 300ms;
   }
   text.absTxt.inputFocus {
