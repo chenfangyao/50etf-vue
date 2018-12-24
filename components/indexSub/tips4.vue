@@ -2,30 +2,39 @@
   <view class="tipItems">
     <view>
       <view class="hasBg">
-        <image src="/static/indexTabImg/jiaoyi.png"/>
+        <image src="/static/indexTabImg/jiaoyi.png" />
       </view>
       <text>交易</text>
     </view>
-    <view>
+    <view @tap='go(1)' hover-class='self-hover'>
       <view class="hasBg bg2">
-        <image src="/static/indexTabImg/gonggao.png"/>
+        <image src="/static/indexTabImg/gonggao.png" />
       </view>
       <text>公告</text>
     </view>
     <view>
       <view class="hasBg bg3">
-        <image src="/static/indexTabImg/chongzhi.png"/>
+        <image src="/static/indexTabImg/chongzhi.png" />
       </view>
       <text>充值</text>
     </view>
-    <view>
+    <view @tap='go(2)' hover-class='self-hover'>
       <view class="hasBg bg4">
-        <image src="/static/indexTabImg/xinshouzhiying.png"/>
+        <image src="/static/indexTabImg/xinshouzhiying.png" />
       </view>
       <text>新手指引</text>
     </view>
   </view>
 </template>
+<script>
+export default {
+  methods: {
+    go(i) {
+      uni.navigateTo({url:'/pages/msg_common/list/list?type='+i})
+    }
+  },
+}
+</script>
 <style lang="scss">
 view.tipItems {
   background-color: #fff;
@@ -39,21 +48,21 @@ view.tipItems {
     width: 94upx;
     height: 94upx;
     border-radius: 50%;
-    background-color: #E67C30;
+    background-color: #e67c30;
     image {
       width: 54upx;
       height: 54upx;
       margin-top: 22upx;
     }
   }
-  .hasBg.bg2{
-    background-color: #F05F5C;
+  .hasBg.bg2 {
+    background-color: #f05f5c;
   }
-  .hasBg.bg3{
-    background-color: #509BEB;
+  .hasBg.bg3 {
+    background-color: #509beb;
   }
-  .hasBg.bg4{
-    background-color: #E6AA12;
+  .hasBg.bg4 {
+    background-color: #e6aa12;
   }
   display: flex;
   justify-content: space-around;

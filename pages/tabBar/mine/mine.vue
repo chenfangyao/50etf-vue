@@ -15,19 +15,19 @@
         <image src="../../../static/mineImg/arrow.png" />
 
       </view>
-      <view class="uni-flex bb6" hover-class="self-hover">
+      <view class="uni-flex bb6" hover-class="self-hover" @tap="go('trading_rules/trading_rules')">
         <image src="/static/mineImg/03.png" />
         <text>交易规则</text>
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover">
+      <view class="uni-flex" hover-class="self-hover" @tap="go('red_envelope/red_envelope')">
         <image src="/static/mineImg/04.png" />
         <text>我的红包</text>
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex bb6" hover-class="self-hover">
+      <view class="uni-flex bb6" hover-class="self-hover"  @tap="go('invite_friends/invite_friends')">
         <image src="/static/mineImg/05.png" />
         <text>邀请好友</text>
         <text class="tip" v-if="false"></text>

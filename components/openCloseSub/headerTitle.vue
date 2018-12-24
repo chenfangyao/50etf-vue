@@ -75,9 +75,9 @@ view.h44 {
         position: absolute;
         width: 52%;
         border-radius: 13px;
-        bottom: 0;
-        top: 0;
-        left: -1%;
+        bottom: -1px;
+        top: -1px;
+        left: -1px;
         background-color: #409de5;
         color: #fff;
         transition: left 80ms ;
@@ -91,7 +91,7 @@ view.h44 {
         color: #707680;
       }
       > view.active.slider {
-        left: 50%;
+        left: 49%;
         background-color: #e6aa12;
       }
     }

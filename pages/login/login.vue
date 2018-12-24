@@ -89,6 +89,9 @@ export default {
                 if (res.status == 1) {
                     this.verifyYes=true
                     this.setsid(res.data.sid)
+                    // #ifdef H5
+                    sessionStorage.setItem('etf_sid',res.data.sid)
+                    // #endif
                     // 获取用户信息
                     this.getuserinfo()
                     uni.switchTab({ url: '/pages/tabBar/index/index'})

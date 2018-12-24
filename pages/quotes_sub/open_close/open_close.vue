@@ -197,9 +197,6 @@
                 })
             },
         },
-        onShow() {
-
-        },
         onUnload(){
             clearInterval(this.getdatainter)
         },

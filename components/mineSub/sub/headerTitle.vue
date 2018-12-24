@@ -1,7 +1,7 @@
 <template>
   <view class="title">
     <view class="msg">
-      <text>消息</text>
+      <text @tap='go(3)'>消息</text>
       <uni-badge text="2" type="danger"></uni-badge>
     </view>
     <text class="set" @tap='go'>设置</text>
@@ -11,9 +11,13 @@
 import uniBadge from "@/components/uni-badge.vue"
 export default {
   components: { uniBadge },
-  methods:{
-    go(){
-      uni.navigateTo({url:'/pages/mine_sub/setting/setting'})
+  methods: {
+    go(i) {
+      if (i == 3) {
+        uni.navigateTo({ url: '/pages/msg_common/list/list?type=' + i })
+      } else {
+        uni.navigateTo({ url: '/pages/mine_sub/setting/setting' })
+      }
     }
   }
 }

@@ -3,7 +3,8 @@
     <view :class="['container',{show}]">
       <view class="title">
         <text @tap="closePop" class="uni-icon uni-icon-close flr"></text>
-        <text>委托{{onClose?'平仓':'开仓'}}确认</text>
+        <text v-if="holding">一键平仓确认</text>
+        <text v-else>委托{{onClose?'平仓':'开仓'}}确认</text>
       </view>
       <view class="list uni-flex">
         <view class="uni-flex">
@@ -13,6 +14,7 @@
           <text v-if="onClose">委托类型</text>
           <text>委托数量</text>
           <text v-if="onClose">剩余可用</text>
+          <text v-else-if="holding">预计交易后持仓</text>
           <text v-else>可用资金</text>
           <text>有效期</text>
           <text v-if="onClose">预估金额</text>
@@ -56,7 +58,7 @@ export default {
       })
     }
   },
-  props: ['onClose'],
+  props: ['onClose','holding'],
   created() {
     setTimeout(
       () => { this.show = true }, 10
@@ -85,7 +87,7 @@ export default {
     background: #fff;
     border-radius: 10upx;
     z-index: 3100;
-    padding: 38upx 30upx 20upx;
+    padding: 28upx 30upx 20upx;
     .c_red {
       color: #f05f5c;
     }
@@ -95,7 +97,7 @@ export default {
       font-weight: bold;
       color: rgba(24, 28, 40, 1);
       position: relative;
-      margin-bottom: 84upx;
+      margin-bottom: 55upx;
       .flr {
         position: absolute;
         left: 37upx;
@@ -117,7 +119,7 @@ export default {
     }
     view.btn2 {
       justify-content: space-between;
-      margin-top: 133upx;
+      margin-top: 53upx;
       > view {
         flex-grow: 1;
         height: 88upx;

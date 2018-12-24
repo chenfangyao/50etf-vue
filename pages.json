@@ -212,19 +212,61 @@
         {
             "path" : "pages/holding_sub/clinch/clinch",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
         },
         {
             "path" : "pages/holding_sub/ping_c_list/ping_c_list",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/holding_sub/ping_c_item/ping_c_item",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/holding_sub/full_and_lose/full_and_lose",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/trading_rules/trading_rules",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/red_envelope/red_envelope",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/mine_sub/invite_friends/invite_friends",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/msg_common/list/list",
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
         },
         {
-            "path" : "pages/holding_sub/ping_c_item/ping_c_item",
+            "path" : "pages/msg_common/detail/detail",
             "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
