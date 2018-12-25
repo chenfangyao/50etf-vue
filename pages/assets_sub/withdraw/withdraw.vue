@@ -1,10 +1,11 @@
 <template>
 	<view class="wrap">
 	  <base-header title="提现"  has-back='1'></base-header>
-    <recharge-way :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
+    <recharge-way v-if="wayLists.length" :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
+    <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' go-to='1'></recharge-way>
 		<view class="panel">
       <view class="inputContainer">
-        <view class="moneyTitle"></view>
+        <view class="moneyTitle">提现金额</view>
         <input type="number" v-model="money">
         <text>￥</text>
       </view>
@@ -44,10 +45,7 @@ export default {
     doWhat() {
     },
     allGet() {
-      this.money = this.allMoney
-      this.$refs.allMoneyInput.valtxt = this.allMoney
-      this.$refs.allMoneyInput.focusInput = true
-
+      this.money = this.allMoney.replace(/,/g,'')
     }
   }
 }
@@ -60,15 +58,20 @@ view.wrap {
     padding: 0.1px 46upx;
     background-color: #fff;
     view.inputContainer {
-      padding-top: 100upx ;
+      padding-top: 36upx;
       position: relative;
-      margin-bottom: 29px;
+      margin-bottom: 29upx;
+      view.moneyTitle {
+        font-size: 14px;
+        color: rgba(24, 28, 40, 1);
+        margin-bottom: 37upx;
+      }
       input {
         font-size: 32px;
         color: rgba(24, 28, 40, 1);
-        line-height: 33px;
         border-bottom: 1px solid #ccc;
-        padding:0 0 24upx 20px;
+        padding: 0 0 20upx 20px;
+        height: 32px !important;
       }
       > text {
         font-size: 18px;
@@ -76,7 +79,7 @@ view.wrap {
         line-height: 33upx;
         position: absolute;
         left: -3px;
-        top: 110upx;
+        top: 150upx;
       }
     }
     view.overage {

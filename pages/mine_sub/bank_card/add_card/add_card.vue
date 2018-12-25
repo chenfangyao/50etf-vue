@@ -3,7 +3,7 @@
 		<base-header title='添加银行卡' has-back='1'></base-header>
     <view class='list-row'>
       <text>开户银行</text>
-      <input type="text" placeholder-class='_placeholder' placeholder='选择开户银行'>
+      <input type="text" placeholder-class='_placeholder' placeholder='选择开户银行' disabled @tap='showPicker'>
     </view>
     <view class='list-row'>
       <text>卡号</text>
@@ -17,19 +17,32 @@
 
      <btn-block txt='添加' ></btn-block>
     </view>
+     <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
+                      @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
 	</view>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
+import mpvuePicker from '@/components/mpvuePicker.vue';
 
 export default {
   data() {
     return {
-
+      pickerValueArray: [{ label: 1 },{ label: 2 },]
     };
   },
-  components: { btnBlock }
+  components: { btnBlock, mpvuePicker },
+  methods: {
+    showPicker() {
+      this.$refs.typePick.show()
+    },
+    onCancel(e) {
+      // console.log(e)
+    },
+    onConfirm(val) {
+    },
+  }
 }
 </script>
 

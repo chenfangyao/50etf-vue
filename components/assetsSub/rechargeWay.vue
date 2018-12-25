@@ -3,9 +3,9 @@
   <view class="rechargeWay uni-flex" @tap='switchPop'>
       <view class="zhifubao" v-if='wayLists'></view>
       <view class="txt">
-        <view>{{wayLists[way_i]}}</view>
+        <view>{{wayLists[way_i]||txt1}}</view>
         <view>
-          <text>{{txt1}}</text>
+          <text v-if="wayLists[way_i]">{{txt1}}</text>
           <text>{{txt2}}</text>
         </view>
       </view>
@@ -26,10 +26,20 @@ export default {
       way_i: 0
     }
   },
-  props:['wayLists','txt1','txt2','goTo'],
+  props:{
+    wayLists:{
+      default(){
+        return[]
+      }
+    },
+    txt1:'',
+    txt2:'',
+    goTo:'',
+  },
   methods: {
     chooseWay(i) {
       this.way_i = i
+      this.$emit('change-wayi',i)
       this.switchPop()
     },
     switchPop() {

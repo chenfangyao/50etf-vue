@@ -289,9 +289,27 @@
         {
             "path" : "pages/assets_sub/withdraw/withdraw",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/assets_sub/bank_card/bank_card",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/assets_sub/help/help",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/assets_sub/receipt_bank/receipt_bank",
+            "style" : {}
         }
     ],
     "tabBar" : {
