@@ -1,6 +1,6 @@
 <template>
   <view class=" _input" :class="{input6}">
-        <input type="number"  v-if="isTel" :disabled='isDisabled' :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
+        <input type="number"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
         <input type="text" v-else :password='!openEye&&isPwd' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
         <text :class="{inputFocus:focusInput}" class='absTxt'>{{placeholderTxt}}</text>
         <image v-show='!openEye' v-if="isPwd" @tap='tabOpen' class='closeImg' src='/static/loginResgImg/close.png'></image>
@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-  props: ['placeholderTxt', 'isPwd', 'isTel', 'input6', 'focusNow', 'isDisabled'],
+  props: ['placeholderTxt', 'isPwd', 'isTel', 'input6', 'focusNow'],
   data() {
     return {
       valtxt: '',
@@ -62,11 +62,7 @@ view._input {
     right: 36upx;
     top: 16upx;
   }
-  input {
-    font-size: 32px;
-    color: rgba(24, 28, 40, 1);
-    line-height: 33px;
-  }
+  
   text.absTxt {
     font-size: 16px;
     color: rgba(153, 153, 153, 1);

@@ -14,19 +14,18 @@ Vue.prototype.$store = store
 function add0(m) {
 	return m < 10 ? "0" + m : m;
 }
-Vue.prototype.$formatetimestr = function(str) {
-	// return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
-	str = Number(str)
-	let time = new Date(str);
-	let y = time.getFullYear();
-	let m = time.getMonth() + 1;
-	let d = time.getDate();
-	let h = time.getHours();
-	let mm = time.getMinutes();
-	let s = time.getSeconds();
-	return (
-		y + "-" + add0(m) + "-" + add0(d) + " " + add0(h) + ":" + add0(mm) + ":" + add0(s)
-	);
+Vue.prototype.$formatetimestr = function (str) {
+  // return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+  let time = new Date(str*1000);
+  let y = time.getFullYear();
+  let m = time.getMonth() + 1;
+  let d = time.getDate();
+  let h = time.getHours();
+  let mm = time.getMinutes();
+  let s = time.getSeconds();
+  return (
+    y + "-" + add0(m) + "-" + add0(d) + " " + add0(h) + ":" + add0(mm) + ":" + add0(s)
+  );
 }
 
 // 时间转时间戳
