@@ -110,7 +110,7 @@ view.wrap {
   left: 0;
   bottom: 0;
   background-color: #fff;
-  z-index: 1000;
+  z-index: 2500;
   view.tips{
     color: #F05F5C;
     text-align: center;

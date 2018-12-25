@@ -27,7 +27,7 @@
         <image src="/static/assetsImg/recharge.png"/>
         <text>充值</text>
       </view>
-      <view  @tap='go'>
+      <view  @tap='go(2)'>
         <image src="/static/assetsImg/withdraw.png"/>
         <text>提现</text>
       </view>
@@ -45,11 +45,15 @@ export default {
   props: ['transmoney'],
   methods: {
     go(i) {
-      switch(i){
+      switch (i) {
         case 1:
-        uni.navigateTo({url:'/pages/assets_sub/recharge/recharge'})
+          uni.navigateTo({ url: '/pages/assets_sub/recharge/recharge' })
+          break
+        case 2:
+          uni.navigateTo({ url: '/pages/assets_sub/withdraw/withdraw' })
+          break
       }
-     }
+    }
   },
   created() {
 
@@ -70,21 +74,18 @@ view.subWrap {
     text-align: center;
     color: #fff;
     h2 {
-      font-size: 28upx;
-      font-family: MicrosoftYaHei;
-      font-weight: 400;
+      font-size: 14px;
       margin: 0;
     }
     h1 {
-      font-size: 56upx;
+      font-size: 28px;
       font-family: ArialMT;
-      line-height: 56upx;
+      line-height: 28px;
       font-weight: bold;
       margin: 20upx 0;
     }
     view.h3 {
-      font-size: 28upx;
-      font-family: MicrosoftYaHei;
+      font-size: 14px;
     }
   }
   .panel2 {
@@ -93,16 +94,21 @@ view.subWrap {
     padding: 30upx 0;
     justify-content: space-around;
     h4 {
-      font-size: 28upx;
-      font-family: MicrosoftYaHei;
-      font-weight: 400;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    h4:first-child {
+      font-size: 15px;
     }
   }
   view.btn2 {
     background-color: #fff;
     padding: 19upx 0;
     border-radius: 0 0 20upx 20upx;
-
+    text {
+      font-size: 15px;
+      vertical-align: middle;
+    }
     > view {
       text-align: center;
       flex-grow: 1;

@@ -1,6 +1,6 @@
 <template>
   <view class="tipItems">
-    <view>
+    <view @tap='go(4)'>
       <view class="hasBg">
         <image src="/static/indexTabImg/jiaoyi.png" />
       </view>
@@ -12,7 +12,7 @@
       </view>
       <text>公告</text>
     </view>
-    <view>
+    <view @tap='go(3)'>
       <view class="hasBg bg3">
         <image src="/static/indexTabImg/chongzhi.png" />
       </view>
@@ -30,7 +30,15 @@
 export default {
   methods: {
     go(i) {
-      uni.navigateTo({url:'/pages/msg_common/list/list?type='+i})
+      let url = ''
+      switch (i) {
+        case 3: url = '/pages/assets_sub/recharge/recharge'
+          break
+        case 4: uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
+          return
+        default: url = '/pages/msg_common/list/list?type=' + i
+      }
+      uni.navigateTo({ url})
     }
   },
 }

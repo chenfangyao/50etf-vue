@@ -127,11 +127,15 @@ view.wrap {
       padding: 0 26upx;
       margin-bottom: 1px;
       font-size: 15px;
+      height: 98upx;
+      line-height: 98upx;
       color: rgba(24, 28, 40, 1);
     }
 
     > view:first-child {
       font-size: 13px;
+      height: 64upx;
+      line-height: 64upx;
       color: rgba(112, 118, 128, 1);
     }
 
