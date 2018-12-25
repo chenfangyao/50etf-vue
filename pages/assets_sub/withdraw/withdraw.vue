@@ -4,7 +4,8 @@
     <recharge-way :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
 		<view class="panel">
       <view class="inputContainer">
-        <input-item placeholderTxt='提现金额' ref='allMoneyInput'  v-model="money" @now-blur='handleBlur' @now-change="handChange"></input-item>
+        <view class="moneyTitle"></view>
+        <input type="number" v-model="money">
         <text>￥</text>
       </view>
       <view class="overage">
@@ -22,12 +23,11 @@
 </template>
 
 <script>
-import inputItem from '@/components/commonResgLog/inputItem.vue'
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
 
 export default {
-  components: { inputItem, btnBlock, rechargeWay },
+  components: { btnBlock, rechargeWay },
   data() {
     return {
       money: '',
@@ -60,14 +60,22 @@ view.wrap {
     padding: 0.1px 46upx;
     background-color: #fff;
     view.inputContainer {
-      padding: 100upx 0 0 15upx;
+      padding-top: 100upx ;
       position: relative;
+      margin-bottom: 29px;
+      input {
+        font-size: 32px;
+        color: rgba(24, 28, 40, 1);
+        line-height: 33px;
+        border-bottom: 1px solid #ccc;
+        padding:0 0 24upx 20px;
+      }
       > text {
         font-size: 18px;
         color: rgba(24, 28, 40, 1);
         line-height: 33upx;
         position: absolute;
-        left: -15px;
+        left: -3px;
         top: 110upx;
       }
     }
