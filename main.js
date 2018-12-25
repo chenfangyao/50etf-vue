@@ -10,7 +10,7 @@ Vue.component('baseHeader', baseHeader)
 
 Vue.prototype.$httpReq = request
 Vue.prototype.$store = store
-// 时间格式化
+// 时间格式化2
 function add0(m) {
   return m < 10 ? "0" + m : m;
 }

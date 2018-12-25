@@ -37,7 +37,7 @@ export default {
       if (i == 1) {
         uni.navigateTo({ url: '../help/help' })
       }
-      console.log('1213');
+        uni.navigateTo({ url: '../receipt_bank/receipt_bank' })
     }
   }
 }

@@ -309,7 +309,10 @@
         },
         {
             "path" : "pages/assets_sub/receipt_bank/receipt_bank",
-            "style" : {}
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
     ],
     "tabBar" : {
