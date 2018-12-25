@@ -37,10 +37,10 @@ export default {
       showErr:false
     };
   },
-    computed: mapState(['isWhite','sid','username','mobile']),
+    computed: mapState(['isWhite','sid','username','mobile','realnstatus']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
-      ...mapMutations(['setsid','setusername','setmobile']),
+      ...mapMutations(['setsid','setusername','setmobile','setrealnstatus']),
     go(i) {
       let url = ''
       switch (i) {
@@ -85,8 +85,11 @@ export default {
                 if (res.status == 1) {
                     this.verifyYes=true
                     this.setsid(res.data.sid)
+                    this.setrealnstatus(res.data.realn_status)
                     // #ifdef H5
                     sessionStorage.setItem('etf_sid',res.data.sid)
+                    // 实名认证状态
+                    sessionStorage.setItem('realnstatus',res.data.realn_status)
                     // #endif
                     // 获取用户信息
                     this.getuserinfo()

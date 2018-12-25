@@ -36,11 +36,6 @@
 		},
 		computed: mapState(['isWhite', 'sid']),
 		methods: {
-			// 获取文章详情
-			timeformates(timestr) {
-				// return new Date(parseInt(timestr) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
-				return util.formateTimeStr(timestr);
-      },
 		},
 		created() {
 			// this.getartdetil()

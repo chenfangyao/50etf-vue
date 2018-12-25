@@ -12,7 +12,7 @@ Vue.prototype.$httpReq = request
 Vue.prototype.$store = store
 // 时间格式化2
 function add0(m) {
-  return m < 10 ? "0" + m : m;
+	return m < 10 ? "0" + m : m;
 }
 Vue.prototype.$formatetimestr = function (str) {
   // return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
@@ -29,46 +29,52 @@ Vue.prototype.$formatetimestr = function (str) {
 }
 
 // 时间转时间戳
-Vue.prototype.$timestamp = function (str) {
-  let timestamp = new Date(str)
-  timestamp = timestamp.getTime(timestamp)
-  timestamp = timestamp.toString().slice(0, 10)
-  return parseInt(timestamp)
+Vue.prototype.$timestamp = function(str) {
+	let timestamp = new Date(str)
+	timestamp = timestamp.getTime(timestamp)
+	timestamp = timestamp.toString().slice(0, 10)
+	return parseInt(timestamp)
 }
 // 输入验证
-Vue.prototype.$validata = function (str, mode) {
-  if (str == '') {
-    return '您输入的不能为空'
-  }
-  switch (mode) {
-    // 用户名
-    case 0:
-      if (str.length < 6) {
-        return '您输入的用户名不能小于6位'
-      }
-      return 1;
-      break;
-    // 密码
-    case 1:
-      if (str.length < 5) {
-        return '您输入的密码不能小于6位'
-      }
-      return 1;
-      break;
-    // 手机号
-    case 2:
-      if (str.length < 11) {
-        return '您输入的手机号不正确'
-      }
-      return 1;
-      break;
-
-  }
-  return 1
+Vue.prototype.$validata = function(str, mode) {
+	if (str == '') {
+		return '您输入的不能为空'
+	}
+	switch (mode) {
+		// 用户名
+		case 0:
+			if (str.length < 6) {
+				return '您输入的用户名不能小于6位'
+			}
+			return 1;
+			break;
+			// 密码
+		case 1:
+			if (str.length < 6) {
+				return '您输入的密码不能小于6位'
+			}
+			return 1;
+			break;
+			// 手机号
+		case 2:
+			if (str.length < 11) {
+				return '您输入的手机号不正确'
+			}
+			return 1;
+			break;
+			// 身份证号码
+		case 3:
+			var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+			if (reg.test(str) === false) {
+				return '您输入的身份证号码不合法'
+			}
+			return 1;
+			break;
+	}
+	return 1
 }
 const app = new Vue({
-  ...App,
-  store
+	...App,
+	store
 })
 app.$mount()
-

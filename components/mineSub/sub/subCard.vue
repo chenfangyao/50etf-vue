@@ -19,10 +19,18 @@
     },
     methods:{
       go(){
+          // 判断实名认证状态实名认证状态。0=未提交，1=审核成功，2=审核中，3=审核失败"
+          let realnstatus;
+          //#ifndef H5
+          realnstatus = this.realnstatus || ""
+          // #endif
+          // #ifdef H5
+          realnstatus = sessionStorage.getItem('realnstatus') || ""
+          // #endif
         uni.navigateTo({url:'/pages/mine_sub/credentials_upload/tep1/tep1'})
       }
     },
-		computed: mapState(['sid','username','mobile']),
+		computed: mapState(['sid','username','mobile','realnstatus']),
 		created(){
 		}
 	}

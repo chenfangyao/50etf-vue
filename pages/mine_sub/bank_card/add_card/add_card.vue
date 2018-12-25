@@ -15,7 +15,7 @@
     </view>
     <view class="fixBottom">
 
-     <btn-block txt='添加' ></btn-block>
+     <btn-block txt='添加' @tap='addbank' ></btn-block>
     </view>
      <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
                       @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
@@ -32,9 +32,9 @@ export default {
       pickerValueArray: [{ label: 1 },{ label: 2 },]
     };
   },
-  components: { btnBlock, mpvuePicker },
-  methods: {
-    showPicker() {
+  components: { btnBlock ,mpvuePicker},
+	methods:{
+showPicker() {
       this.$refs.typePick.show()
     },
     onCancel(e) {
@@ -42,7 +42,44 @@ export default {
     },
     onConfirm(val) {
     },
-  }
+		getbanklist() {
+				var options = {
+						url: '/Sapi/Ubank/bank_list', //请求接口
+						method: 'GET', //请求方法全部大写，默认GET
+				}
+				this.$httpReq(options).then((res) => {
+						// 请求成功的回调
+						// res为服务端返回数据的根对象
+						console.log('银行卡列表', res)
+						if(res.status){
+					
+						}
+				}).catch((err) => {
+						// 请求失败的回调
+						console.log(err)
+				})
+		},
+		addbank(){
+			var options = {
+					url: '/Sapi/Ubank/bind', //请求接口
+					method: 'POST', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log('银行卡列表', res)
+					if(res.status){
+				
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		}
+	},
+	onLoad(){
+		this.getbanklist()
+	}
 }
 </script>
 
