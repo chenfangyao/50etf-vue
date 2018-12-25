@@ -1,22 +1,22 @@
 <template>
 	<view class="wrap">
-	  <base-header title="账户充值" right-txt='限额规则' has-back='1'></base-header>
-    <recharge-way :way-lists='wayLists' txt1='提示限额' txt2='（0-50,000）'></recharge-way>
-    <view class="panel">
+	  <base-header title="提现"  has-back='1'></base-header>
+    <recharge-way :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
+		<view class="panel">
       <view class="inputContainer">
-        <input-item placeholderTxt='充值金额' is-tel='1' v-model="money" @now-blur='handleBlur' @now-change="handChange"></input-item>
+        <input-item placeholderTxt='提现金额' ref='allMoneyInput'  v-model="money" @now-blur='handleBlur' @now-change="handChange"></input-item>
         <text>￥</text>
       </view>
       <view class="overage">
-        <text>账户余额：</text>
-        <text>13.00元</text>
-      </view>
-      <view class="priceItem uni-flex">
-        <view v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @tap='choosePriceItem(i)'>10 元</view>
+        <text>可提现余额：</text>
+        <text>{{allMoney}}元</text>
+        <text class="allWithdraw" @tap='allGet'>全部提现</text>
       </view>
     </view>
     <view class="fixView">
-      <btn-block txt='下一步' @v-tap='go'></btn-block>
+      <btn-block txt='确认提现' @v-tap='doWhat'></btn-block>
+      <view class="bottomTip">温馨提示：最少体现金额0.01元</view>
+
     </view>
 	</view>
 </template>
@@ -31,24 +31,27 @@ export default {
   data() {
     return {
       money: '',
+      allMoney: '1,104,551.17',
       priceLists: [, , , , , ,],
       priceItem_i: 0,
-      wayLists: ['支付宝', '银行转账'],
+      wayLists: ['招商银行'],
 
     }
   },
   methods: {
     handleBlur() { },
     handChange() { },
-    go() {
+    doWhat() {
     },
-    choosePriceItem(i) {
-      this.priceItem_i = i
+    allGet() {
+      this.money = this.allMoney
+      this.$refs.allMoneyInput.valtxt = this.allMoney
+      this.$refs.allMoneyInput.focusInput = true
+
     }
   }
 }
 </script>
-
 <style lang="scss" scoped>
 view.wrap {
   height: 100vh;
@@ -73,6 +76,11 @@ view.wrap {
       color: rgba(136, 138, 161, 1);
       line-height: 14px;
       margin-bottom: 49upx;
+      text.allWithdraw {
+        font-size: 14px;
+        color: rgba(64, 157, 229, 1);
+        margin-left: 15upx;
+      }
     }
     view.priceItem {
       justify-content: space-between;
@@ -98,10 +106,18 @@ view.wrap {
   }
   view.fixView {
     position: fixed;
-    bottom: 20upx;
+    bottom: 60upx;
     left: 0;
     right: 0;
-   
+    view.bottomTip {
+      font-size: 13px;
+      color: rgba(64, 157, 229, 1);
+      text-align: center;
+      line-height: 13px;
+      margin-top: 36upx;
+    }
   }
 }
 </style>
+
+

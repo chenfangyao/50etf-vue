@@ -282,6 +282,13 @@
         {
             "path" : "pages/assets_sub/recharge/recharge",
             "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/assets_sub/withdraw/withdraw",
+            "style" : {
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
