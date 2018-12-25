@@ -69,13 +69,7 @@ export default {
 					if (res.status == 1) {
 						uni.navigateTo({ url: '../tep3/tep3' })
 					}else{
-// 						this.showErr=true
-// 							if(res.info){
-// 									this.tipContent=res.info
-// 							}else{
-// 									this.tipContent='账号或密码错误'
-// 							}
-// 							return
+
 					}
 			}).catch((err) => {
 					// 请求失败的回调
@@ -108,7 +102,6 @@ export default {
           this.$set(this.imgUrl, i, res.tempFilePaths[0])
             this.convertImgToBase64(this.imgUrl[i],(base64img)=>{
                 console.log('base64img',base64img)
-								console.log('i',i)
 								if(i==0){
 									this.f0=base64img
 								}else if(i==1){

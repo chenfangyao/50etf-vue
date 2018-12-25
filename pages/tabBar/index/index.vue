@@ -62,22 +62,6 @@ export default {
         console.log(err)
       })
     },
-    // 登出
-    loginout() {
-      var options = {
-        url: '/Sapi/Login/loginout', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
-        context: '',
-      }
-      this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log(res)
-      }).catch((err) => {
-        // 请求失败的回调
-        alert(err)
-      })
-    },
     // 获取用户信息
     getuserinfo() {
       var options = {

@@ -1,9 +1,9 @@
 <template>
   <view class="wrap">
     <base-header has-back='1'></base-header>
-    <view class="title">公司发展方向通知</view>
-    <view class="timeTitle">2018-02-08 15:46:59</view>
-    <view class="content">上证50指数由上海证券交易所编制，指数简称为上证50，代码000016，基日为2003年12月31日，基点为1000点。2004年1月2日正式发布并于上海证券交易所上市交易。上证50ETF的投资目标是紧密跟踪上证50指数，最小化跟踪偏离度和跟踪误差，代码510050。基金采取被动式投资策略，具体使用的跟踪指数的投资方法主要是完全复制法，追求实现与上证50指数累死的风险与收益特征。</view>
+    <view class="title">{{conent.title}}</view>
+    <view class="timeTitle">{{$formatetimestr(conent.update_time || conent.create_time)}}</view>
+    <view class="content">{{conent.content}}</view>
   </view>
 </template>
 
@@ -11,9 +11,62 @@
 export default {
   data() {
     return {
-
+           artid:'',
+					 conent:'',
+					 formatecontent:'',
     };
-  }
+  },
+	methods:{
+		getartcont(id){
+			var options = {
+				url: '/Sapi/Article/cont', //请求接口
+				data: {
+					id: id,
+				}, //发送给服务端的数据
+				method: 'GET', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				// res为服务端返回数据的根对象
+				console.log('文章详情',res)
+				if (res.status == 1) {
+					this.conent=res.data
+				}
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		},
+		getmymessage(id){
+			var options = {
+				url: '/Sapi/Ucenter/message_cont', //请求接口
+				data: {
+					id: id,
+				}, //发送给服务端的数据
+				method: 'GET', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				// res为服务端返回数据的根对象
+				console.log('文章详情',res)
+				if (res.status == 1) {
+					this.conent=res.data
+				}
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		}
+	},
+	onLoad(opt){
+		this.artid=opt.id
+		if(opt.title=='消息'){
+			this.getmymessage(this.artid)
+		}else{
+			this.getartcont(this.artid)
+		}
+		
+	}
 }
 </script>
 

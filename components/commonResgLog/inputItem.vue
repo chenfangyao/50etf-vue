@@ -35,7 +35,6 @@ export default {
       this.openEye = !this.openEye
     },
     getChange() {
-      // console.log(333)
       this.$emit('now-change')
     }
   }

@@ -2,10 +2,8 @@
   <view>
     <base-header title="交易规则" has-back='1'></base-header>
     <view class="border1"></view>
-    <view class="title">交易条目</view>
-    <view class="content">交易时间：每天9：30至15：00系统都会接受买卖委托。当日15：00－16：00为计算排名时间，同时本系统将自动清空委托库，在这段时间内的提交的委托为无效委托，此前未能成交的委托也一并被清空。系统在交易日的15:00－ ...</view>
-    <view class="title">交易条目</view>
-    <view class="content">交易时间：每天9：30至15：00系统都会接受买卖委托。当日15：00－16：00为计算排名时间，同时本系统将自动清空委托库，在这段时间内的提交的委托为无效委托，此前未能成交的委托也一并被清空。系统在交易日的15:00－ ...</view>
+    <view class="title">{{rules.title}}</view>
+    <view class="content">{{rules.content}}</view>
   </view>
 </template>
 
@@ -13,9 +11,34 @@
 export default {
   data() {
     return {
-
+rules:''
     };
-  }
+  },
+	methods:{
+		tradrule() {
+				var options = {
+						url: '/Sapi/Article/cont', //请求接口
+						method: 'GET', //请求方法全部大写，默认GET
+						data: {
+								id:6
+						},
+				}
+				this.$httpReq(options).then((res) => {
+						// 请求成功的回调
+						// res为服务端返回数据的根对象
+						console.log('交易规则', res)
+						if(res.status){
+								this.rules = res.data
+						}
+				}).catch((err) => {
+						// 请求失败的回调
+						console.log(err)
+				})
+		},
+	},
+	onLoad(){
+		this.tradrule()
+	}
 }
 </script>
 

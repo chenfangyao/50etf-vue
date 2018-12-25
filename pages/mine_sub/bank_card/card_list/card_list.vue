@@ -11,7 +11,7 @@
             <text>尾号1123储蓄卡</text>
           </view>
         </view>
-        <view  class="scroll-view-item_H bg-blue" hover-class='self-hover'><text>删除</text></view>
+        <view  class="scroll-view-item_H bg-blue" hover-class='self-hover' @tap='delbank(key)'><text>删除</text></view>
 		</scroll-view>
 	</view>
 </template>
@@ -26,7 +26,11 @@ export default {
   methods: {
     goAdd() {
       uni.navigateTo({ url: '../add_card/add_card' })
-    }
+    },
+		delbank(index){
+			console.log(333,index)
+			this.cardList.splice(index,1)
+		}
   }
 }
 </script>

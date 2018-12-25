@@ -12,7 +12,10 @@ const store = new Vuex.Store({
         sid: '',
         username: '',
         mobile: '',
+        // 合约code
         hycode:'',
+        // 实名认证状态
+        realnstatus:'',
         loadingFlag: false
     },
     mutations: {
@@ -44,6 +47,9 @@ const store = new Vuex.Store({
         },
         sethycode(state, data){
             state.hycode = data
+        },
+        setrealnstatus(state,data){
+            state.realnstatus=data
         }
     },
 })
