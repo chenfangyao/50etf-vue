@@ -28,7 +28,26 @@ export default {
   },
   components: { btnBlock },
   methods: {
-    logOut() { },
+    logOut() {
+			var options = {
+					url: '/Sapi/Login/loginout', //请求接口
+					data: {
+					}, //发送给服务端的数据
+					method: 'POST', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log(res)
+					if (res.status == 1) {
+						uni.navigateTo({ url:'/pages/login/login' })
+					}else{
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		},
     go(i) {
       let url = ''
       switch (i) {

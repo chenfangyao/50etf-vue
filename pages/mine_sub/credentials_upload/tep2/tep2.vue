@@ -36,12 +36,51 @@ export default {
   data() {
     return {
       imgUrl: [],
+			uName:'',
+			IDcard:'',
+			f0:'',
+			f1:'',
+			f2:'',
     };
   },
   components: { btnBlock },
   methods: {
     goNext() {
-      uni.navigateTo({ url: '../tep3/tep3' })
+			console.log('f0',this.f0)
+			var options = {
+					url: '/Sapi/User/realn', //请求接口
+					data: {
+							real_name: this.uName,
+							idtp: '00',
+							idno:this.IDcard,
+							photo:{
+        f0: this.f0,
+        f1: this.f1,
+        f2: ""
+    }
+
+					}, //发送给服务端的数据
+					method: 'POST', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log(res)
+					if (res.status == 1) {
+						uni.navigateTo({ url: '../tep3/tep3' })
+					}else{
+// 						this.showErr=true
+// 							if(res.info){
+// 									this.tipContent=res.info
+// 							}else{
+// 									this.tipContent='账号或密码错误'
+// 							}
+// 							return
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})  
     },
     upload() {
       uni.uploadFile({
@@ -67,10 +106,18 @@ export default {
         count: 1,
         success: (res) => {
           this.$set(this.imgUrl, i, res.tempFilePaths[0])
-          console.log(res);
-          console.log(this.imgUrl[i]);
+            this.convertImgToBase64(this.imgUrl[i],(base64img)=>{
+                console.log('base64img',base64img)
+								console.log('i',i)
+								if(i==0){
+									this.f0=base64img
+								}else if(i==1){
+									this.f1=base64img
+								}
+            })
         }
       })
+
     },
     previewImage(e) {
       var current = e.target.dataset.src
@@ -78,8 +125,27 @@ export default {
         current: current,
         urls: this.imgUrl
       })
-    }
-  }
+    },
+      convertImgToBase64(url, callback, outputFormat){
+          var canvas = document.createElement('CANVAS'),
+              ctx = canvas.getContext('2d'),
+              img = new Image;
+          img.crossOrigin = 'Anonymous';
+          img.onload = function(){
+              canvas.height = img.height;
+              canvas.width = img.width;
+              ctx.drawImage(img,0,0);
+              var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+              callback.call(this, dataURL);
+              canvas = null;
+          };
+          img.src = url;
+      }
+  },
+	onLoad(opt){
+		this.uName=opt.username
+		this.IDcard=opt.IDcard
+	}
 }
 </script>
 

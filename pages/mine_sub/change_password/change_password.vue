@@ -4,9 +4,9 @@
     <view class="title">修改密码</view>
     <view class="container">
 
-      <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd1"></input-item>
-      <input-item placeholderTxt='新密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd1"></input-item>
-      <input-item placeholderTxt='确认密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd2"></input-item>
+      <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' @now-change='handChange' v-model="pwd1"></input-item>
+      <input-item placeholderTxt='新密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd2"></input-item>
+      <input-item placeholderTxt='确认密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd3"></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
       <submit-btn btnTxt='完成' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -24,23 +24,65 @@ export default {
   data() {
     return {
       tipContent: '两次输入密码不一致',
-      verifyYes: false,
-      pwd2:'',
+      verifyYes: true,
       pwd1:'',
+      pwd2:'',
+			pwd3:'',
       showErr:false,
     };
   },
   components: { submitBtn, inputItem ,errTip},
   methods: {
     handleNext() {
-      uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2' })
-
-      console.log('点击事件，this.verifyYes==true时才会触发！！');
+			// 新旧密码是否一致
+			if(this.pwd3!==this.pwd2){
+				this.showErr=true
+				return
+			}
+			// 验证输入信息
+			if(this.$validata(this.pwd2,1)!=1){
+					this.showErr=true
+					this.tipContent=this.$validata(this.pwd2,1)
+					return
+			}
+			this.resetPwd()
     },
     handleBlur() {
-      console.log('input失去焦点时触发');
-      this.showErr = true
+      
     },
+		resetPwd(){
+			var options = {
+					url: '/Sapi/User/savePwd', //请求接口
+					data: {
+							user_oldpwd: this.pwd1,
+							user_pwd: this.pwd2
+					}, //发送给服务端的数据
+					method: 'POST', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log(res)
+					if (res.status == 1) {
+						this.showErr=false
+						uni.navigateTo({ url:'/pages/login/login' })
+					}else{
+						this.showErr=true
+							if(res.info){
+									this.tipContent=res.info
+							}else{
+									this.tipContent='修改密码失败'
+							}
+							// return
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		},
+		handChange(){
+			this.showErr=false
+		}
   }
 }
 </script>

@@ -184,6 +184,7 @@ export default {
       // this.getmarkinfo()
       // 获取文章列表
       this.getartlelist()
+      this.getconfinfo()
     // this.loginout()
   }
 }
