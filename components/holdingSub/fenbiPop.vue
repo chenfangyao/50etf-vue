@@ -32,7 +32,7 @@
           </view>
         </view>
         <view class="rightPart">
-          <view>12230021.00</view>
+          <view>91223021.00</view>
           <view>
             <text>延期：</text>
             <text>10元</text>
@@ -71,9 +71,8 @@
     </view>
     <view class="bottomTip uni-flex">
       <view>自动延期</view>
-      <view>
-
-      <uni-icon type="checkmarkempty" size="16" @tap='openPop(2)' color='#409DE5'></uni-icon>
+      <view @tap='openPop(2)' >
+       <uni-icon type="checkmarkempty" size="17"  color='#409DE5'></uni-icon>
       </view>
     </view>
     <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle'> </ping-c-pop>
@@ -163,7 +162,6 @@ view.fixWrap {
       }
     }
     view.infoView {
-      height: 72upx;
       font-size: 12px;
       color: rgba(136, 136, 136, 1);
       line-height: 12px;
@@ -185,7 +183,7 @@ view.fixWrap {
       view.rightPart {
         flex-grow: 1;
         > view:first-child {
-          font-size: 44upx;
+          font-size: 42upx;
           line-height: 44upx;
           font-weight: bold;
           color: rgba(240, 95, 92, 1);
@@ -265,21 +263,19 @@ view.fixWrap {
   view.bottomTip {
     position: absolute;
     background-color: #000;
-    bottom: 0;
     right: 0;
+    bottom: 0;
     left: 0;
     height: 80upx;
     padding: 0 35upx;
     justify-content: space-between;
+    align-items: center;
     > view {
       font-size: 11px;
       line-height: 80upx;
       color: rgba(255, 255, 255, 1);
     }
-    view.uni-icon.uni-icon-checkmarkempty {
-      border: solid 1px #409de5;
-      align-self: center;
-    }
+    
   }
 }
 </style>

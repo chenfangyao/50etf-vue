@@ -1,6 +1,6 @@
 <template>
 <view>
-<fenbi-pop v-if="showFenbiPop" @close-me='closePop'></fenbi-pop>
+  <fenbi-pop v-if="showFenbiPop" @close-me='closePop'></fenbi-pop>
   <view v-for='(item,i) in list' class="list1Item " @tap='popShow' hover-class='self-hover' :key="i">
     <view class="line1 uni-flex">
         <view >
@@ -18,7 +18,7 @@
           </view>
           <view>
             <text>{{tabI==0?'延期费：':'平均成交价'}}</text>
-            <text></text>
+            <text>{{item.add_fee_money}}</text>
           </view>
         </view>
         <view class="itemView" v-if='tabI==0'>
@@ -53,6 +53,7 @@ export default {
   components: { hebingPop, fenbiPop },
   methods: {
     popShow() {
+
       this.showFenbiPop = true
     },
     closePop(){

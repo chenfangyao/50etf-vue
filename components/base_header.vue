@@ -3,7 +3,9 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <image class="left commonStyle"  src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
+        <view class="left commonStyle">
+          <image src='/static/arrow/l.png' @tap="back" v-if="hasBack"/>
+        </view>
         <text>{{title}}</text>
         <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="rightTxt">{{rightTxt}}</text>
       </view>
@@ -63,10 +65,12 @@ view.h44 {
       right: 20upx;
       font-size: 14px;
     }
-    image.left {
-      left: 20upx;
-      width: 13px;
-      height: 15px;
+    view.left {
+      padding: 8upx 0 0 20upx;
+      image {
+        width: 13px;
+        height: 15px;
+      }
     }
   }
   .occupy {

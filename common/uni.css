@@ -1430,9 +1430,21 @@ radio-group label, checkbox-group label{
     content: "\e612";
 }
 /* 自加 */
+.uni-icon.uni-icon-checkmarkempty {
+  border: solid 1px #409de5;
+}
 .self-hover{
   opacity: 0.7 !important;
 }
 page,view,text{
   box-sizing: border-box;
+}
+.self-mask{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.5);
 }

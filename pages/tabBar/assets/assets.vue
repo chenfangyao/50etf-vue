@@ -24,9 +24,9 @@
 				<text>{{enable_money}}</text>
 			</view>
 		</view>
+    <button @tap="go(2)">登录</button>
     <button @tap="handleClick">111</button>
     <button @tap="handleClick2">2</button>
-    <button @tap="go(2)">登录</button>
 	</view>
 </template>
 

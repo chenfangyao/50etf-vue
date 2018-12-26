@@ -29,6 +29,9 @@ export default {
     })
     //#endif
   },
+  onError(err) {
+    console.log(err)
+  },
   onShow() {
     console.log('App Show')
   },

@@ -20,9 +20,7 @@ export default {
   },
   methods: {
     back() {
-      uni.navigateBack({
-        delta: 1
-      });
+      uni.switchTab({url:'/pages/tabBar/quotes/quotes'})
     }
   }
 }

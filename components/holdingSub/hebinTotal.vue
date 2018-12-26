@@ -12,8 +12,8 @@ view {
   font-size: 13px;
   color: rgba(136, 136, 136, 1);
   line-height: 64upx;
-  text-align: center;
   border-top: 1px solid #f5f5f5;
+  padding-left: 26upx;
   background: rgba(255, 255, 255, 1);
   margin-bottom: 12upx;
 }

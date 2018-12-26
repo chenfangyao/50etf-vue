@@ -7,12 +7,13 @@
         <hebin-total :total='titleList[tabI].total' v-if="tabI<2"></hebin-total>
         <top-btn v-else-if="tabI==2"></top-btn>
       </view>
-      <view class="heightUp"></view>
-      <view class="h40" v-show="tabI==2"></view>
+      <view class="heightUp" v-show="tabI!=3"></view>
+      <view class="h60" v-show="tabI==2"></view>
     </view>
-    <scroll-view class="list2" v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='10' scroll-y @scrolltolower="loadMore(objI)">
+    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']"  v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
         <list-one :tab-i='objI' :list='obj.list' v-if="objI<2"></list-one>
-        <list-two :tab-i='objI' :list='obj.list' v-else ></list-two>
+        <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2' ></list-two>
+        <list-three :tab-i='objI' :list='obj.list' v-else ></list-three>
         <uni-load-more :loading-type="obj.resquestState" ></uni-load-more>
     </scroll-view>
   </view>
@@ -23,9 +24,11 @@ import headerTab from '@/components/holdingSub/headerTab.vue';
 import filterList from '@/components/holdingSub/filterList.vue';
 import listOne from '@/components/holdingSub/listOne.vue';
 import listTwo from '@/components/holdingSub/listTwo.vue';
+import listThree from '@/components/holdingSub/listThree.vue';
 import hebinTotal from '@/components/holdingSub/hebinTotal.vue';
 import topBtn from '@/components/holdingSub/topBtn.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+
 
 export default {
   data() {
@@ -41,7 +44,7 @@ export default {
 
     };
   },
-  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo },
+  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, },
   methods: {
     tabTap(i) {
       this.tabI = i
@@ -49,6 +52,7 @@ export default {
       this.titleList[i].list.length === 0 && this.getFenbiList(i)
     },
     loadMore(i) {
+      console.log('到底了');
       if (this.titleList[i].resquestState < 2) {
         this.titleList[i].startI++
         this.getFenbiList(i, 'add')
@@ -97,13 +101,40 @@ export default {
 
 <style lang="scss" scoped>
 view.wrap {
-  min-height: 100vh;
+  /* #ifdef H5 */
+  min-height: calc(100vh - 50px);
+  /* #endif */
+  /* #ifndef H5 */
+  height: 100vh;
+  /* #endif */
   background-color: #f5f5f5;
   .list2 {
-    height: calc(100vh - 310upx);
+    /* #ifdef H5 */
+    height: calc(100vh - 68upx - 94px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: calc(100vh - 68upx - 44px - var(--status-bar-height));
+    /* #endif */
+  }
+  .list3 {
+    /* #ifdef H5 */
+    height: calc(100vh - 128upx - 94px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: calc(100vh - 128upx - 44px - var(--status-bar-height));
+    /* #endif */
+  }
+  .list4 {
+    /* #ifdef H5 */
+    height: calc(100vh - 94px - 12upx);
+    /* #endif */
+    /* #ifndef H5 */
+    height: calc(100vh - 44px - var(--status-bar-height) - 12upx);
+    /* #endif */
+    margin-top: 12upx;
   }
   view.heightUp {
-    height: 88upx;
+    height: 68upx;
   }
   view.fix {
     position: fixed;
@@ -112,10 +143,10 @@ view.wrap {
     top: calc(44px + var(--status-bar-height));
     z-index: 20;
     background-color: #f5f5f5;
-    padding-bottom: 16upx;
+    // padding-bottom: 16upx;
   }
-  view.h40 {
-    height: 40upx;
+  view.h60 {
+    height: 60upx;
   }
 }
 </style>
