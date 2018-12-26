@@ -16,7 +16,11 @@ const store = new Vuex.Store({
         hycode:'',
         // 实名认证状态
         realnstatus:'',
-        loadingFlag: false
+        loadingFlag: false,
+		// 支付方式
+		paylist:'',
+		// 账户资金
+		assets:'',
     },
     mutations: {
         login(state, provider) {
@@ -50,7 +54,13 @@ const store = new Vuex.Store({
         },
         setrealnstatus(state,data){
             state.realnstatus=data
-        }
+        },
+		setpaylist(state,data){
+			state.paylist=data
+		},
+		setassets(state,data){
+			state.assets=data
+		}
     },
 })
 

@@ -34,21 +34,68 @@ export default {
       showErr: false,
 			tel:'',
 			uName:'',
+			bankid:'',
+			identifica:'',
+			username:'',
+			bankcardid:'',
+			type:''
     };
   },
   components: { submitBtn, inputItem, errTip, countDown },
   methods: {
     handleNext() {
-      uni.navigateTo({ url: '/pages/forget_pwd/tep3/tep3?username='+this.uName+'&tel='+this.tel+'&verificationCode='+this.vCode+'&type=0' })
-      console.log('点击事件，this.verifyYes==true时才会触发！！');
+			if(this.type==0){
+				uni.navigateTo({ url: '/pages/forget_pwd/tep3/tep3?username='+this.uName+'&tel='+this.tel+'&verificationCode='+this.vCode+'&type=0' })
+			}else if(this.type==1){
+				this.addmybankcard()
+			}
+      
     },
     handleBlur() {
       console.log('input失去焦点时触发');
       // this.showErr = true
     },
+		addmybankcard(){
+			var options = {
+								url: '/Sapi/Ubank/bind', //请求接口
+								method: 'POST', //请求方法全部大写，默认GET
+								data:{
+									sub_id:this.bankid,
+									cardno:this.bankcardid,
+									cardname:this.username,
+									idno:this.identifica,
+									mobile:"手机 字符串 必填",
+									mobile_verify:this.vCode
+			
+								}
+						}
+						this.$httpReq(options).then((res) => {
+								// 请求成功的回调
+								// res为服务端返回数据的根对象
+								console.log('银行', res)
+								if(res.status){
+							
+								}else{
+									this.showErr=true
+									this.tipContent=res.info?res.info:'绑定失败' 
+								}
+						}).catch((err) => {
+								// 请求失败的回调
+								console.log(err)
+						})
+		}
   },
 	onLoad(opt){
-		this.tel=opt.uName
+		this.type=opt.type
+		if(opt.type==0){
+			this.tel=opt.uName
+		}else if(opt.type==1){
+			this.username=opt.username
+			this.bankid=opt.bankid
+			this.identifica=opt.identifica
+			this.bankcardid=opt.bankcardid
+			this.tel=opt.tel
+		}
 	}
 }
 </script>

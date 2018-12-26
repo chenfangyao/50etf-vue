@@ -7,10 +7,10 @@
         </view>
         <text>支付方式</text>
       </view>
-      <view class="item uni-flex" v-for="(item,i) in wayLists" @tap='chooseWay(i)' hover-class='self-hover'>
-        <image src='/static/mineImg/logo.png'></image>
+      <view class="item uni-flex" v-for="(item,i) in wayLists" :key='i' @tap='chooseWay(item)' hover-class='self-hover'>
+        <image :src="item.logo"></image>
         <view class="txt">
-          <view class="wayName">{{item}}</view>
+          <view class="wayName">{{item.pay_name}}</view>
           <view class="wayTip">提示限额（0-50,000）</view>
         </view>
       </view>
@@ -19,7 +19,11 @@
 </template>
 <script>
 import uniIcon from "@/components/uni-icon.vue"
+import { mapState, mapMutations } from 'vuex';
 export default {
+	computed: {...mapState(['paylist']),
+	
+	},
   methods: {
     closeMe() {
       this.$emit('close-me')
@@ -30,14 +34,17 @@ export default {
   },
   data() {
     return {
-      wayLists: ['支付宝', '银行转账'],
-      showSheet: false
+      wayLists: [],
+      showSheet: false,
+			paylists:[]
 
     }
   },
   mounted() {
     setTimeout(() => {
       this.showSheet = true
+			// this.wayLists=this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['offline']).concat(this.paylist['online']).concat(this.paylist['remitance'])
+			this.wayLists=this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
     }, 0)
   },
   components: { uniIcon }

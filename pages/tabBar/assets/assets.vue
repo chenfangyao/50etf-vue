@@ -34,7 +34,7 @@
 import headerCard from '@/components/assetsSub/headerCard.vue'
 import { mapState, mapMutations } from 'vuex';
 export default {
-  computed: mapState(['isWhite', 'sid']),
+  
   data() {
     return {
       res_data: '',
@@ -59,13 +59,11 @@ export default {
     headerCard
   },
   methods: {
+		...mapMutations(['setassets']),
     // 获取资金列表
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        header: {
-          // sid: this.sid || ""
-        },
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
@@ -73,6 +71,7 @@ export default {
         // res为服务端返回数据的根对象
         console.log('资金列表', res)
         if (res.status == 1) {
+					this.setassets(res.data)
           this.enable_money = res.data.enable_money
           this.dta_money = res.data.dta_money
           this.royalty_money = res.data.royalty_money

@@ -4,7 +4,7 @@
     <view class="title">忘记密码？</view>
     <view class="container">
 
-      <input-item placeholderTxt='您的账号' @now-blur='handleBlur' @now-change='handChange'  v-model="uName"></input-item>
+      <input-item placeholderTxt='您的手机号' @now-blur='handleBlur' @now-change='handChange'  v-model="uName"></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
       <submit-btn btnTxt='下一步' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -31,7 +31,7 @@ export default {
   methods: {
     handleNext() {
 			this.getyamfunc()
-      uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?uName='+this.uName+'' })
+      uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?uName='+this.uName+'&type=0' })
 
       console.log('点击事件，this.verifyYes==true时才会触发！！');
     },
