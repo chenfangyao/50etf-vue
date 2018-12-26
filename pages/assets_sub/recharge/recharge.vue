@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 	  <base-header title="账户充值" right-txt='限额规则' has-back='1'></base-header>
-    <recharge-way :way-lists='wayLists' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way>
+    <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way>
     <view class="panel">
       <view class="inputContainer">
         <view class="moneyTitle">充值金额</view>
@@ -10,10 +10,10 @@
       </view>
       <view class="overage">
         <text>账户余额：</text>
-        <text>13.00元</text>
+        <text>{{assets.enable_money}}</text>
       </view>
       <view class="priceItem uni-flex">
-        <view v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @tap='choosePriceItem(i)'>{{10*(i+1)}} 元</view>
+        <view v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @tap='choosePriceItem(i,item)'>{{item}} 元</view>
       </view>
     </view>
     <view class="fixView">
@@ -25,6 +25,7 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: { btnBlock, rechargeWay },
@@ -33,33 +34,68 @@ export default {
       money: '',
       priceLists: [, , , , , ,],
       priceItem_i: 0,
-      wayLists: ['支付宝', '银行转账'],
-      inputDisabled: false
+      wayList: ['支付宝', '银行转账'],
+      inputDisabled: false,
+			paytype:'remit_alipay'
     }
   },
+	computed: mapState(['assets']),
   methods: {
+		...mapMutations(['setpaylist']),
     handleBlur() { },
     handChange() { },
     go() {
+			if(this.money==''){
+				alert('请输入金额')
+				return
+			}
       if(this.inputDisabled){
         //对接支付宝
       }else{
         //跳转银行卡页
-        uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card'})
+        uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+''})
       }
     },
+		getpayway(){
+			var options = {
+					url: '/Sapi/Ufund/payway', //请求接口
+					method: 'GET', //请求方法全部大写，默认GET
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log('支付方式列表列表', res)
+					if(res.status){
+						this.setpaylist(res.data)
+						this.priceLists=res.data.alipay[0].money_selects
+						this.money=this.priceLists[0]
+				// this.pickerValueArray=res.data.list
+					}else{
+						
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		},
     changeWayI(i) {
+			this.priceLists=i.money_selects
+			// 支付方式
+			this.paytype=i.pay_code
       if (i == 0) {//此处判断input禁用是以后端传来的实际字段为主
         this.inputDisabled = true
       } else {
         this.inputDisabled = false
       }
     },
-    choosePriceItem(i) {
+    choosePriceItem(i,item) {
       this.priceItem_i = i
-      this.money = 10*(i+1)//支付宝状态下点击充值金额选项，改变input的值，当前写假的
+      this.money = item//支付宝状态下点击充值金额选项，改变input的值，当前写假的
     }
-  }
+  },
+	onLoad(){
+		this.getpayway()
+	}
 }
 </script>
 

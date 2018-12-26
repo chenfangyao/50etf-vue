@@ -313,6 +313,13 @@
 				"titleNView" : false,
 				"scrollIndicator" : "none"
 			}
+        },
+        {
+            "path" : "pages/assets_sub/gatherinfo/gatherinfo",
+            "style" : {
+            	"titleNView" : false,
+            	"scrollIndicator" : "none"
+            }
         }
     ],
     "tabBar" : {

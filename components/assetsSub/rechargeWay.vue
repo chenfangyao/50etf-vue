@@ -1,11 +1,12 @@
 <template>
 <view>
   <view class="rechargeWay uni-flex" @tap='switchPop'>
-      <view class="zhifubao" v-if='wayLists'></view>
+		<!-- wayLists是否绑定银行 -->
+      <image class="zhifubao" :src="banklogo" v-if='wayLists'></image>
       <view class="txt">
-        <view>{{wayLists[way_i]||txt1}}</view>
+        <view>{{wayLists[way_i]||textbank}}</view>
         <view>
-          <text v-if="wayLists[way_i]">{{txt1}}</text>
+          <text v-if="wayLists[way_i]">{{textbank}}</text>
           <text>{{txt2}}</text>
         </view>
       </view>
@@ -17,13 +18,17 @@
 </template>
 <script>
 import rechargeActionsheet from '@/components/assetsSub/rechargeActionsheet.vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {   rechargeActionsheet },
+	computed: {...mapState(['paylist'])},
   data() {
     return {
       showAction: false,
-      way_i: 0
+      way_i: 0,
+			textbank:'',
+			banklogo:''
     }
   },
   props:{
@@ -40,6 +45,8 @@ export default {
     chooseWay(i) {
       this.way_i = i
       this.$emit('change-wayi',i)
+			this.textbank=i.pay_name
+			this.banklogo=i.logo
       this.switchPop()
     },
     switchPop() {
@@ -49,7 +56,14 @@ export default {
       }
       this.showAction = !this.showAction
     },
-  }
+  },
+	created(){
+		setTimeout(()=>{
+			this.textbank=this.paylist.alipay[0].bank_name
+			this.banklogo=this.paylist.alipay[0].logo
+		},500)
+	}
+
 }
 </script>
 
@@ -63,7 +77,7 @@ export default {
       width: 76upx;
       height: 76upx;
       margin-left: 46upx;
-      background-color: #409de5;
+      // background-color: #409de5;
     }
     view.txt {
       flex-grow: 1;
