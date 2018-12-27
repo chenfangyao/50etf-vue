@@ -10,25 +10,25 @@
         <view class="timeTxt" v-if="item.in_time">{{create_time[i]}}</view>
     </view>
     <view class="line2 uni-flex">
-      <view class='uni-flex leftPart'>
-        <view>
-          <view class="itemView">
-            <text>{{tabI==0?'成交价：':'总市值'}}</text>
-            <text></text>
+      <view class='uni-flex leftPart fg1'>
+        <view class="uni-flex" :class="[tabI==1?'fg1':'w240']">
+          <view class="itemView" >
+            <text>{{tabI==0?'成交价：':'总市值：'}}</text>
+            <text>{{tabI==0?'市值：':'平均成交价：'}}</text>
           </view>
-          <view>
-            <text>{{tabI==0?'延期费：':'平均成交价'}}</text>
-            <text>{{item.add_fee_money}}</text>
+          <view class="itemView c1">
+            <text>{{item.market_value}}</text>
+            <text>{{item.market_value||item.royalty_money}}</text>
           </view>
         </view>
-        <view class="itemView" v-if='tabI==0'>
-          <view>
-            <text>市值：</text>
-            <text>{{item.market_value}}</text>
-          </view>
-          <view>
+        <view class=" uni-flex" v-if='tabI==0'>
+          <view class="itemView">
+            <text>延期费：</text>
             <text>持仓：</text>
-            <text></text>
+          </view>
+          <view class="itemView c1">
+            <text>{{item.add_fee_money}}</text>
+            <text>{{item.enable_amount}}</text>
           </view>
         </view>
       </view>
@@ -67,7 +67,6 @@ export default {
       val.forEach((item, i) => {
         this.moneyColor.push(parseInt(item.profit_money) < 0)
         this.create_time.push(this.$formatetimestr(item.in_time))
-
       });
     }
   },
@@ -105,6 +104,9 @@ view.list1Item {
       font-weight: bold;
       color: rgba(240, 95, 92, 1);
       line-height: 42px;
+      flex-grow: 1;
+      text-align: right;
+      font-family: Arial;
     }
     .moneyTxt.green {
       color: #3aba8f;
@@ -113,16 +115,19 @@ view.list1Item {
       display: flex;
       flex-direction: column;
     }
-    .leftPart > view:first-child {
-      margin-right: 66upx;
+    .fg1{
+      flex-grow: 1;
     }
     .leftPart > view {
       font-size: 12px;
       color: rgba(153, 153, 153, 1);
-      text:last-child {
+      .c1{
         color: #333;
-        margin-left: 0.5em;
+        // margin-left: 0.5em;
       }
+    }
+    view.w240{
+      width: 250upx;
     }
     justify-content: space-between;
     padding: 20upx 25upx;

@@ -1,33 +1,33 @@
 <template>
 	<view class="wrap">
-		<base-header title="平仓结算" has-back='1'></base-header>
+		<base-header title="平仓结算" v-if='showHeader' has-back='1'></base-header>
     <view class="heightUp">
       <view class="fix">
-        <filter-list :total='total' ></filter-list>
+        <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
       </view>
     </view>
     <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore">
-      <view v-for="(item,i) in list" hover-class='self-hover' @tap='go' :key="i" class='listItem uni-flex'>
+      <view v-for="(item,i) in list" hover-class='self-hover' @tap='go(item)' :key="i" class='listItem uni-flex'>
         <view class="content">
           <view class="line1 uni-flex">
             <view>
-              <text class="nameTxt">XD购12月2892A</text>
-              <text class='codeTxt'>10001409</text>
+              <text class="nameTxt">{{item.stock_name}}</text>
+              <text class='codeTxt'>{{item.stock_code}}</text>
             </view>
-            <view class="price">-7412.01</view>
+            <view class="price">{{item.all_income}}</view>
           </view>
           <view class="line2 uni-flex">
             <view>
               <text>
                 <text>持仓数：</text>
-                <text class="digital">9</text>
+                <text class="digital">{{item.sum_buy_amount}}</text>
               </text>
               <text>
                 <text>平仓数：</text>
-                <text class="digital">22</text>
+                <text class="digital">{{sell_amount[i]}}</text>
               </text>
             </view>
-            <view class="time">2018-08-08 10:30:30</view>
+            <view class="time">{{close_time[i]}}</view>
           </view>
         </view>
         <view class="imgContainer"><image src='/static/arrow/r.png'></image></view>
@@ -45,14 +45,27 @@ import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
     return {
-      list: [, , , , , , , , , , , , , , , , , , , , , , , ,],
+      showHeader: true,
+      list: [],
       startI: 0,
       total: '',
       resquestState: 0,
+      close_time: [],//过滤数值
+      sell_amount: [],
+      sdate: 20080101,
+      edate: 20300101,
     };
   },
   components: { filterList, uniLoadMore },
+  created() {
+    this.getDatas()
+  },
   methods: {
+    getChooseTime(obj) {
+      this.sdate = obj.starttime
+      this.edate = obj.endtime
+      this.getDatas()
+    },
     loadMore() {
       console.log('到底了');
       if (this.resquestState < 2) {
@@ -60,8 +73,16 @@ export default {
         this.getDatas('add')
       }
     },
-    go(){
-      uni.navigateTo({url:'../ping_c_item/ping_c_item'})
+    beginChoose() {
+      this.showHeader = false
+    },
+    endChoose() {
+      this.showHeader = true
+    },
+    go(item) {
+      this.$store.commit('setpingCItem', item)
+      // console.log(this.$store.state.pingCItem);
+      uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
     },
     getDatas(add) {
       this.resquestState = 1
@@ -70,13 +91,14 @@ export default {
         data: {
           page_index: this.startI,
           page_size: 10,
-          sdate: 19700101,
-          edate: 20500101
+          sdate: this.sdate,
+          edate: this.edate,
         },
         method: 'GET'
       }
       this.$httpReq(options).then((res) => {
         this.total = res.data.total
+        console.log(res);
         if (add) {
           this.list = this.list.concat(res.data.list)
         } else {
@@ -88,7 +110,15 @@ export default {
       })
     }
   },
-
+  watch: {
+    list(val) {
+      if (!val) return;
+      val.forEach((item, i) => {
+        this.close_time.push(this.$formatetimestr(item.close_time))
+        this.sell_amount.push(parseInt(item.sell_amount))
+      });
+    }
+  },
 }
 </script>
 
@@ -96,7 +126,7 @@ export default {
 view.wrap {
   min-height: 100vh;
   .list2 {
-    height: calc(100vh - 176upx);
+    height: calc(100vh - 176upx - var(--status-bar-height));
   }
   view.heightUp {
     height: 88upx;

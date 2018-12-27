@@ -26,9 +26,16 @@ export default {
     rightTxt: {
       default: ''
     },
+    specialBack: {
+      default: false
+    }
   },
   methods: {
     back() {
+      if (this.specialBack) {
+        this.$emit('special-back')
+        return
+      }
       uni.navigateBack({ delta: 1 });
     },
     rightTap() {

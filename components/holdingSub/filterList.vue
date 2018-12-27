@@ -5,7 +5,7 @@
     <view>总计：{{total}}笔</view>
     <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png' />
   </view>
-  <date-pick v-if="showPick" @select-complete='getTime'></date-pick>
+  <date-pick v-if="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
 
 </view>
 </template>
@@ -22,10 +22,17 @@ export default {
   },
   methods: {
     showDatepick() {
+      this.$emit('begin-choose')
       this.showPick = true
     },
-    getTime(times) {
-      console.log(times);
+    hidDatePick(){
+      this.$emit('end-choose')
+      this.showPick = false
+    },
+    getTime(obj) {
+      this.$emit('select-complete',obj)
+      this.hidDatePick()
+      console.log(obj);
     }
   }
 }

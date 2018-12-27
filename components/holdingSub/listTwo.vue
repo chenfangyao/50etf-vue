@@ -1,38 +1,37 @@
 <template>
 <view>
 
-  <view v-for='(item,i) in list' class="list2Item " hover-class='self-hover' :key="i">
-    <view class="line1 uni-flex">
+  <view v-for='(item,i) in list' class="list2Item " :key="i">
+    <view class="line1 ">
         <view >
           <text class="nameTxt">{{item.stock_name}}</text>
           <text class="codeTxt">{{item.stock_code}}</text>
         </view>
-        <view class="badgeView">{{item.status}}</view>
     </view>
     <view class="line2 uni-flex ">
-      <view class='uni-flex leftPart'>
-        <view>
-          <view class="itemView">
-            <text>市值</text>
-            <text>5543</text>
-          </view>
-          <view>
-            <text>现价</text>
-            <text>{{item.last_price}}</text>
-          </view>
-          <view>
-            <text>数量</text>
-            <text>{{item.entrust_amount}}</text>
-          </view>
+      <view class="leftPart">
+        <view class="buyOrSell">{{item.entrust_bs==1?'开仓':'平仓'}} ({{item.entrust_amount}}张)</view>
+        <view class="price">
+          <text>￥</text>
+          <text>{{item.entrust_price}}</text>
+        </view>
+        <view class="time">
+          <image src='/static/holdingImg/clock.png'></image>
+          <text>{{createTime[i]}}</text>
         </view>
       </view>
-      <view class="businessType" >
-        <text> 交易类型</text>
-        <text  :class="{yellow:moneyColor[i]}">平仓</text>
+      <view class="rightPart">
+        <view :class="[item.status=='撤单'?'c1':'c2']">{{item.status}} ({{item.business_amount}}张)</view>
+        <view class="price">
+          <text>￥</text>
+          <text>{{item.business_price}}</text>
+        </view>
+        <view class="time">
+          <image src='/static/holdingImg/clock.png'></image>
+          <text>{{cancelTime[i]}}</text>
+        </view>
       </view>
-
     </view>
-    <view class='line3'>委托时间：{{createTime[i]}}</view>
   </view>
 </view>
 </template>
@@ -43,13 +42,15 @@ export default {
     return {
       moneyColor: [],
       createTime: [],//时间数组
+      cancelTime: [],
     }
   },
   watch: {
     list(val) {
       if (!val) return;
       val.forEach((item, i) => {
-        this.createTime.push(this.$formatetimestr(item.create_time))
+        this.createTime.push(this.$formatetimestr(item.create_time, 1))
+        this.cancelTime.push(this.$formatetimestr(item.cancel_time, 1))
       });
     }
   },
@@ -64,64 +65,59 @@ view.list2Item {
   view.line1 {
     border-bottom: 1px solid #f5f5f5;
     justify-content: space-between;
-    height: 64upx;
-    view.badgeView {
-      width: 100upx;
-      height: 36upx;
-      background: rgba(240, 95, 92, 1);
-      border-radius: 18upx;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 1);
-      line-height: 36upx;
-      text-align: center;
-      align-self: center;
-    }
+    height: 80upx;
     text.nameTxt {
-      font-size: 15px;
-      line-height: 64upx;
+      font-size: 16px;
+      line-height: 80upx;
       margin-right: 14upx;
-      color: rgba(51, 51, 51, 1);
+      color: #333;
     }
     text.codeTxt {
-      font-size: 13px;
-      color: rgba(102, 102, 102, 1);
+      font-size: 14px;
+      color: #848689;
     }
   }
   .line2 {
-    .businessType {
-      font-size: 14px;
-      color: rgba(112, 118, 128, 1);
-      align-self: center;
-      text:last-child {
-        margin-left: 39upx;
-        color: #409de5;
-      }
-      text.yellow:last-child {
-        color: #e6aa12;
-      }
-    }
-    view.itemView {
-      display: flex;
-    }
-    .leftPart > view {
-      color: #707680;
-      text:last-child {
-        color: #181c28;
-        margin-left: 0.5em;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20upx 48upx;
+    view.time {
+      image {
+        width: 24upx;
+        height: 24upx;
+        vertical-align: middle;
       }
       text {
-        font-size: 14px;
+        vertical-align: middle;
+        margin-left: 20upx;
+        font-size: 1px;
+        color: rgba(102, 102, 102, 1);
       }
     }
-    justify-content: space-between;
-    padding: 20upx 25upx;
-  }
-  .line3 {
-    font-size: 12px;
-    color: rgba(168, 168, 168, 1);
-    padding-bottom: 20upx;
+    view.buyOrSell {
+      font-size: 14px;
+      color: rgba(69, 69, 69, 1);
+    }
+    view.price {
+      text {
+        font-size: 24px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 1);
+      }
+      text:first-child {
+        font-size: 13px;
+        color: rgba(153, 153, 153, 1);
+        margin-right: 0.3em;
+      }
+    }
+    .c1{
+      color: #F05F5C;
+    }
+    .c2{
+      color: #1890ff;
+    }
   }
   background-color: #fff;
-  margin-bottom: 11upx;
+  margin: 0 24upx 16upx;
 }
 </style>
