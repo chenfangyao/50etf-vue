@@ -1,5 +1,5 @@
 <template>
-  <view class="fixWrap" @touchmove.prevent>
+  <view class="fixWrap self-mask" @touchmove.prevent>
     <view class="container">
       <view class="title uni-flex">
         <view>
@@ -134,13 +134,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 view.fixWrap {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
   view.container {
     margin-top: calc((100vh - 100%) / 2);
     background-color: #fff;

@@ -126,7 +126,7 @@ view.uni-tab-bar {
 
     .swiper-tab-list2 {
       // padding-bottom: 27upx;
-      font-size: 30upx;
+      font-size: 15px;
       font-family: MicrosoftYaHei;
       font-weight: 400;
       color: #181c28;

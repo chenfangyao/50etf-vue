@@ -1,7 +1,7 @@
 <template>
 <view>
   <view class="uni-flex wrap" v-for="(item,i) in aa" @tap="go" hover-class="self-hover" :key="i">
-    <text class="txtred">7.09%</text>
+    <text class="txtred">7.09</text>
     <text class="txtred">0.1881</text>
     <view class="uni-flex">
       <text class="gou">12</text>
@@ -9,7 +9,7 @@
       <text class="gou">8</text>
     </view>
     <text class="txtgreen">0.0213</text>
-    <text class="txtgreen">-9.65%</text>
+    <text class="txtgreen">-9.65</text>
   </view>
 </view>
 </template>
@@ -38,7 +38,7 @@ view.wrap {
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
   text {
-    font-size: 26upx;
+    font-size: 14px;
     font-family: MicrosoftYaHei;
     font-weight: 400;
     color: rgba(31, 31, 38, 1);
@@ -56,15 +56,16 @@ view.wrap {
     height: 100%;
     line-height: 70upx;
     padding: 0 23upx;
+    font-size: 13px;
+    color: #333;
   }
   .gou {
-    color: #fff;
-    background: rgba(240, 95, 92, 1);
+    color: #999;
     line-height: 18upx;
     padding: 4upx 6upx;
     // display: inline-block;
     align-self: center;
-    font-size: 18upx;
+    font-size: 14px;
     border-radius: 11upx;
     text-align: center;
   }
