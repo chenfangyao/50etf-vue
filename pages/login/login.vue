@@ -37,10 +37,10 @@ export default {
       showErr:false
     };
   },
-    computed: mapState(['isWhite','sid','username','mobile','realnstatus']),
+    computed: mapState(['isWhite','sid','username','mobile','realnstatus','userinfo']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
-      ...mapMutations(['setsid','setusername','setmobile','setrealnstatus']),
+      ...mapMutations(['setsid','setusername','setmobile','setrealnstatus','setuserinfo']),
     go(i) {
       let url = ''
       switch (i) {
@@ -118,8 +118,9 @@ export default {
               // res为服务端返回数据的根对象
               console.log('用户信息', res)
               if(res.status){
-                  this.setusername(res.data.user_name)
-                  this.setmobile(res.data.mobile)
+//                   this.setusername(res.data.user_name)
+//                   this.setmobile(res.data.mobile)
+									this.setuserinfo(res.data)
               }
           }).catch((err) => {
               // 请求失败的回调

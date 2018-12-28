@@ -4,8 +4,8 @@
       <image src="/static/mineImg/touxiang.png"/>
     </view>
     <view>
-      <h2>用户名{{username}}</h2>
-      <h3>{{mobile}}</h3>
+      <h2>用户名{{userinfo.user_name}}</h2>
+      <h3>{{userinfo.mobile}}</h3>
       <button hover-class='self-hover' @tap='go'>实名认证</button>
     </view>
   </view>
@@ -15,6 +15,8 @@
 	export default {
 	  data(){
 			return{
+				username:'',
+				mobile:'',
 			}
     },
     methods:{
@@ -30,7 +32,7 @@
         uni.navigateTo({url:'/pages/mine_sub/credentials_upload/tep1/tep1'})
       }
     },
-		computed: mapState(['sid','username','mobile','realnstatus']),
+		computed: mapState(['sid','realnstatus','userinfo']),
 		created(){
 		}
 	}

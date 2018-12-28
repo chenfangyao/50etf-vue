@@ -85,24 +85,7 @@
                 btn3_i: 0,
                 sliderVal: 1,
                 pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
-                pickerValueArray: [//后端获得lists替换此处
-                    {
-                        label: '第1笔 13张',
-                        value: 1
-                    },
-                    {
-                        label: '第2笔 30张',
-                        value: 2
-                    },
-                    {
-                        label: '第3笔 3张',
-                        value: 3
-                    },
-                    {
-                        label: '第4笔 6张',
-                        value: 4
-                    }
-                ],
+                pickerValueArray: [],
                 pricevalue: '',
                 pricetitle: '最新价',
                 fbcclength:'',
@@ -209,6 +192,7 @@
                 }
             },
             fbcclist(val){
+							console.log(333,this.fbcclist)
                 if(val){
                     this.fbcclength=this.fbcclist.length
                     this.hbcclength=this.hbcclist.length

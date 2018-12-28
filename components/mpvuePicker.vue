@@ -108,6 +108,10 @@
                 type: Number,
                 default: 2
             },
+			loadType:{
+				type:Number,
+				default:0
+			},
             /* 主题色 */
             themeColor: String
         },
@@ -260,22 +264,31 @@
                 this.$emit('onChange', pickObj);
             },
             pickerChangeMul(e) {
+				var index=e.detail.value[0]
+				this.$emit('pick-change',e.detail.value)
+				
                 if (this.deepLength === 2) {
-                    let pickerValueArray = this.pickerValueArray;
-                    let changeValue = e.mp.detail.value;
-                    // 处理第一列滚动
-                    if (changeValue[0] !== this.pickerValue[0]) {
-                        let pickerValueMulTwoTwo = [];
-                        // 第一列滚动第二列数据更新
-                        for (let i = 0, length = pickerValueArray[changeValue[0]].children.length; i < length; i++) {
-                            pickerValueMulTwoTwo.push(pickerValueArray[changeValue[0]].children[i]);
-                        }
-                        this.pickerValueMulTwoTwo = pickerValueMulTwoTwo;
-                        // 第二列初始化为 0
-                        changeValue[1] = 0;
-                    }
-                    this.pickerValue = changeValue;
-                } else if (this.deepLength === 3) {
+					// 二级联动数组是否为异步加载
+					if(this.loadType===1){
+						this.getcitylist(e,index,this.pickerValueArray[index].value)
+					}else{
+						let pickerValueArray = this.pickerValueArray;
+						let changeValue = e.mp.detail.value;
+						// 处理第一列滚动
+						if (changeValue[0] !== this.pickerValue[0]) {
+							let pickerValueMulTwoTwo = [];
+							// 第一列滚动第二列数据更新
+							for (let i = 0, length = pickerValueArray[changeValue[0]].children.length; i < length; i++) {
+								pickerValueMulTwoTwo.push(pickerValueArray[changeValue[0]].children[i]);
+							}
+							this.pickerValueMulTwoTwo = pickerValueMulTwoTwo;
+							// 第二列初始化为 0
+							changeValue[1] = 0;
+						}
+						this.pickerValue = changeValue;	 
+					}
+                } 
+				else if (this.deepLength === 3) {
                     let pickerValueArray = this.pickerValueArray;
                     let changeValue = e.mp.detail.value;
                     let pickerValueMulThreeTwo = [];
@@ -380,7 +393,51 @@
                         this.pickerValue = [0, 0, 0];
                     }
                 }
-            }
+            },
+			// 获取城市列表
+			getcitylist(e,index,prov_cd){
+					var options = {
+							url: '/Sapi/Ubank/city_list', //请求接口
+							method: 'GET', //请求方法全部大写，默认GET
+							data:{
+								prov_cd:prov_cd
+							}
+					}
+					this.$httpReq(options).then((res) => {
+							// 请求成功的回调
+							// res为服务端返回数据的根对象
+							console.log('城市列表', res)
+							if(res.status){
+									var childlist=[]
+									for(let i=0;i<res.data.list.length;i++){
+										let childObj={}
+										childObj.label=res.data.list[i].city_nm
+										childObj.value=res.data.list[i].city_cd
+										childlist.push(childObj)
+									}
+									this.pickerValueArray[index].children=childlist		
+									let pickerValueArray = this.pickerValueArray;
+									let changeValue = e.mp.detail.value;
+									// 处理第一列滚动
+									if (changeValue[0] !== this.pickerValue[0]) {
+										let pickerValueMulTwoTwo = [];
+										// 第一列滚动第二列数据更新
+										for (let i = 0, length = pickerValueArray[changeValue[0]].children.length; i < length; i++) {
+											pickerValueMulTwoTwo.push(pickerValueArray[changeValue[0]].children[i]);
+										}
+										this.pickerValueMulTwoTwo = pickerValueMulTwoTwo;
+										// 第二列初始化为 0
+										changeValue[1] = 0;
+									}
+									this.pickerValue = changeValue;						
+							}else{
+									
+							}
+					}).catch((err) => {
+							// 请求失败的回调
+							console.log(err)
+					})
+			},
         }
     };
 </script>

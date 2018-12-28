@@ -4,12 +4,29 @@
     <!-- <view class="title">支付账号</view> -->
     <view class="subWrap">
 		<view class='gatherInfo'>
-		<view class='payMoney'>收款账号:{{}}</view>
-		<view class='payMoney'>收款人:{{}}</view>
-		<view class='payMoney'>客户代码:{{}}</view>
+		<view  class='payMoney'>
+			<text>收款账号:</text>
+			<text v-show="showBank">{{cardno}}</text>
+			<view v-show="!showBank" class="chooseCount">
+					<view @tap='showPicker'>
+							{{pickerText}}
+							<text class="arrowDown"></text>
+					</view>
+			</view>
+		</view>
+		
+		<view class='payMoney'>
+			<text>收款人:</text>
+			<text>{{cardname}}</text>
+			</view>
+		<view class='payMoney'>
+			<text>客户代码:</text>
+			<text>{{userinfo.mobile}}-{{userinfo.user_id}}</text></view>
 		</view>
       <submit-btn class='subBtn' btnTxt='复制完成,去支付宝转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
     </view>
+		<mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
+										@onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
 
 	</view>
 </template>
@@ -18,39 +35,51 @@
 import inputItem from '@/components/commonResgLog/inputItem.vue'
 import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
+import mpvuePicker from '@/components/mpvuePicker.vue';
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
       uName: '',
       showErr: false,
-      tipContent: '您的账号和密码错误，请重新输入',
+      tipContent: '',
       bankCode: '',
-      bankName: '423423',
+      bankName: '',
       verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
       paymoney:'',
-	paytype:'',
-	pw_id:''
-
+	    paytype:'',
+	    pw_id:'',
+			cardname:'',
+			cardno:'',
+			showBank:true,
+			pickerText:'',
+			pickerValueArray: [],
     };
   },
-  components: { submitBtn, inputItem, errTip },
+  components: { submitBtn, inputItem, errTip,mpvuePicker },
+	computed: mapState(['mobile','userinfo','bankinfo']),
 	onLoad(opt){
-		this.paytype=opt.paytype
+		this.paytype=this.bankinfo.paytype
+		this.cardname=this.bankinfo.cardname
+		this.cardno=this.bankinfo.cardno
+		this.pw_id=this.bankinfo.pw_id
+		this.paymoney=this.bankinfo.paymoney
+		this.bankCode=this.bankinfo.bankCode
 		if(this.paytype=='remit_alipay'){
-			this.paymoney=opt.paymoney
-			this.bankName=opt.uName
-			this.bankCode=opt.bankCode
+			this.showBank=true	
+			this.bankName=this.bankinfo.uName
 		}else if(this.paytype=='remit_icbc'){
-			this.paymoney=opt.paymoney
-			this.bankCode=opt.bankCode
-			this.pw_id=opt.pw_id
+			this.showBank=false
+			this.bankName=this.bankinfo.bank_name
+			this.pickerText=this.bankinfo.bank_name
+			this.pickerValueArray=[{label:this.bankinfo.bank_name}]
 		}
 	},
   methods: {
     go(i) {
-//       if (i == 1) {
-//         uni.navigateTo({ url: '../help/help' })
-//       }
+      if (i == 1) {
+        uni.navigateTo({ url: '../help/help' })
+      }
       switch(this.paytype){
 				case 'remit_alipay':
 				this.remit_alipay()
@@ -79,7 +108,19 @@ export default {
 				// res为服务端返回数据的根对象
 				console.log('支付信息', res)
 				if(res.status){
+					uni.showToast({
+						title: res.info?res.info:'信息提交成功',
+						duration: 2000,
+						image:'/static/holdingImg/cedan-succ.png'
+					});
+				}else{
+					uni.showToast({
+						title: res.info?res.info:'信息提交失败',
+						duration: 2000,
+						image:'/static/holdingImg/cedan-succ.png'
+					});
 				}
+				
 			}).catch((err) => {
 				// 请求失败的回调
 			})
@@ -101,11 +142,33 @@ export default {
 				// res为服务端返回数据的根对象
 				console.log('支付信息', res)
 				if(res.status){
+					if(res.status){
+						uni.showToast({
+							title: res.info?res.info:'信息提交成功',
+							duration: 2000,
+							image:'/static/holdingImg/cedan-succ.png'
+						});
+					}else{
+					uni.showToast({
+						title: res.info?res.info:'信息提交失败',
+						duration: 2000,
+						image:'/static/holdingImg/cedan-succ.png'
+					});
+				}
 				}
 			}).catch((err) => {
 				// 请求失败的回调
 			})
 		},
+		showPicker() {
+		      this.$refs.typePick.show()
+		    },
+				onCancel(e) {
+					// console.log(e)
+				},
+				onConfirm(val) {
+					this.pickerText=val.label
+				},
   },
 
 }
@@ -145,6 +208,32 @@ view.wrap {
 			border-bottom:1px solid rgb(238,237,242);
 			margin-top: 20upx
 		}
+		view.payMoney >text:nth-child(2){
+			margin-left: 50upx;
+		}
   }
 }
+view.chooseCount {
+	      display: inline-block;
+        width: 450upx;
+        height: 50upx;
+        line-height: 50upx;
+        text-align: center;
+        font-size: 12px;
+        font-family: Adobe Heiti Std R;
+        font-weight: normal;
+        color: rgba(102, 102, 102, 1);
+        line-height: 43px;
+        background: rgba(239, 239, 239, 1);
+        border-radius: 8upx;
+				margin-left: 50upx;
+    text.arrowDown {
+        display: inline-block;
+        width: 17upx;
+        border: 9upx solid #666;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+    }
+    }
 </style>

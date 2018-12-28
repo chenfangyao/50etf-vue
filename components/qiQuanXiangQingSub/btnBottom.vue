@@ -46,9 +46,8 @@ export default {
   methods: {
       ...mapMutations(['sethycode']),
     go(val) {
-        this.sethycode(10001441)
-        console.log('hycode',this.hycode)
-      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val+'&datas=10001441'})
+        this.sethycode(10001442)
+      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val+''})
 
     }
   }

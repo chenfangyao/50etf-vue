@@ -57,10 +57,10 @@ export default {
 
 				switch(this.paytype){
 					case 'remit_alipay':
-					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'',})
+					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'&pw_id='+this.payeeinfo.pw_id+'',})
 					break
 					case 'remit_icbc':
-					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+''})
+					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'&pw_id='+this.payeeinfo.pw_id+'&bank_name='+this.payeeinfo.bank_name+''})
 					break
 				}
         

@@ -6,8 +6,8 @@
       <!-- <input-item placeholderTxt='银行名称' v-model="bankName" ></input-item> -->
 			<view class='payMoney'>支付金额:{{paymoney}}</view>
 			<view class=inputcommon>
-      <input-item placeholderTxt='转账人' v-model="uName" ></input-item>
-      <input-item placeholderTxt='银行卡号' v-model="bankCode" ></input-item>
+      <input-item placeholderTxt='付款人' v-model="uName" ></input-item>
+      <input-item placeholderTxt='付款账号' v-model="bankCode" ></input-item>
 			</view>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
@@ -21,6 +21,7 @@
 import inputItem from '@/components/commonResgLog/inputItem.vue'
 import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
+import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -33,26 +34,44 @@ export default {
       paymoney:'',
 			paytype:'',
 			cardname:'',
-			cardno:''
+			cardno:'',
+			pw_id:'',
+			bank_name:'',
     };
   },
   components: { submitBtn, inputItem, errTip },
 	onLoad(opt){
 		this.paymoney=opt.pay_money
 		this.paytype=opt.paytype
+		this.cardname=opt.cardname
+		this.cardno=opt.cardno
+		this.pw_id=opt.pw_id
+		this.bank_name=opt.bank_name
 	},
   methods: {
+		...mapMutations(['setbankinfo']),
     go(i) {
+			let bankInfo={
+				paymoney:this.paymoney,
+				paytype:this.paytype,
+				uName:this.uName,
+				bankCode:this.bankCode,
+				cardname:this.cardname,
+				cardno:this.cardno,
+				pw_id:this.pw_id,
+				bank_name:this.bank_name,
+			}
+			this.setbankinfo(bankInfo)
       switch(this.paytype){
 				case 'remit_alipay':
 				uni.navigateTo({
-					url: '/pages/assets_sub/gatherinfo/gatherinfo?paymoney='+this.paymoney+'&paytype='+this.paytype+'&uName='+this.uName+'&bankCode='+this.bankCode+'' ,
+					url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
 					})
 				// this.remit_alipay()
 				break
 				case 'remit_icbc':
 				uni.navigateTo({
-					url: '/pages/assets_sub/gatherinfo/gatherinfo?paymoney='+this.paymoney+'&paytype='+this.paytype+'&pw_id=7&bankCode='+this.bankCode+'' ,
+					url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
 					})
 				// this.remit_bank()
 				break
