@@ -3,7 +3,6 @@
 		<header-title :tab-active="onClose" @change-close="changeClose"></header-title>
 		<view class="h1 "></view>
 		<contain-chart></contain-chart>
-		<view class="h12 "></view>
 		<mini-table :hydetils='QuotationMsg'></mini-table>
 		<view class="h12 "></view>
 		<new-price :on-close="onClose" :maxprice="maxbuy" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist"
@@ -237,6 +236,6 @@
 	}
 
 	.h12 {
-		height: 12upx;
+		height: 24upx;
 	}
 </style>

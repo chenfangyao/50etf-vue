@@ -1,14 +1,6 @@
 <template>
     <view class="wrap">
-        <view class="title commonStyle1">{{pricetitle}}</view>
-        <view class="uni-flex line2">
-            <view class="newPrice">{{pricevalue}}</view>
-            <view class="uni-flex btn3">
-                <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i}" :data-i='i'
-                      @tap='changePriceType(i,item)'>{{item}}
-                </view>
-            </view>
-        </view>
+        
         <view v-show="onClose">
             <view class="entrustType">
                 <text class="type commonStyle1">委托类型</text>
@@ -23,9 +15,23 @@
                 <view class="chooseCount">
                     <view v-show="!tabActive">{{maxprice.own_amount}}张</view>
                     <view v-show="tabActive" @tap='showPicker'>
-                        {{pickerText}}
-                        <text class="arrowDown"></text>
+                      <text class="txt">{{pickerText}}</text>
+                        <uni-icon type="arrowdown" size="24"></uni-icon>
                     </view>
+                </view>
+            </view>
+        </view>
+        <view class=" commonStyle1">{{pricetitle}}</view>
+        <view class="uni-flex line2">
+        <view>
+            <image @tap="plusStep2(-1)" src='/static/openCloseImg/minus.png'></image>
+            <text class=" newPrice">{{pricevalue}}</text>
+            <image @tap="plusStep2(1)" src='/static/openCloseImg/plus.png'></image>
+        </view>
+
+            <view class="uni-flex btn3">
+                <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i}" :data-i='i'
+                      @tap='changePriceType(i,item)'>{{item}}
                 </view>
             </view>
         </view>
@@ -57,216 +63,213 @@
     </view>
 </template>
 <script>
-    import mpvuePicker from '@/components/mpvuePicker.vue';
+import mpvuePicker from '@/components/mpvuePicker.vue';
+import uniIcon from "@/components/uni-icon.vue"
 
-    export default {
-        props: {
-            onClose: {
-                require: true
-            },
-            maxprice: {
-                require: true
-            },
-            qrysingle:{
-                require:true
-            },
-            hbcclist:{
-                require:true
-            },
-            fbcclist:{
-                require:true
-            },
-        },
-        components: {mpvuePicker},
-        data() {
-            return {
-                tabActive: false,
-                btn3Arr: ['最新', '对手', '排队',],
-                btn3_i: 0,
-                sliderVal: 1,
-                pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
-                pickerValueArray: [//后端获得lists替换此处
-                    {
-                        label: '第1笔 13张',
-                        value: 1
-                    },
-                    {
-                        label: '第2笔 30张',
-                        value: 2
-                    },
-                    {
-                        label: '第3笔 3张',
-                        value: 3
-                    },
-                    {
-                        label: '第4笔 6张',
-                        value: 4
-                    }
-                ],
-                pricevalue: '',
-                pricetitle: '最新价',
-                fbcclength:'',
-                hbcclength:'',
-            }
-        },
-        methods: {
-            // 合并分笔
-            tapChange(val) {
-                this.tabActive = val
-                this.sliderVal=1
-                if(val==true){
-                    var picktext=this.pickerText
-                    picktext=picktext.split(' ')
-                    picktext=picktext[1]
-                    picktext=picktext.replace('张','')
-                    this.maxprice.maxcounts=parseInt(picktext)
-                }
-                this.$emit('hbfb-switch' ,{val:val,picktext:parseInt(picktext)})
-            },
-            // 最新、对手、排队价格
-            changePriceType(i,item) {
-                this.btn3_i = i
-                this.pricetitle=item
-                switch(i){
-                    case 0:
-                        // 开仓
-                        if(!this.onClose){
-                            this.pricevalue=this.qrysingle.buyPrice1
-                        }
-                        // 平仓
-                        else{
-                            this.pricevalue=this.qrysingle.salePrice1
-                        }
-                        break;
-                    case 1:
-                        // 开仓
-                        if(!this.onClose){
-                            this.pricevalue=this.qrysingle.salePrice1
-                        }
-                        // 平仓
-                        else{
-                            this.pricevalue=this.qrysingle.salePrice1
-                        }
-                        break;
-                    case 2:
-                        // 开仓
-                        if(!this.onClose){
-                            this.pricevalue=this.qrysingle.buyPrice1
-                        }
-                        // 平仓
-                        else{
-                            this.pricevalue=this.qrysingle.salePrice1
-                        }
-                        break;
-                }
-                this.$emit('price-step' ,{num:this.sliderVal,price:this.pricevalue})
-            },
-            // 滑块滑动事件
-            slidering(e) {
-                this.sliderVal = e.detail.value
-                this.$emit('price-step' ,{num:this.sliderVal,price:this.pricevalue})
-            },
-            sliders(e) {
-                this.sliderVal = e.detail.value
-            },
-            // 修改委托数量
-            plusStep(i) {
-                if(i==-1){
-                    if(this.sliderVal==1){
-                        return
-                    }
-                }else{
-                    if(this.sliderVal>this.maxprice.maxcounts-1){
-                        return
-                    }
-                }
-                this.sliderVal=parseInt(this.sliderVal)
-                this.sliderVal += i
-                this.$emit('plus-step' ,{num:this.sliderVal,price:this.pricevalue})
-            },
-            onCancel(e) {
-                // console.log(e)
-            },
-            onConfirm(val) {
-                this.pickerText = val.label
-                if(this.onClose){
-                    this.maxprice.maxcounts=parseInt(val.value[0])
-                }
-                this.sliderVal=1
-                this.$emit('fb-num' ,parseInt(val.value[0]))
-            },
-            // 单列
-            showPicker() {
-							if(this.pickerValueArray[0]){
-								this.$refs.typePick.show()
-							} 
-            },
-        },
-        watch:{
-            qrysingle(val){
-                if(val){
-                    this.pricevalue=this.qrysingle.buyPrice1
-                }
-            },
-            fbcclist(val){
-                if(val){
-                    this.fbcclength=this.fbcclist.length
-                    this.hbcclength=this.hbcclist.length
-                    this.pickerValueArray=[]
-										this.pickerText='0'
-                    if(this.fbcclist[0]){
-											this.pickerText='第1笔 '+this.fbcclist[0].enable_amount+'张'
-											for(var i=0;i<this.fbcclist.length;i++){
-													var pickobj=new Object()
-													pickobj.label='第'+parseInt(i+1)+'笔'+' '+this.fbcclist[i].enable_amount+'张'
-													pickobj.value=this.fbcclist[i].enable_amount
-													this.pickerValueArray.push(pickobj)
-											}
-											console.log('this.pickerValueArray',this.pickerValueArray)
-										}   
-                }
-            },
-            hbcclist(val){
-                if(val){
-                }
-            }
-        },
-        created(){
-        }
+export default {
+  props: {
+    onClose: {
+      require: true
+    },
+    maxprice: {
+      require: true
+    },
+    qrysingle: {
+      require: true
+    },
+    hbcclist: {
+      require: true
+    },
+    fbcclist: {
+      require: true
+    },
+  },
+  components: { mpvuePicker, uniIcon },
+  data() {
+    return {
+      tabActive: false,
+      btn3Arr: ['最新价', '对手', '排队',],
+      btn3_i: 0,
+      sliderVal: 1,
+      pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
+      pickerValueArray: [],//后端获得lists替换此处
+      pricevalue: '',
+      pricetitle: '最新价',
+      fbcclength: '',
+      hbcclength: '',
     }
+  },
+  methods: {
+    // 合并分笔
+    tapChange(val) {
+      this.tabActive = val
+      this.sliderVal = 1
+      if (val == true) {
+        var picktext = this.pickerText
+        picktext = picktext.split(' ')
+        picktext = picktext[1]
+        picktext = picktext.replace('张', '')
+        this.maxprice.maxcounts = parseInt(picktext)
+      }
+      this.$emit('hbfb-switch', { val: val, picktext: parseInt(picktext) })
+    },
+    // 最新、对手、排队价格
+    changePriceType(i, item) {
+      this.btn3_i = i
+      this.pricetitle = item
+      switch (i) {
+        case 0:
+          // 开仓
+          if (!this.onClose) {
+            this.pricevalue = this.qrysingle.buyPrice1
+          }
+          // 平仓
+          else {
+            this.pricevalue = this.qrysingle.salePrice1
+          }
+          break;
+        case 1:
+          // 开仓
+          if (!this.onClose) {
+            this.pricevalue = this.qrysingle.salePrice1
+          }
+          // 平仓
+          else {
+            this.pricevalue = this.qrysingle.salePrice1
+          }
+          break;
+        case 2:
+          // 开仓
+          if (!this.onClose) {
+            this.pricevalue = this.qrysingle.buyPrice1
+          }
+          // 平仓
+          else {
+            this.pricevalue = this.qrysingle.salePrice1
+          }
+          break;
+      }
+      this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
+    },
+    // 滑块滑动事件
+    slidering(e) {
+      this.sliderVal = e.detail.value
+      this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
+    },
+    sliders(e) {
+      this.sliderVal = e.detail.value
+    },
+    // 修改委托数量
+    plusStep(i) {
+      if (i == -1) {
+        if (this.sliderVal == 1) {
+          return
+        }
+      } else {
+        if (this.sliderVal > this.maxprice.maxcounts - 1) {
+          return
+        }
+      }
+      this.sliderVal = parseInt(this.sliderVal)
+      this.sliderVal += i
+      this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
+    },
+    plusStep2(i) {
+      if (i == -1) {
+        if (this.pricevalue == 0.0001) {
+          return
+        }
+      }
+      var val = Math.round(this.pricevalue * 10000)+Number(i)
+      this.pricevalue = Number(val / 10000).toFixed(4)
+    },
+
+    onCancel(e) {
+      // console.log(e)
+    },
+    onConfirm(val) {
+      this.pickerText = '笔 ' + val.index + ' | ' + val.value + '张'
+      if (this.onClose) {
+        this.maxprice.maxcounts = parseInt(val.value[0])
+      }
+      this.sliderVal = 1
+      this.$emit('fb-num', parseInt(val.value[0]))
+    },
+    // 单列
+    showPicker() {
+      if (this.pickerValueArray[0]) {
+        this.$refs.typePick.show()
+      }
+    },
+  },
+  watch: {
+    qrysingle(val) {
+      if (val) {
+        this.pricevalue = this.qrysingle.buyPrice1
+      }
+    },
+    fbcclist(val) {
+      if (val) {
+        this.fbcclength = this.fbcclist.length
+        this.hbcclength = this.hbcclist.length
+        this.pickerValueArray = []
+        this.pickerText = '0'
+        if (this.fbcclist[0]) {
+          this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
+          for (var i = 0; i < this.fbcclist.length; i++) {
+            var pickobj = new Object()
+            pickobj.label = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
+            pickobj.value = this.fbcclist[i].enable_amount
+            pickobj.index = parseInt(i + 1)
+            this.pickerValueArray.push(pickobj)
+          }
+          console.log('this.pickerValueArray', this.pickerValueArray)
+        }
+      }
+    },
+    hbcclist(val) {
+      if (val) {
+      }
+    }
+  },
+  created() {
+  }
+}
 </script>
 <style lang="scss" scoped>
-    view.wrap {
-        padding: 30upx 32upx;
-        background-color: #fff;
-    .commonStyle1 {
-        line-height: 16px;
-        height: 16px;
-        font-weight: bold;
-        font-size: 16px;
-        color: rgba(102, 102, 102, 1);
-    }
-    text.commonStyle2 {
-        font-size: 12px !important;
-        color: rgba(153, 153, 153, 1) !important;
-        line-height: 16px;
-        font-family: MicrosoftYaHei;
-        font-weight: normal !important;
-    }
-    view.line2 {
-        align-items: center;
-        justify-content: space-between;
-        margin: 29upx 0 48upx;
-    view.newPrice {
-        font-size: 24px;
-        line-height: 60upx;
-        font-family: Arial-BoldMT;
-        font-weight: bold;
-        color: rgba(64, 157, 229, 1);
+view.wrap {
+  padding: 30upx 32upx;
+  background-color: #fff;
+  .commonStyle1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(69, 69, 69, 1);
+    line-height: 50upx;
+  }
+  text.commonStyle2 {
+    font-size: 12px !important;
+    color: rgba(153, 153, 153, 1) !important;
+    line-height: 16px;
+    font-family: MicrosoftYaHei;
+    font-weight: normal !important;
+  }
+  view.line2 {
+    align-items: center;
+    justify-content: space-between;
+    margin: 29upx 0 48upx;
+    .newPrice {
+      font-size: 24px;
+      line-height: 60upx;
+      font-family: Arial-BoldMT;
+      font-weight: bold;
+      display: inline-block;
+      width: 185upx;
+      text-align: center;
+      color: rgba(64, 157, 229, 1);
     }
 
     view.btn3 {
-    > view {
+      > view {
         width: 50px;
         height: 30px;
         background: rgba(245, 245, 245, 0);
@@ -275,121 +278,113 @@
         text-align: center;
         font-size: 12px;
         color: rgba(153, 153, 153, 1);
-        line-height: 30px;
-    }
-    > view.active {
+        line-height: 29px;
+      }
+      > view.active {
         border-color: rgba(64, 157, 229, 1);
         color: #409de5;
-    }
-    > view:nth-child(2) {
+      }
+      > view:nth-child(2) {
         margin: 0 26upx;
+      }
     }
-    }
-    }
-    view.entrustType {
+  }
+  view.entrustType {
     text {
-        font-size: 14px;
-        color: #707680;
+      // font-size: 14px;
+      // color: #707680;
     }
     text.type {
-        margin-right: 5px;
-        font-size: 16px;
-        color: rgba(102, 102, 102, 1);
+      margin-right: 5px;
     }
-    }
-    view.chooseType {
-        justify-content: space-between;
-        align-items: center;
+  }
+  view.chooseType {
+    justify-content: space-between;
+    align-items: center;
     view.chooseCount {
-        width: 173upx;
-        height: 50upx;
-        line-height: 50upx;
-        text-align: center;
-        font-size: 12px;
-        font-family: Adobe Heiti Std R;
-        font-weight: normal;
-        color: rgba(102, 102, 102, 1);
-        line-height: 43px;
-        background: rgba(239, 239, 239, 1);
-        border-radius: 8upx;
-    text.arrowDown {
-        display: inline-block;
-        width: 17upx;
-        border: 9upx solid #666;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        border-right-color: transparent;
+      width: 340upx;
+      height: 64upx;
+      text-align: center;
+      font-size: 14px;
+      color: #848689;
+      background: rgba(239, 239, 239, 1);
+      uni-icon{
+        vertical-align: middle;
+      }
+      border-radius: 8upx;
+      view {
+        line-height: 64upx;
+      }
+      text.txt {
+        margin-right: 96upx;
+      }
     }
-    }
-    }
-    view.tabOpen {
-        width: 180upx;
-        height: 60upx;
-        border-radius: 15px;
-        align-self: center;
-        background-color: #efefef;
-        margin: 30upx 0 30upx 1px;
-        position: relative;
+  }
+  view.tabOpen {
+    width: 270upx;
+    height: 64upx;
+    border-radius: 15px;
+    align-self: center;
+    background-color: #efefef;
+    margin: 30upx 0 30upx 1px;
+    position: relative;
     .slider {
-        position: absolute;
-        width: 52%;
-        border-radius: 15px;
-        bottom: 0;
-        top: 0;
-        left: -1%;
-        transition: left 80ms;
-        background-color: #409de5;
-        color: #fff;
+      position: absolute;
+      width: 52%;
+      border-radius: 15px;
+      bottom: 0;
+      top: 0;
+      left: -1%;
+      transition: left 80ms;
+      background-color: #409de5;
+      color: #fff;
     }
     > view {
-        flex-grow: 1;
-        text-align: center;
-        line-height: 60upx;
-        font-size: 12px;
-        color: #707680;
+      flex-grow: 1;
+      text-align: center;
+      line-height: 60upx;
+      font-size: 12px;
+      color: #999;
     }
     > view.active.slider {
-        left: 50%;
+      left: 50%;
     }
-    }
-    view.entrustCount {
-        font-size: 16px;
-        line-height: 16px;
-        justify-content: space-between;
-        font-weight: bold;
-        color: rgba(102, 102, 102, 1);
+  }
+  view.entrustCount {
+    font-size: 16px;
+    line-height: 16px;
+    justify-content: space-between;
+    font-weight: bold;
+    color: rgba(102, 102, 102, 1);
     text.useCount {
-        margin-left: 7px;
+      margin-left: 7px;
     }
     text.mr5 {
-        margin-right: 5px;
+      margin-right: 5px;
     }
-    }
-    view.sliderPart {
-        justify-content: space-between;
-        margin: 35upx 0 14upx;
-        align-items: center;
+  }
+  view.sliderPart {
+    justify-content: space-between;
+    margin: 35upx 0 14upx;
+    align-items: center;
     text.countxt {
-        font-size: 24px;
-        font-family: ArialMT;
-        color: rgba(51, 51, 51, 1);
-        line-height: 24px;
-        width: 136upx;
-        text-align: center;
-        display: inline-block;
+      font-size: 24px;
+      font-family: ArialMT;
+      color: rgba(51, 51, 51, 1);
+      line-height: 24px;
+      width: 185upx;
+      text-align: center;
+      display: inline-block;
     }
-    image {
-        width: 18px;
-        height: 18px;
-    }
-    uni-slider {
-        margin: 0;
-        margin-left: 150upx;
-        margin-right: 10upx;
-    }
+
     view.sliderItem {
-        flex-grow: 1;
+      flex-grow: 1;
+      padding-left: 30upx;
     }
-    }
-    }
+  }
+  image {
+    width: 18px;
+    height: 18px;
+  }
+}
 </style>

@@ -3,7 +3,7 @@
     <view class="info">
       <view class="line1">
         <text>购12月2250</text>
-        <text>10001493</text>
+        <text>(10001493)</text>
       </view>
       <view class="uni-flex line2">
         <view>{{newprices}}</view>
@@ -76,7 +76,7 @@ export default {
     return {
       echarts,
       onInit: initChart, //异步获取数据后，不能在回调中传该函数
-			newprices:'0.2527'
+      newprices: '0.2527'
     }
   },
   methods: {
@@ -94,15 +94,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 view.wrap {
-  padding: 26upx;
+  padding: 26upx 26upx 0;
   background-color: #fff;
   view.info {
     view.line1 {
-      font-size: 13px;
-      color: rgba(130, 133, 151, 1);
-      text:first-child {
-        color: #181c28;
-        margin-right: 21upx;
+      font-size: 14px;
+      text {
+        color: 333;
       }
     }
     view.line2 {

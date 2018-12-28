@@ -70,8 +70,6 @@
 export default {
   data() {
     return {
-      buyData: [, , , , ,],
-      sellData: [, , , ,]
     }
   },
   props: ['hydetils']
@@ -80,7 +78,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 view.wrap {
-  padding: 26upx;
+  padding: 26upx ;
   background-color: #fff;
   view.left {
     margin-right: 18upx;
@@ -101,8 +99,8 @@ view.wrap {
       display: flex;
       justify-content: space-between;
       padding: 0 22upx;
-      border-bottom: 1px solid #ededed;
-      padding-bottom: 2px;
+      border-bottom: 0.5px solid rgba(153,153,153,0.5);
+      font-size: 12px;
     }
     text.w71 {
       width: 45px;
@@ -110,9 +108,11 @@ view.wrap {
     }
     view.title {
       background-color: #ededed;
-      font-size: 13px;
-      color: rgba(24, 28, 40, 1);
-      line-height: 26px;
+      font-size: 11px;
+      color: #848689;
+      line-height: 18px;
+      border-bottom: 0;
+      height: 18px;
     }
   }
   view.right {

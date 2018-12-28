@@ -18,7 +18,7 @@
           </view>
           <view class="itemView c1">
             <text>{{item.market_value}}</text>
-            <text>{{item.market_value||item.royalty_money}}</text>
+            <text>{{item.royalty_money||item.market_value}}</text>
           </view>
         </view>
         <view class=" uni-flex" v-if='tabI==0'>

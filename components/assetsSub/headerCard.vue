@@ -35,6 +35,7 @@
   </view>
 </template>
 <script>
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -42,9 +43,14 @@ export default {
 
     }
   },
+  computed: mapState(['sid']),
   props: ['transmoney'],
   methods: {
     go(i) {
+      if(!this.sid){
+        this.$tipLogin()
+        return
+      }
       switch (i) {
         case 1:
           uni.navigateTo({ url: '/pages/assets_sub/recharge/recharge' })

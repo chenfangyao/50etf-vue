@@ -45,7 +45,7 @@ export default {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 3000;
+  z-index: 300;
   align-items: center;
   .container {
     transform: scale(0, 0);
@@ -55,7 +55,7 @@ export default {
     margin: 0 64upx;
     background: #fff;
     border-radius: 10upx;
-    z-index: 3100;
+    z-index: 310;
     padding: 28upx 30upx 20upx;
     .c_red {
       color: #f05f5c;

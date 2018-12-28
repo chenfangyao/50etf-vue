@@ -6,7 +6,7 @@
     <view class="uni-flex">
       <text class="gou">12</text>
       <text class="midTxt">2.2000</text>
-      <text class="gou">8</text>
+      <text class="gou">{{i}}</text>
     </view>
     <text class="txtgreen">0.0213</text>
     <text class="txtgreen">-9.65</text>
@@ -60,6 +60,8 @@ view.wrap {
     color: #333;
   }
   .gou {
+    width: 36upx;
+    text-align: center;
     color: #999;
     line-height: 18upx;
     padding: 4upx 6upx;

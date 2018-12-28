@@ -112,7 +112,7 @@ view.rightPart {
     margin-bottom: 24upx;
     text:first-child {
       font-size: 12px;
-      color: rgba(130, 133, 151, 1);
+      color: #828597;
       line-height: 12px;
     }
     text:last-child {
