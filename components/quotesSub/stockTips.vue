@@ -9,9 +9,11 @@
        <!-- #ifdef H5 -->
       <view class="df_wh" id="mini-canvas">缩略图</view>
       <!-- #endif -->
-      <text class="currentPrice">2.4560</text>
-      <text>0.0040</text>
-      <text>0.16%</text>
+      <view class="txtContainer">
+        <text class="currentPrice">2.4560</text>
+        <text>0.0040</text>
+        <text>0.16%</text>
+      </view>
     </view>
 </template>
 <script>
@@ -89,27 +91,33 @@ view.stock50 {
   padding: 0 27upx;
   border-top: 1px solid #ededed;
   border-bottom: 12upx solid #ededed;
-
+  view.txtContainer {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    line-height: 71upx;
+  }
   text.stockNmae {
-    font-size: 34upx;
+    font-size: 17px;
     font-family: ArialMT;
     font-weight: 400;
+    line-height: 71upx;
     color: rgba(24, 28, 40, 1);
   }
   text.currentPrice {
-    font-size: 34upx;
+    font-size: 17px;
     font-family: ArialMT;
     font-weight: 400;
   }
   text {
-    font-size: 28upx;
+    font-size: 14px;
     font-family: ArialMT;
     font-weight: 400;
     color: rgba(240, 95, 92, 1);
   }
 }
 view.df_wh {
-  width: 124upx;
+  width: 134upx;
   height: 47upx;
   align-self: center;
 }

@@ -2,8 +2,8 @@
 	<view class="wrap">
 		<base-header title="平仓结算" has-back='1'></base-header>
     <view class="title">
-      <text class="nameTxt">XD购12月2892A</text>
-      <text class="codeTxt">10001409</text>
+      <text class="nameTxt">{{pingCItem.stock_name}}</text>
+      <text class="codeTxt">{{pingCItem.stock_code}}</text>
     </view>
     <view class="buy uni-flex">
       <view class="leftPart">
@@ -12,19 +12,19 @@
 
           <view class="uni-flex flexColumn txt">
             <text>价格：</text>
-            <text>权利金：</text>
+            <text>市值：</text>
           </view>
           <view class="uni-flex flexColumn">
-            <text>0.004</text>
-            <text>4.08</text>
+            <text>{{pingCItem.avg_buy_price}}</text>
+            <text>{{pingCItem.buy_value}}</text>
           </view>
         </view>
       </view>
       <view class="rightPart">
-        <view class="time">2018-08-08 10:30:30</view>
+        <view class="time">{{buss_time}}</view>
         <view>
           <text class='txt'>数量：</text>
-          <text>1张</text>
+          <text>{{pingCItem.sum_buy_amount}}张</text>
         </view>
       </view>
     </view>
@@ -35,19 +35,19 @@
 
           <view class="uni-flex flexColumn txt">
             <text>价格：</text>
-            <text>权利金：</text>
+            <text>市值：</text>
           </view>
           <view class="uni-flex flexColumn">
-            <text>0.004</text>
-            <text>4.08</text>
+            <text>{{pingCItem.sell_price}}</text>
+            <text>{{pingCItem.sell_value}}</text>
           </view>
         </view>
       </view>
       <view class="rightPart">
-        <view class="time">2018-08-08 10:30:30</view>
+        <view class="time">{{close_time}}</view>
         <view>
           <text class='txt'>数量：</text>
-          <text>12张</text>
+          <text>{{sell_amount}}张</text>
         </view>
       </view>
     </view>
@@ -60,11 +60,11 @@
         <text>总净值：</text>
       </view>
       <view class="uni-flex">
-        <text>10202</text>
-        <text>4.00</text>
-        <text>4.08</text>
-        <text>4.08</text>
-        <text>-2.98</text>
+        <text>未接</text>
+        <text>{{pingCItem.fee}}</text>
+        <text>{{pingCItem.all_income}}</text>
+        <text>{{pingCItem.deposit}}</text>
+        <text>{{pingCItem.all_realin}}</text>
       </view>
     </view>
     </view>
@@ -74,10 +74,14 @@
 <script>
 import filterList from '@/components/holdingSub/filterList.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
+      buss_time: '',
+      close_time: '',
+      sell_amount:''
     };
   },
   methods: {
@@ -85,7 +89,12 @@ export default {
       uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
     },
   },
-
+  mounted() {
+    this.close_time = this.$formatetimestr(this.pingCItem.close_time)
+    this.buss_time = this.$formatetimestr(this.pingCItem.buss_time)
+    this.sell_amount=parseInt(this.pingCItem.sell_amount)
+  },
+  computed: mapState(['pingCItem'])
 }
 </script>
 
@@ -103,6 +112,9 @@ view.wrap {
     line-height: 90upx;
     background-color: #fff;
     padding-left: 26upx;
+    .nameTxt {
+      margin-right: 20upx;
+    }
   }
   .buy,
   .sell {

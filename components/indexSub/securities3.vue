@@ -32,9 +32,10 @@ section {
   justify-content: space-between;
   margin-top: 10upx;
   h5 {
-    font-size: 16px;
+    font-size: 19px;
+    line-height: 19px;
     font-family: ArialMT;
-    font-weight: 400;
+    font-weight: 700;
     color: rgba(240, 95, 92, 1);
     margin-bottom: 0;
   }
@@ -57,9 +58,8 @@ section {
   }
   h4 {
     font-size: 13px;
-    font-family: MicrosoftYaHei;
     font-weight: 400;
-    color: rgba(24, 28, 40, 1);
+    color: #666;
     margin-top: 0;
   }
 }

@@ -23,18 +23,18 @@ import fourTips from '@/components/indexSub/tips4.vue'
 export default {
   data() {
     return {
-			newsItem:[]
-		}
+      newsItem: []
+    }
   },
   components: {
     newsView,
     threeSecurities,
     fourTips
   },
-  computed: mapState(['isWhite','sid','username','mobile']),
+  computed: mapState(['isWhite', 'sid', 'username', 'mobile']),
   methods: {
     // 登录
-    ...mapMutations(['setsid','setusername','setmobile']),
+    ...mapMutations(['setsid', 'setusername', 'setmobile']),
     loginin() {
       var options = {
         url: '/Sapi/Login/index', //请求接口
@@ -54,7 +54,7 @@ export default {
         console.log(res)
         if (res.status == 1) {
           this.setsid(res.data.sid)
-					// 获取用户信息
+          // 获取用户信息
           this.getuserinfo()
         }
       }).catch((err) => {
@@ -68,15 +68,15 @@ export default {
         url: '/Sapi/User/info', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
       }
-      
+
       this.$httpReq(options).then((res) => {
         // 请求成功的回调
         // res为服务端返回数据的根对象
         console.log('用户信息', res)
-				if(res.status){
-					this.setusername(res.data.user_name)
-					this.setmobile(res.data.mobile)
-				}
+        if (res.status) {
+          this.setusername(res.data.user_name)
+          this.setmobile(res.data.mobile)
+        }
       }).catch((err) => {
         // 请求失败的回调
       })
@@ -103,14 +103,14 @@ export default {
       })
     },
 
-// 获取指数信息
+    // 获取指数信息
     getmarkinfo() {
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
-				data:{
-					stockTradeMins:''
-				},
+        data: {
+          stockTradeMins: ''
+        },
         context: '',
         header: {
           clienttype: 'web',
@@ -127,47 +127,47 @@ export default {
         alert(err)
       })
     },
-		// 获取文章信息
-		getartlelist() {
-			var options = {
-				url: '/Sapi/Article/notice', //请求接口
-				method: 'POST', //请求方法全部大写，默认GET
-				data: {
-					page_index: 0,
-					page_size: 3,
-					cate_id: 29
-				},
-			}
-			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				// res为服务端返回数据的根对象
-				console.log('文章列表', res)
-				// this.timeformates()
-				this.newsItem = res.data.list
-			}).catch((err) => {
-				// 请求失败的回调
-				console.log(err)
-			})
-		},
+    // 获取文章信息
+    getartlelist() {
+      var options = {
+        url: '/Sapi/Article/notice', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: {
+          page_index: 0,
+          page_size: 3,
+          cate_id: 29
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        // 请求成功的回调
+        // res为服务端返回数据的根对象
+        console.log('文章列表', res)
+        // this.timeformates()
+        this.newsItem = res.data.list
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    },
 
-// 获取更多文章
-    getmoreart(){
-			uni.navigateTo({
-				url: '/pages/index_sub/new_list/new_list?symbol=1',
-				success: res => {},
-				fail: () => {},
-				complete: () => {}
-			});
-	}
+    // 获取更多文章
+    getmoreart() {
+      uni.navigateTo({
+        url: '/pages/index_sub/new_list/new_list?symbol=1',
+        success: res => { },
+        fail: () => { },
+        complete: () => { }
+      });
+    }
 
-	},
+  },
   created() {
     // this.loginin()
-      // 获取指数信息,未确定接口
-      // this.getmarkinfo()
-      // 获取文章列表
-      this.getartlelist()
-      this.getconfinfo()
+    // 获取指数信息,未确定接口
+    // this.getmarkinfo()
+    // 获取文章列表
+    this.getartlelist()
+    this.getconfinfo()
     // this.loginout()
   }
 }
@@ -180,13 +180,15 @@ page {
 
 view.newsViewTitle {
   justify-content: space-between;
-  font-size: 26upx;
-  font-family: MicrosoftYaHei;
-  color: rgba(24, 28, 40, 1);
-  margin: 32upx 0 24upx;
-
+  font-size: 16px;
+  line-height: 16px;
+  color: #333;
+  margin: 32upx 10upx 24upx;
+  font-weight: bold;
   text:last-child {
     color: #a8a8a8;
+    font-size: 12px;
+    font-weight: normal;
   }
 }
 

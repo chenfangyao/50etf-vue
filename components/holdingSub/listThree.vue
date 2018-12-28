@@ -13,24 +13,18 @@
       <view class='uni-flex leftPart'>
         <view>
           <view class="itemView">
-            <text>市值</text>
-            <text>5543</text>
-          </view>
-          <view>
-            <text>现价</text>
-            <text>{{item.last_price}}</text>
+            <text>委托价</text>
+            <text>{{item.entrust_price}}</text>
           </view>
           <view>
             <text>委托数</text>
             <text>{{item.entrust_amount}}</text>
-            <text class="ml10">成交数</text>
-            <text>0</text>
           </view>
         </view>
       </view>
       <view class="businessType" >
         <text> 交易类型</text>
-        <text  :class="{yellow:moneyColor[i]}">平仓</text>
+        <text  :class="{yellow:moneyColor[i]}">{{item.entrust_bs==2?'平仓':'开仓'}}</text>
       </view>
 
     </view>
@@ -42,24 +36,18 @@
           <text class="nameTxt">购6月2450</text>
           <text class="codeTxt">10001409</text>
         </view>
-        <view class="badgeView">5566</view>
+        <view class="badgeView">未成交</view>
     </view>
     <view class="line2 uni-flex ">
       <view class='uni-flex leftPart'>
         <view>
           <view class="itemView">
-            <text>市值</text>
+            <text>委托价</text>
             <text>5543</text>
-          </view>
-          <view>
-            <text>现价</text>
-            <text>213113.23</text>
           </view>
           <view>
             <text>委托数</text>
             <text>33</text>
-            <text class="ml10">成交数</text>
-            <text>0</text>
           </view>
         </view>
       </view>
@@ -143,11 +131,11 @@ view.list2Item {
     view.badgeView {
       width: 100upx;
       height: 36upx;
-      background: rgba(240, 95, 92, 1);
       border-radius: 18upx;
       font-size: 12px;
-      color: rgba(255, 255, 255, 1);
-      line-height: 36upx;
+      color: #409DE5;
+      border: solid 1px #409de5;
+      line-height: 31upx;
       text-align: center;
       align-self: center;
     }
@@ -177,9 +165,6 @@ view.list2Item {
     }
     view.itemView {
       display: flex;
-    }
-    .ml10{
-      margin-left: 20upx;
     }
     .leftPart > view {
       color: #707680;

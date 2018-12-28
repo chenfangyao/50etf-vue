@@ -1,6 +1,6 @@
 <template>
     <view class="wrap">
-      <base-header :hasBack='true' title="选择时间" @right-tap='handleConfirm' rightTxt='确定'></base-header>
+      <base-header :hasBack='true' @special-back='hidMe' special-back=1 title="选择时间" @right-tap='handleConfirm' rightTxt='确定'></base-header>
 			<view class="uni-title self">
         <text :class="{active:inLeft}" @tap="changeActive(true)">{{year}}-{{month}}-{{day}}</text> 至
         <text :class="{active:!inLeft}" @tap="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</text>
@@ -80,6 +80,9 @@ export default {
         this.day2 = this.days[val[2]]
       }
     },
+    hidMe() {
+      this.$emit('hid-me')
+    },
     changeActive(val) {
       this.inLeft = val
     },
@@ -94,7 +97,9 @@ export default {
         this.showTips = true
         return
       }
-			var times={starttime:this.year+'-'+this.month+'-'+this.day,endtime:this.year2+'-'+this.month2+'-'+this.day2}
+      this.showTips = false
+      // var times = { starttime: this.year + '-' + this.month + '-' + this.day, endtime: this.year2 + '-' + this.month2 + '-' + this.day2 }
+      var times = { starttime: this.year + '' + this.month  + this.day, endtime: this.year2 + '' + this.month2 + this.day2 }
       this.$emit('select-complete', times)
     },
 
@@ -111,8 +116,8 @@ view.wrap {
   bottom: 0;
   background-color: #fff;
   z-index: 2500;
-  view.tips{
-    color: #F05F5C;
+  view.tips {
+    color: #f05f5c;
     text-align: center;
   }
 }
