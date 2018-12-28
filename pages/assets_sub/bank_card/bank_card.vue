@@ -31,8 +31,9 @@ export default {
       bankName: '',
       verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
       paymoney:'',
-			paytype:''
-
+			paytype:'',
+			cardname:'',
+			cardno:''
     };
   },
   components: { submitBtn, inputItem, errTip },
@@ -42,10 +43,6 @@ export default {
 	},
   methods: {
     go(i) {
-//       if (i == 1) {
-//         uni.navigateTo({ url: '../help/help' })
-//       }
-
       switch(this.paytype){
 				case 'remit_alipay':
 				uni.navigateTo({

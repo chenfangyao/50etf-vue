@@ -3,12 +3,12 @@
 		<base-header title="收款信息" has-back='1'  @right-tap='go(1)'></base-header>
     <!-- <view class="title">支付账号</view> -->
     <view class="subWrap">
-      <input-item placeholderTxt='收款账号' v-model="bankName" ></input-item>
-      <input-item placeholderTxt='收款人' v-model="uName" ></input-item>
-      <input-item placeholderTxt='客户代码' v-model="bankCode" ></input-item>
-      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
-
-      <submit-btn btnTxt='复制完成,去支付宝转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
+		<view class='gatherInfo'>
+		<view class='payMoney'>收款账号:{{}}</view>
+		<view class='payMoney'>收款人:{{}}</view>
+		<view class='payMoney'>客户代码:{{}}</view>
+		</view>
+      <submit-btn class='subBtn' btnTxt='复制完成,去支付宝转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
     </view>
 
 	</view>
@@ -25,7 +25,7 @@ export default {
       showErr: false,
       tipContent: '您的账号和密码错误，请重新输入',
       bankCode: '',
-      bankName: '',
+      bankName: '423423',
       verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
       paymoney:'',
 	paytype:'',
@@ -35,7 +35,6 @@ export default {
   },
   components: { submitBtn, inputItem, errTip },
 	onLoad(opt){
-		console.log(333,opt)
 		this.paytype=opt.paytype
 		if(this.paytype=='remit_alipay'){
 			this.paymoney=opt.paymoney
@@ -46,8 +45,6 @@ export default {
 			this.bankCode=opt.bankCode
 			this.pw_id=opt.pw_id
 		}
-		
-
 	},
   methods: {
     go(i) {
@@ -131,12 +128,22 @@ view.wrap {
     padding: 28upx 27upx 0;
     margin-top: 12upx;
     background-color: #fff;
+	view.gatherInfo{
+		// background-color: rgb(238,237,242);
+		margin-top: 20upx;
+	}
+	view.subBtn{
+		margin-top: 70upx;
+	}
+    
 		view.payMoney{
 			height: 80upx;
-			background-color:rgb(242,242,242) ;
 			line-height: 80upx;
 			color:grey;
 			font-size: 17px;
+			margin-left: 10upx;
+			border-bottom:1px solid rgb(238,237,242);
+			margin-top: 20upx
 		}
   }
 }

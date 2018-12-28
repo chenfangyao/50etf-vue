@@ -36,7 +36,8 @@ export default {
       priceItem_i: 0,
       wayList: ['支付宝', '银行转账'],
       inputDisabled: false,
-			paytype:'remit_alipay'
+			paytype:'remit_alipay',
+			payeeinfo:{},
     }
   },
 	computed: mapState(['assets']),
@@ -53,7 +54,16 @@ export default {
         //对接支付宝
       }else{
         //跳转银行卡页
-        uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+''})
+
+				switch(this.paytype){
+					case 'remit_alipay':
+					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'',})
+					break
+					case 'remit_icbc':
+					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+''})
+					break
+				}
+        
       }
     },
 		getpayway(){
@@ -67,6 +77,9 @@ export default {
 					console.log('支付方式列表列表', res)
 					if(res.status){
 						this.setpaylist(res.data)
+						// 设置默认下一步传递参数
+						this.payeeinfo=res.data.alipay[0]
+						// 设置默认的选择金额
 						this.priceLists=res.data.alipay[0].money_selects
 						this.money=this.priceLists[0]
 				// this.pickerValueArray=res.data.list
@@ -79,6 +92,8 @@ export default {
 			})
 		},
     changeWayI(i) {
+			console.log(333,i)
+			this.payeeinfo=i
 			this.priceLists=i.money_selects
 			// 支付方式
 			this.paytype=i.pay_code
