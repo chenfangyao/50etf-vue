@@ -1,16 +1,18 @@
 <template>
 <view>
+  <view class="wrap">
 
-  <view class="wrap " >
     <view class="occupy"></view>
-    <image src='/static/arrow/l.png' @tap="back"/>
-    <view>
-      <h4>{{name1}}</h4>
-      <h5>{{name2}}</h5>
+    <view class="wrap2" >
+      <image src='/static/arrow/l.png' @tap="back"/>
+      <view>
+        <h4>{{name1}}</h4>
+        <h5>{{name2}}</h5>
+      </view>
     </view>
   </view>
   <view class="h44"></view>
-</view>
+  </view>
 </template>
 <script>
 export default {
@@ -36,14 +38,17 @@ view.h44 {
 }
 view.wrap {
   border-bottom: 1px solid #ededed;
-  padding-top: 12upx;
-  height: 44px;
   position: fixed;
   left: 0;
   right: 0;
   background-color: #fff;
   top: 0;
   z-index: 50;
+  .wrap2{
+    height: 44px;
+    padding-top: 12upx;
+    position: relative;
+  }
   .occupy {
     height: var(--status-bar-height);
   }

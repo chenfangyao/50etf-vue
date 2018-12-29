@@ -11,13 +11,11 @@
       <view class="h60" v-show="tabI==2"></view>
     </view>
     <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']"  v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
+      <list-one :tab-i='objI' :list='obj.list' v-if="objI<2"></list-one>
+      <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2' ></list-two>
+      <list-three :tab-i='objI' :list='obj.list' v-else ></list-three>
       <view v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</view>
-      <view v-else>
-        <list-one :tab-i='objI' :list='obj.list' v-if="objI<2"></list-one>
-        <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2' ></list-two>
-        <list-three :tab-i='objI' :list='obj.list' v-else ></list-three>
-        <uni-load-more :loading-type="obj.resquestState" ></uni-load-more>
-      </view>
+      <uni-load-more v-else :loading-type="obj.resquestState" ></uni-load-more>
     </scroll-view>
   </view>
 </template>
@@ -84,7 +82,7 @@ export default {
         method: 'GET'
       }
       this.$httpReq(options).then((res) => {
-        if(res.data.not_auth==1){
+        if (res.data.not_auth == 1) {
           return this.$tipLogin()
         }
         this.titleList[i].total = res.data.total
@@ -154,7 +152,7 @@ view.wrap {
   view.h60 {
     height: 60upx;
   }
-  view.nullTxt{
+  view.nullTxt {
     text-align: center;
     margin-top: 50%;
   }

@@ -70,18 +70,16 @@ view.subCard {
   }
   h2 {
     font-size: 30upx;
-    font-family: MicrosoftYaHei;
     font-weight: 400;
     color: rgba(24, 28, 40, 1);
   }
   h3 {
     font-size: 22upx;
-    font-family: MicrosoftYaHei;
     font-weight: 400;
     color: rgba(130, 133, 151, 1);
   }
 
-  margin: 114upx 20upx 0;
+  margin: 66upx 20upx 0;
   background-color: #fff;
   border-radius: 20upx;
   box-shadow: 0upx 5upx 5upx 0upx rgba(245, 245, 245, 0.6);

@@ -4,7 +4,7 @@
     <view class="wrap uni-flex">
       <view class="txt">
         <text class="total">合计</text>
-        <text class="totalPrice">￥{{totalmoney}}</text>
+        <text class="totalPrice">￥{{totalmoney||0}}</text>
       </view>
       <view class="buyBtn" :class="{c1:onClose==1}" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
     </view>

@@ -100,7 +100,7 @@ export default {
       margin-bottom: 55upx;
       .flr {
         position: absolute;
-        left: 37upx;
+        left: -10upx;
         top: 4px;
       }
     }

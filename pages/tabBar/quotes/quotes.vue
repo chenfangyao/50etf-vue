@@ -4,7 +4,7 @@
     <stock-tip-bar></stock-tip-bar>
     <view class="uni-tab-bar">
       <view class="swiper-tab uni-flex">
-        <view v-for="(tab,index) in tabBars" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']" :id="tab.id" :data-current="index" @tap="tapTab">{{tab.name}}</view>
+        <view v-for="(tab,index) in groupLabel" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']" :id="tab.id" :data-current="index" @tap="tapTab">{{tab.tag_name}}({{tab.tag_expiry}})</view>
       </view>
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
@@ -35,23 +35,27 @@ export default {
       tabIndex: 0,
       resquestState: 0,
       newsitems: [1, 2, 3, 4],
-      tabBars: [{
-        name: '1811(0)',
+      quotationStr: '',//获取列表所需的拼接字符串
+      groupLabel: [{
+        tag_name: '1811(0)',
         id: 'guanzhu'
       }, {
-        name: '1812(28)',
+        tag_name: '1812(28)',
         id: 'tuijian'
       }, {
-        name: '1903(131)',
+        tag_name: '1903(131)',
         id: 'tiyu'
       }, {
-        name: '1906(211)',
+        tag_name: '1906(211)',
         id: 'redian'
       },
-      ]
+      ],
+      codeList: [],
+      quoteList: [],//行情页显示的涨跌数据列表
     }
   },
-  created(){
+  created() {
+    this.getgroupLabel()
     this.getartlelist()
   },
   methods: {
@@ -61,6 +65,38 @@ export default {
         // this.addData(e);
         this.resquestState = 0
       }, 1200);
+    },
+    getquoteList() {
+      var options = {
+        url: '/fiftyEtf/QryQuotationList', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data:{
+          quotation_list: this.quotationStr
+        },
+        header:{'Content-Type': 'application/x-www-form-urlencoded'}
+      }
+      this.$httpReq(options).then((res) => {
+        // res为服务端返回数据的根对象
+        console.log('行情列表2', res)
+        this.quoteList = res.data.list
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    },
+    getgroupLabel() {
+      var options = {
+        url: '/fiftyEtf/list_tag', //请求接口
+        method: 'GET', //请求方法全部大写，默认GET
+      }
+      this.$httpReq(options).then((res) => {
+        // res为服务端返回数据的根对象
+        console.log('合约列表2', res)
+        this.groupLabel = res.data.list
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
     },
     addData(e) {
       if (this.newsitems[e].data.length > 30) {
@@ -80,10 +116,15 @@ export default {
         this.tabIndex = e.target.dataset.current
       }
     },
+    dealquotationStr() {
+      this.codeList.forEach(item => {
+        this.quotationStr += '?' + item.stock_code
+      });
+    },
     // 获取合约列表
     getartlelist() {
       var options = {
-        url: '/Sapi/Squery/list_stocks', //请求接口
+        url: '/fiftyEtf/list_stocks', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         data: {
           page_index: 0,
@@ -91,8 +132,10 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        // res为服务端返回数据的根对象
         console.log('合约列表', res)
+        this.codeList = res.data.list
+        this.dealquotationStr()
+        this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
@@ -104,10 +147,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 view.uni-tab-bar {
   .list2 {
-      /* #ifdef H5 */
+    /* #ifdef H5 */
     height: calc(100vh - 248upx - 94px);
     /* #endif */
     /* #ifndef H5 */
@@ -117,7 +159,7 @@ view.uni-tab-bar {
 
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10upx 25upx 0;
     height: 84upx;
 

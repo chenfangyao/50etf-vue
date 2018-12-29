@@ -25,11 +25,12 @@ export default function (obj) {
       sid,
     })
   // }
-  var baseUrl = 'http://47.100.226.135:8040'
+  var baseUrl
   if (obj.url.indexOf('/Sapi') != -1) {
     baseUrl = 'http://47.100.226.135:8040'
   } else if (obj.url.indexOf('/fiftyEtf') != -1) {
-    baseUrl = 'http://47.100.174.65:8011'
+    // baseUrl = 'http://47.100.174.65:8011'
+    baseUrl = 'http://172.26.63.164:8184'
   }
   var p = new Promise((resolve, reject) => {
     uni.request({

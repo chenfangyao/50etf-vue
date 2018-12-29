@@ -41,7 +41,14 @@
 import hebingPop from '@/components/holdingSub/hebingPop.vue'
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 export default {
-  props: ['list', 'tabI'],
+  props: {
+    list: {
+      default() {
+        return []
+      }
+    },
+    tabI: ''
+  },
   data() {
     return {
       moneyColor: [],
@@ -56,18 +63,20 @@ export default {
 
       this.showFenbiPop = true
     },
-    closePop(){
-      
+    closePop() {
+
       this.showFenbiPop = false
     }
   },
   watch: {
     list(val) {
       if (!val) return;
+      this.moneyColor=[]
       val.forEach((item, i) => {
         this.moneyColor.push(parseInt(item.profit_money) < 0)
         this.create_time.push(this.$formatetimestr(item.in_time))
       });
+      console.log(this.moneyColor);
     }
   },
 }
@@ -115,18 +124,18 @@ view.list1Item {
       display: flex;
       flex-direction: column;
     }
-    .fg1{
+    .fg1 {
       flex-grow: 1;
     }
     .leftPart > view {
       font-size: 12px;
       color: rgba(153, 153, 153, 1);
-      .c1{
+      .c1 {
         color: #333;
         // margin-left: 0.5em;
       }
     }
-    view.w240{
+    view.w240 {
       width: 250upx;
     }
     justify-content: space-between;

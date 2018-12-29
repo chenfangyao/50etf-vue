@@ -1,7 +1,6 @@
 <template>
   <view class="hwrap">
-    <view class="occupy"></view>
-
+    <view class="h44"></view>
     <header-title></header-title>
     <sub-card></sub-card>
   </view>
@@ -16,15 +15,14 @@ export default {
 <style lang="scss" scoped>
 view.hwrap {
   height: 328upx;
-  position: relative;
-  top: -var(--status-bar-height);
   background: linear-gradient(
-    0deg,
+    90deg,
     rgba(41, 123, 205, 1),
     rgba(64, 157, 229, 1)
   );
-  .occupy {
-    height: var(--status-bar-height);
+  
+  .h44{
+    height: 44px;
   }
 }
 </style>
