@@ -51,7 +51,8 @@ export default {
     },
     switchPop() {
       if(this.goTo){
-        uni.navigateTo({url:'/pages/mine_sub/bank_card/card_list/card_list'})
+        // uni.navigateTo({url:'/pages/mine_sub/bank_card/card_list/card_list'})
+        uni.navigateTo({url:'/pages/mine_sub/bank_card/add_card/add_card'})
         return
       }
       this.showAction = !this.showAction

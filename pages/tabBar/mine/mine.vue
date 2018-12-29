@@ -8,7 +8,8 @@
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover" @tap="go('bank_card/card_list/card_list')">
+      <!-- <view class="uni-flex" hover-class="self-hover" @tap="go('bank_card/card_list/card_list')"> -->
+      <view class="uni-flex" hover-class="self-hover" @tap="go('bank_card/add_card/add_card')">
         <image src="/static/mineImg/02.png" />
         <text>银行卡</text>
         <text class="tip" v-if="false"></text>

@@ -36,7 +36,7 @@ export default {
       uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
     }
   },
-  computed: mapState(['sid', 'username', 'mobile', 'realnstatus','userinfo']),
+  computed: mapState(['sid', 'realnstatus','userinfo']),
 }
 </script>
 <style lang="scss">

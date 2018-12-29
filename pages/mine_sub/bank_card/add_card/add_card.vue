@@ -30,7 +30,7 @@
 		</view>
     <view class='list-row'>
       <text>卡号</text>
-      <input type="number" placeholder-class='_placeholder' v-model="bankcardid" placeholder='填写卡号'>
+      <input type="text" placeholder-class='_placeholder'  v-model="bankcardid" placeholder='填写卡号'>
     </view>
     <view class='list-row' >
       <text>姓名</text>
@@ -65,7 +65,7 @@ export default {
 			pickerCityValueArray:[],
 			pickerSubBankArray:[],
 			pickerText:'',
-			pickerCityText:'北京市-北京',
+			pickerCityText:'',
 			pickSubBankText:'',
 			bankid:'',
 			identifica:'',
@@ -75,6 +75,7 @@ export default {
 			bankOrCity:0,
 			prov_cd:'',
 			city_cd:'',
+			sub_id:'',
     };
   },
 	computed: mapState(['mobile']),
@@ -96,15 +97,26 @@ export default {
       // console.log(e)
     },
     onConfirm(val) {
+			console.log()
+     // 开户银行
 			if(this.bankOrCity===0){
 				this.pickerText=val.label
 				this.bankid=val.value[0]
-				getsubbanklist(bankid,prov_cd,city_cd)
-			}else if(this.bankOrCity===1){
+				this.getsubbanklist(this.bankid,this.prov_cd,this.city_cd)
+			}
+			// 开户省市
+			else if(this.bankOrCity===1){
+				let oneIndex=val.index[0]
+				let twoIndex=val.index[1]
+				this.prov_cd=this.pickerCityValueArray[oneIndex].value
+				this.city_cd=this.pickerCityValueArray[oneIndex].children[twoIndex].value
 				this.pickerCityText=val.label
-				getsubbanklist(bank_id,prov_cd,city_cd)
-			}else if(this.bankOrCity===2){
+				this.getsubbanklist(this.bankid,this.prov_cd,this.city_cd)
+			}
+			// 开户支行
+			else if(this.bankOrCity===2){
 				this.pickSubBankText=val.label
+				this.sub_id=val.value
 				}
     },
 		getbanklist() {
@@ -147,7 +159,7 @@ export default {
                 console.log('省列表', res)
                 if(res.status){
 									   this.prov_cd=res.data.list[0].prov_cd
-                     this.pickerCityValueArray=[]
+                                       this.pickerCityValueArray=[]
 										 for(let i=0;i<res.data.list.length;i++){
 											 let provObj={}
 											 provObj.label=res.data.list[i].prov_nm
@@ -187,6 +199,7 @@ export default {
 									childlist.push(childObj)
 			          }
 								this.pickerCityValueArray[index].children=childlist	
+								this.pickerCityText=this.pickerCityValueArray[0].label+'-'+this.pickerCityValueArray[0].children[0].label
 								this.getsubbanklist(this.bankid,this.prov_cd,this.city_cd)
 						}else{
 								
@@ -203,8 +216,8 @@ export default {
 						method: 'GET', //请求方法全部大写，默认GET
 						data:{
 							bank_id: bank_id,
-              prov_cd: prov_cd,
-              city_cd: city_cd,
+               prov_cd: prov_cd,
+               city_cd: city_cd,
 						}
 				}
 				this.$httpReq(options).then((res) => {
@@ -214,6 +227,7 @@ export default {
 						if(res.status){
 			         this.pickSubBankText=res.data.list[0].sub_name
 							 this.pickerSubBankArray=[]
+                              this.sub_id=res.data.list[0].sub_id
 							 for(let i=0;i<res.data.list.length;i++){
 								 let bankObj={}
 								 bankObj.label=res.data.list[i].sub_name
@@ -229,19 +243,45 @@ export default {
 						console.log(err)
 				})
 		},
+		// 我的银行
+		mybankinfo(){
+				var options = {
+						url:'/Sapi/Ubank/info', //请求接口
+						method: 'GET', //请求方法全部大写，默认GET
+				}
+				this.$httpReq(options).then((res) => {
+						// 请求成功的回调
+						// res为服务端返回数据的根对象
+						console.log('我的银行', res)
+						if(res.status){
+							if(res.data.sub_id!=undefined){
+								this.pickerText=res.data.bank_name
+								this.pickerCityText=res.data.prov+'-'+res.data.city
+								this.pickSubBankText=res.data.sub_name
+								this.sub_id=res.data.sub_id
+								this.username=res.data.cardname
+								this.bankcardid=res.data.cardno
+								this.identifica=res.data.idno
+								console.log(555,this.bankcardid)
+							}					
+						}else{
+								
+						}
+				}).catch((err) => {
+						// 请求失败的回调
+						console.log(err)
+				})
+		},
 		addbank(){
-			uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?type=1&bankid='+this.bankid+'&identifica='+this.identifica+'&username='+this.username+'&bankcardid='+this.bankcardid+'&tel='+this.mobile+'' })
-			
+			uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?type=1&sub_id='+this.sub_id+'&identifica='+this.identifica+'&username='+this.username+'&bankcardid='+this.bankcardid+'' })
 		},
 		pickChange(e){
-			console.log(33,this.bankid,this.pickerCityValueArray[e[0]].value,this.pickerCityValueArray[e[0]].children[e[1]].value)
-			this.getsubbanklist(this.bankid,this.pickerCityValueArray[e[0]].value,this.pickerCityValueArray[e[0]].children[e[1]].value)
-			// this.getcitylist(e,this.pickerCityValueArray[e].value)
 		}
 	},
 	onLoad(){
 		this.getbanklist()
 		this.getprovlist()
+		this.mybankinfo()
 	}
 }
 </script>
@@ -291,6 +331,8 @@ view.wrap {
         line-height: 43px;
         background: rgba(239, 239, 239, 1);
         border-radius: 8upx;
+				overflow: hidden;
+				white-space: nowrap;
     text.arrowDown {
         display: inline-block;
         width: 17upx;
