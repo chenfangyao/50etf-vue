@@ -18,7 +18,7 @@
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
-import QRCode from 'qrcodejs2'
+// import QRCode from 'qrcodejs2'
 
 export default {
   data() {
