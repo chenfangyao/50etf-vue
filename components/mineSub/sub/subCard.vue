@@ -5,8 +5,8 @@
           <image src="/static/mineImg/touxiang.png"/>
         </view>
         <view>
-          <h2>{{sid?'用户名':'未登录'}}{{username}}</h2>
-          <h3>{{sid?mobile:'— —'}}</h3>
+          <h2>{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
+          <h3>{{sid?userinfo.mobile:'— —'}}</h3>
         </view>
     </view>
     <button hover-class='self-hover' @tap='go'>{{sid?'实名认证':'登录'}}</button>
@@ -36,7 +36,7 @@ export default {
       uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
     }
   },
-  computed: mapState(['sid', 'username', 'mobile', 'realnstatus']),
+  computed: mapState(['sid', 'username', 'mobile', 'realnstatus','userinfo']),
 }
 </script>
 <style lang="scss">
