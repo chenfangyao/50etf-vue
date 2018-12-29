@@ -52,14 +52,13 @@ export default {
 <style lang="scss">
 view.newsView {
   background-color: #fff;
-  padding: 24upx;
+  padding: 20upx 24upx;
   border-radius: 20upx;
   margin: 20upx 0;
-
   h3 {
     font-size: 14px;
     font-weight: 400;
-    height: 50px;
+    max-height: 50px;
     overflow: hidden;
     background-color: #fff;
     color: rgba(24, 28, 40, 1);
@@ -77,7 +76,7 @@ view.newsView {
 
   > view.uni-flex {
     justify-content: space-between;
-    margin-top: 18upx;
+    margin-top: 10upx;
     background-color: #fff;
   }
 }

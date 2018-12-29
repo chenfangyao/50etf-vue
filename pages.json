@@ -310,16 +310,20 @@
         {
             "path" : "pages/assets_sub/receipt_bank/receipt_bank",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
         },
         {
             "path" : "pages/assets_sub/gatherinfo/gatherinfo",
             "style" : {
-            	"titleNView" : false,
-            	"scrollIndicator" : "none"
+                "titleNView" : false,
+                "scrollIndicator" : "none"
             }
+        },
+        {
+            "path" : "pages/bar_code/bar_code",
+            "style" : {}
         }
     ],
     "tabBar" : {

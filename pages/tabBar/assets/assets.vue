@@ -24,9 +24,9 @@
 				<text>{{enable_money}}</text>
 			</view>
 		</view>
-    <!-- <button @tap="go(2)">登录</button>
+    
     <button @tap="handleClick">111</button>
-    <button @tap="handleClick2">2</button> -->
+    <button @tap="handleClick2">2</button>
 	</view>
 </template>
 
@@ -86,12 +86,10 @@ export default {
       })
     },
     handleClick() {
+      uni.navigateTo({url:'/pages/bar_code/bar_code'})
       //#ifdef APP-PLUS
       plus.screen.lockOrientation('portrait-primary');
       //#endif
-    },
-    go(i) {
-      i == 2 && uni.navigateTo({ url: '/pages/login/login' });
     },
     handleClick2() {
       //#ifdef APP-PLUS

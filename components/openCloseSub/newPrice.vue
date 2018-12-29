@@ -39,8 +39,8 @@
             <view>
                 <text class="commonStyle1">委托数量</text>
                 <text class="useCount mr5 commonStyle2">{{onClose?'可用数':'最大可买'}}</text>
-                <text class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts}}</text>
-                <text class="commonStyle2" v-if="onClose">{{maxprice.enable_amount}}</text>
+                <text class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts||0}}</text>
+                <text class="commonStyle2" v-else>{{maxprice.enable_amount}}</text>
             </view>
             <view v-show="!onClose">
                 <text class="commonStyle2 mr5">当前持仓</text>
