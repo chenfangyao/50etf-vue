@@ -234,9 +234,6 @@ export default {
 			
 		},
 		pickChange(e){
-			debugger
-			var ss=this.pickerCityValueArray[e[0]]
-			var sss=this.pickerCityValueArray[e[0]].children[e[1]].value
 			console.log(33,this.bankid,this.pickerCityValueArray[e[0]].value,this.pickerCityValueArray[e[0]].children[e[1]].value)
 			this.getsubbanklist(this.bankid,this.pickerCityValueArray[e[0]].value,this.pickerCityValueArray[e[0]].children[e[1]].value)
 			// this.getcitylist(e,this.pickerCityValueArray[e].value)
