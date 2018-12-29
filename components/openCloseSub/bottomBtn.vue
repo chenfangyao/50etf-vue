@@ -3,10 +3,10 @@
 
     <view class="wrap uni-flex">
       <view class="txt">
-        <text class="total">合计：</text>
+        <text class="total">合计</text>
         <text class="totalPrice">￥{{totalmoney}}</text>
       </view>
-      <view class="buyBtn" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
+      <view class="buyBtn" :class="{c1:onClose==1}" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
     </view>
     <view class="h98"></view>
     <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop'></order-pop>
@@ -14,20 +14,27 @@
 </template>
 <script>
 import orderPop from './orderPop.vue'
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
-      popShow:false
+      popShow: false
     }
   },
-  props:['onClose','totalmoney'],
-  components:{orderPop},
-  methods:{
-    showPop(){
-      this.popShow=true
+  props: ['onClose', 'totalmoney'],
+  components: { orderPop },
+  computed: mapState(['sid']),
+  methods: {
+    showPop() {
+      if (this.sid) {
+        this.popShow = true
+      } else {
+        this.$tipLogin()
+      }
     },
-    closePop(){
-      this.popShow=false
+    closePop() {
+      this.popShow = false
     },
   }
 
@@ -50,15 +57,19 @@ view.wrap {
     width: 500upx;
     background-color: #fff;
     text.total {
-      color: rgba(153, 153, 153, 1);
-      margin-left: 26upx;
+      margin-left: 30upx;
+      font-size: 12px;
+      color: rgba(51, 51, 51, 1);
     }
     text {
       font-size: 16px;
       line-height: 98upx;
     }
     text.totalPrice {
-      color: #333;
+      font-size: 20px;
+      font-family: Arial-BoldMT;
+      color: rgba(51, 51, 51, 1);
+      line-height: 46upx;
     }
   }
   view.buyBtn {
@@ -71,6 +82,9 @@ view.wrap {
   }
   .buyBtn.tap-hover {
     background: darken(rgb(64, 157, 229), 5%);
+  }
+  .c1.buyBtn {
+    background-color: #e6ab12;
   }
 }
 </style>

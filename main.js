@@ -16,7 +16,7 @@ function add0(m) {
 }
 Vue.prototype.$formatetimestr = function (str, onlyTime) {
   // return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
-  if (str==0) return 0;
+  if (str == 0) return 0;
   let time = new Date(str * 1000);
   let y = time.getFullYear();
   let m = time.getMonth() + 1;
@@ -76,6 +76,20 @@ Vue.prototype.$validata = function (str, mode) {
       break;
   }
   return 1
+}
+//登入提示
+Vue.prototype.$tipLogin = () => {
+  uni.showModal({
+    title: '提示',
+    content: '您还未登录，请先登入噢',
+    success: function (res) {
+      if (res.confirm) {
+        uni.navigateTo({ url: '/pages/login/login' })
+      } else if (res.cancel) {
+        console.log('用户点击取消');
+      }
+    }
+  });
 }
 const app = new Vue({
   ...App,

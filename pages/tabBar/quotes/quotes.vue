@@ -9,9 +9,9 @@
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
         <futures-datas></futures-datas>
-        <view class="uni-tab-bar-loading">
+        <!-- <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
-        </view>
+        </view> -->
       </scroll-view>
     </view>
   </view>
@@ -51,6 +51,9 @@ export default {
       ]
     }
   },
+  created(){
+    this.getartlelist()
+  },
   methods: {
     loadMore(e) {
       this.resquestState = 1
@@ -85,9 +88,6 @@ export default {
         data: {
           page_index: 0,
           page_size: 10000,
-          tag_id: 0,
-          options_type: 0,
-          sort: 0
         },
       }
       this.$httpReq(options).then((res) => {
@@ -104,13 +104,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.swiper-box {
-  height: 1000upx !important;
-}
 
 view.uni-tab-bar {
   .list2 {
-    height: calc(100vh - 400upx);
+      /* #ifdef H5 */
+    height: calc(100vh - 248upx - 94px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: calc(100vh - 248upx - 44px - var(--status-bar-height));
+    /* #endif */
   }
 
   .swiper-tab {

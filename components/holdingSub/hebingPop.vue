@@ -24,7 +24,7 @@ view.fixWrap{
   bottom: 0;
   top: 0;
   background-color: rgba(0,0,0,0.5);
-  z-index:2000 ;
+  z-index:200 ;
   view.container{
     margin-top: calc((100vh - 100%)/2);
     min-height: 300px;

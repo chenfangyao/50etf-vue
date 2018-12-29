@@ -19,7 +19,7 @@ export default {
   data() {
     return {}
   },
-    props:['feemoney']
+  props: ['feemoney']
 
 }
 </script>
@@ -28,10 +28,10 @@ view.wrap {
   padding: 30upx 33upx;
   background-color: #fff;
   view.title {
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 16px;
-    color: rgba(102, 102, 102, 1);
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(69, 69, 69, 1);
+    line-height: 50upx;
   }
   view.row {
     justify-content: space-between;
@@ -42,8 +42,9 @@ view.wrap {
       flex-direction: column;
 
       > text {
-        line-height: 12px;
         font-size: 12px;
+        color: rgba(69, 69, 69, 1);
+        line-height: 34upx;
       }
     }
     > view:nth-child(2) {

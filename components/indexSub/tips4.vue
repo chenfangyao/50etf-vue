@@ -79,9 +79,7 @@ view.tipItems {
     height: 60upx;
   }
   text {
-    font-size: 22upx;
-    font-family: MicrosoftYaHei;
-    font-weight: 400;
+    font-size: 13px;
     color: rgba(24, 28, 40, 1);
   }
 }

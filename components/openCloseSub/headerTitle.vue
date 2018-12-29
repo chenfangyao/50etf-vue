@@ -4,10 +4,10 @@
       <view class="occupy"></view>
       <view class="wrap uni-flex">
         <image src='/static/arrow/l.png' @tap="back" />
-        <view class="tabOpen uni-flex">
+        <view class="tabOpen uni-flex" :class="{active:tabActive}">
           <view  @tap='tapChange(false)'>开仓</view>
           <view @tap='tapChange(true)'>平仓</view>
-          <view :class="['slider',{active:tabActive}]">{{tabActive?'平仓':'开仓'}}</view>
+          <view class="slider">{{tabActive?'平仓':'开仓'}}</view>
         </view>
       </view>
     </view>
@@ -18,8 +18,8 @@
 <script>
 export default {
   props: {
-    tabActive:{
-      require:true
+    tabActive: {
+      require: true
     }
   },
   data() {
@@ -29,10 +29,12 @@ export default {
   },
   methods: {
     back() {
-      uni.switchTab({ url: '/pages/tabBar/quotes/quotes' });
+      uni.navigateBack({
+        delta: 1
+      });
     },
     tapChange(val) {
-      this.$emit('change-close' ,val)
+      this.$emit('change-close', val)
     }
   }
 }
@@ -47,7 +49,7 @@ view.h44 {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 2000;
+  z-index: 200;
   background-color: #fff;
   view.wrap {
     text-align: center;
@@ -64,12 +66,12 @@ view.h44 {
       position: absolute;
     }
     view.tabOpen {
-      width: 360upx;
+      width: 352upx;
       height: 54upx;
       border-radius: 13px;
       margin: 0 auto;
       align-self: center;
-      border: 1px solid rgba(168, 168, 168, 0.7);
+      border: 1px solid #409de5;
       position: relative;
       .slider {
         position: absolute;
@@ -80,17 +82,19 @@ view.h44 {
         left: -1px;
         background-color: #409de5;
         color: #fff;
-        transition: left 80ms ;
+        transition: left 80ms;
       }
       > view {
         flex-grow: 1;
         text-align: center;
         line-height: 54upx;
-        font-size: 14px;
-        font-family: MicrosoftYaHei;
-        color: #707680;
+        font-size: 13px;
+        color: #999;
       }
-      > view.active.slider {
+    }
+    view.tabOpen.active {
+      border-color: #e6aa12;
+      .slider {
         left: 49%;
         background-color: #e6aa12;
       }

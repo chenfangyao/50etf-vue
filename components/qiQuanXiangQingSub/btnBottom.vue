@@ -37,14 +37,13 @@ view.uni-flex {
 }
 </style>
 <script>
-    import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {}
   },
-  computed: mapState(['hycode']),
   methods: {
-      ...mapMutations(['sethycode']),
+    ...mapMutations(['sethycode']),
     go(val) {
         this.sethycode(10001442)
       uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val+''})

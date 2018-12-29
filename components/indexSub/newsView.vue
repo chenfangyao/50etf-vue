@@ -61,6 +61,7 @@ view.newsView {
     font-weight: 400;
     height: 50px;
     overflow: hidden;
+    background-color: #fff;
     color: rgba(24, 28, 40, 1);
   }
 
@@ -77,6 +78,7 @@ view.newsView {
   > view.uni-flex {
     justify-content: space-between;
     margin-top: 18upx;
+    background-color: #fff;
   }
 }
 </style>
