@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 	  <base-header title="提现"  has-back='1'></base-header>
-    <recharge-way v-if="wayLists.length" :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
+    <recharge-way v-if="hasBank" :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' go-to='1'></recharge-way>
 		<view class="panel">
       <view class="inputContainer">
@@ -11,7 +11,7 @@
       </view>
       <view class="overage">
         <text>可提现余额：</text>
-        <text>{{allMoney}}元</text>
+        <text>{{assets.enable_money}}元</text>
         <text class="allWithdraw" @tap='allGet'>全部提现</text>
       </view>
     </view>
@@ -26,6 +26,7 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
+import { mapState } from 'vuex';
 
 export default {
   components: { btnBlock, rechargeWay },
@@ -36,17 +37,85 @@ export default {
       priceLists: [, , , , , ,],
       priceItem_i: 0,
       wayLists: ['招商银行'],
-
+      hasBank:false,
+			bankName:[],
     }
   },
+	computed: mapState(['assets']),
+	created(){
+		console.log(444,this.assets)
+		this.mybankinfo()
+	},
   methods: {
     handleBlur() { },
     handChange() { },
     doWhat() {
+			this.ufundcash()
     },
     allGet() {
-      this.money = this.allMoney.replace(/,/g,'')
-    }
+      this.money = this.assets.enable_money.replace(/,/g,'')
+    },
+		// 我的银行
+		mybankinfo(){
+				var options = {
+						url:'/Sapi/Ubank/info', //请求接口
+						method: 'GET', //请求方法全部大写，默认GET
+				}
+				this.$httpReq(options).then((res) => {
+						// 请求成功的回调
+						// res为服务端返回数据的根对象
+						console.log('我的银行', res)
+						if(res.status){
+							if(res.data.sub_id!=undefined){
+								this.hasBank=true
+								this.bankName[0]=res.data.bank_name
+								this.pickerText=res.data.bank_name
+								this.pickerCityText=res.data.prov+'-'+res.data.city
+								this.pickSubBankText=res.data.sub_name
+								this.sub_id=res.data.sub_id
+								this.username=res.data.cardname
+								this.bankcardid=res.data.cardno
+								this.identifica=res.data.idno
+							}					
+						}else{
+								
+						}
+				}).catch((err) => {
+						// 请求失败的回调
+						console.log(err)
+				})
+		},
+		// 提现
+		ufundcash(){
+			var options = {
+					url:'/Sapi/Ufund/cash', //请求接口
+					method: 'POST', //请求方法全部大写，默认GET
+					data:{
+						money:this.money
+					}
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log('提现状态', res)
+					if(res.status){
+						uni.showToast({
+             title: res.info?res.info:'提现申请已提交',
+             duration: 2000,
+             image:'/static/holdingImg/cedan-succ.png'
+      });					
+					}else{
+									uni.showToast({
+									title: res.info?res.info:'提现申请失败',
+									duration: 2000,
+									image:'/static/holdingImg/cedan-succ.png'
+						});	
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		}
   }
 }
 </script>

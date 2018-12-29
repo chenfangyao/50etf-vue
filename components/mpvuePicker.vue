@@ -271,7 +271,6 @@
 					// 二级联动数组是否为异步加载
 					if(this.loadType===1){
 						this.getcitylist(e,index,this.pickerValueArray[index[0]].value)
-						// this.getsubbanklist(this.bankid,this.pickerValueArray[index[0]].value,this.pickerValueArray[index[0]].children[index[1]].value)
 					}else{
 						let pickerValueArray = this.pickerValueArray;
 						let changeValue = e.mp.detail.value;
@@ -416,7 +415,7 @@
 										childObj.value=res.data.list[i].city_cd
 										childlist.push(childObj)
 									}
-									this.pickerValueArray[index].children=childlist		
+									this.pickerValueArray[index[0]].children=childlist		
 									let pickerValueArray = this.pickerValueArray;
 									let changeValue = e.mp.detail.value;
 									// 处理第一列滚动
@@ -431,39 +430,6 @@
 										changeValue[1] = 0;
 									}
 									this.pickerValue = changeValue;						
-							}else{
-									
-							}
-					}).catch((err) => {
-							// 请求失败的回调
-							console.log(err)
-					})
-			},
-			// 支行列表
-			getsubbanklist(bank_id,prov_cd,city_cd){
-					var options = {
-							url: '/Sapi/Ubank/sub_list', //请求接口
-							method: 'GET', //请求方法全部大写，默认GET
-							data:{
-								bank_id: bank_id,
-								prov_cd: prov_cd,
-								city_cd: city_cd,
-							}
-					}
-					this.$httpReq(options).then((res) => {
-							// 请求成功的回调
-							// res为服务端返回数据的根对象
-							console.log('支行列表', res)
-							if(res.status){
-								this.pickSubBankText=res.data.list[0].sub_name
-								this.pickerSubBankArray=[]
-								for(let i=0;i<res.data.list.length;i++){
-									let bankObj={}
-									bankObj.label=res.data.list[i].sub_name
-									bankObj.value=res.data.list[i].sub_id
-									this.pickerSubBankArray.push(bankObj)
-								}
-								console.log(333,this.pickerSubBankArray)
 							}else{
 									
 							}

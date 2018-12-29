@@ -6,6 +6,8 @@
     <view class="QRcode">
       <image src='/static/mineImg/QRcode.png'></image>
     </view>
+		<!-- <view class="QRcode" id="qrcode" ref="qrcode">	 -->
+		<!-- </view> -->
     <view class="txt">http://wxv.zjkj888.cn/m/register/100</view>
 
     <view class="btn">
@@ -16,6 +18,7 @@
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
+import QRCode from 'qrcodejs2'
 
 export default {
   data() {
@@ -51,8 +54,19 @@ export default {
         }
       });
       //#endif
-    }
+    },
+// 		qrcode () {
+//     let qrcode = new QRCode('qrcode',{
+//         width: 200, // 设置宽度，单位像素
+//         height: 200, // 设置高度，单位像素
+//         text: 'https://www.baidu.com'   // 设置二维码内容或跳转地址
+//     })
+// },
+
   },
+	created(){
+		// this.qrcode()
+	}
 }
 </script>
 
