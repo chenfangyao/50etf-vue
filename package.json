@@ -12,6 +12,6 @@
   "dependencies": {
     "echarts": "^4.2.0-rc.2",
     "mpvue-echarts": "^0.2.7",
-    "qrcodejs2": "0.0.2"
+    "vue-qr": "^1.5.2"
   }
 }
