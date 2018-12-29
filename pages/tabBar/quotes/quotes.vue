@@ -4,7 +4,9 @@
     <stock-tip-bar></stock-tip-bar>
     <view class="uni-tab-bar">
       <view class="swiper-tab uni-flex">
-        <view v-for="(tab,index) in groupLabel" :key="tab.id" :class="['swiper-tab-list2',tabIndex==index ? 'active' : '']" :id="tab.id" :data-current="index" @tap="tapTab">{{tab.tag_name}}({{tab.tag_expiry}})</view>
+        <view v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2':id="tab.id" >
+          <text :class="[tabIndex==index ? 'active' : '']" @tap="tapTab" :data-current="index" >{{tab.tag_name}}({{tab.tag_expiry}})</text>
+        </view>
       </view>
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
@@ -70,10 +72,10 @@ export default {
       var options = {
         url: '/fiftyEtf/QryQuotationList', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
-        data:{
+        data: {
           quotation_list: this.quotationStr
         },
-        header:{'Content-Type': 'application/x-www-form-urlencoded'}
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }
       this.$httpReq(options).then((res) => {
         // res为服务端返回数据的根对象
@@ -159,21 +161,23 @@ view.uni-tab-bar {
 
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 10upx 25upx 0;
     height: 84upx;
 
-    .swiper-tab-list2.active {
+    .swiper-tab-list2 text.active {
       border-bottom: 1px solid #409de5;
       color: #409de5;
+      padding-bottom: 13px;
     }
 
     .swiper-tab-list2 {
       // padding-bottom: 27upx;
       font-size: 15px;
-      font-family: MicrosoftYaHei;
       font-weight: 400;
+      // text-align: center;
       color: #181c28;
+      width: 25%;
     }
   }
 }
