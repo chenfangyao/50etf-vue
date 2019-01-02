@@ -4,10 +4,10 @@
 
     <image class="bg" src='/static/mineImg/inviteFriendBg.png'></image>
     <view class="QRcode">
-      <image src='/static/mineImg/QRcode.png'></image>
+			<qrcode-vue :logoSrc="imageUrl" :text="codeValue" margin='0' logoScale='200' size='158'></qrcode-vue>
     </view>
-		<!-- <view class="QRcode" id="qrcode" ref="qrcode">	 -->
-		<!-- </view> -->
+		
+
     <view class="txt">http://wxv.zjkj888.cn/m/register/100</view>
 
     <view class="btn">
@@ -18,15 +18,21 @@
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
-// import QRCode from 'qrcodejs2'
+import QrcodeVue from 'vue-qr'
 
 export default {
   data() {
     return {
-
+       codeValue:'http://172.26.63.71:8083/h5/#/pages/register/register',
+       // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
+       // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+       imageUrl:'static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
-  components: { btnBlock },
+  components: { 
+	 btnBlock,
+	 QrcodeVue
+	 },
   methods: {
     copy() {
       var str = 'http://wxv.zjkj888.cn/m/register/100';
@@ -55,13 +61,7 @@ export default {
       });
       //#endif
     },
-// 		qrcode () {
-//     let qrcode = new QRCode('qrcode',{
-//         width: 200, // 设置宽度，单位像素
-//         height: 200, // 设置高度，单位像素
-//         text: 'https://www.baidu.com'   // 设置二维码内容或跳转地址
-//     })
-// },
+
 
   },
 	created(){
@@ -85,15 +85,15 @@ view.wrap {
     z-index: -5;
   }
   view.QRcode {
-    width: 360upx;
-    height: 360upx;
-    background-color: #fff;
+    width: 158px;
+    height: 158px;
+//     background-color: #fff;
     margin: 346upx auto 40upx;
-    image {
-      width: 317upx;
-      height: 317upx;
-      padding: 21upx;
-    }
+//     image {
+//       width: 317upx;
+//       height: 317upx;
+//       padding: 21upx;
+//     }
   }
   view.txt {
     font-size: 15px;

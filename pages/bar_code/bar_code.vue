@@ -85,6 +85,35 @@
 </script>
 
  -->
+ 
+ 
+ <template>
+ 	<view class="container">
+ 		<page-head :title="title"></page-head>
+ 		<view>
+ 			<qrcode :val="qrval" :size="qrsize" ref="qrcode"></qrcode>
+ 		</view>
+ 		<view class="uni-padding-wrap">
+ 			<view class="uni-title">请输入要生成的二维码内容</view>
+ 		</view>
+ 		<view class="uni-list">
+ 			<view class="uni-list-cell">
+ 				<input class="uni-input" placeholder="请输入要生成的二维码内容" :value="qrval" @input="bindClearInput" />
+ 				<view class="uni-icon uni-icon-clear" v-if="showClearIcon" @click="clearIcon"></view>
+ 			</view>
+ 		</view>
+ 		<view class="uni-padding-wrap uni-common-mt">
+ 			<view class="uni-title">设置二维码大小</view>
+ 		</view>
+ 		<view class="body-view">
+ 			<slider :value="qrsize" @change="sliderchange" min="50" max="500" show-value/>
+ 		</view>
+ 		<view class="uni-padding-wrap">
+ 			<view class="uni-btn-v uni-common-mt">
+ 				<button type="primary" @tap="creatQrcode">生成二维码</button>
+ 				<button type="warn" @tap="clearQrcode">清除二维码</button>
+ 			</view>
+ 		</view>
 
 
 <template>

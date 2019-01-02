@@ -15,8 +15,6 @@ const store = new Vuex.Store({
     userinfo: {},
     // 合约code
     hycode: '',
-    // 实名认证状态
-    realnstatus: '',
     loadingFlag: false,
     // 支付方式
     paylist: '',
@@ -58,9 +56,6 @@ const store = new Vuex.Store({
     },
     sethycode(state, data) {
       state.hycode = data
-    },
-    setrealnstatus(state, data) {
-      state.realnstatus = data
     },
     setpaylist(state, data) {
       state.paylist = data

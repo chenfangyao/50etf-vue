@@ -37,10 +37,15 @@ export default {
       showErr:false
     };
   },
-    computed: mapState(['isWhite','sid','username','mobile','realnstatus','userinfo']),
+	created(){
+		if(this.$validata(this.uName,0)==1 && this.$validata(this.pwd,1)==1){
+			this.verifyYes==true
+		}
+	},
+    computed: mapState(['isWhite','sid','username','mobile','userinfo']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
-      ...mapMutations(['setsid','setusername','setmobile','setrealnstatus','setuserinfo']),
+      ...mapMutations(['setsid','setusername','setmobile','setuserinfo']),
     go(i) {
       let url = ''
       switch (i) {
@@ -85,11 +90,8 @@ export default {
                 if (res.status == 1) {
                     this.verifyYes=true
                     this.setsid(res.data.sid)
-                    this.setrealnstatus(res.data.realn_status)
                     // #ifdef H5
-                    sessionStorage.setItem('etf_sid',res.data.sid)
-                    // 实名认证状态
-                    sessionStorage.setItem('realnstatus',res.data.realn_status)
+                    sessionStorage.setItem('etf_sid',res.data.sid)       
                     // #endif
                     // 获取用户信息
                     this.getuserinfo()
@@ -118,8 +120,6 @@ export default {
               // res为服务端返回数据的根对象
               console.log('用户信息', res)
               if(res.status){
-//                   this.setusername(res.data.user_name)
-//                   this.setmobile(res.data.mobile)
 									this.setuserinfo(res.data)
               }
           }).catch((err) => {

@@ -5,7 +5,7 @@
 			<image src="/static/indexTabImg/banner.png" />
 		</view>
 		<four-tips></four-tips>
-		<three-securities></three-securities>
+		<three-securities :commonstock='commonstock'></three-securities>
 		<view class="uni-flex newsViewTitle">
 			<text>资讯</text>
 			<text @click="getmoreart()">更多></text>
@@ -23,7 +23,10 @@ import fourTips from '@/components/indexSub/tips4.vue'
 export default {
   data() {
     return {
-      newsItem: []
+      newsItem: [],
+			timmer:'',
+			commonstock:'',
+			timestr:[],
     }
   },
   components: {
@@ -102,31 +105,6 @@ export default {
         alert(err)
       })
     },
-
-    // 获取指数信息
-    getmarkinfo() {
-      var options = {
-        url: '/stockStat/getCommonSelectStock', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
-        data: {
-          stockTradeMins: ''
-        },
-        context: '',
-        header: {
-          clienttype: 'web',
-          ver: 'v1.0',
-          sid: this.sid || ""
-        },
-      }
-      this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('指数信息', res)
-      }).catch((err) => {
-        // 请求失败的回调
-        alert(err)
-      })
-    },
     // 获取文章信息
     getartlelist() {
       var options = {
@@ -158,18 +136,50 @@ export default {
         fail: () => { },
         complete: () => { }
       });
-    }
+    },
+		// 获取50etf指数
+		getcommonselectstock(timestrs){
+			// var timesformate=new Date().format("hh:mm:sss");
+			var stockTradeMins=[{"stockCodeInternal":"1000001","tradeMins":timestrs[0]},
+           {"stockCodeInternal":"399001","tradeMins":timestrs[1]},
+           {"stockCodeInternal":"1000004","tradeMins":timestrs[2]}],
+				stockTradeMins=JSON.stringify(stockTradeMins)
+			var options = {
+				url: '/stockStat/getCommonSelectStock', //请求接口
+				method: 'POST', //请求方法全部大写，默认GET
+				data: {stockTradeMins:stockTradeMins},
+				header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				console.log('股票指数', res)
+				if(res.result){
+					this.timestr=[]
+					for(let i=0;i<res.ldata.length;i++){
+						this.timestr.push(res.ldata[i].tradeMins)
+					}
+				}
+				this.commonstock=res
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		}
 
   },
   created() {
-    // this.loginin()
-    // 获取指数信息,未确定接口
-    // this.getmarkinfo()
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
-    // this.loginout()
-  }
+		this.getcommonselectstock(['','',''])
+		this.timmer=setInterval(()=>{
+			this.getcommonselectstock(this.timestr)
+		},10000) 
+  },
+	 onUnload() {
+    clearInterval(this.timmer)
+    this.timmer = null
+  },
 }
 </script>
 <style lang="scss">
