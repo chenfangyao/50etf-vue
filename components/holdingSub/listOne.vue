@@ -1,41 +1,41 @@
 <template>
-<view>
-  <fenbi-pop v-if="showFenbiPop" @close-me='closePop'></fenbi-pop>
-  <view v-for='(item,i) in list' class="list1Item " @tap='popShow' hover-class='self-hover' :key="i">
-    <view class="line1 uni-flex">
-        <view >
+  <view>
+    <fenbi-pop v-if="showFenbiPop" :res-obj='listItem' @close-me='closePop'></fenbi-pop>
+    <view v-for='(item,i) in list' class="list1Item " @tap='popShow(i)' hover-class='self-hover' :key="i">
+      <view class="line1 uni-flex">
+        <view>
           <text class="nameTxt">{{item.stock_name}}</text>
           <text class="codeTxt">{{item.stock_code}}</text>
         </view>
         <view class="timeTxt" v-if="item.in_time">{{create_time[i]}}</view>
-    </view>
-    <view class="line2 uni-flex">
-      <view class='uni-flex leftPart fg1'>
-        <view class="uni-flex" :class="[tabI==1?'fg1':'w240']">
-          <view class="itemView" >
-            <text>{{tabI==0?'成交价：':'总市值：'}}</text>
-            <text>{{tabI==0?'市值：':'平均成交价：'}}</text>
-          </view>
-          <view class="itemView c1">
-            <text>{{item.market_value}}</text>
-            <text>{{item.royalty_money||item.market_value}}</text>
-          </view>
-        </view>
-        <view class=" uni-flex" v-if='tabI==0'>
-          <view class="itemView">
-            <text>延期费：</text>
-            <text>持仓：</text>
-          </view>
-          <view class="itemView c1">
-            <text>{{item.add_fee_money}}</text>
-            <text>{{item.enable_amount}}</text>
-          </view>
-        </view>
       </view>
-      <view class="moneyTxt" :class="{green:moneyColor[i]}">{{item.profit_money}}</view>
+      <view class="line2 uni-flex">
+        <view class='uni-flex leftPart fg1'>
+          <view class="uni-flex" :class="[tabI==1?'fg1':'w240']">
+            <view class="itemView">
+              <text>{{tabI==0?'成交价：':'总市值：'}}</text>
+              <text>{{tabI==0?'市值：':'平均成交价：'}}</text>
+            </view>
+            <view class="itemView c1">
+              <text>{{item.market_value}}</text>
+              <text>{{item.royalty_money||item.market_value}}</text>
+            </view>
+          </view>
+          <view class=" uni-flex" v-if='tabI==0'>
+            <view class="itemView">
+              <text>延期费：</text>
+              <text>持仓：</text>
+            </view>
+            <view class="itemView c1">
+              <text>{{item.add_fee_money}}</text>
+              <text>{{item.enable_amount}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="moneyTxt" :class="{green:moneyColor[i]}">{{item.profit_money}}</view>
+      </view>
     </view>
   </view>
-</view>
 </template>
 <script>
 import hebingPop from '@/components/holdingSub/hebingPop.vue'
@@ -55,28 +55,36 @@ export default {
       create_time: [],
       showHebingPop: false,
       showFenbiPop: false,
+      viewMask: null,
+      listItem: {}
     }
   },
   components: { hebingPop, fenbiPop },
   methods: {
-    popShow() {
-
+    popShow(i) {
+      console.log(this.list[i]);
+      this.listItem = this.list[i]
       this.showFenbiPop = true
+      //#ifdef APP-PLUS
+      this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.5)" });
+      this.viewMask.show()
+      //#endif
     },
     closePop() {
-
+      //#ifdef APP-PLUS
+      this.viewMask.close()
+      //#endif
       this.showFenbiPop = false
     }
   },
   watch: {
     list(val) {
       if (!val) return;
-      this.moneyColor=[]
+      this.moneyColor = []
       val.forEach((item, i) => {
         this.moneyColor.push(parseInt(item.profit_money) < 0)
         this.create_time.push(this.$formatetimestr(item.in_time))
       });
-      console.log(this.moneyColor);
     }
   },
 }

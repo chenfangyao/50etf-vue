@@ -3,10 +3,12 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap uni-flex">
-        <image src='/static/arrow/l.png' @tap="back" />
+        <view class="leftPart"  @tap="back" >
+          <image src='/static/arrow/l.png'/>
+        </view>
         <view class="tabOpen uni-flex" :class="{active:tabActive}">
-          <view  @tap='tapChange(false)'>开仓</view>
-          <view @tap='tapChange(true)'>平仓</view>
+          <view @tap='tapChange'>开仓</view>
+          <view @tap='tapChange'>平仓</view>
           <view class="slider">{{tabActive?'平仓':'开仓'}}</view>
         </view>
       </view>
@@ -33,8 +35,8 @@ export default {
         delta: 1
       });
     },
-    tapChange(val) {
-      this.$emit('change-close', val)
+    tapChange() {
+      this.$emit('change-close')
     }
   }
 }
@@ -52,22 +54,24 @@ view.h44 {
   z-index: 200;
   background-color: #fff;
   view.wrap {
+    view.leftPart {
+      padding: 13px 20upx 0 30upx;
+      height: 44px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      image {
+        width: 13px;
+        height: 15px;
+      }
+    }
     text-align: center;
     height: 44px;
     line-height: 44px;
     position: relative;
-    image {
-      width: 13px;
-      height: 15px;
-      align-self: center;
-      left: 20upx;
-      top: 50%;
-      transform: translateY(-50%);
-      position: absolute;
-    }
     view.tabOpen {
-      width: 352upx;
-      height: 54upx;
+      width: 176px;
+      height: 27px;
       border-radius: 13px;
       margin: 0 auto;
       align-self: center;
@@ -87,7 +91,7 @@ view.h44 {
       > view {
         flex-grow: 1;
         text-align: center;
-        line-height: 54upx;
+        line-height: 27px;
         font-size: 13px;
         color: #999;
       }

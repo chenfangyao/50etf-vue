@@ -6,11 +6,11 @@
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view  :style="'height:'+chartHeight+'px'" @tap='go'>
-      <mpvue-echarts  :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="m-canvas"/>
+    <view :style="'height:'+chartHeight+'px'" @tap='go'>
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" ref="mpEcharts" canvasId="m-canvas" />
     </view>
     <!-- #endif -->
-     <!-- #ifdef H5 -->
+    <!-- #ifdef H5 -->
     <view :style="'height:'+chartHeight+'px'" id="canvas1">k线图2</view>
     <!-- #endif -->
 
@@ -161,9 +161,8 @@ export default {
   methods: {
     go() {
       //#ifdef APP-PLUS
-      uni.navigateTo({
-        url: '/platforms/app-plus/fullscreen/fullscreen',
-      });
+      plus.screen.lockOrientation("landscape-primary");
+      uni.navigateTo({ url: '/pages/echarts/echarts' });
       //#endif
     },
     tapTab(e) { //点击tab-bar
@@ -179,7 +178,7 @@ export default {
       myChart.setOption(option);
     }
   },
-  props:['chartHeight'],
+  props: ['chartHeight'],
   mounted() {
     //#ifdef H5
     this.showH5Echarts()

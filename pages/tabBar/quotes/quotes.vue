@@ -4,13 +4,13 @@
     <stock-tip-bar></stock-tip-bar>
     <view class="uni-tab-bar">
       <view class="swiper-tab uni-flex">
-        <view v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2':id="tab.id" >
-          <text :class="[tabIndex==index ? 'active' : '']" @tap="tapTab" :data-current="index" >{{tab.tag_name}}({{tab.tag_expiry}})</text>
+        <view v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2' :id="tab.id">
+          <text :class="[tabIndex==index ? 'active' : '']" @tap="tapTab" :data-current="index">{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</text>
         </view>
       </view>
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
-        <futures-datas></futures-datas>
+        <futures-datas :quote-list='quoteList'></futures-datas>
         <!-- <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
         </view> -->
@@ -33,40 +33,38 @@ export default {
   data() {
     return {
       scrollLeft: 0,
-      isClickChange: false,
       tabIndex: 0,
-      resquestState: 0,
+      resquestState: 1,
       newsitems: [1, 2, 3, 4],
       quotationStr: '',//获取列表所需的拼接字符串
-      groupLabel: [{
-        tag_name: '1811(0)',
-        id: 'guanzhu'
-      }, {
-        tag_name: '1812(28)',
-        id: 'tuijian'
-      }, {
-        tag_name: '1903(131)',
-        id: 'tiyu'
-      }, {
-        tag_name: '1906(211)',
-        id: 'redian'
-      },
-      ],
+      groupLabel: [],
       codeList: [],
+      timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
     }
   },
   created() {
     this.getgroupLabel()
-    this.getartlelist()
+  },
+  onHide() {
+    clearInterval(this.timmer)
+    this.timmer = null
+  },
+  onShow() {
+     this.beginPolling()
   },
   methods: {
     loadMore(e) {
-      this.resquestState = 1
-      setTimeout(() => {
-        // this.addData(e);
-        this.resquestState = 0
-      }, 1200);
+      // this.resquestState = 1
+      // setTimeout(() => {
+      //   this.addData(e);
+      //   this.resquestState = 0
+      // }, 1200);
+    },
+    beginPolling() {
+      if(this.timmer===null){
+        this.timmer = setInterval(() => this.resquestState && this.getartlelist(), 1000)
+      }
     },
     getquoteList() {
       var options = {
@@ -78,8 +76,7 @@ export default {
         header: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }
       this.$httpReq(options).then((res) => {
-        // res为服务端返回数据的根对象
-        console.log('行情列表2', res)
+        this.resquestState = 1//请求状态
         this.quoteList = res.data.list
       }).catch((err) => {
         // 请求失败的回调
@@ -92,9 +89,31 @@ export default {
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        // res为服务端返回数据的根对象
-        console.log('合约列表2', res)
         this.groupLabel = res.data.list
+        this.getartlelist()
+        this.beginPolling()//启动轮询
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    },
+    // 获取stockCode
+    getartlelist() {
+      this.resquestState = 0
+      var options = {
+        url: '/fiftyEtf/list_stocks', //请求接口
+        method: 'GET', //请求方法全部大写，默认GET
+        data: {
+          page_index: 0,
+          page_size: 10000,
+          tag_id: this.groupLabel[this.tabIndex].id
+        },
+      }
+
+      this.$httpReq(options).then((res) => {
+        this.codeList = res.data.list
+        this.dealquotationStr()
+        this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
@@ -114,35 +133,17 @@ export default {
       if (this.tabIndex === e.target.dataset.current) {
         return false;
       } else {
-        this.isClickChange = true;
         this.tabIndex = e.target.dataset.current
+        this.getartlelist()
       }
     },
     dealquotationStr() {
+      this.quotationStr = ''
       this.codeList.forEach(item => {
         this.quotationStr += '?' + item.stock_code
       });
     },
-    // 获取合约列表
-    getartlelist() {
-      var options = {
-        url: '/fiftyEtf/list_stocks', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
-        data: {
-          page_index: 0,
-          page_size: 10000,
-        },
-      }
-      this.$httpReq(options).then((res) => {
-        console.log('合约列表', res)
-        this.codeList = res.data.list
-        this.dealquotationStr()
-        this.getquoteList()
-      }).catch((err) => {
-        // 请求失败的回调
-        console.log(err)
-      })
-    },
+
   }
 
 }

@@ -42,11 +42,12 @@ export default {
   data() {
     return {}
   },
+  props:['resObj'],
   methods: {
     ...mapMutations(['sethycode']),
     go(val) {
         this.sethycode(10001442)
-      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?val='+val+''})
+      uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC='+val+'&code='+this.resObj.stockCode})
 
     }
   }

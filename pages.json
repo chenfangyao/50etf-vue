@@ -72,7 +72,6 @@
         {
             "path" : "platforms/app-plus/fullscreen/fullscreen",
             "style" : {
-                "titleNView" : false,
                 "scrollIndicator" : "none"
             }
         },

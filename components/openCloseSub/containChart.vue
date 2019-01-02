@@ -2,8 +2,9 @@
   <view class="uni-flex wrap">
     <view class="info">
       <view class="line1">
-        <text>购12月2250</text>
-        <text>(10001493)</text>
+        <!-- <text>购12月2250</text> -->
+        <text>{{subCodeName}}</text>
+        <text>({{resObj.stockCode}})</text>
       </view>
       <view class="uni-flex line2">
         <view>{{newprices}}</view>
@@ -12,16 +13,16 @@
           <h6>-4.75%</h6>
         </view>
       </view>
-      
+
     </view>
-   <!-- #ifndef H5 -->
+    <!-- #ifndef H5 -->
     <view class="df_wh">
-        <mpvue-echarts  :echarts="echarts" :onInit="onInit" canvasId="canvas2"/>
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" canvasId="canvas2" />
     </view>
-  <!-- #endif -->
-  <!-- #ifdef H5 -->
-      <view class="df_wh" id="canvas2">缩略图</view>
-  <!-- #endif -->
+    <!-- #endif -->
+    <!-- #ifdef H5 -->
+    <view class="df_wh" id="canvas2">缩略图</view>
+    <!-- #endif -->
   </view>
 </template>
 <script>
@@ -75,6 +76,7 @@ export default {
   data() {
     return {
       echarts,
+      subCodeName: '',//处理子字符串
       onInit: initChart, //异步获取数据后，不能在回调中传该函数
       newprices: '0.2527'
     }
@@ -83,8 +85,18 @@ export default {
     showH5Echarts() {
       var myChart = echarts.init(document.getElementById('canvas2'));
       myChart.setOption(option);
+    },
+
+  },
+  watch: {
+    resObj: {
+      handler(val) {
+        this.subCodeName = val.stockName.substring(5)
+      },
+      deep: true
     }
   },
+  props: ['resObj'],
   mounted() {
     //#ifdef H5
     this.showH5Echarts()

@@ -1,29 +1,44 @@
 <template>
-<view>
-  <view class="uni-flex wrap" v-for="(item,i) in aa" @tap="go" hover-class="self-hover" :key="i">
-    <text class="txtred">7.09</text>
-    <text class="txtred">0.1881</text>
-    <view class="uni-flex">
-      <text class="gou">12</text>
-      <text class="midTxt">2.2000</text>
-      <text class="gou">{{i}}</text>
+  <view>
+    <view class="uni-flex wrap" v-for="(item,i) in quoteList_filter" @tap="go(item)" hover-class="self-hover" :key="i">
+      <text class="txtred">{{item.incr_percent}}</text>
+      <text class="txtred">{{item.buy_price1}}</text>
+      <view class="uni-flex">
+        <text class="gou">{{item.buy_amount1}}</text>
+        <text class="midTxt">{{item.last_price}}</text>
+        <text class="gou">{{item.sale_amount1}}</text>
+      </view>
+      <text class="txtgreen">{{item.sale_price1}}</text>
+      <text class="txtgreen">-9.65</text>
     </view>
-    <text class="txtgreen">0.0213</text>
-    <text class="txtgreen">-9.65</text>
   </view>
-</view>
 </template>
 <script>
+
 export default {
   data() {
     return {
-      aa: [, , , , , , , , , , , , , ,]
+      quoteList_filter: []
     }
   },
+  props: ['quoteList'],
   methods: {
-    go() {
+    go(obj) {
       uni.navigateTo({
-        url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing'
+        url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing?code='+obj.stock_code
+      });
+    }
+  },
+  watch: {
+    quoteList(val) {
+      this.quoteList_filter=[]
+      val.forEach(item => {
+        let obj = { ...item }
+        obj.last_price = Number(item.last_price).toFixed(4)
+        obj.incr_percent = Number(item.incr_percent).toFixed(4)
+        obj.sale_price1 = Number(item.sale_price1).toFixed(4)
+        obj.buy_price1 = Number(obj.buy_price1).toFixed(4)
+        this.quoteList_filter.push(obj)
       });
     }
   }
@@ -38,10 +53,9 @@ view.wrap {
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
   text {
-    font-size: 14px;
-    font-family: MicrosoftYaHei;
-    font-weight: 400;
+    font-size: 26upx;
     color: rgba(31, 31, 38, 1);
+    width: 51px;
   }
   text.txtred {
     color: #ec605e;
@@ -56,7 +70,8 @@ view.wrap {
     height: 100%;
     line-height: 70upx;
     padding: 0 23upx;
-    font-size: 13px;
+    font-size: 26upx;
+    width: 128upx;
     color: #333;
   }
   .gou {
@@ -67,7 +82,7 @@ view.wrap {
     padding: 4upx 6upx;
     // display: inline-block;
     align-self: center;
-    font-size: 14px;
+    font-size: 28upx;
     border-radius: 11upx;
     text-align: center;
   }

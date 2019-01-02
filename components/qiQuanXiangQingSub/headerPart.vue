@@ -4,10 +4,10 @@
     <view class="uni-flex">
       <view class="leftPart">
         <view class="leftTop uni-flex">
-          <view class="price">0.2527</view>
+          <view class="price">{{resObj.last_price}}</view>
           <view class="flexColumn">
-            <text>-0.00095</text>
-            <text>-4.75%</text>
+            <text>{{resObj.incr}}</text>
+            <text>{{resObj.incr_percent+'%'}}</text>
           </view>
         </view>
         <view class="leftBottom uni-flex">
@@ -32,11 +32,11 @@
         <view class="uni-flex rightBottom">
           <view>
             <text>成交量</text>
-            <text>1380</text>
+            <text>{{resObj.trade_volume}}</text>
           </view>
           <view>
             <text>持仓量</text>
-            <text>2850</text>
+            <text>{{resObj.open_interest}}</text>
           </view>
         </view>
       </view>
@@ -51,12 +51,14 @@
 </template>
 <script>
 import headerPartDetail from './headerPartDetail.vue'
+
 export default {
   data() {
     return {
       isshowDetail:true
     }
   },
+  props:['resObj'],
   components: { headerPartDetail },
   methods: {
     showPartDetail(){

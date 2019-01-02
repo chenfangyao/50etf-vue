@@ -12,7 +12,7 @@ const store = new Vuex.Store({
     sid: '',
     username: '',
     mobile: '',
-	userinfo:{},
+    userinfo: {},
     // 合约code
     hycode: '',
     // 实名认证状态
@@ -22,9 +22,9 @@ const store = new Vuex.Store({
     paylist: '',
     // 账户资金
     assets: '',
-    pingCItem:{},//平仓结算单条详情obj
-	// 充值页面银行卡信息
-	bankinfo:{}
+    pingCItem: {},//平仓结算单条详情obj
+    // 充值页面银行卡信息
+    bankinfo: {}
   },
   mutations: {
     login(state, provider) {
@@ -68,12 +68,12 @@ const store = new Vuex.Store({
     setassets(state, data) {
       state.assets = data
     },
-	setuserinfo(state,data){
-		state.userinfo=data
-	},
-	setbankinfo(state,data){
-		state.bankinfo=data
-	},
+    setuserinfo(state, data) {
+      state.userinfo = data
+    },
+    setbankinfo(state, data) {
+      state.bankinfo = data
+    },
   },
 })
 

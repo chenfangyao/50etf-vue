@@ -121,10 +121,10 @@
 	</view>
 </template>
 <script>
-	// import qrcode from '@/components/qrcode/qrcode.vue'
+	import qrcode from '@/components/qrcode/qrcode.vue'
 	// import QrcodeVue from 'qrcode'
 	import QrcodeVue from 'vue-qr'
-	import imageUrl from '@/static/assetsImg/recharge.png'
+	// import imageUrl from '@/static/assetsImg/recharge.png'
 	export default {
 		data() {
 			return {
@@ -134,8 +134,8 @@
 				qrval: '',
 				qrsize: 100,
 				codeValue: '565',
-				// imageUrl:'/static/assetsImg/recharge.png',//默认二维码中间图片
-				imageUrl, //默认二维码中间图片
+				// imageUrl,//默认二维码中间图片
+				imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg', //默认二维码中间图片
 			}
 		},
 		methods: {
@@ -165,7 +165,8 @@
 		},
 		components: {
 			QrcodeVue,
-			// VueQr
+      // VueQr
+      qrcode
 		}
 	}
 </script>

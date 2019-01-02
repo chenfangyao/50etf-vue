@@ -52,9 +52,9 @@ view.h44 {
       font-size: 15px;
       color: rgba(153, 153, 153, 1);
       line-height: 44px;
+      padding-bottom: 24upx;
     }
     text.now {
-      padding-bottom: 24upx;
       border-bottom: 4upx solid #409DE5;
       color: #409de5;
     }
