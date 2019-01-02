@@ -114,11 +114,7 @@
  				<button type="warn" @tap="clearQrcode">清除二维码</button>
  			</view>
  		</view>
- 		<qrcode-vue 
-           size="300" 
-           level="H" ref="qrcodes" 
-           :value="codeValue">
-       </qrcode-vue>
+
  	  <qrcode-vue :logoSrc="imageUrl" :text="codeValue" :logoScale="50" :size="300"></qrcode-vue>
  		<page-foot :name="name"></page-foot>
  	</view>
@@ -137,7 +133,7 @@
  				qrval:'',
  				qrsize:100,
  				codeValue:'565',
- 				// imageUrl:'/static/assetsImg/recharge.png',//默认二维码中间图片
+ 				// imageUrl:require('http://img5.duitang.com/uploads/item/201411/07/20141107164412_v284V.jpeg'),//默认二维码中间图片
  				imageUrl:require('../../static/assetsImg/recharge.png'),//默认二维码中间图片
  			}
  		},

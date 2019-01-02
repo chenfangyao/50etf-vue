@@ -37,6 +37,11 @@ export default {
       showErr:false
     };
   },
+	created(){
+		if(this.$validata(this.uName,0)==1 && this.$validata(this.pwd,1)==1){
+			this.verifyYes==true
+		}
+	},
     computed: mapState(['isWhite','sid','username','mobile','realnstatus','userinfo']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
