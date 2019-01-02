@@ -1,20 +1,22 @@
 <template>
-<view>
+  <view>
 
-  <view class="uni-flex container">
-    <view>总计：{{total}}笔</view>
-    <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png' />
+    <view class="uni-flex container">
+      <view>总计：{{total}}笔</view>
+      <view class="right" @tap="showDatepick">
+        <image src='/static/mineImg/datePicker.png' />
+      </view>
+    </view>
+    <date-pick v-if="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
+
   </view>
-  <date-pick v-if="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
-
-</view>
 </template>
 <script>
 import datePick from '@/components/datePick.vue'
 
 export default {
   components: { datePick },
-  props:['total'],
+  props: ['total'],
   data() {
     return {
       showPick: false
@@ -25,12 +27,12 @@ export default {
       this.$emit('begin-choose')
       this.showPick = true
     },
-    hidDatePick(){
+    hidDatePick() {
       this.$emit('end-choose')
       this.showPick = false
     },
     getTime(obj) {
-      this.$emit('select-complete',obj)
+      this.$emit('select-complete', obj)
       this.hidDatePick()
       console.log(obj);
     }
@@ -45,9 +47,13 @@ view.container {
   height: 88upx;
   color: rgba(153, 153, 153, 1);
   align-items: center;
-  image {
-    width: 45upx;
-    height: 45upx;
+  view.right {
+    height: 88upx;
+    padding: 21upx 0 0 40upx;
+    image {
+      width: 45upx;
+      height: 45upx;
+    }
   }
 }
 </style>

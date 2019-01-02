@@ -26,14 +26,18 @@ export default {
         return
       }
       // 判断实名认证状态实名认证状态。0=未提交，1=审核成功，2=审核中，3=审核失败"
-      let realnstatus;
-      //#ifndef H5
-      realnstatus = this.realnstatus || ""
-      // #endif
-      // #ifdef H5
-      realnstatus = sessionStorage.getItem('realnstatus') || ""
-      // #endif
-      uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+      let realnstatus=this.userinfo.realn_status;
+			console.log(33,this.userinfo)
+			if(realnstatus==0){
+				uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+			}else if(realnstatus==1){
+				uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=1' })
+			}else if(realnstatus==2){
+				uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=2' })
+			}else if(realnstatus==3){
+				uni.navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=3' })
+			}
+      
     }
   },
   computed: mapState(['sid', 'realnstatus','userinfo']),

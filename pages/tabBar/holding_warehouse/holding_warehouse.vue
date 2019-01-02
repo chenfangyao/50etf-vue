@@ -49,7 +49,6 @@ export default {
   methods: {
     tabTap(i) {
       this.tabI = i
-      console.log(i);
       this.titleList[i].list.length === 0 && this.getFenbiList(i)
     },
     loadMore(i) {
@@ -99,7 +98,7 @@ export default {
   },
   onShow() {
     this.getFenbiList(this.tabI)
-  }
+  },
 }
 </script>
 

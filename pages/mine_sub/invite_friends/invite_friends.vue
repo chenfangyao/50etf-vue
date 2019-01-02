@@ -4,8 +4,7 @@
 
     <image class="bg" src='/static/mineImg/inviteFriendBg.png'></image>
     <view class="QRcode">
-      <!-- <image src='/static/mineImg/QRcode.png'></image> -->
-			<qrcode-vue :logoSrc="imageUrl" :text="codeValue" margin='0' logoScale="100" size='158'   ></qrcode-vue>
+			<qrcode-vue :logoSrc="imageUrl" :text="codeValue" margin='0' logoScale='200' size='158'></qrcode-vue>
     </view>
 		
 
@@ -25,8 +24,9 @@ export default {
   data() {
     return {
        codeValue:'http://172.26.63.71:8083/h5/#/pages/register/register',
-       // imageUrl:require('http://img5.duitang.com/uploads/item/201411/07/20141107164412_v284V.jpeg'),//默认二维码中间图片
-       imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+       // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
+       // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+       imageUrl:'static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
   components: { 

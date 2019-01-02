@@ -21,14 +21,16 @@
           <text v-else>预估支付金额</text>
         </view>
         <view class="uni-flex">
-          <text>购11月2200</text>
-          <text>10001499</text>
+          <text>{{subCodeName}}</text>
+          <text>{{resObj.stockCode}}</text>
           <text class="c_red">0.2527</text>
           <text v-if="onClose">分笔</text>
           <text>5张</text>
           <text v-if="onClose">8张</text>
           <text v-else>11224.00</text>
-          <text>开仓<text class="c_red">{{50}}秒</text>未成单自动撤单</text>
+          <text>
+            <text>开仓</text>
+            <text class="c_red">{{50}}秒</text>未成单自动撤单</text>
           <text v-if="onClose">1399.00</text>
           <text v-else>2384.00</text>
         </view>
@@ -44,7 +46,8 @@
 export default {
   data() {
     return {
-      show: false
+      show: false,
+      subCodeName: ''
     }
   },
   methods: {
@@ -58,13 +61,16 @@ export default {
       })
     }
   },
-  props: ['onClose','holding'],
+  props: ['onClose', 'holding', 'resObj'],
   created() {
     setTimeout(
       () => { this.show = true }, 10
     )
   },
+  mounted() {
+    this.subCodeName = this.resObj.stockName.substring(5)
 
+  }
 }
 </script>
 

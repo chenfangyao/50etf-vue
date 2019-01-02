@@ -1,12 +1,12 @@
 <template>
   <section class="uni-flex">
-    <view v-for='(item,i) in stockList' :key="i" @tap='go'>
-      <h5>3409.4800</h5>
+    <view :class="!item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock.ldata' :key="i" @tap='go'>
+      <h5 >{{item.lowPrice}}</h5>
       <view>
-        <text>17.73</text>
-        <text>+0.66%</text>
+        <text>{{item.priceChange}}</text>
+        <text>{{item.priceChangeRate}}%</text>
       </view>
-      <h4>上证指数</h4>
+      <h4>{{item.stockName}}</h4>
     </view>
     
   </section>
@@ -15,14 +15,20 @@
 export default {
   data(){
     return{
-      stockList:[,,,]
+			type:true
     }
   },
+	props:['commonstock'],
   methods:{
     go(){
       uni.navigateTo({url:'/pages/stock_detail/stock_detail'})
     }
-  }
+  },
+	created(){
+// 		setTimeout(()=>{
+// 			console.log(333,this.commonstock)
+// 		},2000)	
+	}
 }
 </script>
 
@@ -36,7 +42,7 @@ section {
     line-height: 19px;
     font-family: ArialMT;
     font-weight: 700;
-    color: rgba(240, 95, 92, 1);
+    // color: rgba(240, 95, 92, 1);
     margin-bottom: 0;
   }
   > view {
@@ -44,7 +50,7 @@ section {
     font-size: 11px;
     font-family: ArialMT;
     font-weight: 400;
-    color: rgba(240, 95, 92, 1);
+    // color: rgba(240, 95, 92, 1);
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 5px 5px 0px rgba(245, 245, 245, 0.6);
     border-radius: 5px;
@@ -62,5 +68,11 @@ section {
     color: #666;
     margin-top: 0;
   }
+	view.redclass{
+		color: rgba(240, 95, 92, 1);
+	}
+	view.greenclass{
+		color:#3ABA8F;
+	}
 }
 </style>

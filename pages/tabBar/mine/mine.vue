@@ -14,7 +14,6 @@
         <text>银行卡</text>
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
-
       </view>
       <view class="uni-flex bb6" hover-class="self-hover" @tap="go('trading_rules/trading_rules')">
         <image src="/static/mineImg/03.png" />

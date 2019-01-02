@@ -14,6 +14,7 @@ Vue.prototype.$store = store
 function add0(m) {
   return m < 10 ? "0" + m : m;
 }
+
 Vue.prototype.$formatetimestr = function (str, onlyTime) {
   // return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
   if (str == 0) return 0;
@@ -31,6 +32,29 @@ Vue.prototype.$formatetimestr = function (str, onlyTime) {
     y + "-" + add0(m) + "-" + add0(d) + " " + add0(h) + ":" + add0(mm) + ":" + add0(s)
   );
 }
+Date.prototype.format = function (format) {
+    var o = {
+        "M+": this.getMonth() + 1, //month
+        "d+": this.getDate(), //day
+        "h+": this.getHours(), //hour
+        "m+": this.getMinutes(), //minute
+        "s+": this.getSeconds(), //second
+        "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+        "S": this.getMilliseconds() //millisecond
+    };
+
+    if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (o.hasOwnProperty(k)) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+            }
+        }
+    }
+    return format;
+};
 
 // 时间转时间戳
 Vue.prototype.$timestamp = function (str) {

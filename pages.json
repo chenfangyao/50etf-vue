@@ -72,7 +72,6 @@
         {
             "path" : "platforms/app-plus/fullscreen/fullscreen",
             "style" : {
-                "titleNView" : false,
                 "scrollIndicator" : "none"
             }
         },
@@ -324,6 +323,13 @@
         {
             "path" : "pages/bar_code/bar_code",
             "style" : {}
+        },
+        {
+            "path" : "pages/mine_sub/credentials_upload/tep4/tep4",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
     ],
     "tabBar" : {

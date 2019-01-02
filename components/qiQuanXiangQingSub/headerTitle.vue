@@ -1,29 +1,25 @@
 <template>
-<view>
-  <view class="wrap">
-
-    <view class="occupy"></view>
-    <view class="wrap2" >
-      <image src='/static/arrow/l.png' @tap="back"/>
-      <view>
-        <h4>{{name1}}</h4>
-        <h5>{{name2}}</h5>
+  <view>
+    <view class="wrap">
+      <view class="occupy"></view>
+      <view class="wrap2">
+        <view class="left" @tap="back">
+          <image src='/static/arrow/l.png' />
+        </view>
+        <view>
+          <h4>{{resObj.stockName}}</h4>
+          <h5>{{resObj.stockCode}}</h5>
+        </view>
       </view>
     </view>
-  </view>
-  <view class="h44"></view>
+    <view class="h44"></view>
   </view>
 </template>
 <script>
+
 export default {
-  props: {
-    name1: {
-      default: '50ETF购11月2250'
-    },
-    name2: {
-      default: '22336666'
-    }
-  },
+  props:['resObj'],
+  
   methods: {
     back() {
       uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
@@ -44,7 +40,7 @@ view.wrap {
   background-color: #fff;
   top: 0;
   z-index: 50;
-  .wrap2{
+  .wrap2 {
     height: 44px;
     padding-top: 12upx;
     position: relative;
@@ -56,14 +52,16 @@ view.wrap {
     flex-grow: 1;
     text-align: center;
   }
-  image {
-    width: 13px;
-    height: 15px;
-    align-self: center;
-    left: 20upx;
-    top: 50%;
-    transform: translateY(-50%);
+  view.left {
+    padding: 13px 20upx 0 30upx;
+    height: 44px;
     position: absolute;
+    left: 0;
+    top: 0;
+    image {
+      width: 13px;
+      height: 15px;
+    }
   }
   h4 {
     font-size: 15px;

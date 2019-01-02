@@ -3,10 +3,10 @@
     <view class="container">
       <view class="title uni-flex">
         <view>
-          <text class="nameTxt">购6月2450</text>
-          <text>1001409</text>
+          <text class="nameTxt">{{resObj.stock_name}}</text>
+          <text>{{resObj.stock_code}}</text>
         </view>
-        <view>2018-10-02 10:08:54</view>
+        <view>{{timeDeal}}</view>
       </view>
       <view class="infoView uni-flex">
         <view class="leftPart uni-flex">
@@ -35,7 +35,7 @@
           <view>91223021.00</view>
           <view>
             <text>延期：</text>
-            <text>10元</text>
+            <text>{{resObj.add_fee_money}}元</text>
           </view>
         </view>
       </view>
@@ -71,11 +71,11 @@
     </view>
     <view class="bottomTip uni-flex">
       <view>自动延期</view>
-      <view @tap='openPop(2)' >
-       <uni-icon type="checkmarkempty" size="17"  color='#409DE5'></uni-icon>
+      <view @tap='openPop(2)' class="iconWrap">
+        <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
       </view>
     </view>
-    <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle'> </ping-c-pop>
+    <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle' :res-obj='resObj'> </ping-c-pop>
     <extension-pop v-if="showPop2" @yes-tap='yesHandle(2)' @cancle-tap='yesHandle(2)'></extension-pop>
   </view>
 </template>
@@ -89,8 +89,10 @@ export default {
     return {
       showPop: false,
       showPop2: false,
+      timeDeal: ''
     }
   },
+  props: ['resObj'],
   components: { btnBlock, pingCPop, extensionPop, uniIcon },
   methods: {
     closeMe() {
@@ -129,6 +131,9 @@ export default {
       }
       this.showPop = false
     }
+  },
+  mounted() {
+    this.timeDeal =this.$formatetimestr(this.resObj.in_time)
   }
 }
 </script>
@@ -268,7 +273,12 @@ view.fixWrap {
       line-height: 80upx;
       color: rgba(255, 255, 255, 1);
     }
-    
+    view.iconWrap {
+      height: 40upx;
+      width: 40upx;
+      line-height: 0;
+      border: solid 1px #409de5;
+    }
   }
 }
 </style>
