@@ -11,9 +11,9 @@
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
         <futures-datas :quote-list='quoteList'></futures-datas>
-        <!-- <view class="uni-tab-bar-loading">
+        <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
-        </view> -->
+        </view>
       </scroll-view>
     </view>
   </view>
@@ -63,10 +63,12 @@ export default {
     },
     beginPolling() {
       if(this.timmer===null){
-        this.timmer = setInterval(() => this.resquestState && this.getartlelist(), 1000)
+        console.log('开启定时');
+       // this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {
+      this.resquestState = 0
       var options = {
         url: '/fiftyEtf/QryQuotationList', //请求接口
         method: 'POST', //请求方法全部大写，默认GET

@@ -39,7 +39,7 @@ view.h44 {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 50;
+  z-index: 5;
   background-color: #fff;
   view.wrap {
     text-align: center;

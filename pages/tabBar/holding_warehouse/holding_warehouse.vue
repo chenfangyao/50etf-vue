@@ -143,7 +143,13 @@ view.wrap {
     position: fixed;
     left: 0;
     right: 0;
+    /* #ifdef H5 */
+    top:45px;
+    /* #endif */
+    /* #ifndef H5 */
     top: calc(44px + var(--status-bar-height));
+    /* #endif */
+
     z-index: 20;
     background-color: #f5f5f5;
     // padding-bottom: 16upx;
