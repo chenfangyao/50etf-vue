@@ -78,7 +78,6 @@ export default {
       this.$httpReq(options).then((res) => {
         // 请求成功的回调
         // res为服务端返回数据的根对象
-        console.log('用户信息', res)
         if (res.status) {
           this.setusername(res.data.user_name)
           this.setmobile(res.data.mobile)
@@ -120,10 +119,6 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('文章列表', res)
-        // this.timeformates()
         this.newsItem = res.data.list
       }).catch((err) => {
         // 请求失败的回调
