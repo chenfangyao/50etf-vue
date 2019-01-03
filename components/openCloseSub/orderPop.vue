@@ -23,16 +23,16 @@
         <view class="uni-flex">
           <text>{{subCodeName}}</text>
           <text>{{resObj.stockCode}}</text>
-          <text class="c_red">0.2527</text>
+          <text class="c_red">{{newprice}}</text>
           <text v-if="onClose">分笔</text>
-          <text>5张</text>
+          <text>{{stockamunt}}张</text>
           <text v-if="onClose">8张</text>
-          <text v-else>11224.00</text>
+          <text v-else>{{assets.enable_money}}</text>
           <text>
             <text>开仓</text>
             <text class="c_red">{{50}}秒</text>未成单自动撤单</text>
           <text v-if="onClose">1399.00</text>
-          <text v-else>2384.00</text>
+          <text v-else>{{totalMoney}}</text>
         </view>
       </view>
       <view class="btn2 uni-flex">
@@ -43,6 +43,7 @@
   </view>
 </template>
 <script>
+import{ mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -50,6 +51,7 @@ export default {
       subCodeName: ''
     }
   },
+	computed: mapState(['assets','newprice','stockamunt']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
@@ -61,7 +63,7 @@ export default {
       })
     }
   },
-  props: ['onClose', 'holding', 'resObj'],
+  props: ['onClose', 'holding', 'resObj','totalMoney'],
   created() {
     setTimeout(
       () => { this.show = true }, 10

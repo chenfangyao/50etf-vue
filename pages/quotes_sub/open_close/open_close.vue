@@ -38,7 +38,8 @@ export default {
       hbfbswitch: false,
       fbnum: '',
       // cclist:{},
-      symbol: ''
+      symbol: '',
+			bussinesdata:'',
     };
   },
   computed: mapState(['sid', 'hycode']),
@@ -199,7 +200,6 @@ export default {
   onLoad(option) {
     this.symbol = option.code
     this.getartlelist()
-    // this.hycode=option.datas
     this.getdatainter = setInterval(() => {
       this.getartlelist()
     }, 50000)
@@ -214,7 +214,6 @@ export default {
       this.onClose = false
       return
     }
-    // option.val == 1 ? (this.onClose = true) : (this.onClose = false)
   }
 }
 </script>
