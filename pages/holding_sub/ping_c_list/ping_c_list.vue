@@ -126,7 +126,12 @@ export default {
 view.wrap {
   min-height: 100vh;
   .list2 {
+    /* #ifdef H5 */
+    height: calc(100vh - 176upx);
+    /* #endif */
+    /* #ifndef H5 */
     height: calc(100vh - 176upx - var(--status-bar-height));
+    /* #endif */
   }
   view.heightUp {
     height: 88upx;
@@ -135,7 +140,12 @@ view.wrap {
       background-color: #fff;
       left: 0;
       right: 0;
+      /* #ifndef H5 */
       top: calc(45px + var(--status-bar-height));
+      /* #endif */
+      /* #ifdef H5 */
+      top: 45px;
+      /* #endif */
       z-index: 20;
     }
   }

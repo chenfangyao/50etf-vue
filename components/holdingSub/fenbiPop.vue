@@ -1,5 +1,11 @@
 <template>
   <view class="fixWrap self-mask" @touchmove.prevent>
+    <view class="topTip uni-flex">
+      <view>自动延期</view>
+      <view @tap='openPop(2)' class="iconWrap">
+        <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
+      </view>
+    </view>
     <view class="container">
       <view class="title uni-flex">
         <view>
@@ -69,12 +75,7 @@
     <view class="closeIcom">
       <image src='/static/holdingImg/popClose.png' @tap='closeMe'></image>
     </view>
-    <view class="bottomTip uni-flex">
-      <view>自动延期</view>
-      <view @tap='openPop(2)' class="iconWrap">
-        <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
-      </view>
-    </view>
+    
     <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle' :res-obj='resObj'> </ping-c-pop>
     <extension-pop v-if="showPop2" @yes-tap='yesHandle(2)' @cancle-tap='yesHandle(2)'></extension-pop>
   </view>
@@ -100,16 +101,17 @@ export default {
     },
     go(i) {
       this.$emit('close-me')
+      let code=this.resObj.stock_code
       switch (i) {
         case 0:
         case 1:
           uni.navigateTo({ url: '/pages/holding_sub/full_and_lose/full_and_lose?isfull=' + i })
           break
         case 2:
-          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=0' })
+          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=0&code='+code })
           break
         case 3:
-          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1' })
+          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1&code='+code })
           break
         case 4:
           uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
@@ -140,7 +142,6 @@ export default {
 <style lang="scss" scoped>
 view.fixWrap {
   view.container {
-    margin-top: calc((100vh - 100%) / 2);
     background-color: #fff;
     padding: 0 35upx 50upx;
     view.title {
@@ -258,14 +259,11 @@ view.fixWrap {
       height: 72upx;
     }
   }
-  view.bottomTip {
-    position: absolute;
+  view.topTip {
     background-color: #000;
-    right: 0;
-    bottom: 0;
-    left: 0;
     height: 80upx;
     padding: 0 35upx;
+    margin-top: 45%;
     justify-content: space-between;
     align-items: center;
     > view {

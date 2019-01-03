@@ -25,8 +25,8 @@
 			</view>
 		</view>
     
-    <button @tap="handleClick">111</button>
-    <button @tap="handleClick2">2</button>
+    <!-- <button @tap="handleClick">111</button>
+    <button @tap="handleClick2">2</button> -->
 	</view>
 </template>
 
@@ -82,7 +82,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        alert(err)
+        console.error(err)
       })
     },
     handleClick() {

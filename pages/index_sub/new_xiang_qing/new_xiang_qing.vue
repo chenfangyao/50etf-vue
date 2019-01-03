@@ -63,7 +63,7 @@
 				this.update_time = res.data.update_time
 			}).catch((err) => {
 				// 请求失败的回调
-				alert(err)
+				console.error(err)
 			})
 		}
 	}

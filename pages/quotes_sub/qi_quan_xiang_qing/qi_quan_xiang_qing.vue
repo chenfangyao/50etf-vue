@@ -23,10 +23,10 @@ export default {
   components: {
     headerPart, headerTitle, kChart, btnBottom, miniTable
   },
-  data(){
-    return{
-      symbol:'',
-      detailObj:{}
+  data() {
+    return {
+      symbol: '',
+      detailObj: {}
     }
   },
   methods: {
@@ -43,17 +43,36 @@ export default {
         }
       }
       this.$httpReq(obj).then((res) => {
-        this.detailObj=res.data[0]
+        this.detailObj = res.data[0]
 
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
       })
+    },
+    getKchartData() {
+      var obj = {
+        url: '/fiftyEtf/QryMinuteLine', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: {
+          symbol: this.symbol,
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+      this.$httpReq(obj).then((res) => {
+
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err)
+      })
     }
   },
   onLoad(options) {
-    this.symbol=options.code
+    this.symbol = options.code
     this.getItem()
+    this.getKchartData()
   }
 }
 </script>

@@ -105,7 +105,7 @@ export default {
         console.log('用户信息', res)
       }).catch((err) => {
         // 请求失败的回调
-        alert(err)
+        console.error(err)
       })
     },
     // 获取文章信息
@@ -155,7 +155,6 @@ export default {
 			}
 			this.$httpReq(options).then((res) => {
 				// 请求成功的回调
-				console.log('股票指数', res)
 				if(res.result==1){
 					this.timestr=[]
 					// 第一次加载获取res对象
