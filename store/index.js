@@ -22,7 +22,11 @@ const store = new Vuex.Store({
     assets: '',
     pingCItem: {},//平仓结算单条详情obj
     // 充值页面银行卡信息
-    bankinfo: {}
+    bankinfo: {},
+		// 开/平仓页面合约价格
+		newprice:'',
+		// 开/平仓页面委托数量
+		stockamunt:''
   },
   mutations: {
     login(state, provider) {
@@ -69,6 +73,12 @@ const store = new Vuex.Store({
     setbankinfo(state, data) {
       state.bankinfo = data
     },
+		setnewprice(state,data){
+			state.newprice=data
+		},
+		setstockamunt(state,data){
+			state.stockamunt=data
+		},
   },
 })
 

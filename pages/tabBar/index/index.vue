@@ -24,9 +24,12 @@ export default {
   data() {
     return {
       newsItem: [],
-			timmer:'',
-			commonstock:'',
+			timmer:null,
+			commonstock:{},
 			timestr:[],
+			stock1:'',
+			stock2:'',
+			stock3:','
     }
   },
   components: {
@@ -75,7 +78,6 @@ export default {
       this.$httpReq(options).then((res) => {
         // 请求成功的回调
         // res为服务端返回数据的根对象
-        console.log('用户信息', res)
         if (res.status) {
           this.setusername(res.data.user_name)
           this.setmobile(res.data.mobile)
@@ -117,10 +119,6 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('文章列表', res)
-        // this.timeformates()
         this.newsItem = res.data.list
       }).catch((err) => {
         // 请求失败的回调
@@ -152,30 +150,44 @@ export default {
 			}
 			this.$httpReq(options).then((res) => {
 				// 请求成功的回调
-				if(res.result){
+				if(res.result==1){
 					this.timestr=[]
-					for(let i=0;i<res.ldata.length;i++){
-						this.timestr.push(res.ldata[i].tradeMins)
+					// 第一次加载获取res对象
+					if(timestrs[0]==''){
+						this.commonstock=res.ldata
+						for(let i=0;i<res.ldata.length;i++){
+												if(res.ldata[i].updated==true){
+													this.$set(this.timestr,i,res.ldata[i].tradeMins)
+												}
+											}
+					}else{
+						for(let i=0;i<res.ldata.length;i++){
+												if(res.ldata[i].updated==true){
+													this.$set(this.timestr,i,res.ldata[i].tradeMins)
+													this.$set(this.commonstock,i,res.ldata[i])
+												}
+											}
 					}
 				}
-				this.commonstock=res
 			}).catch((err) => {
 				// 请求失败的回调
 				console.log(err)
 			})
 		}
-
   },
   created() {
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
 		this.getcommonselectstock(['','',''])
-		this.timmer=setInterval(()=>{
-			this.getcommonselectstock(this.timestr)
-		},10000) 
+		if(this.timmer===null){
+			this.timmer=setInterval(()=>{
+				this.getcommonselectstock(this.timestr)
+			},10000)
+		}
   },
-	 onUnload() {
+	onHide() {
+    console.log(6666)
     clearInterval(this.timmer)
     this.timmer = null
   },

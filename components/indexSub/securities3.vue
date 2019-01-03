@@ -1,6 +1,6 @@
 <template>
   <section class="uni-flex">
-    <view :class="!item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock.ldata' :key="i" @tap='go'>
+    <view :class="!item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @tap='go'>
       <h5 >{{item.lowPrice}}</h5>
       <view>
         <text>{{item.priceChange}}</text>

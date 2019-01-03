@@ -37,9 +37,11 @@ export default function (obj) {
   }
   var p = new Promise((resolve, reject) => {
     uni.request({
+			//#ifdef H5
       url: obj.url,
+			//#endif
       //#ifndef H5
-      url: baseUrl + obj.url,
+      // url: baseUrl + obj.url,
       //#endif
       method: obj.method || 'GET',
       data: obj.data || {},

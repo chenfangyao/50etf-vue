@@ -65,6 +65,8 @@
 <script>
 import mpvuePicker from '@/components/mpvuePicker.vue';
 import uniIcon from "@/components/uni-icon.vue"
+import { mapState, mapMutations } from 'vuex';
+
 
 export default {
   props: {
@@ -100,6 +102,7 @@ export default {
     }
   },
   methods: {
+		...mapMutations(['setnewprice', 'setstockamunt']),
     // 合并分笔
     tapChange(val) {
       this.tabActive = val
@@ -122,30 +125,36 @@ export default {
           // 开仓
           if (!this.onClose) {
             this.pricevalue = this.qrysingle.buyPrice1
+						this.setnewprice(this.pricevalue)
           }
           // 平仓
           else {
             this.pricevalue = this.qrysingle.salePrice1
+						this.setnewprice(this.pricevalue)
           }
           break;
         case 1:
           // 开仓
           if (!this.onClose) {
             this.pricevalue = this.qrysingle.salePrice1
+						this.setnewprice(this.pricevalue)
           }
           // 平仓
           else {
             this.pricevalue = this.qrysingle.salePrice1
+						this.setnewprice(this.pricevalue)
           }
           break;
         case 2:
           // 开仓
           if (!this.onClose) {
             this.pricevalue = this.qrysingle.buyPrice1
+						this.setnewprice(this.pricevalue)
           }
           // 平仓
           else {
             this.pricevalue = this.qrysingle.salePrice1
+						this.setnewprice(this.pricevalue)
           }
           break;
       }
@@ -154,6 +163,7 @@ export default {
     // 滑块滑动事件
     slidering(e) {
       this.sliderVal = e.detail.value
+			this.setstockamunt(this.sliderVal)
       this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
     },
     sliders(e) {
@@ -172,6 +182,7 @@ export default {
       }
       this.sliderVal = parseInt(this.sliderVal)
       this.sliderVal += i
+			this.setstockamunt(this.sliderVal)
       this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
     },
     plusStep2(i) {
@@ -182,6 +193,7 @@ export default {
       }
       var val = Math.round(this.pricevalue * 10000)+Number(i)
       this.pricevalue = Number(val / 10000).toFixed(4)
+			this.setnewprice(this.pricevalue)
     },
 
     onCancel(e) {
