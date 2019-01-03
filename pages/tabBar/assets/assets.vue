@@ -82,7 +82,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        alert(err)
+        console.error(err)
       })
     },
     handleClick() {
