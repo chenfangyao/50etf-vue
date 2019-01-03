@@ -64,7 +64,7 @@ export default {
     beginPolling() {
       if(this.timmer===null){
         console.log('开启定时');
-       // this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+       this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {
