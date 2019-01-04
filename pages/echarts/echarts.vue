@@ -1,7 +1,7 @@
 <template>
   <view class="echarts-wrap">
     <!-- #ifndef H5 -->
-    <mpvue-echarts :echarts="echarts" :onInit="onInit" :aaa='aaa' canvasId="demo-canvas2" />
+    <mpvue-echarts :echarts="echarts" :onInit="onInit"  canvasId="demo-canvas2" />
     <!-- #endif -->
     <!-- #ifdef H5 -->
     <view>在h5环境显示此文本</view>
@@ -277,7 +277,6 @@ export default {
   data() {
     return {
       echarts,
-      aaa: 0,
       onInit: initChart, //异步获取数据后，不能在回调中传该函数
     }
   },

@@ -144,11 +144,9 @@ view.wrap {
       position: fixed;
       left: 0;
       right: 0;
+      top: 45px;
       /* #ifndef H5 */
       top: calc(45px + var(--status-bar-height));
-      /* #endif */
-      /* #ifdef H5 */
-      top: 45px;
       /* #endif */
 
       z-index: 20;

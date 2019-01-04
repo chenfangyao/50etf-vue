@@ -41,7 +41,7 @@ export default function (obj) {
       url: obj.url,
 			//#endif
       //#ifndef H5
-      // url: baseUrl + obj.url,
+      url: baseUrl + obj.url,
       //#endif
       method: obj.method || 'GET',
       data: obj.data || {},
@@ -51,7 +51,8 @@ export default function (obj) {
       success: res => {
         resolve(res.data)
       },
-      fail: () => {
+      fail: (res) => {
+        console.error('ajax错误：',res)
         reject()
       },
       complete() {
