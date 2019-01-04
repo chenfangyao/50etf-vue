@@ -24,14 +24,14 @@
           <text>{{subCodeName}}</text>
           <text>{{resObj.stockCode}}</text>
           <text class="c_red">{{newprice}}</text>
-          <text v-if="onClose">分笔</text>
+          <text v-if="onClose"><text v-if='entrusttype'>分笔</text><text v-if="!entrusttype">合并</text></text>
           <text>{{stockamunt}}张</text>
-          <text v-if="onClose">8张</text>
-          <text v-else>{{assets.enable_money}}</text>
+          <text v-if="onClose">{{maxbuy.enable_amount}}张</text>
+          <text v-else>{{enable_money}}</text>
           <text>
             <text>开仓</text>
             <text class="c_red">{{50}}秒</text>未成单自动撤单</text>
-          <text v-if="onClose">1399.00</text>
+          <text v-if="onClose">{{totalMoney}}</text>
           <text v-else>{{totalMoney}}</text>
         </view>
       </view>
@@ -48,23 +48,115 @@ export default {
   data() {
     return {
       show: false,
-      subCodeName: ''
+      subCodeName: '',
+	  enable_money:''
     }
   },
-	computed: mapState(['assets','newprice','stockamunt']),
+	computed: mapState(['newprice','stockamunt','enttype','entrusttype','maxbuy','fbccid']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
     },
     yesTap() {
       this.$emit('close-pop')
-      uni.navigateTo({
-        url: '/pages/quotes_sub/entrust_succ/entrust_succ'
-      })
-    }
+	  if(this.onClose){
+		 this.stocksell() 
+	  }else{
+		this.stockbuy()  
+	  }
+	  
+    },
+	 // 获取资金列表
+	getassets() {
+	  var options = {
+	    url: '/Sapi/User/asset', //请求接口
+	    method: 'GET', //请求方法全部大写，默认GET
+	  }
+	  this.$httpReq(options).then((res) => {
+	    if (res.status == 1) {
+		this.enable_money=res.data.enable_money
+	    }
+	  }).catch((err) => {
+	    // 请求失败的回调
+	    console.error(err)
+	  })
+	},
+	stockbuy(){
+			var options = {
+				url: '/Sapi/Stock/buy', //请求接口
+				method: 'POST', //请求方法全部大写，默认GET
+				data: {
+					code: parseInt(this.resObj.stockCode),
+                    price: this.newprice,
+                    amount: this.stockamunt,
+                    enttype: parseInt(this.enttype),
+                    is_pay_bean:0
+				},
+			}
+			this.$httpReq(options).then((res) => {
+				console.log('买入',res)
+				if(res.status){
+					uni.showToast({
+					title: res.info?res.info:'买入成功',
+					duration: 2000
+					});
+					uni.navigateTo({
+					  url: '/pages/quotes_sub/entrust_succ/entrust_succ'
+					})
+				}
+				else{
+					uni.showToast({
+                    title: res.info?res.info:'买入失败',
+                    duration: 2000
+                    });
+				}
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		},
+		stocksell(){
+			   let hid
+			   if(this.entrusttype){
+				 hid=parseInt(this.fbccid)  
+			   }
+				var options = {
+					url: '/Sapi/Stock/sell', //请求接口
+					method: 'POST', //请求方法全部大写，默认GET
+					data: {
+						code: parseInt(this.resObj.stockCode),
+		                price: this.newprice,
+		                amount: this.stockamunt,
+		                enttype: parseInt(this.enttype),
+		                hid:hid
+					},
+				}
+				this.$httpReq(options).then((res) => {
+					console.log('卖出',res)
+					if(res.status){
+						uni.showToast({
+						title: res.info?res.info:'卖出成功',
+						duration: 2000
+						});
+						uni.navigateTo({
+						  url: '/pages/quotes_sub/entrust_succ/entrust_succ'
+						})
+					}
+					else{
+						uni.showToast({
+		                title: res.info?res.info:'卖出失败',
+		                duration: 2000
+		                });
+					}
+				}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+				})
+			}
   },
   props: ['onClose', 'holding', 'resObj','totalMoney'],
   created() {
+	this.getassets()  
     setTimeout(
       () => { this.show = true }, 10
     )

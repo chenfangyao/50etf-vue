@@ -7,10 +7,10 @@
         <text>({{resObj.stockCode}})</text>
       </view>
       <view class="uni-flex line2">
-        <view>{{newprices}}</view>
+        <view>{{resObj.latestPrice}}</view>
         <view>
-          <h6>-0.00095</h6>
-          <h6>-4.75%</h6>
+          <h6>{{resObj.priceChange}}</h6>
+          <h6>{{resObj.priceChangeRate}}%</h6>
         </view>
       </view>
 

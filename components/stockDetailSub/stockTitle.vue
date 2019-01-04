@@ -1,9 +1,22 @@
 <template>
   <view class="uni-flex">
-    <text>上证50 1B0016.SH</text>
-    <text>交易中 11-30 10:16:32</text>
+    <!-- <text>上证50 1B0016.SH</text> -->
+    <text>{{commonstock[index].stockName}}  {{commonstock[index].stockCode}}</text>
+    <!-- <text>交易中 11-30 10:16:32</text> -->
   </view>
 </template>
+ <script>
+ 	import { mapState } from 'vuex';
+ 	
+ 	export default {
+ 	  data() {
+ 	    return {
+ 	    };
+ 	  },
+ 		computed: mapState(['commonstock']),
+ 	  props:['index'],
+ 	}
+ </script>
 <style lang="scss" scoped>
 view {
   justify-content: space-between;

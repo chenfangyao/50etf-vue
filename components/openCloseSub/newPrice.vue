@@ -24,9 +24,9 @@
         <view class=" commonStyle1">{{pricetitle}}</view>
         <view class="uni-flex line2">
         <view>
-            <image @tap="plusStep2(-1)" src='/static/openCloseImg/minus.png'></image>
+            <image v-if="btn3_i" @tap="plusStep2(-1)" src='/static/openCloseImg/minus.png'></image>
             <text class=" newPrice">{{pricevalue}}</text>
-            <image @tap="plusStep2(1)" src='/static/openCloseImg/plus.png'></image>
+            <image v-if="btn3_i" @tap="plusStep2(1)" src='/static/openCloseImg/plus.png'></image>
         </view>
 
             <view class="uni-flex btn3">
@@ -90,7 +90,8 @@ export default {
   data() {
     return {
       tabActive: false,
-      btn3Arr: ['最新价', '对手', '排队',],
+      // btn3Arr: ['最新价', '对手', '排队',],
+      btn3Arr: ['市价', '限价'],
       btn3_i: 0,
       sliderVal: 1,
       pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
@@ -102,10 +103,11 @@ export default {
     }
   },
   methods: {
-		...mapMutations(['setnewprice', 'setstockamunt']),
+		...mapMutations(['setnewprice', 'setstockamunt','setenttype','setentrusttype','setfbccid']),
     // 合并分笔
     tapChange(val) {
       this.tabActive = val
+	  this.setentrusttype(val)
       this.sliderVal = 1
       if (val == true) {
         var picktext = this.pickerText
@@ -120,44 +122,52 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      switch (i) {
-        case 0:
-          // 开仓
-          if (!this.onClose) {
-            this.pricevalue = this.qrysingle.buyPrice1
-						this.setnewprice(this.pricevalue)
-          }
-          // 平仓
-          else {
-            this.pricevalue = this.qrysingle.salePrice1
-						this.setnewprice(this.pricevalue)
-          }
-          break;
-        case 1:
-          // 开仓
-          if (!this.onClose) {
-            this.pricevalue = this.qrysingle.salePrice1
-						this.setnewprice(this.pricevalue)
-          }
-          // 平仓
-          else {
-            this.pricevalue = this.qrysingle.salePrice1
-						this.setnewprice(this.pricevalue)
-          }
-          break;
-        case 2:
-          // 开仓
-          if (!this.onClose) {
-            this.pricevalue = this.qrysingle.buyPrice1
-						this.setnewprice(this.pricevalue)
-          }
-          // 平仓
-          else {
-            this.pricevalue = this.qrysingle.salePrice1
-						this.setnewprice(this.pricevalue)
-          }
-          break;
-      }
+	  this.setenttype=i+1
+	  if(i==0){
+		  this.pricevalue = this.qrysingle.latestPrice
+	  }
+	  // 暂时注释
+//       switch (i) {
+// 		  // 最新价
+//         case 0:
+//           // 开仓
+//           if (!this.onClose) {
+//             this.pricevalue = this.qrysingle.buyPrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           // 平仓
+//           else {
+//             this.pricevalue = this.qrysingle.salePrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           break;
+// 		  // 对手价
+//         case 1:
+//           // 开仓
+//           if (!this.onClose) {
+//             this.pricevalue = this.qrysingle.salePrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           // 平仓
+//           else {
+//             this.pricevalue = this.qrysingle.salePrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           break;
+// 		  // 排队价
+//         case 2:
+//           // 开仓
+//           if (!this.onClose) {
+//             this.pricevalue = this.qrysingle.buyPrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           // 平仓
+//           else {
+//             this.pricevalue = this.qrysingle.salePrice1
+// 						this.setnewprice(this.pricevalue)
+//           }
+//           break;
+//       } 
       this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
     },
     // 滑块滑动事件
@@ -186,6 +196,10 @@ export default {
       this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
     },
     plusStep2(i) {
+		// 市价不允许修改
+		if(this.btn3_i==0){
+			return
+		}
       if (i == -1) {
         if (this.pricevalue == 0.0001) {
           return
@@ -193,14 +207,15 @@ export default {
       }
       var val = Math.round(this.pricevalue * 10000)+Number(i)
       this.pricevalue = Number(val / 10000).toFixed(4)
-			this.setnewprice(this.pricevalue)
+		this.setnewprice(this.pricevalue)
     },
 
     onCancel(e) {
       // console.log(e)
     },
     onConfirm(val) {
-      this.pickerText = '笔 ' + val.index + ' | ' + val.value + '张'
+		this.setfbccid(val.id[0])
+      this.pickerText = '笔 ' + (parseInt(val.index)+1) + ' | ' + val.value + '张'
       if (this.onClose) {
         this.maxprice.maxcounts = parseInt(val.value[0])
       }
@@ -217,7 +232,8 @@ export default {
   watch: {
     qrysingle(val) {
       if (val) {
-        this.pricevalue = this.qrysingle.buyPrice1
+        this.pricevalue = this.qrysingle.latestPrice
+		this.setnewprice(this.pricevalue)
       }
     },
     fbcclist(val) {
@@ -226,6 +242,8 @@ export default {
         this.hbcclength = this.hbcclist.length
         this.pickerValueArray = []
         this.pickerText = '0'
+		// 设置默认分笔持仓id
+		this.setfbccid(this.fbcclist[0]?this.fbcclist[0].id:'')
         if (this.fbcclist[0]) {
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
           for (var i = 0; i < this.fbcclist.length; i++) {
@@ -233,9 +251,9 @@ export default {
             pickobj.label = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
             pickobj.value = this.fbcclist[i].enable_amount
             pickobj.index = parseInt(i + 1)
+			pickobj.id = this.fbcclist[i].id
             this.pickerValueArray.push(pickobj)
           }
-          console.log('this.pickerValueArray', this.pickerValueArray)
         }
       }
     },
@@ -245,6 +263,7 @@ export default {
     }
   },
   created() {
+	  
   }
 }
 </script>

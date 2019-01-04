@@ -4,10 +4,10 @@
     <view class="uni-flex">
       <view class="leftPart">
         <view class="leftTop uni-flex">
-          <view class="price">{{resObj.last_price}}</view>
+          <view class="price">{{resObj.latestPrice}}</view>
           <view class="flexColumn">
-            <text>{{resObj.incr}}</text>
-            <text>{{resObj.incr_percent+'%'}}</text>
+            <text>{{resObj.priceChange}}</text>
+            <text>{{resObj.priceChangeRate+'%'}}</text>
           </view>
         </view>
         <view class="leftBottom uni-flex">
@@ -22,26 +22,26 @@
         <view class="uni-flex rightTop">
           <view>
             <text>今开</text>
-            <text>0.2032</text>
+            <text>{{resObj.openPrice}}</text>
           </view>
           <view>
             <text>昨收</text>
-            <text>0.2187</text>
+            <text>{{resObj.preclosePrice}}</text>
           </view>
         </view>
         <view class="uni-flex rightBottom">
           <view>
             <text>成交量</text>
-            <text>{{resObj.trade_volume}}</text>
+            <text>{{resObj.dealAmount}}</text>
           </view>
           <view>
             <text>持仓量</text>
-            <text>{{resObj.open_interest}}</text>
+            <text>{{resObj.openInterest}}</text>
           </view>
         </view>
       </view>
     </view>
-    <header-part-detail :isshowDetail="isshowDetail"></header-part-detail>
+    <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj'></header-part-detail>
     <view class="arrowImg" @tap="showPartDetail">
       <image v-show="isshowDetail" src="/static/arrow/b.png"></image>
       <image v-show="!isshowDetail" src="/static/arrow/t.png"></image>
@@ -64,7 +64,10 @@ export default {
     showPartDetail(){
       this.isshowDetail = !this.isshowDetail
     }
-  }
+  },
+	created(){
+		console.log(33,this.resObj)
+	}
 }
 </script>
 <style lang="scss" scoped>

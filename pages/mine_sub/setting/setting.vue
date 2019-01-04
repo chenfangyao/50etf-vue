@@ -40,7 +40,7 @@ export default {
 					// res为服务端返回数据的根对象
 					console.log(res)
 					if (res.status == 1) {
-						uni.navigateTo({ url:'/pages/login/login' })
+						uni.switchTab({ url:'/pages/tabBar/index/index' })
 					}else{
 					}
 			}).catch((err) => {

@@ -1,77 +1,95 @@
 <template>
-  <view class="Bigwrap">
-    <base-header :hasBack="true" title='资金流水'></base-header>
-    <view class="line1 uni-flex">
-      <text>此处放文案</text>
-      <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png' />
-    </view>
+    <view class="Bigwrap">
+        <base-header :hasBack="true" title='资金流水'></base-header>
+        <view class="line1 uni-flex">
+            <text>此处放文案</text>
+            <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png'/>
+        </view>
+        <scroll-view class='listscrow' lower-threshold='20' scroll-y @scrolltolower="loadMore">
+            <view class="listsContainer" v-for="(item,i) in monetlist" :key="i">
+                <view class="line1 uni-flex">
+                    <view>
+                        <text class="txt1">{{item.stock_name}}</text>
+                        <text class="txt2">{{item.stock_code}}</text>
+                    </view>
+                    <view class="timetxt">
+                        <text>{{$formatetimestr(item.create_time)}}</text>
+                        <!-- <text>14:52:11</text> -->
+                    </view>
+                </view>
+                <view class="line2">
+                    <view class="bigTxt">{{item.pay_money}}</view>
+                    <view class="uni-flex info">
+                        <view>
+                            <text class="infoName">手续费：</text>
+                            <text>{{item.fee_money}}</text>
+                        </view>
+                        <view>
+                            <text class="infoName">账户余额：</text>
+                            <text>{{item.bal_money}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <uni-load-more :loading-type="resquestState"></uni-load-more>
+        </scroll-view>
 
-    <view class="listsContainer" v-for="(item,i) in monetlist" :key="i">
-      <view class="line1 uni-flex">
-        <view>
-          <text class="txt1">{{item.stock_name}}</text>
-          <text class="txt2">{{item.stock_code}}</text>
-        </view>
-        <view class="timetxt">
-          <text>{{$formatetimestr(item.create_time)}}</text>
-          <!-- <text>14:52:11</text> -->
-        </view>
-      </view>
-      <view class="line2">
-        <view class="bigTxt">{{item.pay_money}}</view>
-        <view class="uni-flex info">
-          <view>
-            <text class="infoName">手续费：</text>
-            <text>{{item.fee_money}}</text>
-          </view>
-          <view>
-            <text class="infoName">账户余额：</text>
-            <text>{{item.bal_money}}</text>
-          </view>
-        </view>
-      </view>
+        <date-pick v-if="showPick" @select-complete='getTime'></date-pick>
     </view>
-    <date-pick v-if="showPick" @select-complete='getTime'></date-pick>
-  </view>
 </template>
 
 <script>
-import datePick from '@/components/datePick.vue'
+import datePick from '@/components/datePick.vue';
+import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
     return {
       showPick: false,
-      monetlist: []
+      monetlist: [],
+			pageindex:0,
+			resquestState: 0,
     }
   },
+	components: { uniLoadMore },
   methods: {
     showDatepick() {
       this.showPick = true
     },
+		loadMore(){
+			if (this.resquestState < 2) {
+			this.pageindex+=1
+			this.capicalflow(0, 0 , this.pageindex,'add')
+			}
+		},
     getTime(val) {
       this.showPick = false;
       var starttime = this.$timestamp(val.starttime)
       var endtime = this.$timestamp(val.endtime)
-      this.capicalflow(starttime, endtime)
+      this.capicalflow(starttime, endtime,0,'add')
     },
     // 资金流水
-    capicalflow(starttime, endtime) {
+    capicalflow(starttime, endtime ,index,add) {
+			this.resquestState = 1
       var options = {
         url: '/Sapi/Squery/list_funds', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         data: {
-          page_index: 0,
-          page_size: 15,
+          page_index: index,
+          page_size: 10,
           date_start: starttime,
           date_end: endtime
         },
-
-
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          this.monetlist = res.data.list
+					if(add){
+						this.monetlist = this.monetlist.concat(res.data.list)
+					}else{
+						this.monetlist=res.data.list
+					}
+
         }
+				this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
@@ -81,8 +99,16 @@ export default {
   components: {
     datePick
   },
+	onLoad(){
+		// uni.startPullDownRefresh();
+	},
+	onPullDownRefresh(){
+// 		setTimeout(()=>{
+// 			uni.stopPullDownRefresh();
+// 		},1000)
+	},
   onShow() {
-    this.capicalflow(0, 0)
+    this.capicalflow(0, 0 , 0)
   }
 }
 </script>
@@ -103,6 +129,9 @@ view.Bigwrap {
       height: 17px;
     }
   }
+	.listscrow{
+		height: 570px;
+	}
   view.listsContainer {
     background-color: #fff;
     margin: 12upx 0;

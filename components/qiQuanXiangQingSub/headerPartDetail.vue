@@ -3,11 +3,11 @@
     <view class="line1 uni-flex">
       <view>
         <text>最高</text>
-        <text>0.2129</text>
+        <text>{{resdata.highPrice}}</text>
       </view>
       <view>
         <text>最低</text>
-        <text>0.1868</text>
+        <text>{{resdata.lowPrice}}</text>
       </view>
       <view>
         <text>剩余天数</text>
@@ -41,6 +41,9 @@ export default {
     isshowDetail: {
       default: true,
     },
+		resdata:{
+			
+		}
   }
 }
 </script>

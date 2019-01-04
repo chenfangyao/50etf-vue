@@ -10,7 +10,7 @@
       <view class="heightUp" v-show="tabI!=3"></view>
       <view class="h60" v-show="tabI==2"></view>
     </view>
-    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']"  v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
+   <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']"  v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
       <list-one :tab-i='objI' :list='obj.list' v-if="objI<2"></list-one>
       <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2' ></list-two>
       <list-three :tab-i='objI' :list='obj.list' v-else ></list-three>

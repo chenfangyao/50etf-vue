@@ -23,10 +23,20 @@ const store = new Vuex.Store({
     pingCItem: {},//平仓结算单条详情obj
     // 充值页面银行卡信息
     bankinfo: {},
-		// 开/平仓页面合约价格
-		newprice:'',
-		// 开/平仓页面委托数量
-		stockamunt:''
+	// 开/平仓页面合约价格
+	newprice:'',
+	// 开/平仓页面委托数量
+	stockamunt:'1',
+	// 委托类型,默认为2
+	enttype:'2',
+	// 委托类型
+	entrusttype:false,
+	// 个人持仓信息
+	maxbuy:{},
+	// 分笔持仓id
+	fbccid:'',
+	// 首页股票信息
+	commonstock:[],
   },
   mutations: {
     login(state, provider) {
@@ -73,12 +83,27 @@ const store = new Vuex.Store({
     setbankinfo(state, data) {
       state.bankinfo = data
     },
-		setnewprice(state,data){
+	setnewprice(state,data){
 			state.newprice=data
 		},
-		setstockamunt(state,data){
+	setstockamunt(state,data){
 			state.stockamunt=data
 		},
+	setenttype(state,data){
+		    state.enttype=data
+	},
+	setentrusttype(state,data){
+		    state.entrusttype=data
+	},
+	setmaxbuy(state,data){
+		    state.maxbuy=data
+	},
+	setfbccid(state,data){
+		    state.fbccid=data
+	},
+	setcommonstock(state,data){
+		   state.commonstock=data
+	}
   },
 })
 

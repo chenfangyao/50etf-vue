@@ -246,7 +246,8 @@
                 let pickObj = {
                     index: this.pickerValue,
                     value: this._getPickerLabelAndValue(this.pickerValue, this.mode).value,
-                    label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label
+                    label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label,
+					id:this._getPickerLabelAndValue(this.pickerValue, this.mode).id,
                 };
                 console.log(pickObj)
                 this.$emit('onConfirm', pickObj);
@@ -335,10 +336,12 @@
             _getPickerLabelAndValue(value, mode) {
                 let pickerLable;
                 let pickerGetValue = [];
+				let id=[]
                 // selector
                 if (mode === 'selector') {
                     pickerLable = this.pickerValueSingleArray[value].label;
                     pickerGetValue.push(this.pickerValueSingleArray[value].value);
+                    id.push(this.pickerValueSingleArray[value].id);
                 } else if (mode === 'timeSelector') {
                     pickerLable = `${this.pickerValueHour[value[0]].label}-${this.pickerValueMinute[value[1]].label}`;
                     pickerGetValue.push(this.pickerValueHour[value[0]].value);
@@ -371,7 +374,8 @@
                 }
                 return {
                     label: pickerLable,
-                    value: pickerGetValue
+                    value: pickerGetValue,
+					id:id,
                 };
             },
             // 初始化 pickerValue 默认值

@@ -1,7 +1,7 @@
 <template>
   <section class="uni-flex">
-    <view :class="!item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @tap='go'>
-      <h5 >{{item.lowPrice}}</h5>
+    <view :class="item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @tap='go(i)'>
+      <h5 >{{item.latestPrice}}</h5>
       <view>
         <text>{{item.priceChange}}</text>
         <text>{{item.priceChangeRate}}%</text>
@@ -12,6 +12,7 @@
   </section>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 export default {
   data(){
     return{
@@ -20,8 +21,10 @@ export default {
   },
 	props:['commonstock'],
   methods:{
-    go(){
-      uni.navigateTo({url:'/pages/stock_detail/stock_detail'})
+		 ...mapMutations(['setcommonstock']),
+    go(i){
+			this.setcommonstock(this.commonstock)
+      uni.navigateTo({url:'/pages/stock_detail/stock_detail?index='+i+''})
     }
   },
 	created(){

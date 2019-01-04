@@ -93,6 +93,7 @@
             "style" : {
                 "titleNView" : false,
                 "scrollIndicator" : "none"
+                // "enablePullDownRefresh" : true
             }
         },
         {
@@ -326,9 +327,9 @@
         {
             "path" : "pages/mine_sub/credentials_upload/tep4/tep4",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
         }
     ],
     "tabBar" : {

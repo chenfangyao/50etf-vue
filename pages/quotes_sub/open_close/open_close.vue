@@ -30,7 +30,7 @@ export default {
       onClose: false,
       maxbuy: {},
       feemoney: '',
-      getdatainter: null,
+      timmer: null,
       // hycode:'',
       hbcclist: [],
       fbcclist: [],
@@ -39,7 +39,7 @@ export default {
       fbnum: '',
       // cclist:{},
       symbol: '',
-			bussinesdata:'',
+		bussinesdata:'',
     };
   },
   computed: mapState(['sid', 'hycode']),
@@ -52,6 +52,7 @@ export default {
     bottomBtn
   },
   methods: {
+	...mapMutations(['setmaxbuy']),
     // 合并、分笔
     hbfbSwitch(val) {
       this.hbfbswitch = val.val
@@ -74,11 +75,9 @@ export default {
         }
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('买入卖出详细', res)
         if (res.status) {
           this.QuotationMsg = res.data[0]
+		  this.getmaxbuy(this.hycode, this.QuotationMsg.latestPrice, 1)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -107,10 +106,9 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        console.log('最大可买数量', res)
         if (res.status) {
           this.maxbuy = res.data
+		  this.setmaxbuy(res.data)
           // 开仓
           if (!this.onClose) {
             this.maxbuy.maxcounts = parseInt(this.maxbuy.maxcount)
@@ -126,14 +124,15 @@ export default {
               this.maxbuy.maxcounts = this.fbnum
             }
           }
-          var djmoney = parseInt(parseInt(amounts) * parseFloat(prices) * 10000)
+		  var hycsnum=res.data.volume_multiple
+          var djmoney = parseFloat(parseInt(amounts) * parseFloat(prices) * hycsnum)
           this.feemoney = {
             feemoney: res.data.fee_money,
-            djmoney: djmoney,
+            djmoney: djmoney.toFixed(2),
             own_amount: res.data.own_amount,
             enable_amount: res.data.enable_amount
           }
-          this.totalmoney = djmoney + parseInt(res.data.fee_money)
+          this.totalmoney = (djmoney + parseFloat(res.data.fee_money)).toFixed(2)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -190,20 +189,22 @@ export default {
       // 合并持仓分笔持仓
       this.getfbchic()
       this.gethbchic()
-      this.getmaxbuy(this.hycode, 0.0115, 1)
+      this.getmaxbuy(this.hycode, this.QuotationMsg.latestPrice, 1)
     }
   },
   onUnload() {
     clearInterval(this.getdatainter)
-    this.getdatainter = null
+    this.timmer = null
   },
   onLoad(option) {
     this.symbol = option.code
     this.getartlelist()
-    this.getdatainter = setInterval(() => {
-      this.getartlelist()
-    }, 50000)
-    this.getmaxbuy(this.hycode, 0.0115, 1)
+      if(this.timmer===null){
+          this.timmer = setInterval(() => {
+              this.getartlelist()
+          }, 50000)
+      }
+
     // 合并持仓分笔持仓
     this.getfbchic()
     this.gethbchic()
@@ -214,7 +215,7 @@ export default {
       this.onClose = false
       return
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

@@ -8,7 +8,7 @@
     </view>
 		
 
-    <view class="txt">http://wxv.zjkj888.cn/m/register/100</view>
+    <view class="txt">{{codeValue}}/100</view>
 
     <view class="btn">
       <btn-block txt='复制' @v-tap='copy'></btn-block>
@@ -23,10 +23,10 @@ import QrcodeVue from 'vue-qr'
 export default {
   data() {
     return {
-       codeValue:'http://172.26.63.71:8083/h5/#/pages/register/register',
+       codeValue:'http://50etfvue.com:1688/h5#/pages/register/register',
        // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
        // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
-       imageUrl:'static/loginResgImg/logo.png',//默认二维码中间图片
+       imageUrl:'h5/static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
   components: { 
