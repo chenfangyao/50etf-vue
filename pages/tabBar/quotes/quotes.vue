@@ -11,9 +11,9 @@
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
         <futures-datas :quote-list='quoteList'></futures-datas>
-        <view class="uni-tab-bar-loading">
+        <!-- <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
-        </view>
+        </view> -->
       </scroll-view>
     </view>
   </view>
@@ -64,7 +64,7 @@ export default {
     beginPolling() {
       if(this.timmer===null){
         console.log('开启定时');
-       // this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+       this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {
@@ -94,9 +94,6 @@ export default {
         this.groupLabel = res.data.list
         this.getartlelist()
         this.beginPolling()//启动轮询
-      }).catch((err) => {
-        // 请求失败的回调
-        console.log(err)
       })
     },
     // 获取stockCode
