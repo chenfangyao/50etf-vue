@@ -1,79 +1,81 @@
 <template>
   <view class="fixWrap self-mask" @touchmove.prevent>
-    <view class="topTip uni-flex">
-      <view>自动延期</view>
-      <view @tap='openPop(2)' class="iconWrap">
-        <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
-      </view>
-    </view>
-    <view class="container">
-      <view class="title uni-flex">
-        <view>
-          <text class="nameTxt">{{resObj.stock_name}}</text>
-          <text>{{resObj.stock_code}}</text>
+    <view class="subWrap">
+      <view class="topTip uni-flex">
+        <view>自动延期</view>
+        <view @tap='openPop(2)' class="iconWrap">
+          <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
         </view>
-        <view>{{timeDeal}}</view>
       </view>
-      <view class="infoView uni-flex">
-        <view class="leftPart uni-flex">
-          <view class="uni-flex left1">
-            <view class="uni-flex uni-column">
-              <text>成交价：</text>
-              <text>延期费：</text>
-            </view>
-            <view class="uni-flex uni-column">
-              <text>12314</text>
-              <text>未开启</text>
-            </view>
-          </view>
-          <view class="uni-flex">
-            <view class="uni-flex uni-column">
-              <text>市值：</text>
-              <text>持仓：</text>
-            </view>
-            <view class="uni-flex uni-column">
-              <text>12314</text>
-              <text>12</text>
-            </view>
-          </view>
-        </view>
-        <view class="rightPart">
-          <view>91223021.00</view>
+      <view class="container">
+        <view class="title uni-flex">
           <view>
-            <text>延期：</text>
-            <text>{{resObj.add_fee_money}}元</text>
+            <text class="nameTxt">{{resObj.stock_name}}</text>
+            <text>{{resObj.stock_code}}</text>
+          </view>
+          <view>{{timeDeal}}</view>
+        </view>
+        <view class="infoView uni-flex">
+          <view class="leftPart uni-flex">
+            <view class="uni-flex left1">
+              <view class="uni-flex uni-column">
+                <text>成交价：</text>
+                <text>延期费：</text>
+              </view>
+              <view class="uni-flex uni-column">
+                <text>12314</text>
+                <text>未开启</text>
+              </view>
+            </view>
+            <view class="uni-flex">
+              <view class="uni-flex uni-column">
+                <text>市值：</text>
+                <text>持仓：</text>
+              </view>
+              <view class="uni-flex uni-column">
+                <text>12314</text>
+                <text>12</text>
+              </view>
+            </view>
+          </view>
+          <view class="rightPart">
+            <view>91223021.00</view>
+            <view>
+              <text>延期：</text>
+              <text>{{resObj.add_fee_money}}元</text>
+            </view>
           </view>
         </view>
-      </view>
-      <view class="btn2 uni-flex">
-        <view class="uni-flex full " hover-class='self-hover' @tap='go(1)'>
-          <view class="uni-flex uni-column">
-            <text>止盈</text>
-            <text>0.0214</text>
+        <view class="btn2 uni-flex">
+          <view class="uni-flex full " hover-class='self-hover' @tap='go(1)'>
+            <view class="uni-flex uni-column">
+              <text>止盈</text>
+              <text>0.0214</text>
+            </view>
+            <view>
+              <image src='/static/holdingImg/setIcon.png'></image>
+            </view>
           </view>
-          <view>
-            <image src='/static/holdingImg/setIcon.png'></image>
+          <view class="uni-flex lose" hover-class='self-hover' @tap='go(0)'>
+            <view class="uni-flex uni-column">
+              <text>止损</text>
+              <text>0.0214</text>
+            </view>
+            <view>
+              <image src='/static/holdingImg/setIcon.png'></image>
+            </view>
           </view>
         </view>
-        <view class="uni-flex lose" hover-class='self-hover' @tap='go(0)'>
-          <view class="uni-flex uni-column">
-            <text>止损</text>
-            <text>0.0214</text>
-          </view>
-          <view>
-            <image src='/static/holdingImg/setIcon.png'></image>
-          </view>
+        <view class="btn3 uni-flex">
+          <view @tap='go(2)'>开仓</view>
+          <view class="pingC" @tap='go(3)'>平仓</view>
+          <view @tap='go(4)'>行情</view>
         </view>
+        <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
       </view>
-      <view class="btn3 uni-flex">
-        <view @tap='go(2)'>开仓</view>
-        <view class="pingC" @tap='go(3)'>平仓</view>
-        <view @tap='go(4)'>行情</view>
+      <view class="closeIcom">
+        <image src='/static/holdingImg/popClose.png' @tap='closeMe'></image>
       </view>
-      <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
-    </view>
-    <view class="closeIcom">
-      <image src='/static/holdingImg/popClose.png' @tap='closeMe'></image>
     </view>
     
     <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle' :res-obj='resObj'> </ping-c-pop>
@@ -101,17 +103,17 @@ export default {
     },
     go(i) {
       this.$emit('close-me')
-      let code=this.resObj.stock_code
+      let code = this.resObj.stock_code
       switch (i) {
         case 0:
         case 1:
           uni.navigateTo({ url: '/pages/holding_sub/full_and_lose/full_and_lose?isfull=' + i })
           break
         case 2:
-          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=0&code='+code })
+          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=0&code=' + code })
           break
         case 3:
-          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1&code='+code })
+          uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1&code=' + code })
           break
         case 4:
           uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
@@ -135,12 +137,17 @@ export default {
     }
   },
   mounted() {
-    this.timeDeal =this.$formatetimestr(this.resObj.in_time)
+    this.timeDeal = this.$formatetimestr(this.resObj.in_time)
   }
 }
 </script>
 <style lang="scss" scoped>
 view.fixWrap {
+  top: 75px;
+  /* #ifndef H5 */
+  top: calc(75px + var(--status-bar-height));
+  /* #endif */
+
   view.container {
     background-color: #fff;
     padding: 0 35upx 50upx;
@@ -263,7 +270,11 @@ view.fixWrap {
     background-color: #000;
     height: 80upx;
     padding: 0 35upx;
-    margin-top: 45%;
+    margin-top: calc(33% - 75px);
+    /* #ifndef H5 */
+    margin-top: calc(33% - 75px - var(--status-bar-height));
+    /* #endif */
+
     justify-content: space-between;
     align-items: center;
     > view {

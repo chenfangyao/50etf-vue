@@ -53,16 +53,6 @@ export var commonOption = {
   itemStyle: { color: '#7fbe9e' },
 
 }
-
-export function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-  chart.setOption(option);
-  return chart; // 返回 chart 后可以自动绑定触摸操作
-}
 export var optionK = {
   ...commonOption,
   legend: {
@@ -72,16 +62,20 @@ export var optionK = {
     {
       left: 0,
       right: 0,
-      top: 5,
-      bottom: 130,
+      top: 10,
+      bottom: 100,
     },
     {
       left: 0,
       right: 0,
-      top: 228,
+      top: 214,
       bottom: 0
     },
   ],
+  title: {
+    text: '',
+    left: 0
+  },
   series: [
     {
       name: 'K',
@@ -108,7 +102,8 @@ export var optionK = {
       smooth: true,
       lineStyle: {
         normal: { opacity: 0.5 }
-      }
+      },
+      itemStyle: { color: '#ec605e' }
     },
     {
       name: 'MA10',
@@ -118,6 +113,7 @@ export var optionK = {
       xAxisIndex: 0,
       yAxisIndex: 0,
       smooth: true,
+      itemStyle: { color: '#3aba8f' },
       lineStyle: {
         normal: { opacity: 0.5 }
       }
@@ -129,6 +125,7 @@ export var optionK = {
       data: [],
       xAxisIndex: 0,
       yAxisIndex: 0,
+      itemStyle: { color: '#409de5' },
       smooth: true,
       lineStyle: {
         normal: { opacity: 0.5 }
@@ -142,6 +139,7 @@ export var optionK = {
       yAxisIndex: 0,
       data: [],
       smooth: true,
+      itemStyle: { color: '#e6aa12' },
       lineStyle: {
         normal: { opacity: 0.5 }
       }
@@ -237,3 +235,4 @@ export var option = {
 
   ]
 };
+

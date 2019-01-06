@@ -7,10 +7,10 @@
     </view>
     <!-- #ifndef H5 -->
     <view class="h278" v-show="tabIndex==0"  @tap='go'>
-      <mpvue-echarts :echarts="echarts"  :onInit="onInit" canvasId="m-canvas" />
+      <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad  :onInit="onInit" canvasId="m-canvas" />
     </view>
     <view class="h358" v-show="tabIndex!=0">
-      <!-- <mpvue-echarts :echarts="echarts"  :onInit="onInit2" canvasId="m-canvas2" /> -->
+      <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad  :onInit="onInit2" canvasId="m-canvas2" />
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
@@ -23,12 +23,32 @@
 <script>
 import echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
-let chart = null;//Appecharts实例
-var h5Chart = null;//h5echarts实例
-let chartK = null;//Appecharts实例K线图
-var h5ChartK = null;//h5echarts实例K线图
-import { commonOption, option, optionK, initChart } from './EchartOption.js'
+import { commonOption, option, optionK } from './EchartOption.js'
+let chart = null;//AppEcharts实例
+let chartK = null;//AppEcharts实例K线图
 
+
+function initChart(canvas, width, height) {
+
+  chart = echarts.init(canvas, null, {
+    width: width,
+    height: height
+  });
+  canvas.setChart(chart);
+  chart.setOption(option);
+  return chart; // 返回 chart 后可以自动绑定触摸操作
+}
+function initChartK(canvas, width, height) {
+  chartK = echarts.init(canvas, null, {
+    width: width,
+    height: height
+  });
+  canvas.setChart(chartK);
+  chartK.setOption(optionK);
+  return chartK; // 返回 chartK 后可以自动绑定触摸操作
+}
+var h5Chart = null;//h5echarts实例
+var h5ChartK = null;//h5echarts实例K线图
 
 export default {
   components: { mpvueEcharts },
@@ -38,21 +58,21 @@ export default {
       echarts,
       resquestState: 1,//为1时可发请求
       onInit: initChart,
-      // onInit2: initChart(chartK),
+      onInit2: initChartK,
+      checkTimmer: null,//监听mpvue-echart 加载完事件
+      timmer1: null,//分时线定时器
+      timmer2: null,//1分线定时器
+      timmer3: null,//5分线定时器
       fenshiData: [],//分时图总数据
       topTabs: [
         {
           name: '分时',
-          timmer: null
         }, {
           name: '日K',
-          timmer: null
         }, {
           name: '1分',
-          timmer: null
         }, {
           name: '5分',
-          timmer: null
         },
       ],
     }
@@ -60,27 +80,51 @@ export default {
   methods: {
     go() {
       //#ifdef APP-PLUS
-      plus.screen.lockOrientation("landscape-primary");
-      uni.navigateTo({ url: '/pages/echarts/echarts' });
+      // plus.screen.lockOrientation("landscape-primary");
+      // uni.navigateTo({ url: '/pages/echarts/echarts' });
       //#endif
     },
+    checkOready(i, obj) {
+      this.checkTimmer = setInterval(() => {
+        var el = i == 1 ? chart : chartK
+        if (el !== null) {
+          el.setOption(obj)
+          clearInterval(this.checkTimmer)
+        }
+      }, 10)
+    },
     tapTab(e) { //点击tab-bar
-      if (this.tabIndex === e.target.dataset.current) {
-        return false;
-      } else {
-        this.tabIndex = e.target.dataset.current
-        this.$emit('change-i', this.tabIndex)
+      if (this.tabIndex === e.target.dataset.current) return false;
+      this.tabIndex = e.target.dataset.current
+      this.$emit('change-i', this.tabIndex)
+      let j = 1
+      switch (Number(this.tabIndex)) {
+        case 1: j = 4
+          break
+        case 2: j = 1
+          break
+        case 3: j = 2
+          break
+      }
+      //#ifdef H5
+      if (!h5ChartK) {
         setTimeout(() => {
           h5ChartK = echarts.init(document.getElementById('canvas2'));
           h5ChartK.setOption(optionK)
         }, 0)
-        this.getDayK()
       }
+      //#endif
+      this.getDayK(j)
+
     },
     beginPolling() {
-      if (this.topTabs[0].timmer === null) {
-        console.log('开启定时');
-        this.topTabs[0].timmer = setInterval(() => this.getfenshi(), 30000)
+      this.timmer1 === null && (this.timmer1 = setInterval(() => this.getfenshi(), 30000))
+
+    },
+    beginPollingK() {
+      if (h5ChartK || chartK) {//定时器未加！！
+        this.timmer2 === null && (this.timmer2 = setInterval(() => this.getDayK(), 3000))
+        this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(2), 60000 * 3))
       }
     },
     dealFenshiData(arr) {
@@ -118,8 +162,12 @@ export default {
       h5Chart.setOption(obj)
       //#endif
       //#ifndef H5
-      console.log(chart);
-      chart && chart.setOption(obj)
+      if (chart) {
+        chart.setOption(obj)
+      } else {
+        this.$refs.fenshi.init()
+        this.checkOready(1, obj)
+      }
       //#endif
     },
     dealKData(arr) {
@@ -175,12 +223,36 @@ export default {
           }
         ]
       }
-      h5ChartK.setOption(obj)
-    },
-    showH5Echarts() {
-      h5Chart = echarts.init(document.getElementById('canvas1'));
-      h5Chart.setOption(option)
+      //#ifdef H5
+      h5ChartK && h5ChartK.setOption(obj)
+      //#endif
+      //#ifndef H5
+      if (chartK) {
+        chartK.setOption(obj)
+      } else {
+        setTimeout(() => {
+          this.$refs.k_tu.init()
+          this.checkOready(2, obj)
+        }, 50)
+      }
+      //#endif
 
+    },
+    getDayK(j = 1) {
+      var options = {
+        url: '/fiftyEtf/QryKLine',
+        method: 'POST',
+        data: {
+          symbol: this.symbolStr,
+          type: j
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+      this.$httpReq(options).then((res) => {
+        this.dealKData(res.mdata.list)
+      })
     },
     getfenshi() {
       var options = {
@@ -199,27 +271,28 @@ export default {
         }
       })
     },
-    getDayK(j = 1) {
-      var options = {
-        url: '/fiftyEtf/QryKLine',
-        method: 'POST',
-        data: {
-          symbol: this.symbolStr,
-          type: j
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }
-      this.$httpReq(options).then((res) => {
-        this.dealKData(res.mdata.list)
-      })
+
+    showH5Echarts() {
+      h5Chart = echarts.init(document.getElementById('canvas1'));
+      h5Chart.setOption(option)
     },
   },
   props: ['chartHeight', 'symbolStr'],
   mounted() {
     //#ifdef H5
     this.showH5Echarts()
+    //#endif
+  },
+  beforeDestroy() {
+    clearInterval(this.timmer1)
+    clearInterval(this.checkTimmer)
+    //#ifdef H5
+    h5Chart = null
+    h5ChartK = null
+    //#endif
+    //#ifndef H5
+    chart = null
+    chartK = null
     //#endif
   },
   created() {
@@ -253,6 +326,6 @@ view.uni-tab-bar {
   height: 278px;
 }
 .h358 {
-  height: 358px;
+  height: 324px;
 }
 </style>
