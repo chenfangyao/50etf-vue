@@ -2,10 +2,10 @@
    <view class='infoWrap uni-flex'>
      <view class="leftPart">
        <view class="line1">
-         <view class="bigTxt">{{parseFloat(commonstock[index].latestPrice).toFixed(2)}}</view>
+         <view class="bigTxt">{{latestPrice}}</view>
          <view class="txt2">
-           <text>{{parseFloat(commonstock[index].priceChange).toFixed(2)}}</text>
-           <text>{{commonstock[index].priceChangeRate}}%</text>
+           <text>{{priceChange}}</text>
+           <text>{{priceChangeRate}}%</text>
          </view>
        </view>
      </view>
@@ -17,9 +17,9 @@
            <text>最&nbsp&nbsp&nbsp高</text>
          </view>
          <view class="uni-flex uni-column">
-           <text>{{(commonstock[index].dealAmount/100000000).toFixed(2)}}亿</text>
-           <text>{{parseFloat(commonstock[index].openPrice).toFixed(2)}}</text>
-           <text>{{parseFloat(commonstock[index].highPrice).toFixed(2)}}</text>
+           <text>{{dealAmount}}亿</text>
+           <text>{{openPrice}}</text>
+           <text>{{highPrice}}</text>
          </view>
        </view>
      </view>
@@ -32,8 +32,8 @@
          </view>
          <view class="uni-flex uni-column">
            <text>&nbsp</text>
-           <text>{{parseFloat(commonstock[index].preclosePrice).toFixed(2)}}</text>
-           <text>{{parseFloat(commonstock[index].lowPrice).toFixed(2)}}</text>
+           <text>{{preclosePrice}}</text>
+           <text>{{lowPrice}}</text>
          </view>
        </view>
      </view>
@@ -45,10 +45,31 @@
  	export default {
  	  data() {
  	    return {
+				latestPrice:'',
+				priceChange:'',
+				priceChangeRate:'',
+				dealAmount:'',
+				openPrice:'',
+				highPrice:'',
+				preclosePrice:'',
+				lowPrice:'',
  	    };
  	  },
  		computed: mapState(['commonstock']),
  	  props:['index'],
+		methods:{
+			
+		},
+		mounted(){
+			this.latestPrice=parseFloat(this.commonstock[this.index].latestPrice).toFixed(2)
+			this.priceChange=parseFloat(this.commonstock[this.index].priceChange).toFixed(2)
+			this.priceChangeRate=parseFloat(this.commonstock[this.index].priceChangeRate).toFixed(2)
+			this.dealAmount=parseFloat(this.commonstock[this.index].dealAmount/100000000).toFixed(2)
+			this.openPrice=parseFloat(this.commonstock[this.index].openPrice).toFixed(2)
+			this.highPrice=parseFloat(this.commonstock[this.index].highPrice).toFixed(2)
+			this.preclosePrice=parseFloat(this.commonstock[this.index].preclosePrice).toFixed(2)
+			this.lowPrice=parseFloat(this.commonstock[this.index].lowPrice).toFixed(2)
+		},
  	}
  </script>
  <style lang="scss" scoped>
