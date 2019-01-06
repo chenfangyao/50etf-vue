@@ -5,7 +5,7 @@
             <text>此处放文案</text>
             <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png'/>
         </view>
-        <scroll-view class='listscrow' lower-threshold='20' scroll-y @scrolltolower="loadMore">
+        <scroll-view class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
             <view class="listsContainer" v-for="(item,i) in monetlist" :key="i">
                 <view class="line1 uni-flex">
                     <view>
@@ -50,7 +50,6 @@ export default {
 			resquestState: 0,
     }
   },
-	components: { uniLoadMore },
   methods: {
     showDatepick() {
       this.showPick = true
@@ -97,7 +96,7 @@ export default {
     }
   },
   components: {
-    datePick
+    datePick,uniLoadMore
   },
 	onLoad(){
 		// uni.startPullDownRefresh();

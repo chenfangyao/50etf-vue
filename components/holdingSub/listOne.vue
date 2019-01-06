@@ -38,7 +38,6 @@
   </view>
 </template>
 <script>
-import hebingPop from '@/components/holdingSub/hebingPop.vue'
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 export default {
   props: {
@@ -59,22 +58,25 @@ export default {
       listItem: {}
     }
   },
-  components: { hebingPop, fenbiPop },
+  components: { fenbiPop },
   methods: {
     popShow(i) {
-      console.log(this.list[i]);
       this.listItem = this.list[i]
+      this.$emit('gou-shi')//兼容狗屎iPhone
       this.showFenbiPop = true
       //#ifdef APP-PLUS
-      this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.5)" });
+      this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
       this.viewMask.show()
       //#endif
     },
     closePop() {
       //#ifdef APP-PLUS
       this.viewMask.close()
+      this.viewMask = null
       //#endif
       this.showFenbiPop = false
+      this.$emit('gou-shi')//兼容狗屎iPhone
+
     }
   },
   watch: {

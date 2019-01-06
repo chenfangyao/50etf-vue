@@ -2,9 +2,9 @@
    <view class='infoWrap uni-flex'>
      <view class="leftPart">
        <view class="line1">
-         <view class="bigTxt">{{parseFloat(commonstock[index].latestPrice).toFixed(2)}}</view>
+         <view class="bigTxt">{{(commonstock[index].latestPrice)}}</view>
          <view class="txt2">
-           <text>{{parseFloat(commonstock[index].priceChange).toFixed(2)}}</text>
+           <text>{{(commonstock[index].priceChange)}}</text>
            <text>{{commonstock[index].priceChangeRate}}%</text>
          </view>
        </view>
@@ -17,9 +17,9 @@
            <text>最&nbsp&nbsp&nbsp高</text>
          </view>
          <view class="uni-flex uni-column">
-           <text>{{(commonstock[index].dealAmount/100000000).toFixed(2)}}亿</text>
-           <text>{{parseFloat(commonstock[index].openPrice).toFixed(2)}}</text>
-           <text>{{parseFloat(commonstock[index].highPrice).toFixed(2)}}</text>
+           <text>{{(commonstock[index].dealAmount/100000000)}}亿</text>
+           <text>{{(commonstock[index].openPrice)}}</text>
+           <text>{{(commonstock[index].highPrice)}}</text>
          </view>
        </view>
      </view>
@@ -32,8 +32,8 @@
          </view>
          <view class="uni-flex uni-column">
            <text>&nbsp</text>
-           <text>{{parseFloat(commonstock[index].preclosePrice).toFixed(2)}}</text>
-           <text>{{parseFloat(commonstock[index].lowPrice).toFixed(2)}}</text>
+           <text>{{(commonstock[index].preclosePrice)}}</text>
+           <text>{{(commonstock[index].lowPrice)}}</text>
          </view>
        </view>
      </view>

@@ -8,8 +8,8 @@
 
       <view class="h12"></view>
       <mini-table :hydetils='detailObj'></mini-table>
-      <view class="h100"></view>
     </block>
+      <view class="h100"></view>
     
     <btn-bottom :res-obj='detailObj'></btn-bottom>
   </view>
