@@ -28,7 +28,8 @@ export default {
       showAction: false,
       way_i: 0,
 			textbank:'',
-			banklogo:''
+			banklogo:'',
+			
     }
   },
   props:{

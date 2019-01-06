@@ -35,7 +35,7 @@ export default {
       priceLists: [, , , , , ,],
       priceItem_i: 0,
       wayList: ['支付宝', '银行转账'],
-      inputDisabled: false,
+      inputDisabled: true,
 			paytype:'remit_alipay',
 			payeeinfo:{},
     }
@@ -50,11 +50,7 @@ export default {
 				alert('请输入金额')
 				return
 			}
-      if(this.inputDisabled){
-        //对接支付宝
-      }else{
         //跳转银行卡页
-
 				switch(this.paytype){
 					case 'remit_alipay':
 					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'&pw_id='+this.payeeinfo.pw_id+'',})
@@ -63,8 +59,6 @@ export default {
 					uni.navigateTo({url:'/pages/assets_sub/bank_card/bank_card?pay_money='+this.money+'&paytype='+this.paytype+'&cardname='+this.payeeinfo.cardname+'&cardno='+this.payeeinfo.cardno+'&pw_id='+this.payeeinfo.pw_id+'&bank_name='+this.payeeinfo.bank_name+''})
 					break
 				}
-        
-      }
     },
 		getpayway(){
 			var options = {
@@ -97,7 +91,8 @@ export default {
 			this.priceLists=i.money_selects
 			// 支付方式
 			this.paytype=i.pay_code
-      if (i == 0) {//此处判断input禁用是以后端传来的实际字段为主
+			// 支付宝支付禁用输入框
+      if (this.paytype == "remit_alipay") {//此处判断input禁用是以后端传来的实际字段为主
         this.inputDisabled = true
       } else {
         this.inputDisabled = false

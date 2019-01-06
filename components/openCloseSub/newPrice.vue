@@ -207,7 +207,8 @@ export default {
       }
       var val = Math.round(this.pricevalue * 10000)+Number(i)
       this.pricevalue = Number(val / 10000).toFixed(4)
-		this.setnewprice(this.pricevalue)
+		  this.setnewprice(this.pricevalue)
+			this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
     },
 
     onCancel(e) {

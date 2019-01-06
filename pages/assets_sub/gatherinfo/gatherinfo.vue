@@ -87,8 +87,7 @@ export default {
 				case 'remit_icbc':
 				this.remit_bank()
 				break
-			}
-			
+			}			
     },
 		// 支付宝支付
 		remit_alipay(){
