@@ -1,7 +1,7 @@
 <template>
   <view class="wrap">
     <header-tab @tab-tap='tabTap' :title-list='titleList'></header-tab>
-    <view >
+    <view>
       <view class="fix">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
         <hebin-total :total='titleList[tabI].total' v-if="tabI<2"></hebin-total>
@@ -10,14 +10,14 @@
       <view class="heightUp" v-show="tabI!=3"></view>
       <view class="h60" v-show="tabI==2"></view>
     </view>
-   <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']"  v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
-      <list-one :tab-i='objI' :list='obj.list' @gou-shi='closes1' v-if="objI<2"></list-one>
-      <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2' ></list-two>
-      <list-three :tab-i='objI' :list='obj.list' v-else ></list-three>
+    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']" v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
+      <list-one :tab-i='objI' :list='obj.list' @gou-shi='openPop' v-if="objI<2"></list-one>
+      <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2'></list-two>
+      <list-three :tab-i='objI' :list='obj.list' v-else></list-three>
       <view v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</view>
-      <uni-load-more v-else :loading-type="obj.resquestState" ></uni-load-more>
+      <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>
-    <view class="sview" v-show="s1view"></view>
+    <fenbi-pop v-if="showFenbiPop" :res-obj='listItem' @close-me='closePop'></fenbi-pop>
 
   </view>
 </template>
@@ -32,12 +32,15 @@ import hebinTotal from '@/components/holdingSub/hebinTotal.vue';
 import topBtn from '@/components/holdingSub/topBtn.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 
+import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 
 export default {
   data() {
     return {
-      s1view: false,//兼容狗屎iphone
       tabI: 0,//顶部tab位置
+      showFenbiPop: false,
+      listItem: {},//给fenbiPop的数据
+      viewMask: null,
       titleList: [
         { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0, },
         { name: '合并', startI: 0, list: [], resquestState: 0, total: 0, },
@@ -47,17 +50,28 @@ export default {
 
     };
   },
-  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree },
+  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop },
   methods: {
-    closes1() {
-      this.s1view = !this.s1view
+    openPop(i) {
+      //#ifdef APP-PLUS
+      this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
+      this.viewMask && this.viewMask.show()
+      //#endif
+      this.showFenbiPop = true
+      this.listItem = this.titleList[0].list[i]//分笔pop
+    },
+    closePop() {
+      //#ifdef APP-PLUS
+      this.viewMask && this.viewMask.close()
+      this.viewMask = null
+      //#endif
+      this.showFenbiPop = false
     },
     tabTap(i) {
       this.tabI = i
       this.titleList[i].list.length === 0 && this.getFenbiList(i)
     },
     loadMore(i) {
-      console.log('到底了');
       if (this.titleList[i].resquestState < 2) {
         this.titleList[i].startI++
         this.getFenbiList(i, 'add')
@@ -97,7 +111,7 @@ export default {
         }
         this.titleList[i].resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.log(err)
+        console.error(err)
       })
     }
   },
@@ -165,19 +179,6 @@ view.wrap {
   view.nullTxt {
     text-align: center;
     margin-top: 50%;
-  }
-  view.sview {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.5) ;
-    height: 75px;
-    /* #ifndef H5 */
-    height:calc( 76px + var(--status-bar-height));
-    /* #endif */
-
   }
 }
 </style>

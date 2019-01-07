@@ -1,5 +1,5 @@
 <template>
-  <view :class="[{'isshow':isshowDetail},'wrap' ]">
+  <view :class="{'isshow':isshowDetail} " class="wrap">
     <view class="line1 uni-flex">
       <view>
         <text>最高</text>
@@ -39,7 +39,7 @@ export default {
   },
   props: {
     isshowDetail: {
-      default: true,
+      default: false,
     },
 		resdata:{
 			
@@ -50,9 +50,9 @@ export default {
 
 <style lang="scss" scoped>
 view.wrap {
-  margin: 22upx 0 0 25upx;
+  margin: 0 0 0 25upx;
   transition: height 300ms;
-  height: 43.2px;
+  height: 0 ;
   overflow: hidden;
   text:first-child {
     font-size: 12px;
@@ -78,8 +78,7 @@ view.wrap {
   }
 }
 .isshow {
-  height: 0 !important;
-  margin-top: 0 !important;
-  // display: none;
+  height: 43.2px !important;
+  margin: 22upx 0 0 25upx;
 }
 </style>

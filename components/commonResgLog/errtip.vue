@@ -11,7 +11,7 @@ export default {
 view.tip {
   font-size: 13px;
   color: rgba(240, 95, 92, 1);
-  margin: 16upx 0 32upx;
+  margin: -36upx 0 32upx;
   height: 36upx;
   opacity: 0;
 }

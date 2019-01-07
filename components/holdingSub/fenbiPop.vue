@@ -143,10 +143,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 view.fixWrap {
-  top: 75px;
-  /* #ifndef H5 */
-  top: calc(75px + var(--status-bar-height));
-  /* #endif */
 
   view.container {
     background-color: #fff;
@@ -270,10 +266,7 @@ view.fixWrap {
     background-color: #000;
     height: 80upx;
     padding: 0 35upx;
-    margin-top: calc(33% - 75px);
-    /* #ifndef H5 */
-    margin-top: calc(33% - 75px - var(--status-bar-height));
-    /* #endif */
+    margin-top: 33% ;
 
     justify-content: space-between;
     align-items: center;

@@ -44,7 +44,7 @@ export default {
 view._input {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10upx;
-  margin-bottom: 48upx;
+  margin-bottom: 62upx;
   position: relative;
   color: rgba(51, 51, 53, 1);
   font-size: 16px;
@@ -64,16 +64,18 @@ view._input {
   }
   
   text.absTxt {
-    font-size: 16px;
+    font-size: 18px;
     color: rgba(153, 153, 153, 1);
     letter-spacing: 2px;
     position: absolute;
     bottom: 10upx;
     left: 10upx;
+    color: #ccc;
+    font-weight: 500;
     transition: font-size 300ms, bottom 300ms;
   }
   text.absTxt.inputFocus {
-    font-size: 11px;
+    font-size: 14px;
     bottom: 60upx;
   }
 }
