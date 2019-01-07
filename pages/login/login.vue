@@ -8,10 +8,10 @@
       <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' @now-change="handChange"></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
-      <view class="txt2 uni-flex">
+      <!-- <view class="txt2 uni-flex">
         <text @tap='go(1)'>注册用户</text>
         <text @tap='go(2)'>忘记密码 ？</text>
-      </view>
+      </view> -->
     </view>
     <view class="bottomTxt">
       <text>登录即代表阅读并同意 </text>
@@ -54,6 +54,7 @@ export default {
         case 2: url = '/pages/forget_pwd/tep1/tep1'
           break
         case 3: url = '/pages/risk_book/risk_book'
+				  break
       }
       uni.navigateTo({ url })
     },

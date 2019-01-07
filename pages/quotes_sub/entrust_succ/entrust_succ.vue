@@ -4,7 +4,7 @@
     <view class="txt">交易成功</view>
     <view class="btn2 uni-flex">
       <view hover-class='self-hover' @tap='go'>继续交易</view>
-      <view hover-class='self-hover'>查看委托</view>
+      <view hover-class='self-hover' @tap="gowt">查看委托</view>
     </view>
   </view>
 </template>
@@ -21,7 +21,12 @@ export default {
       uni.navigateBack({
         delta:1
       })
-    }
+    },
+      gowt(){
+          uni.switchTab({
+              url: '/pages/tabBar/holding_warehouse/holding_warehouse'
+          })
+      }
   }
 }
 </script>

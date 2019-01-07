@@ -28,14 +28,8 @@ export default {
         url: '/pages/index_sub/new_xiang_qing/new_xiang_qing?id=' + artid + ''
       });
     }
-
   },
   watch: {
-    // 			sid(newname, oldname) {
-    // 				if (newname != "") {
-    // 					this.getartlelist()
-    // 				}
-    // 			}
     newlists(val) {
       if (!val) return;
       val.forEach((item, i) => {

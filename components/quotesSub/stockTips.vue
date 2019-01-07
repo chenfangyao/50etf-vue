@@ -10,9 +10,9 @@
       <view class="df_wh" id="mini-canvas">缩略图</view>
       <!-- #endif -->
       <view class="txtContainer">
-        <text class="currentPrice">2.4560</text>
-        <text>0.0040</text>
-        <text>0.16%</text>
+        <text class="currentPrice">{{commonstock[0].latestPrice}}</text>
+        <text>{{commonstock[0].priceChange}}</text>
+        <text>{{commonstock[0].priceChangeRate}}%</text>
       </view>
     </view>
 </template>
@@ -66,13 +66,14 @@ export default {
       onInit: initChart, //异步获取数据后，不能在回调中传该函数
     }
   },
+	props:['commonstock'],
   methods: {
     showH5Echarts() {
       var myChart = echarts.init(document.getElementById('mini-canvas'));
       myChart.setOption(option);
     },
     go() {
-      uni.navigateTo({ url: '/pages/stock_detail/stock_detail' })
+      uni.navigateTo({ url: '/pages/stock_detail/stock_detail?index=0' })
     }
   },
   mounted() {

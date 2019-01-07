@@ -202,7 +202,7 @@ view.wrap {
 			height: 80upx;
 			line-height: 80upx;
 			color:grey;
-			font-size: 17px;
+			font-size: 15px;
 			margin-left: 10upx;
 			border-bottom:1px solid rgb(238,237,242);
 			margin-top: 20upx

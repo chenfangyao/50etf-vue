@@ -1,5 +1,5 @@
 <template>
-	<view >
+	<view>
 		<base-header title="资讯详情" :hasBack='true'></base-header>
 		<view class='grayline'></view>
 		<view class='artconent'>
@@ -9,10 +9,10 @@
 				</view>
 				<view class="artlittle uni-flex newsViewTitle">
 					<text>{{artlittle}}</text>
-					<text>{{$formatetimestr(update_time)}}</text>
+					<text>{{update_time}}</text>
 				</view>
 				<view class="artwenan">
-           <rich-text :nodes="artwenan" ></rich-text>
+					<rich-text :nodes="artwenan"></rich-text>
 				</view>
 			</view>
 		</view>
@@ -35,8 +35,7 @@
 			};
 		},
 		computed: mapState(['isWhite', 'sid']),
-		methods: {
-		},
+		methods: {},
 		created() {
 			// this.getartdetil()
 		},
@@ -60,7 +59,7 @@
 				this.arttitle = res.data.title
 				this.artlittle = res.data.source
 				this.artwenan = res.data.content.replace(/<br \/>/g, "<br/> <span style='margin-left:2em'></span>")
-				this.update_time = res.data.update_time
+				this.update_time = this.$formatetimestr(res.data.update_time)
 			}).catch((err) => {
 				// 请求失败的回调
 				console.error(err)
@@ -97,10 +96,11 @@
 		font-size: 18px;
 		font-family: MicrosoftYaHei;
 	}
+
 	view.artwenan {
 		font-size: 16px;
-    text-align: left;
-    text-indent:2em;
+		text-align: left;
+		text-indent: 2em;
 		font-family: MicrosoftYaHei;
 		color: #a8a8a8;
 		margin: 40upx 0;

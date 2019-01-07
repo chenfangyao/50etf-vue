@@ -81,7 +81,7 @@ export default {
     };
   },
 	computed: mapState(['mobile']),
-  components: { btnBlock ,mpvuePicker},
+    components: { btnBlock ,mpvuePicker},
 	methods:{
     showPicker() {
 		if(this.editdefault){
@@ -270,7 +270,6 @@ export default {
 								this.username=res.data.cardname
 								this.bankcardid=res.data.cardno
 								this.identifica=res.data.idno
-								console.log(555,this.bankcardid)
 							}					
 						}else{
 								
@@ -290,10 +289,14 @@ export default {
 		pickChange(e){
 		}
 	},
-	onLoad(){
+	onLoad(opt){
 		this.getbanklist()
 		this.getprovlist()
 		this.mybankinfo()
+		if(opt.bankinfo==0){
+			this.editdefault=true
+			this.btntxt='保存'
+		}
 	}
 }
 </script>
@@ -338,7 +341,7 @@ view.wrap {
         width: 450upx;
         height: 50upx;
         line-height: 50upx;
-        text-align: center;
+        // text-align: center;
         font-size: 12px;
         font-family: Adobe Heiti Std R;
         font-weight: normal;
