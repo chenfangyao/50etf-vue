@@ -3,9 +3,9 @@
     <text>涨跌(%)</text>
     <text>现价</text>
     <view class="uni-flex">
-      <!-- <text class="gou">购</text> -->
+      <text class="gou">购</text>
       <text class="mlr">行权价</text>
-      <!-- <text class="gu">沽</text> -->
+      <text class="gu">沽</text>
     </view>
     <text>现价</text>
     <text>涨跌(%)</text>

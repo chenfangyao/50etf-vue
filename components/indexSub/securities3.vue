@@ -1,10 +1,10 @@
 <template>
   <section class="uni-flex">
-    <view :class="item.priceChange?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @tap='go(i)'>
+    <view :class="item.priceChange>0?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @tap='go(i)'>
       <h5 >{{item.latestPrice}}</h5>
       <view>
-        <text>{{item.priceChange}}</text>
-        <text>{{item.priceChangeRate}}%</text>
+        <text >{{item.priceChange}}</text>
+        <text >{{item.priceChangeRate}}%</text>
       </view>
       <h4>{{item.stockName}}</h4>
     </view>

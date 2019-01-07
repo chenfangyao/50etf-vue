@@ -18,12 +18,13 @@ export var commonOption = {
   xAxis: [
     {
       data: [],
+      // type:'time',
       boundaryGap: false,
       axisLine: { onZero: false },
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { show: false },
+      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '15:00') } },
     },
     {
       gridIndex: 1,
@@ -40,12 +41,12 @@ export var commonOption = {
       splitLine: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { show: false },
+      // axisLabel: { show: false },
     },
     {
       scale: true,
       gridIndex: 1,
-      axisLabel: { show: false },
+      // axisLabel: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
@@ -60,14 +61,14 @@ export var optionK = {
   },
   grid: [
     {
-      left: 0,
-      right: 0,
+      left: 5,
+      right: 5,
       top: 10,
       bottom: 100,
     },
     {
-      left: 0,
-      right: 0,
+      left: 5,
+      right: 5,
       top: 214,
       bottom: 0
     },
@@ -166,14 +167,14 @@ export var option = {
   grid: [
     {
       left: 3,
-      right: 0,
+      right: 3,
       top: 5,
-      bottom: 120,
+      bottom: 80,
     },
     {
       left: 3,
-      right: 0,
-      top: 158,
+      right: 3,
+      top: 218,
       bottom: 0
     },
   ],

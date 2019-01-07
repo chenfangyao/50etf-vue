@@ -114,7 +114,7 @@ export default {
     getartlelist() {
       this.resquestState = 0
       var options = {
-        url: '/fiftyEtf/list_stocks', //请求接口
+        url: '/Sapi/Squery/list_stocks', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         data: {
           page_index: 0,
@@ -215,7 +215,7 @@ view.uni-tab-bar {
       // padding-bottom: 27upx;
       font-size: 15px;
       font-weight: 400;
-      // text-align: center;
+      text-align: center;
       color: #181c28;
       width: 25%;
     }

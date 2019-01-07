@@ -9,7 +9,7 @@
       <view class="datas">
         <text>1</text>
         <text>{{hydetils.buyAmount1}}</text>
-        <text class="w71">{{hydetils.buyPrice1}}</text>
+        <text class="w71">{{buyPrice1}}</text>
       </view>
       <view class="datas">
         <text>2</text>
@@ -70,15 +70,33 @@
 export default {
   data() {
     return {
+      buyPrice1: '',
+      buyPrice2: '',
+      buyPrice3: '',
+      buyPrice4: '',
+      buyPrice5: '',
+      salePrice1: '',
+      salePrice2: '',
+      salePrice3: '',
+      salePrice4: '',
+      salePrice5: '',
     }
   },
-  props: ['hydetils']
+  props: ['hydetils'],
+  mounted() { 
+    this.buyPrice1=this.hydetils.buyPrice1
+    /* for(var i=1;i<6;i++){
+      this['buyPrice'+i]=this.hydetils['buyPrice'+i]
+      this['salePrice'+i]=this.hydetils['salePrice'+i]
+    } */
+    console.log(this.buyPrice1,111111);
+  }
 
 }
 </script>
 <style lang="scss" scoped>
 view.wrap {
-  padding: 26upx ;
+  padding: 26upx;
   background-color: #fff;
   view.left {
     margin-right: 18upx;
@@ -99,7 +117,7 @@ view.wrap {
       display: flex;
       justify-content: space-between;
       padding: 0 22upx;
-      border-bottom: 0.5px solid rgba(153,153,153,0.5);
+      border-bottom: 0.5px solid rgba(153, 153, 153, 0.5);
       font-size: 12px;
     }
     text.w71 {

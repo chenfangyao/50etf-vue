@@ -38,7 +38,7 @@ export default {
           return
         default: url = '/pages/msg_common/list/list?type=' + i
       }
-      uni.navigateTo({ url})
+      uni.navigateTo({ url })
     }
   },
 }
@@ -53,31 +53,14 @@ view.tipItems {
     text-align: center;
   }
   view.hasBg {
-    width: 94upx;
-    height: 94upx;
-    border-radius: 50%;
-    background-color: #e67c30;
     image {
-      width: 54upx;
-      height: 54upx;
+      width: 94upx;
+      height: 94upx;
       margin-top: 22upx;
     }
   }
-  .hasBg.bg2 {
-    background-color: #f05f5c;
-  }
-  .hasBg.bg3 {
-    background-color: #509beb;
-  }
-  .hasBg.bg4 {
-    background-color: #e6aa12;
-  }
   display: flex;
   justify-content: space-around;
-  image {
-    width: 60upx;
-    height: 60upx;
-  }
   text {
     font-size: 13px;
     color: rgba(24, 28, 40, 1);

@@ -17,7 +17,7 @@
       <view v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</view>
       <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>
-    <fenbi-pop v-if="showFenbiPop" :res-obj='listItem' @close-me='closePop'></fenbi-pop>
+    <fenbi-pop v-if="showFenbiPop" :hebin-hide='tabI==0' :res-obj='listItem' @close-me='closePop'></fenbi-pop>
 
   </view>
 </template>

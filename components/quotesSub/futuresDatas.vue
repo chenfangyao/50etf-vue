@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
-      <view @tap="go(item.gou)" class="wrap1">
+      <view @tap="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <text class="txtred">{{item.gou.incr_percent}}</text>
         <text class="txtred">{{item.gou.last_price}}</text>
       </view>
@@ -10,9 +10,9 @@
         <text class="midTxt">{{item.gou.exercise_price}}</text>
         <!-- <text class="gou">{{item.sale_amount1}}</text> -->
       </view>
-      <view @tap="go(item.gu)" class="wrap1">
-        <text class="txtgreen">{{item.gu.incr_percent}}</text>
+      <view @tap="go(item.gu)" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
         <text class="txtgreen">{{item.gu.last_price}}</text>
+        <text class="txtgreen">{{item.gu.incr_percent}}</text>
       </view>
     </view>
   </view>
@@ -76,41 +76,46 @@ export default {
           }
         }
       })
-      this.inTemArr = this.res2arr
+      this.inTemArr = this.res2arr.sort((a, b) => { return a.gou.exercise_price - b.gou.exercise_price })
     },
     toFixed4(val) {
       var arr = []
       val.forEach(item => {
         let obj = { ...item }
         obj.last_price = Number(item.last_price).toFixed(4)
-        obj.incr_percent = Number(item.incr_percent).toFixed(4)
+        obj.incr_percent = Number(item.incr_percent*100).toFixed(2)
         arr.push(obj)
       });
       return arr
     },
     compareDiff(newval, oldval) {
       if (newval.length != oldval.length) return;
-      var difArr = []
+      var difArrUp = []
+      var difArrDown = []
       newval.forEach((obj, i) => {
-        //!还差判断涨跌！！！
-        obj.last_price != oldval[i].last_price && difArr.push(obj.stock_code)//价格不等
-        obj.incr_percent != oldval[i].incr_percent && difArr.push(obj.stock_code)//百分比不等
+        if(obj.last_price < oldval[i].last_price){
 
+          // console.log(obj.last_price , oldval[i].last_price,obj.stock_name);todo
+        }
+        obj.last_price < oldval[i].last_price && difArrDown.push(obj.stock_code)//价格不等
+        obj.last_price > oldval[i].last_price && difArrUp.push(obj.stock_code)//价格不等
       })
+      this.calcDiff(difArrUp, 1)
+      this.calcDiff(difArrDown, 0)
     },
-    calcDiff(difArr) {
-      var arr = [...this.res2arr]//为了少敲几个字
+    calcDiff(difArr, Q) {
+      var arr = [...this.inTemArr]//为了少敲几个字
       difArr.forEach(item => {
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].gou.stock_code == item) {
-            arr[i].gou.isChanged = true
-            this.$set(this.res2arr, i, arr[i])
+            Q == 1 ? (arr[i].gou.isUp = true) : (arr[i].gou.isDown = true)
+            this.$set(this.inTemArr, i, arr[i])
             this.clearChange(i, 'gou')
             break
           }
           if (arr[i].gu.stock_code == item) {
-            arr[i].gu.isChanged = true
-            this.$set(this.res2arr, i, arr[i])
+            Q == 1 ? (arr[i].gu.isUp = true) : (arr[i].gu.isDown = true)
+            this.$set(this.inTemArr, i, arr[i])
             this.clearChange(i, 'gu')
             break
           }
@@ -119,10 +124,11 @@ export default {
     },
     clearChange(i, str) {
       setTimeout(() => {
-        var obj = this.res2arr[i]
-        obj[str].isChanged = false
-        this.$set(this.res2arr, i, obj)
-      }, 1000)
+        var obj = this.inTemArr[i]
+        obj[str].isUp = false
+        obj[str].isDown = false
+        this.$set(this.inTemArr, i, obj)
+      }, 800)
     }
 
   },
@@ -131,6 +137,7 @@ export default {
     quoteList(newval, oldval) {
       this.dealCodeList()
       this.getTemDatas(this.toFixed4(newval))
+      this.compareDiff(newval, oldval)
     },
   }
 }
@@ -139,7 +146,7 @@ export default {
 <style lang="scss" scoped>
 view.wrap {
   justify-content: space-between;
-  padding: 0 25upx;
+  padding-left: 25upx;
   height: 70upx;
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
@@ -162,7 +169,7 @@ view.wrap {
     line-height: 70upx;
     padding: 0 23upx;
     font-size: 13px;
-    width: 128upx;
+    width: 154upx;
     color: #333;
     text-align: center;
   }
@@ -175,6 +182,7 @@ view.wrap {
     }
   }
   view.wrap1:last-child {
+    padding-right: 25upx;
     text {
       text-align: right;
     }
@@ -190,6 +198,12 @@ view.wrap {
     font-size: 28upx;
     border-radius: 11upx;
     text-align: center;
+  }
+  view.down_c {
+    background: linear-gradient(-90deg, #3aba8f, #fff);
+  }
+  view.up_c {
+    background: linear-gradient(-90deg, #ec605e, #fff);
   }
 }
 </style>

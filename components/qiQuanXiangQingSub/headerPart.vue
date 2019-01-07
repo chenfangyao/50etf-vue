@@ -7,7 +7,7 @@
           <view class="price">{{resObj.latestPrice}}</view>
           <view class="flexColumn">
             <text>{{resObj.priceChange}}</text>
-            <text>{{resObj.priceChangeRate+'%'}}</text>
+            <text>{{priceChangeRate}}</text>
           </view>
         </view>
         <view class="leftBottom uni-flex">
@@ -56,13 +56,19 @@ import headerPartDetail from './headerPartDetail.vue'
 export default {
   data() {
     return {
-      isshowDetail:false
+      isshowDetail: false,
+      priceChangeRate: '',
     }
   },
   props:['resObj','hynumbers','hyinfos'],
   components: { headerPartDetail },
+  watch: {
+    resObj(val) {
+      this.priceChangeRate = (val.priceChangeRate * 100).toFixed(2)+'%'
+    }
+  },
   methods: {
-    showPartDetail(){
+    showPartDetail() {
       this.isshowDetail = !this.isshowDetail
     }
   },
@@ -90,7 +96,6 @@ view.leftPart {
       font-size: 13px;
       line-height: 15px;
       font-weight: 400;
-      
     }
   }
   view.leftBottom {
@@ -143,5 +148,4 @@ view.arrowImg {
     height: 17upx;
   }
 }
-
 </style>

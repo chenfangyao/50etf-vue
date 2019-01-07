@@ -1,10 +1,12 @@
 <template>
   <view class="fixWrap self-mask" @touchmove.prevent>
     <view class="subWrap">
-      <view class="topTip uni-flex">
+      <view class="topTip uni-flex" :class="{hebinHide:!hebinHide}">
         <view>自动延期</view>
-        <view @tap='openPop(2)' class="iconWrap">
-          <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon>
+        <view @tap='openPop2' class="iconWrap">
+          <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
+          <image src='/static/holdingImg/dagou.png' v-if="showDagou"></image>
+          <image src='/static/holdingImg/meigou.png' v-else></image>
         </view>
       </view>
       <view class="container">
@@ -46,7 +48,7 @@
             </view>
           </view>
         </view>
-        <view class="btn2 uni-flex">
+        <view class="btn2 uni-flex" v-if='hebinHide'>
           <view class="uni-flex full " hover-class='self-hover' @tap='go(1)'>
             <view class="uni-flex uni-column">
               <text>止盈</text>
@@ -71,7 +73,7 @@
           <view class="pingC" @tap='go(3)'>平仓</view>
           <view @tap='go(4)'>行情</view>
         </view>
-        <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
+        <btn-block txt='一键平仓' @v-tap='openPop' v-if='hebinHide'></btn-block>
       </view>
       <view class="closeIcom">
         <image src='/static/holdingImg/popClose.png' @tap='closeMe'></image>
@@ -79,24 +81,29 @@
     </view>
     
     <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle' :res-obj='resObj'> </ping-c-pop>
-    <extension-pop v-if="showPop2" @yes-tap='yesHandle(2)' @cancle-tap='yesHandle(2)'></extension-pop>
+    <extension-pop v-if="showPop2" @yes-tap='yesHandle(1)' @cancle-tap='yesHandle(0)'></extension-pop>
   </view>
 </template>
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import pingCPop from '@/components/openCloseSub/orderPop.vue'
 import extensionPop from '@/components/holdingSub/extensionPop.vue'
-import uniIcon from "@/components/uni-icon.vue"
 export default {
   data() {
     return {
       showPop: false,
       showPop2: false,
-      timeDeal: ''
+      timeDeal: '',
+      showDagou: false
     }
   },
-  props: ['resObj'],
-  components: { btnBlock, pingCPop, extensionPop, uniIcon },
+  props: ['resObj', 'hebinHide'],
+  props: {
+    resObj: {
+    },
+    hebinHide: { default: true }
+  },
+  components: { btnBlock, pingCPop, extensionPop },
   methods: {
     closeMe() {
       this.$emit('close-me')
@@ -121,29 +128,35 @@ export default {
 
       }
     },
-    openPop(i) {
-      if (i == 2) {
-        this.showPop2 = true
-        return
-      }
+    openPop() {
       this.showPop = true
     },
-    yesHandle(i) {
-      if (i == 2) {
-        this.showPop2 = false
-        return
+    openPop2() {
+      if(this.showDagou){
+        this.showPop2 = true
+      }else{
+        this.showDagou=true
+        this.resObj.auto_delay=1
       }
-      this.showPop = false
+    },
+    yesHandle(i) {
+      this.showPop2 = false
+      if (i == 1) {
+        this.showDagou = !this.showDagou
+        this.resObj.auto_delay = this.showDagou ? 1 : 0
+      }
+      //还没发请求，auto_delay还没改
+
     }
   },
   mounted() {
+    this.showDagou = this.resObj.auto_delay == 1
     this.timeDeal = this.$formatetimestr(this.resObj.in_time)
   }
 }
 </script>
 <style lang="scss" scoped>
 view.fixWrap {
-
   view.container {
     background-color: #fff;
     padding: 0 35upx 50upx;
@@ -266,7 +279,7 @@ view.fixWrap {
     background-color: #000;
     height: 80upx;
     padding: 0 35upx;
-    margin-top: 33% ;
+    margin-top: 33%;
 
     justify-content: space-between;
     align-items: center;
@@ -279,8 +292,14 @@ view.fixWrap {
       height: 40upx;
       width: 40upx;
       line-height: 0;
-      border: solid 1px #409de5;
+      image {
+        width: 100%;
+        height: 100%;
+      }
     }
+  }
+  view.topTip.hebinHide {
+    margin-top: calc(33% + 166upx);
   }
 }
 </style>
