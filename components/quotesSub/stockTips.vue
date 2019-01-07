@@ -10,9 +10,9 @@
       <view class="df_wh" id="mini-canvas">缩略图</view>
       <!-- #endif -->
       <view class="txtContainer">
-        <text class="currentPrice">{{commonstock[0].latestPrice}}</text>
-        <text>{{commonstock[0].priceChange}}</text>
-        <text>{{commonstock[0].priceChangeRate}}%</text>
+				<text class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</text>
+				<text>{{commonstock[0]?commonstock[0].priceChange:0}}</text>
+				<text>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</text>
       </view>
     </view>
 </template>
@@ -77,6 +77,7 @@ export default {
     }
   },
   mounted() {
+		console.log(555,this.commonstock)
     //#ifdef H5
     this.showH5Echarts()
     //#endif

@@ -8,14 +8,10 @@
 (一)私募股权基金管理人保证在募集资金前在中国证券投资基金业协会(以下简称中国基金业协会)注册为私募股权基金管理人，并取得《基金管理人登记代码》。
 </view> -->
     <view class='txt'>
-		<!-- <view class='contitle'><text>{{rescontent.title}}</text></view>
-		<view class='conartle'><text>{{rescontent.content}}</text></view> -->
-		
 		<view class="arttitle">
 			<text>{{rescontent.title}}</text>
 		</view>
 		<view class="artwenan">
-			<!-- <text>{{rescontent.content}}</text> -->
 			<rich-text :nodes="rescontent.content"></rich-text>
 		</view>
 	</view>
