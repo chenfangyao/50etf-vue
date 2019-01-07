@@ -2,19 +2,10 @@
    <view class='infoWrap uni-flex'>
      <view class="leftPart">
        <view class="line1">
-<<<<<<< .mine
-         <view class="bigTxt">{{(commonstock[index].latestPrice)}}</view>
-=======
          <view class="bigTxt">{{latestPrice}}</view>
->>>>>>> .theirs
          <view class="txt2">
-<<<<<<< .mine
-           <text>{{(commonstock[index].priceChange)}}</text>
-           <text>{{commonstock[index].priceChangeRate}}%</text>
-=======
            <text>{{priceChange}}</text>
            <text>{{priceChangeRate}}%</text>
->>>>>>> .theirs
          </view>
        </view>
      </view>
@@ -26,15 +17,9 @@
            <text>最&nbsp&nbsp&nbsp高</text>
          </view>
          <view class="uni-flex uni-column">
-<<<<<<< .mine
-           <text>{{(commonstock[index].dealAmount/100000000)}}亿</text>
-           <text>{{(commonstock[index].openPrice)}}</text>
-           <text>{{(commonstock[index].highPrice)}}</text>
-=======
            <text>{{dealAmount}}亿</text>
            <text>{{openPrice}}</text>
            <text>{{highPrice}}</text>
->>>>>>> .theirs
          </view>
        </view>
      </view>
@@ -47,13 +32,8 @@
          </view>
          <view class="uni-flex uni-column">
            <text>&nbsp</text>
-<<<<<<< .mine
-           <text>{{(commonstock[index].preclosePrice)}}</text>
-           <text>{{(commonstock[index].lowPrice)}}</text>
-=======
            <text>{{preclosePrice}}</text>
            <text>{{lowPrice}}</text>
->>>>>>> .theirs
          </view>
        </view>
      </view>

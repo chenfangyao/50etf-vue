@@ -10,7 +10,7 @@
       </view>
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
-        <futures-datas :quote-list='quoteList'></futures-datas>
+        <futures-datas :quote-list='quoteList' :code-list='codeList'></futures-datas>
         <!-- <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
         </view> -->
@@ -51,7 +51,7 @@ export default {
     this.timmer = null
   },
   onShow() {
-     this.beginPolling()
+    this.beginPolling()
   },
   methods: {
     loadMore(e) {
@@ -62,9 +62,8 @@ export default {
       // }, 1200);
     },
     beginPolling() {
-      if(this.timmer===null){
-        console.log('开启定时');
-       this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+      if (this.timmer === null) {
+        this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {

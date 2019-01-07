@@ -1,6 +1,5 @@
 <template>
   <view>
-    <fenbi-pop v-if="showFenbiPop" :res-obj='listItem' @close-me='closePop'></fenbi-pop>
     <view v-for='(item,i) in list' class="list1Item " @tap='popShow(i)' hover-class='self-hover' :key="i">
       <view class="line1 uni-flex">
         <view>
@@ -38,7 +37,6 @@
   </view>
 </template>
 <script>
-import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 export default {
   props: {
     list: {
@@ -52,32 +50,14 @@ export default {
     return {
       moneyColor: [],
       create_time: [],
-      showHebingPop: false,
-      showFenbiPop: false,
-      viewMask: null,
-      listItem: {}
     }
   },
-  components: { fenbiPop },
   methods: {
     popShow(i) {
-      this.listItem = this.list[i]
-      this.$emit('gou-shi')//兼容狗屎iPhone
-      this.showFenbiPop = true
-      //#ifdef APP-PLUS
-      this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
-      this.viewMask.show()
-      //#endif
+      this.$emit('gou-shi',i)//兼容狗屎iPhone
+     
     },
-    closePop() {
-      //#ifdef APP-PLUS
-      this.viewMask.close()
-      this.viewMask = null
-      //#endif
-      this.showFenbiPop = false
-      this.$emit('gou-shi')//兼容狗屎iPhone
-
-    }
+   
   },
   watch: {
     list(val) {

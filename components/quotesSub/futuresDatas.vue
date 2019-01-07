@@ -1,15 +1,19 @@
 <template>
   <view>
-    <view class="uni-flex wrap" v-for="(item,i) in quoteList_filter" @tap="go(item)" hover-class="self-hover" :key="i">
-      <text class="txtred">{{item.incr_percent}}</text>
-      <text class="txtred">{{item.buy_price1}}</text>
-      <view class="uni-flex">
-        <text class="gou">{{item.buy_amount1}}</text>
-        <text class="midTxt">{{item.last_price}}</text>
-        <text class="gou">{{item.sale_amount1}}</text>
+    <view class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
+      <view @tap="go(item.gou)" class="wrap1">
+        <text class="txtred">{{item.gou.incr_percent}}</text>
+        <text class="txtred">{{item.gou.last_price}}</text>
       </view>
-      <text class="txtgreen">{{item.sale_price1}}</text>
-      <text class="txtgreen">-9.65</text>
+      <view class="uni-flex">
+        <!-- <text class="gou">{{item.buy_amount1}}</text> -->
+        <text class="midTxt">{{item.gou.exercise_price}}</text>
+        <!-- <text class="gou">{{item.sale_amount1}}</text> -->
+      </view>
+      <view @tap="go(item.gu)" class="wrap1">
+        <text class="txtgreen">{{item.gu.incr_percent}}</text>
+        <text class="txtgreen">{{item.gu.last_price}}</text>
+      </view>
     </view>
   </view>
 </template>
@@ -18,29 +22,116 @@
 export default {
   data() {
     return {
-      quoteList_filter: []
+      res2arr: [],//暂存分好购沽的数据,
+      inTemArr: []
     }
   },
-  props: ['quoteList'],
+  props: ['quoteList', 'codeList'],
   methods: {
     go(obj) {
       uni.navigateTo({
-        url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing?code='+obj.stock_code
+        url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing?code=' + obj.stock_code
       });
-    }
-  },
-  watch: {
-    quoteList(val) {
-      this.quoteList_filter=[]
+    },
+    dealCodeList() {//把传进来的合约代码分购、沽两组
+      var arr = [...this.codeList]
+      this.res2arr = []
+      for (; arr.length > 0;) {
+        var obj = arr.shift()
+        for (var i = 0; i < arr.length; i++) {
+          var resultObj = {}
+          if (arr[i].stock_name.replace(/购|沽/, '') == obj.stock_name.replace(/购|沽/, '')) {
+            if (arr[i].options_type == 1 && obj.options_type == 2) {
+              resultObj.gou = arr[i]
+              resultObj.gu = obj
+            } else if (arr[i].options_type == 2 && obj.options_type == 1) {
+              resultObj.gou = obj
+              resultObj.gu = arr[i]
+            }
+            this.res2arr.push(resultObj)
+            arr.splice(i, 1)
+            break
+          }
+        }
+      }
+    },
+    getTemDatas(arr) {//根据codelist 处理qrylist
+      this.res2arr.forEach((obj, j) => {
+        for (var i = 0; i < arr.length; i++) {
+          if (obj.gou.stock_code == arr[i].stock_code) {
+            this.res2arr[j].gou.incr_percent = arr[i].incr_percent
+            this.res2arr[j].gou.last_price = arr[i].last_price
+            if (this.res2arr[j].gu.incr_percent != undefined) {
+              arr.splice(i, 1)
+              break
+            }
+          }
+          if (obj.gu.stock_code == arr[i].stock_code) {
+            this.res2arr[j].gu.incr_percent = arr[i].incr_percent
+            this.res2arr[j].gu.last_price = arr[i].last_price
+            if (this.res2arr[j].gou.incr_percent != undefined) {
+              arr.splice(i, 1)
+              break
+            }
+          }
+        }
+      })
+      this.inTemArr = this.res2arr
+    },
+    toFixed4(val) {
+      var arr = []
       val.forEach(item => {
         let obj = { ...item }
         obj.last_price = Number(item.last_price).toFixed(4)
         obj.incr_percent = Number(item.incr_percent).toFixed(4)
-        obj.sale_price1 = Number(item.sale_price1).toFixed(4)
-        obj.buy_price1 = Number(obj.buy_price1).toFixed(4)
-        this.quoteList_filter.push(obj)
+        arr.push(obj)
       });
+      return arr
+    },
+    compareDiff(newval, oldval) {
+      if (newval.length != oldval.length) return;
+      var difArr = []
+      newval.forEach((obj, i) => {
+        //!还差判断涨跌！！！
+        obj.last_price != oldval[i].last_price && difArr.push(obj.stock_code)//价格不等
+        obj.incr_percent != oldval[i].incr_percent && difArr.push(obj.stock_code)//百分比不等
+
+      })
+    },
+    calcDiff(difArr) {
+      var arr = [...this.res2arr]//为了少敲几个字
+      difArr.forEach(item => {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].gou.stock_code == item) {
+            arr[i].gou.isChanged = true
+            this.$set(this.res2arr, i, arr[i])
+            this.clearChange(i, 'gou')
+            break
+          }
+          if (arr[i].gu.stock_code == item) {
+            arr[i].gu.isChanged = true
+            this.$set(this.res2arr, i, arr[i])
+            this.clearChange(i, 'gu')
+            break
+          }
+        }
+      })
+    },
+    clearChange(i, str) {
+      setTimeout(() => {
+        var obj = this.res2arr[i]
+        obj[str].isChanged = false
+        this.$set(this.res2arr, i, obj)
+      }, 1000)
     }
+
+  },
+
+  watch: {
+    quoteList(newval, oldval) {
+      this.dealCodeList()
+      this.getTemDatas(this.toFixed4(newval))
+    },
   }
 }
 </script>
@@ -53,7 +144,7 @@ view.wrap {
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
   text {
-    font-size: 26upx;
+    font-size: 13px;
     color: rgba(31, 31, 38, 1);
     width: 51px;
   }
@@ -70,9 +161,23 @@ view.wrap {
     height: 100%;
     line-height: 70upx;
     padding: 0 23upx;
-    font-size: 26upx;
+    font-size: 13px;
     width: 128upx;
     color: #333;
+    text-align: center;
+  }
+  view.wrap1 {
+    flex-grow: 1;
+    justify-content: space-between;
+    display: flex;
+    text {
+      flex-grow: 1;
+    }
+  }
+  view.wrap1:last-child {
+    text {
+      text-align: right;
+    }
   }
   .gou {
     width: 36upx;

@@ -55,7 +55,7 @@ import headerPartDetail from './headerPartDetail.vue'
 export default {
   data() {
     return {
-      isshowDetail:true
+      isshowDetail:false
     }
   },
   props:['resObj'],
