@@ -24,12 +24,12 @@ export default {
   data() {
     return {
       newsItem: [],
-			timmer:null,
-			commonstock:{},
-			timestr:[],
-			stock1:'',
-			stock2:'',
-			stock3:','
+      timmer: null,
+      commonstock: {},
+      timestr: [],
+      stock1: '',
+      stock2: '',
+      stock3: ','
     }
   },
   components: {
@@ -41,51 +41,6 @@ export default {
   methods: {
     // 登录
     ...mapMutations(['setsid', 'setusername', 'setmobile']),
-    loginin() {
-      var options = {
-        url: '/Sapi/Login/index', //请求接口
-        data: {
-          user_name: 'lcs001',
-          user_pwd: '123456'
-        }, //发送给服务端的数据
-        header: {
-          clienttype: 'web',
-          ver: 'v1.0'
-        },
-        method: 'POST', //请求方法全部大写，默认GET
-      }
-      this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log(res)
-        if (res.status == 1) {
-          this.setsid(res.data.sid)
-          // 获取用户信息
-          this.getuserinfo()
-        }
-      }).catch((err) => {
-        // 请求失败的回调
-        console.log(err)
-      })
-    },
-    // 获取用户信息
-    getuserinfo() {
-      var options = {
-        url: '/Sapi/User/info', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
-      }
-
-      this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        if (res.status) {
-          this.setusername(res.data.user_name)
-          this.setmobile(res.data.mobile)
-        }
-      }).catch((err) => {
-        // 请求失败的回调
-      })
-    },
     // 获取配置信息
     getconfinfo() {
       var options = {
@@ -135,58 +90,58 @@ export default {
         complete: () => { }
       });
     },
-		// 获取50etf指数
-		getcommonselectstock(timestrs){
-			// var timesformate=new Date().format("hh:mm:sss");
-			var stockTradeMins=[{"stockCodeInternal":"1000001","tradeMins":timestrs[0]},
-           {"stockCodeInternal":"399001","tradeMins":timestrs[1]},
-           {"stockCodeInternal":"1000004","tradeMins":timestrs[2]}],
-				stockTradeMins=JSON.stringify(stockTradeMins)
-			var options = {
-				url: '/stockStat/getCommonSelectStock', //请求接口
-				method: 'POST', //请求方法全部大写，默认GET
-				data: {stockTradeMins:stockTradeMins},
-				header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			}
-			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				if(res.result==1){
-					this.timestr=[]
-					// 第一次加载获取res对象
-					if(timestrs[0]==''){
-						this.commonstock=res.ldata
-						for(let i=0;i<res.ldata.length;i++){
-												if(res.ldata[i].updated==true){
-													this.$set(this.timestr,i,res.ldata[i].tradeMins)
-												}
-											}
-					}else{
-						for(let i=0;i<res.ldata.length;i++){
-												if(res.ldata[i].updated==true){
-													this.$set(this.timestr,i,res.ldata[i].tradeMins)
-													this.$set(this.commonstock,i,res.ldata[i])
-												}
-											}
-					}
-				}
-			}).catch((err) => {
-				// 请求失败的回调
-				console.log(err)
-			})
-		}
+    // 获取50etf指数
+    getcommonselectstock(timestrs) {
+      // var timesformate=new Date().format("hh:mm:sss");
+      var stockTradeMins = [{ "stockCodeInternal": "1000001", "tradeMins": timestrs[0] },
+      { "stockCodeInternal": "399001", "tradeMins": timestrs[1] },
+      { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }],
+        stockTradeMins = JSON.stringify(stockTradeMins)
+      var options = {
+        url: '/stockStat/getCommonSelectStock', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: { stockTradeMins: stockTradeMins },
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }
+      this.$httpReq(options).then((res) => {
+        // 请求成功的回调
+        if (res.result == 1) {
+          this.timestr = []
+          // 第一次加载获取res对象
+          if (timestrs[0] == '') {
+            this.commonstock = res.ldata
+            for (let i = 0; i < res.ldata.length; i++) {
+              if (res.ldata[i].updated == true) {
+                this.$set(this.timestr, i, res.ldata[i].tradeMins)
+              }
+            }
+          } else {
+            for (let i = 0; i < res.ldata.length; i++) {
+              if (res.ldata[i].updated == true) {
+                this.$set(this.timestr, i, res.ldata[i].tradeMins)
+                this.$set(this.commonstock, i, res.ldata[i])
+              }
+            }
+          }
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    }
   },
-  created() {
+  onShow() {
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
-		this.getcommonselectstock(['','',''])
-		if(this.timmer===null){
-			this.timmer=setInterval(()=>{
-				this.getcommonselectstock(this.timestr)
-			},3000)
-		}
+    this.getcommonselectstock(['', '', ''])
+    if (this.timmer === null) {
+      this.timmer = setInterval(() => {
+        this.getcommonselectstock(this.timestr)
+      }, 3000)
+    }
   },
-	onHide() {
+  onHide() {
     clearInterval(this.timmer)
     this.timmer = null
   },
