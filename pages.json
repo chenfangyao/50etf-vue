@@ -93,9 +93,9 @@
             "style" : {
                 "titleNView" : false,
                 "scrollIndicator" : "none"
-                // "enablePullDownRefresh" : true
             }
         },
+        // "enablePullDownRefresh" : true
         {
             "path" : "pages/mine_sub/my_customer_service/my_customer_service",
             "style" : {
@@ -330,6 +330,13 @@
                 "titleNView" : false,
                 "scrollIndicator" : "none"
             }
+        },
+        {
+            "path" : "pages/mine_sub/bank_card/add_card_btn/add_card_btn",
+            "style" : {
+				"titleNView" : false,
+				"scrollIndicator" : "none"
+			}
         }
     ],
     "tabBar" : {

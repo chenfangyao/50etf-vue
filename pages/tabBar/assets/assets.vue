@@ -14,10 +14,10 @@
 			</view>
 		</view>
 		<view class="info">
-			<view>冻结金</view>
+			<view>其他</view>
 			<view class="uni-flex">
-				<text>委托金</text>
-				<text></text>
+				<text>待扣延期费</text>
+				<text>{{add_fee_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 			<view class="uni-flex">
 				<text>提现金额</text>

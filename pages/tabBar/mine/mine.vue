@@ -39,12 +39,12 @@
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
       </view>
-      <view class="uni-flex" hover-class="self-hover">
+      <!-- <view class="uni-flex" hover-class="self-hover">
         <image src="/static/mineImg/07.png" />
         <text>50ETF</text>
         <text class="tip" v-if="false"></text>
         <image src="../../../static/mineImg/arrow.png" />
-      </view>
+      </view> -->
       <view class="uni-flex" hover-class="self-hover" @tap="go('about_us/about_us')" >
         <image src="/static/mineImg/08.png" />
         <text>关于我们</text>
@@ -63,7 +63,29 @@ export default {
   },
   methods: {
     go(href) {
-      uni.navigateTo({ url:'/pages/mine_sub/'+href })
+			if(href=='bank_card/add_card/add_card'){
+				var options = {
+						url:'/Sapi/Ubank/info', //请求接口
+						method: 'GET', //请求方法全部大写，默认GET
+				}
+				this.$httpReq(options).then((res) => {
+						// 请求成功的回调
+						// res为服务端返回数据的根对象
+						console.log('我的银行', res)
+						if(res.status){
+							if(res.data.sub_id!=undefined){
+								uni.navigateTo({ url:'/pages/mine_sub/'+href })
+							}else{
+								uni.navigateTo({ url:'/pages/mine_sub/bank_card/add_card_btn/add_card_btn'})
+							}					
+						}
+				}).catch((err) => {
+						// 请求失败的回调
+						console.log(err)
+				})
+			}else{
+				uni.navigateTo({ url:'/pages/mine_sub/'+href })
+			} 
     }
   },
   components: {

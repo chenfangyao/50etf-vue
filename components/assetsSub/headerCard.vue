@@ -4,8 +4,8 @@
       <h2>可用资金（元）</h2>
       <h1>{{transmoney.enable_money}}</h1><h1 v-if='!transmoney.enable_money'>0.00</h1>
       <view class="h3">
-        <text>总资产</text>
-        <text>{{transmoney.dta_money}}</text><text v-if='!transmoney.enable_money'>0.00</text>
+        <!-- <text>总资产</text>
+        <text>{{transmoney.dta_money}}</text><text v-if='!transmoney.enable_money'>0.00</text> -->
       </view>
     </view>
     <view class="panel2 uni-flex">
@@ -13,14 +13,18 @@
         <h4>{{transmoney.royalty_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>权益金</h4>
       </view>
-      <view>
+			<view>
+			  <h4>{{transmoney.dta_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
+			  <h4>总资产</h4>
+			</view>
+      <!-- <view>
         <h4>{{transmoney.freeze_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>冻结金</h4>
       </view>
       <view>
         <h4>{{transmoney.add_fee_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>管理费</h4>
-      </view>
+      </view> -->
     </view>
     <view class="uni-flex btn2">
       <view class="hasBorder" @tap='go(1)'>
@@ -92,6 +96,7 @@ view.subWrap {
     }
     view.h3 {
       font-size: 14px;
+			height: 5px;
     }
   }
   .panel2 {

@@ -6,7 +6,7 @@
 			<view class="chooseCount">
 					<view @tap='showPicker'>
 							{{pickerText}}
-							<text class="arrowDown"></text>
+							<text v-show="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
     </view>
@@ -15,7 +15,7 @@
 			<view class="chooseCount">
 					<view @tap='showCityPicker'>
 							{{pickerCityText}}
-							<text class="arrowDown"></text>
+							<text v-show="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
 		</view>
@@ -24,7 +24,7 @@
 			<view class="chooseCount">
 					<view @tap='showBankPicker'>
 							{{pickSubBankText}}
-							<text class="arrowDown"></text>
+							<text v-show="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
 		</view>
@@ -42,7 +42,7 @@
 		</view>
     <view class="fixBottom">
 
-     <btn-block txt='添加' @v-tap="addbank" ></btn-block>
+     <btn-block :txt='btntxt' @v-tap="addbank" ></btn-block>
     </view>
      <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
                       @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
@@ -76,22 +76,30 @@ export default {
 			prov_cd:'',
 			city_cd:'',
 			sub_id:'',
+			btntxt:'修改',
+			editdefault:false
     };
   },
 	computed: mapState(['mobile']),
   components: { btnBlock ,mpvuePicker},
 	methods:{
     showPicker() {
-      this.$refs.typePick.show()
-			this.bankOrCity=0
+		if(this.editdefault){
+			this.$refs.typePick.show()
+						this.bankOrCity=0
+		}  
     },
 		showCityPicker(){
-			this.$refs.cityPick.show()
-			this.bankOrCity=1
+			if(this.editdefault){
+				this.$refs.cityPick.show()
+				this.bankOrCity=1
+			}	
 		},
 		showBankPicker(){
-			this.$refs.subBankPick.show()
-			this.bankOrCity=2
+			if(this.editdefault){
+				this.$refs.subBankPick.show()
+				this.bankOrCity=2
+			}	
 		}, 
     onCancel(e) {
       // console.log(e)
@@ -273,7 +281,11 @@ export default {
 				})
 		},
 		addbank(){
-			uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?type=1&sub_id='+this.sub_id+'&identifica='+this.identifica+'&username='+this.username+'&bankcardid='+this.bankcardid+'' })
+			if(this.btntxt=='保存'){
+				uni.navigateTo({ url:'/pages/forget_pwd/tep2/tep2?type=1&sub_id='+this.sub_id+'&identifica='+this.identifica+'&username='+this.username+'&bankcardid='+this.bankcardid+'' })
+			}
+			this.btntxt='保存'
+			this.editdefault=true	
 		},
 		pickChange(e){
 		}
@@ -289,15 +301,18 @@ export default {
 
 <style lang="scss" scoped>
 view.wrap {
-  background-color: #f5f5f5;
+  // background-color: #f5f5f5;
   min-height: 100vh;
+  margin-top: 20px;
 
   view.list-row {
-    width: 750upx;
-    height: 98upx;
+    width: 680upx;
+    height: 110upx;
+	margin-left: 35upx;
+	margin-top: 20upx;
     background: rgba(255, 255, 255, 1);
-    border-top: 1px solid #eee;
-    line-height: 98upx;
+    border-bottom: 1px solid #eee;
+    line-height: 110upx;
     padding-left: 37upx;
     display: flex;
     align-items: center;
@@ -329,7 +344,7 @@ view.wrap {
         font-weight: normal;
         color: rgba(102, 102, 102, 1);
         line-height: 43px;
-        background: rgba(239, 239, 239, 1);
+        // background: rgba(239, 239, 239, 1);
         border-radius: 8upx;
 				overflow: hidden;
 				white-space: nowrap;
