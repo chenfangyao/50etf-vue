@@ -30,41 +30,41 @@ export default {
   },
   components: { btnBlock },
   methods: {
-		...mapMutations(['setuserinfo']),
+    ...mapMutations(['setuserinfo']),
     logOut() {
-		    uni.showModal({
-                title:'确认退出登录？',
-                // content:'hellowold',
-                success:(res)=>{
-                    if (res.confirm) {
-                        this.sureloginout()
-                    } else if (res.cancel) {
-                        console.log('用户点击取消');
-                    }
-                }
-            })
-		},
-    sureloginout(){
-        var options = {
-            url: '/Sapi/Login/loginout', //请求接口
-            data: {
-            }, //发送给服务端的数据
-            method: 'POST', //请求方法全部大写，默认GET
+      uni.showModal({
+        title: '确认退出登录？',
+        content: ' ',
+        success: (res) => {
+          if (res.confirm) {
+            this.sureloginout()
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+          }
         }
-        this.$httpReq(options).then((res) => {
-            // 请求成功的回调
-            // res为服务端返回数据的根对象
-            console.log(res)
-            if (res.status == 1) {
-                this.setuserinfo('')
-                uni.switchTab({ url:'/pages/tabBar/index/index' })
-            }else{
-            }
-        }).catch((err) => {
-            // 请求失败的回调
-            console.log(err)
-        })
-    } ,
+      })
+    },
+    sureloginout() {
+      var options = {
+        url: '/Sapi/Login/loginout', //请求接口
+        data: {
+        }, //发送给服务端的数据
+        method: 'POST', //请求方法全部大写，默认GET
+      }
+      this.$httpReq(options).then((res) => {
+        // 请求成功的回调
+        // res为服务端返回数据的根对象
+        console.log(res)
+        if (res.status == 1) {
+          this.setuserinfo('')
+          uni.switchTab({ url: '/pages/tabBar/index/index' })
+        } else {
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    },
     go(i) {
       let url = ''
       switch (i) {
