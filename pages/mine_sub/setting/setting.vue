@@ -5,7 +5,8 @@
       <text>修改密码</text>
       <image src='/static/arrow/r.png'></image>
     </view>
-    <view class='mb26 uni-flex' hover-class='self-hover' @tap='go(2)'>
+    <!-- <view class='mb26 uni-flex' hover-class='self-hover' @tap='go(2)'> -->
+    <view class='mb26 uni-flex' hover-class='self-hover' >
       <text>关于</text>
       <view class="uni-flex verView">
         <text class="verTxt">版本号：10.1.38</text>
@@ -71,7 +72,6 @@ export default {
           break
         case 2: url = '/pages/mine_sub/about_us/about_us'
           break
-
       }
       uni.navigateTo({ url })
     }

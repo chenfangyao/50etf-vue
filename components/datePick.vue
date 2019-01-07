@@ -39,10 +39,16 @@ export default {
     }
 
     for (let i = 1; i <= 12; i++) {
+			if(i<10){
+				i='0'+i
+			}
       months.push(i)
     }
 
     for (let i = 1; i <= 31; i++) {
+			if(i<10){
+				i='0'+i
+			}
       days.push(i)
     }
     return {
@@ -144,6 +150,10 @@ view.self {
   text.active {
     border-color: #409def;
     color: #409def;
+		font-size: 16px;
   }
+	text{
+		font-size: 15px;
+	}
 }
 </style>

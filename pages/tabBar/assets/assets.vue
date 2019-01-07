@@ -6,22 +6,22 @@
 			<view>权益金</view>
 			<view class="uni-flex">
 				<text>权益金</text>
-				<text>{{royalty_money}}</text>
+				<text>{{royalty_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 			<view class="uni-flex">
 				<text>盈亏</text>
-				<text class="hasColor">{{profit_money}}</text>
+				<text class="hasColor">{{profit_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 		</view>
 		<view class="info">
 			<view>冻结金</view>
 			<view class="uni-flex">
 				<text>委托金</text>
-				<text>25,765,00</text>
+				<text></text>
 			</view>
 			<view class="uni-flex">
 				<text>提现金额</text>
-				<text>{{enable_money}}</text>
+				<text>{{enable_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 		</view>
     

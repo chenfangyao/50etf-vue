@@ -2,23 +2,23 @@
   <view class="subWrap ">
     <view class="panel1">
       <h2>可用资金（元）</h2>
-      <h1>{{transmoney.enable_money}}</h1>
+      <h1>{{transmoney.enable_money}}</h1><h1 v-if='!transmoney.enable_money'>0.00</h1>
       <view class="h3">
         <text>总资产</text>
-        <text>{{transmoney.dta_money}}</text>
+        <text>{{transmoney.dta_money}}</text><text v-if='!transmoney.enable_money'>0.00</text>
       </view>
     </view>
     <view class="panel2 uni-flex">
       <view>
-        <h4>{{transmoney.royalty_money}}</h4>
+        <h4>{{transmoney.royalty_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>权益金</h4>
       </view>
       <view>
-        <h4>{{transmoney.freeze_money}}</h4>
+        <h4>{{transmoney.freeze_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>冻结金</h4>
       </view>
       <view>
-        <h4>{{transmoney.add_fee_money}}</h4>
+        <h4>{{transmoney.add_fee_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
         <h4>管理费</h4>
       </view>
     </view>

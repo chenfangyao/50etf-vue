@@ -183,12 +183,12 @@ export default {
 		if(this.timmer===null){
 			this.timmer=setInterval(()=>{
 				this.getcommonselectstock(this.timestr)
-			},50000)
+			},3000)
 		}
   },
 	onHide() {
-//     clearInterval(this.timmer)
-//     this.timmer = null
+    clearInterval(this.timmer)
+    this.timmer = null
   },
 }
 </script>
