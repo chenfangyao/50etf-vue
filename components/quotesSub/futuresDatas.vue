@@ -11,8 +11,8 @@
         <!-- <text class="gou">{{item.sale_amount1}}</text> -->
       </view>
       <view @tap="go(item.gu)" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
-        <text class="txtgreen">{{item.gu.incr_percent}}</text>
         <text class="txtgreen">{{item.gu.last_price}}</text>
+        <text class="txtgreen">{{item.gu.incr_percent}}</text>
       </view>
     </view>
   </view>
@@ -83,7 +83,7 @@ export default {
       val.forEach(item => {
         let obj = { ...item }
         obj.last_price = Number(item.last_price).toFixed(4)
-        obj.incr_percent = Number(item.incr_percent).toFixed(4)
+        obj.incr_percent = Number(item.incr_percent*100).toFixed(2)
         arr.push(obj)
       });
       return arr
@@ -169,7 +169,7 @@ view.wrap {
     line-height: 70upx;
     padding: 0 23upx;
     font-size: 13px;
-    width: 128upx;
+    width: 154upx;
     color: #333;
     text-align: center;
   }

@@ -26,12 +26,12 @@
         <view>
             <!-- <image v-if="btn3_i" @tap="plusStep2(-1)" class='opacityclass' src='/static/openCloseImg/minus.png'></image> -->
             <image  @tap="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
-            <text class=" newPrice">{{pricevalue}}</text>
+            <text class=" newPrice" :class="{yellow1:onClose}">{{pricevalue}}</text>
             <image  @tap="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
         </view>
 
             <view class="uni-flex btn3">
-                <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i}" :data-i='i'
+                <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i,yellow1:onClose}" :data-i='i'
                       @tap='changePriceType(i,item)'>{{item}}
                 </view>
             </view>
@@ -58,7 +58,7 @@
             </view>
             <view class="sliderItem">
                 <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='1' :value='sliderVal'
-                        backgroundColor='#e6e6e6' block-size='18' activeColor='#409de5'/>
+                        backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'"/>
             </view>
         </view>
     </view>
@@ -104,11 +104,11 @@ export default {
     }
   },
   methods: {
-		...mapMutations(['setnewprice', 'setstockamunt','setenttype','setentrusttype','setfbccid']),
+    ...mapMutations(['setnewprice', 'setstockamunt', 'setenttype', 'setentrusttype', 'setfbccid']),
     // 合并分笔
     tapChange(val) {
       this.tabActive = val
-	  this.setentrusttype(val)
+      this.setentrusttype(val)
       this.sliderVal = 1
       if (val == true) {
         var picktext = this.pickerText
@@ -123,58 +123,58 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-	  this.setenttype=i+1
-	  if(i==0){
-		  this.pricevalue = this.qrysingle.latestPrice
-	  }
-	  // 暂时注释
-//       switch (i) {
-// 		  // 最新价
-//         case 0:
-//           // 开仓
-//           if (!this.onClose) {
-//             this.pricevalue = this.qrysingle.buyPrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           // 平仓
-//           else {
-//             this.pricevalue = this.qrysingle.salePrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           break;
-// 		  // 对手价
-//         case 1:
-//           // 开仓
-//           if (!this.onClose) {
-//             this.pricevalue = this.qrysingle.salePrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           // 平仓
-//           else {
-//             this.pricevalue = this.qrysingle.salePrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           break;
-// 		  // 排队价
-//         case 2:
-//           // 开仓
-//           if (!this.onClose) {
-//             this.pricevalue = this.qrysingle.buyPrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           // 平仓
-//           else {
-//             this.pricevalue = this.qrysingle.salePrice1
-// 						this.setnewprice(this.pricevalue)
-//           }
-//           break;
-//       } 
+      this.setenttype = i + 1
+      if (i == 0) {
+        this.pricevalue = this.qrysingle.latestPrice
+      }
+      // 暂时注释
+      //       switch (i) {
+      // 		  // 最新价
+      //         case 0:
+      //           // 开仓
+      //           if (!this.onClose) {
+      //             this.pricevalue = this.qrysingle.buyPrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           // 平仓
+      //           else {
+      //             this.pricevalue = this.qrysingle.salePrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           break;
+      // 		  // 对手价
+      //         case 1:
+      //           // 开仓
+      //           if (!this.onClose) {
+      //             this.pricevalue = this.qrysingle.salePrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           // 平仓
+      //           else {
+      //             this.pricevalue = this.qrysingle.salePrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           break;
+      // 		  // 排队价
+      //         case 2:
+      //           // 开仓
+      //           if (!this.onClose) {
+      //             this.pricevalue = this.qrysingle.buyPrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           // 平仓
+      //           else {
+      //             this.pricevalue = this.qrysingle.salePrice1
+      // 						this.setnewprice(this.pricevalue)
+      //           }
+      //           break;
+      //       } 
       this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
     },
     // 滑块滑动事件
     slidering(e) {
       this.sliderVal = e.detail.value
-			this.setstockamunt(this.sliderVal)
+      this.setstockamunt(this.sliderVal)
       this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
     },
     sliders(e) {
@@ -193,31 +193,31 @@ export default {
       }
       this.sliderVal = parseInt(this.sliderVal)
       this.sliderVal += i
-			this.setstockamunt(this.sliderVal)
+      this.setstockamunt(this.sliderVal)
       this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
     },
     plusStep2(i) {
-		// 市价不允许修改
-		if(this.btn3_i==0){
-			return
-		}
+      // 市价不允许修改
+      if (this.btn3_i == 0) {
+        return
+      }
       if (i == -1) {
         if (this.pricevalue == 0.0001) {
           return
         }
       }
-      var val = Math.round(this.pricevalue * 10000)+Number(i)
+      var val = Math.round(this.pricevalue * 10000) + Number(i)
       this.pricevalue = Number(val / 10000).toFixed(4)
-		  this.setnewprice(this.pricevalue)
-			this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
+      this.setnewprice(this.pricevalue)
+      this.$emit('plus-step', { num: this.sliderVal, price: this.pricevalue })
     },
 
     onCancel(e) {
       // console.log(e)
     },
     onConfirm(val) {
-		this.setfbccid(val.id[0])
-      this.pickerText = '笔 ' + (parseInt(val.index)+1) + ' | ' + val.value + '张'
+      this.setfbccid(val.id[0])
+      this.pickerText = '笔 ' + (parseInt(val.index) + 1) + ' | ' + val.value + '张'
       if (this.onClose) {
         this.maxprice.maxcounts = parseInt(val.value[0])
       }
@@ -235,7 +235,7 @@ export default {
     qrysingle(val) {
       if (val) {
         this.pricevalue = this.qrysingle.latestPrice
-		this.setnewprice(this.pricevalue)
+        this.setnewprice(this.pricevalue)
       }
     },
     fbcclist(val) {
@@ -244,8 +244,8 @@ export default {
         this.hbcclength = this.hbcclist.length
         this.pickerValueArray = []
         this.pickerText = '0'
-		// 设置默认分笔持仓id
-		this.setfbccid(this.fbcclist[0]?this.fbcclist[0].id:'')
+        // 设置默认分笔持仓id
+        this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         if (this.fbcclist[0]) {
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
           for (var i = 0; i < this.fbcclist.length; i++) {
@@ -253,7 +253,7 @@ export default {
             pickobj.label = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
             pickobj.value = this.fbcclist[i].enable_amount
             pickobj.index = parseInt(i + 1)
-			pickobj.id = this.fbcclist[i].id
+            pickobj.id = this.fbcclist[i].id
             this.pickerValueArray.push(pickobj)
           }
         }
@@ -265,7 +265,7 @@ export default {
     }
   },
   created() {
-	  
+
   }
 }
 </script>
@@ -300,7 +300,9 @@ view.wrap {
       text-align: center;
       color: rgba(64, 157, 229, 1);
     }
-
+    .yellow1{
+      color: #e6aa12;
+    }
     view.btn3 {
       > view {
         width: 50px;
@@ -316,6 +318,10 @@ view.wrap {
       > view.active {
         border-color: rgba(64, 157, 229, 1);
         color: #409de5;
+      }
+      > view.active.yellow1 {
+        border-color: #e6aa12;
+        color: #e6aa12;
       }
       > view:nth-child(2) {
         margin: 0 26upx;
@@ -341,7 +347,7 @@ view.wrap {
       font-size: 14px;
       color: #848689;
       background: rgba(239, 239, 239, 1);
-      uni-icon{
+      uni-icon {
         vertical-align: middle;
       }
       border-radius: 8upx;
@@ -369,7 +375,7 @@ view.wrap {
       top: 0;
       left: -1%;
       transition: left 80ms;
-      background-color: #409de5;
+      background-color: #e6aa12;
       color: #fff;
     }
     > view {
@@ -419,8 +425,8 @@ view.wrap {
     width: 18px;
     height: 18px;
   }
-	.opacityclass{
-		opacity: 0;
-	}
+  .opacityclass {
+    opacity: 0;
+  }
 }
 </style>
