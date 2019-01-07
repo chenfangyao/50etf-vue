@@ -20,8 +20,8 @@
 				<text>{{add_fee_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 			<view class="uni-flex">
-				<text>提现金额</text>
-				<text>{{enable_money}}</text><text v-if='!royalty_money'>0.00</text>
+				<text>提现冻结</text>
+				<text>{{freeze_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 		</view>
     

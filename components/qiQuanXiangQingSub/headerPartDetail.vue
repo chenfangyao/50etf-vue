@@ -11,37 +11,47 @@
       </view>
       <view>
         <text>剩余天数</text>
-        <text>1天</text>
+        <text>{{hyinfos.tag_expiry}}天</text>
       </view>
     </view>
     <view class="line2 uni-flex">
       <view>
         <text>行权日</text>
-        <text>20180627</text>
+        <text>{{hyinfos.expire_date}}</text>
       </view>
       <view>
         <text>行权价格</text>
-        <text>2.2500</text>
+        <text>{{hyinfos.exercise_price}}</text>
       </view>
       <view>
         <text>合约单位</text>
-        <text>10000</text>
+        <text>{{hynumbers}}</text>
+        <!-- <text>{{hyinfos.volume_multiple}}</text> -->
       </view>
     </view>
   </view>
 </template>
 <script>
+	import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {
-
     }
   },
+	computed: mapState(['taglist']),
+	methods:{
+	},
   props: {
     isshowDetail: {
       default: false,
     },
 		resdata:{
+			
+		},
+		hynumbers:{
+			
+		},
+		hyinfos:{
 			
 		}
   }

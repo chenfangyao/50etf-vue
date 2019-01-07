@@ -13,8 +13,8 @@
                         <text class="txt2">{{item.stock_code}}</text>
                     </view>
                     <view class="timetxt">
-                        <text>{{$formatetimestr(item.create_time)}}</text>
-                        <!-- <text>14:52:11</text> -->
+                        <!-- <text>{{$formatetimestr(item.create_time)}}</text> -->
+                        <text>{{formatetime[i]}}</text>
                     </view>
                 </view>
                 <view class="line2">
@@ -48,6 +48,7 @@ export default {
       monetlist: [],
 			pageindex:0,
 			resquestState: 0,
+			formatetime:[],
     }
   },
   methods: {
@@ -83,10 +84,17 @@ export default {
         if (res.status) {
 					if(add){
 						this.monetlist = this.monetlist.concat(res.data.list)
+						var temarr=[]
+						for(let i=0;i<res.data.list.length;i++){
+							temarr.push(this.$formatetimestr(res.data.list[i].create_time))
+						}
+						this.formatetime=this.formatetime.concat(temarr)
 					}else{
 						this.monetlist=res.data.list
+						for(let i=0;i<res.data.list.length;i++){
+							this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))
+						}
 					}
-
         }
 				this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {

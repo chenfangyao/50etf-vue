@@ -66,7 +66,7 @@ export default {
 				    })
 						return
 			}
-      this.sethycode(10001442)
+      this.sethycode(this.resObj.stockCode)
       uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC='+val+'&code='+this.resObj.stockCode})
 
     }

@@ -1,7 +1,7 @@
 <template>
   <view>
     <header-title :res-obj='detailObj'></header-title>
-    <header-part :res-obj='detailObj'></header-part>
+    <header-part :res-obj='detailObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part>
     <view class="h12"></view>
     <k-chart  @change-i='changeI' :symbol-str='symbol'></k-chart>
     <block v-if="onDayKTab">
@@ -30,13 +30,40 @@ export default {
     return {
       symbol: '',
       detailObj: {},
-      onDayKTab: true
+      onDayKTab: true,
+			hynumbers:'',
+			hyinfos:{},
     }
   },
   methods: {
     changeI(i) {
       if (i == 0) { this.onDayKTab = true }
       else { this.onDayKTab = false }
+    },
+		    // 获取最大可买数量
+    getmaxbuy(codes, prices, amounts) {
+      var options = {
+        url: '/Sapi/Stock/max_buy', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        dataType: "json",
+        data: {
+          // 股票代码
+          code: this.symbol,
+          // 委托价格
+          price: 0.0017,
+          // 委托数量,默认设置为1
+          amount: 1
+        },
+      }
+      this.$httpReq(options).then((res) => {
+				console.log('最大可买量',res)
+        if (res.status) {
+					this.hynumbers=res.data.volume_multiple
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
     },
     getItem() {
       var obj = {
@@ -55,10 +82,27 @@ export default {
 
       })
     },
+		gethyinfoprice(){
+			 var obj = {
+			  url: '/Sapi/Stock/hyinfo', //请求接口
+			  method: 'POST', //请求方法全部大写，默认GET
+			  dataType: "json",
+			  data: {
+			    stock_code: this.symbol,
+			  },
+			}
+			this.$httpReq(obj).then((res) => {
+			  if(res.status){
+					this.hyinfos=res.data
+				}
+			})
+		}
   },
   onLoad(options) {
     this.symbol = options.code
     this.getItem()
+		this.getmaxbuy()
+		this.gethyinfoprice()
   }
 }
 </script>
