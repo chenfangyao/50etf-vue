@@ -18,12 +18,13 @@ export var commonOption = {
   xAxis: [
     {
       data: [],
+      // type:'time',
       boundaryGap: false,
       axisLine: { onZero: false },
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '14:57') } },
+      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '15:00') } },
     },
     {
       gridIndex: 1,
@@ -37,7 +38,7 @@ export var commonOption = {
   yAxis: [
     {
       scale: true,
-      // splitLine: { show: false },
+      splitLine: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
       // axisLabel: { show: false },
