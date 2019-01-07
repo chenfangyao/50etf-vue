@@ -43,10 +43,30 @@ export default {
     return {}
   },
   props:['resObj'],
+	computed: mapState(['sid']),
   methods: {
     ...mapMutations(['sethycode']),
     go(val) {
-        this.sethycode(10001442)
+				if(!this.sid){
+				 uni.showModal({
+				        title:'您还未登录',
+				        content:'现在去登录',
+				        success:(res)=>{
+				            if (res.confirm) {
+				                uni.navigateTo({
+				                	url: '/pages/login/login',
+				                	success: res => {},
+				                	fail: () => {},
+				                	complete: () => {}
+				                });
+				            } else if (res.cancel) {
+				                console.log('用户点击取消');
+				            }
+				        }
+				    })
+						return
+			}
+      this.sethycode(10001442)
       uni.navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC='+val+'&code='+this.resObj.stockCode})
 
     }

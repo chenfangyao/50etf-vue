@@ -3,7 +3,9 @@
     <base-header title="交易规则" has-back='1'></base-header>
     <view class="border1"></view>
     <view class="title">{{rules.title}}</view>
-    <view class="content">{{rules.content}}</view>
+    <!-- <view class="content">{{rules.content}}</view> -->
+		<view class="content"><rich-text :nodes="rules.content"></rich-text></view>
+		
   </view>
 </template>
 
@@ -52,6 +54,7 @@ view.title {
   color: rgba(24, 28, 40, 1);
   margin: 50upx 0 34upx;
   line-height: 16px;
+	text-align: center;
 }
 view.content {
   font-size: 15px;

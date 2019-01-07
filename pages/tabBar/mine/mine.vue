@@ -57,10 +57,12 @@
 
 <script>
 import headerCard from '@/components/mineSub/headerCard.vue'
+import { mapState } from 'vuex';
 export default {
   data() {
     return {}
   },
+	computed: mapState(['sid']),
   methods: {
     go(href) {
 			if(!this.sid){
