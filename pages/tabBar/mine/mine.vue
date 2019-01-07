@@ -63,6 +63,25 @@ export default {
   },
   methods: {
     go(href) {
+			if(!this.sid){
+				 uni.showModal({
+				        title:'您还未登录',
+				        content:'现在去登录',
+				        success:(res)=>{
+				            if (res.confirm) {
+				                uni.navigateTo({
+				                	url: '/pages/login/login',
+				                	success: res => {},
+				                	fail: () => {},
+				                	complete: () => {}
+				                });
+				            } else if (res.cancel) {
+				                console.log('用户点击取消');
+				            }
+				        }
+				    })
+						return
+			}
 			if(href=='bank_card/add_card/add_card'){
 				var options = {
 						url:'/Sapi/Ubank/info', //请求接口

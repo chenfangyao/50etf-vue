@@ -2,8 +2,9 @@
   <view class="wrap">
     <base-header has-back='1'></base-header>
     <view class="title">{{conent.title}}</view>
-    <view class="timeTitle">{{$formatetimestr(conent.update_time || conent.create_time)}}</view>
-    <view class="content">{{conent.content}}</view>
+    <view class="timeTitle">{{datetimes}}</view>
+    <!-- <view class="content">{{conent.content}}</view> -->
+	<rich-text :nodes="conent.content"></rich-text>
   </view>
 </template>
 
@@ -12,8 +13,9 @@ export default {
   data() {
     return {
            artid:'',
-					 conent:'',
-					 formatecontent:'',
+		   conent:'',
+		   formatecontent:'',
+		   datetimes:''
     };
   },
 	methods:{
@@ -31,6 +33,7 @@ export default {
 				console.log('文章详情',res)
 				if (res.status == 1) {
 					this.conent=res.data
+					this.datetimes=this.$formatetimestr(this.conent.update_time || this.conent.create_time)
 				}
 			}).catch((err) => {
 				// 请求失败的回调

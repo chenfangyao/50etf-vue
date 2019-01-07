@@ -87,11 +87,12 @@ export default {
 				method: 'POST', //请求方法全部大写，默认GET
 				data: {
 					code: parseInt(this.resObj.stockCode),
-                    price: this.newprice,
-                    amount: this.stockamunt,
+                    price: parseFloat(this.newprice),
+                    amount: parseInt(this.stockamunt),
                     enttype: parseInt(this.enttype),
                     is_pay_bean:0
 				},
+                // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			}
 			this.$httpReq(options).then((res) => {
 				console.log('买入',res)

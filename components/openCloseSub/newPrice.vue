@@ -24,9 +24,10 @@
         <view class=" commonStyle1">{{pricetitle}}</view>
         <view class="uni-flex line2">
         <view>
-            <image v-if="btn3_i" @tap="plusStep2(-1)" src='/static/openCloseImg/minus.png'></image>
+            <!-- <image v-if="btn3_i" @tap="plusStep2(-1)" class='opacityclass' src='/static/openCloseImg/minus.png'></image> -->
+            <image  @tap="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
             <text class=" newPrice">{{pricevalue}}</text>
-            <image v-if="btn3_i" @tap="plusStep2(1)" src='/static/openCloseImg/plus.png'></image>
+            <image  @tap="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
         </view>
 
             <view class="uni-flex btn3">
@@ -418,5 +419,8 @@ view.wrap {
     width: 18px;
     height: 18px;
   }
+	.opacityclass{
+		opacity: 0;
+	}
 }
 </style>

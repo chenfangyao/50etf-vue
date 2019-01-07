@@ -1,7 +1,7 @@
 <template>
   <view>
     <base-header title="行情"></base-header>
-    <stock-tip-bar></stock-tip-bar>
+    <stock-tip-bar :commonstock='commonstock'></stock-tip-bar>
     <view class="uni-tab-bar">
       <view class="swiper-tab uni-flex">
         <view v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2' :id="tab.id">
@@ -25,6 +25,7 @@ import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
 import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
 
 import uniLoadMore from '@/components/uni-load-more.vue';
+import { mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -41,19 +42,31 @@ export default {
       codeList: [],
       timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
+			commonstock:{},//50etf股票详情
+			commonstocktimmer:null
     }
   },
   created() {
     this.getgroupLabel()
   },
   onHide() {
+		console.log('关闭了第二个页面的定时器')
     clearInterval(this.timmer)
+    clearInterval(this.commonstocktimmer)
     this.timmer = null
+    this.commonstocktimmer = null
   },
   onShow() {
     this.beginPolling()
+		this.getcommonselectstock([''])
+		if(this.commonstocktimmer===null){
+			this.commonstocktimmer=setInterval(()=>{
+				this.getcommonselectstock([this.commonstock[0].tradeMins])
+			},15000)
+		}
   },
   methods: {
+		...mapMutations(['setcommonstock']),
     loadMore(e) {
       // this.resquestState = 1
       // setTimeout(() => {
@@ -104,7 +117,9 @@ export default {
         data: {
           page_index: 0,
           page_size: 10000,
-          tag_id: this.groupLabel[this.tabIndex].id
+          tag_id: this.groupLabel[this.tabIndex].id,
+					timestr:[],
+					commonstock:{}
         },
       }
 
@@ -141,6 +156,29 @@ export default {
         this.quotationStr += '?' + item.stock_code
       });
     },
+		// 获取50etf指数
+		getcommonselectstock(timestrs){
+			// var timesformate=new Date().format("hh:mm:sss");
+			var stockTradeMins=[{"stockCodeInternal":"510050","tradeMins":timestrs[0]}],
+				stockTradeMins=JSON.stringify(stockTradeMins)
+			var options = {
+				url: '/stockStat/getCommonSelectStock', //请求接口
+				method: 'POST', //请求方法全部大写，默认GET
+				data: {stockTradeMins:stockTradeMins},
+				header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			}
+			this.$httpReq(options).then((res) => {
+				// 请求成功的回调
+				console.log('50etf指数',res)
+				if(res.result==1 && res.ldata[0].updated===true){
+					this.commonstock=res.ldata
+					this.setcommonstock(res.ldata)
+				}
+			}).catch((err) => {
+				// 请求失败的回调
+				console.log(err)
+			})
+		}
 
   }
 
