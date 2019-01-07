@@ -37,6 +37,8 @@ const store = new Vuex.Store({
 	fbccid:'',
 	// 首页股票信息
 	commonstock:[],
+	// 合约tag
+	taglist:{}
   },
   mutations: {
     login(state, provider) {
@@ -103,6 +105,9 @@ const store = new Vuex.Store({
 	},
 	setcommonstock(state,data){
 		   state.commonstock=data
+	},
+	settaglist(state,data){
+		  state.taglist=data
 	}
   },
 })

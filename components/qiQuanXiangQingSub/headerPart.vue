@@ -41,10 +41,11 @@
         </view>
       </view>
     </view>
-    <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj'></header-part-detail>
+    <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part-detail>
     <view class="arrowImg" @tap="showPartDetail">
-      <image v-show="isshowDetail" src="/static/arrow/b.png"></image>
-      <image v-show="!isshowDetail" src="/static/arrow/t.png"></image>
+      <image v-show="isshowDetail" src="/static/arrow/t.png"></image>
+      <image v-show="!isshowDetail" src="/static/arrow/b.png"></image>
+      <!-- <image v-show="!isshowDetail" src="/static/arrow/t.png"></image> -->
     </view>
 
   </view>
@@ -59,7 +60,7 @@ export default {
       priceChangeRate: '',
     }
   },
-  props: ['resObj'],
+  props:['resObj','hynumbers','hyinfos'],
   components: { headerPartDetail },
   watch: {
     resObj(val) {
@@ -71,9 +72,9 @@ export default {
       this.isshowDetail = !this.isshowDetail
     }
   },
-  created() {
-    console.log(33, this.resObj)
-  }
+	created(){
+		
+	}
 }
 </script>
 <style lang="scss" scoped>
@@ -92,7 +93,7 @@ view.leftPart {
     display: flex;
     flex-direction: column;
     text {
-      font-size: 12px;
+      font-size: 13px;
       line-height: 15px;
       font-weight: 400;
     }
@@ -107,7 +108,7 @@ view.leftPart {
       font-size: 10px;
     }
     text {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 }
@@ -115,7 +116,13 @@ view.rightPart {
   flex-grow: 1;
   margin: 30upx 85upx 0 80upx;
   view.uni-flex {
+		view:nth-child(1){
+			margin-left: 10px;
+		}
     justify-content: space-between;
+		text{
+			font-size: 12px;
+		}
   }
   .rightBottom > view,
   .rightTop > view {

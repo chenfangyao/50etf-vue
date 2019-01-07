@@ -6,7 +6,7 @@
 			<view class="chooseCount">
 					<view @tap='showPicker'>
 							{{pickerText}}
-							<text v-show="editdefault" class="arrowDown"></text>
+							<text v-if="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
     </view>
@@ -15,7 +15,7 @@
 			<view class="chooseCount">
 					<view @tap='showCityPicker'>
 							{{pickerCityText}}
-							<text v-show="editdefault" class="arrowDown"></text>
+							<text v-if="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
 		</view>
@@ -24,7 +24,7 @@
 			<view class="chooseCount">
 					<view @tap='showBankPicker'>
 							{{pickSubBankText}}
-							<text v-show="editdefault" class="arrowDown"></text>
+							<text v-if="editdefault" class="arrowDown"></text>
 					</view>
 			</view>
 		</view>

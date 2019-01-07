@@ -3,8 +3,8 @@
 		<base-header :hasBack="true" title='我的客服'></base-header>
     <view class="h50"></view>
     <btn-block txt='电话客服' @v-tap='showPop'></btn-block>
-    <view class="h577"></view>
-		<view class="telPop" v-show="telShow">
+    <!--<view class="h577"></view>-->
+	<view class="telPop" v-show="telShow">
       <view class="fixed"  @tap="showPop"></view>
       <view class="container">
         <view class="txt">是否拨打电话</view>
@@ -42,7 +42,7 @@ view.wrap {
   background-color: #f5f5f5;
   height: 100vh;
   view.h50{
-    height: 50upx;
+    height: 500upx;
   }
   view.telPop {
     view.fixed {

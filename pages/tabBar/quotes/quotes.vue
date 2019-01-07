@@ -25,7 +25,7 @@ import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
 import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
 
 import uniLoadMore from '@/components/uni-load-more.vue';
-import { mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -49,6 +49,7 @@ export default {
   created() {
     this.getgroupLabel()
   },
+	computed: mapState(['taglist']),
   onHide() {
 		console.log('关闭了第二个页面的定时器')
     clearInterval(this.timmer)
@@ -66,7 +67,7 @@ export default {
 		}
   },
   methods: {
-		...mapMutations(['setcommonstock']),
+		...mapMutations(['setcommonstock','settaglist']),
     loadMore(e) {
       // this.resquestState = 1
       // setTimeout(() => {
@@ -106,6 +107,7 @@ export default {
         this.groupLabel = res.data.list
         this.getartlelist()
         this.beginPolling()//启动轮询
+				this.settaglist(this.groupLabel[0])
       })
     },
     // 获取stockCode
@@ -118,8 +120,8 @@ export default {
           page_index: 0,
           page_size: 10000,
           tag_id: this.groupLabel[this.tabIndex].id,
-					timestr:[],
-					commonstock:{}
+            timestr:[],
+			commonstock:{}
         },
       }
 
@@ -147,6 +149,7 @@ export default {
         return false;
       } else {
         this.tabIndex = e.target.dataset.current
+				this.settaglist(this.groupLabel[this.tabIndex])
         this.getartlelist()
       }
     },
