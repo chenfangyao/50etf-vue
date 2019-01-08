@@ -134,6 +134,16 @@ export default {
       this.minFenshi > val && (this.minFenshi = val)
       this.maxFenshi < val && (this.maxFenshi = val)
     },
+    calcMinMax() {
+      var val = ''
+      if (this.maxFenshi - this.stockInfo.preClosePrice >= this.stockInfo.preClosePrice - this.minFenshi) {
+        val = Math.abs(this.maxFenshi - this.stockInfo.preClosePrice)
+      } else {
+        val = Math.abs(this.stockInfo.preClosePrice - this.minFenshi)
+      }
+      this.Ymax = this.stockInfo.preClosePrice + val * 1.005
+      this.Ymin = this.stockInfo.preClosePrice - val * 1.005
+    },
     dealFenshiData(arr) {
       // if (arr.length === this.fenshiData.length) return;
       var X = [, , ,]
@@ -156,6 +166,7 @@ export default {
         }
         YBar.push(subBar)
       });
+      this.calcMinMax()
       X.length < 240 && (X.length = 245)
       let obj = {
         xAxis: [
@@ -181,23 +192,27 @@ export default {
             axisLine: { show: false },
             axisTick: { show: false },
             interval: 0.0001,
-
-            min: (value) => {
-              return value.min * 0.995;
-            },
-            max: (value) => {
-              return value.max * 1.005;
-            },
+            max: this.Ymax,
+            min: this.Ymin,
             axisLabel: {
               inside: true, margin: 0,
+              showMaxLabel: true,
+              showMinLabel: true,
               formatter: (val, i) => {
-                var num = Number(val)
+                var num = Number(val.toFixed(4))
+                var max = Number((this.Ymax * 0.99).toFixed(4))
+                var midMax = (max - this.stockInfo.preClosePrice) / 2
+                midMax = Number(midMax.toFixed(4))
+                var min = Number((this.Ymin * 1.01).toFixed(4))
+                var midMin = (this.stockInfo.preClosePrice - min) / 2
+                midMin = Number(midMin.toFixed(4))
                 switch (num) {
                   case this.stockInfo.preClosePrice:
-                  case this.stockInfo.highPrice:
-                  case this.stockInfo.lowPrice:
-                  case 0.193:
-                    return val
+                  case max:
+                  case min:
+                  case midMax:
+                  case midMin:
+                    return num
                   default:
                     return ''
                 }

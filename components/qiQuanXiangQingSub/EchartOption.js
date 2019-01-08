@@ -18,7 +18,6 @@ export var commonOption = {
   xAxis: [
     {
       data: [],
-      // type:'time',
       boundaryGap: false,
       axisLine: { onZero: false },
       splitLine: { show: false, },
@@ -62,8 +61,7 @@ export var optionK = {
       axisLine: { show: false },
       axisTick: { show: false },
       axisLabel: { show: false },
-      min: 'dataMin',
-      max: 'dataMax',
+      scale: true,
     },
     {
       scale: true,
@@ -184,6 +182,8 @@ export var option = {
       axisLine: { show: false },
       axisTick: { show: false },
       interval: 0.0001,
+      scale: true,
+
 
     },
     {
