@@ -141,8 +141,8 @@ export default {
       }, 3000)
     }
   },
-	onHide() {
-		console.log('关闭了第一个页面的定时器')
+onHide() {
+	console.log('关闭了第一个页面的定时器')
     clearInterval(this.timmer)
     this.timmer = null
   },

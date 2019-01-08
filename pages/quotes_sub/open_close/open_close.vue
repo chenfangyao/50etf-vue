@@ -39,7 +39,7 @@ export default {
       fbnum: '',
       // cclist:{},
       symbol: '',
-		bussinesdata:'',
+		  bussinesdata:'',
     };
   },
   computed: mapState(['sid', 'hycode']),
@@ -77,7 +77,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-		  this.getmaxbuy(this.hycode, this.QuotationMsg.latestPrice, 1)
+		  this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -85,10 +85,10 @@ export default {
       })
     },
     plusStepNum(val) {
-      this.getmaxbuy(this.hycode, val.price, val.num)
+      this.getmaxbuy(this.symbol, val.price, val.num)
     },
     priceStep(val) {
-      this.getmaxbuy(this.hycode, val.price, val.num)
+      this.getmaxbuy(this.symbol, val.price, val.num)
     },
     // 获取最大可买数量
     getmaxbuy(codes, prices, amounts) {
@@ -108,7 +108,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.maxbuy = res.data
-		  this.setmaxbuy(res.data)
+		      this.setmaxbuy(res.data)
           // 开仓
           if (!this.onClose) {
             this.maxbuy.maxcounts = parseInt(this.maxbuy.maxcount)
@@ -151,7 +151,7 @@ export default {
         if (res.status) {
           this.fbcclist = []
           for (var i = 0; i < res.data.list.length; i++) {
-            if (res.data.list[i].stock_code == this.hycode) {
+            if (res.data.list[i].stock_code == this.symbol) {
               this.fbcclist.push(res.data.list[i])
             }
           }
@@ -174,7 +174,7 @@ export default {
         if (res.status) {
           this.hbcclist = []
           for (var i = 0; i < res.data.list.length; i++) {
-            if (res.data.list[i].stock_code == this.hycode) {
+            if (res.data.list[i].stock_code == this.symbol) {
               this.hbcclist.push(res.data.list[i])
             }
           }
@@ -189,10 +189,11 @@ export default {
       // 合并持仓分笔持仓
       this.getfbchic()
       this.gethbchic()
-      this.getmaxbuy(this.hycode, this.QuotationMsg.latestPrice, 1)
+      this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
     }
   },
   onUnload() {
+    console.log('关闭开仓平仓定时器')
     clearInterval(this.getdatainter)
     this.timmer = null
   },
@@ -202,7 +203,7 @@ export default {
       if(this.timmer===null){
           this.timmer = setInterval(() => {
               this.getartlelist()
-          }, 50000)
+          }, 1500)
       }
 
     // 合并持仓分笔持仓

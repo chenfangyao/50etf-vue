@@ -89,7 +89,6 @@ export default {
       this['buyPrice'+i]=this.hydetils['buyPrice'+i]
       this['salePrice'+i]=this.hydetils['salePrice'+i]
     } */
-    console.log(this.buyPrice1,111111);
   }
 
 }

@@ -105,7 +105,6 @@ export default {
 			this.$httpReq(options).then((res) => {
 				// 请求成功的回调
 				// res为服务端返回数据的根对象
-				console.log('支付信息', res)
 				if(res.status){
 					uni.showToast({
 						title: res.info?res.info:'信息提交成功',
@@ -163,7 +162,6 @@ export default {
 		      this.$refs.typePick.show()
 		    },
 				onCancel(e) {
-					// console.log(e)
 				},
 				onConfirm(val) {
 					this.pickerText=val.label

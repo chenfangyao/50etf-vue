@@ -28,7 +28,6 @@ export default {
       uni.navigateTo({ url: '../add_card/add_card' })
     },
 		delbank(index){
-			console.log(333,index)
 			this.cardList.splice(index,1)
 		}
   }

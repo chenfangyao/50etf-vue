@@ -4,7 +4,7 @@
   <view class="title">
     <view class="msg">
       <text @tap='go(3) ' class="commonStyle1">消息</text>
-      <uni-badge text="2" type="danger"></uni-badge>
+      <uni-badge :text="newlength" type="danger"></uni-badge>
     </view>
     <text class="commonStyle1" @tap='go'>设置</text>
   </view>
@@ -13,7 +13,13 @@
 <script>
 import uniBadge from "@/components/uni-badge.vue"
 export default {
+	data(){
+		return{
+			txt:1
+		}
+	},
   components: { uniBadge },
+	props:['newlength'],
   methods: {
     go(i) {
       if (i == 3) {
@@ -22,7 +28,7 @@ export default {
         uni.navigateTo({ url: '/pages/mine_sub/setting/setting' })
       }
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

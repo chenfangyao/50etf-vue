@@ -1,6 +1,6 @@
 <template>
   <view class="wrap">
-    <header-tab @tab-tap='tabTap' :title-list='titleList'></header-tab>
+    <header-tab @tab-tap='tabTap' :title-list='titleList' :tabI='tabI'></header-tab>
     <view>
       <view class="fix">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
@@ -33,6 +33,7 @@ import topBtn from '@/components/holdingSub/topBtn.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -50,8 +51,10 @@ export default {
 
     };
   },
+	computed: mapState(['weituoindex']),
   components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop },
   methods: {
+		...mapMutations(['setweituoindex']),
     openPop(i) {
       //#ifdef APP-PLUS
       this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
@@ -115,9 +118,22 @@ export default {
       })
     }
   },
-  onShow() {
-    this.getFenbiList(this.tabI)
-  },
+//   onLoad(opt) {
+// 		console.log(111,opt)
+// 		if(opt){
+// 			this.tabI=opt.tabindex
+// 		}
+//     this.getFenbiList(this.tabI)
+//   },
+	onShow(){
+		if(this.weituoindex==2){
+			this.tabI=this.weituoindex
+		}
+		this.getFenbiList(this.tabI)
+	},
+	onHide(){
+		this.setweituoindex(0)
+	}
 }
 </script>
 

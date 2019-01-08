@@ -97,10 +97,10 @@ export default {
 			this.$httpReq(options).then((res) => {
 				console.log('买入',res)
 				if(res.status){
-					uni.showToast({
-					title: res.info?res.info:'买入成功',
-					duration: 2000
-					});
+					// uni.showToast({
+					// title: res.info?res.info:'买入成功',
+					// duration: 2000
+					// });
 					uni.navigateTo({
 					  url: '/pages/quotes_sub/entrust_succ/entrust_succ'
 					})
