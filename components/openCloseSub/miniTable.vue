@@ -9,7 +9,7 @@
       <view class="datas">
         <text>1</text>
         <text>{{hydetils.buyAmount1}}</text>
-        <text class="w71">{{buyPrice1}}</text>
+        <text class="w71">{{hydetils.buyPrice1}}</text>
       </view>
       <view class="datas">
         <text>2</text>

@@ -178,7 +178,7 @@ export var option = {
       bottom: 0
     },
   ],
-  itemStyle: { color: '#7fbe9e' },
+  itemStyle: { color: '#4AB9BB' },
   /* dataZoom: [
     {
       type: 'inside',
@@ -198,7 +198,7 @@ export var option = {
       data: [],
       symbol: 'none',
       lineStyle: {
-        normal: { opacity: 0.5 }
+        normal: { opacity: 1 }
       },
       areaStyle: {
         opacity: 0.5,
@@ -209,7 +209,7 @@ export var option = {
           x2: 0,
           y2: 1,
           colorStops: [{
-            offset: 0, color: '#54DDDC' // 0% 处的颜色
+            offset: 0, color: '#4AB9BB' // 0% 处的颜色
           }, {
             offset: 1, color: '#ffffff' // 100% 处的颜色
           }],

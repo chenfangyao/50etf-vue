@@ -77,8 +77,8 @@ view.h44 {
       height: 44px;
       left: 0;
       image {
-        width: 13px;
-        height: 15px;
+        width: 17px;
+        height: 20px;
       }
     }
   }
