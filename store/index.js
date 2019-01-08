@@ -38,7 +38,9 @@ const store = new Vuex.Store({
 	// 首页股票信息
 	commonstock:[],
 	// 合约tag
-	taglist:{}
+	taglist:{},
+	// 委托的index
+	weituoindex:0,
   },
   mutations: {
     login(state, provider) {
@@ -108,6 +110,9 @@ const store = new Vuex.Store({
 	},
 	settaglist(state,data){
 		  state.taglist=data
+	},
+	setweituoindex(state,data){
+		state.weituoindex=data
 	}
   },
 })

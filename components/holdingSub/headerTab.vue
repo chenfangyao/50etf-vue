@@ -11,17 +11,24 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex';
 export default {
-  props: ['titleList'],
+  props: ['titleList','tabI'],
   data() {
     return {
       currentI:0
     }
   },
+	computed: mapState(['weituoindex']),
+	created(){
+		if(this.weituoindex==2){
+			this.currentI=this.weituoindex
+		}
+	},
   methods: {
-    back() {
-      uni.navigateBack({ delta: 1 });
-    },
+//     back() {
+//       uni.navigateBack({ delta: 1 });
+//     },
     tabTap(e) {
       this.$emit('tab-tap',e.target.dataset.tabi)
       this.currentI=e.target.dataset.tabi

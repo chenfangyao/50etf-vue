@@ -81,7 +81,6 @@ export default {
     },
     go(item) {
       this.$store.commit('setpingCItem', item)
-      // console.log(this.$store.state.pingCItem);
       uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
     },
     getDatas(add) {

@@ -1,7 +1,7 @@
 <template>
   <view class="hwrap">
     <view class="h44"></view>
-    <header-title></header-title>
+    <header-title :newlength='newlength'></header-title>
     <sub-card></sub-card>
   </view>
 </template>
@@ -9,7 +9,8 @@
 import headerTitle from './sub/headerTitle.vue'
 import subCard from './sub/subCard.vue'
 export default {
-  components: { subCard, headerTitle }
+  components: { subCard, headerTitle },
+	props:['newlength'],
 }
 </script>
 <style lang="scss" scoped>

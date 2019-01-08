@@ -86,7 +86,6 @@ export default {
 			})
 		},
     changeWayI(i) {
-			console.log(333,i)
 			this.payeeinfo=i
 			this.priceLists=i.money_selects
 			// 支付方式

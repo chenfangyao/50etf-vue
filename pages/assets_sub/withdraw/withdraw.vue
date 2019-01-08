@@ -43,7 +43,6 @@ export default {
   },
 	computed: mapState(['assets']),
 	created(){
-		console.log(444,this.assets)
 		this.mybankinfo()
 	},
   methods: {

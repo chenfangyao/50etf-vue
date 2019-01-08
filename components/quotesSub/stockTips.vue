@@ -77,7 +77,6 @@ export default {
     }
   },
   mounted() {
-		console.log(555,this.commonstock)
     //#ifdef H5
     this.showH5Echarts()
     //#endif

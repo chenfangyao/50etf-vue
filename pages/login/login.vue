@@ -4,8 +4,9 @@
     <view class="h1"></view>
     <view class="img"><image src='/static/loginResgImg/logo.png'></image></view>
     <view class="container">
-      <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item>
-      <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' @now-change="handChange"></input-item>
+      <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->
+      <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
+      <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' ></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
       <!-- <view class="txt2 uni-flex">
@@ -29,7 +30,7 @@ export default {
   data() {
     return {
       tipContent: '您的账号和密码错误，请重新输入',
-      verifyYes: false,//验证通过，把它至为true,登录按钮才会变色且启用
+      verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
       pwd: '',
       uName: '',
       openEye: false,
@@ -59,7 +60,7 @@ export default {
       uni.navigateTo({ url })
     },
     handleLogin() {
-        this.verifyYes=false
+        // this.verifyYes=false
         this.showErr=false
           // 验证输入信息
         if(this.$validata(this.uName,0)!=1){
@@ -115,7 +116,6 @@ export default {
               url: '/Sapi/User/info', //请求接口
               method: 'GET', //请求方法全部大写，默认GET
           }
-
           this.$httpReq(options).then((res) => {
               // 请求成功的回调
               // res为服务端返回数据的根对象

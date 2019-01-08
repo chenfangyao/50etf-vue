@@ -57,9 +57,6 @@ var option = {
   }]
 }
 function initChart(canvas, width, height) {
-
-
-
   chart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -137,6 +134,7 @@ view.wrap {
   view.df_wh {
     height: 80px;
     flex-grow: 1;
+	width: 180px;
   }
 }
 </style>

@@ -50,8 +50,8 @@ export default {
     this.getgroupLabel()
   },
 	computed: mapState(['taglist']),
-  onHide() {
-		console.log('关闭了第二个页面的定时器')
+  onHide(){
+	console.log('关闭了第二个页面的定时器')
     clearInterval(this.timmer)
     clearInterval(this.commonstocktimmer)
     this.timmer = null
@@ -63,7 +63,7 @@ export default {
 		if(this.commonstocktimmer===null){
 			this.commonstocktimmer=setInterval(()=>{
 				this.getcommonselectstock([this.commonstock[0].tradeMins])
-			},15000)
+			},1500)
 		}
   },
   methods: {
@@ -172,7 +172,6 @@ export default {
 			}
 			this.$httpReq(options).then((res) => {
 				// 请求成功的回调
-				console.log('50etf指数',res)
 				if(res.result==1 && res.ldata[0].updated===true){
 					this.commonstock=res.ldata
 					this.setcommonstock(res.ldata)

@@ -4,11 +4,10 @@
 
     <image class="bg" src='/static/mineImg/inviteFriendBg.png'></image>
     <view class="QRcode">
-			<qrcode-vue :logoSrc="imageUrl" :text="codeValue" margin='0' logoScale='200' size='158'></qrcode-vue>
+			<qrcode-vue :logoSrc="imageUrl" :text="baseurl" margin='0' logoScale='200' size='158'></qrcode-vue>
     </view>
 		
-
-    <view class="txt">{{codeValue}}/100</view>
+    <view class="txt">{{baseurl}}</view>
 
     <view class="btn">
       <btn-block txt='复制' @v-tap='copy'></btn-block>
@@ -19,6 +18,7 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import QrcodeVue from 'vue-qr'
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -29,13 +29,19 @@ export default {
        imageUrl:'h5/static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
+	computed: {
+		...mapState(['userinfo']),
+     baseurl() {
+				return this.codeValue+'/'+this.userinfo.user_id
+			}
+		},
   components: { 
 	 btnBlock,
 	 QrcodeVue
 	 },
   methods: {
     copy() {
-      var str = 'http://wxv.zjkj888.cn/m/register/100';
+      var str = this.baseurl;
       //#ifdef H5
       var oInput = document.createElement('input');
       oInput.value = str;
@@ -52,7 +58,6 @@ export default {
       uni.setClipboardData({
         data: str,
         success () {
-          console.log('success');
           uni.showToast({
             title: '复制成功',
             duration: 500
@@ -101,6 +106,9 @@ view.wrap {
     color: rgba(51, 51, 51, 1);
     line-height: 15px;
     text-align: center;
+		word-wrap: break-word;
+		width: 80%;
+		margin-left: 10%;
   }
   view.btn {
     padding: 0 53upx;

@@ -1,6 +1,6 @@
 <template>
   <view class="wrap">
-    <headerCard></headerCard>
+    <headerCard :newlength='newlength'></headerCard>
     <view class="items" >
       <view class="uni-flex" hover-class="self-hover"  @tap="go('capital_flow/capital_flow')" >
         <image src="/static/mineImg/01.png" />
@@ -60,7 +60,9 @@ import headerCard from '@/components/mineSub/headerCard.vue'
 import { mapState } from 'vuex';
 export default {
   data() {
-    return {}
+    return {
+			newlength:''
+		}
   },
 	computed: mapState(['sid']),
   methods: {
@@ -107,8 +109,33 @@ export default {
 			}else{
 				uni.navigateTo({ url:'/pages/mine_sub/'+href })
 			} 
-    }
+    },
+			getmymessage(){
+			var options = {
+					url: '/Sapi/Ucenter/message_list', //请求接口
+					method: 'GET', //请求方法全部大写，默认GET
+					data: {
+							page_index: 0,
+							page_size: 7,
+					},
+			}
+			this.$httpReq(options).then((res) => {
+					// 请求成功的回调
+					// res为服务端返回数据的根对象
+					console.log('我的消息', res)
+					if(res.status){
+						this.newlength = res.data.list.length
+						// this.newlength = 3
+					}
+			}).catch((err) => {
+					// 请求失败的回调
+					console.log(err)
+			})
+		},
   },
+	onLoad(){
+		this.getmymessage()
+	},
   components: {
     headerCard
   }

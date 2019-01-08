@@ -242,7 +242,6 @@ export default {
 								 bankObj.value=res.data.list[i].sub_id
 								 this.pickerSubBankArray.push(bankObj)
 							 }
-							 console.log(333,this.pickerSubBankArray)
 						}else{
 								
 						}

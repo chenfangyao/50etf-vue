@@ -28,9 +28,6 @@ export default {
     }
   },
 	created(){
-// 		setTimeout(()=>{
-// 			console.log(333,this.commonstock)
-// 		},2000)	
 	}
 }
 </script>

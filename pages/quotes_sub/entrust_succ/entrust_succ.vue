@@ -10,6 +10,7 @@
 </template>
 
 <script>
+	import {mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -17,14 +18,16 @@ export default {
     };
   },
   methods:{
+		...mapMutations(['setweituoindex']),
     go(){
       uni.navigateBack({
         delta:1
       })
     },
       gowt(){
+				  this.setweituoindex(2)
           uni.switchTab({
-              url: '/pages/tabBar/holding_warehouse/holding_warehouse'
+              url: '/pages/tabBar/holding_warehouse/holding_warehouse?tabindex=2'
           })
       }
   }
