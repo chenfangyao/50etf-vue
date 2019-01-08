@@ -24,7 +24,7 @@ export var commonOption = {
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '15:00') } },
+      axisLabel: { interval: (i, val) => { return (i == 3 || val == '11:30' || val == '15:00') } },
     },
     {
       gridIndex: 1,
@@ -35,13 +35,35 @@ export var commonOption = {
       axisTick: { show: false },
       axisLine: { show: false },
     }],
+
+  itemStyle: { color: '#7fbe9e' },
+
+}
+export var optionK = {
+  ...commonOption,
+  legend: {
+    data: ['MA5', 'MA10', 'MA20', 'MA30']
+  },
+  visualMap: {
+    show: false,
+    seriesIndex: 5,
+    dimension: 2,
+    pieces: [{
+      value: 1,
+      color: '#ec0000'
+    }, {
+      value: -1,
+      color: '#32a632'
+    }]
+  },
   yAxis: [
     {
-      scale: true,
       splitLine: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
-      // axisLabel: { show: false },
+      axisLabel: { show: false },
+      min: 'dataMin',
+      max: 'dataMax',
     },
     {
       scale: true,
@@ -51,14 +73,6 @@ export var commonOption = {
       axisTick: { show: false },
       splitLine: { show: false }
     }],
-  itemStyle: { color: '#7fbe9e' },
-
-}
-export var optionK = {
-  ...commonOption,
-  legend: {
-    data: ['MA5', 'MA10', 'MA20', 'MA30']
-  },
   grid: [
     {
       left: 5,
@@ -102,7 +116,7 @@ export var optionK = {
       yAxisIndex: 0,
       smooth: true,
       lineStyle: {
-        normal: { opacity: 0.5 }
+        normal: { width: 1 }
       },
       itemStyle: { color: '#ec605e' }
     },
@@ -116,7 +130,7 @@ export var optionK = {
       smooth: true,
       itemStyle: { color: '#3aba8f' },
       lineStyle: {
-        normal: { opacity: 0.5 }
+        normal: { width: 1 }
       }
     },
     {
@@ -129,7 +143,7 @@ export var optionK = {
       itemStyle: { color: '#409de5' },
       smooth: true,
       lineStyle: {
-        normal: { opacity: 0.5 }
+        normal: { width: 1 }
       }
     },
     {
@@ -142,7 +156,7 @@ export var optionK = {
       smooth: true,
       itemStyle: { color: '#e6aa12' },
       lineStyle: {
-        normal: { opacity: 0.5 }
+        normal: { width: 1 }
       }
     },
     {
@@ -164,11 +178,39 @@ export var optionK = {
 }
 export var option = {
   ...commonOption,
+  yAxis: [
+    {
+      splitLine: { show: false },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      interval: 0.0001,
+
+    },
+    {
+      scale: true,
+      gridIndex: 1,
+      // axisLabel: { show: false },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { show: false }
+    }],
+  visualMap: {
+    show: false,
+    seriesIndex: 1,
+    dimension: 2,
+    pieces: [{
+      value: 1,
+      color: '#ec0000'
+    }, {
+      value: -1,
+      color: '#32a632'
+    }]
+  },
   grid: [
     {
       left: 3,
-      right: 3,
-      top: 5,
+      right: 13,
+      top: 0,
       bottom: 80,
     },
     {
@@ -198,7 +240,7 @@ export var option = {
       data: [],
       symbol: 'none',
       lineStyle: {
-        normal: { opacity: 1 }
+        normal: { opacity: 1, width: 1 }
       },
       areaStyle: {
         opacity: 0.5,

@@ -83,7 +83,7 @@ export default {
       val.forEach(item => {
         let obj = { ...item }
         obj.last_price = Number(item.last_price).toFixed(4)
-        obj.incr_percent = Number(item.incr_percent*100).toFixed(2)
+        obj.incr_percent = Number(item.incr_percent * 100).toFixed(2)
         arr.push(obj)
       });
       return arr
@@ -93,7 +93,7 @@ export default {
       var difArrUp = []
       var difArrDown = []
       newval.forEach((obj, i) => {
-        if(obj.last_price < oldval[i].last_price){
+        if (obj.last_price < oldval[i].last_price) {
 
           // console.log(obj.last_price , oldval[i].last_price,obj.stock_name);todo
         }
@@ -104,11 +104,12 @@ export default {
       this.calcDiff(difArrDown, 0)
     },
     calcDiff(difArr, Q) {
-      var arr = [...this.inTemArr]//为了少敲几个字
+      var arr = this.inTemArr//为了少敲几个字
       difArr.forEach(item => {
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].gou.stock_code == item) {
             Q == 1 ? (arr[i].gou.isUp = true) : (arr[i].gou.isDown = true)
+            console.log(this.inTemArr[i], arr[i]);
             this.$set(this.inTemArr, i, arr[i])
             this.clearChange(i, 'gou')
             break
@@ -137,7 +138,7 @@ export default {
     quoteList(newval, oldval) {
       this.dealCodeList()
       this.getTemDatas(this.toFixed4(newval))
-      this.compareDiff(newval, oldval)
+      this.compareDiff(newval, oldval)//有缺陷
     },
   }
 }
@@ -146,7 +147,6 @@ export default {
 <style lang="scss" scoped>
 view.wrap {
   justify-content: space-between;
-  padding-left: 25upx;
   height: 70upx;
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
@@ -162,7 +162,6 @@ view.wrap {
     color: #3aba8f;
   }
   text.midTxt {
-    margin: 0 13upx;
     background-color: #eaeeed;
     display: inline-block;
     height: 100%;
@@ -179,7 +178,12 @@ view.wrap {
     display: flex;
     text {
       flex-grow: 1;
+      line-height: 70upx;
     }
+  }
+  view.wrap1:first-child{
+    padding-left: 25upx;
+
   }
   view.wrap1:last-child {
     padding-right: 25upx;
@@ -200,10 +204,18 @@ view.wrap {
     text-align: center;
   }
   view.down_c {
-    background: linear-gradient(-90deg, #3aba8f, #fff);
+    background-color: rgba(240, 95, 92, 0.9);
+
+    text {
+      color: #fff;
+    }
   }
   view.up_c {
-    background: linear-gradient(-90deg, #ec605e, #fff);
+    background-color: rgba(58, 186, 143, 0.9);
+    // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
+    text {
+      color: #fff;
+    }
   }
 }
 </style>

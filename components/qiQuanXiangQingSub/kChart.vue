@@ -56,9 +56,12 @@ export default {
     return {
       tabIndex: 0,
       echarts,
+      minFenshi: 100,//分时的最小值
+      maxFenshi: 0,
       resquestState: 1,//为1时可发请求
       onInit: initChart,
       onInit2: initChartK,
+      stockInfo: {},//分时信息对象，内含最高，最低，昨收
       checkTimmer: null,//监听mpvue-echart 加载完事件
       timmer1: null,//分时线定时器
       timmer2: null,//1分线定时器
@@ -127,17 +130,33 @@ export default {
         this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(2), 60000 * 3))
       }
     },
+    getMinMax(val) {
+      this.minFenshi > val && (this.minFenshi = val)
+      this.maxFenshi < val && (this.maxFenshi = val)
+    },
     dealFenshiData(arr) {
       // if (arr.length === this.fenshiData.length) return;
-      var X = []
+      var X = [, , ,]
       var Yline = []
       var YBar = []
-      arr.forEach(item => {
+      var subBar = []
+      arr.forEach((item, i) => {
         X.push(item.minute)
         Yline.push(item.closePrice)
-        YBar.push(item.volume)
+        this.getMinMax(item.closePrice)
+        subBar = [item.minute]
+        subBar.push(item.volume)
+        if (i == 0) {
+          subBar.push(1)
+        }
+        else if (item.closePrice < arr[i - 1].closePrice) {
+          subBar.push(-1)
+        } else {
+          subBar.push(1)
+        }
+        YBar.push(subBar)
       });
-      X.length < 237 && (X.length = 237)
+      X.length < 240 && (X.length = 245)
       let obj = {
         xAxis: [
           {
@@ -155,7 +174,45 @@ export default {
             name: '成交量',
             data: YBar,
           }
-        ]
+        ],
+        yAxis: [
+          {
+            splitLine: { show: false },
+            axisLine: { show: false },
+            axisTick: { show: false },
+            interval: 0.0001,
+
+            min: (value) => {
+              return value.min * 0.995;
+            },
+            max: (value) => {
+              return value.max * 1.005;
+            },
+            axisLabel: {
+              inside: true, margin: 0,
+              formatter: (val, i) => {
+                var num = Number(val)
+                switch (num) {
+                  case this.stockInfo.preClosePrice:
+                  case this.stockInfo.highPrice:
+                  case this.stockInfo.lowPrice:
+                  case 0.193:
+                    return val
+                  default:
+                    return ''
+                }
+              }
+            },
+
+          },
+          {
+            scale: true,
+            gridIndex: 1,
+            axisLabel: { show: false },
+            axisLine: { show: false },
+            axisTick: { show: false },
+            splitLine: { show: false }
+          }],
       }
       this.fenshiData = arr
       //#ifdef H5
@@ -174,20 +231,34 @@ export default {
       var X = []
       var Yk = []
       var YBar = []
+      var subBar = []
       var MA5 = []
       var MA10 = []
       var MA20 = []
       var MA30 = []
       arr.forEach(item => {
+        subBar = [item.tradeDate]
         X.push(item.tradeDate)
         Yk.push([item.openPrice, item.closePrice, item.lowPrice, item.highPrice])
-        YBar.push(item.amount)
         MA5.push(item.ma5)
         MA10.push(item.ma10)
         MA20.push(item.ma20)
         MA30.push(item.ma30)
+        subBar.push(item.amount)
+        if (item.closePrice < item.openPrice) {
+          subBar.push(-1)
+        } else {
+          subBar.push(1)
+        }
+        YBar.push(subBar)
+
       });
-      // X.length < 237 && (X.length = 237)
+      if (this.tabIndex == 2) {
+        X.length < 237 && (X.length = 237)
+      } else if (this.tabIndex == 1) {
+        X.length < 90 && (X.length = 90)
+
+      }
       let obj = {
         xAxis: [
           {
@@ -267,7 +338,10 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.result == 1) {
+          this.stockInfo = res.mdata.stockInfo
+          console.log(this.stockInfo);
           this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
+
         }
       })
     },
