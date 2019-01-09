@@ -19,6 +19,7 @@ import { mapState, mapMutations } from 'vuex';
 import newsView from '@/components/indexSub/newsView.vue'
 import threeSecurities from '@/components/indexSub/securities3.vue'
 import fourTips from '@/components/indexSub/tips4.vue'
+import util from '@/common/util.js'
 
 export default {
   data() {
@@ -37,26 +38,24 @@ export default {
     threeSecurities,
     fourTips
   },
-  computed: mapState(['isWhite', 'sid', 'username', 'mobile']),
+  computed: mapState(['isWhite', 'sid', 'username', 'mobile','indextimmer']),
   methods: {
     // 登录
-    ...mapMutations(['setsid', 'setusername', 'setmobile']),
+    ...mapMutations(['setsid', 'setusername', 'setmobile','setsoftconf','setindextimmer']),
     // 获取配置信息
     getconfinfo() {
       var options = {
         url: '/Sapi/Soft/conf', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         context: '',
-        header: {
-          clienttype: 'web',
-          ver: 'v1.0',
-          sid: this.sid || ""
-        },
       }
       this.$httpReq(options).then((res) => {
         // 请求成功的回调
         // res为服务端返回数据的根对象
         console.log('用户信息', res)
+		if(res.status){
+			this.setsoftconf(res.data)
+		}
       }).catch((err) => {
         // 请求失败的回调
         console.error(err)
@@ -69,7 +68,7 @@ export default {
         method: 'POST', //请求方法全部大写，默认GET
         data: {
           page_index: 0,
-          page_size: 3,
+          page_size: 8,
           cate_id: 29
         },
       }
@@ -131,20 +130,28 @@ export default {
     }
   },
   onShow() {
+		clearInterval(util.indextimmer.indexCommonSelectStock)
+		util.indextimmer.indexCommonSelectStock = null
+		clearInterval(util.indextimmer.quotesCommonSelectStock)
+		util.indextimmer.quotesCommonSelectStock=null
+		clearInterval(util.indextimmer.quotesQryQuotationList)
+		util.indextimmer.quotesQryQuotationList=null
+		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+		util.indextimmer.quotesQrySingleQuotationMsg = null
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
     this.getcommonselectstock(['', '', ''])
-    if (this.timmer === null) {
-      this.timmer = setInterval(() => {
+    if (util.indextimmer.indexCommonSelectStock === null) {
+	  util.indextimmer.indexCommonSelectStock=setInterval(() => {
         this.getcommonselectstock(this.timestr)
       }, 3000)
-    }
+    }	
   },
 onHide() {
 	console.log('关闭了第一个页面的定时器')
-    clearInterval(this.timmer)
-    this.timmer = null
+    clearInterval(util.indextimmer.indexCommonSelectStock)
+    util.indextimmer.indexCommonSelectStock = null
   },
 }
 </script>

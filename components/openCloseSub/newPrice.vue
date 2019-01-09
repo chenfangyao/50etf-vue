@@ -25,9 +25,9 @@
         <view class="uni-flex line2">
         <view>
             <!-- <image v-if="btn3_i" @tap="plusStep2(-1)" class='opacityclass' src='/static/openCloseImg/minus.png'></image> -->
-            <image  @tap="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
+            <image  @tap="plusStep2(-1)" :class="!btn3_i && !softconf.ent_price_type?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
             <text class=" newPrice" :class="{yellow1:onClose}">{{pricevalue}}</text>
-            <image  @tap="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
+            <image  @tap="plusStep2(1)" :class="!btn3_i && !softconf.ent_price_type?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
         </view>
 
             <view class="uni-flex btn3">
@@ -91,7 +91,6 @@ export default {
   data() {
     return {
       tabActive: false,
-      // btn3Arr: ['最新价', '对手', '排队',],
       btn3Arr: ['市价', '限价'],
       btn3_i: 0,
       sliderVal: 1,
@@ -124,51 +123,53 @@ export default {
       this.btn3_i = i
       this.pricetitle = item
       this.setenttype = i + 1
-      if (i == 0) {
-        this.pricevalue = this.qrysingle.latestPrice
-      }
-      // 暂时注释
-      //       switch (i) {
-      // 		  // 最新价
-      //         case 0:
-      //           // 开仓
-      //           if (!this.onClose) {
-      //             this.pricevalue = this.qrysingle.buyPrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           // 平仓
-      //           else {
-      //             this.pricevalue = this.qrysingle.salePrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           break;
-      // 		  // 对手价
-      //         case 1:
-      //           // 开仓
-      //           if (!this.onClose) {
-      //             this.pricevalue = this.qrysingle.salePrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           // 平仓
-      //           else {
-      //             this.pricevalue = this.qrysingle.salePrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           break;
-      // 		  // 排队价
-      //         case 2:
-      //           // 开仓
-      //           if (!this.onClose) {
-      //             this.pricevalue = this.qrysingle.buyPrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           // 平仓
-      //           else {
-      //             this.pricevalue = this.qrysingle.salePrice1
-      // 						this.setnewprice(this.pricevalue)
-      //           }
-      //           break;
-      //       } 
+			      if(this.softconf.ent_price_type==0){
+							 switch (i) {
+							// 最新价
+							  case 0:
+							    // 开仓
+							    if (!this.onClose) {
+							      this.pricevalue = this.qrysingle.latestPrice
+										this.setnewprice(this.pricevalue)
+							    }
+							    // 平仓
+							    else {
+							      this.pricevalue = this.qrysingle.latestPrice
+										this.setnewprice(this.pricevalue)
+							    }
+							    break;
+							// 对手价
+							  case 1:
+							    // 开仓
+							    if (!this.onClose) {
+							      this.pricevalue = this.qrysingle.salePrice1
+										this.setnewprice(this.pricevalue)
+							    }
+							    // 平仓
+							    else {
+							      this.pricevalue = this.qrysingle.buyPrice1
+										this.setnewprice(this.pricevalue)
+							    }
+							    break;
+							// 排队价
+							  case 2:
+							    // 开仓
+							    if (!this.onClose) {
+							      this.pricevalue = this.qrysingle.buyPrice1
+										this.setnewprice(this.pricevalue)
+							    }
+							    // 平仓
+							    else {
+							      this.pricevalue = this.qrysingle.salePrice1
+										this.setnewprice(this.pricevalue)
+							    }
+							    break;
+							} 
+						}else{
+							 if (i == 0) {
+							  this.pricevalue = this.qrysingle.latestPrice
+							}
+						}
       this.$emit('price-step', { num: this.sliderVal, price: this.pricevalue })
     },
     // 滑块滑动事件
@@ -198,7 +199,7 @@ export default {
     },
     plusStep2(i) {
       // 市价不允许修改
-      if (this.btn3_i == 0) {
+      if (this.btn3_i == 0 && !this.softconf.ent_price_type) {
         return
       }
       if (i == -1) {
@@ -234,8 +235,54 @@ export default {
   watch: {
     qrysingle(val) {
       if (val) {
-        this.pricevalue = this.qrysingle.latestPrice
-        this.setnewprice(this.pricevalue)
+				if(this.softconf.ent_price_type==0){
+					 switch (this.btn3_i) {
+					// 最新价
+					  case 0:
+					    // 开仓
+					    if (!this.onClose) {
+					      this.pricevalue = this.qrysingle.latestPrice
+								this.setnewprice(this.pricevalue)
+					    }
+					    // 平仓
+					    else {
+					      this.pricevalue = this.qrysingle.latestPrice
+								this.setnewprice(this.pricevalue)
+					    }
+					    break;
+					// 对手价
+					  case 1:
+					    // 开仓
+					    if (!this.onClose) {
+					      this.pricevalue = this.qrysingle.salePrice1
+								this.setnewprice(this.pricevalue)
+					    }
+					    // 平仓
+					    else {
+					      this.pricevalue = this.qrysingle.buyPrice1
+								this.setnewprice(this.pricevalue)
+					    }
+					    break;
+					// 排队价
+					  case 2:
+					    // 开仓
+					    if (!this.onClose) {
+					      this.pricevalue = this.qrysingle.buyPrice1
+								this.setnewprice(this.pricevalue)
+					    }
+					    // 平仓
+					    else {
+					      this.pricevalue = this.qrysingle.salePrice1
+								this.setnewprice(this.pricevalue)
+					    }
+					    break;
+					} 
+				}else{
+					 if (this.btn3_i == 0) {
+					  this.pricevalue = this.qrysingle.latestPrice
+						this.setnewprice(this.pricevalue)
+					}
+				}  
       }
     },
     fbcclist(val) {
@@ -262,11 +309,22 @@ export default {
     hbcclist(val) {
       if (val) {
       }
-    }
+    },
+		onClose(val){
+			// 切换委托数量重置为1
+			this.sliderVal=1
+		}
   },
   created() {
-
-  }
+		if(this.softconf.ent_price_type==0){
+			this.btn3Arr=['最新价', '对手', '排队']
+		}else{
+			this.btn3Arr=['市价', '限价']
+		}
+  },
+	computed:{
+		...mapState(['softconf'])
+	}
 }
 </script>
 <style lang="scss" scoped>

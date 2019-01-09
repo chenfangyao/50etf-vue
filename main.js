@@ -7,7 +7,6 @@ import request from '@/common/request.js'
 import store from './store'
 App.mpType = 'app'
 Vue.component('baseHeader', baseHeader)
-
 Vue.prototype.$httpReq = request
 Vue.prototype.$store = store
 // 时间格式化2

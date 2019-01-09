@@ -4,7 +4,7 @@
   <view class="title">
     <view class="msg">
       <text @tap='go(3) ' class="commonStyle1">消息</text>
-      <uni-badge :text="newlength" type="danger"></uni-badge>
+      <uni-badge :text="txt" type="danger"></uni-badge>
     </view>
     <text class="commonStyle1" @tap='go'>设置</text>
   </view>
@@ -15,11 +15,14 @@ import uniBadge from "@/components/uni-badge.vue"
 export default {
 	data(){
 		return{
-			txt:1
+			txt:'0'
 		}
 	},
   components: { uniBadge },
 	props:['newlength'],
+	created(){
+		this.txt=this.newlength.toString()
+	},
   methods: {
     go(i) {
       if (i == 3) {

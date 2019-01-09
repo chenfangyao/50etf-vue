@@ -68,10 +68,21 @@ var dateUtils = {
 		return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
 	}
 };
+var timemers={
+	// 首页定时器
+	indexCommonSelectStock:null,
+	// 行情页合约列表定时器
+	quotesQryQuotationList:null,
+	// 行情页50etf股票定时器
+	quotesCommonSelectStock:null,
+	// 行情页单个合约定时器
+	quotesQrySingleQuotationMsg:null	
+}
 
 module.exports = {
 	formatTime: formatTime,
 	formatLocation: formatLocation,
 	dateUtils: dateUtils,
-	formateTimeStr:formateTimeStr
+	formateTimeStr:formateTimeStr,
+	indextimmer:timemers
 }

@@ -41,6 +41,8 @@ const store = new Vuex.Store({
 	taglist:{},
 	// 委托的index
 	weituoindex:0,
+	// 软件配置信息
+	softconf:{},
   },
   mutations: {
     login(state, provider) {
@@ -113,7 +115,10 @@ const store = new Vuex.Store({
 	},
 	setweituoindex(state,data){
 		state.weituoindex=data
-	}
+	},
+	setsoftconf(state,data){
+		state.softconf=data
+	},
   },
 })
 

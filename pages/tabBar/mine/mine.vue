@@ -58,13 +58,14 @@
 <script>
 import headerCard from '@/components/mineSub/headerCard.vue'
 import { mapState } from 'vuex';
+import util from '@/common/util.js'
 export default {
   data() {
     return {
 			newlength:''
 		}
   },
-	computed: mapState(['sid']),
+	computed: mapState(['sid','indextimmer']),
   methods: {
     go(href) {
 			if(!this.sid){
@@ -133,7 +134,16 @@ export default {
 			})
 		},
   },
-	onLoad(){
+	onShow(){
+		clearInterval(util.indextimmer.indexCommonSelectStock)
+		util.indextimmer.indexCommonSelectStock = null
+		clearInterval(util.indextimmer.quotesCommonSelectStock)
+		util.indextimmer.quotesCommonSelectStock=null
+		clearInterval(util.indextimmer.quotesQryQuotationList)
+		util.indextimmer.quotesQryQuotationList=null
+		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+		util.indextimmer.quotesQrySingleQuotationMsg = null
+		
 		this.getmymessage()
 	},
   components: {
