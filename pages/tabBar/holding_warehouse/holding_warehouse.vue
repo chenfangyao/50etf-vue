@@ -34,6 +34,7 @@ import uniLoadMore from '@/components/uni-load-more.vue';
 
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 import { mapState, mapMutations } from 'vuex';
+import util from '@/common/util.js'
 
 export default {
   data() {
@@ -126,6 +127,15 @@ export default {
 //     this.getFenbiList(this.tabI)
 //   },
 	onShow(){
+		clearInterval(util.indextimmer.indexCommonSelectStock)
+		util.indextimmer.indexCommonSelectStock = null
+		clearInterval(util.indextimmer.quotesCommonSelectStock)
+		util.indextimmer.quotesCommonSelectStock=null
+		clearInterval(util.indextimmer.quotesQryQuotationList)
+		util.indextimmer.quotesQryQuotationList=null
+		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+		util.indextimmer.quotesQrySingleQuotationMsg = null
+		
 		if(this.weituoindex==2){
 			this.tabI=this.weituoindex
 		}

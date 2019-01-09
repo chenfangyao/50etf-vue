@@ -22,6 +22,7 @@ import newPrice from '@/components/openCloseSub/newPrice.vue'
 import totalCost from '@/components/openCloseSub/totalCost.vue'
 import bottomBtn from '@/components/openCloseSub/bottomBtn.vue'
 import { mapState, mapMutations } from 'vuex'
+import util from '@/common/util.js'
 
 export default {
   data() {
@@ -77,7 +78,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-		  this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
+		  // this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -194,14 +195,14 @@ export default {
   },
   onUnload() {
     console.log('关闭开仓平仓定时器')
-    clearInterval(this.getdatainter)
-    this.timmer = null
+    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+    util.indextimmer.quotesQrySingleQuotationMsg = null
   },
   onLoad(option) {
     this.symbol = option.code
     this.getartlelist()
-      if(this.timmer===null){
-          this.timmer = setInterval(() => {
+      if(util.indextimmer.quotesQrySingleQuotationMsg===null){
+          util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
               this.getartlelist()
           }, 1500)
       }

@@ -65,7 +65,15 @@ export default {
 					console.log(res)
 					if (res.status == 1) {
 						this.showErr=false
-						uni.navigateTo({ url:'/pages/login/login' })
+						uni.showToast({
+							title: '修改成功',
+							mask: false,
+							duration: 2000
+						});
+						setTimeout(()=>{
+							uni.navigateTo({ url:'/pages/login/login' })
+						},1500)
+						
 					}else{
 						this.showErr=true
 							if(res.info){

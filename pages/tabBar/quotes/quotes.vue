@@ -26,6 +26,7 @@ import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
 
 import uniLoadMore from '@/components/uni-load-more.vue';
 import { mapState, mapMutations } from 'vuex';
+import util from '@/common/util.js'
 
 export default {
   components: {
@@ -52,16 +53,25 @@ export default {
 	computed: mapState(['taglist']),
   onHide(){
 	console.log('关闭了第二个页面的定时器')
-    clearInterval(this.timmer)
-    clearInterval(this.commonstocktimmer)
-    this.timmer = null
-    this.commonstocktimmer = null
+    clearInterval(util.indextimmer.quotesQryQuotationList)
+    clearInterval(util.indextimmer.quotesCommonSelectStock)
+    util.indextimmer.quotesQryQuotationList = null
+    util.indextimmer.quotesCommonSelectStock = null
   },
   onShow() {
+		clearInterval(util.indextimmer.indexCommonSelectStock)
+		util.indextimmer.indexCommonSelectStock = null
+		clearInterval(util.indextimmer.quotesCommonSelectStock)
+		util.indextimmer.quotesCommonSelectStock=null
+		clearInterval(util.indextimmer.quotesQryQuotationList)
+		util.indextimmer.quotesQryQuotationList=null
+		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+		util.indextimmer.quotesQrySingleQuotationMsg = null
+		
     this.beginPolling()
 		this.getcommonselectstock([''])
-		if(this.commonstocktimmer===null){
-			this.commonstocktimmer=setInterval(()=>{
+if(util.indextimmer.quotesCommonSelectStock===null){
+			util.indextimmer.quotesCommonSelectStock=setInterval(()=>{
 				this.getcommonselectstock([this.commonstock[0].tradeMins])
 			},1500)
 		}
@@ -76,8 +86,8 @@ export default {
       // }, 1200);
     },
     beginPolling() {
-      if (this.timmer === null) {
-        this.timmer = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+      if (util.indextimmer.quotesQryQuotationList === null) {
+        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {
