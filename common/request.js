@@ -34,6 +34,8 @@ export default function (obj) {
     // baseUrl = 'http://172.26.63.164:8184'
   } else if (obj.url.indexOf('getCommonSelectStock') != -1 || obj.url.indexOf('getTimeSharingInfo') != -1) {
     baseUrl = 'http://47.100.165.236:8181'
+  }else if (obj.url.indexOf('/market') != -1) {
+    baseUrl='http://50etfvue.cardoctor.com.cn'
   }
   var p = new Promise((resolve, reject) => {
     uni.request({

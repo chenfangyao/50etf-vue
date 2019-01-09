@@ -15,8 +15,8 @@ import mpvueEcharts from 'mpvue-echarts'
 
 let chartK = null;
 
-var upColor = '#ec0000';
-var upBorderColor = '#8A0000';
+var upColor = '#f05f5c';
+var upBorderColor = '#f05f5c';
 var downColor = '#00da3c';
 var downBorderColor = '#008F28';
 

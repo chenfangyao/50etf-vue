@@ -1,9 +1,11 @@
 export const commonOption = {
-  /*  tooltip: {
-     trigger: 'axis',
+   tooltip: {
+     trigger: 'item',
+     triggerOn :'mousemove',
      axisPointer: {
        type: 'cross'
      },
+     alwaysShowContent:false,
      position(pos, params, el, elRect, size) {
        const obj = {
          top: 60
@@ -11,7 +13,7 @@ export const commonOption = {
        obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
        return obj;
      },
-   }, */
+   },
   animation: false,
   itemStyle: { color: '#7fbe9e' },
 
@@ -45,10 +47,10 @@ export const optionK = {
     dimension: 2,
     pieces: [{
       value: 1,
-      color: '#ec0000'
+      color: '#f05f5c'
     }, {
       value: -1,
-      color: '#32a632'
+      color: '#3aba8f'
     }]
   },
 
@@ -100,10 +102,10 @@ export const optionK = {
       yAxisIndex: 0,
       itemStyle: {
         normal: {
-          color: '#ec0000',
-          color0: '#00da3c',
-          borderColor: '#8A0000',
-          borderColor0: '#008F28'
+          color: '#f05f5c',
+          color0: '#3aba8f',
+          borderColor: '#f05f5c',
+          borderColor0: '#3aba8f'
         }
       },
     },
@@ -235,10 +237,10 @@ export const option = {
     dimension: 2,
     pieces: [{
       value: 1,
-      color: '#ec0000'
+      color: '#f05f5c'
     }, {
       value: -1,
-      color: '#32a632'
+      color: '#3aba8f'
     }]
   },
   grid: [
@@ -264,7 +266,7 @@ export const option = {
       data: [],
       symbol: 'none',
       lineStyle: {
-        normal: { opacity: 1, width: 1 }
+        normal: { opacity: 1, width: 1 },
       },
       areaStyle: {
         opacity: 0.5,

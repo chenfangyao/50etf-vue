@@ -115,7 +115,7 @@ export default {
         setTimeout(() => {
           h5ChartK = echarts.init(document.getElementById('canvas2'));
           h5ChartK.setOption(optionK)
-        }, 0)
+        }, 50)
       }
       //#endif
       this.getDayK(j)
@@ -188,7 +188,7 @@ export default {
               data: [
                 {
                   yAxis: this.stockInfo.preClosePrice.toFixed(4),
-                  lineStyle: { color: '#e6aa12' },
+                  lineStyle: { color: '#e6aa12', opacity: 1 },
                   label: { formatter: '0.00%' },
                 },
                 {
@@ -261,7 +261,7 @@ export default {
       var X = []
       var YBar = []
       var subBar = []
-      var MA_k=[[],[],[],[],[]]
+      var MA_k = [[], [], [], [], []]
       arr.forEach(item => {
         subBar = [item.tradeDate]
         X.push(item.tradeDate)
@@ -278,7 +278,7 @@ export default {
         }
         YBar.push(subBar)
       });
-      let obj=optionK
+      let obj = optionK
       if (this.tabIndex == 2) {
         X.length < 237 && (X.length = 237)
         obj = option1k
@@ -288,15 +288,21 @@ export default {
       obj.xAxis[0].data = X
       obj.xAxis[1].data = X
       obj.series[5].data = YBar
-      for(let i=0;i<MA_k.length;i++){
-        obj.series[i].data=MA_k[i]
+      for (let i = 0; i < MA_k.length; i++) {
+        obj.series[i].data = MA_k[i]
+      }
+      obj.series[0].itemStyle = {
+        color: '#f05f5c',
+        color0: '#3aba8f',
+        borderColor: '#f05f5c',
+        borderColor0: '#3aba8f'
       }
       //#ifdef H5
       h5ChartK && h5ChartK.setOption(obj, true)
       //#endif
       //#ifndef H5
       if (chartK) {
-        chartK.setOption(obj,true)
+        chartK.setOption(obj, true)
       } else {
         setTimeout(() => {
           this.$refs.k_tu.init()
