@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       res2arr: [],//暂存分好购沽的数据,
-      inTemArr: []
+      inTemArr: [],
     }
   },
   props: ['quoteList', 'codeList'],
@@ -76,7 +76,7 @@ export default {
           }
         }
       })
-      this.inTemArr = this.res2arr.sort((a, b) => { return a.gou.exercise_price - b.gou.exercise_price })
+      this.inTemArr = this.res2arr.sort((a, b) => a.gou.exercise_price - b.gou.exercise_price)
     },
     toFixed4(val) {
       var arr = []
@@ -89,16 +89,11 @@ export default {
       return arr
     },
     compareDiff(newval, oldval) {
-      if (newval.length != oldval.length) return;
       var difArrUp = []
       var difArrDown = []
       newval.forEach((obj, i) => {
-        if (obj.last_price < oldval[i].last_price) {
-
-          // console.log(obj.last_price , oldval[i].last_price,obj.stock_name);todo
-        }
-        obj.last_price < oldval[i].last_price && difArrDown.push(obj.stock_code)//价格不等
-        obj.last_price > oldval[i].last_price && difArrUp.push(obj.stock_code)//价格不等
+        obj.last_price < oldval[i].last_price && difArrDown.push(obj)//价格不等
+        obj.last_price > oldval[i].last_price && difArrUp.push(obj)//价格不等
       })
       this.calcDiff(difArrUp, 1)
       this.calcDiff(difArrDown, 0)
@@ -107,14 +102,17 @@ export default {
       var arr = this.inTemArr//为了少敲几个字
       difArr.forEach(item => {
         for (let i = 0; i < arr.length; i++) {
-          if (arr[i].gou.stock_code == item) {
+          if (arr[i].gou.stock_code == item.stock_code) {
+            arr[i].gou.last_price = item.last_price
+            arr[i].gou.incr_percent = item.incr_percent
             Q == 1 ? (arr[i].gou.isUp = true) : (arr[i].gou.isDown = true)
-            console.log(this.inTemArr[i], arr[i]);
             this.$set(this.inTemArr, i, arr[i])
             this.clearChange(i, 'gou')
             break
           }
-          if (arr[i].gu.stock_code == item) {
+          if (arr[i].gu.stock_code == item.stock_code) {
+            arr[i].gu.last_price = item.last_price
+            arr[i].gu.incr_percent = item.incr_percent
             Q == 1 ? (arr[i].gu.isUp = true) : (arr[i].gu.isDown = true)
             this.$set(this.inTemArr, i, arr[i])
             this.clearChange(i, 'gu')
@@ -133,12 +131,14 @@ export default {
     }
 
   },
-
   watch: {
     quoteList(newval, oldval) {
-      this.dealCodeList()
-      this.getTemDatas(this.toFixed4(newval))
-      this.compareDiff(newval, oldval)//有缺陷
+      if (newval.length != oldval.length) {
+        this.dealCodeList()
+        this.getTemDatas(this.toFixed4(newval))
+      } else {
+        this.compareDiff(newval, oldval)//有缺陷
+      }
     },
   }
 }
@@ -181,9 +181,8 @@ view.wrap {
       line-height: 70upx;
     }
   }
-  view.wrap1:first-child{
+  view.wrap1:first-child {
     padding-left: 25upx;
-
   }
   view.wrap1:last-child {
     padding-right: 25upx;
@@ -204,14 +203,13 @@ view.wrap {
     text-align: center;
   }
   view.down_c {
-    background-color: rgba(240, 95, 92, 0.9);
-
+    background-color: rgba(58, 186, 143, 0.9);
     text {
       color: #fff;
     }
   }
   view.up_c {
-    background-color: rgba(58, 186, 143, 0.9);
+    background-color: rgba(240, 95, 92, 0.9);
     // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
     text {
       color: #fff;

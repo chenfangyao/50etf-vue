@@ -1,29 +1,31 @@
-export var commonOption = {
-  //#ifdef H5
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross'
-    },
-    position(pos, params, el, elRect, size) {
-      var obj = {
-        top: 60
-      };
-      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-      return obj;
-    }
-  },
-  //#endif
+export const commonOption = {
+  /*  tooltip: {
+     trigger: 'axis',
+     axisPointer: {
+       type: 'cross'
+     },
+     position(pos, params, el, elRect, size) {
+       const obj = {
+         top: 60
+       };
+       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+       return obj;
+     },
+   }, */
   animation: false,
+  itemStyle: { color: '#7fbe9e' },
+
+}
+export const optionK = {
+  ...commonOption,
   xAxis: [
     {
       data: [],
       boundaryGap: false,
-      axisLine: { onZero: false },
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { interval: (i, val) => { return (i == 3 || val == '11:30' || val == '15:00') } },
+      axisLabel: { interval: (i, val) => { return i < 3 }, margin: 15 },
     },
     {
       gridIndex: 1,
@@ -34,12 +36,6 @@ export var commonOption = {
       axisTick: { show: false },
       axisLine: { show: false },
     }],
-
-  itemStyle: { color: '#7fbe9e' },
-
-}
-export var optionK = {
-  ...commonOption,
   legend: {
     data: ['MA5', 'MA10', 'MA20', 'MA30']
   },
@@ -55,18 +51,24 @@ export var optionK = {
       color: '#32a632'
     }]
   },
+
   yAxis: [
     {
-      splitLine: { show: false },
+      position: 'right',
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { show: false },
       scale: true,
+      splitNumber: 2,
+      axisLabel: {
+        inside: true, margin: 0,
+        // showMaxLabel: true,
+        // showMinLabel: true,
+      },
     },
     {
       scale: true,
       gridIndex: 1,
-      // axisLabel: { show: false },
+      // axisLabel: { },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
@@ -75,7 +77,7 @@ export var optionK = {
     {
       left: 5,
       right: 5,
-      top: 10,
+      top: 30,
       bottom: 100,
     },
     {
@@ -174,22 +176,55 @@ export var optionK = {
     }
   ]
 }
-export var option = {
+export const option1k = {
+  ...optionK,
+  dataZoom: [{
+    type: 'inside',
+    start: 85,
+    end: 100,
+    xAxisIndex: [0, 1],
+    zoomLock: true,
+    throttle: 0
+  },],
+}
+export const option5k = {}
+export const optionRk = {}
+export const option = {
   ...commonOption,
-  yAxis: [
+  xAxis: [
     {
-      splitLine: { show: false },
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      interval: 0.0001,
+      axisLabel: { interval: (i, val) => { return (i == 3 || val == '11:30' || val == '15:00') }, margin: 15 },
+    },
+    {
+      gridIndex: 1,
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false },
+      axisLabel: { show: false },
+      axisTick: { show: false },
+      axisLine: { show: false },
+    }],
+  yAxis: [
+    {
+      axisLabel: {
+        inside: true, margin: 0,
+        showMaxLabel: true,
+        showMinLabel: true,
+      },
+      splitLine: { show: false, },
+      axisLine: { show: false, lineStyle: { color: '#666' } },
+      axisTick: { show: false },
       scale: true,
-
-
+      interval: 0.0001,
     },
     {
       scale: true,
       gridIndex: 1,
-      // axisLabel: { show: false },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
@@ -209,8 +244,8 @@ export var option = {
   grid: [
     {
       left: 3,
-      right: 13,
-      top: 0,
+      right: 50,
+      top: 10,
       bottom: 80,
     },
     {
@@ -221,18 +256,7 @@ export var option = {
     },
   ],
   itemStyle: { color: '#4AB9BB' },
-  /* dataZoom: [
-    {
-      type: 'inside',
-      start: 50,
-      end: 100,
-      zoomLock: true,
-      throttle: 0,
-    },
-  ],  */
-  /* legend: {
-     data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
-   }, */
+
   series: [
     {
       name: '当前价',

@@ -6,11 +6,11 @@
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view class="h278" v-show="tabIndex==0"  @tap='go'>
-      <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad  :onInit="onInit" canvasId="m-canvas" />
+    <view class="h278" v-show="tabIndex==0" @tap='go'>
+      <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
     </view>
     <view class="h358" v-show="tabIndex!=0">
-      <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad  :onInit="onInit2" canvasId="m-canvas2" />
+      <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad :onInit="onInit2" canvasId="m-canvas2" />
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
@@ -23,7 +23,7 @@
 <script>
 import echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
-import { commonOption, option, optionK } from './EchartOption.js'
+import { option, optionK, option1k, option5k, optionRk } from './EchartOption.js'
 let chart = null;//AppEcharts实例
 let chartK = null;//AppEcharts实例K线图
 
@@ -58,6 +58,8 @@ export default {
       echarts,
       minFenshi: 100,//分时的最小值
       maxFenshi: 0,
+      Ymax: '',
+      Ymin: '',
       resquestState: 1,//为1时可发请求
       onInit: initChart,
       onInit2: initChartK,
@@ -66,7 +68,6 @@ export default {
       timmer1: null,//分时线定时器
       timmer2: null,//1分线定时器
       timmer3: null,//5分线定时器
-      fenshiData: [],//分时图总数据
       topTabs: [
         {
           name: '分时',
@@ -136,16 +137,16 @@ export default {
     },
     calcMinMax() {
       var val = ''
-      if (this.maxFenshi - this.stockInfo.preClosePrice >= this.stockInfo.preClosePrice - this.minFenshi) {
-        val = Math.abs(this.maxFenshi - this.stockInfo.preClosePrice)
+      if (this.stockInfo.highPrice - this.stockInfo.preClosePrice >= this.stockInfo.preClosePrice - this.stockInfo.lowPrice) {
+        val = Math.abs(this.stockInfo.highPrice - this.stockInfo.preClosePrice)
       } else {
-        val = Math.abs(this.stockInfo.preClosePrice - this.minFenshi)
+        val = Math.abs(this.stockInfo.preClosePrice - this.stockInfo.lowPrice)
       }
-      this.Ymax = this.stockInfo.preClosePrice + val * 1.005
-      this.Ymin = this.stockInfo.preClosePrice - val * 1.005
+      this.Ymax = (this.stockInfo.preClosePrice + val * 1.005).toFixed(4)
+      this.Ymin = (this.stockInfo.preClosePrice - val * 1.005).toFixed(4)
+      console.log(this.stockInfo);
     },
     dealFenshiData(arr) {
-      // if (arr.length === this.fenshiData.length) return;
       var X = [, , ,]
       var Yline = []
       var YBar = []
@@ -166,8 +167,9 @@ export default {
         }
         YBar.push(subBar)
       });
+
       this.calcMinMax()
-      X.length < 240 && (X.length = 245)
+      X.length < 240 && (X.length = 240)
       let obj = {
         xAxis: [
           {
@@ -180,6 +182,27 @@ export default {
           {
             name: '当前价',
             data: Yline,
+            markLine: {
+              symbol: ['none', 'none'],
+              lineStyle: { opacity: 0.5 },
+              data: [
+                {
+                  yAxis: this.stockInfo.preClosePrice.toFixed(4),
+                  lineStyle: { color: '#e6aa12' },
+                  label: { formatter: '0.00%' },
+                },
+                {
+                  yAxis: this.Ymax + '',
+                  label: { formatter: () => ((this.Ymax - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
+                },
+                {
+                  yAxis: this.Ymin + '',
+                  label: { formatter: () => ((this.Ymin - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
+
+                },
+
+              ]
+            }
           },
           {
             name: '成交量',
@@ -188,23 +211,16 @@ export default {
         ],
         yAxis: [
           {
-            splitLine: { show: false },
-            axisLine: { show: false },
-            axisTick: { show: false },
-            interval: 0.0001,
             max: this.Ymax,
             min: this.Ymin,
             axisLabel: {
-              inside: true, margin: 0,
-              showMaxLabel: true,
-              showMinLabel: true,
               formatter: (val, i) => {
                 var num = Number(val.toFixed(4))
-                var max = Number((this.Ymax * 0.99).toFixed(4))
-                var midMax = (max - this.stockInfo.preClosePrice) / 2
+                var max = Number(this.Ymax)
+                var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
                 midMax = Number(midMax.toFixed(4))
-                var min = Number((this.Ymin * 1.01).toFixed(4))
-                var midMin = (this.stockInfo.preClosePrice - min) / 2
+                var min = Number(this.Ymin)
+                var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
                 midMin = Number(midMin.toFixed(4))
                 switch (num) {
                   case this.stockInfo.preClosePrice:
@@ -229,7 +245,6 @@ export default {
             splitLine: { show: false }
           }],
       }
-      this.fenshiData = arr
       //#ifdef H5
       h5Chart.setOption(obj)
       //#endif
@@ -244,21 +259,17 @@ export default {
     },
     dealKData(arr) {
       var X = []
-      var Yk = []
       var YBar = []
       var subBar = []
-      var MA5 = []
-      var MA10 = []
-      var MA20 = []
-      var MA30 = []
+      var MA_k=[[],[],[],[],[]]
       arr.forEach(item => {
         subBar = [item.tradeDate]
         X.push(item.tradeDate)
-        Yk.push([item.openPrice, item.closePrice, item.lowPrice, item.highPrice])
-        MA5.push(item.ma5)
-        MA10.push(item.ma10)
-        MA20.push(item.ma20)
-        MA30.push(item.ma30)
+        MA_k[0].push([item.openPrice, item.closePrice, item.lowPrice, item.highPrice])
+        MA_k[1].push(item.ma5)
+        MA_k[2].push(item.ma10)
+        MA_k[3].push(item.ma20)
+        MA_k[4].push(item.ma30)
         subBar.push(item.amount)
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
@@ -266,55 +277,26 @@ export default {
           subBar.push(1)
         }
         YBar.push(subBar)
-
       });
+      let obj=optionK
       if (this.tabIndex == 2) {
         X.length < 237 && (X.length = 237)
+        obj = option1k
       } else if (this.tabIndex == 1) {
-        X.length < 90 && (X.length = 90)
-
+        X.length < 60 && (X.length = 60)
       }
-      let obj = {
-        xAxis: [
-          {
-            data: X,
-          },
-          {
-            data: X,
-          }],
-        series: [
-          {
-            name: 'K',
-            data: Yk,
-          },
-          {
-            name: 'MA5',
-            data: MA5,
-          },
-          {
-            name: 'MA10',
-            data: MA10,
-          },
-          {
-            name: 'MA20',
-            data: MA20,
-          },
-          {
-            name: 'MA30',
-            data: MA30,
-          },
-          {
-            name: '成交量',
-            data: YBar,
-          }
-        ]
+      obj.xAxis[0].data = X
+      obj.xAxis[1].data = X
+      obj.series[5].data = YBar
+      for(let i=0;i<MA_k.length;i++){
+        obj.series[i].data=MA_k[i]
       }
       //#ifdef H5
-      h5ChartK && h5ChartK.setOption(obj)
+      h5ChartK && h5ChartK.setOption(obj, true)
       //#endif
       //#ifndef H5
       if (chartK) {
-        chartK.setOption(obj)
+        chartK.setOption(obj,true)
       } else {
         setTimeout(() => {
           this.$refs.k_tu.init()
@@ -354,7 +336,6 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.result == 1) {
           this.stockInfo = res.mdata.stockInfo
-          console.log(this.stockInfo);
           this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
 
         }
