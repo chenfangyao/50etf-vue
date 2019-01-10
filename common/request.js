@@ -17,7 +17,6 @@ export default function (obj) {
   // #ifdef H5
   sid = sessionStorage.getItem('etf_sid') || ""
   // #endif
-
   obj.header = obj.header || {}
   Object.assign(obj.header, {
     clienttype: 'web',

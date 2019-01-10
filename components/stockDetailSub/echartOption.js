@@ -25,18 +25,10 @@ export const optionK = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false, },
-      axisLine: { show: false },
-      axisTick: { show: false },
+      axisLine: { lineStyle:{color:'#aaa'} },
+      // axisTick: { show: false },
       axisLabel: {
-        interval: (i, val) => {
-          switch (val) {
-            case '09:30':
-            case '11:30':
-            case '15:00':
-              return true
-          }
-        },
-        margin: 15, align: 'left'
+        splitNumber: 2, align: 'left',
       },
     },
     {
@@ -66,22 +58,26 @@ export const optionK = {
 
   yAxis: [
     {
-      position: 'right',
-      axisLine: { show: false },
+      axisLine: { show: false, },
       axisTick: { show: false },
+      splitLine:{lineStyle:{color:'#eee'}},
       scale: true,
-      splitNumber: 2,
+      // interval: 0.01,
       axisLabel: {
-        inside: true, margin: 0,
-        // showMaxLabel: true,
-        // showMinLabel: true,
+        margin: 0,
+        color:'#999',
+        inside: true,
       },
     },
     {
       scale: true,
       gridIndex: 1,
-      // axisLabel: { },
       axisLine: { show: false },
+      axisLabel: {
+        margin: 0,
+        showMaxLabel: true,
+        showMinLabel: false, show: false
+      },
       axisTick: { show: false },
       splitLine: { show: false }
     }],
@@ -95,7 +91,7 @@ export const optionK = {
     {
       left: 5,
       right: 5,
-      top: 214,
+      top: 234,
       bottom: 0
     },
   ],
@@ -188,51 +184,7 @@ export const optionK = {
     }
   ]
 }
-export const option1k = {
-  ...optionK,
-  xAxis: [
-    {
-      data: [],
-      boundaryGap: false,
-      splitLine: { show: false, },
-      axisLine: { show: false },
-      axisTick: { show: false },
-      
-      axisLabel: {
-        //#ifndef H5
-        interval: (i, val) => {
-          switch (val) {
-            case '09:30':
-            case '11:30':
-            case '15:00':
-              return true
-          }
-        },
-        //#endif
-        margin: 15, align: 'left'
-      },
-    },
-    {
-      gridIndex: 1,
-      data: [],
-      boundaryGap: false,
-      splitLine: { show: false },
-      axisLabel: { show: false },
-      axisTick: { show: false },
-      axisLine: { show: false },
-    }],
-  //#ifdef H5
-  
-  dataZoom: [{
-    type: 'inside',
-    start: 0,
-    end: 30,
-    xAxisIndex: [0, 1],
-    zoomLock: true,
-    throttle: 0
-  },],
-  //#endif
-}
+export const option1k = {}
 export const option5k = {}
 export const optionRk = {}
 export const option = {
@@ -242,9 +194,20 @@ export const option = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false, },
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '15:00') }, margin: 15, align: 'left' },
+      axisLine: { show: false,lineStyle: { color: '#666' } },
+      // axisTick: { show: false },
+      axisLabel: { 
+        interval: (i, val) => {
+          switch (val) {
+            case '09:30':
+            case '11:30':
+            case '15:00':
+              return true
+          }
+        },
+        margin: 5 ,
+       align:'left',
+      },
     },
     {
       gridIndex: 1,
@@ -262,11 +225,13 @@ export const option = {
         showMaxLabel: true,
         showMinLabel: true,
       },
+      splitNumber: 2,
+
       splitLine: { show: false, },
       axisLine: { show: false, lineStyle: { color: '#666' } },
       axisTick: { show: false },
       scale: true,
-      interval: 0.0001,
+      interval: 10000,
     },
     {
       scale: true,
@@ -292,12 +257,12 @@ export const option = {
       left: 3,
       right: 50,
       top: 10,
-      bottom: 80,
+      bottom: 130,
     },
     {
       left: 3,
       right: 3,
-      top: 218,
+      top: 234,
       bottom: 0
     },
   ],

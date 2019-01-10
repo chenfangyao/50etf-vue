@@ -1,12 +1,12 @@
 <template>
-  <view>
+  <view class="wrap">
     <view class="uni-tab-bar">
       <view class="swiper-tab uni-flex">
         <view v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @tap="tapTab">{{tab.name}}</view>
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view class="h278" v-show="tabIndex==0" @tap='go'>
+    <view class="h358" v-show="tabIndex==0" @tap='go'>
       <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
     </view>
     <view class="h358" v-show="tabIndex!=0">
@@ -14,7 +14,7 @@
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
-    <view class="h278" id="canvas1" v-show="tabIndex==0">k线图1</view>
+    <view class="h358" id="canvas1" v-show="tabIndex==0">k线图1</view>
     <view class="h358" id="canvas2" v-show="tabIndex!=0">k线图2</view>
     <!-- #endif -->
 
@@ -23,8 +23,11 @@
 <script>
 import echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
-import { option, optionK, option1k, option5k, optionRk } from './EchartOption.js'
-import { fenshiT, fiveMinK } from './time.js'
+import { option, optionK, option1k, option5k, optionRk } from './echartOption.js'
+import { fenshiT } from '@/components/qiQuanXiangQingSub/time.js'
+
+import { mapState } from 'vuex';
+
 let chart = null;//AppEcharts实例
 let chartK = null;//AppEcharts实例K线图
 
@@ -75,9 +78,9 @@ export default {
         }, {
           name: '日K',
         }, {
-          name: '1分',
+          name: '周k',
         }, {
-          name: '5分',
+          name: '月k',
         },
       ],
     }
@@ -102,15 +105,6 @@ export default {
       if (this.tabIndex === e.target.dataset.current) return false;
       this.tabIndex = e.target.dataset.current
       this.$emit('change-i', this.tabIndex)
-      let j = 1
-      switch (Number(this.tabIndex)) {
-        case 1: j = 4
-          break
-        case 2: j = 1
-          break
-        case 3: j = 2
-          break
-      }
       //#ifdef H5
       if (!h5ChartK) {
         setTimeout(() => {
@@ -119,7 +113,7 @@ export default {
         }, 50)
       }
       //#endif
-      this.getDayK(j)
+      this.tabIndex != 0 && this.getDayK()
 
     },
     beginPolling() {
@@ -129,7 +123,7 @@ export default {
     beginPollingK() {
       if (h5ChartK || chartK) {//定时器未加！！
         this.timmer2 === null && (this.timmer2 = setInterval(() => this.getDayK(), 3000))
-        this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(2), 60000 * 3))
+        this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(), 60000 * 3))
       }
     },
     getMinMax(val) {
@@ -143,9 +137,9 @@ export default {
       } else {
         val = Math.abs(this.stockInfo.preClosePrice - this.stockInfo.lowPrice)
       }
-
-      this.Ymax = (this.stockInfo.preClosePrice + val * 1.005).toFixed(4)
+      this.Ymax = (this.stockInfo.preClosePrice - 0 + val * 1.005).toFixed(4)
       this.Ymin = (this.stockInfo.preClosePrice - val * 1.005).toFixed(4)
+      console.log(this.stockInfo);
     },
     dealFenshiData(arr) {
       var Yline = []
@@ -166,6 +160,7 @@ export default {
         }
         YBar.push(subBar)
       });
+
       this.calcMinMax()
       let obj = {
         xAxis: [
@@ -184,7 +179,7 @@ export default {
               lineStyle: { opacity: 0.5 },
               data: [
                 {
-                  yAxis: this.stockInfo.preClosePrice.toFixed(4),
+                  yAxis: (this.stockInfo.preClosePrice - 0).toFixed(4),
                   lineStyle: { color: '#e6aa12', opacity: 1 },
                   label: { formatter: '0.00%' },
                 },
@@ -214,17 +209,15 @@ export default {
               formatter: (val, i) => {
                 var num = Number(val.toFixed(4))
                 var max = Number(this.Ymax)
-                var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
-                midMax = Number(midMax.toFixed(4))
+                // var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
+                // midMax = Number(midMax.toFixed(4))
                 var min = Number(this.Ymin)
-                var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
-                midMin = Number(midMin.toFixed(4))
+                // var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
+                // midMin = Number(midMin.toFixed(4))
                 switch (num) {
                   case this.stockInfo.preClosePrice:
                   case max:
                   case min:
-                  case midMax:
-                  case midMin:
                     return num
                   default:
                     return ''
@@ -261,7 +254,6 @@ export default {
       var MA_k = [[], [], [], [], []]
       arr.forEach(item => {
         subBar = [item.tradeDate]
-
         X.push(item.tradeDate)
         MA_k[0].push([item.openPrice, item.closePrice, item.lowPrice, item.highPrice])
         MA_k[1].push(item.ma5)
@@ -277,17 +269,27 @@ export default {
         YBar.push(subBar)
       });
       let obj = optionK
-      if (this.tabIndex == 2) {
-        X = fenshiT
-        obj = option1k
-      } else if (this.tabIndex == 1) {
-        X.length < 60 && (X.length = 60)
-      } else if (this.tabIndex == 3) {
-        X = fiveMinK
-      }
       obj.xAxis[0].data = X
+      /*  obj.yAxis[0].axisLabel.formatter = (val, i) => {
+         var num = Number(val.toFixed(4))
+         var max = Number(this.Ymax)
+         // var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
+         // midMax = Number(midMax.toFixed(4))
+         var min = Number(this.Ymin)
+         // var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
+         // midMin = Number(midMin.toFixed(4))
+         switch (num) {
+           case this.stockInfo.preClosePrice:
+           case max:
+           case min:
+             return num
+           default:
+             return ''
+         }
+       } */
       obj.xAxis[1].data = X
       obj.series[5].data = YBar
+
       for (let i = 0; i < MA_k.length; i++) {
         obj.series[i].data = MA_k[i]
       }
@@ -312,17 +314,23 @@ export default {
       //#endif
 
     },
-    getDayK(j = 1) {
+    getDayK() {
+      let j = Number(this.tabIndex)
+      let url = ''
+      switch (j) {
+        case 1: url = '/market/getStockStatDay'
+          break
+        case 2: url = '/market/getStockStatWeek'
+          break
+        case 3: url = '/market/getStockStatMonth'
+          break
+      }
       var options = {
-        url: '/fiftyEtf/QryKLine',
-        method: 'POST',
+        url,
         data: {
-          symbol: this.symbolStr,
-          type: j
+          period: 60,
+          stockCodeInternal: this.commonstock[this.symbolStr].stockCodeInternal
         },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
       }
       this.$httpReq(options).then((res) => {
         this.dealKData(res.mdata.list)
@@ -330,14 +338,11 @@ export default {
     },
     getfenshi() {
       var options = {
-        url: '/fiftyEtf/QryMinuteLine',
-        method: 'POST',
+        url: 'market/getTimeSharingInfo',
+        method: 'GET',
         data: {
-          symbol: this.symbolStr,
+          stockCodeInternal: this.commonstock[this.symbolStr].stockCodeInternal,
         },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
       }
       this.$httpReq(options).then((res) => {
         if (res.result == 1) {
@@ -354,6 +359,8 @@ export default {
     },
   },
   props: ['chartHeight', 'symbolStr'],
+  computed: mapState(['commonstock']),
+
   mounted() {
     //#ifdef H5
     this.showH5Echarts()
@@ -378,6 +385,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+view.wrap {
+  margin-bottom: 20px;
+}
 view.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
@@ -402,6 +412,6 @@ view.uni-tab-bar {
   height: 278px;
 }
 .h358 {
-  height: 324px;
+  height: 358px;
 }
 </style>
