@@ -34,7 +34,6 @@ export default {
     getTime(obj) {
       this.$emit('select-complete', obj)
       this.hidDatePick()
-      console.log(obj);
     }
   }
 }

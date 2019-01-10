@@ -121,7 +121,7 @@ export default {
               // res为服务端返回数据的根对象
               console.log('用户信息', res)
               if(res.status){
-									this.setuserinfo(res.data)
+				this.setuserinfo(res.data)
               }
           }).catch((err) => {
               // 请求失败的回调

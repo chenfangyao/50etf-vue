@@ -17,7 +17,7 @@
     </view>
     <view class="fixView">
       <btn-block txt='确认提现' @v-tap='doWhat'></btn-block>
-      <view class="bottomTip">温馨提示：最少体现金额0.01元</view>
+      <view class="bottomTip">温馨提示：最少体现金额100元</view>
 
     </view>
 	</view>

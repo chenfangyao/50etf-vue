@@ -57,6 +57,7 @@ Date.prototype.format = function (format) {
 
 // 时间转时间戳
 Vue.prototype.$timestamp = function (str) {
+	
   let timestamp = new Date(str)
   timestamp = timestamp.getTime(timestamp)
   timestamp = timestamp.toString().slice(0, 10)
@@ -65,7 +66,7 @@ Vue.prototype.$timestamp = function (str) {
 // 输入验证
 Vue.prototype.$validata = function (str, mode) {
   if (str == '') {
-    return '您输入的不能为空'
+    return '内容不能为空'
   }
   switch (mode) {
     // 用户名
@@ -104,7 +105,7 @@ Vue.prototype.$validata = function (str, mode) {
 Vue.prototype.$tipLogin = () => {
   uni.showModal({
     title: '提示',
-    content: '您还未登录，请先登入噢',
+    content: '您还未登录，请先登录',
     success: function (res) {
       if (res.confirm) {
         uni.navigateTo({ url: '/pages/login/login' })

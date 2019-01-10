@@ -11,7 +11,7 @@
         <image :src="item.logo"></image>
         <view class="txt">
           <view class="wayName">{{item.pay_name}}</view>
-          <view class="wayTip">提示限额（0-50,000）</view>
+          <!-- <view class="wayTip">提示限额（0-50,000）</view> -->
         </view>
       </view>
     </view>

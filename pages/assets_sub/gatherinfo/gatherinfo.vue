@@ -23,7 +23,7 @@
 			<text>客户代码:</text>
 			<text>{{userinfo.mobile}}-{{userinfo.user_id}}</text></view>
 		</view>
-      <submit-btn class='subBtn' btnTxt='复制完成,去支付宝转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
+      <submit-btn class='subBtn' btnTxt='复制完成,去转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
     </view>
 		<mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
 										@onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>

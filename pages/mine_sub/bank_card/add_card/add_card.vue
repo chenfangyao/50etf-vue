@@ -38,7 +38,7 @@
     </view>
 		<view class='list-row' >
 			<text>身份证号</text>
-			<input type="text" v-model="identifica"  placeholder='填写身份证号码'>
+			<input type="text" v-model="identifica"  placeholder='填写收款银行身份证'>
 		</view>
     <view class="fixBottom">
 
@@ -80,7 +80,7 @@ export default {
 			editdefault:false
     };
   },
-	computed: mapState(['mobile']),
+	computed: mapState(['mobile','userinfo']),
     components: { btnBlock ,mpvuePicker},
 	methods:{
     showPicker() {
@@ -292,6 +292,7 @@ export default {
 		this.getbanklist()
 		this.getprovlist()
 		this.mybankinfo()
+		// this.username=this.userinfo.real_name
 		if(opt.bankinfo==0){
 			this.editdefault=true
 			this.btntxt='保存'

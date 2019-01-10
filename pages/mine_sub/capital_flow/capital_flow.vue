@@ -1,6 +1,6 @@
 <template>
     <view class="Bigwrap">
-        <base-header :hasBack="true" title='资金流水'></base-header>
+        <base-header :hasBack="true"  title='资金流水'></base-header>
         <view class="line1 uni-flex">
             <text>此处放文案</text>
             <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png'/>
@@ -34,12 +34,12 @@
             <uni-load-more :loading-type="resquestState"></uni-load-more>
         </scroll-view>
 
-        <date-pick v-if="showPick" @select-complete='getTime'></date-pick>
+        <date-pick v-if="showPick" @hid-me='closeme' @select-complete='getTime'></date-pick>
     </view>
 </template>
 
 <script>
-import datePick from '@/components/datePick.vue';
+import datePick from '@/components/datePick2.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
@@ -63,10 +63,14 @@ export default {
 		},
     getTime(val) {
       this.showPick = false;
+			console.log(555,val)
       var starttime = this.$timestamp(val.starttime)
       var endtime = this.$timestamp(val.endtime)
       this.capicalflow(starttime, endtime,0,'add')
     },
+		closeme(){
+			this.showPick = false;
+		},
     // 资金流水
     capicalflow(starttime, endtime ,index,add) {
 			this.resquestState = 1
@@ -137,7 +141,7 @@ view.Bigwrap {
     }
   }
 	.listscrow{
-		height: 570px;
+		height: 100vh;
 	}
   view.listsContainer {
     background-color: #fff;

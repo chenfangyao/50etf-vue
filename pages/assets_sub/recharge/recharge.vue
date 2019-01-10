@@ -1,7 +1,8 @@
 <template>
 	<view class="wrap">
 	  <base-header title="账户充值" right-txt='限额规则' has-back='1'></base-header>
-    <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way>
+    <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
+    <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
     <view class="panel">
       <view class="inputContainer">
         <view class="moneyTitle">充值金额</view>

@@ -79,6 +79,7 @@ export default {
     getChooseTime(obj) {
       this.sdate = obj.starttime
       this.edate = obj.endtime
+			this.startI=0
       this.getDatas()
     },
     filterVal(val) {

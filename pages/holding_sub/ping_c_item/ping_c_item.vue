@@ -60,7 +60,7 @@
         <text>总净值：</text>
       </view>
       <view class="uni-flex">
-        <text>未接</text>
+        <text>{{hynumber}}</text>
         <text>{{pingCItem.fee}}</text>
         <text>{{pingCItem.all_income}}</text>
         <text>{{pingCItem.deposit}}</text>
@@ -81,18 +81,35 @@ export default {
     return {
       buss_time: '',
       close_time: '',
-      sell_amount:''
+      sell_amount:'',
+			hynumber:0
     };
   },
   methods: {
     go() {
       uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
     },
+		gethyinfoprice(){
+			 var obj = {
+			  url: '/Sapi/Stock/hyinfo', //请求接口
+			  method: 'POST', //请求方法全部大写，默认GET
+			  dataType: "json",
+			  data: {
+			    stock_code: this.pingCItem.stock_code,
+			  },
+			}
+			this.$httpReq(obj).then((res) => {
+			  if(res.status){
+					this.hynumber=parseInt(res.data.volume_multiple)
+				}
+			})
+		}
   },
   mounted() {
     this.close_time = this.$formatetimestr(this.pingCItem.close_time)
     this.buss_time = this.$formatetimestr(this.pingCItem.buss_time)
     this.sell_amount=parseInt(this.pingCItem.sell_amount)
+		this.gethyinfoprice()
   },
   computed: mapState(['pingCItem'])
 }

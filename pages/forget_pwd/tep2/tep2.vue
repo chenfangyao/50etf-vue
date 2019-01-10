@@ -51,7 +51,6 @@ export default {
 				uni.navigateTo({ url: '/pages/forget_pwd/tep3/tep3?username='+this.uName+'&tel='+this.tel+'&verificationCode='+this.vCode+'&type=0' })
 			}else if(this.type==1){
 				this.addmybankcard()
-				uni.switchTab({ url: '/pages/tabBar/mine/mine' })
 			}
       
     },
@@ -65,7 +64,8 @@ export default {
 								data:{
 									sub_id:this.sub_id,
 									cardno:this.bankcardid,
-									cardname:this.username,
+                                    cardname:this.username,
+                                    // cardname:this.userinfo.real_name,
 									idno:this.identifica,
 									mobile:this.userinfo.mobile,
 									mobile_verify:this.vCode			
@@ -77,13 +77,16 @@ export default {
 								console.log('银行', res)
 								if(res.status){
 							     uni.showToast({
-                   title: res.info?res.userinfo:'绑定成功',
+                   title: res.info?res.info:'绑定成功',
                    duration: 2000,
                    image:'/static/holdingImg/cedan-succ.png'
                    });
+							     setTimeout(()=>{
+                                     uni.switchTab({ url: '/pages/tabBar/mine/mine' })
+                                 },2000)
 								}else{
 									uni.showToast({
-									title: res.info?res.userinfo:'绑定失败',
+									title: res.info?res.info:'绑定失败',
 									duration: 2000,
 									image:'/static/holdingImg/cedan-succ.png'
 									});

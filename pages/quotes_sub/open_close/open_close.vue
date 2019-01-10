@@ -53,7 +53,7 @@ export default {
     bottomBtn
   },
   methods: {
-	...mapMutations(['setmaxbuy']),
+	...mapMutations(['setmaxbuy','setstockamunt']),
     // 合并、分笔
     hbfbSwitch(val) {
       this.hbfbswitch = val.val
@@ -199,6 +199,7 @@ export default {
     util.indextimmer.quotesQrySingleQuotationMsg = null
   },
   onLoad(option) {
+    this.setstockamunt(1)
     this.symbol = option.code
     this.getartlelist()
       if(util.indextimmer.quotesQrySingleQuotationMsg===null){

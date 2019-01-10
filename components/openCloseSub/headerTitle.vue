@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   props: {
     tabActive: {
@@ -30,6 +31,7 @@ export default {
     }
   },
   methods: {
+      ...mapMutations(['setstockamunt']),
     back() {
       uni.navigateBack({
         delta: 1
@@ -37,6 +39,7 @@ export default {
     },
     tapChange() {
       this.$emit('change-close')
+      this.setstockamunt(1)
     }
   }
 }
