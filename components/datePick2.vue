@@ -37,18 +37,11 @@ export default {
     for (let i = 2008; i <= date.getFullYear(); i++) {
       years.push(i)
     }
-
     for (let i = 1; i <= 12; i++) {
-			if(i<10){
-				i='0'+i
-			}
       months.push(i)
     }
 
     for (let i = 1; i <= 31; i++) {
-			if(i<10){
-				i='0'+i
-			}
       days.push(i)
     }
     return {

@@ -102,7 +102,7 @@ export default {
 					// duration: 2000
 					// });
 					uni.navigateTo({
-					  url: '/pages/quotes_sub/entrust_succ/entrust_succ'
+					  url: '/pages/quotes_sub/entrust_succ/entrust_succ?type='+this.onClose+'&code='+parseInt(this.resObj.stockCode)+''
 					})
 				}
 				else{
@@ -140,7 +140,7 @@ export default {
 						duration: 2000
 						});
 						uni.navigateTo({
-						  url: '/pages/quotes_sub/entrust_succ/entrust_succ'
+						  url: '/pages/quotes_sub/entrust_succ/entrust_succ?type='+this.onClose+'&code='+parseInt(this.resObj.stockCode)+''
 						})
 					}
 					else{

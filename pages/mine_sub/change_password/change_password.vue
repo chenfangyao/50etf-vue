@@ -37,6 +37,7 @@ export default {
 			// 新旧密码是否一致
 			if(this.pwd3!==this.pwd2){
 				this.showErr=true
+				this.tipContent='两次输入不一致'
 				return
 			}
 			// 验证输入信息
