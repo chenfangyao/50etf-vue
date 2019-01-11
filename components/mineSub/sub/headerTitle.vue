@@ -12,6 +12,7 @@
 </template>
 <script>
 import uniBadge from "@/components/uni-badge.vue"
+import { mapState } from 'vuex';
 export default {
 	data(){
 		return{
@@ -21,10 +22,31 @@ export default {
   components: { uniBadge },
 	props:['newlength'],
 	created(){
-		this.txt=this.newlength.toString()
+		if(this.sid){
+			this.txt=this.newlength.toString()
+		}
 	},
   methods: {
     go(i) {
+				if(!this.sid){
+				 uni.showModal({
+				        title:'您还未登录',
+				        content:'现在去登录',
+				        success:(res)=>{
+				            if (res.confirm) {
+				                uni.navigateTo({
+				                	url: '/pages/login/login',
+				                	success: res => {},
+				                	fail: () => {},
+				                	complete: () => {}
+				                });
+				            } else if (res.cancel) {
+				                console.log('用户点击取消');
+				            }
+				        }
+				    })
+						return
+			}
       if (i == 3) {
         uni.navigateTo({ url: '/pages/msg_common/list/list?type=' + i })
       } else {

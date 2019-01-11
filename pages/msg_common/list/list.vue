@@ -7,6 +7,7 @@
         <text class="time">{{$formatetimestr(item.update_time || item.create_time)}}</text>
       </view>
       <view class="miniContent">{{item.source}}</view>
+			<!-- <view class="texttime"><text class="time">{{$formatetimestr(item.update_time || item.create_time)}}</text></view> -->
     </view>
   </view>
 </template>
@@ -102,6 +103,7 @@ view.listItem {
     > text:first-child {
       font-size: 16px;
       color: rgba(24, 28, 40, 1);
+			text-overflow:ellipsis;overflow:hidden;width:50%;
     }
     text {
       line-height: 47upx;

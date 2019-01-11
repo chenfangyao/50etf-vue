@@ -10,7 +10,7 @@
 			</view>
 			<view class="uni-flex">
 				<text>盈亏</text>
-				<text class="hasColor">{{profit_money}}</text><text v-if='!royalty_money'>0.00</text>
+				<text :class="greenredclass?'greenColor':'redColor'">{{profit_money}}</text><text v-if='!royalty_money'>0.00</text>
 			</view>
 		</view>
 		<view class="info">
@@ -52,7 +52,8 @@ export default {
       royalty_money: "持仓权益",
       add_dpt_money: "保证金",
       add_fee_money: "延期费",
-      tip_risk_month: "资金页面底下提示文字，有值才显示。如：需月配请联系客服"
+      tip_risk_month: "资金页面底下提示文字，有值才显示。如：需月配请联系客服",
+			greenredclass:false,
     };
   },
   // props:{aa:'res_data'},
@@ -79,6 +80,11 @@ export default {
           this.freeze_money = res.data.freeze_money
           this.add_fee_money = res.data.add_fee_money
           this.profit_money = res.data.profit_money
+					if(res.data.profit_money.indexOf('-')!=-1){
+						this.greenredclass=true
+					}else{
+						this.greenredclass=false
+					}
           this.res_data = res.data
         }
       }).catch((err) => {
@@ -146,9 +152,12 @@ view.wrap {
       color: rgba(112, 118, 128, 1);
     }
 
-    text.hasColor {
+    text.greenColor {
       color: #3aba8f;
     }
+		text.redColor {
+		  color: #ec605e;
+		}
   }
 }
 </style>

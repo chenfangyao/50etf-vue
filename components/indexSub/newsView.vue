@@ -1,13 +1,18 @@
 <template>
 	<view>
 		<view v-for="(item,i) in newlists" :key="i" class="newsView" @tap="getartdetil(item.id)">
-			<h3>{{item.title}}</h3>
+			<h3 class='titlelength'>{{item.title}}</h3>
 			<view class="uni-flex">
 				<text>{{item.source}}</text>
 				<text>
 					<text class="newsTime">{{update_time[i]}}</text>
-					<!-- <text class="newsTime">{{item.update_time}}</text> -->
 				</text>
+			</view>
+			<view class="uni-flex">
+				<!-- <text>{{item.source}}</text> -->
+				<!-- <text>
+					<text class="newsTime">{{update_time[i]}}</text>
+				</text> -->
 			</view>
 		</view>
 	</view>
@@ -72,6 +77,10 @@ view.newsView {
     justify-content: space-between;
     margin-top: 10upx;
     background-color: #fff;
+
   }
+}
+.titlelength{
+		text-overflow:ellipsis;overflow:hidden;width:95%;
 }
 </style>
