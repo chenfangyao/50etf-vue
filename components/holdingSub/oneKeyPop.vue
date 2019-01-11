@@ -3,36 +3,26 @@
     <view :class="['container',{show}]">
       <view class="title">
         <text @tap="closePop" class="uni-icon uni-icon-close flr"></text>
-        <text v-if="holding">一键平仓确认</text>
-        <text v-else>委托{{onClose?'平仓':'开仓'}}确认</text>
+        <text >一键平仓确认</text>
       </view>
       <view class="list uni-flex">
         <view class="uni-flex">
           <text>合约名称</text>
           <text>合约代码</text>
           <text>委托价格</text>
-          <text v-if="onClose">委托类型</text>
           <text>委托数量</text>
-          <text v-if="onClose">剩余可用</text>
-          <text v-else-if="holding">预计交易后持仓</text>
-          <text v-else>可用资金</text>
           <text>有效期</text>
-          <text v-if="onClose">预估金额</text>
-          <text v-else>预估支付金额</text>
+          <text >预估支付金额</text>
         </view>
         <view class="uni-flex">
-          <text>{{subCodeName}}</text>
-          <text>{{resObj.stockCode}}</text>
-          <text class="c_red">{{newprice}}</text>
-          <text v-if="onClose"><text v-if='entrusttype'>分笔</text><text v-if="!entrusttype">合并</text></text>
-          <text>{{stockamunt}}张</text>
-          <text v-if="onClose">{{maxbuy.enable_amount}}张</text>
-          <text v-else>{{enable_money}}</text>
+          <text>{{resObj.stock_name}}</text>
+          <text>{{resObj.stock_code}}</text>
+          <text class="c_red">{{resObj.last_price}}</text>
+          <text>{{resObj.own_amount}}张</text>
           <text>
             <text>开仓</text>
             <text class="c_red">{{50}}秒</text>未成单自动撤单</text>
-          <text v-if="onClose">{{totalMoney}}</text>
-          <text v-else>{{totalMoney}}</text>
+          <text >{{resObj.market_value}}</text>
         </view>
       </view>
       <view class="btn2 uni-flex">
@@ -48,22 +38,16 @@ export default {
   data() {
     return {
       show: false,
-      subCodeName: '',
       enable_money: ''
     }
   },
-  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
     },
     yesTap() {
       this.$emit('close-pop')
-      if (this.onClose) {
         this.stocksell()
-      } else {
-        this.stockbuy()
-      }
 
     },
     // 获取资金列表
@@ -81,53 +65,16 @@ export default {
         console.error(err)
       })
     },
-    stockbuy() {
-      var options = {
-        url: '/Sapi/Stock/buy', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
-        data: {
-          code: parseInt(this.resObj.stockCode),
-          price: parseFloat(this.newprice),
-          amount: parseInt(this.stockamunt),
-          enttype: parseInt(this.enttype),
-          is_pay_bean: 0
-        },
-        // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      }
-      this.$httpReq(options).then((res) => {
-        if (res.status) {
-          // uni.showToast({
-          // title: res.info?res.info:'买入成功',
-          // duration: 2000
-          // });
-          uni.navigateTo({
-            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
-          })
-        }
-        else {
-          uni.showToast({
-            title: res.info ? res.info : '买入失败',
-            duration: 2000
-          });
-        }
-      }).catch((err) => {
-        // 请求失败的回调
-        console.log(err)
-      })
-    },
     stocksell() {
-      let hid
-      if (this.entrusttype) {
-        hid = parseInt(this.fbccid)
-      }
+      let hid=''
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
         data: {
-          code: parseInt(this.resObj.stockCode),
-          price: this.newprice,
-          amount: this.stockamunt,
-          enttype: parseInt(this.enttype),
+          code: this.resObj.stockCode,
+          price: this.resObj.last_price,
+          amount: this.resObj.own_amount,
+          enttype: 1,
           hid: hid
         },
       }
@@ -154,17 +101,13 @@ export default {
       })
     }
   },
-  props: ['onClose', 'holding', 'resObj', 'totalMoney'],
+  props: ['onClose',  'resObj', ],
   created() {
     this.getassets()
     setTimeout(
       () => { this.show = true }, 10
     )
   },
-  mounted() {
-    this.subCodeName = this.resObj.stockName.substring(5)
-
-  }
 }
 </script>
 

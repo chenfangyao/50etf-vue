@@ -1,7 +1,7 @@
 <template>
   <view class="fixWrap self-mask" @touchmove.prevent>
     <view class="subWrap">
-      <view class="topTip uni-flex" :class="{hebinHide:!hebinHide}">
+      <view class="topTip uni-flex">
         <view>自动延期</view>
         <view @tap='openPop2' class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
@@ -26,7 +26,7 @@
               </view>
               <view class="uni-flex uni-column">
                 <text>{{resObj.avg_buy_price}}</text>
-                <text>未开启</text>
+                <text>{{resObj.add_fee_money}}</text>
               </view>
             </view>
             <view class="uni-flex">
@@ -73,20 +73,20 @@
           <view class="pingC" @tap='go(3)'>平仓</view>
           <view @tap='go(4)'>行情</view>
         </view>
-        <btn-block txt='一键平仓' @v-tap='openPop' v-if='hebinHide'></btn-block>
+        <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
       </view>
       <view class="closeIcom">
         <image src='/static/holdingImg/popClose.png' @tap='closeMe'></image>
       </view>
     </view>
     
-    <ping-c-pop v-if="showPop" holding='1' @yes-tap='yesHandle' @close-pop='yesHandle' :res-obj='resObj'> </ping-c-pop>
+    <one-key v-if="showPop"  @yes-tap='oneKeyHandle(1)' @close-pop='oneKeyHandle'  :res-obj='resObj'> </one-key>
     <extension-pop v-if="showPop2" @yes-tap='yesHandle(1)' @cancle-tap='yesHandle(0)'></extension-pop>
   </view>
 </template>
 <script>
 import btnBlock from '@/components/btnBlock.vue'
-import pingCPop from '@/components/openCloseSub/orderPop.vue'
+import oneKey from '@/components/holdingSub/oneKeyPop.vue'
 import extensionPop from '@/components/holdingSub/extensionPop.vue'
 export default {
   data() {
@@ -94,16 +94,15 @@ export default {
       showPop: false,
       showPop2: false,
       timeDeal: '',
-      showDagou: false
+      showDagou: false,
+      oneKeyObj: {}
     }
   },
-  props: ['resObj', 'hebinHide'],
   props: {
     resObj: {
     },
-    hebinHide: { default: true }
   },
-  components: { btnBlock, pingCPop, extensionPop },
+  components: { btnBlock, oneKey, extensionPop },
   methods: {
     closeMe() {
       this.$emit('close-me')
@@ -128,6 +127,9 @@ export default {
 
       }
     },
+    oneKeyHandle(i) {
+      this.showPop = false
+    },
     openPop() {
       this.showPop = true
     },
@@ -146,8 +148,8 @@ export default {
         this.resObj.auto_delay = this.showDagou ? 1 : 0
       }
       //还没发请求，auto_delay还没改
+    },
 
-    }
   },
   mounted() {
     console.log(this.resObj);
@@ -303,7 +305,7 @@ view.fixWrap {
     color: #3aba8f !important;
   }
   view.topTip.hebinHide {
-    margin-top: calc(33% + 166upx);
+    margin-top: calc(33% + 166upx); //经典
   }
 }
 </style>

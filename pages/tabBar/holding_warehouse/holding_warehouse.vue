@@ -18,6 +18,7 @@
       <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>
     <fenbi-pop v-if="showFenbiPop" :hebin-hide='tabI==0' :res-obj='listItem' @close-me='closePop'></fenbi-pop>
+    <hebing-pop v-if="showHebingPop"  :res-obj='listItem' @close-me='closePop'></hebing-pop>
 
   </view>
 </template>
@@ -32,6 +33,7 @@ import hebinTotal from '@/components/holdingSub/hebinTotal.vue';
 import topBtn from '@/components/holdingSub/topBtn.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 
+import hebingPop from '@/components/holdingSub/hebingPop.vue'
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 import { mapState, mapMutations } from 'vuex';
 import util from '@/common/util.js'
@@ -41,6 +43,7 @@ export default {
     return {
       tabI: 0,//顶部tab位置
       showFenbiPop: false,
+      showHebingPop: false,
       listItem: {},//给fenbiPop的数据
       viewMask: null,
       titleList: [
@@ -53,7 +56,7 @@ export default {
     };
   },
   computed: mapState(['weituoindex']),
-  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop },
+  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop },
   methods: {
     ...mapMutations(['setweituoindex']),
     openPop(i) {
@@ -61,7 +64,7 @@ export default {
       this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
       this.viewMask && this.viewMask.show()
       //#endif
-      this.showFenbiPop = true
+      this.tabI == 1 ? (this.showHebingPop = true) : (this.showFenbiPop = true)
       this.listItem = this.titleList[this.tabI].list[i]//分笔pop
     },
     closePop() {
@@ -69,7 +72,7 @@ export default {
       this.viewMask && this.viewMask.close()
       this.viewMask = null
       //#endif
-      this.showFenbiPop = false
+      this.tabI == 1 ? (this.showHebingPop = false) : (this.showFenbiPop = false)
     },
     tabTap(i) {
       this.tabI = i
