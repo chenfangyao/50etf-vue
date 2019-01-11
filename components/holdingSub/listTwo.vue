@@ -48,6 +48,8 @@ export default {
   watch: {
     list(val) {
       if (!val) return;
+      this.createTime = []
+      this.cancelTime = []
       val.forEach((item, i) => {
         this.createTime.push(this.$formatetimestr(item.create_time, 1))
         this.cancelTime.push(this.$formatetimestr(item.cancel_time, 1))
@@ -110,10 +112,10 @@ view.list2Item {
         margin-right: 0.3em;
       }
     }
-    .c1{
-      color: #F05F5C;
+    .c1 {
+      color: #f05f5c;
     }
-    .c2{
+    .c2 {
       color: #1890ff;
     }
   }

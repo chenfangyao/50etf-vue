@@ -1,9 +1,11 @@
 <template>
 	<view :class="isWhite?'white':'black'">
 		<base-header title="首页"></base-header>
-		<view class="banner">
-			<image src="/static/indexTabImg/banner.png" />
-		</view>
+    <swiper class="banner" autoplay circular>
+      <swiper-item v-for="(item,i) in imgList" :key="i">
+		  	<image :src="item.img" />
+      </swiper-item>
+    </swiper>
 		<four-tips></four-tips>
 		<three-securities :commonstock='commonstock'></three-securities>
 		<view class="uni-flex newsViewTitle">
@@ -28,6 +30,7 @@ export default {
       timmer: null,
       commonstock: {},
       timestr: [],
+      imgList: [],
       stock1: '',
       stock2: '',
       stock3: ','
@@ -38,10 +41,10 @@ export default {
     threeSecurities,
     fourTips
   },
-  computed: mapState(['isWhite', 'sid', 'username', 'mobile','indextimmer']),
+  computed: mapState(['isWhite', 'sid', 'username', 'mobile', 'indextimmer']),
   methods: {
     // 登录
-    ...mapMutations(['setsid', 'setusername', 'setmobile','setsoftconf','setindextimmer']),
+    ...mapMutations(['setsid', 'setusername', 'setmobile', 'setsoftconf', 'setindextimmer']),
     // 获取配置信息
     getconfinfo() {
       var options = {
@@ -53,9 +56,9 @@ export default {
         // 请求成功的回调
         // res为服务端返回数据的根对象
         console.log('用户信息', res)
-		if(res.status){
-			this.setsoftconf(res.data)
-		}
+        if (res.status) {
+          this.setsoftconf(res.data)
+        }
       }).catch((err) => {
         // 请求失败的回调
         console.error(err)
@@ -64,8 +67,8 @@ export default {
     // 获取文章信息
     getartlelist() {
       var options = {
-        url: '/Sapi/Article/notice', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        url: '/Sapi/Article/notice',
+        method: 'POST',
         data: {
           page_index: 0,
           page_size: 8,
@@ -79,7 +82,17 @@ export default {
         console.log(err)
       })
     },
-
+    getImgList() {
+      let options = {
+        url: '/Sapi/soft/welcome',
+        method: 'GET',
+      }
+      this.$httpReq(options).then((res) => {
+        this.imgList = res.data.top.white
+      }).catch((err) => {
+        console.error(err)
+      })
+    },
     // 获取更多文章
     getmoreart() {
       uni.navigateTo({
@@ -130,29 +143,32 @@ export default {
     }
   },
   onShow() {
-		clearInterval(util.indextimmer.indexCommonSelectStock)
-		util.indextimmer.indexCommonSelectStock = null
-		clearInterval(util.indextimmer.quotesCommonSelectStock)
-		util.indextimmer.quotesCommonSelectStock=null
-		clearInterval(util.indextimmer.quotesQryQuotationList)
-		util.indextimmer.quotesQryQuotationList=null
-		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
+    clearInterval(util.indextimmer.indexCommonSelectStock)
+    util.indextimmer.indexCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesCommonSelectStock)
+    util.indextimmer.quotesCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesQryQuotationList)
+    util.indextimmer.quotesQryQuotationList = null
+    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+    util.indextimmer.quotesQrySingleQuotationMsg = null
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
     this.getcommonselectstock(['', '', ''])
     if (util.indextimmer.indexCommonSelectStock === null) {
-	  util.indextimmer.indexCommonSelectStock=setInterval(() => {
+      util.indextimmer.indexCommonSelectStock = setInterval(() => {
         this.getcommonselectstock(this.timestr)
       }, 3000)
-    }	
+    }
   },
-onHide() {
-	console.log('关闭了第一个页面的定时器')
+  onHide() {
+    console.log('关闭了第一个页面的定时器')
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
   },
+  onLoad() {
+    this.getImgList()
+  }
 }
 </script>
 <style lang="scss">
@@ -175,11 +191,11 @@ view.newsViewTitle {
   }
 }
 
-view.banner {
+.banner {
   height: 260upx;
   border-radius: 20upx;
   margin: 12upx 0;
-
+  overflow: hidden;
   image {
     width: 100%;
     height: 100%;

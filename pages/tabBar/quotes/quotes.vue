@@ -43,41 +43,41 @@ export default {
       codeList: [],
       timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
-			commonstock:{},//50etf股票详情
-			commonstocktimmer:null
+      commonstock: {},//50etf股票详情
+      commonstocktimmer: null
     }
   },
   created() {
     this.getgroupLabel()
   },
-	computed: mapState(['taglist']),
-  onHide(){
-	console.log('关闭了第二个页面的定时器')
+  computed: mapState(['taglist']),
+  onHide() {
+    console.log('关闭了第二个页面的定时器')
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
     util.indextimmer.quotesQryQuotationList = null
     util.indextimmer.quotesCommonSelectStock = null
   },
   onShow() {
-		clearInterval(util.indextimmer.indexCommonSelectStock)
-		util.indextimmer.indexCommonSelectStock = null
-		clearInterval(util.indextimmer.quotesCommonSelectStock)
-		util.indextimmer.quotesCommonSelectStock=null
-		clearInterval(util.indextimmer.quotesQryQuotationList)
-		util.indextimmer.quotesQryQuotationList=null
-		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
-		
+    clearInterval(util.indextimmer.indexCommonSelectStock)
+    util.indextimmer.indexCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesCommonSelectStock)
+    util.indextimmer.quotesCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesQryQuotationList)
+    util.indextimmer.quotesQryQuotationList = null
+    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+    util.indextimmer.quotesQrySingleQuotationMsg = null
+    this.quotationStr || this.getartlelist()
     this.beginPolling()
-		this.getcommonselectstock([''])
-if(util.indextimmer.quotesCommonSelectStock===null){
-			util.indextimmer.quotesCommonSelectStock=setInterval(()=>{
-				this.getcommonselectstock([this.commonstock[0].tradeMins])
-			},1500)
-		}
+    this.getcommonselectstock([''])
+    if (util.indextimmer.quotesCommonSelectStock === null) {
+      util.indextimmer.quotesCommonSelectStock = setInterval(() => {
+        this.getcommonselectstock([this.commonstock[0].tradeMins])
+      }, 1500)
+    }
   },
   methods: {
-		...mapMutations(['setcommonstock','settaglist']),
+    ...mapMutations(['setcommonstock', 'settaglist']),
     loadMore(e) {
       // this.resquestState = 1
       // setTimeout(() => {
@@ -87,6 +87,7 @@ if(util.indextimmer.quotesCommonSelectStock===null){
     },
     beginPolling() {
       if (util.indextimmer.quotesQryQuotationList === null) {
+        console.log('启动', this.resquestState);
         util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
@@ -117,7 +118,7 @@ if(util.indextimmer.quotesCommonSelectStock===null){
         this.groupLabel = res.data.list
         this.getartlelist()
         this.beginPolling()//启动轮询
-				this.settaglist(this.groupLabel[0])
+        this.settaglist(this.groupLabel[0])
       })
     },
     // 获取stockCode
@@ -130,8 +131,8 @@ if(util.indextimmer.quotesCommonSelectStock===null){
           page_index: 0,
           page_size: 10000,
           tag_id: this.groupLabel[this.tabIndex].id,
-            timestr:[],
-			commonstock:{}
+          timestr: [],
+          commonstock: {}
         },
       }
 
@@ -159,7 +160,7 @@ if(util.indextimmer.quotesCommonSelectStock===null){
         return false;
       } else {
         this.tabIndex = e.target.dataset.current
-				this.settaglist(this.groupLabel[this.tabIndex])
+        this.settaglist(this.groupLabel[this.tabIndex])
         this.getartlelist()
       }
     },
@@ -169,28 +170,28 @@ if(util.indextimmer.quotesCommonSelectStock===null){
         this.quotationStr += '?' + item.stock_code
       });
     },
-		// 获取50etf指数
-		getcommonselectstock(timestrs){
-			// var timesformate=new Date().format("hh:mm:sss");
-			var stockTradeMins=[{"stockCodeInternal":"510050","tradeMins":timestrs[0]}],
-				stockTradeMins=JSON.stringify(stockTradeMins)
-			var options = {
-				url: '/stockStat/getCommonSelectStock', //请求接口
-				method: 'POST', //请求方法全部大写，默认GET
-				data: {stockTradeMins:stockTradeMins},
-				header: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			}
-			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				if(res.result==1 && res.ldata[0].updated===true){
-					this.commonstock=res.ldata
-					this.setcommonstock(res.ldata)
-				}
-			}).catch((err) => {
-				// 请求失败的回调
-				console.log(err)
-			})
-		}
+    // 获取50etf指数
+    getcommonselectstock(timestrs) {
+      // var timesformate=new Date().format("hh:mm:sss");
+      var stockTradeMins = [{ "stockCodeInternal": "510050", "tradeMins": timestrs[0] }],
+        stockTradeMins = JSON.stringify(stockTradeMins)
+      var options = {
+        url: '/stockStat/getCommonSelectStock', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: { stockTradeMins: stockTradeMins },
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }
+      this.$httpReq(options).then((res) => {
+        // 请求成功的回调
+        if (res.result == 1 && res.ldata[0].updated === true) {
+          this.commonstock = res.ldata
+          this.setcommonstock(res.ldata)
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.log(err)
+      })
+    }
 
   }
 

@@ -52,17 +52,17 @@ export default {
 
     };
   },
-	computed: mapState(['weituoindex']),
+  computed: mapState(['weituoindex']),
   components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop },
   methods: {
-		...mapMutations(['setweituoindex']),
+    ...mapMutations(['setweituoindex']),
     openPop(i) {
       //#ifdef APP-PLUS
       this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
       this.viewMask && this.viewMask.show()
       //#endif
       this.showFenbiPop = true
-      this.listItem = this.titleList[0].list[i]//分笔pop
+      this.listItem = this.titleList[this.tabI].list[i]//分笔pop
     },
     closePop() {
       //#ifdef APP-PLUS
@@ -119,31 +119,29 @@ export default {
       })
     }
   },
-//   onLoad(opt) {
-// 		console.log(111,opt)
-// 		if(opt){
-// 			this.tabI=opt.tabindex
-// 		}
-//     this.getFenbiList(this.tabI)
-//   },
-	onShow(){
-		clearInterval(util.indextimmer.indexCommonSelectStock)
-		util.indextimmer.indexCommonSelectStock = null
-		clearInterval(util.indextimmer.quotesCommonSelectStock)
-		util.indextimmer.quotesCommonSelectStock=null
-		clearInterval(util.indextimmer.quotesQryQuotationList)
-		util.indextimmer.quotesQryQuotationList=null
-		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
-		
-		if(this.weituoindex==2){
-			this.tabI=this.weituoindex
-		}
-		this.getFenbiList(this.tabI)
-	},
-	onHide(){
-		this.setweituoindex(0)
-	}
+  onShow() {
+    clearInterval(util.indextimmer.indexCommonSelectStock)
+    util.indextimmer.indexCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesCommonSelectStock)
+    util.indextimmer.quotesCommonSelectStock = null
+    clearInterval(util.indextimmer.quotesQryQuotationList)
+    util.indextimmer.quotesQryQuotationList = null
+    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
+    util.indextimmer.quotesQrySingleQuotationMsg = null
+
+    if (this.weituoindex == 2) {
+      console.log('进来啦');
+      this.tabI = 2
+      this.titleList[2].startI = 0
+
+      this.getFenbiList(2)
+      return
+    }
+    this.titleList[this.tabI].list.length || this.getFenbiList(this.tabI)
+  },
+  onHide() {
+    this.setweituoindex(0)
+  }
 }
 </script>
 

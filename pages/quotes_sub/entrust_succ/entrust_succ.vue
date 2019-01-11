@@ -10,43 +10,43 @@
 </template>
 
 <script>
-	import {mapMutations } from 'vuex';
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
-       type:0,
-			 code:0,
+      type: 0,
+      code: 0,
     };
   },
-  methods:{
-		...mapMutations(['setweituoindex']),
-    go(){
-//       uni.navigateBack({
-//         delta:1
-//       })
-         uni.navigateTo({
-         	url: '/pages/quotes_sub/open_close/open_close?pinkaiC='+this.type+'&code='+this.code+'',
-         	success: res => {},
-         	fail: () => {},
-         	complete: () => {}
-         });
+  methods: {
+    ...mapMutations(['setweituoindex']),
+    go() {
+      //       uni.navigateBack({
+      //         delta:1
+      //       })
+      uni.navigateTo({
+        url: '/pages/quotes_sub/open_close/open_close?pinkaiC=' + this.type + '&code=' + this.code + '',
+        success: res => { },
+        fail: () => { },
+        complete: () => { }
+      });
     },
-      gowt(){
-				  this.setweituoindex(2)
-          uni.switchTab({
-              url: '/pages/tabBar/holding_warehouse/holding_warehouse?tabindex=2'
-          })
-      }
+    gowt() {
+      this.setweituoindex(2)
+      uni.switchTab({
+        url: '/pages/tabBar/holding_warehouse/holding_warehouse'
+      })
+    }
   },
-	onLoad(opt){
-		// 暂时注释
-// 		if(opt.type=="true"){
-// 			this.type=1
-// 		}else{
-// 			this.type=0
-// 		}	
-		this.code=opt.code
-	}
+  onLoad(opt) {
+    // 暂时注释
+    // 		if(opt.type=="true"){
+    // 			this.type=1
+    // 		}else{
+    // 			this.type=0
+    // 		}	
+    this.code = opt.code
+  }
 }
 </script>
 

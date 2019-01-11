@@ -25,7 +25,7 @@
                 <text>延期费：</text>
               </view>
               <view class="uni-flex uni-column">
-                <text>12314</text>
+                <text>{{resObj.avg_buy_price}}</text>
                 <text>未开启</text>
               </view>
             </view>
@@ -35,24 +35,24 @@
                 <text>持仓：</text>
               </view>
               <view class="uni-flex uni-column">
-                <text>12314</text>
-                <text>12</text>
+                <text>{{resObj.market_value}}</text>
+                <text>{{resObj.own_amount}}</text>
               </view>
             </view>
           </view>
           <view class="rightPart">
-            <view>91223021.00</view>
+            <view :class="{green:resObj.profit_money<0}">{{resObj.profit_money}}</view>
             <view>
               <text>延期：</text>
               <text>{{resObj.add_fee_money}}元</text>
             </view>
           </view>
         </view>
-        <view class="btn2 uni-flex" v-if='hebinHide'>
+        <view class="btn2 uni-flex" v-if='false'>
           <view class="uni-flex full " hover-class='self-hover' @tap='go(1)'>
             <view class="uni-flex uni-column">
               <text>止盈</text>
-              <text>0.0214</text>
+              <text>未接</text>
             </view>
             <view>
               <image src='/static/holdingImg/setIcon.png'></image>
@@ -61,7 +61,7 @@
           <view class="uni-flex lose" hover-class='self-hover' @tap='go(0)'>
             <view class="uni-flex uni-column">
               <text>止损</text>
-              <text>0.0214</text>
+              <text>未接</text>
             </view>
             <view>
               <image src='/static/holdingImg/setIcon.png'></image>
@@ -132,11 +132,11 @@ export default {
       this.showPop = true
     },
     openPop2() {
-      if(this.showDagou){
+      if (this.showDagou) {
         this.showPop2 = true
-      }else{
-        this.showDagou=true
-        this.resObj.auto_delay=1
+      } else {
+        this.showDagou = true
+        this.resObj.auto_delay = 1
       }
     },
     yesHandle(i) {
@@ -150,8 +150,9 @@ export default {
     }
   },
   mounted() {
+    console.log(this.resObj);
     this.showDagou = this.resObj.auto_delay == 1
-    this.timeDeal = this.$formatetimestr(this.resObj.in_time)
+    this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   }
 }
 </script>
@@ -297,6 +298,9 @@ view.fixWrap {
         height: 100%;
       }
     }
+  }
+  .green {
+    color: #3aba8f !important;
   }
   view.topTip.hebinHide {
     margin-top: calc(33% + 166upx);

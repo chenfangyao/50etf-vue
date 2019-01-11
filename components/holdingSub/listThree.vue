@@ -79,7 +79,7 @@ export default {
       showResultPop: false,
       moneyColor: [],
       createTime: [],//时间数组
-      listMock: [, , , , , , , , ,]//临时数组
+      listMock: []//临时数组
     }
   },
   components: { cedanPop, cedanJieguoPop },

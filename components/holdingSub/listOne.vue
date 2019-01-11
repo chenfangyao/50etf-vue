@@ -16,8 +16,8 @@
               <text>{{tabI==0?'市值：':'平均成交价：'}}</text>
             </view>
             <view class="itemView c1">
-              <text>{{item.market_value}}</text>
-              <text>{{item.royalty_money||item.market_value}}</text>
+              <text>{{tabI==0?item.avg_buy_price:item.royalty_money}}</text>
+              <text>{{tabI==0?item.market_value:item.avg_buy_price}}</text>
             </view>
           </view>
           <view class=" uni-flex" v-if='tabI==0'>
@@ -27,7 +27,7 @@
             </view>
             <view class="itemView c1">
               <text>{{item.add_fee_money}}</text>
-              <text>{{item.enable_amount}}</text>
+              <text>{{item.own_amount}}</text>
             </view>
           </view>
         </view>

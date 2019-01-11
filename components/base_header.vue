@@ -3,8 +3,8 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <view class="left commonStyle" @tap="back">
-          <image src='/static/arrow/l.png'  v-if="hasBack"/>
+        <view class="left commonStyle" @tap="back"  v-if="hasBack">
+          <image src='/static/arrow/l.png' />
         </view>
         <text>{{title}}</text>
         <text class="right commonStyle" hover-class='self-hover' @tap="rightTap" v-if="rightTxt">{{rightTxt}}</text>
@@ -36,6 +36,12 @@ export default {
         this.$emit('special-back')
         return
       }
+      //#ifdef H5
+      if (getCurrentPages().length == 1) {
+        history.back()
+        return
+      }
+      //#endif
       uni.navigateBack({ delta: 1 });
     },
     rightTap() {

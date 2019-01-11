@@ -3,7 +3,7 @@
     <view class="headerContainer">
       <view class="occupy"></view>
       <view class="wrap">
-        <text @tap='tabTap' :class="{now:currentI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</text>
+        <text @tap='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</text>
       </view>
     </view>
     <view class="h44"></view>
@@ -11,28 +11,19 @@
 </template>
 
 <script>
-	import { mapState } from 'vuex';
 export default {
   props: ['titleList','tabI'],
   data() {
     return {
-      currentI:0
     }
   },
-	computed: mapState(['weituoindex']),
-	created(){
-		if(this.weituoindex==2){
-			this.currentI=this.weituoindex
-		}
-	},
   methods: {
-//     back() {
-//       uni.navigateBack({ delta: 1 });
-//     },
     tabTap(e) {
       this.$emit('tab-tap',e.target.dataset.tabi)
-      this.currentI=e.target.dataset.tabi
     }
+  },
+  watch:{
+
   }
 }
 </script>
