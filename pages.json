@@ -334,9 +334,14 @@
         {
             "path" : "pages/mine_sub/bank_card/add_card_btn/add_card_btn",
             "style" : {
-				"titleNView" : false,
-				"scrollIndicator" : "none"
-			}
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/assets_sub/recording/recording",
+            "style" : { "titleNView" : false,
+                "scrollIndicator" : "none"}
         }
     ],
     "tabBar" : {

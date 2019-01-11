@@ -21,7 +21,8 @@ export default {
       default: ''
     },
     hasBack: {
-      default: false
+      default: false,
+      
     },
     rightTxt: {
       default: ''

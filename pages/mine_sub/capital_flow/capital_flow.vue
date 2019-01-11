@@ -107,9 +107,7 @@ export default {
       })
     }
   },
-  components: {
-    datePick,uniLoadMore
-  },
+  components: { datePick,uniLoadMore },
 	onLoad(){
 		// uni.startPullDownRefresh();
 	},
@@ -141,7 +139,12 @@ view.Bigwrap {
     }
   }
 	.listscrow{
-		height: 100vh;
+     /* #ifndef H5 */
+    height: calc(100vh - 178upx - var(--status-bar-height));
+    /* #endif */
+    /* #ifdef H5 */
+    height: calc(100vh - 178upx);
+    /* #endif */
 	}
   view.listsContainer {
     background-color: #fff;

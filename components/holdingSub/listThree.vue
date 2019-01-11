@@ -28,8 +28,12 @@
       </view>
 
     </view>
-    <view class='line3'>委托时间：{{createTime[i]}}</view>
+    <view class='line3 uni-flex'>
+      <text>委托时间：{{createTime[i]}}</text>
+      <view class='countdownBtn' hover-class='hover1' @tap='showPop'>撤单（{{countdown}} S）</view>
+    </view>
   </view>
+  <!-- 以下是假数据 -->
   <view v-for='(item,i) in listMock' class="list2Item "  :key="i">
     <view class="line1 uni-flex">
         <view >
