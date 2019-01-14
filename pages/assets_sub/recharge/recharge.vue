@@ -61,7 +61,6 @@ export default {
     },
     rightTap() {
       uni.navigateTo({ url: '/pages/assets_sub/recording/recording?type=1' })
-
     },
     getpayway() {
       var options = {

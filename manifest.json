@@ -47,6 +47,8 @@
     "quickapp" : {},
 	"h5":{
 		"router":{
+			"mode" : "history",
+
 			"base" : "/h5/"
 
 		}

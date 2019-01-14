@@ -64,7 +64,7 @@ export default {
     getChooseTime(obj) {
       this.sdate = obj.starttime
       this.edate = obj.endtime
-			this.startI=0
+      this.startI = 0
       this.getDatas()
     },
     loadMore() {
@@ -98,10 +98,11 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         this.total = res.data.total
-        console.log(res);
         if (add) {
           this.list = this.list.concat(res.data.list)
         } else {
+          this.close_time = []
+          this.sell_amount = []
           this.list = res.data.list
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2

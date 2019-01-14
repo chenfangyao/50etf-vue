@@ -6,10 +6,10 @@
       </view>
     </view>
     <!-- #ifndef H5 -->
-    <view class="h278" v-show="tabIndex==0" @tap='go'>
+    <view class="h278" v-show="tabIndex==0" >
       <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
     </view>
-    <view class="h358" v-show="tabIndex!=0">
+    <view class="h358" v-show="tabIndex!=0" @tap='go'>
       <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad :onInit="onInit2" canvasId="m-canvas2" />
     </view>
     <!-- #endif -->
@@ -84,9 +84,10 @@ export default {
   },
   methods: {
     go() {
+      if (this.tabIndex != 2) return;
       //#ifdef APP-PLUS
-      // plus.screen.lockOrientation("landscape-primary");
-      // uni.navigateTo({ url: '/pages/echarts/echarts?symbol=' + this.symbolStr });
+      plus.screen.lockOrientation("landscape-primary");
+      uni.navigateTo({ url: '/platforms/app-plus/fullscreen/fullscreen' });
       //#endif
     },
     checkOready(i, obj) {
@@ -355,6 +356,9 @@ export default {
   },
   props: ['chartHeight', 'symbolStr'],
   mounted() {
+    //#ifdef APP-PLUS
+    plus.storage.setItem('symbolStr', this.symbolStr);
+    //#endif
     //#ifdef H5
     this.showH5Echarts()
     //#endif

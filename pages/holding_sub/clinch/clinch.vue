@@ -70,7 +70,6 @@ export default {
   components: { filterList, uniLoadMore },
   methods: {
     loadMore() {
-      console.log('到底了');
       if (this.resquestState < 2) {
         this.startI++
         this.getDatas('add')
@@ -79,7 +78,7 @@ export default {
     getChooseTime(obj) {
       this.sdate = obj.starttime
       this.edate = obj.endtime
-			this.startI=0
+      this.startI = 0
       this.getDatas()
     },
     filterVal(val) {
@@ -113,6 +112,8 @@ export default {
         if (add) {
           this.list = this.list.concat(res.data.list)
         } else {
+          this.businessTime = []
+          this.business_amount = []
           this.list = res.data.list
         }
         this.filterVal(this.list)

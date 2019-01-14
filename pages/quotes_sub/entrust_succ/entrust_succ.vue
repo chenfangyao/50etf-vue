@@ -24,12 +24,10 @@ export default {
       //       uni.navigateBack({
       //         delta:1
       //       })
-      uni.navigateTo({
+      uni.redirectTo({
         url: '/pages/quotes_sub/open_close/open_close?pinkaiC=' + this.type + '&code=' + this.code + '',
-        success: res => { },
-        fail: () => { },
-        complete: () => { }
       });
+
     },
     gowt() {
       this.setweituoindex(2)

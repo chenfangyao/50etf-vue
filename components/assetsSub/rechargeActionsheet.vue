@@ -1,6 +1,6 @@
 <template>
   <view class="mask" >
-    <view class="wayList" :class="{active:showSheet}">
+    <view class="wayList">
       <view class="title">
         <view class="iconWrap " @tap='closeMe'>
           <uni-icon type="closeempty"   size="30"></uni-icon>
@@ -21,31 +21,26 @@
 import uniIcon from "@/components/uni-icon.vue"
 import { mapState, mapMutations } from 'vuex';
 export default {
-	computed: {...mapState(['paylist']),
-	
-	},
+  computed: {    ...mapState(['paylist']),
+
+  },
   methods: {
     closeMe() {
       this.$emit('close-me')
     },
-    chooseWay(i){
-      this.$emit('choose-way',i)
+    chooseWay(i) {
+      this.$emit('choose-way', i)
     }
   },
   data() {
     return {
       wayLists: [],
-      showSheet: false,
-			paylists:[]
 
     }
   },
+  props: ['showAction'],
   mounted() {
-    setTimeout(() => {
-      this.showSheet = true
-			// this.wayLists=this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['offline']).concat(this.paylist['online']).concat(this.paylist['remitance'])
-			this.wayLists=this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
-    }, 0)
+    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
   },
   components: { uniIcon }
 }
@@ -63,8 +58,8 @@ view.mask {
   view.wayList {
     position: absolute;
     bottom: 0;
-    transform: translateY(100%);
-    transition: transform 300ms;
+    // transform: translateY(100%);
+    // transition: transform 300ms;
     background-color: #fff;
     left: 0;
     right: 0;
@@ -103,9 +98,6 @@ view.mask {
         margin-right: 26upx;
       }
     }
-  }
-  view.wayList.active {
-    transform: translateY(0);
   }
 }
 </style>

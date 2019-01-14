@@ -5,7 +5,7 @@
         <text>总计：{{total}}笔</text>
         <image class="right" @tap="switchDatepick" src='/static/mineImg/datePicker.png'/>
     </view>
-    <scroll-view class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
+    <scroll-view v-if='type==1' class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
         <view class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
           <view class="left">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</view>
           <view class="middle">
@@ -14,6 +14,18 @@
             <view class="time">{{formatetime[i]}}</view>
           </view>
           <view class="money">{{item.pay_money}}</view>
+        </view>
+        <uni-load-more :loading-type="resquestState"></uni-load-more>
+    </scroll-view>
+    <scroll-view v-else class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
+        <view class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
+          <view class="left">{{item.status}}</view>
+          <view class="middle">
+            <view>{{bank_code[i][0]}}</view>
+            <view>{{bank_code[i][1]}}</view>
+            <view class="time">{{formatetime[i]}}</view>
+          </view>
+          <view class="money">{{item.money}}</view>
         </view>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
     </scroll-view>
@@ -29,11 +41,13 @@ export default {
   data() {
     return {
       showPick: false,
-      recordlist: [, ,],
+      recordlist: [],
       resquestState: 0,
       pageindex: 0,
       formatetime: [],
       total: '',
+      type: 1,//1充值、2提现
+      bank_code: []
     };
   },
   components: { datePick, uniLoadMore },
@@ -49,21 +63,19 @@ export default {
     },
     getTime(val) {
       this.showPick = false;
-      var starttime = this.$timestamp(val.starttime)
-      var endtime = this.$timestamp(val.endtime)
-      this.getRecords(starttime, endtime, 0, 'add')
+      this.getRecords(val.starttime, val.endtime, 0)
     },
-    getRecords(type, starttime, endtime, index, add) {
+    getRecords(starttime, endtime, index, add) {
       this.resquestState = 1
-      let url = type == 1 ? '/Sapi/Ufund/pay_list' : '/Sapi/Ufund/cash_list'//1充值、2提现
+      let url = this.type == 1 ? '/Sapi/Ufund/pay_list' : '/Sapi/Ufund/cash_list'
       var options = {
         url, //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         data: {
           page_index: index || 0,
           page_size: 10,
-          date_start: starttime || 0,
-          date_end: endtime || 0
+          sdate: starttime || 0,
+          edate: endtime || 0
         },
       }
       this.$httpReq(options).then((res) => {
@@ -74,14 +86,22 @@ export default {
             var temarr = []
             for (let i = 0; i < res.data.list.length; i++) {
               temarr.push(this.$formatetimestr(res.data.list[i].create_time))
+              if (res.data.list[i].bankcard) {
+                this.bank_code.push(res.data.list[i].bankcard.split(' '))
+              }
             }
             this.formatetime = this.formatetime.concat(temarr)
           } else {
             this.recordlist = res.data.list
             for (let i = 0; i < res.data.list.length; i++) {
               this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))
+              if (res.data.list[i].bankcard) {
+                this.bank_code[i] = res.data.list[i].bankcard.split(' ')
+              }
+
             }
           }
+
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
@@ -89,6 +109,9 @@ export default {
         console.log(err)
       })
     }
+  },
+  onLoad(opts) {
+    this.type = opts.type
   },
   created() {
     this.getRecords(1)
@@ -123,19 +146,20 @@ view.wrap {
     view.listsContainer {
       background-color: #fff;
       margin: 12upx 0;
-      padding: 18upx 32upx;
-      height: 164upx;
+      padding: 8upx 32upx 0;
       justify-content: space-between;
       view.money {
         font-size: 20px;
         font-weight: 500;
+        flex-grow: 1;
         color: rgba(240, 95, 92, 1);
         letter-spacing: 1px;
+        text-align: right;
       }
       view.left {
         font-size: 16px;
         line-height: 164upx;
-        width: 102upx;
+        width: 122upx;
         font-weight: 500;
         color: rgba(24, 144, 255, 1);
         letter-spacing: 1px;
@@ -146,6 +170,9 @@ view.wrap {
         .time {
           font-size: 11px;
           color: rgba(102, 102, 102, 1);
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
         }
       }
     }

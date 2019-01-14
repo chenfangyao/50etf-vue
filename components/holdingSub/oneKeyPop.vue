@@ -46,8 +46,8 @@ export default {
       this.$emit('close-pop')
     },
     yesTap() {
+      this.stocksell()
       this.$emit('close-pop')
-        this.stocksell()
 
     },
     // 获取资金列表
@@ -71,8 +71,8 @@ export default {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
         data: {
-          code: this.resObj.stockCode,
           price: this.resObj.last_price,
+          code: this.resObj.stock_code,
           amount: this.resObj.own_amount,
           enttype: 1,
           hid: hid
@@ -86,7 +86,7 @@ export default {
             duration: 2000
           });
           uni.navigateTo({
-            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
+            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stock_code) + ''
           })
         }
         else {

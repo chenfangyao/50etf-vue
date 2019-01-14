@@ -42,14 +42,14 @@
           </view>
           <view class="rightPart">
             <view :class="{green:resObj.profit_money<0}">{{resObj.profit_money}}</view>
-            <view>
+            <!-- <view>
               <text>延期：</text>
               <text>{{resObj.add_fee_money}}元</text>
-            </view>
+            </view> -->
           </view>
         </view>
-        <view class="btn2 uni-flex" v-if='false'>
-          <view class="uni-flex full " hover-class='self-hover' @tap='go(1)'>
+        <view class="btn2 uni-flex" >
+          <view class="uni-flex full " hover-class='self-hover'>
             <view class="uni-flex uni-column">
               <text>止盈</text>
               <text>未接</text>
@@ -58,7 +58,7 @@
               <image src='/static/holdingImg/setIcon.png'></image>
             </view>
           </view>
-          <view class="uni-flex lose" hover-class='self-hover' @tap='go(0)'>
+          <view class="uni-flex lose" hover-class='self-hover'>
             <view class="uni-flex uni-column">
               <text>止损</text>
               <text>未接</text>
