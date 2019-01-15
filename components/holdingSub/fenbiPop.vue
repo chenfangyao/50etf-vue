@@ -152,7 +152,6 @@ export default {
 
   },
   mounted() {
-    console.log(this.resObj);
     this.showDagou = this.resObj.auto_delay == 1
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   }
