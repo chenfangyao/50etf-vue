@@ -30,7 +30,7 @@
     </view>
     <view class='line3 uni-flex'>
       <text>委托时间：{{createTime[i]}}</text>
-      <view class='countdownBtn' hover-class='hover1' @tap='showPop'>撤单（{{countdown}} S）</view>
+      <view class='countdownBtn' hover-class='hover1' @tap='showPop(i)'>撤单（{{countdown}} S）</view>
     </view>
   </view>
   <!-- 以下是假数据 -->
@@ -66,7 +66,7 @@
       <view class='countdownBtn' hover-class='hover1' @tap='showPop'>撤单（{{countdown}} S）</view>
     </view>
   </view>
-  <cedan-pop v-if='showCedanPop' @close-me='showPop'></cedan-pop>
+  <cedan-pop v-if='showCedanPop' @close-me='closePop'></cedan-pop>
   <cedan-jieguo-pop v-if='showResultPop'></cedan-jieguo-pop>
 </view>
 </template>
@@ -83,7 +83,8 @@ export default {
       showResultPop: false,
       moneyColor: [],
       createTime: [],//时间数组
-      listMock: []//临时数组
+      listMock: [],//临时数组
+      eid: ''
     }
   },
   components: { cedanPop, cedanJieguoPop },
@@ -99,14 +100,39 @@ export default {
     this.countdownFun()
   },
   methods: {
-    showPop(str) {
+    showPop(i) {
       this.showCedanPop = !this.showCedanPop
-      if (str === 'yes') {
-        this.showResultPop = true
-        setTimeout(()=>{
-          this.showResultPop = false
-        },900)
+      this.eid = this.list[i].id
+    },
+    closePop(str) {
+      this.showCedanPop = !this.showCedanPop
+      if (str === 'yes') {//用户确认撤单
+        var options = {
+          url: '/Sapi/Stock/revoke', //请求接口
+          data: {
+            eid: this.eid
+          },
+          method: 'GET',
+          header: { 'Content-Type': 'application/json' }
+        }
+        this.$httpReq(options).then((res) => {
+          if (res.status) { this.showResult() } else {
+            uni.showToast({
+              title: res.info,
+              duration: 2000,
+              icon: 'none'
+            });
+          }
+          console.log(res);
+        })
+
       }
+    },
+    showResult() {
+      this.showResultPop = true
+      setTimeout(() => {
+        this.showResultPop = false
+      }, 900)
     },
     countdownFun() {
       this.timer = setInterval(() => {
@@ -137,7 +163,7 @@ view.list2Item {
       height: 36upx;
       border-radius: 18upx;
       font-size: 12px;
-      color: #409DE5;
+      color: #409de5;
       border: solid 1px #409de5;
       line-height: 31upx;
       text-align: center;
