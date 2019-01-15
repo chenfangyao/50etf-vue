@@ -123,7 +123,6 @@ export default {
               icon: 'none'
             });
           }
-          console.log(res);
         })
 
       }
