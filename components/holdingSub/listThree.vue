@@ -79,6 +79,7 @@ export default {
     return {
       countdown: 60,
       timer: null,
+      countdownArr:[],//倒计时数组存定时器和倒计数字
       showCedanPop: false,
       showResultPop: false,
       moneyColor: [],
@@ -91,8 +92,10 @@ export default {
   watch: {
     list(val) {
       if (!val) return;
+       this.createTime=[]
       val.forEach((item, i) => {
         this.createTime.push(this.$formatetimestr(item.create_time))
+        // this.countdownFun(i)
       });
     }
   },
@@ -107,25 +110,27 @@ export default {
     closePop(str) {
       this.showCedanPop = !this.showCedanPop
       if (str === 'yes') {//用户确认撤单
-        var options = {
-          url: '/Sapi/Stock/revoke', //请求接口
-          data: {
-            eid: this.eid
-          },
-          method: 'GET',
-          header: { 'Content-Type': 'application/json' }
-        }
-        this.$httpReq(options).then((res) => {
-          if (res.status) { this.showResult() } else {
-            uni.showToast({
-              title: res.info,
-              duration: 2000,
-              icon: 'none'
-            });
-          }
-        })
-
+        this.revoke()
       }
+    },
+    revoke() {
+      var options = {
+        url: '/Sapi/Stock/revoke', //请求接口
+        data: {
+          eid: this.eid
+        },
+        method: 'GET',
+        header: { 'Content-Type': 'application/json' }
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) { this.showResult() } else {
+          uni.showToast({
+            title: res.info,
+            duration: 2000,
+            icon: 'none'
+          });
+        }
+      })
     },
     showResult() {
       this.showResultPop = true

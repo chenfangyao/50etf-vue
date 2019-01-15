@@ -72,7 +72,7 @@ export const optionK = {
       scale: true,
       splitNumber: 2,
       axisLabel: {
-        inside: true, margin: 0,
+        margin: 3,
         // showMaxLabel: true,
         // showMinLabel: true,
       },
@@ -80,7 +80,16 @@ export const optionK = {
     {
       scale: true,
       gridIndex: 1,
-      // axisLabel: { },
+      position: 'right',
+
+      axisLabel: {
+        margin: -15,
+        showMaxLabel: true,
+        showMinLabel: false,
+      },
+      max: 'dataMax',
+      min: 'dataMin',
+
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
@@ -88,15 +97,15 @@ export const optionK = {
   grid: [
     {
       left: 5,
-      right: 5,
+      right: 45,
       top: 30,
       bottom: 130,
     },
     {
       left: 5,
-      right: 5,
-      top: 214,
-      bottom: 0
+      right: 45,
+      top: 244,
+      bottom: 3
     },
   ],
   title: {
@@ -197,18 +206,8 @@ export const option1k = {
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      
       axisLabel: {
-        //#ifndef H5
-        interval: (i, val) => {
-          switch (val) {
-            case '09:30':
-            case '11:30':
-            case '15:00':
-              return true
-          }
-        },
-        //#endif
+        interval: 11,
         margin: 15, align: 'left'
       },
     },
@@ -217,12 +216,12 @@ export const option1k = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false },
-      axisLabel: { show: false },
       axisTick: { show: false },
       axisLine: { show: false },
+
     }],
   //#ifdef H5
-  
+
   dataZoom: [{
     type: 'inside',
     start: 0,
@@ -234,7 +233,33 @@ export const option1k = {
   //#endif
 }
 export const option5k = {}
-export const optionRk = {}
+export const optionRk = {
+  ...optionK,
+  xAxis: [
+    {
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false, },
+      axisLine: { show: false },
+      axisLabel: {
+        margin: 15,
+        interval: 'auto',
+        formatter: (val, i) => {
+          if (val == 'undefined') { return '' } else { return val }
+        },
+        align: 'left'
+      },
+    },
+    {
+      gridIndex: 1,
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false },
+      axisLabel: { show: false },
+      axisTick: { show: false },
+      axisLine: { show: false },
+    }],
+}
 export const option = {
   ...commonOption,
   xAxis: [
@@ -271,6 +296,14 @@ export const option = {
     {
       scale: true,
       gridIndex: 1,
+      max: 'dataMax',
+      min: 'dataMin',
+      position: 'right',
+      axisLabel: {
+        margin: 0,
+        showMaxLabel: true,
+        showMinLabel: false,
+      },
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { show: false }
@@ -292,13 +325,13 @@ export const option = {
       left: 3,
       right: 50,
       top: 10,
-      bottom: 80,
+      bottom: 100,
     },
     {
       left: 3,
-      right: 3,
-      top: 218,
-      bottom: 0
+      right: 50,
+      top: 228,
+      bottom: 3
     },
   ],
   itemStyle: { color: '#4AB9BB' },

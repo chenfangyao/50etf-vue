@@ -9,13 +9,13 @@
     <view class="h278" v-show="tabIndex==0" >
       <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
     </view>
-    <view class="h358" v-show="tabIndex!=0" @tap='go'>
+    <view class="h324" v-show="tabIndex!=0" @tap='go'>
       <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad :onInit="onInit2" canvasId="m-canvas2" />
     </view>
     <!-- #endif -->
     <!-- #ifdef H5 -->
     <view class="h278" id="canvas1" v-show="tabIndex==0">k线图1</view>
-    <view class="h358" id="canvas2" v-show="tabIndex!=0">k线图2</view>
+    <view class="h324" id="canvas2" v-show="tabIndex!=0">k线图2</view>
     <!-- #endif -->
 
   </view>
@@ -57,8 +57,7 @@ export default {
     return {
       tabIndex: 0,
       echarts,
-      minFenshi: 100,//分时的最小值
-      maxFenshi: 0,
+      maxBar: 0,
       Ymax: '',
       Ymin: '',
       resquestState: 1,//为1时可发请求
@@ -133,9 +132,8 @@ export default {
         this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(2), 60000 * 3))
       }
     },
-    getMinMax(val) {
-      this.minFenshi > val && (this.minFenshi = val)
-      this.maxFenshi < val && (this.maxFenshi = val)
+    getMaxBar(val) {
+      this.maxBar < val && (this.maxBar = val)
     },
     calcMinMax() {
       var val = ''
@@ -154,7 +152,7 @@ export default {
       var subBar = []
       arr.forEach((item, i) => {
         Yline.push(item.closePrice)
-        this.getMinMax(item.closePrice)
+        this.getMaxBar(item.volume)
         subBar = [item.minute]
         subBar.push(item.volume)
         if (i == 0) {
@@ -237,7 +235,12 @@ export default {
           {
             scale: true,
             gridIndex: 1,
-            axisLabel: { show: false },
+            axisLabel: {
+              formatter: (val, i) => {
+                if (val == this.maxBar) return val + ' 张'
+                else return ''
+              }
+            },
             axisLine: { show: false },
             axisTick: { show: false },
             splitLine: { show: false }
@@ -256,13 +259,13 @@ export default {
       //#endif
     },
     dealKData(arr) {
+      this.maxBar = 0
       var X = []
       var YBar = []
       var subBar = []
       var MA_k = [[], [], [], [], []]
       arr.forEach(item => {
         subBar = [item.tradeDate]
-
         X.push(item.tradeDate)
         MA_k[0].push([item.openPrice, item.closePrice, item.lowPrice, item.highPrice])
         MA_k[1].push(item.ma5)
@@ -270,6 +273,7 @@ export default {
         MA_k[3].push(item.ma20)
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
+        this.getMaxBar(item.amount)
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
         } else {
@@ -278,17 +282,22 @@ export default {
         YBar.push(subBar)
       });
       let obj = optionK
-      if (this.tabIndex == 2) {
+      if (this.tabIndex == 2) {//1分K
         X = fenshiT
         obj = option1k
-      } else if (this.tabIndex == 1) {
+      } else if (this.tabIndex == 1) {//日K的情况
         X.length < 60 && (X.length = 60)
-      } else if (this.tabIndex == 3) {
+        obj = optionRk//todo 有时候日K会跑飞
+      } else if (this.tabIndex == 3) {//5分k
         X = fiveMinK
       }
       obj.xAxis[0].data = X
       obj.xAxis[1].data = X
       obj.series[5].data = YBar
+      obj.yAxis[1].axisLabel.formatter = val => {
+        if (val == this.maxBar) return val + ' 张'
+        else return ''
+      }
       for (let i = 0; i < MA_k.length; i++) {
         obj.series[i].data = MA_k[i]
       }
@@ -405,7 +414,7 @@ view.uni-tab-bar {
 .h278 {
   height: 278px;
 }
-.h358 {
+.h324 {
   height: 324px;
 }
 </style>
