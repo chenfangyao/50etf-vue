@@ -31,11 +31,15 @@ export default {
     }
   },
   methods: {
-      ...mapMutations(['setstockamunt']),
+    ...mapMutations(['setstockamunt']),
     back() {
-      uni.navigateBack({
-        delta: 1
-      });
+      //#ifdef H5
+      if (getCurrentPages().length == 1) {
+        history.back()
+        return
+      }
+      //#endif
+      uni.navigateBack({ delta: 1 });
     },
     tapChange() {
       this.$emit('change-close')
