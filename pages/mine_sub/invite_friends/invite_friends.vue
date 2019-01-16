@@ -4,7 +4,13 @@
 
     <image class="bg" src='/static/mineImg/inviteFriendBg.png'></image>
     <view class="QRcode">
+       <!-- #ifdef H5 -->
+      
 			<qrcode-vue :logoSrc="imageUrl" :text="baseurl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
+      <!-- #endif -->
+       <!-- #ifndef H5 -->
+      <qr-code :val="baseurl" :size="158" ref="appQrcode"></qr-code>
+      <!-- #endif -->
     </view>
 		
     <view class="txt">{{baseurl}}</view>
@@ -19,26 +25,24 @@
 import btnBlock from '@/components/btnBlock.vue'
 import QrcodeVue from 'vue-qr'
 import { mapState } from 'vuex';
+import qrCode from '@/components/qrcode/qrcode.vue'
 
 export default {
   data() {
     return {
-       codeValue:'http://50etfvue.com:1688/h5#/pages/register/register',
-       // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
-       // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
-       imageUrl:'h5/static/loginResgImg/logo.png',//默认二维码中间图片
+      codeValue: 'http://50etfvue.com:1688/h5#/pages/register/register',
+      // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
+      // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+      imageUrl: 'h5/static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
-	computed: {
-		...mapState(['userinfo']),
-     baseurl() {
-				return this.codeValue+'/'+this.userinfo.user_id
-			}
-		},
-  components: { 
-	 btnBlock,
-	 QrcodeVue
-	 },
+  computed: {
+    ...mapState(['userinfo']),
+    baseurl() {
+      return this.codeValue + '/' + this.userinfo.user_id
+    }
+  },
+  components: { btnBlock, QrcodeVue, qrCode },
   methods: {
     copy() {
       var str = this.baseurl;
@@ -57,7 +61,7 @@ export default {
       //#ifndef H5
       uni.setClipboardData({
         data: str,
-        success () {
+        success() {
           uni.showToast({
             title: '复制成功',
             duration: 500
@@ -69,9 +73,11 @@ export default {
 
 
   },
-	created(){
-		// this.qrcode()
-	}
+  mounted() {
+    //#ifndef H5
+    this.$refs.appQrcode.creatQrcode()
+    //#endif
+  }
 }
 </script>
 
@@ -92,13 +98,13 @@ view.wrap {
   view.QRcode {
     width: 158px;
     height: 158px;
-//     background-color: #fff;
+    //     background-color: #fff;
     margin: 346upx auto 40upx;
-//     image {
-//       width: 317upx;
-//       height: 317upx;
-//       padding: 21upx;
-//     }
+    //     image {
+    //       width: 317upx;
+    //       height: 317upx;
+    //       padding: 21upx;
+    //     }
   }
   view.txt {
     font-size: 15px;
@@ -106,9 +112,9 @@ view.wrap {
     color: rgba(51, 51, 51, 1);
     line-height: 15px;
     text-align: center;
-		word-wrap: break-word;
-		width: 80%;
-		margin-left: 10%;
+    word-wrap: break-word;
+    width: 80%;
+    margin-left: 10%;
   }
   view.btn {
     padding: 0 53upx;

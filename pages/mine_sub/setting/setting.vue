@@ -58,7 +58,7 @@ export default {
         if (res.status == 1) {
           this.setuserinfo({})
           this.setsid('')
-          uni.switchTab({ url: '/pages/tabBar/index/index' })
+          uni.reLaunch({ url: '/pages/tabBar/index/index' })
         } else {
         }
       }).catch((err) => {
