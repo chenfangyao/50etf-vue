@@ -67,7 +67,8 @@ export default {
     util.indextimmer.quotesQryQuotationList = null
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
-    this.quotationStr || this.getartlelist()
+    
+    // this.quotationStr || this.getartlelist()
     this.beginPolling()
     this.getcommonselectstock([''])
     if (util.indextimmer.quotesCommonSelectStock === null) {
