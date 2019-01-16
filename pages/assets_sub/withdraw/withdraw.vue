@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
 	  <base-header title="提现"  has-back='1'  right-txt='提现记录'  @right-tap='rightTap'></base-header>
-    <recharge-way v-if="hasBank" :way-lists='wayLists' txt1='尾号1123储蓄卡' go-to='1'></recharge-way>
+    <recharge-way v-if="hasBank" :way-lists='wayLists' :showbanklogo="showbanklogo" txt1='' :txt2='txts1' go-to='1'></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' go-to='1'></recharge-way>
 		<view class="panel">
       <view class="inputContainer">
@@ -39,6 +39,8 @@ export default {
       wayLists: ['招商银行'],
       hasBank: false,
       bankName: [],
+			txts1:'',
+			showbanklogo:false
     }
   },
   computed: mapState(['assets']),
@@ -69,6 +71,7 @@ export default {
           if (res.data.sub_id != undefined) {
             this.hasBank = true
             this.bankName[0] = res.data.bank_name
+						this.wayLists[0]=res.data.bank_name
             this.pickerText = res.data.bank_name
             this.pickerCityText = res.data.prov + '-' + res.data.city
             this.pickSubBankText = res.data.sub_name
@@ -76,6 +79,7 @@ export default {
             this.username = res.data.cardname
             this.bankcardid = res.data.cardno
             this.identifica = res.data.idno
+						this.txts1=res.data.cardno
           }
         } else {
 

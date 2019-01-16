@@ -2,11 +2,12 @@
 <view>
   <view class="rechargeWay uni-flex" @tap='switchPop'>
 		<!-- wayLists是否绑定银行 -->
-      <image class="zhifubao" :src="banklogo" v-if='wayLists'></image>
+		<!-- 暂时无logo先隐藏 -->
+      <image  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'></image>
       <view class="txt">
         <view>{{wayLists[way_i]||textbank}}</view>
         <view>
-          <text v-if="wayLists[way_i]">{{textbank}}</text>
+          <!-- <text v-if="wayLists[way_i]">{{txt2}}</text> -->
           <text>{{txt2}}</text>
         </view>
       </view>
@@ -39,7 +40,8 @@ export default {
       }
     },
     txt1:'',
-    txt2:'',
+    txt2:{},
+		showbanklogo:{},
     goTo:'',
   },
   methods: {

@@ -190,7 +190,7 @@ export default {
       // 合并持仓分笔持仓
       this.getfbchic()
       this.gethbchic()
-      this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
+      this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
     }
   },
   onUnload() {
@@ -202,6 +202,9 @@ export default {
     this.setstockamunt(1)
     this.symbol = option.code
     this.getartlelist()
+		setTimeout(()=>{
+			this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
+		},1500)
       if(util.indextimmer.quotesQrySingleQuotationMsg===null){
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
               this.getartlelist()
@@ -219,6 +222,12 @@ export default {
       return
     }
   },
+	watch:{
+// 		QuotationMsg(val){
+// 			this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
+// 		}
+
+	},
 }
 </script>
 <style lang="scss" scoped>

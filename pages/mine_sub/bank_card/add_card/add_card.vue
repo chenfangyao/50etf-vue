@@ -242,6 +242,9 @@ export default {
 								 bankObj.value=res.data.list[i].sub_id
 								 this.pickerSubBankArray.push(bankObj)
 							 }
+							 if(this.btntxt=='修改'){
+								 this.mybankinfo()
+								 } 
 						}else{
 								
 						}
@@ -291,7 +294,7 @@ export default {
 	onLoad(opt){
 		this.getbanklist()
 		this.getprovlist()
-		this.mybankinfo()
+		// this.mybankinfo()
 		// this.username=this.userinfo.real_name
 		if(opt.bankinfo==0){
 			this.editdefault=true

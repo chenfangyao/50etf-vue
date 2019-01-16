@@ -2,7 +2,7 @@
 	<view class="wrap">
 	  <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
     <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
-    <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
+    <recharge-way :way-lists='wayList' :showbanklogo="showbanklogo" @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
     <view class="panel">
       <view class="inputContainer">
         <view class="moneyTitle">充值金额</view>
@@ -39,6 +39,8 @@ export default {
       inputDisabled: true,
       paytype: 'remit_alipay',
       payeeinfo: {},
+			showbanklogo:true,
+			defaultitemmoney:'',
     }
   },
   computed: mapState(['assets']),
@@ -95,12 +97,14 @@ export default {
       // 支付宝支付禁用输入框
       if (this.paytype == "remit_alipay") {//此处判断input禁用是以后端传来的实际字段为主
         this.inputDisabled = true
+				this.money=this.defaultitemmoney
       } else {
         this.inputDisabled = false
       }
     },
     choosePriceItem(i, item) {
       this.priceItem_i = i
+			this.defaultitemmoney=item
       this.money = item//支付宝状态下点击充值金额选项，改变input的值，当前写假的
     }
   },

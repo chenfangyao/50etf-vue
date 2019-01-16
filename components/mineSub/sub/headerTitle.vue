@@ -21,6 +21,7 @@ export default {
 	},
   components: { uniBadge },
 	props:['newlength'],
+	computed: mapState(['sid']),
 	created(){
 		if(this.sid){
 			this.txt=this.newlength.toString()

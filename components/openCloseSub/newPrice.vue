@@ -25,9 +25,9 @@
         <view class="uni-flex line2">
         <view>
             <!-- <image v-if="btn3_i" @tap="plusStep2(-1)" class='opacityclass' src='/static/openCloseImg/minus.png'></image> -->
-            <image  @tap="plusStep2(-1)" :class="!btn3_i && !softconf.ent_price_type?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
+            <image  @tap="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
             <text class=" newPrice" :class="{yellow1:onClose}">{{pricevalue}}</text>
-            <image  @tap="plusStep2(1)" :class="!btn3_i && !softconf.ent_price_type?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
+            <image  @tap="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
         </view>
 
             <view class="uni-flex btn3">
@@ -93,7 +93,7 @@ export default {
       tabActive: false,
       btn3Arr: ['市价', '限价'],
       btn3_i: 0,
-      sliderVal: 1,
+      sliderVal: 0,
       pickerText: '',//选择的值,默认取lists的第一个值，从后端获取后初始化
       pickerValueArray: [],//后端获得lists替换此处
       pricevalue: '',
@@ -108,7 +108,7 @@ export default {
     tapChange(val) {
       this.tabActive = val
       this.setentrusttype(val)
-      this.sliderVal = 1
+      this.sliderVal = 0
       if (val == true) {
         var picktext = this.pickerText
         picktext = picktext.split(' ')
@@ -199,7 +199,7 @@ export default {
     },
     plusStep2(i) {
       // 市价不允许修改
-      if (this.btn3_i == 0 && !this.softconf.ent_price_type) {
+      if (this.btn3_i == 0 ) {
         return
       }
       if (i == -1) {
@@ -312,7 +312,7 @@ export default {
     },
     onClose(val) {
       // 切换委托数量重置为1
-      this.sliderVal = 1
+      this.sliderVal = 0
     }
   },
   created() {
@@ -321,6 +321,7 @@ export default {
     } else {
       this.btn3Arr = ['市价', '限价']
     }
+		this.pricetitle=this.btn3Arr[0]
   },
   computed: {
     ...mapState(['softconf'])
