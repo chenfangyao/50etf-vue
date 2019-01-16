@@ -4,7 +4,7 @@
 
     <image class="bg" src='/static/mineImg/inviteFriendBg.png'></image>
     <view class="QRcode">
-			<qrcode-vue :logoSrc="imageUrl" :text="baseurl" margin='0' logoScale='200' size='158'></qrcode-vue>
+			<qrcode-vue :logoSrc="imageUrl" :text="baseurl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
     </view>
 		
     <view class="txt">{{baseurl}}</view>

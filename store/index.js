@@ -122,9 +122,9 @@ const store = new Vuex.Store({
 	},
   },
   //#ifdef H5
-  plugins: [ createPersistedState({
+  /* plugins: [ createPersistedState({
     storage: window.sessionStorage
- }) ],
+ }) ], */
   //#endif
 })
 
