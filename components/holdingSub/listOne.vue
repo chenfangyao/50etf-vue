@@ -53,11 +53,12 @@ export default {
     }
   },
   methods: {
+
     popShow(i) {
-      this.$emit('gou-shi',i)//兼容狗屎iPhone
-     
+      this.$emit('gou-shi', i)//兼容狗屎iPhone
+
     },
-   
+
   },
   watch: {
     list(val) {

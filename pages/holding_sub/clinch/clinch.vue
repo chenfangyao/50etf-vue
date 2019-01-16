@@ -109,11 +109,11 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         this.total = res.data.total
+        this.businessTime = []
+        this.business_amount = []
         if (add) {
           this.list = this.list.concat(res.data.list)
         } else {
-          this.businessTime = []
-          this.business_amount = []
           this.list = res.data.list
         }
         this.filterVal(this.list)

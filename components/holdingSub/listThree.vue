@@ -30,7 +30,7 @@
     </view>
     <view class='line3 uni-flex'>
       <text>委托时间：{{createTime[i]}}</text>
-      <view class='countdownBtn' hover-class='hover1' @tap='showPop(i)'>撤单（{{countdown}} S）</view>
+      <view class='countdownBtn' hover-class='hover1' @tap='showPop(i)'>撤单</view>   <!-- （{{countdown}} S） -->
     </view>
   </view>
   <!-- 以下是假数据 -->

@@ -2,7 +2,7 @@
     <view class="Bigwrap">
         <base-header :hasBack="true"  title='资金流水'></base-header>
         <view class="line1 uni-flex">
-            <text>此处放文案</text>
+            <text>共{{total}}笔</text>
             <image class="right" @tap="showDatepick" src='/static/mineImg/datePicker.png'/>
         </view>
         <scroll-view class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
@@ -39,46 +39,45 @@
 </template>
 
 <script>
-import datePick from '@/components/datePick2.vue';
+import datePick from '@/components/datePick.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
     return {
       showPick: false,
       monetlist: [],
-			pageindex:0,
-			resquestState: 0,
-			formatetime:[],
+      pageindex: 0,
+      resquestState: 0,
+      formatetime: [],
+      total: 0,
     }
   },
   methods: {
     showDatepick() {
       this.showPick = true
     },
-		loadMore(){
-			if (this.resquestState < 2) {
-			this.pageindex+=1
-			this.capicalflow(0, 0 , this.pageindex,'add')
-			}
-		},
+    loadMore() {
+      if (this.resquestState < 2) {
+        this.pageindex += 1
+        this.capicalflow(0, 0, 'add')
+      }
+    },
     getTime(val) {
       this.showPick = false;
-			console.log(555,val)
-      var starttime = this.$timestamp(val.starttime)
-      var endtime = this.$timestamp(val.endtime)
-      this.capicalflow(starttime, endtime,0,'add')
+      this.pageindex = 0
+      this.capicalflow(val.starttime, val.endtime)
     },
-		closeme(){
-			this.showPick = false;
-		},
+    closeme() {
+      this.showPick = false;
+    },
     // 资金流水
-    capicalflow(starttime, endtime ,index,add) {
-			this.resquestState = 1
+    capicalflow(starttime, endtime, add) {
+      this.resquestState = 1
       var options = {
         url: '/Sapi/Squery/list_funds', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
         data: {
-          page_index: index,
+          page_index: this.pageindex,
           page_size: 10,
           date_start: starttime,
           date_end: endtime
@@ -86,38 +85,40 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-					if(add){
-						this.monetlist = this.monetlist.concat(res.data.list)
-						var temarr=[]
-						for(let i=0;i<res.data.list.length;i++){
-							temarr.push(this.$formatetimestr(res.data.list[i].create_time))
-						}
-						this.formatetime=this.formatetime.concat(temarr)
-					}else{
-						this.monetlist=res.data.list
-						for(let i=0;i<res.data.list.length;i++){
-							this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))
-						}
-					}
+          this.total = res.data.total
+          if (add) {
+            this.monetlist = this.monetlist.concat(res.data.list)
+            var temarr = []
+            for (let i = 0; i < res.data.list.length; i++) {
+              temarr.push(this.$formatetimestr(res.data.list[i].create_time))
+            }
+            this.formatetime = this.formatetime.concat(temarr)
+          } else {
+            this.monetlist = res.data.list
+            this.formatetime = []
+            for (let i = 0; i < res.data.list.length; i++) {
+              this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))
+            }
+          }
         }
-				this.resquestState = res.data.list.length == 10 ? 0 : 2
+        this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
       })
     }
   },
-  components: { datePick,uniLoadMore },
-	onLoad(){
-		// uni.startPullDownRefresh();
-	},
-	onPullDownRefresh(){
-// 		setTimeout(()=>{
-// 			uni.stopPullDownRefresh();
-// 		},1000)
-	},
+  components: { datePick, uniLoadMore },
+  onLoad() {
+    // uni.startPullDownRefresh();
+  },
+  onPullDownRefresh() {
+    // 		setTimeout(()=>{
+    // 			uni.stopPullDownRefresh();
+    // 		},1000)
+  },
   onShow() {
-    this.capicalflow(0, 0 , 0)
+    this.capicalflow(0, 0)
   }
 }
 </script>
@@ -138,14 +139,14 @@ view.Bigwrap {
       height: 17px;
     }
   }
-	.listscrow{
-     /* #ifndef H5 */
+  .listscrow {
+    /* #ifndef H5 */
     height: calc(100vh - 178upx - var(--status-bar-height));
     /* #endif */
     /* #ifdef H5 */
     height: calc(100vh - 178upx);
     /* #endif */
-	}
+  }
   view.listsContainer {
     background-color: #fff;
     margin: 12upx 0;

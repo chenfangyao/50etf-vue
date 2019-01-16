@@ -1,7 +1,7 @@
 <template>
 	<view :class="isWhite?'white':'black'">
 		<base-header title="首页"></base-header>
-    <swiper class="banner" autoplay circular>
+    <swiper class="banner" autoplay circular >
       <swiper-item v-for="(item,i) in imgList" :key="i">
 		  	<image :src="item.img" />
       </swiper-item>
