@@ -25,6 +25,12 @@ export default {
   },
   methods: {
     back() {
+      //#ifdef H5
+      if (getCurrentPages().length == 1) {
+        history.back()
+        return
+      }
+      //#endif
       uni.navigateBack({ delta: 1 });
     }
   },
