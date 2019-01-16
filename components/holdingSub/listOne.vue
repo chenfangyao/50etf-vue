@@ -53,16 +53,18 @@ export default {
     }
   },
   methods: {
+
     popShow(i) {
-      this.$emit('gou-shi',i)//兼容狗屎iPhone
-     
+      this.$emit('gou-shi', i)//兼容狗屎iPhone
+
     },
-   
+
   },
   watch: {
     list(val) {
       if (!val) return;
       this.moneyColor = []
+      this.create_time = []
       val.forEach((item, i) => {
         this.moneyColor.push(parseInt(item.profit_money) < 0)
         this.create_time.push(this.$formatetimestr(item.in_time))

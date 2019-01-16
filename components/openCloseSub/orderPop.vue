@@ -96,11 +96,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          // uni.showToast({
-          // title: res.info?res.info:'买入成功',
-          // duration: 2000
-          // });
-          uni.navigateTo({
+          uni.redirectTo({
             url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
           })
         }
@@ -132,13 +128,8 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        console.log('卖出', res)
         if (res.status) {
-          uni.showToast({
-            title: res.info ? res.info : '卖出成功',
-            duration: 2000
-          });
-          uni.navigateTo({
+          uni.redirectTo({
             url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
           })
         }

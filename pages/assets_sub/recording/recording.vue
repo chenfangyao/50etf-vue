@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<base-header has-back='1' title="充值记录"></base-header>
+		<base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
     <view class="line1 uni-flex">
         <text>总计：{{total}}笔</text>
         <image class="right" @tap="switchDatepick" src='/static/mineImg/datePicker.png'/>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import datePick from '@/components/datePick2.vue';
+import datePick from '@/components/datePick.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
@@ -92,6 +92,7 @@ export default {
             }
             this.formatetime = this.formatetime.concat(temarr)
           } else {
+            this.formatetime=[]
             this.recordlist = res.data.list
             for (let i = 0; i < res.data.list.length; i++) {
               this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))

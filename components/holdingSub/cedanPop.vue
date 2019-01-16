@@ -18,6 +18,7 @@ export default {
       this.$emit('close-me')
     },
     yesTap() { 
+       
       this.$emit('close-me','yes')
     },
   }

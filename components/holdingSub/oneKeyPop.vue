@@ -27,7 +27,7 @@
       </view>
       <view class="btn2 uni-flex">
         <view hover-class='tap-hover' @tap='closePop'>取消</view>
-        <view hover-class='tap-hover' @tap='yesTap'>确定</view>
+        <view hover-class='tap-hover' @tap='stocksell'>确定</view>
       </view>
     </view>
   </view>
@@ -45,11 +45,6 @@ export default {
     closePop: function () {
       this.$emit('close-pop')
     },
-    yesTap() {
-      this.stocksell()
-      this.$emit('close-pop')
-
-    },
     // 获取资金列表
     getassets() {
       var options = {
@@ -66,7 +61,7 @@ export default {
       })
     },
     stocksell() {
-      let hid=''
+      let hid = ''
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
@@ -79,29 +74,25 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        console.log('卖出', res)
+       this.$emit('close-pop','deep')
+
         if (res.status) {
-          uni.showToast({
-            title: res.info ? res.info : '卖出成功',
-            duration: 2000
-          });
-          uni.navigateTo({
-            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stock_code) + ''
-          })
-        }
-        else {
+          uni.navigateTo({   url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stock_code) + ''})
+        } else {
           uni.showToast({
             title: res.info ? res.info : '卖出失败',
-            duration: 2000
+            duration: 2000,
+            icon:'none'
           });
         }
+
       }).catch((err) => {
         // 请求失败的回调
         console.log(err)
       })
     }
   },
-  props: ['onClose',  'resObj', ],
+  props: ['onClose', 'resObj',],
   created() {
     this.getassets()
     setTimeout(

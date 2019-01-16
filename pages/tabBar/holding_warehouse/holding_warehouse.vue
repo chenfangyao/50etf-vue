@@ -46,6 +46,7 @@ export default {
       showHebingPop: false,
       listItem: {},//给fenbiPop的数据
       viewMask: null,
+      revokeTimer: null,//撤单定时器
       titleList: [
         { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0, },
         { name: '合并', startI: 0, list: [], resquestState: 0, total: 0, },
@@ -76,7 +77,16 @@ export default {
     },
     tabTap(i) {
       this.tabI = i
-      this.titleList[i].list.length === 0 && this.getFenbiList(i)
+      this.checkRevoke(i)
+      this.getFenbiList(i)
+    },
+    checkRevoke(i) {
+      if (i == 3) {
+        !this.revokeTimer && (this.revokeTimer = setInterval(i => { this.getFenbiList(3) }, 3000))
+      } else {
+        clearInterval(this.revokeTimer)
+        this.revokeTimer = null
+      }
     },
     loadMore(i) {
       if (this.titleList[i].resquestState < 2) {
@@ -133,7 +143,6 @@ export default {
     util.indextimmer.quotesQrySingleQuotationMsg = null
 
     if (this.weituoindex == 2) {
-      console.log('进来啦');
       this.tabI = 2
       this.titleList[2].startI = 0
 
@@ -144,6 +153,7 @@ export default {
   },
   onHide() {
     this.setweituoindex(0)
+    this.checkRevoke()//清除撤单定时器
   }
 }
 </script>

@@ -80,7 +80,7 @@
       </view>
     </view>
     
-    <one-key v-if="showPop"  @yes-tap='oneKeyHandle(1)' @close-pop='oneKeyHandle'  :res-obj='resObj'> </one-key>
+    <one-key v-if="showPop"   @close-pop='oneKeyHandle'  :res-obj='resObj'> </one-key>
     <extension-pop v-if="showPop2" @yes-tap='yesHandle(1)' @cancle-tap='yesHandle(0)'></extension-pop>
   </view>
 </template>
@@ -127,8 +127,10 @@ export default {
 
       }
     },
-    oneKeyHandle(i) {
+    oneKeyHandle(str) {
       this.showPop = false
+      console.log(str);
+      str=='deep'&&this.closeMe()
     },
     openPop() {
       this.showPop = true
@@ -152,7 +154,6 @@ export default {
 
   },
   mounted() {
-    console.log(this.resObj);
     this.showDagou = this.resObj.auto_delay == 1
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   }

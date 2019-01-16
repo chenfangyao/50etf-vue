@@ -98,11 +98,11 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         this.total = res.data.total
+        this.close_time = []
+        this.sell_amount = []
         if (add) {
           this.list = this.list.concat(res.data.list)
         } else {
-          this.close_time = []
-          this.sell_amount = []
           this.list = res.data.list
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
