@@ -80,12 +80,12 @@ export default {
           this.freeze_money = res.data.freeze_money
           this.add_fee_money = res.data.add_fee_money
           this.profit_money = res.data.profit_money
+					this.res_data = res.data
 					if(res.data.profit_money.indexOf('-')!=-1){
 						this.greenredclass=true
 					}else{
 						this.greenredclass=false
-					}
-          this.res_data = res.data
+					}  
         }
       }).catch((err) => {
         // 请求失败的回调

@@ -30,7 +30,7 @@ export default {
   },
   components: { btnBlock },
   methods: {
-    ...mapMutations(['setuserinfo']),
+    ...mapMutations(['setuserinfo','setsid']),
     logOut() {
       uni.showModal({
         title: '确认退出登录？',
@@ -56,7 +56,8 @@ export default {
         // res为服务端返回数据的根对象
         console.log(res)
         if (res.status == 1) {
-          this.setuserinfo('')
+          this.setuserinfo({})
+          this.setsid('')
           uni.switchTab({ url: '/pages/tabBar/index/index' })
         } else {
         }
