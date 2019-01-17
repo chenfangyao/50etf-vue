@@ -1,6 +1,6 @@
 
 <template>
-  <view>
+  <view class="bgfff">
     <view class="uni-flex">
       <view class="leftPart">
         <view class="leftTop uni-flex">
@@ -78,6 +78,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.bgfff{background: #fff;}
 view.leftPart {
   margin: 30upx 0 0 26upx;
   view.leftTop {
@@ -87,6 +88,7 @@ view.leftPart {
       font-size: 32px;
       font-weight: bold;
       line-height: 32px;
+      margin-right: 4upx;
     }
   }
   .flexColumn {
@@ -100,7 +102,7 @@ view.leftPart {
   }
   view.leftBottom {
     color: #a8a8a8;
-    margin-top: 36upx;
+    margin-top: 20upx;
     font-size: 10px;
     view.time {
       align-self: flex-start;
@@ -121,19 +123,19 @@ view.rightPart {
 		}
     justify-content: space-between;
 		text{
-			font-size: 12px;
+			font-size: 14px;
 		}
   }
   .rightBottom > view,
   .rightTop > view {
-    margin-bottom: 24upx;
+    margin-bottom: 12upx;
     text:first-child {
-      font-size: 12px;
+      font-size: 14px;
       color: #828597;
       line-height: 12px;
     }
     text:last-child {
-      font-size: 12px;
+      font-size: 14px;
       font-family: ArialMT;
       color: rgba(24, 28, 40, 1);
     }

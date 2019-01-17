@@ -70,10 +70,10 @@ export default {
     
     this.quotationStr || this.getartlelist()//获取那一串股票码
     this.beginPolling()
-    this.getcommonselectstock([''])
+   this.getcommonselectstock([''])
     if (util.indextimmer.quotesCommonSelectStock === null) {
       util.indextimmer.quotesCommonSelectStock = setInterval(() => {
-        this.getcommonselectstock([this.commonstock[0].tradeMins])
+       this.getcommonselectstock([this.commonstock[0].tradeMins])
       }, 1500)
     }
   },

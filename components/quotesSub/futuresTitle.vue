@@ -1,6 +1,6 @@
 <template>
   <view class="uni-flex wrap">
-    <text>涨跌(%)</text>
+    <text><text>涨跌</text><text class="small">(%)</text></text>
     <text>现价</text>
     <view class="uni-flex">
       <text class="gou">购</text>
@@ -8,7 +8,7 @@
       <text class="gu">沽</text>
     </view>
     <text>现价</text>
-    <text>涨跌(%)</text>
+    <text><text>涨跌</text><text class="small">(%)</text></text>
   </view>
 </template>
 <style lang="scss" scoped>
@@ -17,9 +17,13 @@ view.wrap {
   padding: 18upx 25upx;
   border-bottom: 1px solid #f5f5f5;
   text {
-    font-size: 12px;
+    font-size: 14px;
     color: rgba(31, 31, 38, 1);
     text-align: center;
+  }
+  text.small{
+    font-size: 9px;
+    line-height: 9px;
   }
   text.mlr{
     margin: 0 33upx;

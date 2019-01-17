@@ -154,10 +154,10 @@ export default {
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
-    this.getcommonselectstock(['', '', ''])
+   this.getcommonselectstock(['', '', ''])
     if (util.indextimmer.indexCommonSelectStock === null) {
       util.indextimmer.indexCommonSelectStock = setInterval(() => {
-        this.getcommonselectstock(this.timestr)
+       this.getcommonselectstock(this.timestr)
       }, 3000)
     }
   },

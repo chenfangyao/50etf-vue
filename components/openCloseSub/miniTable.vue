@@ -9,27 +9,27 @@
       <view class="datas">
         <text>1</text>
         <text>{{hydetils.buyAmount1}}</text>
-        <text class="w71">{{hydetils.buyPrice1}}</text>
+        <text class="w71">{{buyPrice1}}</text>
       </view>
       <view class="datas">
         <text>2</text>
         <text>{{hydetils.buyAmount2}}</text>
-        <text class="w71">{{hydetils.buyPrice2}}</text>
+        <text class="w71">{{buyPrice2}}</text>
       </view>
       <view class="datas">
         <text>3</text>
         <text>{{hydetils.buyAmount3}}</text>
-        <text class="w71">{{hydetils.buyPrice3}}</text>
+        <text class="w71">{{buyPrice3}}</text>
       </view>
       <view class="datas">
         <text>4</text>
         <text>{{hydetils.buyAmount4}}</text>
-        <text class="w71">{{hydetils.buyPrice4}}</text>
+        <text class="w71">{{buyPrice4}}</text>
       </view>
       <view class="datas">
         <text>5</text>
         <text>{{hydetils.buyAmount5}}</text>
-        <text class="w71">{{hydetils.buyPrice5}}</text>
+        <text class="w71">{{buyPrice5}}</text>
       </view>
     </view>
     <view class="right">
@@ -39,27 +39,27 @@
         <text>卖</text>
       </view>
       <view class="datas">
-        <text class="w71">{{hydetils.salePrice1}}</text>
+        <text class="w71">{{salePrice1}}</text>
         <text>{{hydetils.saleAmount1}}</text>
         <text>1</text>
       </view>
       <view class="datas">
-        <text class="w71">{{hydetils.salePrice2}}</text>
+        <text class="w71">{{salePrice2}}</text>
         <text>{{hydetils.saleAmount2}}</text>
         <text>2</text>
       </view>
       <view class="datas">
-        <text class="w71">{{hydetils.salePrice3}}</text>
+        <text class="w71">{{salePrice3}}</text>
         <text>{{hydetils.saleAmount3}}</text>
         <text>3</text>
       </view>
       <view class="datas">
-        <text class="w71">{{hydetils.salePrice4}}</text>
+        <text class="w71">{{salePrice4}}</text>
         <text>{{hydetils.saleAmount4}}</text>
         <text>4</text>
       </view>
       <view class="datas">
-        <text class="w71">{{hydetils.salePrice5}}</text>
+        <text class="w71">{{salePrice5}}</text>
         <text>{{hydetils.saleAmount5}}</text>
         <text>5</text>
       </view>
@@ -70,26 +70,31 @@
 export default {
   data() {
     return {
-      buyPrice1: '',
-      buyPrice2: '',
-      buyPrice3: '',
-      buyPrice4: '',
-      buyPrice5: '',
-      salePrice1: '',
-      salePrice2: '',
-      salePrice3: '',
-      salePrice4: '',
-      salePrice5: '',
     }
   },
+  computed: {
+    buyPrice1() {
+      return this.hydetils.buyPrice1.toFixed(4)
+    },
+    buyPrice2() {
+      return this.hydetils.buyPrice2.toFixed(4)
+    },
+    buyPrice3() {
+      return this.hydetils.buyPrice3.toFixed(4)
+    },
+    buyPrice4() {
+      return this.hydetils.buyPrice4.toFixed(4)
+    },
+    buyPrice5() {
+      return this.hydetils.buyPrice5.toFixed(4)
+    },
+    salePrice1() { return this.hydetils.salePrice1.toFixed(4) },
+    salePrice2() { return this.hydetils.salePrice2.toFixed(4) },
+    salePrice3() { return this.hydetils.salePrice3.toFixed(4) },
+    salePrice4() { return this.hydetils.salePrice4.toFixed(4) },
+    salePrice5() { return this.hydetils.salePrice5.toFixed(4) },
+  },
   props: ['hydetils'],
-  mounted() { 
-    this.buyPrice1=this.hydetils.buyPrice1
-    /* for(var i=1;i<6;i++){
-      this['buyPrice'+i]=this.hydetils['buyPrice'+i]
-      this['salePrice'+i]=this.hydetils['salePrice'+i]
-    } */
-  }
 
 }
 </script>

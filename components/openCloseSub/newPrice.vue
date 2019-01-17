@@ -57,7 +57,7 @@
                 <image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
             </view>
             <view class="sliderItem">
-                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='1' :value='sliderVal'
+                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
                         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'"/>
             </view>
         </view>

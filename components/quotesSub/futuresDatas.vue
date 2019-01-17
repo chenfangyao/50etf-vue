@@ -1,18 +1,18 @@
 <template>
   <view>
     <view class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
-      <view @tap="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
-        <text class="txtred">{{item.gou.incr_percent}}</text>
-        <text class="txtred">{{item.gou.last_price}}</text>
+      <view @tap="go(item.gou)" class="wrap1 " :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
+        <text :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}" >{{item.gou.incr_percent}}</text>
+        <text :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}">{{item.gou.last_price}}</text>
       </view>
       <view class="uni-flex">
         <!-- <text class="gou">{{item.buy_amount1}}</text> -->
         <text class="midTxt">{{item.gou.exercise_price}}</text>
         <!-- <text class="gou">{{item.sale_amount1}}</text> -->
       </view>
-      <view @tap="go(item.gu)" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
-        <text class="txtgreen">{{item.gu.last_price}}</text>
-        <text class="txtgreen">{{item.gu.incr_percent}}</text>
+      <view @tap="go(item.gu)" class="wrap1 "  :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
+        <text :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}" >{{item.gu.last_price}}</text>
+        <text :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}">{{item.gu.incr_percent}}</text>
       </view>
     </view>
   </view>
@@ -137,7 +137,7 @@ export default {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
       } else {
-        this.compareDiff(newval, oldval)//有缺陷
+        this.compareDiff(newval, oldval)
       }
     },
   }
@@ -151,8 +151,9 @@ view.wrap {
   line-height: 70upx;
   border-bottom: 1px solid #f5f5f5;
   text {
-    font-size: 13px;
-    color: rgba(31, 31, 38, 1);
+    font-size: 14px;
+    // color: rgba(31, 31, 38, 1);
+    color: #454545;
     width: 51px;
   }
   text.txtred {
@@ -166,8 +167,9 @@ view.wrap {
     display: inline-block;
     height: 100%;
     line-height: 70upx;
+    font-weight: bold;
     padding: 0 23upx;
-    font-size: 13px;
+    font-size: 14px;
     width: 154upx;
     color: #333;
     text-align: center;
@@ -203,17 +205,35 @@ view.wrap {
     text-align: center;
   }
   view.down_c {
-    background-color: rgba(58, 186, 143, 0.9);
+     background: linear-gradient(  90deg, rgba(58, 186, 148, 1), rgba(167, 229, 208, 1));
+
     text {
       color: #fff;
     }
   }
   view.up_c {
-    background-color: rgba(240, 95, 92, 0.9);
+     background: linear-gradient(  90deg, rgba(240, 95, 92, 1), rgba(245, 186, 184, 1));
+
     // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
     text {
       color: #fff;
     }
   }
+  view.down_c:first-child {
+     background: linear-gradient(  -90deg, rgba(58, 186, 148, 1), rgba(167, 229, 208, 1));
+
+    text {
+      color: #fff;
+    }
+  }
+  view.up_c:first-child {
+     background: linear-gradient(  -90deg, rgba(240, 95, 92, 1), rgba(245, 186, 184, 1));
+
+    // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
+    text {
+      color: #fff;
+    }
+  }
+
 }
 </style>
