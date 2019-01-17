@@ -340,7 +340,21 @@
         },
         {
             "path" : "pages/assets_sub/recording/recording",
-            "style" : { "titleNView" : false,
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/registers/registers",
+            "style" : {
+                "titleNView" : false,
+                "scrollIndicator" : "none"
+            }
+        },
+        {
+            "path" : "pages/forgets_pwd/forgets_pwd",
+            "style" : {"titleNView" : false,
                 "scrollIndicator" : "none"}
         }
     ],

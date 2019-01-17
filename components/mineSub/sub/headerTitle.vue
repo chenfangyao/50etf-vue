@@ -4,7 +4,8 @@
   <view class="title">
     <view class="msg">
       <text @tap='go(3) ' class="commonStyle1">消息</text>
-      <uni-badge :text="txt" type="danger"></uni-badge>
+      <!-- <uni-badge :text="txt" type="danger"></uni-badge> -->
+      <uni-badge :text="sid?newlengths:'0'" type="danger"></uni-badge>
     </view>
     <text class="commonStyle1" @tap='go'>设置</text>
   </view>
@@ -20,12 +21,15 @@ export default {
 		}
 	},
   components: { uniBadge },
-	props:['newlength'],
-	computed: mapState(['sid']),
+	computed: mapState(['sid','newlengths']),
 	created(){
+		console.log(4444)
 		if(this.sid){
-			this.txt=this.newlength.toString()
+			this.txt=this.newlengths.toString()
+		}else{
+			this.txt='0'
 		}
+	
 	},
   methods: {
     go(i) {
@@ -53,7 +57,7 @@ export default {
       } else {
         uni.navigateTo({ url: '/pages/mine_sub/setting/setting' })
       }
-    }
+    },
   },
 }
 </script>

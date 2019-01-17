@@ -9,7 +9,7 @@
       <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' ></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
-      <view class="txt2 uni-flex" style='opacity:0'>
+      <view class="txt2 uni-flex" >
         <text @tap='go(1)'>注册用户</text>
         <text @tap='go(2)'>忘记密码 ？</text>
       </view>
@@ -50,9 +50,11 @@ export default {
     go(i) {
       let url = ''
       switch (i) {
-        case 1: url = '/pages/register/register'
+        // case 1: url = '/pages/register/register'
+        case 1: url = '/pages/registers/registers'
           break
-        case 2: url = '/pages/forget_pwd/tep1/tep1'
+        // case 2: url = '/pages/forget_pwd/tep1/tep1'
+        case 2: url = '/pages/forgets_pwd/forgets_pwd'
           break
         case 3: url = '/pages/risk_book/risk_book'
 				  break

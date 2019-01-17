@@ -27,7 +27,7 @@ const store = new Vuex.Store({
 	// 开/平仓页面合约价格
 	newprice:'',
 	// 开/平仓页面委托数量
-	stockamunt:'1',
+	stockamunt:'0',
 	// 委托类型,默认为2
 	enttype:'2',
 	// 委托类型
@@ -44,6 +44,7 @@ const store = new Vuex.Store({
 	weituoindex:0,
 	// 软件配置信息
 	softconf:{},
+	newlengths:0,
   },
   mutations: {
     login(state, provider) {
@@ -119,6 +120,9 @@ const store = new Vuex.Store({
 	},
 	setsoftconf(state,data){
 		state.softconf=data
+	},
+	setnewlengths(state,data){
+		state.newlengths=data
 	},
   },
   //#ifdef H5

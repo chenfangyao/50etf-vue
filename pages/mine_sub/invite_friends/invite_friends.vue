@@ -30,10 +30,10 @@ import qrCode from '@/components/qrcode/qrcode.vue'
 export default {
   data() {
     return {
-      codeValue: 'http://50etfvue.com:1688/h5#/pages/register/register',
-      // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
-      // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
-      imageUrl: 'h5/static/loginResgImg/logo.png',//默认二维码中间图片
+       codeValue:'http://50etfvue.com:1688/h5#/pages/register/register',
+       // imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
+       // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+       imageUrl:'/h5/static/loginResgImg/logo.png',//默认二维码中间图片
     };
   },
   computed: {
