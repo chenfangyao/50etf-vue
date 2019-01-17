@@ -68,7 +68,7 @@ export default {
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
     
-    // this.quotationStr || this.getartlelist()
+    this.quotationStr || this.getartlelist()//获取那一串股票码
     this.beginPolling()
     this.getcommonselectstock([''])
     if (util.indextimmer.quotesCommonSelectStock === null) {

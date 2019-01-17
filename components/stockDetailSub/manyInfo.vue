@@ -16,8 +16,8 @@
            <text>最&nbsp&nbsp&nbsp高</text>
          </view>
          <view class="uni-flex uni-column">
-           <text>{{openPrice}}</text>
-           <text>{{highPrice}}</text>
+           <text>{{openPrice=='NaN'?'--':openPrice}}</text>
+           <text>{{highPrice=='NaN'?'--':highPrice}}</text>
          </view>
        </view>
      </view>
@@ -31,9 +31,8 @@
          </view>
          <view class="uni-flex uni-column">
            <text>{{preclosePrice}}</text>
-           <text>{{lowPrice}}</text>
-           <text>{{dealAmount}}亿</text>
-
+           <text>{{lowPrice=='NaN'?'--':lowPrice}}</text>
+           <text>{{dealAmount=='NaN'?'--':dealAmount}}亿</text>
          </view>
        </view>
      </view>
