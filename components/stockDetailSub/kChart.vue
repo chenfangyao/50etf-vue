@@ -60,8 +60,7 @@ export default {
     return {
       tabIndex: 0,
       echarts,
-      minFenshi: 100,//分时的最小值
-      maxFenshi: 0,
+      maxBar: 0,//最大成交量
       Ymax: '',
       Ymin: '',
       resquestState: 1,//为1时可发请求
@@ -126,9 +125,8 @@ export default {
         this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(), 60000 * 3))
       }
     },
-    getMinMax(val) {
-      this.minFenshi > val && (this.minFenshi = val)
-      this.maxFenshi < val && (this.maxFenshi = val)
+    getMaxBar(val) {
+      this.maxBar < val && (this.maxBar = val)
     },
     calcMinMax() {
       var val = ''
@@ -139,7 +137,6 @@ export default {
       }
       this.Ymax = (this.stockInfo.preClosePrice - 0 + val * 1.005).toFixed(4)
       this.Ymin = (this.stockInfo.preClosePrice - val * 1.005).toFixed(4)
-      console.log(this.stockInfo);
     },
     dealFenshiData(arr) {
       var Yline = []
@@ -147,7 +144,7 @@ export default {
       var subBar = []
       arr.forEach((item, i) => {
         Yline.push(item.closePrice)
-        this.getMinMax(item.closePrice)
+        this.getMaxBar(item.volume)
         subBar = [item.minute]
         subBar.push(item.volume)
         if (i == 0) {
@@ -190,7 +187,6 @@ export default {
                 {
                   yAxis: this.Ymin + '',
                   label: { formatter: () => ((this.Ymin - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
-
                 },
 
               ]
@@ -209,13 +205,10 @@ export default {
               formatter: (val, i) => {
                 var num = Number(val.toFixed(4))
                 var max = Number(this.Ymax)
-                // var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
-                // midMax = Number(midMax.toFixed(4))
                 var min = Number(this.Ymin)
-                // var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
-                // midMin = Number(midMin.toFixed(4))
+                console.log(num);
                 switch (num) {
-                  case this.stockInfo.preClosePrice:
+                  case this.stockInfo.preClosePrice://没分到，出不来这种结果
                   case max:
                   case min:
                     return num
@@ -229,7 +222,12 @@ export default {
           {
             scale: true,
             gridIndex: 1,
-            axisLabel: { show: false },
+            axisLabel: {
+              formatter: (val, i) => {
+                if (val == this.maxBar) return (this.maxBar / 10000 / 10000).toFixed(2) + '亿张'
+                else return ''
+              }
+            },
             axisLine: { show: false },
             axisTick: { show: false },
             splitLine: { show: false }
@@ -248,6 +246,7 @@ export default {
       //#endif
     },
     dealKData(arr) {
+      this.maxBar = 0
       var X = []
       var YBar = []
       var subBar = []
@@ -261,6 +260,7 @@ export default {
         MA_k[3].push(item.ma20)
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
+        this.getMaxBar(item.amount)
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
         } else {
@@ -289,7 +289,10 @@ export default {
        } */
       obj.xAxis[1].data = X
       obj.series[5].data = YBar
-
+      obj.yAxis[1].axisLabel.formatter = val => {
+        if (val == this.maxBar) return (this.maxBar / 10000 / 10000).toFixed(2) + '亿张'
+        else return ''
+      }
       for (let i = 0; i < MA_k.length; i++) {
         obj.series[i].data = MA_k[i]
       }
@@ -338,7 +341,7 @@ export default {
     },
     getfenshi() {
       var options = {
-        url: 'market/getTimeSharingInfo',
+        url: '/market/getTimeSharingInfo',
         method: 'GET',
         data: {
           stockCodeInternal: this.commonstock[this.symbolStr].stockCodeInternal,

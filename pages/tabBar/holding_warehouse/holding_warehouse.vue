@@ -78,6 +78,7 @@ export default {
     tabTap(i) {
       this.tabI = i
       this.checkRevoke(i)
+      this.titleList[i].startI=0//重搜
       this.getFenbiList(i)
     },
     checkRevoke(i) {

@@ -25,10 +25,11 @@ export const optionK = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false, },
-      axisLine: { lineStyle:{color:'#aaa'} },
+      axisLine: { lineStyle: { color: '#aaa' } },
       // axisTick: { show: false },
       axisLabel: {
-        splitNumber: 2, align: 'left',
+        splitNumber: 2,
+        margin: 10
       },
     },
     {
@@ -60,39 +61,40 @@ export const optionK = {
     {
       axisLine: { show: false, },
       axisTick: { show: false },
-      splitLine:{lineStyle:{color:'#eee'}},
+      splitLine: { lineStyle: { color: '#eee' } },
       scale: true,
       // interval: 0.01,
       axisLabel: {
-        margin: 0,
-        color:'#999',
-        inside: true,
+        margin: 5,
+        color: '#999',
       },
     },
     {
       scale: true,
       gridIndex: 1,
       axisLine: { show: false },
+      max: 'dataMax',
+      min: 'dataMin',
       axisLabel: {
-        margin: 0,
+        margin: -35,
         showMaxLabel: true,
-        showMinLabel: false, show: false
+        showMinLabel: false,
       },
       axisTick: { show: false },
       splitLine: { show: false }
     }],
   grid: [
     {
-      left: 5,
+      left: 45,
       right: 5,
       top: 30,
-      bottom: 130,
+      bottom: 140,
     },
     {
-      left: 5,
+      left: 45,
       right: 5,
-      top: 234,
-      bottom: 0
+      top: 254,
+      bottom: 3
     },
   ],
   title: {
@@ -194,9 +196,9 @@ export const option = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false, },
-      axisLine: { show: false,lineStyle: { color: '#666' } },
+      axisLine: { show: false, lineStyle: { color: '#666' } },
       // axisTick: { show: false },
-      axisLabel: { 
+      axisLabel: {
         interval: (i, val) => {
           switch (val) {
             case '09:30':
@@ -205,8 +207,8 @@ export const option = {
               return true
           }
         },
-        margin: 5 ,
-       align:'left',
+        margin: 10,
+        align: 'left',
       },
     },
     {
@@ -221,7 +223,8 @@ export const option = {
   yAxis: [
     {
       axisLabel: {
-        inside: true, margin: 0,
+        inside:true,
+        margin:0,
         showMaxLabel: true,
         showMinLabel: true,
       },
@@ -231,14 +234,23 @@ export const option = {
       axisLine: { show: false, lineStyle: { color: '#666' } },
       axisTick: { show: false },
       scale: true,
-      interval: 10000,
     },
     {
       scale: true,
       gridIndex: 1,
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { show: false }
+      splitLine: { show: false },
+      position:'right',
+      axisLabel: {
+        margin: -30,
+        inside:true,
+
+        showMaxLabel: true,
+        showMinLabel: false,
+      },
+      max: 'dataMax',
+      min: 'dataMin',
     }],
   visualMap: {
     show: false,
@@ -254,16 +266,16 @@ export const option = {
   },
   grid: [
     {
-      left: 3,
-      right: 50,
+      left: 5,
+      right: 45,
       top: 10,
-      bottom: 130,
+      bottom: 140,
     },
     {
-      left: 3,
-      right: 3,
-      top: 234,
-      bottom: 0
+      left: 5,
+      right: 45,
+      top: 254,
+      bottom: 5
     },
   ],
   itemStyle: { color: '#4AB9BB' },
