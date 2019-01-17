@@ -78,7 +78,8 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-		  // this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
+					// console.log(1111,this.QuotationMsg.buyPrice1)
+		      // this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -199,7 +200,7 @@ export default {
     util.indextimmer.quotesQrySingleQuotationMsg = null
   },
   onLoad(option) {
-    this.setstockamunt(1)
+    this.setstockamunt(0)
     this.symbol = option.code
     this.getartlelist()
 		setTimeout(()=>{
@@ -208,7 +209,7 @@ export default {
       if(util.indextimmer.quotesQrySingleQuotationMsg===null){
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
               this.getartlelist()
-          }, 1500)
+          }, 2500)
       }
 
     // 合并持仓分笔持仓

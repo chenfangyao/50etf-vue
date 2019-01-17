@@ -1,6 +1,6 @@
 <template>
   <view class="wrap">
-    <headerCard :newlength='newlength'></headerCard>
+    <headerCard ></headerCard>
     <view class="items" >
       <view class="uni-flex" hover-class="self-hover"  @tap="go('capital_flow/capital_flow')" >
         <image src="/static/mineImg/01.png" />
@@ -57,16 +57,16 @@
 
 <script>
 import headerCard from '@/components/mineSub/headerCard.vue'
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import util from '@/common/util.js'
 export default {
   data() {
     return {
-			newlength:''
 		}
   },
-	computed: mapState(['sid','indextimmer']),
+	computed: mapState(['sid','indextimmer','newlengths']),
   methods: {
+		...mapMutations(['setnewlengths']),
     go(href) {
 			if(!this.sid){
 				 uni.showModal({
@@ -111,7 +111,7 @@ export default {
 				uni.navigateTo({ url:'/pages/mine_sub/'+href })
 			} 
     },
-			getmymessage(){
+		getmymessage(){
 			var options = {
 					url: '/Sapi/Ucenter/message_list', //请求接口
 					method: 'GET', //请求方法全部大写，默认GET
@@ -125,8 +125,7 @@ export default {
 					// res为服务端返回数据的根对象
 					console.log('我的消息', res)
 					if(res.status){
-						this.newlength = res.data.list.length
-						// this.newlength = 3
+						this.setnewlengths(res.data.list.length.toString())
 					}
 			}).catch((err) => {
 					// 请求失败的回调
@@ -135,6 +134,7 @@ export default {
 		},
   },
 	onShow(){
+		this.getmymessage()
 		clearInterval(util.indextimmer.indexCommonSelectStock)
 		util.indextimmer.indexCommonSelectStock = null
 		clearInterval(util.indextimmer.quotesCommonSelectStock)
@@ -142,9 +142,7 @@ export default {
 		clearInterval(util.indextimmer.quotesQryQuotationList)
 		util.indextimmer.quotesQryQuotationList=null
 		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
-		
-		this.getmymessage()
+		util.indextimmer.quotesQrySingleQuotationMsg = null	
 	},
   components: {
     headerCard

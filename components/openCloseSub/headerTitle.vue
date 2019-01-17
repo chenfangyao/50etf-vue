@@ -43,7 +43,7 @@ export default {
     },
     tapChange() {
       this.$emit('change-close')
-      this.setstockamunt(1)
+      this.setstockamunt(0)
     }
   }
 }
