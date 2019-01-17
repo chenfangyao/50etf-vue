@@ -70,25 +70,12 @@
 export default {
   data() {
     return {
-//       buyPrice1: '',
-//       buyPrice2: '',
-//       buyPrice3: '',
-//       buyPrice4: '',
-//       buyPrice5: '',
-//       salePrice1: '',
-//       salePrice2: '',
-//       salePrice3: '',
-//       salePrice4: '',
-//       salePrice5: '',
+
     }
   },
   props: ['hydetils'],
   mounted() { 
-    // this.buyPrice1=this.hydetils.buyPrice1
-    /* for(var i=1;i<6;i++){
-      this['buyPrice'+i]=this.hydetils['buyPrice'+i]
-      this['salePrice'+i]=this.hydetils['salePrice'+i]
-    } */
+
   }
 
 }

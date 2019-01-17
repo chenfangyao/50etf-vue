@@ -99,7 +99,7 @@ export default {
           })
       },
 			// 忘记密码
-			resetped(){
+	resetped(){
 				var options = {
 						url: '/Sapi/User/resetPwd ', //请求接口
 						data: {

@@ -78,8 +78,6 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-					// console.log(1111,this.QuotationMsg.buyPrice1)
-		      // this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -223,12 +221,7 @@ export default {
       return
     }
   },
-	watch:{
-// 		QuotationMsg(val){
-// 			this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 1)
-// 		}
 
-	},
 }
 </script>
 <style lang="scss" scoped>
