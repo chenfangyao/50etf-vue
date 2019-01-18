@@ -48,7 +48,8 @@
 	"h5":{
 		"router":{
 			"mode" : "history",
-			// "publicPath":"./",
+      // "publicPath":"./",
+      
       // "base" : "/storage/emulated/0/iOS/data/io.dcloud.HBuilder/apps/HBuilder/www/"
 			"base" : "/h5/"
       

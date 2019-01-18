@@ -394,8 +394,8 @@ view.wrap {
 view.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
-    justify-content: space-between;
-    padding: 10upx 25upx 0;
+    justify-content: space-around;
+    padding: 10upx 56upx 0;
     height: 72upx;
     font-size: 14px;
     background-color: #ededed;
