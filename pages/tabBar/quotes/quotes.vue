@@ -121,7 +121,6 @@ export default {
     // 获取stockCode
     getartlelist() {
       this.resquestState = 0
-      console.log(this.groupLabel);
       var options = {
         url: '/Sapi/Squery/list_stocks', //请求接口
         method: 'GET', //请求方法全部大写，默认GET

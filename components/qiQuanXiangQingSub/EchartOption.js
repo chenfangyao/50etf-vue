@@ -220,7 +220,6 @@ export const option1k = {
       axisLine: { show: false },
 
     }],
-  //#ifdef H5
 
   dataZoom: [{
     type: 'inside',
@@ -230,7 +229,6 @@ export const option1k = {
     zoomLock: true,
     throttle: 0
   },],
-  //#endif
 }
 export const option5k = {}
 export const optionRk = {

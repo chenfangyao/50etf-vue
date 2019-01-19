@@ -5,7 +5,7 @@
         <view>自动延期</view>
         <view @tap='openPop2' class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
-          <image src='/static/holdingImg/dagou.png' v-if="showDagou"></image>
+          <image src='/static/holdingImg/dagou.png' v-if="showDagou == 1"></image>
           <image src='/static/holdingImg/meigou.png' v-else></image>
         </view>
       </view>
@@ -129,8 +129,7 @@ export default {
     },
     oneKeyHandle(str) {
       this.showPop = false
-      console.log(str);
-      str=='deep'&&this.closeMe()
+      str == 'deep' && this.closeMe()
     },
     openPop() {
       this.showPop = true
@@ -139,17 +138,30 @@ export default {
       if (this.showDagou) {
         this.showPop2 = true
       } else {
-        this.showDagou = true
-        this.resObj.auto_delay = 1
+        this.sendAutodelay(1)
       }
+    },
+    sendAutodelay(i) {
+      var options = {
+        url: '/Sapi/Stock/autodelay', 
+        method: 'POST', 
+        data: {
+          ischecked: i,
+          hid: this.resObj.id
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.info === "ok") {
+          this.showDagou = !this.showDagou
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
     },
     yesHandle(i) {
       this.showPop2 = false
-      if (i == 1) {
-        this.showDagou = !this.showDagou
-        this.resObj.auto_delay = this.showDagou ? 1 : 0
-      }
-      //还没发请求，auto_delay还没改
+      i == 1 && this.sendAutodelay(0)
+
     },
 
   },
