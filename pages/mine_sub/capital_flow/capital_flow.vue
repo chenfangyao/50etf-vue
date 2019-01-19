@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import datePick from '@/components/datePick.vue';
+import datePick from '@/components/datePick2.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
   data() {
@@ -50,6 +50,8 @@ export default {
       resquestState: 0,
       formatetime: [],
       total: 0,
+      date_start: 0,
+      date_end: 0
     }
   },
   methods: {
@@ -59,19 +61,21 @@ export default {
     loadMore() {
       if (this.resquestState < 2) {
         this.pageindex += 1
-        this.capicalflow(0, 0, 'add')
+        this.capicalflow( 'add')
       }
     },
     getTime(val) {
       this.showPick = false;
       this.pageindex = 0
-      this.capicalflow(val.starttime, val.endtime)
+      this.date_start = this.$timestamp(val.starttime)
+      this.date_end = this.$timestamp(val.endtime)
+      this.capicalflow()
     },
     closeme() {
       this.showPick = false;
     },
     // 资金流水
-    capicalflow(starttime, endtime, add) {
+    capicalflow(add) {
       this.resquestState = 1
       var options = {
         url: '/Sapi/Squery/list_funds', //请求接口
@@ -79,8 +83,8 @@ export default {
         data: {
           page_index: this.pageindex,
           page_size: 10,
-          date_start: starttime,
-          date_end: endtime
+          date_start: this.date_start,
+          date_end: this.date_end
         },
       }
       this.$httpReq(options).then((res) => {
@@ -118,7 +122,7 @@ export default {
     // 		},1000)
   },
   onShow() {
-    this.capicalflow(0, 0)
+    this.capicalflow()
   }
 }
 </script>

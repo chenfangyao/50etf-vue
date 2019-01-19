@@ -1,7 +1,7 @@
-<template>
-	<view>
-    <view>hello world</view>
-		 <web-view src="/hybrid/html/local.html"></web-view>
+<template >
+	<view >
+		 <web-view  src="http://50etfvue.cardoctor.com.cn/h5"></web-view>
+		 <!-- <web-view  src="/hybrid/html/local.html"></web-view> -->
 	</view>
 </template>
 

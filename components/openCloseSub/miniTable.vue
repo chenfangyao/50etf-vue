@@ -72,29 +72,30 @@ export default {
     return {
     }
   },
+
   computed: {
     buyPrice1() {
-      return this.hydetils.buyPrice1.toFixed(4)
+      if(this.hydetils.buyPrice1)return this.hydetils.buyPrice1.toFixed(4)
     },
     buyPrice2() {
-      return this.hydetils.buyPrice2.toFixed(4)
+      if(this.hydetils.buyPrice2)return this.hydetils.buyPrice2.toFixed(4)
     },
     buyPrice3() {
-      return this.hydetils.buyPrice3.toFixed(4)
+      if(this.hydetils.buyPrice3)return this.hydetils.buyPrice3.toFixed(4)
     },
     buyPrice4() {
-      return this.hydetils.buyPrice4.toFixed(4)
+      if(this.hydetils.buyPrice4)return this.hydetils.buyPrice4.toFixed(4)
     },
     buyPrice5() {
-      return this.hydetils.buyPrice5.toFixed(4)
+      if(this.hydetils.buyPrice5)return this.hydetils.buyPrice5.toFixed(4)
     },
-    salePrice1() { return this.hydetils.salePrice1.toFixed(4) },
-    salePrice2() { return this.hydetils.salePrice2.toFixed(4) },
-    salePrice3() { return this.hydetils.salePrice3.toFixed(4) },
-    salePrice4() { return this.hydetils.salePrice4.toFixed(4) },
-    salePrice5() { return this.hydetils.salePrice5.toFixed(4) },
+    salePrice1() { if(this.hydetils.salePrice1)return this.hydetils.salePrice1.toFixed(4) },
+    salePrice2() { if(this.hydetils.salePrice2)return this.hydetils.salePrice2.toFixed(4) },
+    salePrice3() { if(this.hydetils.salePrice3)return this.hydetils.salePrice3.toFixed(4) },
+    salePrice4() { if(this.hydetils.salePrice4)return this.hydetils.salePrice4.toFixed(4) },
+    salePrice5() { if(this.hydetils.salePrice5)return this.hydetils.salePrice5.toFixed(4) },
   },
-  props: ['hydetils'],
+  props: ["hydetils"]
 
 }
 </script>

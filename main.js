@@ -59,8 +59,7 @@ Date.prototype.format = function (format) {
 Vue.prototype.$timestamp = function (str) {
 	
   let timestamp = new Date(str)
-  timestamp = timestamp.getTime(timestamp)
-  timestamp = timestamp.toString().slice(0, 10)
+  timestamp = timestamp.getTime()/1000//取到秒
   return parseInt(timestamp)
 }
 // 输入验证

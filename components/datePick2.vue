@@ -29,19 +29,26 @@ export default {
     const year2 = year
     const months = []
     const month = date.getMonth() + 1
-    const month2 = month
+    const month2 = month < 10 ? '0' + month : month
     const days = []
     const day = date.getDate()
-    const day2 = day
+    const day2 = day < 10 ? '0' + day : day
 
     for (let i = 2008; i <= date.getFullYear(); i++) {
       years.push(i)
     }
+
     for (let i = 1; i <= 12; i++) {
+      if (i < 10) {
+        i = '0' + i
+      }
       months.push(i)
     }
 
     for (let i = 1; i <= 31; i++) {
+      if (i < 10) {
+        i = '0' + i
+      }
       days.push(i)
     }
     return {
@@ -80,7 +87,7 @@ export default {
       }
     },
     hidMe() {
-			this.showTips = false
+      this.showTips = false
       this.$emit('hid-me')
     },
     changeActive(val) {
@@ -98,8 +105,8 @@ export default {
         return
       }
       this.showTips = false
-      // var times = { starttime: this.year + '-' + this.month + '-' + this.day, endtime: this.year2 + '-' + this.month2 + '-' + this.day2 }
-      var times = { starttime: this.year + '' + this.month  + this.day, endtime: this.year2 + '' + this.month2 + this.day2 }
+      var times = { starttime: this.year + '-' + this.month + '-' + this.day, endtime: this.year2 + '-' + this.month2 + '-' + this.day2 }
+      // var times = { starttime: this.year + '' + this.month + this.day, endtime: this.year2 + '' + this.month2 + this.day2 }
       this.$emit('select-complete', times)
     },
 
@@ -144,10 +151,10 @@ view.self {
   text.active {
     border-color: #409def;
     color: #409def;
-		/* font-size: 16px; */
+    /* font-size: 16px; */
   }
-	text{
-		font-size: 15px;
-	}
+  text {
+    font-size: 15px;
+  }
 }
 </style>

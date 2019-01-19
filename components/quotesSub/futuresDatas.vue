@@ -137,7 +137,7 @@ export default {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
       } else {
-        this.compareDiff(newval, oldval)
+        this.compareDiff(this.toFixed4(newval), oldval)
       }
     },
   }

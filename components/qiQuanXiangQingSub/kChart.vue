@@ -85,7 +85,7 @@ export default {
     go() {
       if (this.tabIndex != 2) return;
       //#ifdef APP-PLUS
-      plus.screen.lockOrientation("landscape-primary");
+      // plus.screen.lockOrientation("landscape-primary");
       uni.navigateTo({ url: '/platforms/app-plus/fullscreen/fullscreen' });
       //#endif
     },

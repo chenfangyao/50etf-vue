@@ -47,9 +47,6 @@ export default {
       commonstocktimmer: null
     }
   },
-  created() {
-    this.getgroupLabel()
-  },
   computed: mapState(['taglist']),
   onHide() {
     console.log('关闭了第二个页面的定时器')
@@ -68,7 +65,7 @@ export default {
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
     
-    this.quotationStr || this.getartlelist()//获取那一串股票码
+    this.quotationStr || this.getgroupLabel()//获取那一串股票码
     this.beginPolling()
    this.getcommonselectstock([''])
     if (util.indextimmer.quotesCommonSelectStock === null) {
@@ -88,7 +85,6 @@ export default {
     },
     beginPolling() {
       if (util.indextimmer.quotesQryQuotationList === null) {
-        console.log('启动', this.resquestState);
         util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
@@ -125,6 +121,7 @@ export default {
     // 获取stockCode
     getartlelist() {
       this.resquestState = 0
+      console.log(this.groupLabel);
       var options = {
         url: '/Sapi/Squery/list_stocks', //请求接口
         method: 'GET', //请求方法全部大写，默认GET
@@ -139,6 +136,7 @@ export default {
 
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
+        console.log('余情');
         this.dealquotationStr()
         this.getquoteList()
       }).catch((err) => {
