@@ -129,7 +129,7 @@ export default {
         }
         this.titleList[i].resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err)
+        console.error(err,'捕捉')
       })
     }
   },

@@ -107,7 +107,7 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.log(err)
+        console.error(err,'捕捉')
       })
     }
   },

@@ -103,7 +103,7 @@ export default {
         this.quoteList = res.data.list
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     getgroupLabel() {
@@ -136,12 +136,11 @@ export default {
 
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
-        console.log('余情');
         this.dealquotationStr()
         this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     addData(e) {
@@ -188,7 +187,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     }
 

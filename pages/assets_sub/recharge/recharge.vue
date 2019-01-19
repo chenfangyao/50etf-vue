@@ -86,7 +86,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     changeWayI(i) {

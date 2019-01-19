@@ -55,7 +55,7 @@
 					this.resquestState = res.data.list.length == 10 ? 0 : 2
 				}).catch((err) => {
 					// 请求失败的回调
-					console.error(err)
+					console.error(err,'捕捉')
 				})
 			}
 			
@@ -81,7 +81,7 @@
 // 				this.newsItem=res.data.list
 // 			}).catch((err) => {
 // 				// 请求失败的回调
-// 				console.error(err)
+// 				console.error(err,'捕捉')
 // 			})
 		}
 	}

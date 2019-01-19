@@ -153,7 +153,7 @@ export default {
 						}
 				}).catch((err) => {
 						// 请求失败的回调
-						console.log(err)
+						console.error(err,'捕捉')
 				})
 		},
 		getprovlist(index){
@@ -182,7 +182,7 @@ export default {
                 }
             }).catch((err) => {
                 // 请求失败的回调
-                console.log(err)
+                console.error(err,'捕捉')
             })
 		},
 		getcitylist(index,prov_cd){
@@ -214,7 +214,7 @@ export default {
 						}
 				}).catch((err) => {
 						// 请求失败的回调
-						console.log(err)
+						console.error(err,'捕捉')
 				})
 		},
 		// 支行列表
@@ -250,7 +250,7 @@ export default {
 						}
 				}).catch((err) => {
 						// 请求失败的回调
-						console.log(err)
+						console.error(err,'捕捉')
 				})
 		},
 		// 我的银行
@@ -278,7 +278,7 @@ export default {
 						}
 				}).catch((err) => {
 						// 请求失败的回调
-						console.log(err)
+						console.error(err,'捕捉')
 				})
 		},
 		addbank(){

@@ -68,7 +68,7 @@ export default {
 
         }
       }).catch((err) => {
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     chooseImage(i) {

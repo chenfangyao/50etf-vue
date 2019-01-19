@@ -119,7 +119,7 @@ export default {
         this.filterVal(this.list)
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err)
+        console.error(err,'捕捉')
       })
     }
   },

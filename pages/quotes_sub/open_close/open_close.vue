@@ -81,7 +81,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     plusStepNum(val) {
@@ -136,7 +136,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     // 分笔持仓
@@ -158,7 +158,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     // 合并持仓
@@ -181,7 +181,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     reGetSth() {

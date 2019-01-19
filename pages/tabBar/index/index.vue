@@ -61,7 +61,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err)
+        console.error(err,'捕捉')
       })
     },
     // 获取文章信息
@@ -79,7 +79,7 @@ export default {
         this.newsItem = res.data.list
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     },
     getImgList() {
@@ -90,7 +90,7 @@ export default {
       this.$httpReq(options).then((res) => {
         this.imgList = res.data.top.white
       }).catch((err) => {
-        console.error(err)
+        console.error(err,'捕捉')
       })
     },
     // 获取更多文章
@@ -138,7 +138,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.log(err)
+        console.error(err,'捕捉')
       })
     }
   },

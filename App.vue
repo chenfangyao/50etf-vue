@@ -30,7 +30,7 @@ export default {
     //#endif
   },
   onError(err) {
-    console.log(err)
+    console.error(err,'捕捉')
   },
   onShow() {
     console.log('App Show')

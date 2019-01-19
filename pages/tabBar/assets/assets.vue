@@ -89,7 +89,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err)
+        console.error(err,'捕捉')
       })
     },
     handleClick() {

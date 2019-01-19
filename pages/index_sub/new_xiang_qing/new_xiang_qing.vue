@@ -62,7 +62,7 @@
 				this.update_time = this.$formatetimestr(res.data.update_time)
 			}).catch((err) => {
 				// 请求失败的回调
-				console.error(err)
+				console.error(err,'捕捉')
 			})
 		}
 	}
