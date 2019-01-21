@@ -82,7 +82,7 @@ export default {
     },
     go(item) {
       this.$store.commit('setpingCItem', item)
-      uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
+      uni.navigateTo({ url: '/pages/holding_sub/ping_c_item/ping_c_item' })
     },
     getDatas(add) {
       this.resquestState = 1

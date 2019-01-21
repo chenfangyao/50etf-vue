@@ -46,15 +46,6 @@
       }
     },
     {
-      "path": "pages/echarts/echarts",
-      "style": {
-        "app-plus": {
-          "titleNView": false,
-          "scrollIndicator": "none"
-        }
-      }
-    },
-    {
       "path": "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
       "style": {
         "titleNView": false,
@@ -126,21 +117,7 @@
       }
     },
     {
-      "path": "pages/register/register",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
       "path": "pages/risk_book/risk_book",
-      "style": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    },
-    {
-      "path": "pages/forget_pwd/tep1/tep1",
       "style": {
         "titleNView": false,
         "scrollIndicator": "none"

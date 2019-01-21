@@ -50,7 +50,7 @@
 			"mode" : "history",
 
 			// "base" : "/storage/emulated/0/Android/data/io.dcloud.HBuilder/apps/HBuilder/www/"
-
+			// "base": "assets/apps/H5594EC02/www/"
 			"base" : "/h5/"
 		}
 	},

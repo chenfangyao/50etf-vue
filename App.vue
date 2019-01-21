@@ -28,9 +28,32 @@ export default {
       }
     })
     //#endif
+    //#ifdef H5
+    document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton", function () {
+        if (getCurrentPages().length > 1) {
+          uni.navigateBack({ delta: 1 });
+          return
+        }
+        uni.showModal({
+          title: '提示',
+          content: '确定退出吗？',
+          success: function (res) {
+            if (res.confirm) {
+              plus.runtime.quit();
+            } else if (res.cancel) {
+              console.log('用户点击取消');
+            }
+          }
+        });
+      });
+    }, false);
+
+
+    //#endif
+
   },
   onError(err) {
-    console.error(err,'捕捉')
+    console.error(err, '捕捉')
   },
   onShow() {
     console.log('App Show')

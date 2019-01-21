@@ -39,7 +39,7 @@ export default function (obj) {
   var p = new Promise((resolve, reject) => {
     uni.request({
 			//#ifdef H5
-      url: obj.url,
+      url:  obj.url,
 			//#endif
       //#ifndef H5
       url: baseUrl + obj.url,

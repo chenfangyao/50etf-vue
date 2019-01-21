@@ -25,8 +25,6 @@
 			</view>
 		</view>
     
-    <!-- <button @tap="handleClick">111</button>
-    <button @tap="handleClick2">2</button> -->
 	</view>
 </template>
 
@@ -91,20 +89,6 @@ export default {
         // 请求失败的回调
         console.error(err,'捕捉')
       })
-    },
-    handleClick() {
-      uni.navigateTo({url:'/pages/bar_code/bar_code'})
-      //#ifdef APP-PLUS
-      plus.screen.lockOrientation('portrait-primary');
-      //#endif
-    },
-    handleClick2() {
-      //#ifdef APP-PLUS
-      plus.screen.lockOrientation("landscape-primary");
-      //#endif
-      uni.navigateTo({
-        url: '/pages/echarts/echarts'
-      });
     },
   },
   onShow: function () {

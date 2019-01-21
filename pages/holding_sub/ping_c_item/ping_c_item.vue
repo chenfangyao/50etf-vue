@@ -86,9 +86,6 @@ export default {
     };
   },
   methods: {
-    go() {
-      uni.navigateTo({ url: '../ping_c_item/ping_c_item' })
-    },
 		gethyinfoprice(){
 			 var obj = {
 			  url: '/Sapi/Stock/hyinfo', //请求接口

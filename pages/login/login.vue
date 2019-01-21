@@ -50,10 +50,8 @@ export default {
     go(i) {
       let url = ''
       switch (i) {
-        // case 1: url = '/pages/register/register'
         case 1: url = '/pages/registers/registers'
           break
-        // case 2: url = '/pages/forget_pwd/tep1/tep1'
         case 2: url = '/pages/forgets_pwd/forgets_pwd'
           break
         case 3: url = '/pages/risk_book/risk_book'

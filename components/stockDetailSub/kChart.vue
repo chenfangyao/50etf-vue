@@ -87,8 +87,8 @@ export default {
   methods: {
     go() {
       //#ifdef APP-PLUS
-      // plus.screen.lockOrientation("landscape-primary");
-      // uni.navigateTo({ url: '/pages/echarts/echarts?symbol=' + this.symbolStr });
+     /*  plus.screen.lockOrientation("landscape-primary");
+      uni.navigateTo({ url: '/pages/echarts/echarts?symbol=' + this.symbolStr }); */
       //#endif
     },
     checkOready(i, obj) {
