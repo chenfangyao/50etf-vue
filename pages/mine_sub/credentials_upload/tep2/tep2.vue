@@ -41,6 +41,7 @@ export default {
       f0: '',
       f1: '',
       f2: '',
+      mobile:'',
     };
   },
   components: { btnBlock },
@@ -56,7 +57,8 @@ export default {
             f0: this.f0,
             f1: this.f1,
             f2: ""
-          }
+          },
+            mobile:this.mobile,
 
         },
         method: 'POST',
@@ -65,7 +67,11 @@ export default {
         if (res.status == 1) {
           uni.navigateTo({ url: '../tep3/tep3' })
         } else {
-
+          uni.showToast({
+          	title: res.info?res.info:'实名认证失败',
+          	mask: false,
+          	duration: 2500
+          });
         }
       }).catch((err) => {
         console.error(err,'捕捉')
@@ -133,6 +139,7 @@ export default {
   onLoad(opt) {
     this.uName = opt.username
     this.IDcard = opt.IDcard
+      this.mobile=opt.telnum
   }
 }
 </script>
