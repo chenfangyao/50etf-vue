@@ -10,7 +10,7 @@
       </view>
       <futures-title></futures-title>
       <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
-        <futures-datas :quote-list='quoteList' :code-list='codeList'></futures-datas>
+        <futures-datas :quote-list='quoteList' :code-list='codeList' :latest-price="commonstock"></futures-datas>
         <!-- <view class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
         </view> -->

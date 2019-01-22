@@ -7,7 +7,7 @@
       </view>
       <view class="uni-flex">
         <!-- <text class="gou">{{item.buy_amount1}}</text> -->
-        <text class="midTxt">{{item.gou.exercise_price}}</text>
+        <text class="midTxt" :class="{bg1:item.gou.exercise_price==gtPrice,bg2:item.gou.exercise_price==ltPrice}">{{item.gou.exercise_price}}</text>
         <!-- <text class="gou">{{item.sale_amount1}}</text> -->
       </view>
       <view @tap="go(item.gu)" class="wrap1 "  :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
@@ -24,14 +24,32 @@ export default {
     return {
       res2arr: [],//暂存分好购沽的数据,
       inTemArr: [],
+      ltPrice: 1000000,
+      gtPrice: 0,//先置为大值
+      calcOnce: 1,
     }
   },
-  props: ['quoteList', 'codeList'],
+  props: ['quoteList', 'codeList', 'latestPrice'],
   methods: {
     go(obj) {
       uni.navigateTo({
         url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing?code=' + obj.stock_code
       });
+    },
+    calcBg(val, old) {
+      if (old == 2) return;
+      if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
+      this.codeList.forEach(item => {
+        var snap = item.exercise_price
+        if (snap.indexOf('A') == -1) {
+          if (snap < val[0].latestPrice) {
+            this.gtPrice < snap && (this.gtPrice = snap)
+          } else {
+            this.ltPrice > snap && (this.ltPrice = snap)
+          }
+        }
+      })
+      this.gtPrice !== 0 && (this.calcOnce = 2)
     },
     dealCodeList() {//把传进来的合约代码分购、沽两组
       var arr = [...this.codeList]
@@ -76,7 +94,7 @@ export default {
           }
         }
       })
-      this.inTemArr = this.res2arr.sort((a, b) => a.gou.exercise_price - b.gou.exercise_price)
+      this.inTemArr = this.res2arr.sort((a, b) => parseFloat(a.gou.exercise_price) - parseFloat(b.gou.exercise_price))
     },
     toFixed4(val) {
       var arr = []
@@ -133,6 +151,7 @@ export default {
   },
   watch: {
     quoteList(newval, oldval) {
+      this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length != oldval.length) {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
@@ -140,6 +159,9 @@ export default {
         this.compareDiff(this.toFixed4(newval), oldval)
       }
     },
+    latestPrice(val, old) {//股票最新价
+      this.calcBg(val, old)
+    }
   }
 }
 </script>
@@ -174,6 +196,12 @@ view.wrap {
     color: #333;
     text-align: center;
   }
+  text.midTxt.bg1 {
+    background-color: #e6aa12;
+  }
+  text.midTxt.bg2 {
+    background-color: #409de5;
+  }
   view.wrap1 {
     flex-grow: 1;
     justify-content: space-between;
@@ -205,14 +233,22 @@ view.wrap {
     text-align: center;
   }
   view.down_c {
-     background: linear-gradient(  90deg, rgba(58, 186, 148, 1), rgba(167, 229, 208, 1));
+    background: linear-gradient(
+      90deg,
+      rgba(58, 186, 148, 1),
+      rgba(167, 229, 208, 1)
+    );
 
     text {
       color: #fff;
     }
   }
   view.up_c {
-     background: linear-gradient(  90deg, rgba(240, 95, 92, 1), rgba(245, 186, 184, 1));
+    background: linear-gradient(
+      90deg,
+      rgba(240, 95, 92, 1),
+      rgba(245, 186, 184, 1)
+    );
 
     // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
     text {
@@ -220,20 +256,27 @@ view.wrap {
     }
   }
   view.down_c:first-child {
-     background: linear-gradient(  -90deg, rgba(58, 186, 148, 1), rgba(167, 229, 208, 1));
+    background: linear-gradient(
+      -90deg,
+      rgba(58, 186, 148, 1),
+      rgba(167, 229, 208, 1)
+    );
 
     text {
       color: #fff;
     }
   }
   view.up_c:first-child {
-     background: linear-gradient(  -90deg, rgba(240, 95, 92, 1), rgba(245, 186, 184, 1));
+    background: linear-gradient(
+      -90deg,
+      rgba(240, 95, 92, 1),
+      rgba(245, 186, 184, 1)
+    );
 
     // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
     text {
       color: #fff;
     }
   }
-
 }
 </style>
