@@ -145,7 +145,7 @@ export default {
         obj[str].isUp = false
         obj[str].isDown = false
         this.$set(this.inTemArr, i, obj)
-      }, 800)
+      }, 500)
     }
 
   },
