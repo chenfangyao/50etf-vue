@@ -1,69 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <view class="wrap">
-        
-        <view v-show="onClose">
-            <view class="entrustType">
-                <text class="type commonStyle1">委托类型</text>
-                <text class="commonStyle2">持仓笔数 {{fbcclength}}</text>
-            </view>
-            <view class="chooseType uni-flex">
-                <view class="tabOpen uni-flex">
-                    <view @tap='tapChange(false)'>合并</view>
-                    <view @tap='tapChange(true)'>分笔</view>
-                    <view :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</view>
-                </view>
-                <view class="chooseCount">
-                    <view v-show="!tabActive">{{maxprice.own_amount}}张</view>
-                    <view v-show="tabActive" @tap='showPicker'>
-                      <text class="txt">{{pickerText}}</text>
-                        <uni-icon type="arrowdown" size="24"></uni-icon>
-                    </view>
-                </view>
-            </view>
-        </view>
-        <view class=" commonStyle1">{{pricetitle}}</view>
-        <view class="uni-flex line2">
-        <view>
-            <!-- <image v-if="btn3_i" @tap="plusStep2(-1)" class='opacityclass' src='/static/openCloseImg/minus.png'></image> -->
-            <image  @tap="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/minus.png'></image>
-            <text class=" newPrice" :class="{yellow1:onClose}">{{pricevalue}}</text>
-            <image  @tap="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src='/static/openCloseImg/plus.png'></image>
-        </view>
-
-            <view class="uni-flex btn3">
-                <view v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i,yellow1:onClose}" :data-i='i'
-                      @tap='changePriceType(i,item)'>{{item}}
-                </view>
-            </view>
-        </view>
-        <view class="uni-flex entrustCount">
-            <view>
-                <text class="commonStyle1">委托数量</text>
-                <text class="useCount mr5 commonStyle2">{{onClose?'可用数':'最大可买'}}</text>
-                <text class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts||0}}</text>
-                <text class="commonStyle2" v-else>{{maxprice.enable_amount}}</text>
-            </view>
-            <view v-show="!onClose">
-                <text class="commonStyle2 mr5">当前持仓</text>
-                <text class="commonStyle2">{{maxprice.own_amount}}</text>
-            </view>
-        </view>
-        <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
-                      @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
-        <view class="sliderPart uni-flex">
-            <view>
-                <image @tap='plusStep(-1)' src='/static/openCloseImg/minus.png'></image>
-                <text class="countxt">{{sliderVal}}</text>
-                <image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
-            </view>
-            <view class="sliderItem">
-                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
-                        backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'"/>
-            </view>
-        </view>
-    </view>
-=======
 	<view class="wrap">
 
 		<view v-show="onClose">
@@ -132,7 +67,6 @@
 			</view>
 		</view>
 	</view>
->>>>>>> remotes/origin/qhs#v0.01
 </template>
 <script>
 	import mpvuePicker from '@/components/mpvuePicker.vue';
