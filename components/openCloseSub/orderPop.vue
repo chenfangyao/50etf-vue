@@ -52,19 +52,40 @@ export default {
       enable_money: ''
     }
   },
-  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid']),
+  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid','hbfbcell']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
     },
     yesTap() {
       this.$emit('close-pop')
+			//平仓
       if (this.onClose) {
-        this.stocksell()
-      } else {
+				if(this.hbfbcell.length && !this.entrusttype){
+					console.log(1111)
+					// 全部平仓
+					if(this.hbfbcell[0]==='all'){
+						this.stocksell('',this.maxbuy.enable_amount)
+					}else{//合并分笔平仓
+						var ii=0
+						var hbfbcellinterval=null
+						hbfbcellinterval=setInterval(()=>{
+							if(ii<this.hbfbcell.length){
+								var hynum=this.hbfbcell[ii].split('-')[0]
+								var hyids=this.hbfbcell[ii].split('-')[1]
+								this.stocksell(parseInt(hyids),parseInt(hynum))
+									ii+=1
+							}else{
+								clearInterval(hbfbcellinterval)
+							}
+						},3500)
+					}		
+				}else{//分笔平仓
+					this.stocksell(this.fbccid,this.stockamunt)
+				}
+      } else {//开仓
         this.stockbuy()
       }
-
     },
     // 获取资金列表
     getassets() {
@@ -111,10 +132,10 @@ export default {
         console.log(err)
       })
     },
-    stocksell() {
+    stocksell(fbccid,number) {
       let hid
-      if (this.entrusttype) {
-        hid = parseInt(this.fbccid)
+      if (this.entrusttype || this.hbfbcell.length) {
+        hid = parseInt(fbccid)
       }
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
@@ -122,7 +143,7 @@ export default {
         data: {
           code: parseInt(this.resObj.stockCode),
           price: this.newprice,
-          amount: this.stockamunt,
+          amount: number,
           enttype: parseInt(this.enttype),
           hid: hid
         },

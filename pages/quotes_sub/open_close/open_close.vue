@@ -53,7 +53,7 @@ export default {
     bottomBtn
   },
   methods: {
-	...mapMutations(['setmaxbuy','setstockamunt']),
+	...mapMutations(['setmaxbuy','setstockamunt','setcctotalmoney']),
     // 合并、分笔
     hbfbSwitch(val) {
       this.hbfbswitch = val.val
@@ -107,6 +107,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
+					console.log(22,res)
           this.maxbuy = res.data
 		      this.setmaxbuy(res.data)
           // 开仓
@@ -133,6 +134,7 @@ export default {
             enable_amount: res.data.enable_amount
           }
           this.totalmoney = (djmoney + parseFloat(res.data.fee_money)).toFixed(2)
+					this.setcctotalmoney(this.totalmoney)
         }
       }).catch((err) => {
         // 请求失败的回调

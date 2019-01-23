@@ -13,7 +13,11 @@
                     <view :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</view>
                 </view>
                 <view class="chooseCount">
-                    <view v-show="!tabActive">{{maxprice.own_amount}}张</view>
+                    <!-- <view v-show="!tabActive">{{maxprice.own_amount}}张</view> -->
+										<view v-show="!tabActive" @tap='showPicker'>
+										  <text class="txt">{{maxprice.own_amount}}张</text>
+										    <uni-icon type="arrowdown" size="24"></uni-icon>
+										</view>
                     <view v-show="tabActive" @tap='showPicker'>
                       <text class="txt">{{pickerText}}</text>
                         <uni-icon type="arrowdown" size="24"></uni-icon>
@@ -50,14 +54,16 @@
         </view>
         <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
                       @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
-        <view class="sliderPart uni-flex">
+				<mpvue-checkbox themeColor="#007AFF" ref="typeCheckbox"   :pickerValueDefault="[0]"
+											@onConfirm="onConfirms" @onCancel="onCancel" :picker-value-array="items"></mpvue-checkbox>
+        <view v-if="tabActive || !onClose" class="sliderPart uni-flex">
             <view>
                 <image @tap='plusStep(-1)' src='/static/openCloseImg/minus.png'></image>
                 <text class="countxt">{{sliderVal}}</text>
                 <image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
             </view>
             <view class="sliderItem">
-                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='1' :value='sliderVal'
+                <slider  @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
                         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'"/>
             </view>
         </view>
@@ -65,7 +71,8 @@
 </template>
 <script>
 import mpvuePicker from '@/components/mpvuePicker.vue';
-import uniIcon from "@/components/uni-icon.vue"
+import mpvueCheckbox from '@/components/mpvueCheckbox.vue';
+import uniIcon from "@/components/uni-icon.vue";
 import { mapState, mapMutations } from 'vuex';
 
 
@@ -87,7 +94,7 @@ export default {
       require: true
     },
   },
-  components: { mpvuePicker, uniIcon },
+  components: { mpvuePicker, uniIcon , mpvueCheckbox },
   data() {
     return {
       tabActive: false,
@@ -100,10 +107,11 @@ export default {
       pricetitle: '最新价',
       fbcclength: '',
       hbcclength: '',
+      items:[]
     }
   },
   methods: {
-    ...mapMutations(['setnewprice', 'setstockamunt', 'setenttype', 'setentrusttype', 'setfbccid']),
+    ...mapMutations(['setnewprice', 'setstockamunt', 'setenttype', 'setentrusttype', 'setfbccid','sethbfbcell','setcctotalmoney']),
     // 合并分笔
     tapChange(val) {
       this.tabActive = val
@@ -183,12 +191,20 @@ export default {
     },
     // 修改委托数量
     plusStep(i) {
+			var maxtradecount=0
+			if(this.onClose){
+				maxtradecount=this.maxprice.enable_amount
+			}else{
+				maxtradecount=this.maxprice.maxcounts
+			}
+			
       if (i == -1) {
-        if (this.sliderVal == 1) {
+        if (this.sliderVal == 0) {
           return
         }
       } else {
         if (this.sliderVal > this.maxprice.maxcounts - 1) {
+        // if (this.sliderVal > maxtradecount - 1) {
           return
         }
       }
@@ -222,14 +238,44 @@ export default {
       if (this.onClose) {
         this.maxprice.maxcounts = parseInt(val.value[0])
       }
-      this.sliderVal = 1
+      this.sliderVal = 0
       this.$emit('fb-num', parseInt(val.value[0]))
     },
+		// checkbox确认
+		onConfirms(val) {
+			// 全卖调用合并持仓接口
+			var totalhynum=0
+			
+			this.sethbfbcell(val)
+			if(val[0]=='all'){
+				this.setstockamunt(this.maxprice.enable_amount)
+				totalhynum=this.maxprice.enable_amount
+			}
+			// 循环调用分笔持仓接口
+			else{
+				var tempArr=[]
+				var allNum=0
+				for(var k=0;k<val.length;k++){
+					var hynum=val[k].split('-')[0]
+					allNum+=parseInt(hynum)
+				}
+				this.setstockamunt(allNum)
+				totalhynum=allNum
+			}
+			var hycsnum=this.maxbuy.volume_multiple
+			var djmoney = parseFloat(totalhynum * parseFloat(this.pricevalue) * hycsnum)
+			this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)).toFixed(2))
+		},
     // 单列
     showPicker() {
-      if (this.pickerValueArray[0]) {
-        this.$refs.typePick.show()
-      }
+			if(this.tabActive){
+				 if (this.pickerValueArray[0]) {
+				  this.$refs.typePick.show()
+				}
+			}else{
+				this.$refs.typeCheckbox.show()
+			}
+     
     },
   },
   watch: {
@@ -298,11 +344,23 @@ export default {
           for (var i = 0; i < this.fbcclist.length; i++) {
             var pickobj = new Object()
             pickobj.label = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
-            pickobj.value = this.fbcclist[i].enable_amount
+            pickobj.name = '第' + parseInt(i + 1) + '笔'
+            pickobj.value = this.fbcclist[i].enable_amount.toString()
             pickobj.index = parseInt(i + 1)
             pickobj.id = this.fbcclist[i].id
+            pickobj.checked=false
             this.pickerValueArray.push(pickobj)
+
           }
+          this.items=[]
+            var firtArr=[{
+                value: 'All',
+                name: '全部',
+                id: '000',
+								checked:false
+            },]
+            // this.items=this.items.concat(firtArr).concat(this.pickerValueArray)
+            this.items=this.pickerValueArray
         }
       }
     },
@@ -316,6 +374,8 @@ export default {
     }
   },
   created() {
+		// 初始化将合并分笔置空
+		this.sethbfbcell([])
     if (this.softconf.ent_price_type == 0) {
       this.btn3Arr = ['最新价', '对手', '排队']
     } else {
@@ -324,7 +384,7 @@ export default {
 		this.pricetitle=this.btn3Arr[0]
   },
   computed: {
-    ...mapState(['softconf'])
+    ...mapState(['softconf','maxbuy'])
   }
 }
 </script>

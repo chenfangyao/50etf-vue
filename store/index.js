@@ -45,6 +45,10 @@ const store = new Vuex.Store({
 	// 软件配置信息
 	softconf:{},
 	newlengths:0,
+	// 合并平仓
+	hbfbcell:[],
+	// 持仓合计
+	cctotalmoney:0
   },
   mutations: {
     login(state, provider) {
@@ -124,6 +128,12 @@ const store = new Vuex.Store({
 	setnewlengths(state,data){
 		state.newlengths=data
 	},
+	sethbfbcell(state,data){
+		state.hbfbcell=data
+	},
+	setcctotalmoney(state,data){
+		state.cctotalmoney=data
+	}
   },
   //#ifdef H5
   plugins: [ createPersistedState({
