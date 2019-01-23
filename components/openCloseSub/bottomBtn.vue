@@ -4,12 +4,13 @@
     <view class="wrap uni-flex">
       <view class="txt">
         <text class="total">合计</text>
-        <text class="totalPrice">￥{{totalmoney||0}}</text>
+        <!-- <text class="totalPrice">￥{{totalmoney||0}}</text> -->
+        <text class="totalPrice">￥{{cctotalmoney||0}}</text>
       </view>
       <view class="buyBtn" :class="{c1:onClose==1}" @tap='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</view>
     </view>
     <view class="h98"></view>
-    <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop' :res-obj='resObj' :total-money='totalmoney'></order-pop>
+    <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop' :res-obj='resObj' :total-money='cctotalmoney'></order-pop>
   </view>
 </template>
 <script>
@@ -24,7 +25,7 @@ export default {
   },
   props: ['onClose', 'totalmoney','resObj'],
   components: { orderPop },
-  computed: mapState(['sid']),
+  computed: mapState(['sid','cctotalmoney']),
   methods: {
     showPop() {
       if (this.sid) {

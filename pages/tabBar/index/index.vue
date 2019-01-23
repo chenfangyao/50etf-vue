@@ -97,6 +97,7 @@ export default {
     getmoreart() {
       uni.navigateTo({
         url: '/pages/index_sub/new_list/new_list?symbol=1',
+        // url: '/pages/checkbox-group/checkbox-group',
         success: res => { },
         fail: () => { },
         complete: () => { }

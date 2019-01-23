@@ -2,7 +2,6 @@
   <view class="wrap">
     <view class="title">费用总计</view>
     <view class="uni-flex row">
-
       <view class="uni-flex col hasMargin">
         <text>手续费：</text>
         <text>冻结权利金：</text>
