@@ -61,6 +61,14 @@ export default {
       })
     },
     stocksell() {
+			if(this.resObj.last_price<0.0002){
+				uni.showToast({
+					title: '当前价格无法一键平仓',
+					mask: false,
+					duration: 1500
+				});
+				return
+			}
       let hid = ''
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
