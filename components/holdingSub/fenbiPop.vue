@@ -133,6 +133,7 @@ export default {
       str=='deep'&&this.closeMe()
     },
     openPop() {
+			
       this.showPop = true
     },
     openPop2() {

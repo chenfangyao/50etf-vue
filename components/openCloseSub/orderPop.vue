@@ -61,8 +61,15 @@ export default {
       this.$emit('close-pop')
 			//平仓
       if (this.onClose) {
+				if(this.newprice<0.0002){
+					uni.showToast({
+						title: '当前价格无法平仓！',
+						mask: false,
+						duration: 1500
+					});
+					return
+				}
 				if(this.hbfbcell.length && !this.entrusttype){
-					console.log(1111)
 					// 全部平仓
 					if(this.hbfbcell[0]==='all'){
 						this.stocksell('',this.maxbuy.enable_amount)
