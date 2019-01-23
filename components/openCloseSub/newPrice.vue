@@ -62,7 +62,7 @@
 				<image @tap='plusStep(1)' src='/static/openCloseImg/plus.png'></image>
 			</view>
 			<view class="sliderItem">
-				<slider @change="slidering" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
+				<slider @change="slidering" :disabled="sliderdisable" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
 				 backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />
 			</view>
 		</view>
@@ -113,7 +113,8 @@
 				pricetitle: '最新价',
 				fbcclength: '',
 				hbcclength: '',
-				items: []
+				items: [],
+				sliderdisable:false,
 			}
 		},
 		methods: {
@@ -126,11 +127,17 @@
 				this.setentrusttype(val)
 				this.sliderVal = 0
 				if (val == true) {
+					this.maxprice.maxcounts=0.1
 					var picktext = this.pickerText
 					picktext = picktext.split(' ')
 					picktext = picktext[1]
-					picktext = picktext.replace('张', '')
-					this.maxprice.maxcounts = parseInt(picktext)
+					if(picktext!=undefined){
+						picktext = picktext.replace('张', '')
+						this.maxprice.maxcounts = parseInt(picktext)
+					}
+						if(this.maxprice.maxcounts==0.1){
+							this.sliderdisable=true
+						}
 				}
 				this.$emit('hbfb-switch', {
 					val: val,
@@ -209,6 +216,9 @@
 			// 修改委托数量
 			plusStep(i) {
 				var maxtradecount = 0
+				if(this.maxprice.maxcounts===NaN){
+					return
+				}
 				if (this.onClose) {
 					maxtradecount = this.maxprice.enable_amount
 				} else {
