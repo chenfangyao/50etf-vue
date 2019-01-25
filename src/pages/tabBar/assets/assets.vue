@@ -117,15 +117,13 @@ div.wrap {
 
     > div {
       background-color: #fff;
-      height:.64rem;
-      line-height:.64rem;
+      line-height:.98rem;
       display: flex;
       justify-content: space-between;
-      padding: 0.26rem;
+      padding:0 0.26rem;
       margin-bottom: 1px;
       font-size: 15px;
       height:.98rem;
-      line-height:.98rem;
       color: rgba(24, 28, 40, 1);
     }
 
@@ -133,6 +131,7 @@ div.wrap {
       font-size: 13px;
       height:.64rem;
       line-height:.64rem;
+
       color: rgba(112, 118, 128, 1);
     }
 

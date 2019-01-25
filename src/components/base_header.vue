@@ -4,7 +4,7 @@
       <div class="occupy"></div>
       <div class="wrap">
         <div class="left commonStyle" @click="back"  v-if="hasBack">
-          <img src="/assets/arrow/l.png">
+          <img src="../assets/arrow/l.png">
         </div>
         <span>{{title}}</span>
         <span class="right commonStyle" hover-class='self-hover' @click="rightTap" v-if="rightTxt">{{rightTxt}}</span>
