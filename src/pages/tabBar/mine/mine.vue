@@ -70,22 +70,7 @@ export default {
 		...mapMutations(['setnewlengths']),
     go(href) {
 			if(!this.sid){
-				 uni.showModal({
-				        title:'您还未登录',
-				        content:'现在去登录',
-				        success:(res)=>{
-				            if (res.confirm) {
-				                this.$navigateTo({
-				                	url: '/pages/login/login',
-				                	success: res => {},
-				                	fail: () => {},
-				                	complete: () => {}
-				                });
-				            } else if (res.cancel) {
-				                console.log('用户点击取消');
-				            }
-				        }
-				    })
+				this.$tipLogin()
 						return
 			}
 			if(href=='bank_card/add_card/add_card'){
@@ -99,7 +84,11 @@ export default {
 						console.log('我的银行', res)
 						if(res.status){
 							if(res.data.sub_id!=undefined){
-								this.$navigateTo({ url:'/pages/mine_sub/'+href })
+								// this.$navigateTo({ url:'/pages/mine_sub/'+href })
+								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card/add_card' })
+                // this.$router.push({
+                //   path: '/pages/mine_sub/'+href,
+                // })
 							}else{
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card_btn/add_card_btn'})
 							}
@@ -167,7 +156,7 @@ div.wrap {
       margin-bottom: 1px;
       height:.96rem;
       line-height:.96rem;
-      padding: 0.26rem 0.42rem;
+      padding: 0 .26rem 0 .42rem;
       span {
         flex-grow: 1;
       }

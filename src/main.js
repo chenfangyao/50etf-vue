@@ -62,20 +62,6 @@ Vue.prototype.$validata = function(str, mode) {
 }
 //登入提示
 Vue.prototype.$tipLogin = () => {
-  // uni.showModal({
-  //   title: '提示',
-  //   content: '您还未登录，请先登录',
-  //   success: function(res) {
-  //     if (res.confirm) {
-  //       uni.navigateTo({
-  //         url: '/pages/login/login'
-  //       })
-  //     } else if (res.cancel) {
-  //       console.log('用户点击取消');
-  //     }
-  //   }
-  // });
-
   Dialog.confirm({
     title: '您还未登录',
     message: '是否登录？'

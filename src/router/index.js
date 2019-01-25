@@ -10,6 +10,7 @@ const login = resolve => require([ '@/pages/login/login' ], resolve)
 const recharge = resolve => require([ '@/pages/assets_sub/recharge/recharge' ], resolve)
 const withdraw = resolve => require([ '@/pages/assets_sub/withdraw/withdraw' ], resolve)
 const setting = resolve => require([ '@/pages/mine_sub/setting/setting' ], resolve)
+const add_card = resolve => require([ '@/pages/mine_sub/bank_card/add_card/add_card' ], resolve)
 
 Vue.use(Router)
 
@@ -27,6 +28,8 @@ export default new Router({
     { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, index:1 } },
     // 我的页面设置
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, index:1 } },
+    // 添加银行卡
+    { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card, meta: { isKeepAlive: true, index:1 } },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true ,index:2} },
     // { path: '*', redirect: '/' }
   ]

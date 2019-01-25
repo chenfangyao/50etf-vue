@@ -183,7 +183,7 @@ div.newsViewTitle {
   font-size: 16px;
   line-height: 16px;
   color: #333;
-  margin:.32rem.10rem.24rem;
+  margin:.32rem .10rem .24rem;
   font-weight: bold;
   span:last-child {
     color: #a8a8a8;
