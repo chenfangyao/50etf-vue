@@ -63,8 +63,6 @@ export default {
       // }).catch(() => {
       //   // on cancel
       // });
-
-      // this.$toast('提示内容');
       switch (i) {
         case 1:
           this.$navigateTo({ url: '/pages/assets_sub/recharge/recharge' })
