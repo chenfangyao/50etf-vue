@@ -3,14 +3,14 @@
 		<base-header title="设置" has-back='1'></base-header>
     <div class=' uni-flex' hover-class='self-hover' @click='go(1)'>
       <span>修改密码</span>
-      <img src="/assets/arrow/r.png">
+      <img src="../../../assets/arrow/r.png">
     </div>
     <!-- <div class='mb26 uni-flex' hover-class='self-hover' @click='go(2)'> -->
     <div class='mb26 uni-flex' hover-class='self-hover' >
       <span>关于</span>
       <div class="uni-flex verView">
         <span class="verTxt">版本号：10.1.38</span>
-        <img src="/assets/arrow/r.png">
+        <img src="../../../assets/arrow/r.png">
       </div>
     </div>
     <btn-block txt='退出登录' @v-tap='logOut'></btn-block>
@@ -81,10 +81,11 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   height: 100vh;
+  width: 100%;
   background-color: #f5f5f5;
   > div {
     height:.98rem;
-    padding: 0.26rem 0.30rem;
+    padding: 0 .26rem 0 .30rem;
     background-color: #fff;
     align-items: center;
     font-size: 15px;

@@ -1,10 +1,10 @@
 <template>
   <div class=" _input" :class="{input6}">
         <input type="tel"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
-        <input type="text" v-else :password='!openEye&&isPwd' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
+        <input :type="!openEye&&isPwd?'password':'text'" v-else  @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
         <span :class="{inputFocus:focusInput}" class='absTxt'>{{placeholderTxt}}</span>
-        <img v-show='!openEye' v-if="isPwd" @click='tabOpen' class='closeImg' src="/assets/loginResgImg/close.png">
-        <img v-show='openEye' v-if="isPwd" @click='tabOpen' class='openImg' src="/assets/loginResgImg/open.png">
+        <img v-show='!openEye' v-if="isPwd" @click='tabOpen' class='closeImg' src="../../assets/loginResgImg/close.png">
+        <img v-show='openEye' v-if="isPwd" @click='tabOpen' class='openImg' src="../../assets/loginResgImg/open.png">
       </div>
 </template>
 <script>
@@ -48,6 +48,11 @@ div._input {
   position: relative;
   color: rgba(51, 51, 53, 1);
   font-size: 16px;
+  input{
+    position: relative;
+    z-index: 20;
+    background-color: transparent;
+  }
   img.openImg {
     width:.42rem;
     height:.33rem;
