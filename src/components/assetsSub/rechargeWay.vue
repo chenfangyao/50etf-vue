@@ -11,7 +11,7 @@
           <span>{{txt2}}</span>
         </div>
       </div>
-      <img  class="to_r" src="/assets/arrow/r.png">
+      <img  class="to_r" src="../../assets/arrow/r.png">
   </div>
   <recharge-actionsheet v-if="showAction" @choose-way='chooseWay'  @close-me='switchPop'></recharge-actionsheet>
   
@@ -99,9 +99,9 @@ export default {
       }
     }
     img.to_r {
-      width:.25rem;
+      width: .25rem;
       margin-right:.24rem;
-      height:.30rem;
+      height: .30rem;
     }
   }
 </style>

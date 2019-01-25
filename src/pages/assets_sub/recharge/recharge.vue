@@ -6,7 +6,7 @@
     <div class="panel">
       <div class="inputContainer">
         <div class="moneyTitle">充值金额</div>
-        <input type="number" v-model="money" :disabled='inputDisabled'>
+        <input type="tel" v-model="money" :disabled='inputDisabled'>
         <span>￥</span>
       </div>
       <div class="overage">
@@ -119,7 +119,7 @@ div.wrap {
   height: 100vh;
   background-color: #f5f5f5;
   div.panel {
-    padding: 0.1px.46rem;
+    padding: 0.1px .46rem;
     background-color: #fff;
     div.inputContainer {
       padding-top:.36rem;
@@ -134,7 +134,9 @@ div.wrap {
         font-size: 32px;
         color: rgba(24, 28, 40, 1);
         border-bottom: 1px solid #ccc;
-        padding: 0 0.20rem 20px;
+        padding: 0 0 .20rem 20px;
+        background-color: #fff;
+        width: 100%;
         height: 32px !important;
       }
       > span {
@@ -143,7 +145,7 @@ div.wrap {
         line-height:.33rem;
         position: absolute;
         left: -3px;
-        top:1.50rem;
+        top:1.30rem;
       }
     }
     div.overage {
