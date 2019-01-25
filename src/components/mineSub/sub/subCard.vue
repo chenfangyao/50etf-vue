@@ -35,7 +35,7 @@ export default {
 				this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=2' })
 			}else if(realnstatus==3){
 				this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=3' })
-			} 
+			}
     }
   },
   computed: mapState(['sid', 'realnstatus','userinfo']),

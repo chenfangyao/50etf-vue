@@ -6,38 +6,38 @@
         <img src="/assets/mineImg/01.png" />
         <span>资金流水</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <!-- <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/card_list/card_list')"> -->
       <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/add_card/add_card')">
         <img src="/assets/mineImg/02.png" />
         <span>银行卡</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex bb6" hover-class="self-hover" @click="go('trading_rules/trading_rules')">
         <img src="/assets/mineImg/03.png" />
         <span>交易规则</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex" hover-class="self-hover" @click="go('red_envelope/red_envelope')">
         <img src="/assets/mineImg/04.png" />
         <span>我的红包</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex bb6" hover-class="self-hover"  @click="go('invite_friends/invite_friends')">
         <img src="/assets/mineImg/05.png" />
         <span>邀请好友</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex" hover-class="self-hover"  @click="go('my_customer_service/my_customer_service')">
         <img src="/assets/mineImg/06.png" />
         <span>联系客服</span>
         <span class="tip" v-if="false"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <!-- <div class="uni-flex" hover-class="self-hover">
         <img src="/assets/mineImg/07.png" />
@@ -49,7 +49,7 @@
         <img src="/assets/mineImg/08.png" />
         <span>关于我们</span>
         <span class="tip" v-if="true"></span>
-        <img src="../../../static/mineImg/arrow.png" />
+        <img src="../../../assets/mineImg/arrow.png" />
       </div>
     </div>
   </div>
@@ -62,6 +62,7 @@ import util from '@/common/util.js'
 export default {
   data() {
     return {
+
 		}
   },
 	computed: mapState(['sid','indextimmer','newlengths']),
@@ -101,7 +102,7 @@ export default {
 								this.$navigateTo({ url:'/pages/mine_sub/'+href })
 							}else{
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card_btn/add_card_btn'})
-							}					
+							}
 						}
 				}).catch((err) => {
 						// 请求失败的回调
@@ -109,7 +110,7 @@ export default {
 				})
 			}else{
 				this.$navigateTo({ url:'/pages/mine_sub/'+href })
-			} 
+			}
     },
 		getmymessage(){
 			var options = {
@@ -142,7 +143,7 @@ export default {
 		clearInterval(util.indextimmer.quotesQryQuotationList)
 		util.indextimmer.quotesQryQuotationList=null
 		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null	
+		util.indextimmer.quotesQrySingleQuotationMsg = null
 	},
   components: {
     headerCard

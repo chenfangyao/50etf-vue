@@ -33,7 +33,8 @@ export default function (obj) {
 
 
   axios.interceptors.response.use(function (response) {
-    return response.data;
+    console.log(response)
+    return response;
   }, function (error) {
     return Promise.reject(error);
   });
