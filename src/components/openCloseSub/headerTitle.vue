@@ -39,7 +39,7 @@ export default {
         return
       }
       //#endif
-     this.$router.go(-1)
+    this.$router.goBack()
     },
     tapChange() {
       this.$emit('change-close')

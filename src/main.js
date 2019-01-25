@@ -16,14 +16,11 @@ Toast.setDefaultOptions({
 })
 // import '@/common/color.scss'
 Vue.component('baseHeader', baseHeader)
-Vue.route.prototype.goBack = function () {
-  this.isBack = true
-  router.go(-1)
-}
+
 Vue.config.productionTip = false
 Vue.prototype.$httpReq = request
-Vue.prototype.$navigateTo = opt => { router.push(opt.url) }
-Vue.prototype.$redirectTo = opt => { router.replace(opt.url) }
+Vue.prototype.$navigateTo = opt => { router.push({ path: opt.url, query: opt.query}) }
+Vue.prototype.$redirectTo = opt => { router.replace({ path: opt.url, query: opt.query}) }
 
 // 输入验证
 Vue.prototype.$validata = function(str, mode) {
