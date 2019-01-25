@@ -1,5 +1,11 @@
 import axios from 'axios'
 import store from '../vuex'
+
+axios.interceptors.response.use(function (response) {
+  return response.data;
+}, function (error) {
+  return Promise.reject(error);
+});
 export default function (obj) {
   var isShowLoading = true;
   if (obj.loading == undefined) {
@@ -31,28 +37,22 @@ export default function (obj) {
     baseURL = 'http://50etfvue.cardoctor.com.cn'
   }
 
-
-  axios.interceptors.response.use(function (response) {
-    console.log(response)
-    return response;
-  }, function (error) {
-    return Promise.reject(error);
-  });
+ 
 
 
-
-
-
-
-  return axios({
+  var opt = {
     url: obj.url,
     baseURL,
     method: obj.method || 'get',
     headers: obj.header || {},
     timeout: 10000,
     responseType: obj.dataType || '',
-    data: obj.data || {},
-    params: obj.data || {},
-
-  });
+  }
+  if (obj.method === 'GET') {
+    opt.params = obj.data || {}
+  } else {
+    opt.data = obj.data || {}
+  }
+ 
+  return axios(opt);
 }
