@@ -136,6 +136,8 @@ div.wrap {
         background-color: white;
         border-bottom: 1px solid #ccc;
         padding: 0 0 .20rem 20px;
+        background-color: #fff;
+        width: 100%;
         height: 32px !important;
       }
       > span {
@@ -144,7 +146,7 @@ div.wrap {
         line-height:.33rem;
         position: absolute;
         left: -3px;
-        top:1.50rem;
+        top:1.30rem;
       }
     }
     div.overage {
