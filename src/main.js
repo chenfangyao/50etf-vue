@@ -81,6 +81,7 @@ Vue.prototype.$tipLogin = () => {
     message: '是否登录？'
   }).then(() => {
     // on confirm
+    router.push({name:'login'})
   }).catch(() => {
     // on cancel
   });
