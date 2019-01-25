@@ -3,38 +3,38 @@
     <headerCard ></headerCard>
     <div class="items" >
       <div class="uni-flex" hover-class="self-hover"  @click="go('capital_flow/capital_flow')" >
-        <img src="/assets/mineImg/01.png" />
+        <img src="../../../assets/mineImg/01.png" />
         <span>资金流水</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <!-- <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/card_list/card_list')"> -->
       <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/add_card/add_card')">
-        <img src="/assets/mineImg/02.png" />
+        <img src="../../../assets/mineImg/02.png" />
         <span>银行卡</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex bb6" hover-class="self-hover" @click="go('trading_rules/trading_rules')">
-        <img src="/assets/mineImg/03.png" />
+        <img src="../../../assets/mineImg/03.png" />
         <span>交易规则</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex" hover-class="self-hover" @click="go('red_envelope/red_envelope')">
-        <img src="/assets/mineImg/04.png" />
+        <img src="../../../assets/mineImg/04.png" />
         <span>我的红包</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex bb6" hover-class="self-hover"  @click="go('invite_friends/invite_friends')">
-        <img src="/assets/mineImg/05.png" />
+        <img src="../../../assets/mineImg/05.png" />
         <span>邀请好友</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <div class="uni-flex" hover-class="self-hover"  @click="go('my_customer_service/my_customer_service')">
-        <img src="/assets/mineImg/06.png" />
+        <img src="../../../assets/mineImg/06.png" />
         <span>联系客服</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
@@ -46,7 +46,7 @@
         <img src="../../../static/mineImg/arrow.png" />
       </div> -->
       <div class="uni-flex" hover-class="self-hover" @click="go('about_us/about_us')" >
-        <img src="/assets/mineImg/08.png" />
+        <img src="../../../assets/mineImg/08.png" />
         <span>关于我们</span>
         <span class="tip" v-if="true"></span>
         <img src="../../../assets/mineImg/arrow.png" />
@@ -167,7 +167,7 @@ div.wrap {
       margin-bottom: 1px;
       height:.96rem;
       line-height:.96rem;
-      padding: 0.26rem 0.42rem;
+      padding: 0 .26rem 0 .42rem;
       span {
         flex-grow: 1;
       }

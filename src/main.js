@@ -16,7 +16,10 @@ Toast.setDefaultOptions({
 })
 // import '@/common/color.scss'
 Vue.component('baseHeader', baseHeader)
-
+Vue.route.prototype.goBack = function () {
+  this.isBack = true
+  router.go(-1)
+}
 Vue.config.productionTip = false
 Vue.prototype.$httpReq = request
 Vue.prototype.$navigateTo = opt => { router.push(opt.url) }

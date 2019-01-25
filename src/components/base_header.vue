@@ -37,7 +37,8 @@ export default {
         this.$emit('special-back')
         return
       }
-     this.$router.go(-1)
+    //  this.$router.go(-1)
+     this.$router.goBack()
     },
     rightTap() {
       this.$emit('right-tap')

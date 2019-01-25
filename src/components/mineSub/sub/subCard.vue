@@ -2,7 +2,7 @@
 <div class="subCard">
     <div class=" uni-flex ml50">
         <div class="imgContainer">
-          <img src="/assets/mineImg/touxiang.png"/>
+          <img src="../../../assets/mineImg/touxiang.png"/>
         </div>
         <div>
           <h2>{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
@@ -57,6 +57,7 @@ button {
 }
 div.subCard {
   padding:.22rem 0.34rem;
+  text-align: center;
   div.ml50 {
     margin-left:.50rem;
   }
@@ -73,10 +74,13 @@ div.subCard {
   h2 {
     font-size:.30rem;
     font-weight: 400;
+    margin: 0;
+
     color: rgba(24, 28, 40, 1);
   }
   h3 {
     font-size:.22rem;
+    margin: 0;
     font-weight: 400;
     color: rgba(130, 133, 151, 1);
   }
