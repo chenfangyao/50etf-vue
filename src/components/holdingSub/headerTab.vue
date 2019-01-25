@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <div class="headerContainer">
+      <div class="occupy"></div>
+      <div class="wrap">
+        <span @touchend='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
+      </div>
+    </div>
+    <div class="h44"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['titleList','tabI'],
+  data() {
+    return {
+    }
+  },
+  methods: {
+    tabTap(e) {
+      this.$emit('tab-tap',e.target.dataset.tabi)
+    }
+  },
+  watch:{
+
+  }
+}
+</script>
+
+<style lang="scss">
+div.h44 {
+  height: 44px;
+}
+.headerContainer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+  div.wrap {
+    text-align: center;
+    height: 44px;
+    font-size: 16px;
+    line-height: 44px;
+    position: relative;
+    span {
+      margin: 0.25rem;
+      font-size: 15px;
+      color: rgba(153, 153, 153, 1);
+      line-height: 44px;
+      padding-bottom:.24rem;
+    }
+    span.now {
+      border-bottom:.04rem solid #409DE5;
+      color: #409de5;
+    }
+  }
+  .occupy {
+    height: var(--status-bar-height);
+  }
+}
+</style>

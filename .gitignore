@@ -3,6 +3,7 @@
 # dependencies
 **/node_modules
 **/unpackage
+**/dist
 manifest.json
 # roadhog-api-doc ignore
 /src/utils/request-temp.js

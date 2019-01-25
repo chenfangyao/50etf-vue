@@ -1,0 +1,270 @@
+<template>
+  <div class="mask uni-flex">
+    <div :class="['container',{show}]">
+      <div class="title">
+        <span @touchend="closePop" class="uni-icon uni-icon-close flr"></span>
+        <span v-if="holding">一键平仓确认</span>
+        <span v-else>委托{{onClose?'平仓':'开仓'}}确认</span>
+      </div>
+      <div class="list uni-flex">
+        <div class="uni-flex">
+          <span>合约名称</span>
+          <span>合约代码</span>
+          <span>委托价格</span>
+          <span v-if="onClose">委托类型</span>
+          <span>委托数量</span>
+          <span v-if="onClose">剩余可用</span>
+          <span v-else-if="holding">预计交易后持仓</span>
+          <span v-else>可用资金</span>
+          <span>有效期</span>
+          <span v-if="onClose">预估金额</span>
+          <span v-else>预估支付金额</span>
+        </div>
+        <div class="uni-flex">
+          <span>{{subCodeName}}</span>
+          <span>{{resObj.stockCode}}</span>
+          <span class="c_red">{{newprice}}</span>
+          <span v-if="onClose"><span v-if='entrusttype'>分笔</span><span v-if="!entrusttype">合并</span></span>
+          <span>{{stockamunt}}张</span>
+          <span v-if="onClose">{{maxbuy.enable_amount}}张</span>
+          <span v-else>{{enable_money}}</span>
+          <span>
+            <span>开仓</span>
+            <span class="c_red">{{50}}秒</span>未成单自动撤单</span>
+          <span v-if="onClose">{{totalMoney}}</span>
+          <span v-else>{{totalMoney}}</span>
+        </div>
+      </div>
+      <div class="btn2 uni-flex">
+        <div hover-class='tap-hover' @touchend='closePop'>取消</div>
+        <div hover-class='tap-hover' @touchend='yesTap'>确定</div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import { mapState } from 'vuex';
+export default {
+  data() {
+    return {
+      show: false,
+      subCodeName: '',
+      enable_money: ''
+    }
+  },
+  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid','hbfbcell']),
+  methods: {
+    closePop: function () {
+      this.$emit('close-pop')
+    },
+    yesTap() {
+      this.$emit('close-pop')
+			//平仓
+      if (this.onClose) {
+				if(this.newprice<0.0002){
+					uni.showToast({
+						title: '当前价格无法平仓！',
+						mask: false,
+						duration: 1500
+					});
+					return
+				}
+				if(this.hbfbcell.length && !this.entrusttype){
+					// 全部平仓
+					if(this.hbfbcell[0]==='all'){
+						this.stocksell('',this.maxbuy.enable_amount)
+					}else{//合并分笔平仓
+						var ii=0
+						var hbfbcellinterval=null
+						hbfbcellinterval=setInterval(()=>{
+							if(ii<this.hbfbcell.length){
+								var hynum=this.hbfbcell[ii].split('-')[0]
+								var hyids=this.hbfbcell[ii].split('-')[1]
+								this.stocksell(parseInt(hyids),parseInt(hynum))
+									ii+=1
+							}else{
+								clearInterval(hbfbcellinterval)
+							}
+						},3500)
+					}		
+				}else{//分笔平仓
+					this.stocksell(this.fbccid,this.stockamunt)
+				}
+      } else {//开仓
+        this.stockbuy()
+      }
+    },
+    // 获取资金列表
+    getassets() {
+      var options = {
+        url: '/Sapi/User/asset', //请求接口
+        method: 'GET', //请求方法全部大写，默认GET
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status == 1) {
+          this.enable_money = res.data.enable_money
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err,'捕捉')
+      })
+    },
+    stockbuy() {
+      var options = {
+        url: '/Sapi/Stock/buy', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: {
+          code: parseInt(this.resObj.stockCode),
+          price: parseFloat(this.newprice),
+          amount: parseInt(this.stockamunt),
+          enttype: parseInt(this.enttype),
+          is_pay_bean: 0
+        },
+        // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$redirectTo({
+            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
+          })
+        }
+        else {
+          uni.showToast({
+            title: res.info ? res.info : '买入失败',
+            duration: 2000
+          });
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err,'捕捉')
+      })
+    },
+    stocksell(fbccid,number) {
+      let hid
+      if (this.entrusttype || this.hbfbcell.length) {
+        hid = parseInt(fbccid)
+      }
+      var options = {
+        url: '/Sapi/Stock/sell', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: {
+          code: parseInt(this.resObj.stockCode),
+          price: this.newprice,
+          amount: number,
+          enttype: parseInt(this.enttype),
+          hid: hid
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$redirectTo({
+            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
+          })
+        }
+        else {
+          uni.showToast({
+            title: res.info ? res.info : '卖出失败',
+            duration: 2000
+          });
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err,'捕捉')
+      })
+    }
+  },
+  props: ['onClose', 'holding', 'resObj', 'totalMoney'],
+  created() {
+    this.getassets()
+    setTimeout(
+      () => { this.show = true }, 10
+    )
+  },
+  mounted() {
+    this.subCodeName = this.resObj.stockName.substring(5)
+
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.mask {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  align-items: center;
+  .container {
+    transform: scale(0, 0);
+    transition: transform 300ms;
+    overflow: hidden;
+    flex-grow: 1;
+    margin: 0.35rem;
+    background: #fff;
+    border-radius:.10rem;
+    z-index: 310;
+    padding:.28rem.30rem.20rem;
+    .c_red {
+      color: #f05f5c;
+    }
+    div.title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(24, 28, 40, 1);
+      position: relative;
+      margin-bottom:.55rem;
+      .flr {
+        position: absolute;
+        left: -10upx;
+        top: 4px;
+      }
+    }
+    div.list {
+      justify-content: space-between;
+      > div {
+        flex-direction: column;
+        color: #181c28;
+        font-size: 12px;
+        line-height:.52rem;
+        flex-grow: 1;
+      }
+      > div:first-child {
+        color: #707680;
+      }
+    }
+    div.btn2 {
+      justify-content: space-between;
+      margin-top:.53rem;
+      > div {
+        flex-grow: 1;
+        height:.88rem;
+        border-radius:.10rem;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 1);
+        line-height:.88rem;
+        text-align: center;
+      }
+      > div:first-child {
+        background: rgba(153, 153, 153, 1);
+        margin-right:.20rem;
+      }
+      > div.tap-hover:first-child {
+        background: darken(rgba(153, 153, 153, 1), 5%);
+      }
+      > div:last-child {
+        background: #409de5;
+      }
+      > div.tap-hover:last-child {
+        background: darken(#409de5, 5%);
+      }
+    }
+  }
+  .container.show {
+    transform: scale(1, 1);
+  }
+}
+</style>

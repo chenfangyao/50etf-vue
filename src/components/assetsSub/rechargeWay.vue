@@ -1,0 +1,107 @@
+<template>
+<div>
+  <div class="rechargeWay uni-flex" @touchend='switchPop'>
+		<!-- wayLists是否绑定银行 -->
+		<!-- 暂时无logo先隐藏 -->
+      <img  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'>
+      <div class="txt">
+        <div>{{wayLists[way_i]||textbank}}</div>
+        <div>
+          <!-- <span v-if="wayLists[way_i]">{{txt2}}</span> -->
+          <span>{{txt2}}</span>
+        </div>
+      </div>
+      <img  class="to_r" src="/assets/arrow/r.png">
+  </div>
+  <recharge-actionsheet v-if="showAction" @choose-way='chooseWay'  @close-me='switchPop'></recharge-actionsheet>
+  
+</div>
+</template>
+<script>
+import rechargeActionsheet from '@/components/assetsSub/rechargeActionsheet.vue'
+import { mapState, mapMutations } from 'vuex';
+
+export default {
+  components: {   rechargeActionsheet },
+	computed: {...mapState(['paylist'])},
+  data() {
+    return {
+      showAction: false,
+      way_i: 0,
+			textbank:'',
+			banklogo:'',			
+    }
+  },
+  props:{
+    wayLists:{
+      default(){
+        return[]
+      }
+    },
+    txt1:'',
+    txt2:{},
+		showbanklogo:{},
+    goTo:'',
+  },
+  methods: {
+    chooseWay(i) {
+      this.way_i = i
+      this.$emit('change-wayi',i)
+			this.textbank=i.pay_name
+			this.banklogo=i.logo
+      this.switchPop()
+    },
+    switchPop() {
+      if(this.goTo){
+        // this.$navigateTo({url:'/pages/mine_sub/bank_card/card_list/card_list'})
+        this.$navigateTo({url:'/pages/mine_sub/bank_card/add_card/add_card'})
+        return
+      }
+      this.showAction = !this.showAction
+    },
+  },
+	created(){
+		setTimeout(()=>{
+			this.textbank=this.paylist.alipay[0].bank_name
+			this.banklogo=this.paylist.alipay[0].logo
+		},500)
+	}
+
+}
+</script>
+
+<style lang="scss" scoped>
+ div.rechargeWay {
+    height:1.40rem;
+    background-color: #fff;
+    margin:.12rem 0;
+    align-items: center;
+    .zhifubao {
+      width:.76rem;
+      height:.76rem;
+      margin-left:.46rem;
+      // background-color: #409de5;
+    }
+    div.txt {
+      flex-grow: 1;
+      margin-left:.35rem;
+      div {
+        font-size: 15px;
+        color: rgba(24, 28, 40, 1);
+        line-height:.33rem;
+        margin-bottom:.08rem;
+      }
+      span {
+        margin-right:.08rem;
+        font-size: 12px;
+        color: rgba(168, 168, 168, 1);
+        line-height:.28rem;
+      }
+    }
+    img.to_r {
+      width:.25rem;
+      margin-right:.24rem;
+      height:.30rem;
+    }
+  }
+</style>

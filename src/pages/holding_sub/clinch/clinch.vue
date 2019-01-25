@@ -1,0 +1,218 @@
+<template>
+	<div class="wrap">
+		<base-header title="成交结果" has-back='1' v-if='showHeader'></base-header>
+    <div class="heightUp">
+      <div class="fix">
+        <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
+      </div>
+    </div>
+    <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore">
+      <div v-for="(item,i) in list"   :key="i" class='listItem uni-flex'>
+        <div class="leftPart">
+          <div class="title">
+            <span>{{item.stock_name}}</span>
+            <span>{{item.stock_code}}</span>
+          </div>
+          <div class="uni-flex tip4">
+            <div class="uni-flex ">
+              <div class="uni-flex uni-column">
+                <span>委托：</span>
+                <span>成交：</span>
+              </div>
+              <div class="uni-flex uni-column">
+                <span>{{item.entrust_amount}}张</span>
+                <span>{{business_amount[i]}}张</span>
+              </div>
+            </div>
+            <div class="uni-flex ">
+              <div class="uni-flex uni-column">
+                <span>方向：</span>
+                <span>方式：</span>
+              </div>
+              <div class="uni-flex uni-column">
+                <span>{{item.entrust_bs==2?'卖出':'买入'}}</span>
+                <span>{{item.entrust_type==2?'市价':'现价'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rightPart">
+          <div class="time">{{businessTime[i]}}</div>
+          <div class="price">{{item.business_price}}</div>
+          <div class="txt">均价</div>
+        </div>
+      </div>
+      <uni-load-more :loading-type="resquestState" ></uni-load-more>
+
+    </scroll-view>
+	</div>
+</template>
+
+<script>
+import filterList from '@/components/holdingSub/filterList.vue';
+import uniLoadMore from '@/components/uni-load-more.vue';
+
+export default {
+  data() {
+    return {
+      list: [],
+      startI: 0,
+      total: '',
+      resquestState: 0,
+      businessTime: [],//过滤用
+      business_amount: [],//过滤用
+      showHeader: true,
+      sdate: 20080101,
+      edate: 20300101,
+
+    };
+  },
+  components: { filterList, uniLoadMore },
+  methods: {
+    loadMore() {
+      if (this.resquestState < 2) {
+        this.startI++
+        this.getDatas('add')
+      }
+    },
+    getChooseTime(obj) {
+      this.sdate = obj.starttime
+      this.edate = obj.endtime
+      this.startI = 0
+      this.getDatas()
+    },
+    filterVal(val) {
+      if (!val) return;
+      val.forEach((item, i) => {
+        this.businessTime.push(this.$formatetimestr(item.business_time))
+        this.business_amount.push(parseInt(item.business_amount))
+      });
+    },
+    beginChoose() {
+      this.showHeader = false
+    },
+    endChoose() {
+      this.showHeader = true
+    },
+    getDatas(add) {
+      this.resquestState = 1
+      var options = {
+        url: '/Sapi/Squery/list_buss', //请求接口
+        data: {
+          page_index: this.startI,
+          page_size: 10,
+          sdate: this.sdate,
+          edate: this.edate,
+          history: 1
+        },
+        method: 'GET'
+      }
+      this.$httpReq(options).then((res) => {
+        this.total = res.data.total
+        this.businessTime = []
+        this.business_amount = []
+        if (add) {
+          this.list = this.list.concat(res.data.list)
+        } else {
+          this.list = res.data.list
+        }
+        this.filterVal(this.list)
+        this.resquestState = res.data.list.length == 10 ? 0 : 2
+      }).catch((err) => {
+        console.error(err,'捕捉')
+      })
+    }
+  },
+  created() { this.getDatas() }
+}
+</script>
+
+<style lang="scss" scoped>
+div.wrap {
+  min-height: 100vh;
+  .list2 {
+    /* #ifndef H5 */
+    height: calc(100vh -1.76rem - var(--status-bar-height));
+    /* #endif */
+    /* #ifdef H5 */
+    height: calc(100vh -1.76rem);
+
+    /* #endif */
+  }
+  div.heightUp {
+    height:.88rem;
+    div.fix {
+      background-color: #fff;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 45px;
+      /* #ifndef H5 */
+      top: calc(45px + var(--status-bar-height));
+      /* #endif */
+
+      z-index: 20;
+    }
+  }
+  background-color: #f5f5f5;
+  div.listItem {
+    background-color: #fff;
+    margin:.13rem 0;
+    justify-content: space-between;
+    padding:.25rem.26rem;
+    div.leftPart {
+      flex-grow: 1;
+      div.tip4 {
+        > div {
+          flex-grow: 1;
+          line-height:.58rem;
+          font-size: 12px;
+          view:first-child {
+            color: rgba(153, 153, 153, 1);
+            // margin-right:.28rem;
+          }
+          view:last-child {
+            color: #333;
+          }
+        }
+        > div:last-child {
+          justify-content: flex-end;
+        }
+      }
+      div.title {
+        margin-bottom:.36rem;
+        span:first-child {
+          font-size: 15px;
+          color: rgba(51, 51, 51, 1);
+          line-height: 15px;
+          margin-right:.11rem;
+        }
+        line-height: 15px;
+        font-size: 13px;
+        color: rgba(102, 102, 102, 1);
+      }
+    }
+    div.rightPart {
+      text-align: right;
+      flex-grow: 1;
+      .time {
+        font-size: 12px;
+        color: rgba(153, 153, 153, 1);
+        line-height: 12px;
+      }
+      .price {
+        font-size: 24px;
+        font-weight: bold;
+        color: rgba(51, 51, 51, 1);
+        line-height: 24px;
+        margin:.39rem 0.12rem;
+      }
+      .txt {
+        font-size: 12px;
+        color: rgba(153, 153, 153, 1);
+        line-height: 12px;
+      }
+    }
+  }
+}
+</style>

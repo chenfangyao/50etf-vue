@@ -1,0 +1,182 @@
+<template>
+	<div class="wrap">
+		<base-header title="平仓结算" has-back='1'></base-header>
+    <div class="title">
+      <span class="nameTxt">{{pingCItem.stock_name}}</span>
+      <span class="codeTxt">{{pingCItem.stock_code}}</span>
+    </div>
+    <div class="buy uni-flex">
+      <div class="leftPart">
+        <div class="subTitle">买入</div>
+        <div class="uni-flex ">
+
+          <div class="uni-flex flexColumn txt">
+            <span>价格：</span>
+            <span>市值：</span>
+          </div>
+          <div class="uni-flex flexColumn">
+            <span>{{pingCItem.avg_buy_price}}</span>
+            <span>{{pingCItem.buy_value}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="rightPart">
+        <div class="time">{{buss_time}}</div>
+        <div>
+          <span class='txt'>数量：</span>
+          <span>{{pingCItem.sum_buy_amount}}张</span>
+        </div>
+      </div>
+    </div>
+    <div class="sell uni-flex">
+      <div class="leftPart">
+        <div class="subTitle">卖出</div>
+        <div class="uni-flex ">
+
+          <div class="uni-flex flexColumn txt">
+            <span>价格：</span>
+            <span>市值：</span>
+          </div>
+          <div class="uni-flex flexColumn">
+            <span>{{pingCItem.sell_price}}</span>
+            <span>{{pingCItem.sell_value}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="rightPart">
+        <div class="time">{{close_time}}</div>
+        <div>
+          <span class='txt'>数量：</span>
+          <span>{{sell_amount}}张</span>
+        </div>
+      </div>
+    </div>
+    <div class="uni-flex lastLine">
+      <div class="uni-flex">
+        <span>合约乘数：</span>
+        <span>缴纳手续费：</span>
+        <span>合约盈亏：</span>
+        <span>缴纳保证金：</span>
+        <span>总净值：</span>
+      </div>
+      <div class="uni-flex">
+        <span>{{hynumber}}</span>
+        <span>{{pingCItem.fee}}</span>
+        <span>{{pingCItem.all_income}}</span>
+        <span>{{pingCItem.deposit}}</span>
+        <span>{{pingCItem.all_realin}}</span>
+      </div>
+    </div>
+    </div>
+	</div>
+</template>
+
+<script>
+import filterList from '@/components/holdingSub/filterList.vue';
+import uniLoadMore from '@/components/uni-load-more.vue';
+import { mapState } from 'vuex';
+
+export default {
+  data() {
+    return {
+      buss_time: '',
+      close_time: '',
+      sell_amount:'',
+			hynumber:0
+    };
+  },
+  methods: {
+		gethyinfoprice(){
+			 var obj = {
+			  url: '/Sapi/Stock/hyinfo', //请求接口
+			  method: 'POST', //请求方法全部大写，默认GET
+			  dataType: "json",
+			  data: {
+			    stock_code: this.pingCItem.stock_code,
+			  },
+			}
+			this.$httpReq(obj).then((res) => {
+			  if(res.status){
+					this.hynumber=parseInt(res.data.volume_multiple)
+				}
+			})
+		}
+  },
+  mounted() {
+    this.close_time = this.$formatetimestr(this.pingCItem.close_time)
+    this.buss_time = this.$formatetimestr(this.pingCItem.buss_time)
+    this.sell_amount=parseInt(this.pingCItem.sell_amount)
+		this.gethyinfoprice()
+  },
+  computed: mapState(['pingCItem'])
+}
+</script>
+
+<style lang="scss" scoped>
+div.wrap {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  div.title {
+    color: rgba(51, 51, 51, 1);
+    font-size: 16px;
+    font-family: Arial-BoldMT;
+    font-weight: bold;
+    margin:.12rem 0 1px;
+    height:.90rem;
+    line-height:.90rem;
+    background-color: #fff;
+    padding-left:.26rem;
+    .nameTxt {
+      margin-right:.20rem;
+    }
+  }
+  .buy,
+  .sell {
+    justify-content: space-between;
+    background-color: #fff;
+    margin-bottom:.12rem;
+    padding:.36rem;
+    font-size: 12px;
+    div.subTitle {
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: bold;
+      margin-bottom:.28rem;
+      color: rgba(102, 102, 102, 1);
+    }
+
+    div.time {
+      font-size: 11px;
+      font-family: ArialMT;
+      color: rgba(153, 153, 153, 1);
+    }
+    div.flexColumn {
+      flex-direction: column;
+    }
+    .txt {
+      color: #888;
+      margin-right:.19rem;
+    }
+    div.rightPart {
+      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+  div.lastLine {
+    background-color: #fff;
+    padding:.30rem;
+    > div {
+      flex-direction: column;
+      line-height:.52rem;
+      color: #181c28;
+    }
+    > div:first-child {
+      font-size: 12px;
+      color: rgba(136, 136, 136, 1);
+      margin-right:.19rem;
+    }
+  }
+}
+</style>
