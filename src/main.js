@@ -8,8 +8,12 @@ import request from '@/common/request.js'
 import baseHeader from '@/components/base_header.vue'
 
 import '@/common/uni.css'
-import { Toast  } from 'vant';
-Vue.use(Toast)
+import { Toast,Dialog} from 'vant';
+Vue.use(Toast,Dialog )
+Toast.setDefaultOptions({
+  duration: 2000,
+  position: 'bottom'
+})
 // import '@/common/color.scss'
 Vue.component('baseHeader', baseHeader)
 
@@ -58,18 +62,27 @@ Vue.prototype.$validata = function(str, mode) {
 }
 //登入提示
 Vue.prototype.$tipLogin = () => {
-  uni.showModal({
-    title: '提示',
-    content: '您还未登录，请先登录',
-    success: function(res) {
-      if (res.confirm) {
-        uni.navigateTo({
-          url: '/pages/login/login'
-        })
-      } else if (res.cancel) {
-        console.log('用户点击取消');
-      }
-    }
+  // uni.showModal({
+  //   title: '提示',
+  //   content: '您还未登录，请先登录',
+  //   success: function(res) {
+  //     if (res.confirm) {
+  //       uni.navigateTo({
+  //         url: '/pages/login/login'
+  //       })
+  //     } else if (res.cancel) {
+  //       console.log('用户点击取消');
+  //     }
+  //   }
+  // });
+
+  Dialog.confirm({
+    title: '您还未登录',
+    message: '是否登录？'
+  }).then(() => {
+    // on confirm
+  }).catch(() => {
+    // on cancel
   });
 }
 new Vue({
