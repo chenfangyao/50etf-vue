@@ -84,6 +84,7 @@ export default {
 									ii+=1
 							}else{
 								clearInterval(hbfbcellinterval)
+								hbfbcellinterval=null
 							}
 						},3500)
 					}		
