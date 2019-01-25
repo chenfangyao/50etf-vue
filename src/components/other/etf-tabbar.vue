@@ -14,11 +14,11 @@
         <span>持仓</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img3s : icon.img3">
       </van-tabbar-item>
-      <van-tabbar-item to="/" replace>
+      <van-tabbar-item to="/assets" replace>
         <span>资产</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img4s : icon.img4">
       </van-tabbar-item>
-      <van-tabbar-item to="/" replace>
+      <van-tabbar-item to="/mine" replace>
         <span>我的</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img5s : icon.img5">
       </van-tabbar-item>

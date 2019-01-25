@@ -2,7 +2,7 @@
 	<div class="wrap">
     <base-header :has-back='true' title='登录'></base-header>
     <div class="h1"></div>
-    <div class="img"><img src="/assets/loginResgImg/logo.png"></div>
+    <!--<div class="img"><img src="/assets/loginResgImg/logo.png"></div>-->
     <div class="container">
       <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->
       <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
@@ -60,10 +60,9 @@ export default {
       this.$navigateTo({ url })
     },
     handleLogin() {
-        // this.verifyYes=false
         this.showErr=false
           // 验证输入信息
-        if(this.$validata(this.uName,0)!=1){
+        /*if(this.$validata(this.uName,0)!=1){
             this.showErr=true
             this.tipContent=this.$validata(this.uName,0)
             return
@@ -72,7 +71,7 @@ export default {
             this.showErr=true
             this.tipContent=this.$validata(this.pwd,1)
             return
-        }
+        }*/
             var options = {
                 url: '/Sapi/Login/index', //请求接口
                 data: {
@@ -93,11 +92,12 @@ export default {
                     this.verifyYes=true
                     this.setsid(res.data.sid)
                     // #ifdef H5
-                    sessionStorage.setItem('etf_sid',res.data.sid)       
+                    sessionStorage.setItem('etf_sid',res.data.sid)
                     // #endif
                     // 获取用户信息
                     this.getuserinfo()
-                    uni.switchTab({ url: '/pages/tabBar/index/index'})
+                    // uni.switchTab({ url: '/pages/tabBar/index/index'})
+                  this.$router.replace('/index')
                 }else{
                     this.showErr=true
                     if(res.info){

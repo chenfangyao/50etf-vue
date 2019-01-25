@@ -4,6 +4,9 @@ import Router from 'vue-router'
 const HelloWorld = resolve => require([ '@/components/HelloWorld' ], resolve)
 const bv = resolve => require([ '@/components/bv' ], resolve)
 const index = resolve => require([ '@/pages/tabBar/index/index' ], resolve)
+const assets = resolve => require([ '@/pages/tabBar/assets/assets' ], resolve)
+const mine = resolve => require([ '@/pages/tabBar/mine/mine' ], resolve)
+const login = resolve => require([ '@/pages/login/login' ], resolve)
 
 Vue.use(Router)
 
@@ -12,6 +15,9 @@ export default new Router({
   routes: [
     { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true, tabbar: true } },
     { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true,index:1 } },
+    { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true,index:1 } },
+    { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true,index:1 } },
+    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, index:1 } },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true ,index:2} },
     // { path: '*', redirect: '/' }
   ]
@@ -28,24 +34,6 @@ var pages= [
   },
   {
     "path": "pages/tabBar/holding_warehouse/holding_warehouse",
-    "style": {
-      "app-plus": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    }
-  },
-  {
-    "path": "pages/tabBar/assets/assets",
-    "style": {
-      "app-plus": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    }
-  },
-  {
-    "path": "pages/tabBar/mine/mine",
     "style": {
       "app-plus": {
         "titleNView": false,
@@ -112,13 +100,6 @@ var pages= [
   },
   {
     "path": "pages/quotes_sub/entrust_succ/entrust_succ",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/login/login",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"
