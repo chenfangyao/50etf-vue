@@ -5,7 +5,6 @@
   </view>
 </template>
 <style lang="scss" scoped>
-@import "../../common/customize.scss";
 
 $v1bg: #409de5;
 $v2bg: #e6aa12;
