@@ -51,10 +51,11 @@ export default {
   props: ['transmoney'],
   methods: {
     go(i) {
-      if(!this.sid){
-        this.$tipLogin()
-        return
-      }
+      // if(!this.sid){
+      //   this.$tipLogin()
+      //   return
+      // }
+      Toast.success('成功文案');
       switch (i) {
         case 1:
           this.$navigateTo({ url: '/pages/assets_sub/recharge/recharge' })

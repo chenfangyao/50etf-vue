@@ -24,7 +24,7 @@
 				<span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
 		</div>
-    
+
 	</div>
 </template>
 
@@ -33,7 +33,7 @@ import headerCard from '@/components/assetsSub/headerCard.vue'
 import { mapState, mapMutations } from 'vuex';
 import util from '@/common/util.js'
 export default {
-  
+
   data() {
     return {
       res_data: '',
@@ -83,7 +83,7 @@ export default {
 						this.greenredclass=true
 					}else{
 						this.greenredclass=false
-					}  
+					}
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -100,7 +100,7 @@ export default {
 		util.indextimmer.quotesQryQuotationList=null
 		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
 		util.indextimmer.quotesQrySingleQuotationMsg = null
-		
+
     this.getassets()
     // this.$refs.ff.getassets()
   }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../vuex'
 export default function (obj) {
+
   var isShowLoading = true;
   if (obj.loading == undefined) {
     obj.loading = true
