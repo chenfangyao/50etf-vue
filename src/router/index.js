@@ -9,6 +9,7 @@ const mine = resolve => require([ '@/pages/tabBar/mine/mine' ], resolve)
 const login = resolve => require([ '@/pages/login/login' ], resolve)
 const recharge = resolve => require([ '@/pages/assets_sub/recharge/recharge' ], resolve)
 const withdraw = resolve => require([ '@/pages/assets_sub/withdraw/withdraw' ], resolve)
+const setting = resolve => require([ '@/pages/mine_sub/setting/setting' ], resolve)
 
 Vue.use(Router)
 
@@ -24,6 +25,8 @@ export default new Router({
     // 充值
     { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, index:1 } },
     { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, index:1 } },
+    // 我的页面设置
+    { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, index:1 } },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true ,index:2} },
     // { path: '*', redirect: '/' }
   ]
@@ -127,13 +130,6 @@ var pages= [
   },
   {
     "path": "pages/forget_pwd/tep3/tep3",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/setting/setting",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"
@@ -246,20 +242,6 @@ var pages= [
   },
   {
     "path": "pages/stock_detail/stock_detail",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/assets_sub/recharge/recharge",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/assets_sub/withdraw/withdraw",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"

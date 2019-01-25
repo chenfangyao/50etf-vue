@@ -51,10 +51,10 @@ export default {
   props: ['transmoney'],
   methods: {
     go(i) {
-      // if(!this.sid){
-      //   this.$tipLogin()
-      //   return
-      // }
+      if(!this.sid){
+        this.$tipLogin()
+        return
+      }
       // this.$dialog.confirm({
       //   title: '您还未登录',
       //   message: '是否登录？'

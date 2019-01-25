@@ -32,17 +32,15 @@ export default {
   methods: {
     ...mapMutations(['setuserinfo','setsid']),
     logOut() {
-      uni.showModal({
-        title: '确认退出登录？',
-        content: ' ',
-        success: (res) => {
-          if (res.confirm) {
-            this.sureloginout()
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      })
+      this.$dialog.confirm({
+        title: '退出登录',
+        message: '是否确认退出登录？'
+      }).then(() => {
+        // on confirm
+        this.sureloginout()
+      }).catch(() => {
+        // on cancel
+      });
     },
     sureloginout() {
       var options = {
@@ -58,7 +56,7 @@ export default {
         if (res.status == 1) {
           this.setuserinfo({})
           this.setsid('')
-          uni.reLaunch({ url: '/pages/tabBar/index/index' })
+          this.$router.push({name:'index'})
         } else {
         }
       }).catch((err) => {

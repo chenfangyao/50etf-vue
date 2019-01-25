@@ -29,27 +29,28 @@ export default {
 		}else{
 			this.txt='0'
 		}
-	
+
 	},
   methods: {
     go(i) {
 				if(!this.sid){
-				 uni.showModal({
-				        title:'您还未登录',
-				        content:'现在去登录',
-				        success:(res)=>{
-				            if (res.confirm) {
-				                this.$navigateTo({
-				                	url: '/pages/login/login',
-				                	success: res => {},
-				                	fail: () => {},
-				                	complete: () => {}
-				                });
-				            } else if (res.cancel) {
-				                console.log('用户点击取消');
-				            }
-				        }
-				    })
+				 // uni.showModal({
+				 //        title:'您还未登录',
+				 //        content:'现在去登录',
+				 //        success:(res)=>{
+				 //            if (res.confirm) {
+				 //                this.$navigateTo({
+				 //                	url: '/pages/login/login',
+				 //                	success: res => {},
+				 //                	fail: () => {},
+				 //                	complete: () => {}
+				 //                });
+				 //            } else if (res.cancel) {
+				 //                console.log('用户点击取消');
+				 //            }
+				 //        }
+				 //    })
+          this.$tipLogin()
 						return
 			}
       if (i == 3) {
