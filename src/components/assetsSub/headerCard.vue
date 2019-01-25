@@ -51,10 +51,10 @@ export default {
   props: ['transmoney'],
   methods: {
     go(i) {
-      if(!this.sid){
-        this.$tipLogin()
-        return
-      }
+      // if(!this.sid){
+      //   this.$tipLogin()
+      //   return
+      // }
       // this.$dialog.confirm({
       //   title: '您还未登录',
       //   message: '是否登录？'
@@ -63,8 +63,6 @@ export default {
       // }).catch(() => {
       //   // on cancel
       // });
-
-      // this.$toast('提示内容');
       switch (i) {
         case 1:
           this.$navigateTo({ url: '/pages/assets_sub/recharge/recharge' })

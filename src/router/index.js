@@ -7,6 +7,8 @@ const index = resolve => require([ '@/pages/tabBar/index/index' ], resolve)
 const assets = resolve => require([ '@/pages/tabBar/assets/assets' ], resolve)
 const mine = resolve => require([ '@/pages/tabBar/mine/mine' ], resolve)
 const login = resolve => require([ '@/pages/login/login' ], resolve)
+const recharge = resolve => require([ '@/pages/assets_sub/recharge/recharge' ], resolve)
+const withdraw = resolve => require([ '@/pages/assets_sub/withdraw/withdraw' ], resolve)
 
 Vue.use(Router)
 
@@ -17,7 +19,11 @@ export default new Router({
     { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true,index:1 } },
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true,index:1 } },
     { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true,index:1 } },
+    // 登录
     { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, index:1 } },
+    // 充值
+    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, index:1 } },
+    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, index:1 } },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true ,index:2} },
     // { path: '*', redirect: '/' }
   ]
