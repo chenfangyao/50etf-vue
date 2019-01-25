@@ -1436,6 +1436,10 @@ radio-group label, checkbox-group label{
 * {
   box-sizing: border-box;
 }
+input{
+  border: 0;
+	-webkit-appearance:none;
+}
 .self-mask{
   position: fixed;
   top: 0;
