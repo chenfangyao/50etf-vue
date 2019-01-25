@@ -2,8 +2,8 @@
     <div class="wrap">
       <base-header :hasBack='true' @special-back='hidMe' special-back=1 title="选择时间" @right-tap='handleConfirm' rightTxt='确定'></base-header>
 			<div class="uni-title self">
-        <span :class="{active:inLeft}" @touchend="changeActive(true)">{{year}}-{{month}}-{{day}}</span> 至
-        <span :class="{active:!inLeft}" @touchend="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</span>
+        <span :class="{active:inLeft}" @click="changeActive(true)">{{year}}-{{month}}-{{day}}</span> 至
+        <span :class="{active:!inLeft}" @click="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</span>
 			</div>
       <div v-show='showTips' class="tips">开始时间不能大于结束时间</div>
       <picker-view v-if="visible" :indicator-style="indicatorStyle" :value="value" @change="bindChange">

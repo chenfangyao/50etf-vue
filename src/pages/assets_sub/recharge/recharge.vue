@@ -14,7 +14,7 @@
         <span>{{assets.enable_money}}</span>
       </div>
       <div class="priceItem uni-flex">
-        <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @touchend='choosePriceItem(i,item)'>{{item}} 元</div>
+        <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @click='choosePriceItem(i,item)'>{{item}} 元</div>
       </div>
     </div>
     <div class="fixView">

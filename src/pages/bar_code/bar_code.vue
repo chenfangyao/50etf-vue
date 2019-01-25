@@ -26,8 +26,8 @@
 		</div>
 		<div class="uni-padding-wrap">
 			<div class="uni-btn-v uni-common-mt">
-				<button type="primary" @touchend="creatQrcode">生成二维码</button>
-				<button type="warn" @touchend="clearQrcode">清除二维码</button>
+				<button type="primary" @click="creatQrcode">生成二维码</button>
+				<button type="warn" @click="clearQrcode">清除二维码</button>
 			</div>
 		</div>
 		<!-- <qrcode-vue size="300" level="H" ref="qrcodes" :value="codeValue">

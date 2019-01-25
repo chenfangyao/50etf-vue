@@ -1,5 +1,5 @@
 <template>
-	<span class="uni-badge" v-if="text" :class="setClass" @touchend="onClick()">{{text}}</span>
+	<span class="uni-badge" v-if="text" :class="setClass" @click="onClick()">{{text}}</span>
 </template>
 
 <script>

@@ -27,13 +27,13 @@
           </div>
         </div>
         <div class="btn3 uni-flex">
-          <div @touchend='go(2)'>开仓</div>
-          <div class="pingC" @touchend='go(3)'>平仓</div>
-          <div @touchend='go(4)'>行情</div>
+          <div @click='go(2)'>开仓</div>
+          <div class="pingC" @click='go(3)'>平仓</div>
+          <div @click='go(4)'>行情</div>
         </div>
       </div>
       <div class="closeIcom">
-        <img src="/assets/holdingImg/popClose.png" @touchend='closeMe">
+        <img src="/assets/holdingImg/popClose.png" @click='closeMe">
       </div>
     </div>
     

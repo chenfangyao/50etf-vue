@@ -3,7 +3,7 @@
     <div class="subWrap">
       <div class="topTip uni-flex">
         <div>自动延期</div>
-        <div @touchend='openPop2' class="iconWrap">
+        <div @click='openPop2' class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
           <img src="/assets/holdingImg/dagou.png" v-if="showDagou == 1">
           <img src="/assets/holdingImg/meigou.png" v-else>
@@ -69,14 +69,14 @@
           </div>
         </div>
         <div class="btn3 uni-flex">
-          <div @touchend='go(2)'>开仓</div>
-          <div class="pingC" @touchend='go(3)'>平仓</div>
-          <div @touchend='go(4)'>行情</div>
+          <div @click='go(2)'>开仓</div>
+          <div class="pingC" @click='go(3)'>平仓</div>
+          <div @click='go(4)'>行情</div>
         </div>
         <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
       </div>
       <div class="closeIcom">
-        <img src="/assets/holdingImg/popClose.png" @touchend='closeMe">
+        <img src="/assets/holdingImg/popClose.png" @click='closeMe">
       </div>
     </div>
     

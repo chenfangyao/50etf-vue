@@ -11,7 +11,7 @@
             <span>尾号1123储蓄卡</span>
           </div>
         </div>
-        <div  class="scroll-view-item_H bg-blue" hover-class='self-hover' @touchend='delbank(key)'><span>删除</span></div>
+        <div  class="scroll-view-item_H bg-blue" hover-class='self-hover' @click='delbank(key)'><span>删除</span></div>
 		</scroll-view>
 	</div>
 </template>

@@ -3,7 +3,7 @@
     <div class="headerContainer">
       <div class="occupy"></div>
       <div class="wrap">
-        <span @touchend='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
+        <span @click='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
       </div>
     </div>
     <div class="h44"></div>

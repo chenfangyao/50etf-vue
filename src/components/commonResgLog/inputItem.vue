@@ -3,8 +3,8 @@
         <input type="number"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
         <input type="text" v-else :password='!openEye&&isPwd' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
         <span :class="{inputFocus:focusInput}" class='absTxt'>{{placeholderTxt}}</span>
-        <img v-show='!openEye' v-if="isPwd" @touchend='tabOpen' class='closeImg' src="/assets/loginResgImg/close.png">
-        <img v-show='openEye' v-if="isPwd" @touchend='tabOpen' class='openImg' src="/assets/loginResgImg/open.png">
+        <img v-show='!openEye' v-if="isPwd" @click='tabOpen' class='closeImg' src="/assets/loginResgImg/close.png">
+        <img v-show='openEye' v-if="isPwd" @click='tabOpen' class='openImg' src="/assets/loginResgImg/open.png">
       </div>
 </template>
 <script>

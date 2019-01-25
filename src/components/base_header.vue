@@ -3,11 +3,11 @@
     <div class="headerContainer">
       <div class="occupy"></div>
       <div class="wrap">
-        <div class="left commonStyle" @touchend="back"  v-if="hasBack">
+        <div class="left commonStyle" @click="back"  v-if="hasBack">
           <img src="/assets/arrow/l.png">
         </div>
         <span>{{title}}</span>
-        <span class="right commonStyle" hover-class='self-hover' @touchend="rightTap" v-if="rightTxt">{{rightTxt}}</span>
+        <span class="right commonStyle" hover-class='self-hover' @click="rightTap" v-if="rightTxt">{{rightTxt}}</span>
       </div>
     </div>
     <div class="h44"></div>

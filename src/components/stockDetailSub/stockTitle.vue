@@ -3,7 +3,7 @@
     <div class="wrap">
       <div class="occupy"></div>
       <div class="wrap2">
-        <div class="left" @touchend="back">
+        <div class="left" @click="back">
           <img src="/assets/arrow/l.png" />
         </div>
         <div>

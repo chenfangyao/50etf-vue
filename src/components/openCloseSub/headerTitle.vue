@@ -3,12 +3,12 @@
     <div class="headerContainer">
       <div class="occupy"></div>
       <div class="wrap uni-flex">
-        <div class="leftPart"  @touchend="back" >
+        <div class="leftPart"  @click="back" >
           <img src="/assets/arrow/l.png"/>
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
-          <div @touchend='tapChange'>开仓</div>
-          <div @touchend='tapChange'>平仓</div>
+          <div @click='tapChange'>开仓</div>
+          <div @click='tapChange'>平仓</div>
           <div class="slider">{{tabActive?'平仓':'开仓'}}</div>
         </div>
       </div>

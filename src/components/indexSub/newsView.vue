@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-for="(item,i) in newlists" :key="i" class="newsView" @touchend="getartdetil(item.id)">
+		<div v-for="(item,i) in newlists" :key="i" class="newsView" @click="getartdetil(item.id)">
 			<h3 class='titlelength'>{{item.title}}</h3>
 			<div class="uni-flex">
 				<span>{{item.source}}</span>

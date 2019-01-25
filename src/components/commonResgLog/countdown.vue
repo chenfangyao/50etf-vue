@@ -1,5 +1,5 @@
 <template>
-  <div hover-class='self-hover' @touchend='sendCode' class="txt">{{verifyCodeContent||initTxt}}</div>
+  <div hover-class='self-hover' @click='sendCode' class="txt">{{verifyCodeContent||initTxt}}</div>
 </template>
 <script>
 export default {

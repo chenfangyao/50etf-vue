@@ -2,14 +2,14 @@
   <div>
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex">
-        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @touchend="tapTab">{{tab.name}}</div>
+        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
       </div>
     </div>
     <!-- #ifndef H5 -->
     <div class="h278" v-show="tabIndex==0" >
       <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
     </div>
-    <div class="h324" v-show="tabIndex!=0" @touchend='go'>
+    <div class="h324" v-show="tabIndex!=0" @click='go'>
       <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad :onInit="onInit2" canvasId="m-canvas2" />
     </div>
     <!-- #endif -->

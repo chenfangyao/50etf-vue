@@ -1,5 +1,5 @@
 <template>
-  <div class="stock50 uni-flex" @touchend='go'>
+  <div class="stock50 uni-flex" @click='go'>
       <span class="stockNmae">50ETF</span>
       <!-- #ifndef H5 -->
       <div class="df_wh">

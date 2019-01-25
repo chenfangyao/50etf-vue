@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
-      <div @touchend="go(item.gou)" class="wrap1 " :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
+      <div @click="go(item.gou)" class="wrap1 " :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}" >{{item.gou.incr_percent}}</span>
         <span :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}">{{item.gou.last_price}}</span>
       </div>
@@ -10,7 +10,7 @@
         <span class="midTxt" :class="{bg1:item.gou.exercise_price==gtPrice,bg2:item.gou.exercise_price==ltPrice}">{{item.gou.exercise_price}}</span>
         <!-- <span class="gou">{{item.sale_amount1}}</span> -->
       </div>
-      <div @touchend="go(item.gu)" class="wrap1 "  :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
+      <div @click="go(item.gu)" class="wrap1 "  :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
         <span :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}" >{{item.gu.last_price}}</span>
         <span :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}">{{item.gu.incr_percent}}</span>
       </div>

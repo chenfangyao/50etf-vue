@@ -3,11 +3,11 @@
   <div class="occupy"></div>
   <div class="title">
     <div class="msg">
-      <span @touchend='go(3) ' class="commonStyle1">消息</span>
+      <span @click='go(3) ' class="commonStyle1">消息</span>
       <!-- <uni-badge :text="txt" type="danger"></uni-badge> -->
       <uni-badge :text="sid?newlengths:'0'" type="danger"></uni-badge>
     </div>
-    <span class="commonStyle1" @touchend='go'>设置</span>
+    <span class="commonStyle1" @click='go'>设置</span>
   </div>
 </div>
 </template>

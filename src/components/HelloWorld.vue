@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5>你好世界</h5>
-    <span @touchend="go">back</span>
+    <span @click="go">back</span>
     <input type="range" v-model='va'>
   </div>
 </template>

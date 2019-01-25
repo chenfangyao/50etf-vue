@@ -4,7 +4,7 @@
     <div class="list-row">
       <span>开户银行</span>
       <div class="chooseCount">
-        <div @touchend="showPicker">
+        <div @click="showPicker">
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
         </div>
@@ -13,7 +13,7 @@
     <div class="list-row">
       <span>开户省市</span>
       <div class="chooseCount">
-        <div @touchend="showCityPicker">
+        <div @click="showCityPicker">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
         </div>
@@ -22,7 +22,7 @@
     <div class="list-row">
       <span>开户支行</span>
       <div class="chooseCount">
-        <div @touchend="showBankPicker">
+        <div @click="showBankPicker">
           {{pickSubBankText}}
           <span v-if="editdefault" class="arrowDown"></span>
         </div>

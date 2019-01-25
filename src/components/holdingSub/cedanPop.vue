@@ -5,8 +5,8 @@
       <img src="/assets/holdingImg/cedan.png">
       <div class="txt">是否撤单？</div>
       <div class="btn2 uni-flex">
-        <div @touchend='cancle'>取消</div>
-        <div @touchend='yesTap'>确定</div>
+        <div @click='cancle'>取消</div>
+        <div @click='yesTap'>确定</div>
       </div>
     </div>
   </div>

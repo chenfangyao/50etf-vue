@@ -10,13 +10,13 @@
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
       <div class="txt2 uni-flex" >
-        <span @touchend='go(1)'>注册用户</span>
-        <span @touchend='go(2)'>忘记密码 ？</span>
+        <span @click='go(1)'>注册用户</span>
+        <span @click='go(2)'>忘记密码 ？</span>
       </div>
     </div>
     <div class="bottomTxt">
       <span>登录即代表阅读并同意 </span>
-      <span class="blueTxt"  @touchend='go(3)'>风险揭示书</span>
+      <span class="blueTxt"  @click='go(3)'>风险揭示书</span>
     </div>
 	</div>
 </template>

@@ -1,11 +1,11 @@
 <template>
 	<div class="wrap">
 		<base-header title="设置" has-back='1'></base-header>
-    <div class=' uni-flex' hover-class='self-hover' @touchend='go(1)'>
+    <div class=' uni-flex' hover-class='self-hover' @click='go(1)'>
       <span>修改密码</span>
       <img src="/assets/arrow/r.png">
     </div>
-    <!-- <div class='mb26 uni-flex' hover-class='self-hover' @touchend='go(2)'> -->
+    <!-- <div class='mb26 uni-flex' hover-class='self-hover' @click='go(2)'> -->
     <div class='mb26 uni-flex' hover-class='self-hover' >
       <span>关于</span>
       <div class="uni-flex verView">

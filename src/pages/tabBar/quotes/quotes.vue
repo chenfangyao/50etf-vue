@@ -5,7 +5,7 @@
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex">
         <div v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2' :id="tab.id">
-          <span :class="[tabIndex==index ? 'active' : '']" @touchend="tapTab" :data-current="index">{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
+          <span :class="[tabIndex==index ? 'active' : '']" @click="tapTab" :data-current="index">{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
         </div>
       </div>
       <futures-title></futures-title>

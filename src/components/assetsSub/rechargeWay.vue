@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="rechargeWay uni-flex" @touchend='switchPop'>
+  <div class="rechargeWay uni-flex" @click='switchPop'>
 		<!-- wayLists是否绑定银行 -->
 		<!-- 暂时无logo先隐藏 -->
       <img  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'>

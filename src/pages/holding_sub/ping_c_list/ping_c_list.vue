@@ -7,7 +7,7 @@
       </div>
     </div>
     <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore">
-      <div v-for="(item,i) in list" hover-class='self-hover' @touchend='go(item)' :key="i" class='listItem uni-flex'>
+      <div v-for="(item,i) in list" hover-class='self-hover' @click='go(item)' :key="i" class='listItem uni-flex'>
         <div class="content">
           <div class="line1 uni-flex">
             <div>

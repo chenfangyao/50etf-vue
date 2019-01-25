@@ -30,7 +30,7 @@
     </div>
     <div class='line3 uni-flex'>
       <span>委托时间：{{createTime[i]}}</span>
-      <div class='countdownBtn' hover-class='hover1' @touchend='showPop(i)'>撤单</div>   <!-- （{{countdown}} S） -->
+      <div class='countdownBtn' hover-class='hover1' @click='showPop(i)'>撤单</div>   <!-- （{{countdown}} S） -->
     </div>
   </div>
   <!-- 以下是假数据 -->
@@ -63,7 +63,7 @@
     </div>
     <div class='line3 uni-flex'>
       <span>委托时间：2018-10-02 10:09:10</span>
-      <div class='countdownBtn' hover-class='hover1' @touchend='showPop'>撤单（{{countdown}} S）</div>
+      <div class='countdownBtn' hover-class='hover1' @click='showPop'>撤单（{{countdown}} S）</div>
     </div>
   </div>
   <cedan-pop v-if='showCedanPop' @close-me='closePop'></cedan-pop>

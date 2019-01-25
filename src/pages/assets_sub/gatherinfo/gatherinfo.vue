@@ -8,7 +8,7 @@
 			<span>收款账号:</span>
 			<span v-show="showBank">{{cardno}}</span>
 			<div v-show="!showBank" class="chooseCount">
-					<div @touchend='showPicker'>
+					<div @click='showPicker'>
 							{{pickerText}}
 							<span class="arrowDown"></span>
 					</div>

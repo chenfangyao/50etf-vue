@@ -2,12 +2,12 @@
   <div class="mask" >
     <div class="wayList">
       <div class="title">
-        <div class="iconWrap " @touchend='closeMe'>
+        <div class="iconWrap " @click='closeMe'>
           <uni-icon type="closeempty"   size="30"></uni-icon>
         </div>
         <span>支付方式</span>
       </div>
-      <div class="item uni-flex" v-for="(item,i) in wayLists" :key='i' @touchend='chooseWay(item)' hover-class='self-hover'>
+      <div class="item uni-flex" v-for="(item,i) in wayLists" :key='i' @click='chooseWay(item)' hover-class='self-hover'>
         <img :src="item.logo">
         <div class="txt">
           <div class="wayName">{{item.pay_name}}</div>

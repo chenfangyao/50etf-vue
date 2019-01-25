@@ -3,8 +3,8 @@
     <base-header title='委托' :hasBack='false'></base-header>
     <div class="txt">交易成功</div>
     <div class="btn2 uni-flex">
-      <div hover-class='self-hover' @touchend='go'>继续交易</div>
-      <div hover-class='self-hover' @touchend="gowt">查看委托</div>
+      <div hover-class='self-hover' @click='go'>继续交易</div>
+      <div hover-class='self-hover' @click="gowt">查看委托</div>
     </div>
   </div>
 </template>

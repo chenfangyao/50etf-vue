@@ -27,11 +27,11 @@
       </div> -->
     </div>
     <div class="uni-flex btn2">
-      <div class="hasBorder" @touchend='go(1)'>
+      <div class="hasBorder" @click='go(1)'>
         <img src="/assets/assetsImg/recharge.png">
         <span>充值</span>
       </div>
-      <div  @touchend='go(2)'>
+      <div  @click='go(2)'>
         <img src="/assets/assetsImg/withdraw.png">
         <span>提现</span>
       </div>

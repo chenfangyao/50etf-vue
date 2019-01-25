@@ -42,7 +42,7 @@
       </div>
     </div>
     <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part-detail>
-    <div class="arrowImg" @touchend="showPartDetail">
+    <div class="arrowImg" @click="showPartDetail">
       <img v-show="isshowDetail" src="/assets/arrow/t.png">
       <img v-show="!isshowDetail" src="/assets/arrow/b.png">
       <!-- <img v-show="!isshowDetail" src="/assets/arrow/t.png"> -->

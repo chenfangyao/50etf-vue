@@ -2,7 +2,7 @@
   <div class="mask uni-flex">
     <div :class="['container',{show}]">
       <div class="title">
-        <span @touchend="closePop" class="uni-icon uni-icon-close flr"></span>
+        <span @click="closePop" class="uni-icon uni-icon-close flr"></span>
         <span >一键平仓确认</span>
       </div>
       <div class="list uni-flex">
@@ -26,8 +26,8 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div hover-class='tap-hover' @touchend='closePop'>取消</div>
-        <div hover-class='tap-hover' @touchend='stocksell'>确定</div>
+        <div hover-class='tap-hover' @click='closePop'>取消</div>
+        <div hover-class='tap-hover' @click='stocksell'>确定</div>
       </div>
     </div>
   </div>

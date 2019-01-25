@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for='(item,i) in list' class="list1Item " @touchend='popShow(i)' hover-class='self-hover' :key="i">
+    <div v-for='(item,i) in list' class="list1Item " @click='popShow(i)' hover-class='self-hover' :key="i">
       <div class="line1 uni-flex">
         <div>
           <span class="nameTxt">{{item.stock_name}}</span>

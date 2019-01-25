@@ -1,5 +1,5 @@
 <template>
-  <div class=" bigBtn" hover-class='active' @touchend="handleTap">{{txt}}</div>
+  <div class=" bigBtn" hover-class='active' @click="handleTap">{{txt}}</div>
 
 </template>
 <script>
