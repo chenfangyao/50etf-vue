@@ -1433,7 +1433,7 @@ radio-group label, checkbox-group label{
 .self-hover{
   opacity: 0.7 !important;
 }
-page,view,span {
+* {
   box-sizing: border-box;
 }
 .self-mask{

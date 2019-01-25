@@ -107,6 +107,7 @@ div.subWrap {
     h4 {
       font-size: 14px;
       font-weight: normal;
+      margin: 0;
     }
     h4:first-child {
       font-size: 15px;
