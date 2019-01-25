@@ -37,12 +37,6 @@ export default {
         this.$emit('special-back')
         return
       }
-      //#ifdef H5
-      if (getCurrentPages().length == 1) {
-        history.back()
-        return
-      }
-      //#endif
      this.$router.go(-1)
     },
     rightTap() {
