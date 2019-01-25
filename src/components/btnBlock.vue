@@ -16,7 +16,7 @@ export default {
 <style lang="scss" scoped>
 div.bigBtn {
   height: .98rem;
-  margin: 0 .22rem;
+  margin: 0 .22rem; 
   background: rgba(64, 157, 229, 1);
   border-radius:.10rem;
   font-size:.32rem;
