@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+Router.prototype.goBack = function () {
+  this.isBack = true
+  history.go(-1)
+}
 const HelloWorld = resolve => require([ '@/components/HelloWorld' ], resolve)
 const bv = resolve => require([ '@/components/bv' ], resolve)
 const index = resolve => require([ '@/pages/tabBar/index/index' ], resolve)

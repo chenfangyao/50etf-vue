@@ -80,7 +80,7 @@ export default {
 }
 .title {
   height: 44px;
-  padding: 0.26rem;
+  padding: 0 .26rem;
 
   .msg {
     position: relative;

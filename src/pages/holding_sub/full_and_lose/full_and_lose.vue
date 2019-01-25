@@ -38,7 +38,7 @@ export default {
   components: { submitBtn, inputItem },
   methods: {
     handleNext() {
-      this.$router.go(-1)
+     this.$router.goBack()
     },
   },
   onLoad(option) {

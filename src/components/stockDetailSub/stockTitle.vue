@@ -31,7 +31,7 @@ export default {
         return
       }
       //#endif
-     this.$router.go(-1)
+    this.$router.goBack()
     }
   },
   computed: mapState(['commonstock']),

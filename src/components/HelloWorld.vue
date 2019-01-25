@@ -27,7 +27,7 @@ export default {
         // 请求成功的回调
         // res为服务端返回数据的根对象
         console.log('用户信息', res)
-      // this.$router.go(-1)
+      //this.$router.goBack()
       })
     }
   },

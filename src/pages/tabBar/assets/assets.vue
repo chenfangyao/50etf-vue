@@ -110,7 +110,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  height: calc(100vh -.70rem);
+  height: calc(100vh - .70rem);
 
   div.info {
     margin-bottom:.12rem;
