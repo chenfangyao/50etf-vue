@@ -15,7 +15,7 @@
         <router-view v-if="!$route.meta.isKeepAlive"></router-view>
       </transition>
     </template>
-    <etf-tabbar v-if="showTabbar"></etf-tabbar>
+    <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
   </div>
 </template>
 
@@ -26,7 +26,6 @@ export default {
   components: { etfTabbar },
   data() {
     return {
-      showTabbar: true,
       transitionName: ''
     }
   },

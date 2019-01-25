@@ -97,7 +97,7 @@ export default {
                     // 获取用户信息
                     this.getuserinfo()
                     // uni.switchTab({ url: '/pages/tabBar/index/index'})
-                  this.$router.replace('/index')
+                  this.$router.replace('/')
                 }else{
                     this.showErr=true
                     if(res.info){
