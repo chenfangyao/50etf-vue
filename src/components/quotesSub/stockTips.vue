@@ -1,14 +1,7 @@
 <template>
   <div class="stock50 uni-flex" @click='go'>
       <span class="stockNmae">50ETF</span>
-      <!-- #ifndef H5 -->
-      <div class="df_wh">
-        <mpvue-echarts  :echarts="echarts" :onInit="onInit"  canvasId="mini-canvas2"/>
-      </div>
-      <!-- #endif -->
-       <!-- #ifdef H5 -->
       <div class="df_wh" id="mini-canvas">缩略图</div>
-      <!-- #endif -->
       <div class="txtContainer">
 				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
 				<span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
@@ -18,7 +11,6 @@
 </template>
 <script>
 import echarts from 'echarts'
-import mpvueEcharts from 'mpvue-echarts'
 let chart = null;
 
 var option = {
@@ -57,9 +49,6 @@ function initChart(canvas, width, height) {
   return chart; // 返回 chart 后可以自动绑定触摸操作
 }
 export default {
-  components: {
-    mpvueEcharts
-  },
   data() {
     return {
       echarts,
@@ -89,7 +78,7 @@ div.stock50 {
   height:.84rem;
   line-height:.84rem;
   justify-content: space-between;
-  padding: 0.27rem;
+  padding: 0 .27rem;
   border-top: 1px solid #ededed;
   border-bottom:.12rem solid #ededed;
   div.txtContainer {

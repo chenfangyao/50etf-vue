@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 div.list2Item {
   > div {
-    padding: 0.25rem;
+    padding: 0 .25rem;
   }
   div.line1 {
     border-bottom: 1px solid #f5f5f5;
@@ -82,7 +82,7 @@ div.list2Item {
   .line2 {
     justify-content: space-between;
     text-align: center;
-    padding:.20rem.48rem;
+    padding:.20rem .48rem;
     div.time {
       img {
         width:.24rem;
@@ -120,6 +120,6 @@ div.list2Item {
     }
   }
   background-color: #fff;
-  margin: 0.24rem.16rem;
+  margin: 0 .24rem .16rem;
 }
 </style>

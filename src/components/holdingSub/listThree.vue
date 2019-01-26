@@ -33,39 +33,6 @@
       <div class='countdownBtn' hover-class='hover1' @click='showPop(i)'>撤单</div>   <!-- （{{countdown}} S） -->
     </div>
   </div>
-  <!-- 以下是假数据 -->
-  <div v-for='(item,i) in listMock' class="list2Item "  :key="i">
-    <div class="line1 uni-flex">
-        <div >
-          <span class="nameTxt">购6月2450</span>
-          <span class="codeTxt">10001409</span>
-        </div>
-        <div class="badgeView">未成交</div>
-    </div>
-    <div class="line2 uni-flex ">
-      <div class='uni-flex leftPart'>
-        <div>
-          <div class="itemView">
-            <span>委托价</span>
-            <span>5543</span>
-          </div>
-          <div>
-            <span>委托数</span>
-            <span>33</span>
-          </div>
-        </div>
-      </div>
-      <div class="businessType" >
-        <span> 交易类型</span>
-        <span  :class="{yellow:i%2}">平仓</span>
-      </div>
-
-    </div>
-    <div class='line3 uni-flex'>
-      <span>委托时间：2018-10-02 10:09:10</span>
-      <div class='countdownBtn' hover-class='hover1' @click='showPop'>撤单（{{countdown}} S）</div>
-    </div>
-  </div>
   <cedan-pop v-if='showCedanPop' @close-me='closePop'></cedan-pop>
   <cedan-jieguo-pop v-if='showResultPop'></cedan-jieguo-pop>
 </div>
@@ -84,7 +51,6 @@ export default {
       showResultPop: false,
       moneyColor: [],
       createTime: [],//时间数组
-      listMock: [],//临时数组
       eid: ''
     }
   },
@@ -156,7 +122,7 @@ export default {
 <style lang="scss" scoped>
 div.list2Item {
   > div {
-    padding: 0.25rem;
+    padding: 0 .25rem;
   }
   div.line1 {
     border-bottom: 1px solid #f5f5f5;
@@ -211,7 +177,7 @@ div.list2Item {
       }
     }
     justify-content: space-between;
-    padding:.20rem.25rem;
+    padding:.20rem .25rem;
   }
   .line3 {
     font-size: 12px;

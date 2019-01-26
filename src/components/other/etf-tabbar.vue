@@ -1,16 +1,16 @@
 <template>
-  <div class>
+  <div >
     <div class="base-spase"></div>
     <van-tabbar v-model="active" :z-index="100">
       <van-tabbar-item to="/" replace>
         <span>首页</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img1s : icon.img1">
       </van-tabbar-item>
-      <van-tabbar-item to="/h" replace>
+      <van-tabbar-item to="/quotes" replace>
         <span>行情</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img2s : icon.img2">
       </van-tabbar-item>
-      <van-tabbar-item to="/" replace>
+      <van-tabbar-item to="/holding_warehouse" replace>
         <span>持仓</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img3s : icon.img3">
       </van-tabbar-item>
@@ -67,7 +67,7 @@ export default {
 
 <style  lang="scss">
 .base-spase {
-  margin-bottom: 50px;
+  height: 50px;
 }
 .van-tabbar-item__icon  {
   margin-bottom: 0;

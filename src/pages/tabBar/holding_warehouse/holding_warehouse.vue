@@ -5,18 +5,22 @@
       <div class="fix">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
         <hebin-total :total='titleList[tabI].total' v-if="tabI<2"></hebin-total>
-        <top-btn v-else-if="tabI==2"></top-btn>
+        <template v-else-if="tabI==2">
+          <div class="h8"></div>
+          <top-btn ></top-btn>
+        </template>
       </div>
       <div class="heightUp" v-show="tabI!=3"></div>
-      <div class="h60" v-show="tabI==2"></div>
+      <div class="h40" v-show="tabI==2"></div>
     </div>
-    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']" v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrolltolower="loadMore(objI)">
+    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']" v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrollToEnd="loadMore(objI)">
       <list-one :tab-i='objI' :list='obj.list' @gou-shi='openPop' v-if="objI<2"></list-one>
       <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2'></list-two>
       <list-three :tab-i='objI' :list='obj.list' v-else></list-three>
       <div v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</div>
       <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>
+    <div class="h5"></div>
     <fenbi-pop v-if="showFenbiPop" :hebin-hide='tabI==0' :res-obj='listItem' @close-me='closePop'></fenbi-pop>
     <hebing-pop v-if="showHebingPop"  :res-obj='listItem' @close-me='closePop'></hebing-pop>
 
@@ -32,6 +36,7 @@ import listThree from '@/components/holdingSub/listThree.vue';
 import hebinTotal from '@/components/holdingSub/hebinTotal.vue';
 import topBtn from '@/components/holdingSub/topBtn.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+import scrollView from '@/components/other/scroll-view'
 
 import hebingPop from '@/components/holdingSub/hebingPop.vue'
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
@@ -45,7 +50,6 @@ export default {
       showFenbiPop: false,
       showHebingPop: false,
       listItem: {},//给fenbiPop的数据
-      viewMask: null,
       revokeTimer: null,//撤单定时器
       titleList: [
         { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0, },
@@ -57,22 +61,14 @@ export default {
     };
   },
   computed: mapState(['weituoindex']),
-  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop },
+  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop ,scrollView},
   methods: {
     ...mapMutations(['setweituoindex']),
     openPop(i) {
-      //#ifdef APP-PLUS
-      this.viewMask === null && (this.viewMask = new plus.nativeObj.View('mask', { left: '0px', height: '56px', bottom: '0px', width: '100%', backgroundColor: "rgba(0,0,0,0.3)" }));
-      this.viewMask && this.viewMask.show()
-      //#endif
       this.tabI == 1 ? (this.showHebingPop = true) : (this.showFenbiPop = true)
       this.listItem = this.titleList[this.tabI].list[i]//分笔pop
     },
     closePop() {
-      //#ifdef APP-PLUS
-      this.viewMask && this.viewMask.close()
-      this.viewMask = null
-      //#endif
       this.tabI == 1 ? (this.showHebingPop = false) : (this.showFenbiPop = false)
     },
     tabTap(i) {
@@ -169,50 +165,48 @@ div.wrap {
   /* #endif */
   background-color: #f5f5f5;
   .list2 {
-    /* #ifdef H5 */
-    height: calc(100vh -.68rem - 94px);
-    /* #endif */
-    /* #ifndef H5 */
-    height: calc(100vh -.68rem - 44px - var(--status-bar-height));
-    /* #endif */
+    overflow: hidden;
+    height: calc(100vh - .68rem  -  86px);
+    // height: calc(100vh -.68rem - 44px - var(--status-bar-height));
   }
   .list3 {
-    /* #ifdef H5 */
-    height: calc(100vh -1.28rem - 94px);
-    /* #endif */
-    /* #ifndef H5 */
-    height: calc(100vh -1.28rem - 44px - var(--status-bar-height));
-    /* #endif */
+    overflow: hidden;
+    height: calc(100vh - 1.24rem - 94px);
+    // height: calc(100vh -1.28rem - 44px - var(--status-bar-height));
   }
   .list4 {
-    /* #ifdef H5 */
-    height: calc(100vh - 94px -.12rem);
-    /* #endif */
-    /* #ifndef H5 */
-    height: calc(100vh - 44px - var(--status-bar-height) -.12rem);
-    /* #endif */
+    overflow: hidden;
+    height: calc(100vh - 94px - .12rem);
+    // height: calc(100vh - 44px - var(--status-bar-height) -.12rem);
     margin-top:.12rem;
   }
   div.heightUp {
     height:.68rem;
+  }
+  div.h8{
+    height: 8px;
+    background-color: #f5f5f5;
+    position: relative;
+    z-index: 50
+  }
+  div.h5{
+    height: 5px;
   }
   div.fix {
     position: fixed;
     left: 0;
     right: 0;
     /* #ifdef H5 */
-    top: 45px;
+    top: 44px;
     /* #endif */
-    /* #ifndef H5 */
-    top: calc(44px + var(--status-bar-height));
-    /* #endif */
+    // top: calc(44px + var(--status-bar-height));
 
     z-index: 20;
     background-color: #f5f5f5;
     // padding-bottom:.16rem;
   }
-  div.h60 {
-    height:.60rem;
+  div.h40 {
+    height:.50rem;
   }
   div.nullTxt {
     text-align: center;

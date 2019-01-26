@@ -24,13 +24,17 @@ import etfTabbar from '@/components/other/etf-tabbar'
 export default {
   name: 'App',
   components: { etfTabbar },
+
   data() {
     return {
       transitionName: ''
     }
   },
   watch: {
-    $route() {
+    $route(to,from) {
+      if(to.meta.tabbar){
+          this.$store.commit('settabIndex', to.meta.index)
+      }
       if (this.$router.isBack) {
         this.transitionName = 'slide-right';
       } else {

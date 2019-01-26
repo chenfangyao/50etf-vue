@@ -21,11 +21,11 @@ export default {
 div.itemwrap {
   justify-content: space-between;
   height:.96rem;
-  margin:.16rem.22rem 0;
+  margin:0 .22rem 5px;
   padding:.10rem 0;
   background-color: #fff;
-  box-shadow:0px 0px.08rem 0px rgba(153,153,153,0.5);;
-  border-radius:8upx;
+  box-shadow:0px 0px .08rem 0px rgba(153,153,153,0.5);;
+  border-radius:.08rem;
   > div {
     width: 50%;
     text-align: center;

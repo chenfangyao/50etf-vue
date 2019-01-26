@@ -16,12 +16,30 @@ Toast.setDefaultOptions({
 })
 // import '@/common/color.scss'
 Vue.component('baseHeader', baseHeader)
-
+function add0(m) {
+  return m < 10 ? "0" + m : m;
+}
 Vue.config.productionTip = false
 Vue.prototype.$httpReq = request
 Vue.prototype.$navigateTo = opt => { router.push({ path: opt.url, query: opt.query}) }
 Vue.prototype.$redirectTo = opt => { router.replace({ path: opt.url, query: opt.query}) }
-
+Vue.prototype.$formatetimestr = function (str, onlyTime) {
+  // return new Date(parseInt(str) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+  if (str == 0) return 0;
+  let time = new Date(str * 1000);
+  let y = time.getFullYear();
+  let m = time.getMonth() + 1;
+  let d = time.getDate();
+  let h = time.getHours();
+  let mm = time.getMinutes();
+  let s = time.getSeconds();
+  if (onlyTime) {
+    return (add0(h) + ":" + add0(mm) + ":" + add0(s))
+  }
+  return (
+    y + "-" + add0(m) + "-" + add0(d) + " " + add0(h) + ":" + add0(mm) + ":" + add0(s)
+  );
+}
 // 输入验证
 Vue.prototype.$validata = function(str, mode) {
   if (str == '') {

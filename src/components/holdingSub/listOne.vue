@@ -77,7 +77,7 @@ export default {
 <style lang="scss" scoped>
 div.list1Item {
   > div {
-    padding: 0.25rem;
+    padding: 0 .25rem;
   }
   div.line1 {
     border-bottom: 1px solid #f5f5f5;

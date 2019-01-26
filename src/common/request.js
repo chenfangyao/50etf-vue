@@ -1,9 +1,16 @@
 import axios from 'axios'
 import store from '../vuex'
-
+import Qs from 'qs'
 axios.interceptors.response.use(function (response) {
   return response.data;
 }, function (error) {
+  return Promise.reject(error);
+});
+axios.interceptors.request.use(function (config) {
+  console.log(config);
+  return config;
+}, function (error) {
+  // 对请求错误做些什么
   return Promise.reject(error);
 });
 export default function (obj) {
@@ -38,22 +45,28 @@ export default function (obj) {
     baseURL = 'http://50etfvue.cardoctor.com.cn'
   }
 
- 
+
 
 
   var opt = {
     url: obj.url,
-    baseURL,
+    baseURL: process.env.NODE_ENV === 'production' ? baseURL : '',
     method: obj.method || 'get',
     headers: obj.header || {},
     timeout: 10000,
     responseType: obj.dataType || '',
   }
-  if (obj.method === 'GET') {
+  if (obj.method === 'GET') {//|| (obj.header['Content-Type'] == 'application/x-www-form-urlencoded')
+    console.log(opt.headers);
     opt.params = obj.data || {}
+  } else if (obj.header['Content-Type'] == 'application/x-www-form-urlencoded'){
+    // opt.transformRequest=function(data){
+    //   return Qs.stringify(obj.data)
+    // }
+    opt.data = Qs.stringify(obj.data) || {}
   } else {
     opt.data = obj.data || {}
   }
- 
+
   return axios(opt);
 }

@@ -4,58 +4,49 @@ Router.prototype.goBack = function () {
   this.isBack = true
   history.go(-1)
 }
-const HelloWorld = resolve => require([ '@/components/HelloWorld' ], resolve)
-const bv = resolve => require([ '@/components/bv' ], resolve)
-const index = resolve => require([ '@/pages/tabBar/index/index' ], resolve)
-const assets = resolve => require([ '@/pages/tabBar/assets/assets' ], resolve)
-const mine = resolve => require([ '@/pages/tabBar/mine/mine' ], resolve)
-const login = resolve => require([ '@/pages/login/login' ], resolve)
-const recharge = resolve => require([ '@/pages/assets_sub/recharge/recharge' ], resolve)
-const withdraw = resolve => require([ '@/pages/assets_sub/withdraw/withdraw' ], resolve)
-const setting = resolve => require([ '@/pages/mine_sub/setting/setting' ], resolve)
-const add_card = resolve => require([ '@/pages/mine_sub/bank_card/add_card/add_card' ], resolve)
+const HelloWorld = resolve => require(['@/components/HelloWorld'], resolve)
+const bv = resolve => require(['@/components/bv'], resolve)
+const index = resolve => require(['@/pages/tabBar/index/index'], resolve)
+const quotes = resolve => require(['@/pages/tabBar/quotes/quotes'], resolve)
+const holding_warehouse = resolve => require(['@/pages/tabBar/holding_warehouse/holding_warehouse'], resolve)
+const assets = resolve => require(['@/pages/tabBar/assets/assets'], resolve)
+const mine = resolve => require(['@/pages/tabBar/mine/mine'], resolve)
+const login = resolve => require(['@/pages/login/login'], resolve)
+const recharge = resolve => require(['@/pages/assets_sub/recharge/recharge'], resolve)
+const withdraw = resolve => require(['@/pages/assets_sub/withdraw/withdraw'], resolve)
+const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve)
+const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
 
 Vue.use(Router)
 
 export default new Router({
-  // base:'/abc/',
+  base: process.env.NODE_ENV === 'web' ? '/h5/' : '',
   routes: [
-    { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true, tabbar: true } },
-    { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true,index:1 } },
-    { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true,index:1 } },
-    { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true,index:1 } },
+    { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
+    //首页
+    { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0} },
+    //行情
+    { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1} },
+    //持仓
+    { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2} },
+
+    //资产
+    { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
     // 登录
-    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, index:1 } },
+    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, } },
     // 充值
-    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, index:1 } },
-    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, index:1 } },
+    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, } },
+    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, } },
     // 我的页面设置
-    { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, index:1 } },
+    { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true, index: 4 } },
+    { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },
     // 添加银行卡
-    { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card, meta: { isKeepAlive: true, index:1 } },
-    { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true ,index:2} },
+    { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card, meta: { isKeepAlive: true, } },
+    { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
     // { path: '*', redirect: '/' }
   ]
 })
-var pages= [
-  {
-    "path": "pages/tabBar/quotes/quotes",
-    "style": {
-      "app-plus": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    }
-  },
-  {
-    "path": "pages/tabBar/holding_warehouse/holding_warehouse",
-    "style": {
-      "app-plus": {
-        "titleNView": false,
-        "scrollIndicator": "none"
-      }
-    }
-  },
+var pages = [
   {
     "path": "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
     "style": {

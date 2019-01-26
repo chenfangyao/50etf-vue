@@ -1,19 +1,23 @@
 <template>
   <div>
     <base-header title="行情"></base-header>
-    <stock-tip-bar :commonstock='commonstock'></stock-tip-bar>
+    <stock-tip-bar :commonstock="commonstock"></stock-tip-bar>
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex">
-        <div v-for="(tab,index) in groupLabel" :key="tab.id" class='swiper-tab-list2' :id="tab.id">
-          <span :class="[tabIndex==index ? 'active' : '']" @click="tapTab" :data-current="index">{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
+        <div v-for="(tab,index) in groupLabel" :key="tab.id" class="swiper-tab-list2" :id="tab.id">
+          <span
+            :class="[tabIndex==index ? 'active' : '']"
+            @click="tapTab"
+            :data-current="index"
+          >{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
         </div>
       </div>
       <futures-title></futures-title>
-      <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore(1)">
-        <futures-datas :quote-list='quoteList' :code-list='codeList' :latest-price="commonstock"></futures-datas>
+      <scroll-view class="list2" lower-threshold="10" scroll-y @scrollToEnd="loadMore(1)">
+        <futures-datas :quote-list="quoteList" :code-list="codeList" :latest-price="commonstock"></futures-datas>
         <!-- <div class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
-        </div> -->
+        </div>-->
       </scroll-view>
     </div>
   </div>
@@ -64,13 +68,13 @@ export default {
     util.indextimmer.quotesQryQuotationList = null
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
-    
+
     this.quotationStr || this.getgroupLabel()//获取那一串股票码
     this.beginPolling()
-   this.getcommonselectstock([''])
+    this.getcommonselectstock([''])
     if (util.indextimmer.quotesCommonSelectStock === null) {
       util.indextimmer.quotesCommonSelectStock = setInterval(() => {
-       this.getcommonselectstock([this.commonstock[0].tradeMins])
+        this.getcommonselectstock([this.commonstock[0].tradeMins])
       }, 1500)
     }
   },
@@ -103,7 +107,7 @@ export default {
         this.quoteList = res.data.list
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     getgroupLabel() {
@@ -139,7 +143,7 @@ export default {
         this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     addData(e) {
@@ -186,7 +190,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
 
@@ -209,8 +213,8 @@ div.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
     justify-content: space-between;
-    padding:.10rem.25rem 0;
-    height:.84rem;
+    padding: 0.1rem.25rem 0;
+    height: 0.84rem;
 
     .swiper-tab-list2 span.active {
       border-bottom: 1px solid #409de5;

@@ -108,12 +108,12 @@ export default {
       // var timesformate=new Date().format("hh:mm:sss");
       var stockTradeMins = [{ "stockCodeInternal": "1000001", "tradeMins": timestrs[0] },
       { "stockCodeInternal": "399001", "tradeMins": timestrs[1] },
-      { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }],
+      { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }]
         stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
-        data: { stockTradeMins: stockTradeMins },
+        data: { stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
       this.$httpReq(options).then((res) => {
