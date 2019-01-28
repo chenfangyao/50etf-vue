@@ -24,7 +24,7 @@ export default {
 		 ...mapMutations(['setcommonstock']),
     go(i){
 			this.setcommonstock(this.commonstock)
-      this.$navigateTo({url:'/pages/stock_detail/stock_detail?index='+i+''})
+      this.$navigateTo({url:'/stock_detail',query:{index:i}})
     }
   },
 	created(){
@@ -66,7 +66,7 @@ section {
     font-size: 13px;
     font-weight: 400;
     color: #666;
-    margin-top: 0;
+    margin: 0;
   }
 	div.redclass{
 		color: rgba(240, 95, 92, 1);

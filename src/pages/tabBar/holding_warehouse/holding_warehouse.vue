@@ -1,29 +1,28 @@
 <template>
   <div class="wrap">
-    <header-tab @tab-tap='tabTap' :title-list='titleList' :tabI='tabI'></header-tab>
+    <header-tab @tab-tap="tabTap" :title-list="titleList" :tabI="tabI"></header-tab>
     <div>
       <div class="fix">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
-        <hebin-total :total='titleList[tabI].total' v-if="tabI<2"></hebin-total>
+        <hebin-total :total="titleList[tabI].total" v-if="tabI<2"></hebin-total>
         <template v-else-if="tabI==2">
           <div class="h8"></div>
-          <top-btn ></top-btn>
+          <top-btn></top-btn>
         </template>
       </div>
       <div class="heightUp" v-show="tabI!=3"></div>
       <div class="h40" v-show="tabI==2"></div>
     </div>
-    <scroll-view :class="[objI<2?'list2':objI==2?'list3':'list4']" v-for="(obj,objI) in titleList" :key="objI" v-show="tabI==objI" lower-threshold='20' scroll-y @scrollToEnd="loadMore(objI)">
-      <list-one :tab-i='objI' :list='obj.list' @gou-shi='openPop' v-if="objI<2"></list-one>
-      <list-two :tab-i='objI' :list='obj.list' v-else-if='objI==2'></list-two>
-      <list-three :tab-i='objI' :list='obj.list' v-else></list-three>
+    <scroll-view  :class="[objI<2?'list2':objI==2?'list3':'list4']"    v-for="(obj,objI) in titleList"  :key="objI"    v-show="tabI==objI"   ref='scroll2' @scrollToEnd="loadMore(objI)"  >
+      <list-one :tab-i="objI" :list="obj.list" @gou-shi="openPop" v-if="objI<2"></list-one>
+      <list-two :tab-i="objI" :list="obj.list" v-else-if="objI==2"></list-two>
+      <list-three :tab-i="objI" :list="obj.list" v-else></list-three>
       <div v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</div>
       <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>
     <div class="h5"></div>
-    <fenbi-pop v-if="showFenbiPop" :hebin-hide='tabI==0' :res-obj='listItem' @close-me='closePop'></fenbi-pop>
-    <hebing-pop v-if="showHebingPop"  :res-obj='listItem' @close-me='closePop'></hebing-pop>
-
+    <fenbi-pop v-if="showFenbiPop" :hebin-hide="tabI==0" :res-obj="listItem" @close-me="closePop"></fenbi-pop>
+    <hebing-pop v-if="showHebingPop" :res-obj="listItem" @close-me="closePop"></hebing-pop>
   </div>
 </template>
 
@@ -61,7 +60,7 @@ export default {
     };
   },
   computed: mapState(['weituoindex']),
-  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop ,scrollView},
+  components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop, scrollView },
   methods: {
     ...mapMutations(['setweituoindex']),
     openPop(i) {
@@ -73,8 +72,9 @@ export default {
     },
     tabTap(i) {
       this.tabI = i
+      this.setweituoindex(i)
       this.checkRevoke(i)
-      this.titleList[i].startI=0//重搜
+      this.titleList[i].startI = 0//重搜
       this.getFenbiList(i)
     },
     checkRevoke(i) {
@@ -120,16 +120,17 @@ export default {
         this.titleList[i].total = res.data.total
         if (add) {
           this.titleList[i].list = this.titleList[i].list.concat(res.data.list)
+          this.$refs.scroll2.refresh()
         } else {
           this.titleList[i].list = res.data.list
         }
         this.titleList[i].resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
-  created() {
+  beforeRouteEnter(to, from, next) {
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
     clearInterval(util.indextimmer.quotesCommonSelectStock)
@@ -138,19 +139,20 @@ export default {
     util.indextimmer.quotesQryQuotationList = null
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
-
-    if (this.weituoindex == 2) {
-      this.tabI = 2
-      this.titleList[2].startI = 0
-
-      this.getFenbiList(2)
-      return
-    }
-    this.titleList[this.tabI].list.length || this.getFenbiList(this.tabI)
+    next(vm => {
+      if (vm.weituoindex == 2) {
+        vm.tabI = 2
+        vm.titleList[2].startI = 0
+        vm.getFenbiList(2)
+        return
+      }
+      vm.titleList[vm.tabI].list.length || vm.getFenbiList(vm.tabI)
+    })
   },
-  onHide() {
-    this.setweituoindex(0)
+  beforeRouteLeave(to, from, next) {
+    // this.setweituoindex(0)
     this.checkRevoke()//清除撤单定时器
+    next()
   }
 }
 </script>
@@ -166,7 +168,7 @@ div.wrap {
   background-color: #f5f5f5;
   .list2 {
     overflow: hidden;
-    height: calc(100vh - .68rem  -  86px);
+    height: calc(100vh - 0.68rem - 86px);
     // height: calc(100vh -.68rem - 44px - var(--status-bar-height));
   }
   .list3 {
@@ -176,20 +178,20 @@ div.wrap {
   }
   .list4 {
     overflow: hidden;
-    height: calc(100vh - 94px - .12rem);
+    height: calc(100vh - 94px - 0.12rem);
     // height: calc(100vh - 44px - var(--status-bar-height) -.12rem);
-    margin-top:.12rem;
+    margin-top: 0.12rem;
   }
   div.heightUp {
-    height:.68rem;
+    height: 0.68rem;
   }
-  div.h8{
+  div.h8 {
     height: 8px;
     background-color: #f5f5f5;
     position: relative;
-    z-index: 50
+    z-index: 50;
   }
-  div.h5{
+  div.h5 {
     height: 5px;
   }
   div.fix {
@@ -206,7 +208,7 @@ div.wrap {
     // padding-bottom:.16rem;
   }
   div.h40 {
-    height:.50rem;
+    height: 0.5rem;
   }
   div.nullTxt {
     text-align: center;

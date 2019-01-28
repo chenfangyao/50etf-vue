@@ -66,7 +66,7 @@ export default {
 						return
 			}
       this.sethycode(this.resObj.stockCode)
-      this.$navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC='+val+'&code='+this.resObj.stockCode})
+      this.$navigateTo({ url: '/open_close',query:{pinkaiC:val,code:this.resObj.stockCode}})
 
     }
   }

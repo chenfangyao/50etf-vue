@@ -48,7 +48,7 @@ export default {
      */
     pullup: {
       type: Boolean,
-      default: false
+      default: true
     },
     /**
      * 是否派发顶部下拉的事件，用于下拉刷新
@@ -150,7 +150,7 @@ export default {
     data() {
       setTimeout(() => {
         this.refresh();
-      }, this.refreshDelay);
+      }, 20);
     },
   }
 };

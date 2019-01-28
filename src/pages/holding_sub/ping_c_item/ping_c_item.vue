@@ -115,6 +115,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   min-height: 100vh;
+  width: 100%;
   background-color: #f5f5f5;
   div.title {
     color: rgba(51, 51, 51, 1);

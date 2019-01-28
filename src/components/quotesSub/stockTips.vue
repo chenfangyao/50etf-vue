@@ -38,21 +38,10 @@ var option = {
     symbol: 'none'
   }]
 }
-function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-  chart.setOption(option);
-
-  return chart; // 返回 chart 后可以自动绑定触摸操作
-}
 export default {
   data() {
     return {
       echarts,
-      onInit: initChart, //异步获取数据后，不能在回调中传该函数
     }
   },
 	props:['commonstock'],
@@ -62,7 +51,7 @@ export default {
       myChart.setOption(option);
     },
     go() {
-      this.$navigateTo({ url: '/pages/stock_detail/stock_detail?index=0' })
+      this.$navigateTo({ url: '/stock_detail',query:{index:0} })
     }
   },
   mounted() {

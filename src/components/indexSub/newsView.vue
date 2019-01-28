@@ -30,7 +30,8 @@ export default {
     // 获取文章详情
     getartdetil(artid) {
       this.$navigateTo({
-        url: '/pages/index_sub/new_xiang_qing/new_xiang_qing?id=' + artid + ''
+        query:{id:artid},
+        url: '/pages/index_sub/new_xiang_qing/new_xiang_qing'
       });
     }
   },

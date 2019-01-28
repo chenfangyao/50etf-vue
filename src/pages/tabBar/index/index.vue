@@ -48,19 +48,15 @@ export default {
     // 获取配置信息
     getconfinfo() {
       var options = {
-        url: '/Sapi/Soft/conf', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        url: '/Sapi/Soft/conf', 
+        method: 'GET', 
         context: '',
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('用户信息', res)
         if (res.status) {
           this.setsoftconf(res.data)
         }
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err, '捕捉')
       })
     },
@@ -78,7 +74,6 @@ export default {
       this.$httpReq(options).then((res) => {
         this.newsItem = res.data.list
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err, '捕捉')
       })
     },
@@ -96,11 +91,8 @@ export default {
     // 获取更多文章
     getmoreart() {
       this.$navigateTo({
-        url: '/pages/index_sub/new_list/new_list?symbol=1',
-        // url: '/pages/checkbox-group/checkbox-group',
-        success: res => { },
-        fail: () => { },
-        complete: () => { }
+        url: '/pages/index_sub/new_list/new_list',
+        query:{symbol:1}
       });
     },
     // 获取50etf指数
@@ -143,7 +135,7 @@ export default {
       })
     }
   },
-  created() {
+  beforeRouteEnter(to, from, next) {
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
     clearInterval(util.indextimmer.quotesCommonSelectStock)
@@ -152,28 +144,31 @@ export default {
     util.indextimmer.quotesQryQuotationList = null
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
-    // 获取文章列表
-    this.getartlelist()
-    this.getconfinfo()
-    this.getImgList()
-    this.getcommonselectstock(['', '', ''])
-    if (util.indextimmer.indexCommonSelectStock === null) {
-      util.indextimmer.indexCommonSelectStock = setInterval(() => {
-        this.getcommonselectstock(this.timestr)
-      }, 3000)
-    }
+    next(vm=>{
+      // 获取文章列表
+      vm.getartlelist()
+      vm.getconfinfo()
+      vm.getImgList()
+      vm.getcommonselectstock(['', '', ''])
+      if (util.indextimmer.indexCommonSelectStock === null) {
+        util.indextimmer.indexCommonSelectStock = setInterval(() => {
+          vm.getcommonselectstock(vm.timestr)
+        }, 3000)
+      }
+    })
   },
-  onHide() {
+  beforeRouteLeave(to, from, next) {
     console.log('关闭了第一个页面的定时器')
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
+    next()
   },
 }
 </script>
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  padding: 0.2rem;
+  padding: 0 .2rem 1px;
 }
 
 div.newsViewTitle {
@@ -193,7 +188,6 @@ div.newsViewTitle {
 .banner {
   height: 2.6rem;
   border-radius: 0.2rem;
-  margin: 0.12rem 0;
   overflow: hidden;
   img {
     width: 100%;

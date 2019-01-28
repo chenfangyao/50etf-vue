@@ -202,11 +202,11 @@ export default {
     transition: transform 300ms;
     overflow: hidden;
     flex-grow: 1;
-    margin: 0.35rem;
+    margin: 0 .35rem;
     background: #fff;
     border-radius:.10rem;
     z-index: 310;
-    padding:.28rem.30rem.20rem;
+    padding:.28rem .30rem .20rem;
     .c_red {
       color: #f05f5c;
     }
@@ -219,7 +219,7 @@ export default {
       margin-bottom:.55rem;
       .flr {
         position: absolute;
-        left: -10upx;
+        left: -0.1rem;
         top: 4px;
       }
     }

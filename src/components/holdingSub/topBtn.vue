@@ -1,7 +1,7 @@
 <template>
   <div class="uni-flex itemwrap">
-    <div hover-class='self-hover' @click="go('/pages/holding_sub/clinch/clinch')">成交记录</div>
-    <div hover-class='self-hover' @click="go('/pages/holding_sub/ping_c_list/ping_c_list')">平仓结算</div>
+    <div hover-class='self-hover' @click="go('/clinch')">成交记录</div>
+    <div hover-class='self-hover' @click="go('/ping_c_list')">平仓结算</div>
   </div>
 </template>
 <script>

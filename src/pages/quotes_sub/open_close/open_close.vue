@@ -1,16 +1,26 @@
 <template>
   <div class="wrap_op">
     <header-title :tab-active="onClose" @change-close="reGetSth"></header-title>
-    <div class="h1 "></div>
-    <contain-chart :res-obj='QuotationMsg'></contain-chart>
-    <mini-table :hydetils='QuotationMsg'></mini-table>
-    <div class="h12 "></div>
-    <new-price :on-close="onClose" :maxprice="maxbuy" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @fb-num="fbNum" @hbfb-switch="hbfbSwitch" @plus-step="plusStepNum" @price-step="priceStep"></new-price>
-    <div class="h12 "></div>
+    <div class="h1"></div>
+    <contain-chart :res-obj="QuotationMsg"></contain-chart>
+    <mini-table :hydetils="QuotationMsg"></mini-table>
+    <div class="h12"></div>
+    <new-price
+      :on-close="onClose"
+      :maxprice="maxbuy"
+      :qrysingle="QuotationMsg"
+      :fbcclist="fbcclist"
+      :hbcclist="hbcclist"
+      @fb-num="fbNum"
+      @hbfb-switch="hbfbSwitch"
+      @plus-step="plusStepNum"
+      @price-step="priceStep"
+    ></new-price>
+    <div class="h12"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
-    <div class="h12 " v-if="!onClose"></div>
-    <bottom-btn :on-close="onClose" :totalmoney="totalmoney" :res-obj='QuotationMsg'></bottom-btn>
+    <div class="h12" v-if="!onClose"></div>
+    <bottom-btn :on-close="onClose" :totalmoney="totalmoney" :res-obj="QuotationMsg"></bottom-btn>
   </div>
 </template>
 
@@ -40,7 +50,7 @@ export default {
       fbnum: '',
       // cclist:{},
       symbol: '',
-		  bussinesdata:'',
+      bussinesdata: '',
     };
   },
   computed: mapState(['sid', 'hycode']),
@@ -53,7 +63,7 @@ export default {
     bottomBtn
   },
   methods: {
-	...mapMutations(['setmaxbuy','setstockamunt','setcctotalmoney']),
+    ...mapMutations(['setmaxbuy', 'setstockamunt', 'setcctotalmoney']),
     // 合并、分笔
     hbfbSwitch(val) {
       this.hbfbswitch = val.val
@@ -81,7 +91,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     plusStepNum(val) {
@@ -107,9 +117,9 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-					console.log(22,res)
+          console.log(22, res)
           this.maxbuy = res.data
-		      this.setmaxbuy(res.data)
+          this.setmaxbuy(res.data)
           // 开仓
           if (!this.onClose) {
             this.maxbuy.maxcounts = parseInt(this.maxbuy.maxcount)
@@ -125,7 +135,7 @@ export default {
               this.maxbuy.maxcounts = this.fbnum
             }
           }
-		  var hycsnum=res.data.volume_multiple
+          var hycsnum = res.data.volume_multiple
           var djmoney = parseFloat(parseInt(amounts) * parseFloat(prices) * hycsnum)
           this.feemoney = {
             feemoney: res.data.fee_money,
@@ -134,11 +144,11 @@ export default {
             enable_amount: res.data.enable_amount
           }
           this.totalmoney = (djmoney + parseFloat(res.data.fee_money)).toFixed(2)
-					this.setcctotalmoney(this.totalmoney)
+          this.setcctotalmoney(this.totalmoney)
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     // 分笔持仓
@@ -160,7 +170,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     // 合并持仓
@@ -183,7 +193,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     reGetSth() {
@@ -194,34 +204,38 @@ export default {
       this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
     }
   },
-  onUnload() {
+  beforeRouteLeave(to, from, next) {
     console.log('关闭开仓平仓定时器')
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
+    next()
   },
-  onLoad(option) {
-    this.setstockamunt(0)
-    this.symbol = option.code
-    this.getartlelist()
-		setTimeout(()=>{
-			this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
-		},1500)
-      if(util.indextimmer.quotesQrySingleQuotationMsg===null){
-          util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
-              this.getartlelist()
-          }, 2500)
-      }
+  beforeRouteEnter(to, from, next) {
+    next(vm=>{
 
-    // 合并持仓分笔持仓
-    this.getfbchic()
-    this.gethbchic()
-    if (option.pinkaiC == '1') {
-      this.onClose = true
-      return
-    } else {
-      this.onClose = false
-      return
-    }
+      vm.setstockamunt(0)
+      vm.symbol = to.query.code
+      vm.getartlelist()
+      setTimeout(() => {
+        vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
+      }, 1500)
+      if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
+        util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
+          vm.getartlelist()
+        }, 2500)
+      }
+  
+      // 合并持仓分笔持仓
+      vm.getfbchic()
+      vm.gethbchic()
+      if (to.query.pinkaiC == '1') {
+        vm.onClose = true
+        return
+      } else {
+        vm.onClose = false
+        return
+      }
+    })
   },
 
 }
@@ -237,6 +251,6 @@ div.h1 {
 }
 
 .h12 {
-  height:.24rem;
+  height: 0.24rem;
 }
 </style>

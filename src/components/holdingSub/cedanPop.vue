@@ -2,7 +2,7 @@
   <div class="maskWrap self-mask">
     <div class="container">
       <div class="txt">撤单确认</div>
-      <img src="/assets/holdingImg/cedan.png">
+      <img src="../../assets/holdingImg/cedan.png">
       <div class="txt">是否撤单？</div>
       <div class="btn2 uni-flex">
         <div @click='cancle'>取消</div>
@@ -43,11 +43,11 @@ div.maskWrap {
     img {
       width:1.50rem;
       height:1.50rem;
-      margin:.80rem 0.36rem;
+      margin:.80rem 0 .36rem;
     }
     div.btn2 {
       justify-content: space-between;
-      padding: 0.55rem;
+      padding: 0 .55rem;
       margin-top:.80rem;
       div {
         width:2.30rem;
