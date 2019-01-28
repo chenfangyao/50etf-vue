@@ -4,7 +4,7 @@
     <div class="uni-flex container">
       <div>总计：{{total}}笔</div>
       <div class="right" @click="showDatepick">
-        <img src="/assets/mineImg/datePicker.png" />
+        <img src="../../assets/mineImg/datePicker.png" />
       </div>
     </div>
     <date-pick v-if="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>

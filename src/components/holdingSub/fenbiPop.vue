@@ -122,7 +122,7 @@ export default {
           this.$navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1&code=' + code })
           break
         case 4:
-          uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
+          this.$redirectTo({ url: '/quotes' })
           break
 
       }

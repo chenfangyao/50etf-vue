@@ -2,14 +2,25 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Router.prototype.goBack = function () {
   this.isBack = true
-  history.go(-1)
+  history.back(-1)
 }
 const HelloWorld = resolve => require(['@/components/HelloWorld'], resolve)
 const bv = resolve => require(['@/components/bv'], resolve)
+//首页
 const index = resolve => require(['@/pages/tabBar/index/index'], resolve)
+const newsDetail = resolve => require(['@/pages/index_sub/new_xiang_qing/new_xiang_qing'], resolve)
+const newList = resolve => require(['@/pages/index_sub/new_list/new_list'], resolve)
+const stockDetail = resolve => require(['@/pages/stock_detail/stock_detail'], resolve)
+
 const quotes = resolve => require(['@/pages/tabBar/quotes/quotes'], resolve)
 const quotesDetail = resolve => require(['@/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing'], resolve)
+const openClose = resolve => require(['@/pages/quotes_sub/open_close/open_close'], resolve)
+//持仓
 const holding_warehouse = resolve => require(['@/pages/tabBar/holding_warehouse/holding_warehouse'], resolve)
+const clinch = resolve => require(['@/pages/holding_sub/clinch/clinch'], resolve)
+const ping_c_list = resolve => require(['@/pages/holding_sub/ping_c_list/ping_c_list'], resolve)
+const ping_c_item = resolve => require(['@/pages/holding_sub/ping_c_item/ping_c_item'], resolve)
+
 const assets = resolve => require(['@/pages/tabBar/assets/assets'], resolve)
 const mine = resolve => require(['@/pages/tabBar/mine/mine'], resolve)
 const login = resolve => require(['@/pages/login/login'], resolve)
@@ -38,16 +49,23 @@ export default new Router({
   routes: [
     //首页
     { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0 } },
+    { path: '/pages/index_sub/new_xiang_qing/new_xiang_qing', name: 'newsDetail', component: newsDetail,  },
+    { path: '/pages/index_sub/new_list/new_list', name: 'newList', component: newList,  },
+    { path: '/stock_detail', name: 'stockDetail', component: stockDetail,  },
     //行情
     { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1 } },
     { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail,  },
+    { path: '/open_close', name: 'openClose', component: openClose,  },
     //持仓
     { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2 } },
+    { path: '/clinch', name: 'clinch', component: clinch },
+    { path: '/ping_c_list', name: 'ping_c_list', component: ping_c_list,  },
+    { path: '/ping_c_item', name: 'ping_c_item', component: ping_c_item },
 
     //资产
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
     // 登录
-    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, } },
+    { path: '/pages/login/login', name: 'login', component: login},
     // 我的页面设置
     { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true, index: 4 } },
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },
@@ -92,27 +110,6 @@ export default new Router({
 })
 var pages = [
   {
-    "path": "pages/index_sub/new_xiang_qing/new_xiang_qing",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "platforms/app-plus/fullscreen/fullscreen",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/quotes_sub/open_close/open_close",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/mine_sub/about_us/about_us",
     "style": {
       "titleNView": false,
@@ -127,13 +124,6 @@ var pages = [
     }
   },
   // "enablePullDownRefresh" : true
-  {
-    "path": "pages/index_sub/new_list/new_list",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
   {
     "path": "pages/quotes_sub/entrust_succ/entrust_succ",
     "style": {
@@ -191,27 +181,6 @@ var pages = [
     }
   },
   {
-    "path": "pages/holding_sub/clinch/clinch",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/holding_sub/ping_c_list/ping_c_list",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/holding_sub/ping_c_item/ping_c_item",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/holding_sub/full_and_lose/full_and_lose",
     "style": {
       "titleNView": false,
@@ -248,13 +217,6 @@ var pages = [
   },
   {
     "path": "pages/msg_common/detail/detail",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/stock_detail/stock_detail",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"

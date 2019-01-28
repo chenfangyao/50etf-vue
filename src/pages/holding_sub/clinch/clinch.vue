@@ -1,56 +1,63 @@
 <template>
-	<div class="wrap">
-		<base-header title="成交结果" has-back='1' v-if='showHeader'></base-header>
+  <div class="wrap">
+    <base-header title="成交结果" has-back="1" v-if="showHeader"></base-header>
     <div class="heightUp">
       <div class="fix">
-        <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
+        <filter-list
+          :total="total"
+          @begin-choose="beginChoose"
+          @end-choose="endChoose"
+          @select-complete="getChooseTime"
+        ></filter-list>
       </div>
     </div>
-    <scroll-view class="list2" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
-      <div v-for="(item,i) in list"   :key="i" class='listItem uni-flex'>
-        <div class="leftPart">
-          <div class="title">
-            <span>{{item.stock_name}}</span>
-            <span>{{item.stock_code}}</span>
-          </div>
-          <div class="uni-flex tip4">
-            <div class="uni-flex ">
-              <div class="uni-flex uni-column">
-                <span>委托：</span>
-                <span>成交：</span>
+    <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
+      <div class='padding1'>
+        <div v-for="(item,i) in list" :key="i" class="listItem uni-flex">
+          <div class="leftPart">
+            <div class="title">
+              <span>{{item.stock_name}}</span>
+              <span>{{item.stock_code}}</span>
+            </div>
+            <div class="uni-flex tip4">
+              <div class="uni-flex">
+                <div class="uni-flex uni-column">
+                  <span>委托：</span>
+                  <span>成交：</span>
+                </div>
+                <div class="uni-flex uni-column">
+                  <span>{{item.entrust_amount}}张</span>
+                  <span>{{business_amount[i]}}张</span>
+                </div>
               </div>
-              <div class="uni-flex uni-column">
-                <span>{{item.entrust_amount}}张</span>
-                <span>{{business_amount[i]}}张</span>
+              <div class="uni-flex">
+                <div class="uni-flex uni-column">
+                  <span>方向：</span>
+                  <span>方式：</span>
+                </div>
+                <div class="uni-flex uni-column">
+                  <span>{{item.entrust_bs==2?'卖出':'买入'}}</span>
+                  <span>{{item.entrust_type==2?'市价':'现价'}}</span>
+                </div>
               </div>
             </div>
-            <div class="uni-flex ">
-              <div class="uni-flex uni-column">
-                <span>方向：</span>
-                <span>方式：</span>
-              </div>
-              <div class="uni-flex uni-column">
-                <span>{{item.entrust_bs==2?'卖出':'买入'}}</span>
-                <span>{{item.entrust_type==2?'市价':'现价'}}</span>
-              </div>
-            </div>
+          </div>
+          <div class="rightPart">
+            <div class="time">{{businessTime[i]}}</div>
+            <div class="price">{{item.business_price}}</div>
+            <div class="txt">均价</div>
           </div>
         </div>
-        <div class="rightPart">
-          <div class="time">{{businessTime[i]}}</div>
-          <div class="price">{{item.business_price}}</div>
-          <div class="txt">均价</div>
-        </div>
+        <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
-      <uni-load-more :loading-type="resquestState" ></uni-load-more>
-
     </scroll-view>
-	</div>
+  </div>
 </template>
 
 <script>
 import filterList from '@/components/holdingSub/filterList.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+import scrollView from '@/components/other/scroll-view'
 
 export default {
   data() {
@@ -67,7 +74,7 @@ export default {
 
     };
   },
-  components: { filterList, uniLoadMore },
+  components: { filterList, uniLoadMore, scrollView },
   methods: {
     loadMore() {
       if (this.resquestState < 2) {
@@ -113,13 +120,15 @@ export default {
         this.business_amount = []
         if (add) {
           this.list = this.list.concat(res.data.list)
+          this.$refs.scroll1.refresh()
+
         } else {
           this.list = res.data.list
         }
         this.filterVal(this.list)
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
@@ -130,17 +139,18 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   min-height: 100vh;
+  width: 100%;
   .list2 {
     /* #ifndef H5 */
-    height: calc(100vh -1.76rem - var(--status-bar-height));
+    // height: calc(100vh -1.76rem - var(--status-bar-height));
     /* #endif */
     /* #ifdef H5 */
-    height: calc(100vh -1.76rem);
-
+    height: calc(100vh - 1.76rem);
+    overflow: hidden;
     /* #endif */
   }
   div.heightUp {
-    height:.88rem;
+    height: 0.88rem;
     div.fix {
       background-color: #fff;
       position: fixed;
@@ -148,7 +158,7 @@ div.wrap {
       right: 0;
       top: 45px;
       /* #ifndef H5 */
-      top: calc(45px + var(--status-bar-height));
+      // top: calc(45px + var(--status-bar-height));
       /* #endif */
 
       z-index: 20;
@@ -157,15 +167,15 @@ div.wrap {
   background-color: #f5f5f5;
   div.listItem {
     background-color: #fff;
-    margin:.13rem 0;
+    margin: 0.13rem 0;
     justify-content: space-between;
-    padding:.25rem.26rem;
+    padding: 0.25rem 0.26rem;
     div.leftPart {
       flex-grow: 1;
       div.tip4 {
         > div {
           flex-grow: 1;
-          line-height:.58rem;
+          line-height: 0.58rem;
           font-size: 12px;
           view:first-child {
             color: rgba(153, 153, 153, 1);
@@ -180,12 +190,12 @@ div.wrap {
         }
       }
       div.title {
-        margin-bottom:.36rem;
+        margin-bottom: 0.36rem;
         span:first-child {
           font-size: 15px;
           color: rgba(51, 51, 51, 1);
           line-height: 15px;
-          margin-right:.11rem;
+          margin-right: 0.11rem;
         }
         line-height: 15px;
         font-size: 13px;
@@ -205,7 +215,7 @@ div.wrap {
         font-weight: bold;
         color: rgba(51, 51, 51, 1);
         line-height: 24px;
-        margin:.39rem 0.12rem;
+        margin: 0.39rem 0 0.12rem;
       }
       .txt {
         font-size: 12px;

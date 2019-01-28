@@ -6,33 +6,35 @@
         <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
-    <scroll-view class="list2" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
-      <div v-for="(item,i) in list" hover-class='self-hover' @click='go(item)' :key="i" class='listItem uni-flex'>
-        <div class="content">
-          <div class="line1 uni-flex">
-            <div>
-              <span class="nameTxt">{{item.stock_name}}</span>
-              <span class='codeTxt'>{{item.stock_code}}</span>
+    <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
+      <div class='padding1'>
+        <div v-for="(item,i) in list" hover-class='self-hover' @click='go(item)' :key="i" class='listItem uni-flex'>
+          <div class="content">
+            <div class="line1 uni-flex">
+              <div>
+                <span class="nameTxt">{{item.stock_name}}</span>
+                <span class='codeTxt'>{{item.stock_code}}</span>
+              </div>
+              <div class="price">{{item.all_income}}</div>
             </div>
-            <div class="price">{{item.all_income}}</div>
-          </div>
-          <div class="line2 uni-flex">
-            <div>
-              <span>
-                <span>持仓数：</span>
-                <span class="digital">{{item.sum_buy_amount}}</span>
-              </span>
-              <span>
-                <span>平仓数：</span>
-                <span class="digital">{{sell_amount[i]}}</span>
-              </span>
+            <div class="line2 uni-flex">
+              <div>
+                <span>
+                  <span>持仓数：</span>
+                  <span class="digital">{{item.sum_buy_amount}}</span>
+                </span>
+                <span>
+                  <span>平仓数：</span>
+                  <span class="digital">{{sell_amount[i]}}</span>
+                </span>
+              </div>
+              <div class="time">{{close_time[i]}}</div>
             </div>
-            <div class="time">{{close_time[i]}}</div>
           </div>
+          <div class="imgContainer"><img src="../../../assets/arrow/r.png"></div>
         </div>
-        <div class="imgContainer"><img src="/assets/arrow/r.png"></div>
+        <uni-load-more :loading-type="resquestState" ></uni-load-more>
       </div>
-      <uni-load-more :loading-type="resquestState" ></uni-load-more>
 
     </scroll-view>
 	</div>
@@ -41,6 +43,7 @@
 <script>
 import filterList from '@/components/holdingSub/filterList.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+import scrollView from '@/components/other/scroll-view'
 
 export default {
   data() {
@@ -56,7 +59,7 @@ export default {
       edate: 20300101,
     };
   },
-  components: { filterList, uniLoadMore },
+  components: { filterList, uniLoadMore ,scrollView},
   created() {
     this.getDatas()
   },
@@ -68,7 +71,6 @@ export default {
       this.getDatas()
     },
     loadMore() {
-      console.log('到底了');
       if (this.resquestState < 2) {
         this.startI++
         this.getDatas('add')
@@ -82,7 +84,7 @@ export default {
     },
     go(item) {
       this.$store.commit('setpingCItem', item)
-      this.$navigateTo({ url: '/pages/holding_sub/ping_c_item/ping_c_item' })
+      this.$navigateTo({ url: '/ping_c_item' })
     },
     getDatas(add) {
       this.resquestState = 1
@@ -102,6 +104,8 @@ export default {
         this.sell_amount = []
         if (add) {
           this.list = this.list.concat(res.data.list)
+          this.$refs.scroll1.refresh()
+
         } else {
           this.list = res.data.list
         }
@@ -126,12 +130,14 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   min-height: 100vh;
+  width: 100%;
   .list2 {
     /* #ifndef H5 */
-    height: calc(100vh -1.76rem - var(--status-bar-height));
+    // height: calc(100vh -1.76rem - var(--status-bar-height));
     /* #endif */
     /* #ifdef H5 */
-    height: calc(100vh -1.76rem);
+    overflow: hidden;
+    height: calc(100vh - 1.76rem);
     /* #endif */
   }
   div.heightUp {
@@ -143,7 +149,7 @@ div.wrap {
       right: 0;
       top: 45px;
       /* #ifndef H5 */
-      top: calc(45px + var(--status-bar-height));
+      // top: calc(45px + var(--status-bar-height));
       /* #endif */
       z-index: 20;
     }
@@ -152,7 +158,7 @@ div.wrap {
   div.listItem {
     background-color: #fff;
     margin:.13rem 0;
-    padding:.25rem.26rem;
+    padding:.25rem .26rem;
     justify-content: space-between;
     div.imgContainer {
       align-self: center;

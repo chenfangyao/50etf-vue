@@ -111,6 +111,7 @@ export default {
 .wrap2 {
   background-color: #f5f5f5;
   min-height: 100vh;
+  width: 100%;
 }
 .h12 {
   height:.12rem;

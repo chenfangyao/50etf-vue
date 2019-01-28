@@ -1,7 +1,8 @@
 'use strict'
 
 module.exports = {
-  NODE_ENV: '"development"',
+  // NODE_ENV: '"development"',
+  NODE_ENV: '"production"',
   API_HOST_Sapi: '"http://47.100.226.135:8040"',
   API_HOST_fiftyEtf: '"http://47.100.174.65:8011"',
   API_HOST_market: '"http://50etfvue.cardoctor.com.cn"',

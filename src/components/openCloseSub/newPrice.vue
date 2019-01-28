@@ -29,9 +29,9 @@
 		<div class="uni-flex line2">
 			<div>
 				<!-- <img v-if="btn3_i" @click="plusStep2(-1)" class='opacityclass' src="/assets/openCloseImg/minus.png"> -->
-				<img @click="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src="/assets/openCloseImg/minus.png">
+				<img @click="plusStep2(-1)" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/minus.png">
 				<span class=" newPrice" :class="{yellow1:onClose}">{{pricevalue}}</span>
-				<img @click="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src="/assets/openCloseImg/plus.png">
+				<img @click="plusStep2(1)" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/plus.png">
 			</div>
 
 			<div class="uni-flex btn3">
@@ -57,9 +57,9 @@
 		 :picker-value-array="items"></mpvue-checkbox>
 		<div v-if="tabActive || !onClose" class="sliderPart uni-flex">
 			<div>
-				<img @click='plusStep(-1)' src="/assets/openCloseImg/minus.png">
+				<img @click='plusStep(-1)' src="../../assets/openCloseImg/minus.png">
 				<span class="countxt">{{sliderVal}}</span>
-				<img @click='plusStep(1)' src="/assets/openCloseImg/plus.png">
+				<img @click='plusStep(1)' src="../../assets/openCloseImg/plus.png">
 			</div>
 			<div class="sliderItem">
 				<slider @change="slidering" :disabled="sliderdisable" @changing="sliders" :max='maxprice.maxcounts' min='0' :value='sliderVal'
@@ -422,7 +422,7 @@
 </script>
 <style lang="scss" scoped>
 	div.wrap {
-		padding:.30rem.32rem;
+		padding:.30rem .32rem;
 		background-color: #fff;
 
 		.commonStyle1 {
@@ -443,7 +443,7 @@
 		div.line2 {
 			align-items: center;
 			justify-content: space-between;
-			margin:.29rem 0.48rem;
+			margin:.29rem 0 .48rem;
 
 			.newPrice {
 				font-size: 24px;
@@ -484,7 +484,7 @@
 				}
 
 				>div:nth-child(2) {
-					margin: 0.26rem;
+					margin: 0 .26rem;
 				}
 			}
 		}
@@ -534,7 +534,7 @@
 			border-radius: 15px;
 			align-self: center;
 			background-color: #efefef;
-			margin:.30rem 0.30rem 1px;
+			margin:.30rem 0 .30rem 1px;
 			position: relative;
 
 			.slider {
@@ -580,7 +580,7 @@
 
 		div.sliderPart {
 			justify-content: space-between;
-			margin:.35rem 0.14rem;
+			margin:.35rem 0 .14rem;
 			align-items: center;
 
 			span.countxt {

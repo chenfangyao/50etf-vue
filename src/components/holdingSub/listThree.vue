@@ -90,11 +90,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) { this.showResult() } else {
-          uni.showToast({
-            title: res.info,
-            duration: 2000,
-            icon: 'none'
-          });
+          this.$toast(res.info)
         }
       })
     },

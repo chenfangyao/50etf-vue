@@ -5,14 +5,6 @@
         <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
       </div>
     </div>
-    <!-- #ifndef H5 -->
-    <div class="h358" v-show="tabIndex==0" @click='go'>
-      <mpvue-echarts :echarts="echarts" ref='fenshi' lazyLoad :onInit="onInit" canvasId="m-canvas" />
-    </div>
-    <div class="h358" v-show="tabIndex!=0">
-      <mpvue-echarts :echarts="echarts" ref='k_tu' lazyLoad :onInit="onInit2" canvasId="m-canvas2" />
-    </div>
-    <!-- #endif -->
     <!-- #ifdef H5 -->
     <div class="h358" id="canvas1" v-show="tabIndex==0">k线图1</div>
     <div class="h358" id="canvas2" v-show="tabIndex!=0">k线图2</div>
@@ -22,40 +14,15 @@
 </template>
 <script>
 import echarts from 'echarts'
-import mpvueEcharts from 'mpvue-echarts'
 import { option, optionK, option1k, option5k, optionRk } from './echartOption.js'
 import { fenshiT } from '@/components/qiQuanXiangQingSub/time.js'
 
 import { mapState } from 'vuex';
 
-let chart = null;//AppEcharts实例
-let chartK = null;//AppEcharts实例K线图
-
-
-function initChart(canvas, width, height) {
-
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-  chart.setOption(option);
-  return chart; // 返回 chart 后可以自动绑定触摸操作
-}
-function initChartK(canvas, width, height) {
-  chartK = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chartK);
-  chartK.setOption(optionK);
-  return chartK; // 返回 chartK 后可以自动绑定触摸操作
-}
 var h5Chart = null;//h5echarts实例
 var h5ChartK = null;//h5echarts实例K线图
 
 export default {
-  components: { mpvueEcharts },
   data() {
     return {
       tabIndex: 0,
@@ -64,8 +31,6 @@ export default {
       Ymax: '',
       Ymin: '',
       resquestState: 1,//为1时可发请求
-      onInit: initChart,
-      onInit2: initChartK,
       stockInfo: {},//分时信息对象，内含最高，最低，昨收
       checkTimmer: null,//监听mpvue-echart 加载完事件
       timmer1: null,//分时线定时器
@@ -90,15 +55,6 @@ export default {
      /*  plus.screen.lockOrientation("landscape-primary");
       this.$navigateTo({ url: '/pages/echarts/echarts?symbol=' + this.symbolStr }); */
       //#endif
-    },
-    checkOready(i, obj) {
-      this.checkTimmer = setInterval(() => {
-        var el = i == 1 ? chart : chartK
-        if (el !== null) {
-          el.setOption(obj)
-          clearInterval(this.checkTimmer)
-        }
-      }, 10)
     },
     tapTab(e) { //点击tab-bar
       if (this.tabIndex === e.target.dataset.current) return false;
@@ -236,14 +192,6 @@ export default {
       //#ifdef H5
       h5Chart.setOption(obj)
       //#endif
-      //#ifndef H5
-      if (chart) {
-        chart.setOption(obj)
-      } else {
-        this.$refs.fenshi.init()
-        this.checkOready(1, obj)
-      }
-      //#endif
     },
     dealKData(arr) {
       this.maxBar = 0
@@ -305,16 +253,6 @@ export default {
       //#ifdef H5
       h5ChartK && h5ChartK.setOption(obj, true)
       //#endif
-      //#ifndef H5
-      if (chartK) {
-        chartK.setOption(obj, true)
-      } else {
-        setTimeout(() => {
-          this.$refs.k_tu.init()
-          this.checkOready(2, obj)
-        }, 50)
-      }
-      //#endif
 
     },
     getDayK() {
@@ -330,6 +268,7 @@ export default {
       }
       var options = {
         url,
+        method:'GET',
         data: {
           period: 60,
           stockCodeInternal: this.commonstock[this.symbolStr].stockCodeInternal
@@ -375,10 +314,6 @@ export default {
     //#ifdef H5
     h5Chart = null
     h5ChartK = null
-    //#endif
-    //#ifndef H5
-    chart = null
-    chartK = null
     //#endif
   },
   created() {

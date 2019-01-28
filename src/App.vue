@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <template v-if="$route.meta.tabbar">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <transition :name="transitionName">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
     </template>
     <template v-else>
+      <transition :name="transitionName">
+        <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+      </transition>
       <transition :name="transitionName">
         <keep-alive>
           <router-view v-if="$route.meta.isKeepAlive"></router-view>
         </keep-alive>
-      </transition>
-      <transition :name="transitionName">
-        <router-view v-if="!$route.meta.isKeepAlive"></router-view>
       </transition>
     </template>
     <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
@@ -31,7 +33,7 @@ export default {
     }
   },
   created() {
-    document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton",  ()=> {
+    document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton", () => {
         if (this.$route.meta.tabbar) {
           this.$router.goBack()
           return
@@ -50,6 +52,9 @@ export default {
     $route(to, from) {
       if (to.meta.tabbar) {
         this.$store.commit('settabIndex', to.meta.index)
+        this.transitionName = ''
+        this.$router.isBack = false
+        return
       }
       if (this.$router.isBack) {
         this.transitionName = 'slide-right';

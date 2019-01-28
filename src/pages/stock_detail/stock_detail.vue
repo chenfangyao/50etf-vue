@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="wrap3">
     <!-- <base-header title='50ETF' has-back='1'></base-header>		 -->
     <stock-title :index='index'></stock-title>
     <many-info  :index='index'></many-info>
@@ -18,11 +18,15 @@ export default {
     };
   },
   components: { stockTitle, manyInfo, kChart },
-	onLoad(opt){
-    this.index=opt.index
+	created(){
+    this.index=this.$route.query.index
+    console.log(this.index);
 	}
 }
 </script>
 
 <style>
+.wrap3{
+  width: 100%;
+}
 </style>

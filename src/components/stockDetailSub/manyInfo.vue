@@ -75,12 +75,12 @@ export default {
  <style lang="scss" scoped>
 div.infoWrap {
   border-bottom:.12rem solid #f5f5f5;
-  padding:.35rem.28rem 0;
+  padding:.35rem .28rem 0;
   justify-content: space-between;
   position: relative;
   div.abs {
     position: absolute;
-    bottom:22upx;
+    bottom:.22rem;
     left:.30rem;
     font-size: 11px;
     color: rgba(153, 153, 153, 1);

@@ -54,7 +54,7 @@ export default {
 div.tipItems {
   background-color: #fff;
   padding:.24rem 0;
-  margin-top:.08rem;
+  margin-top:0.1rem;
   border-radius: 5px;
   > div {
     text-align: center;

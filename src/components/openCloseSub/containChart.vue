@@ -15,19 +15,11 @@
       </div>
 
     </div>
-    <!-- #ifndef H5 -->
-    <div class="df_wh">
-      <mpvue-echarts :echarts="echarts" :onInit="onInit" canvasId="canvas2" />
-    </div>
-    <!-- #endif -->
-    <!-- #ifdef H5 -->
     <div class="df_wh" id="canvas2">缩略图</div>
-    <!-- #endif -->
   </div>
 </template>
 <script>
 import echarts from 'echarts'
-import mpvueEcharts from 'mpvue-echarts'
 let chart = null;
 
 var option = {
@@ -56,25 +48,11 @@ var option = {
     symbol: 'none'
   }]
 }
-function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-  chart.setOption(option);
-
-  return chart; // 返回 chart 后可以自动绑定触摸操作
-}
 export default {
-  components: {
-    mpvueEcharts
-  },
   data() {
     return {
       echarts,
       subCodeName: '',//处理子字符串
-      onInit: initChart, //异步获取数据后，不能在回调中传该函数
       newprices: '0.2527'
     }
   },
@@ -103,7 +81,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 div.wrap {
-  padding:.26rem.26rem 0;
+  padding:.26rem .26rem 0;
   background-color: #fff;
   div.info {
     div.line1 {
@@ -125,7 +103,7 @@ div.wrap {
     }
     h6 {
       font-size: 12px;
-      margin: 0 0.10rem 0;
+      margin: 0 0 .10rem 0;
       line-height: 12px;
       font-weight: 400;
       color: rgba(240, 95, 92, 1);

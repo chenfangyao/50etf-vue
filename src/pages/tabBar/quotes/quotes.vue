@@ -13,7 +13,7 @@
         </div>
       </div>
       <futures-title></futures-title>
-      <scroll-view class="list2" lower-threshold="10" scroll-y @scrollToEnd="loadMore(1)">
+      <scroll-view class="list2"   @scrollToEnd="loadMore(1)">
         <futures-datas :quote-list="quoteList" :code-list="codeList" :latest-price="commonstock"></futures-datas>
         <!-- <div class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
@@ -35,7 +35,7 @@ import scrollView from '@/components/other/scroll-view'
 
 export default {
   components: {
-    uniLoadMore, stockTipBar, futuresTitle, futuresDatas,scrollView
+    uniLoadMore, stockTipBar, futuresTitle, futuresDatas, scrollView
   },
   data() {
     return {
@@ -53,31 +53,31 @@ export default {
     }
   },
   computed: mapState(['taglist']),
-  onHide() {
+  beforeRouteLeave(to, from, next) {
     console.log('关闭了第二个页面的定时器')
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
     util.indextimmer.quotesQryQuotationList = null
     util.indextimmer.quotesCommonSelectStock = null
+    next()
   },
-  created() {
+  beforeRouteEnter(to, from, next) {
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesCommonSelectStock)
-    util.indextimmer.quotesCommonSelectStock = null
     clearInterval(util.indextimmer.quotesQryQuotationList)
     util.indextimmer.quotesQryQuotationList = null
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
-
-    this.quotationStr || this.getgroupLabel()//获取那一串股票码
-    this.beginPolling()
-    this.getcommonselectstock([''])
-    if (util.indextimmer.quotesCommonSelectStock === null) {
-      util.indextimmer.quotesCommonSelectStock = setInterval(() => {
-        this.getcommonselectstock([this.commonstock[0].tradeMins])
-      }, 1500)
-    }
+    next(vm => {
+      vm.quotationStr || vm.getgroupLabel()//获取那一串股票码
+      vm.beginPolling()
+      vm.getcommonselectstock([''])
+      if (util.indextimmer.quotesCommonSelectStock === null) {
+        util.indextimmer.quotesCommonSelectStock = setInterval(() => {
+          vm.getcommonselectstock([vm.commonstock[0].tradeMins])
+        }, 1500)
+      }
+    })
   },
   methods: {
     ...mapMutations(['setcommonstock', 'settaglist']),
@@ -90,7 +90,7 @@ export default {
     },
     beginPolling() {
       if (util.indextimmer.quotesQryQuotationList === null) {
-        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 30000)
       }
     },
     getquoteList() {
@@ -211,7 +211,7 @@ div.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
     justify-content: space-between;
-    padding: 0.1rem.25rem 0;
+    padding: 0.1rem 0.25rem 0;
     height: 0.84rem;
 
     .swiper-tab-list2 span.active {

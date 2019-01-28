@@ -4,7 +4,7 @@
       <div class="occupy"></div>
       <div class="wrap uni-flex">
         <div class="leftPart"  @click="back" >
-          <img src="/assets/arrow/l.png"/>
+          <img src="../../assets/arrow/l.png"/>
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
           <div @click='tapChange'>开仓</div>
@@ -33,12 +33,6 @@ export default {
   methods: {
     ...mapMutations(['setstockamunt']),
     back() {
-      //#ifdef H5
-      if (getCurrentPages().length == 1) {
-        history.back()
-        return
-      }
-      //#endif
     this.$router.goBack()
     },
     tapChange() {
@@ -62,7 +56,7 @@ div.h44 {
   background-color: #fff;
   div.wrap {
     div.leftPart {
-      padding: 13px.20rem 0.30rem;
+      padding: 13px .20rem 0 .30rem;
       height: 44px;
       position: absolute;
       left: 0;

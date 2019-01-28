@@ -7,10 +7,11 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 axios.interceptors.request.use(function (config) {
-  console.log(config);
+  if (config.method == 'get') {
+       config.data = true
+  }
   return config;
 }, function (error) {
-  // 对请求错误做些什么
   return Promise.reject(error);
 });
 export default function (obj) {
@@ -50,14 +51,13 @@ export default function (obj) {
 
   var opt = {
     url: obj.url,
-    baseURL,//: process.env.NODE_ENV === 'production' ? baseURL : '',
+    baseURL: process.env.NODE_ENV === 'production' ? baseURL : '',
     method: obj.method || 'get',
     headers: obj.header || {},
     timeout: 10000,
     responseType: obj.dataType || '',
   }
   if (obj.method === 'GET') {//|| (obj.header['Content-Type'] == 'application/x-www-form-urlencoded')
-    console.log(opt.headers);
     opt.params = obj.data || {}
   } else if (obj.header['Content-Type'] == 'application/x-www-form-urlencoded'){
     // opt.transformRequest=function(data){
