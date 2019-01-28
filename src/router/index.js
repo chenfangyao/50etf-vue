@@ -16,13 +16,14 @@ const recharge = resolve => require(['@/pages/assets_sub/recharge/recharge'], re
 const withdraw = resolve => require(['@/pages/assets_sub/withdraw/withdraw'], resolve)
 const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve)
 const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
+const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'], resolve)
+const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
 
 Vue.use(Router)
 
 export default new Router({
   base: process.env.NODE_ENV === 'web' ? '/h5/' : '',
   routes: [
-    { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     //首页
     { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0} },
     //行情
@@ -34,15 +35,20 @@ export default new Router({
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
     // 登录
     { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true, } },
-    // 充值
-    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, } },
-    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, } },
     // 我的页面设置
     { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true, index: 4 } },
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },
     // 添加银行卡
     { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card, meta: { isKeepAlive: true, } },
+    // 充值
+    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, } },
+    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, } },
+    // 账户充值第二步
+    { path: '/pages/assets_sub/bank_card/bank_card', name: 'bank_card', component: bank_card,  },
+    // 账户充值第三步
+    { path: '/pages/assets_sub/gatherinfo/gatherinfo', name: 'gatherinfo', component: gatherinfo,  },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
+    { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     // { path: '*', redirect: '/' }
   ]
 })
@@ -161,20 +167,6 @@ var pages = [
     }
   },
   {
-    "path": "pages/mine_sub/bank_card/card_list/card_list",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/bank_card/add_card/add_card",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/holding_sub/clinch/clinch",
     "style": {
       "titleNView": false,
@@ -245,13 +237,6 @@ var pages = [
     }
   },
   {
-    "path": "pages/assets_sub/bank_card/bank_card",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/assets_sub/help/help",
     "style": {
       "titleNView": false,
@@ -260,13 +245,6 @@ var pages = [
   },
   {
     "path": "pages/assets_sub/receipt_bank/receipt_bank",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/assets_sub/gatherinfo/gatherinfo",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"

@@ -50,7 +50,7 @@ export default function (obj) {
 
   var opt = {
     url: obj.url,
-    baseURL: process.env.NODE_ENV === 'production' ? baseURL : '',
+    baseURL,//: process.env.NODE_ENV === 'production' ? baseURL : '',
     method: obj.method || 'get',
     headers: obj.header || {},
     timeout: 10000,

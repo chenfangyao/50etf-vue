@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap"> 
+	<div class="wrap">
 		<base-header title="支付银行" has-back='1' right-txt='帮助' @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap">
@@ -40,14 +40,23 @@ export default {
     };
   },
   components: { submitBtn, inputItem, errTip },
-	onLoad(opt){
-		this.paymoney=opt.pay_money
-		this.paytype=opt.paytype
-		this.cardname=opt.cardname
-		this.cardno=opt.cardno
-		this.pw_id=opt.pw_id
-		this.bank_name=opt.bank_name
-	},
+	// onLoad(opt){
+	// 	this.paymoney=opt.pay_money
+	// 	this.paytype=opt.paytype
+	// 	this.cardname=opt.cardname
+	// 	this.cardno=opt.cardno
+	// 	this.pw_id=opt.pw_id
+	// 	this.bank_name=opt.bank_name
+	// },
+  created(){
+    let opt=this.$route.query
+    this.paymoney=opt.pay_money
+    this.paytype=opt.paytype
+    this.cardname=opt.cardname
+    this.cardno=opt.cardno
+    this.pw_id=opt.pw_id
+    this.bank_name=opt.bank_name
+  },
   methods: {
 		...mapMutations(['setbankinfo']),
     go(i) {
@@ -62,21 +71,22 @@ export default {
 				bank_name:this.bank_name,
 			}
 			this.setbankinfo(bankInfo)
-      switch(this.paytype){
-				case 'remit_alipay':
-				this.$navigateTo({
-					url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
-					})
-				// this.remit_alipay()
-				break
-				case 'remit_icbc':
-				this.$navigateTo({
-					url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
-					})
-				// this.remit_bank()
-				break
-			}
-			
+      this.$navigateTo({
+        url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
+      })
+      // switch(this.paytype){
+		// 		case 'remit_alipay':
+		// 		this.$navigateTo({
+		// 			url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
+		// 			})
+		// 		break
+		// 		case 'remit_icbc':
+		// 		this.$navigateTo({
+		// 			url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
+		// 			})
+		// 		break
+		// 	}
+
     },
 
   },

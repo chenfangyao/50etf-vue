@@ -54,10 +54,31 @@ export default {
       //跳转银行卡页
       switch (this.paytype) {
         case 'remit_alipay':
-          this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '', })
+          // this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '', })
+          this.$router.push({
+            path:'/pages/assets_sub/bank_card/bank_card',
+            query:{
+              pay_money:this.money,
+              paytype:this.paytype,
+              cardname:this.payeeinfo.cardname,
+              cardno:this.payeeinfo.cardno,
+              pw_id:this.payeeinfo.pw_id
+            }
+          })
           break
         case 'remit_icbc':
-          this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '&bank_name=' + this.payeeinfo.bank_name + '' })
+          // this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '&bank_name=' + this.payeeinfo.bank_name + '' })
+          this.$router.push({
+            path:'/pages/assets_sub/bank_card/bank_card',
+            query:{
+              pay_money:this.money,
+              paytype:this.paytype,
+              cardname:this.payeeinfo.cardname,
+              cardno:this.payeeinfo.cardno,
+              pw_id:this.payeeinfo.pw_id,
+              bank_name:this.payeeinfo.bank_name,
+            }
+          })
           break
       }
     },
@@ -108,7 +129,7 @@ export default {
       this.money = item//支付宝状态下点击充值金额选项，改变input的值，当前写假的
     }
   },
-  onLoad() {
+  created() {
     this.getpayway()
   }
 }
@@ -138,7 +159,7 @@ div.wrap {
         padding: 0 0 .20rem 20px;
         background-color: #fff;
         width: 100%;
-        height: 32px !important;
+        height: 38px !important;
       }
       > span {
         font-size: 18px;

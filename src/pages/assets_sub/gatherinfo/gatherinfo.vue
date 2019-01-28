@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap"> 
+	<div class="wrap">
 		<base-header title="收款信息" has-back='1'  @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap">
@@ -8,13 +8,14 @@
 			<span>收款账号:</span>
 			<span v-show="showBank">{{cardno}}</span>
 			<div v-show="!showBank" class="chooseCount">
-					<div @click='showPicker'>
+					<!--<div @click='showPicker'>-->
+					<div >
 							{{pickerText}}
-							<span class="arrowDown"></span>
+							<!--<span class="arrowDown"></span>-->
 					</div>
 			</div>
 		</div>
-		
+
 		<div class='payMoney'>
 			<span>收款人:</span>
 			<span>{{cardname}}</span>
@@ -58,7 +59,7 @@ export default {
   },
   components: { submitBtn, inputItem, errTip,mpvuePicker },
 	computed: mapState(['mobile','userinfo','bankinfo']),
-	onLoad(opt){
+	created(){
 		this.paytype=this.bankinfo.paytype
 		this.cardname=this.bankinfo.cardname
 		this.cardno=this.bankinfo.cardno
@@ -66,7 +67,7 @@ export default {
 		this.paymoney=this.bankinfo.paymoney
 		this.bankCode=this.bankinfo.bankCode
 		if(this.paytype=='remit_alipay'){
-			this.showBank=true	
+			this.showBank=true
 			this.bankName=this.bankinfo.uName
 		}else if(this.paytype=='remit_icbc'){
 			this.showBank=false
@@ -87,7 +88,7 @@ export default {
 				case 'remit_icbc':
 				this.remit_bank()
 				break
-			}			
+			}
     },
 		// 支付宝支付
 		remit_alipay(){
@@ -106,19 +107,15 @@ export default {
 				// 请求成功的回调
 				// res为服务端返回数据的根对象
 				if(res.status){
-					uni.showToast({
-						title: res.info?res.info:'信息提交成功',
-						duration: 2000,
-						image:'/static/holdingImg/cedan-succ.png'
-					});
+					this.$toast.success({
+            message:res.info?res.info:'信息提交成功',
+					})
 				}else{
-					uni.showToast({
-						title: res.info?res.info:'信息提交失败',
-						duration: 2000,
-						image:'/static/holdingImg/cedan-succ.png'
-					});
+          this.$toast.fail({
+            message:res.info?res.info:'信息提交失败'
+          })
 				}
-				
+
 			}).catch((err) => {
 				// 请求失败的回调
 			})
@@ -140,17 +137,13 @@ export default {
 				// res为服务端返回数据的根对象
 				console.log('支付信息', res)
 					if(res.status){
-						uni.showToast({
-							title: res.info?res.info:'信息提交成功',
-							duration: 2000,
-							image:'/static/holdingImg/cedan-succ.png'
-						});
+            this.$toast.success({
+              message:res.info?res.info:'信息提交成功',
+            })
 					}else{
-					uni.showToast({
-						title: res.info?res.info:'信息提交失败',
-						duration: 2000,
-						image:'/static/holdingImg/cedan-succ.png'
-					});
+            this.$toast.fail({
+              message:res.info?res.info:'信息提交失败',
+            })
 				}
 			}).catch((err) => {
 				// 请求失败的回调
@@ -193,7 +186,7 @@ div.wrap {
 	div.subBtn{
 		margin-top:.70rem;
 	}
-    
+
 		div.payMoney{
 			height:.80rem;
 			line-height:.80rem;
@@ -213,13 +206,13 @@ div.chooseCount {
         width:4.50rem;
         height:.50rem;
         line-height:.50rem;
-        text-align: center;
+        /*text-align: center;*/
         font-size: 12px;
         font-family: Adobe Heiti Std R;
         font-weight: normal;
         color: rgba(102, 102, 102, 1);
         line-height: 43px;
-        background: rgba(239, 239, 239, 1);
+        /*background: rgba(239, 239, 239, 1);*/
         border-radius:.08rem;
 				margin-left:.50rem;
     span.arrowDown {
