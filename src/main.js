@@ -12,7 +12,7 @@ import { Toast,Dialog} from 'vant';
 Vue.use(Toast,Dialog,router )
 Toast.setDefaultOptions({
   duration: 2000,
-  position: 'bottom'
+  position: 'middle'
 })
 // import '@/common/color.scss'
 Vue.component('baseHeader', baseHeader)
