@@ -14,7 +14,7 @@
 <style lang="scss" scoped>
 div.wrap {
   justify-content: space-between;
-  padding:.18rem.25rem;
+  padding:.18rem .25rem;
   border-bottom: 1px solid #f5f5f5;
   span {
     font-size: 14px;
@@ -26,7 +26,7 @@ div.wrap {
     line-height: 9px;
   }
   span.mlr{
-    margin: 0.33rem;
+    margin: 0 .33rem;
   }
   .gou,
   .gu {

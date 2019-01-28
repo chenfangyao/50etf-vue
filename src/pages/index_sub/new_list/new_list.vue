@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<base-header title="资讯" :hasBack='true'></base-header>
-		<scroll-view class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
+		<scroll-view class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
 		<news-view :newlists="newsItem"></news-view>
 		<uni-load-more :loading-type="resquestState"></uni-load-more>
 		</scroll-view>

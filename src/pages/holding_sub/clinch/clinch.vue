@@ -6,7 +6,7 @@
         <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
-    <scroll-view class="list2" lower-threshold='10' scroll-y @scrolltolower="loadMore">
+    <scroll-view class="list2" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div v-for="(item,i) in list"   :key="i" class='listItem uni-flex'>
         <div class="leftPart">
           <div class="title">

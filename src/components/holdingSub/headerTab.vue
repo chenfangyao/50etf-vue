@@ -37,6 +37,7 @@ div.h44 {
   left: 0;
   right: 0;
   top: 0;
+  z-index: 50;
   background-color: #fff;
   div.wrap {
     text-align: center;
@@ -45,11 +46,11 @@ div.h44 {
     line-height: 44px;
     position: relative;
     span {
-      margin: 0.25rem;
+      margin: 0 .25rem;
       font-size: 15px;
       color: rgba(153, 153, 153, 1);
       line-height: 44px;
-      padding-bottom:.24rem;
+      padding-bottom:.19rem;
     }
     span.now {
       border-bottom:.04rem solid #409DE5;

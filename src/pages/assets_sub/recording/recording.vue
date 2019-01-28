@@ -5,7 +5,7 @@
         <span>总计：{{total}}笔</span>
         <img class="right" @click="switchDatepick" src="/assets/mineImg/datePicker.png">
     </div>
-    <scroll-view v-if='type==1' class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
+    <scroll-view v-if='type==1' class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
         <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
           <div class="middle">
@@ -17,7 +17,7 @@
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
     </scroll-view>
-    <scroll-view v-else class='listscrow' lower-threshold='10' scroll-y @scrolltolower="loadMore">
+    <scroll-view v-else class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
         <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.status}}</div>
           <div class="middle">

@@ -3,10 +3,10 @@
     <div class="subWrap">
       <div class="topTip uni-flex">
         <div>自动延期</div>
-        <div @click='openPop2' class="iconWrap">
+        <div @click="openPop2" class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
-          <img src="/assets/holdingImg/dagou.png" v-if="showDagou == 1">
-          <img src="/assets/holdingImg/meigou.png" v-else>
+          <img src="../../assets/holdingImg/dagou.png" v-if="showDagou == 1">
+          <img src="../../assets/holdingImg/meigou.png" v-else>
         </div>
       </div>
       <div class="container">
@@ -45,43 +45,43 @@
             <!-- <div>
               <span>延期：</span>
               <span>{{resObj.add_fee_money}}元</span>
-            </div> -->
+            </div>-->
           </div>
         </div>
-        <div class="btn2 uni-flex" >
-          <div class="uni-flex full " hover-class='self-hover'>
+        <div class="btn2 uni-flex">
+          <div class="uni-flex full" hover-class="self-hover">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span>未接</span>
             </div>
             <div>
-              <img src="/assets/holdingImg/setIcon.png">
+              <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" hover-class='self-hover'>
+          <div class="uni-flex lose" hover-class="self-hover">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>未接</span>
             </div>
             <div>
-              <img src="/assets/holdingImg/setIcon.png">
+              <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
         </div>
         <div class="btn3 uni-flex">
-          <div @click='go(2)'>开仓</div>
-          <div class="pingC" @click='go(3)'>平仓</div>
-          <div @click='go(4)'>行情</div>
+          <div @click="go(2)">开仓</div>
+          <div class="pingC" @click="go(3)">平仓</div>
+          <div @click="go(4)">行情</div>
         </div>
-        <btn-block txt='一键平仓' @v-tap='openPop'></btn-block>
+        <btn-block txt="一键平仓" @v-tap="openPop"></btn-block>
       </div>
       <div class="closeIcom">
-        <img src="/assets/holdingImg/popClose.png" @click='closeMe">
+        <img src="../../assets/holdingImg/popClose.png" @click="closeMe">
       </div>
     </div>
-    
-    <one-key v-if="showPop"   @close-pop='oneKeyHandle'  :res-obj='resObj'> </one-key>
-    <extension-pop v-if="showPop2" @yes-tap='yesHandle(1)' @cancle-tap='yesHandle(0)'></extension-pop>
+
+    <one-key v-if="showPop" @close-pop="oneKeyHandle" :res-obj="resObj"></one-key>
+    <extension-pop v-if="showPop2" @yes-tap="yesHandle(1)" @cancle-tap="yesHandle(0)"></extension-pop>
   </div>
 </template>
 <script>
@@ -132,7 +132,7 @@ export default {
       str == 'deep' && this.closeMe()
     },
     openPop() {
-			
+
       this.showPop = true
     },
     openPop2() {
@@ -144,8 +144,8 @@ export default {
     },
     sendAutodelay(i) {
       var options = {
-        url: '/Sapi/Stock/autodelay', 
-        method: 'POST', 
+        url: '/Sapi/Stock/autodelay',
+        method: 'POST',
         data: {
           ischecked: i,
           hid: this.resObj.id
@@ -176,34 +176,34 @@ export default {
 div.fixWrap {
   div.container {
     background-color: #fff;
-    padding: 0.35rem.50rem;
+    padding: 0 0.35rem 0.5rem;
     div.title {
-      height:.80rem;
+      height: 0.8rem;
       font-size: 13px;
       color: rgba(102, 102, 102, 1);
       justify-content: space-between;
       border-bottom: solid 1px #f2f2f2;
       > div {
-        line-height:.80rem;
+        line-height: 0.8rem;
       }
       span.nameTxt {
         font-size: 15px;
         color: rgba(51, 51, 51, 1);
-        line-height:.80rem;
-        margin-right:.16rem;
+        line-height: 0.8rem;
+        margin-right: 0.16rem;
       }
     }
     div.infoView {
       font-size: 12px;
       color: rgba(136, 136, 136, 1);
       line-height: 12px;
-      margin:.35rem 0.50rem;
+      margin: 0.35rem 0 0.5rem;
       justify-content: space-between;
       div.leftPart {
         flex-grow: 1;
         justify-content: space-between;
         div.left1 {
-          margin-right:.40rem;
+          margin-right: 0.4rem;
         }
         div.uni-column {
           justify-content: space-between;
@@ -215,8 +215,8 @@ div.fixWrap {
       div.rightPart {
         flex-grow: 1;
         > div:first-child {
-          font-size:.42rem;
-          line-height:.44rem;
+          font-size: 0.42rem;
+          line-height: 0.44rem;
           font-weight: bold;
           color: rgba(240, 95, 92, 1);
         }
@@ -234,45 +234,45 @@ div.fixWrap {
     div.btn2 {
       justify-content: space-between;
       > div {
-        width:3.20rem;
-        height:1.50rem;
+        width: 3.2rem;
+        height: 1.5rem;
         background: rgba(236, 96, 94, 1);
-        border-radius:.10rem;
+        border-radius: 0.1rem;
         justify-content: space-between;
-        padding:.30rem;
+        padding: 0.3rem;
         div.uni-column {
           justify-content: space-between;
         }
         span:first-child {
-          font-size:.40rem;
+          font-size: 0.4rem;
           font-weight: bold;
-          line-height:.40rem;
+          line-height: 0.4rem;
         }
         span {
           color: rgba(255, 255, 255, 1);
-          font-size:.30rem;
-          line-height:.30rem;
+          font-size: 0.3rem;
+          line-height: 0.3rem;
         }
       }
       div.lose {
         background-color: #3aba8f;
       }
       img {
-        width:.30rem;
-        height:.30rem;
+        width: 0.3rem;
+        height: 0.3rem;
       }
     }
     div.btn3 {
       justify-content: space-between;
-      margin:.50rem 0.20rem;
+      margin: 0.5rem 0 0.2rem;
       > div {
-        height:.72rem;
-        width:2.00rem;
+        height: 0.72rem;
+        width: 2rem;
         border: 1px solid rgba(64, 157, 229, 1);
-        border-radius:.04rem;
+        border-radius: 0.04rem;
         font-size: 13px;
         color: rgba(64, 157, 229, 1);
-        line-height:.68rem;
+        line-height: 0.68rem;
         text-align: center;
       }
       div.pingC {
@@ -286,28 +286,28 @@ div.fixWrap {
   }
   div.closeIcom {
     text-align: center;
-    margin:.26rem auto 0;
+    margin: 0.26rem auto 0;
     img {
-      width:.72rem;
-      height:.72rem;
+      width: 0.72rem;
+      height: 0.72rem;
     }
   }
   div.topTip {
     background-color: #000;
-    height:.80rem;
-    padding: 0.35rem;
+    height: 0.8rem;
+    padding: 0 0.35rem;
     margin-top: 33%;
 
     justify-content: space-between;
     align-items: center;
     > div {
       font-size: 11px;
-      line-height:.80rem;
+      line-height: 0.8rem;
       color: rgba(255, 255, 255, 1);
     }
     div.iconWrap {
-      height:.40rem;
-      width:.40rem;
+      height: 0.4rem;
+      width: 0.4rem;
       line-height: 0;
       img {
         width: 100%;
