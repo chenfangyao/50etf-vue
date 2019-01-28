@@ -4,7 +4,7 @@
     <div class="border1">
 		<div class='textview'><span>{{text1}}</span></div>
 		<div class='textview'><span>{{text2}}</span></div>
-		<div class='textview'><span>{{text3}}</span></div>	
+		<div class='textview'><span>{{text3}}</span></div>
 	</div>
     <div class="title">
 		 <div class="fixView">
@@ -29,32 +29,33 @@ export default {
   components: { btnBlock },
   methods: {
     doWhat() {
-      let url
+      var url=''
       switch (this.type) {
-        case '1':
-          url = '/pages/tabBar/mine/mine'
+        case 1:
+          url = '/mine'
           break
-        case '2':
-          url = '/pages/tabBar/mine/mine'
+        case 2:
+          url = '/mine'
           break
-        case '3':
+        case 3:
           url = '/pages/mine_sub/credentials_upload/tep1/tep1'
           break
       }
-      if (this.type == 3) { this.$navigateTo({ url }) } else { uni.switchTab({ url }) }
+      this.$navigateTo({ url:url })
+      // if (this.type == 3) { this.$navigateTo({ url }) } else { uni.switchTab({ url }) }
     },
   },
-  onLoad(opt) {
-    this.type = opt.type
-    if (opt.type == 1) {
+  created() {
+    this.type = this.$route.query.type
+    if (this.type == 1) {
       this.text1 = '您的实名认证申请已通过审核'
       this.text2 = '无需重复提交，如有疑问请联系客服热线：'
     }
-    else if (opt.type == 2) {
+    else if (this.type == 2) {
       this.text1 = '您的实名认证申请已提交请耐心等待'
       this.text2 = '无需重复提交，如有疑问请联系客服热线：'
     }
-    else if (opt.type == 3) {
+    else if (this.type == 3) {
       this.text1 = '您的实名认证申请审核失败'
       this.text2 = '申请失败，如有疑问请联系客服热线：'
       this.btntext = '重新申请'
@@ -73,7 +74,7 @@ div.border1 {
     text-align: center;
     margin-top:.30rem;
   }
-  view:nth-child(1) {
+  div:nth-child(1) {
     color: red;
     font-size: 18px;
   }

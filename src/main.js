@@ -9,7 +9,7 @@ import baseHeader from '@/components/base_header.vue'
 
 import '@/common/uni.css'
 import { Toast,Dialog} from 'vant';
-Vue.use(Toast,Dialog,router )
+Vue.use(Toast,Dialog,router  )
 Toast.setDefaultOptions({
   duration: 2000,
   position: 'middle'

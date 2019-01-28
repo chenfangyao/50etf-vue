@@ -1,9 +1,9 @@
 <template>
 	<div class="wrap">
 		<base-header title="我的红包" has-back='1'></base-header>
-    <img class="bg" src="/assets/mineImg/hong_bao_bg.jpg">
+    <img class="bg" src="../../../assets/mineImg/hong_bao_bg.jpg">
     <div class='logo'>
-      <img  src="/assets/mineImg/logo.png">
+      <img  src="../../../assets/mineImg/logo.png">
     </div>
     <div class="txt">你投资，我出钱</div>
     <div class="txt">注册就送200红包</div>
@@ -13,7 +13,7 @@
       <span> 人选择50ETF期权</span>
     </div>
     <div class="redBadge">
-      <img src="/assets/mineImg/hong_bao.png">
+      <img src="../../../assets/mineImg/hong_bao.png">
       <div class="price">
         <span>200</span>
         <span>元</span>

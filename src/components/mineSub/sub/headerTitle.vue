@@ -34,27 +34,17 @@ export default {
   methods: {
     go(i) {
 				if(!this.sid){
-				 // uni.showModal({
-				 //        title:'您还未登录',
-				 //        content:'现在去登录',
-				 //        success:(res)=>{
-				 //            if (res.confirm) {
-				 //                this.$navigateTo({
-				 //                	url: '/pages/login/login',
-				 //                	success: res => {},
-				 //                	fail: () => {},
-				 //                	complete: () => {}
-				 //                });
-				 //            } else if (res.cancel) {
-				 //                console.log('用户点击取消');
-				 //            }
-				 //        }
-				 //    })
           this.$tipLogin()
 						return
 			}
       if (i == 3) {
-        this.$navigateTo({ url: '/pages/msg_common/list/list?type=' + i })
+        // this.$navigateTo({ url: '/pages/msg_common/list/list?type=' + i })
+        this.$router.push({
+          path:'/pages/msg_common/list/list',
+          query:{
+            type:i
+          }
+        })
       } else {
         this.$navigateTo({ url: '/pages/mine_sub/setting/setting' })
       }

@@ -20,29 +20,32 @@ export default {
       lists: []
     };
   },
-  onLoad(options) {
-    let type = Number(options.type)
-		let id
+  created() {
+    let type = Number(this.$route.query.type)
     switch (type) {
       case 1:
         this.title = '公告'
-				this.getartlelist(28)
+        this.getartlelist(28)
         break
       case 2:
         this.title = '新手引导'
-				this.getartlelist(2)
+        this.getartlelist(2)
         break
       case 3:
         this.title = '消息'
-				this.getmymessage()
+        this.getmymessage()
         break
     }
-    
-
   },
   methods: {
     go(ids){
-      this.$navigateTo({url:'../detail/detail?id='+ids+'&title='+this.title+''})
+       this.$router.push({
+         path:'/pages/msg_common/detail/detail',
+         query:{
+           id:ids,
+           title:this.title
+         }
+       })
     },
       getartlelist(id) {
           var options = {

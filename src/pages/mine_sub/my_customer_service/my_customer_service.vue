@@ -4,7 +4,7 @@
     <div class="h50"></div>
     <btn-block txt='电话客服' @v-tap='showPop'></btn-block>
     <!--<div class="h577"></div>-->
-	<div class="telPop" v-show="telShow">
+	  <div class="telPop" v-show="telShow">
       <div class="fixed"  @click="showPop"></div>
       <div class="container">
         <div class="txt">是否拨打电话</div>
@@ -30,9 +30,12 @@ export default {
     },
     call() {
       uni.makePhoneCall({
-        phoneNumber: '9-559-555' 
+        phoneNumber: '9-559-555'
       });
     }
+  },
+  created(){
+    console.log(88888)
   }
 }
 </script>

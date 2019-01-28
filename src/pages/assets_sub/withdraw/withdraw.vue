@@ -100,18 +100,14 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          uni.showToast({
-            title: res.info ? res.info : '提现申请已提交',
-            duration: 2000,
-            image: '/static/holdingImg/cedan-succ.png'
-          });
-          this.$redirectTo({url:'/pages/assets_sub/recording/recording?type=2'})
+          this.$router.push({
+            path:'/pages/assets_sub/recording/recording',
+            query:{
+              type:2,
+            }
+          })
         } else {
-          uni.showToast({
-            title: res.info ? res.info : '提现申请失败',
-            duration: 2000,
-            image: '/static/holdingImg/cedan-succ.png'
-          });
+          this.$toast.fail(res.info ? res.info : '提现申请失败')
         }
       }).catch((err) => {
         console.error(err,'捕捉')
@@ -140,8 +136,8 @@ div.wrap {
         font-size: 32px;
         color: rgba(24, 28, 40, 1);
         border-bottom: 1px solid #ccc;
-        padding: 0 0.20rem 20px;
-        height: 32px !important;
+        padding: 0 0 .20rem 20px;
+        /*height: 32px !important;*/
       }
       > span {
         font-size: 18px;

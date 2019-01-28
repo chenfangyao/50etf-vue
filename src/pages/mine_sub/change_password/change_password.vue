@@ -49,7 +49,7 @@ export default {
 			this.resetPwd()
     },
     handleBlur() {
-      
+
     },
 		resetPwd(){
 			var options = {
@@ -66,15 +66,16 @@ export default {
 					console.log(res)
 					if (res.status == 1) {
 						this.showErr=false
-						uni.showToast({
-							title: '修改成功',
-							mask: false,
-							duration: 2000
-						});
+						// uni.showToast({
+						// 	title: '修改成功',
+						// 	mask: false,
+						// 	duration: 2000
+						// });
+						this.$toast.success(res.info?res.info: '修改成功')
 						setTimeout(()=>{
 							this.$navigateTo({ url:'/pages/login/login' })
 						},1500)
-						
+
 					}else{
 						this.showErr=true
 							if(res.info){

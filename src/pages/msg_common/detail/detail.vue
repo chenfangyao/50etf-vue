@@ -61,15 +61,23 @@ export default {
 			})
 		}
 	},
-	onLoad(opt){
-		this.artid=opt.id
-		if(opt.title=='消息'){
-			this.getmymessage(this.artid)
-		}else{
-			this.getartcont(this.artid)
-		}
-		
-	}
+	// onLoad(opt){
+	// 	this.artid=opt.id
+	// 	if(opt.title=='消息'){
+	// 		this.getmymessage(this.artid)
+	// 	}else{
+	// 		this.getartcont(this.artid)
+	// 	}
+	//
+	// }
+	created(){
+    this.artid=this.$route.query.id
+    if(this.$route.query.title=='消息'){
+      this.getmymessage(this.artid)
+    }else{
+      this.getartcont(this.artid)
+    }
+  }
 }
 </script>
 

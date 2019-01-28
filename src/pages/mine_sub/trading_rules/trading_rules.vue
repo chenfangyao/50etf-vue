@@ -5,7 +5,6 @@
     <div class="title">{{rules.title}}</div>
     <!-- <div class="content">{{rules.content}}</div> -->
 		<div class="content"><rich-text :nodes="rules.content"></rich-text></div>
-		
   </div>
 </template>
 
@@ -38,7 +37,7 @@ rules:''
 				})
 		},
 	},
-	onLoad(){
+	created(){
 		this.tradrule()
 	}
 }
@@ -61,7 +60,7 @@ div.content {
   color: rgba(112, 118, 128, 1);
   line-height:.58rem;
   padding: 0.43rem;
-  
+
 }
 </style>
 

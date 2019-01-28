@@ -84,11 +84,7 @@ export default {
 						console.log('我的银行', res)
 						if(res.status){
 							if(res.data.sub_id!=undefined){
-								// this.$navigateTo({ url:'/pages/mine_sub/'+href })
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card/add_card' })
-                // this.$router.push({
-                //   path: '/pages/mine_sub/'+href,
-                // })
 							}else{
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card_btn/add_card_btn'})
 							}
