@@ -31,10 +31,11 @@ import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
 import uniLoadMore from '@/components/uni-load-more.vue';
 import { mapState, mapMutations } from 'vuex';
 import util from '@/common/util.js'
+import scrollView from '@/components/other/scroll-view'
 
 export default {
   components: {
-    uniLoadMore, stockTipBar, futuresTitle, futuresDatas
+    uniLoadMore, stockTipBar, futuresTitle, futuresDatas,scrollView
   },
   data() {
     return {
@@ -202,12 +203,9 @@ export default {
 <style lang="scss" scoped>
 div.uni-tab-bar {
   .list2 {
-    /* #ifdef H5 */
-    height: calc(100vh -2.48rem - 94px);
-    /* #endif */
-    /* #ifndef H5 */
-    height: calc(100vh -2.48rem - 44px - var(--status-bar-height));
-    /* #endif */
+    height: calc(100vh - 2.48rem - 94px);
+    overflow: hidden;
+    // height: calc(100vh -2.48rem - 44px - var(--status-bar-height));
   }
 
   .swiper-tab {

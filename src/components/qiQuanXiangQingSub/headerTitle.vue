@@ -4,7 +4,7 @@
       <div class="occupy"></div>
       <div class="wrap2">
         <div class="left" @click="back">
-          <img src="/assets/arrow/l.png" />
+          <img src="../../assets/arrow/l.png" />
         </div>
         <div>
           <h4>{{resObj.stockName}}</h4>
@@ -22,7 +22,7 @@ export default {
   
   methods: {
     back() {
-      uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
+      this.$redirectTo({ url: '/quotes' })
     }
   }
 }

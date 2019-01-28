@@ -1,19 +1,19 @@
 <template>
-	<div :class="isWhite?'white':'black'" class="wrap">
-		<base-header title="首页"></base-header>
-    <!-- <swiper class="banner" autoplay circular >
-      <swiper-item v-for="(item,i) in imgList" :key="i">
+  <div :class="isWhite?'white':'black'" class="wrap">
+    <base-header title="首页"></base-header>
+    <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
+      <van-swipe-item v-for="(item,i) in imgList" :key="i">
 		  	<img :src="item.img" >
-      </swiper-item>
-    </swiper> -->
-		<four-tips></four-tips>
-		<three-securities :commonstock='commonstock'></three-securities>
-		<div class="uni-flex newsViewTitle">
-			<span>资讯</span>
-			<span @click="getmoreart()">更多></span>
-		</div>
-		<news-view :newlists="newsItem"></news-view>
-	</div>
+      </van-swipe-item>
+    </van-swipe>
+    <four-tips></four-tips>
+    <three-securities :commonstock="commonstock"></three-securities>
+    <div class="uni-flex newsViewTitle">
+      <span>资讯</span>
+      <span @click="getmoreart()">更多></span>
+    </div>
+    <news-view :newlists="newsItem"></news-view>
+  </div>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ import newsView from '@/components/indexSub/newsView.vue'
 import threeSecurities from '@/components/indexSub/securities3.vue'
 import fourTips from '@/components/indexSub/tips4.vue'
 import util from '@/common/util.js'
-
+import { Swipe, SwipeItem } from 'vant';
 export default {
   data() {
     return {
@@ -37,9 +37,9 @@ export default {
     }
   },
   components: {
-    newsView,
-    threeSecurities,
-    fourTips
+    newsView, threeSecurities, fourTips,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem
   },
   computed: mapState(['isWhite', 'sid', 'username', 'mobile', 'indextimmer']),
   methods: {
@@ -61,7 +61,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     // 获取文章信息
@@ -79,7 +79,7 @@ export default {
         this.newsItem = res.data.list
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     getImgList() {
@@ -90,7 +90,7 @@ export default {
       this.$httpReq(options).then((res) => {
         this.imgList = res.data.top.white
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     // 获取更多文章
@@ -109,7 +109,7 @@ export default {
       var stockTradeMins = [{ "stockCodeInternal": "1000001", "tradeMins": timestrs[0] },
       { "stockCodeInternal": "399001", "tradeMins": timestrs[1] },
       { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }]
-        stockTradeMins = JSON.stringify(stockTradeMins)
+      stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
@@ -139,7 +139,7 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
@@ -155,10 +155,11 @@ export default {
     // 获取文章列表
     this.getartlelist()
     this.getconfinfo()
-   this.getcommonselectstock(['', '', ''])
+    this.getImgList()
+    this.getcommonselectstock(['', '', ''])
     if (util.indextimmer.indexCommonSelectStock === null) {
       util.indextimmer.indexCommonSelectStock = setInterval(() => {
-       this.getcommonselectstock(this.timestr)
+        this.getcommonselectstock(this.timestr)
       }, 3000)
     }
   },
@@ -167,15 +168,12 @@ export default {
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
   },
-  onLoad() {
-    this.getImgList()
-  }
 }
 </script>
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  padding: 0.20rem;
+  padding: 0.2rem;
 }
 
 div.newsViewTitle {
@@ -183,7 +181,7 @@ div.newsViewTitle {
   font-size: 16px;
   line-height: 16px;
   color: #333;
-  margin:.32rem .10rem .24rem;
+  margin: 0.32rem 0.1rem 0.24rem;
   font-weight: bold;
   span:last-child {
     color: #a8a8a8;
@@ -193,9 +191,9 @@ div.newsViewTitle {
 }
 
 .banner {
-  height:2.60rem;
-  border-radius:.20rem;
-  margin:.12rem 0;
+  height: 2.6rem;
+  border-radius: 0.2rem;
+  margin: 0.12rem 0;
   overflow: hidden;
   img {
     width: 100%;

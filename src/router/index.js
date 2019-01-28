@@ -8,6 +8,7 @@ const HelloWorld = resolve => require(['@/components/HelloWorld'], resolve)
 const bv = resolve => require(['@/components/bv'], resolve)
 const index = resolve => require(['@/pages/tabBar/index/index'], resolve)
 const quotes = resolve => require(['@/pages/tabBar/quotes/quotes'], resolve)
+const quotesDetail = resolve => require(['@/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing'], resolve)
 const holding_warehouse = resolve => require(['@/pages/tabBar/holding_warehouse/holding_warehouse'], resolve)
 const assets = resolve => require(['@/pages/tabBar/assets/assets'], resolve)
 const mine = resolve => require(['@/pages/tabBar/mine/mine'], resolve)
@@ -26,11 +27,12 @@ export default new Router({
   base: process.env.NODE_ENV === 'web' ? '/h5/' : '',
   routes: [
     //首页
-    { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0} },
+    { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0 } },
     //行情
-    { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1} },
+    { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1 } },
+    { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail,  },
     //持仓
-    { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2} },
+    { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2 } },
 
     //资产
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
@@ -56,13 +58,6 @@ export default new Router({
   ]
 })
 var pages = [
-  {
-    "path": "pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
   {
     "path": "pages/index_sub/new_xiang_qing/new_xiang_qing",
     "style": {

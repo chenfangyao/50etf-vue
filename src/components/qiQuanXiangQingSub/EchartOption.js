@@ -14,7 +14,7 @@ export const commonOption = {
       return obj;
     },
   },
-  animation: false,
+  // animation: false,
   itemStyle: { color: '#7fbe9e' },
 
 }
@@ -224,7 +224,7 @@ export const option1k = {
   dataZoom: [{
     type: 'inside',
     start: 0,
-    end: 30,
+    end: 10,
     xAxisIndex: [0, 1],
     zoomLock: true,
     throttle: 0
