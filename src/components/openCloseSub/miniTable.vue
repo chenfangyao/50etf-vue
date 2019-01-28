@@ -121,7 +121,7 @@ div.wrap {
     div.datas {
       display: flex;
       justify-content: space-between;
-      padding: 0.22rem;
+      padding: 0 .22rem;
       border-bottom: 0.5px solid rgba(153, 153, 153, 0.5);
       font-size: 12px;
     }

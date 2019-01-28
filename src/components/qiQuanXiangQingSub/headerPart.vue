@@ -43,8 +43,8 @@
     </div>
     <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part-detail>
     <div class="arrowImg" @click="showPartDetail">
-      <img v-show="isshowDetail" src="/assets/arrow/t.png">
-      <img v-show="!isshowDetail" src="/assets/arrow/b.png">
+      <img v-show="isshowDetail" src="../../assets/arrow/t.png">
+      <img v-show="!isshowDetail" src="../../assets/arrow/b.png">
       <!-- <img v-show="!isshowDetail" src="/assets/arrow/t.png"> -->
     </div>
 
@@ -80,7 +80,7 @@ export default {
 <style lang="scss" scoped>
 .bgfff{background: #fff;}
 div.leftPart {
-  margin:.30rem 0 0.26rem;
+  margin:.30rem  0  0 .26rem;
   div.leftTop {
     color: rgba(240, 95, 92, 1);
     font-family: MicrosoftYaHei;
@@ -116,7 +116,7 @@ div.leftPart {
 }
 div.rightPart {
   flex-grow: 1;
-  margin:.30rem.85rem 0.80rem;
+  margin:.30rem .85rem  0 .80rem;
   div.uni-flex {
 		view:nth-child(1){
 			margin-left: 10px;

@@ -1,18 +1,29 @@
 <template>
   <div>
     <div class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
-      <div @click="go(item.gou)" class="wrap1 " :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
-        <span :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}" >{{item.gou.incr_percent}}</span>
-        <span :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}">{{item.gou.last_price}}</span>
+      <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
+        <span
+          :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"
+        >{{item.gou.incr_percent}}</span>
+        <span
+          :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"
+        >{{item.gou.last_price}}</span>
       </div>
       <div class="uni-flex">
         <!-- <span class="gou">{{item.buy_amount1}}</span> -->
-        <span class="midTxt" :class="{bg1:item.gou.exercise_price==gtPrice,bg2:item.gou.exercise_price==ltPrice}">{{item.gou.exercise_price}}</span>
+        <span
+          class="midTxt"
+          :class="{bg1:item.gou.exercise_price==gtPrice,bg2:item.gou.exercise_price==ltPrice}"
+        >{{item.gou.exercise_price}}</span>
         <!-- <span class="gou">{{item.sale_amount1}}</span> -->
       </div>
-      <div @click="go(item.gu)" class="wrap1 "  :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
-        <span :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}" >{{item.gu.last_price}}</span>
-        <span :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}">{{item.gu.incr_percent}}</span>
+      <div @click="go(item.gu)" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
+        <span
+          :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}"
+        >{{item.gu.last_price}}</span>
+        <span
+          :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}"
+        >{{item.gu.incr_percent}}</span>
       </div>
     </div>
   </div>
@@ -33,7 +44,9 @@ export default {
   methods: {
     go(obj) {
       this.$navigateTo({
-        url: '/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing?code=' + obj.stock_code
+        url: '/qi_quan_xiang_qing',
+        query: { code: obj.stock_code }
+
       });
     },
     calcBg(val, old) {
@@ -151,7 +164,7 @@ export default {
   },
   watch: {
     quoteList(newval, oldval) {
-      this.calcBg(this.latestPrice, this.calcOnce)
+      //  this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length != oldval.length) {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
@@ -169,8 +182,8 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   justify-content: space-between;
-  height:.70rem;
-  line-height:.70rem;
+  height: 0.7rem;
+  line-height: 0.7rem;
   border-bottom: 1px solid #f5f5f5;
   span {
     font-size: 14px;
@@ -188,11 +201,11 @@ div.wrap {
     background-color: #eaeeed;
     display: inline-block;
     height: 100%;
-    line-height:.70rem;
+    line-height: 0.7rem;
     font-weight: bold;
-    padding: 0.23rem;
+    padding: 0 0.23rem;
     font-size: 14px;
-    width:1.54rem;
+    width: 1.54rem;
     color: #333;
     text-align: center;
   }
@@ -208,28 +221,28 @@ div.wrap {
     display: flex;
     span {
       flex-grow: 1;
-      line-height:.70rem;
+      line-height: 0.7rem;
     }
   }
   div.wrap1:first-child {
-    padding-left:.25rem;
+    padding-left: 0.25rem;
   }
   div.wrap1:last-child {
-    padding-right:.25rem;
+    padding-right: 0.25rem;
     span {
       text-align: right;
     }
   }
   .gou {
-    width:.36rem;
+    width: 0.36rem;
     text-align: center;
     color: #999;
-    line-height:.18rem;
-    padding:.04rem.06rem;
+    line-height: 0.18rem;
+    padding: 0.04rem.06rem;
     // display: inline-block;
     align-self: center;
-    font-size:.28rem;
-    border-radius:.11rem;
+    font-size: 0.28rem;
+    border-radius: 0.11rem;
     text-align: center;
   }
   div.down_c {

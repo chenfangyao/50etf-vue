@@ -4,11 +4,11 @@
     <header-part :res-obj='detailObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part>
     <div class="h12"></div>
     <k-chart  @change-i='changeI' :symbol-str='symbol'></k-chart>
-    <block v-if="onDayKTab">
+    <template v-if="onDayKTab">
 
       <div class="h12"></div>
       <mini-table :hydetils='detailObj'></mini-table>
-    </block>
+    </template>
       <div class="h100"></div>
     
     <btn-bottom :res-obj='detailObj'></btn-bottom>
@@ -98,8 +98,8 @@ export default {
       })
     }
   },
-  onLoad(options) {
-    this.symbol = options.code
+  created() {
+    this.symbol = this.$route.query.code
     this.getItem()
     this.getmaxbuy()
     this.gethyinfoprice()

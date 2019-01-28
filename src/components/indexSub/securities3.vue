@@ -60,7 +60,7 @@ section {
     }
   }
   > div:nth-child(2) {
-    margin: 0.10rem;
+    margin: 0 .10rem;
   }
   h4 {
     font-size: 13px;

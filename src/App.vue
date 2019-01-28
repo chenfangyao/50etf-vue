@@ -30,10 +30,26 @@ export default {
       transitionName: ''
     }
   },
+  created() {
+    document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton",  ()=> {
+        if (this.$route.meta.tabbar) {
+          this.$router.goBack()
+          return
+        }
+        this.$dialog.confirm({
+          title: '提示',
+          message: '确定退出吗？'
+        }).then(() => {
+          plus.runtime.quit();
+        }).catch(() => {
+        });
+      });
+    }, false);
+  },
   watch: {
-    $route(to,from) {
-      if(to.meta.tabbar){
-          this.$store.commit('settabIndex', to.meta.index)
+    $route(to, from) {
+      if (to.meta.tabbar) {
+        this.$store.commit('settabIndex', to.meta.index)
       }
       if (this.$router.isBack) {
         this.transitionName = 'slide-right';
@@ -63,7 +79,7 @@ $c1: #007aff;
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
-  transition: transform 0.2s ;
+  transition: transform 0.2s;
   position: absolute;
   top: 0;
 }

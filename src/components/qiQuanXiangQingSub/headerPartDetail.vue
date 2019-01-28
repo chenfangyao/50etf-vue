@@ -60,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 div.wrap {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0 .25rem;
   transition: height 300ms;
   height: 0 ;
   overflow: hidden;
@@ -89,6 +89,6 @@ div.wrap {
 }
 .isshow {
   height: 43.2px !important;
-  margin:.22rem 0 0.25rem;
+  margin:.22rem 0 0 .25rem;
 }
 </style>
