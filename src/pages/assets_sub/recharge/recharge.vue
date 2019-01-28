@@ -83,7 +83,12 @@ export default {
       }
     },
     rightTap() {
-      this.$navigateTo({ url: '/pages/assets_sub/recording/recording?type=1' })
+      this.$router.push({
+        path:'/pages/assets_sub/recording/recording',
+        query:{
+          type:1,
+        }
+      })
     },
     getpayway() {
       var options = {

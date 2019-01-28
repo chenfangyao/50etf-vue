@@ -18,6 +18,7 @@ const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve
 const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
 const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'], resolve)
 const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
+const recording = resolve => require(['@/pages/assets_sub/recording/recording'], resolve)
 
 Vue.use(Router)
 
@@ -47,6 +48,8 @@ export default new Router({
     { path: '/pages/assets_sub/bank_card/bank_card', name: 'bank_card', component: bank_card,  },
     // 账户充值第三步
     { path: '/pages/assets_sub/gatherinfo/gatherinfo', name: 'gatherinfo', component: gatherinfo,  },
+    // 充值记录
+    { path: '/pages/assets_sub/recording/recording', name: 'recording', component: recording,  },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
     { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     // { path: '*', redirect: '/' }
