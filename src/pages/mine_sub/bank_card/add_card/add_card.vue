@@ -558,26 +558,7 @@
     border-right-color: transparent;
   }
 
-  .vuePickera .area_roll_mask{
-    -webkit-mask:none!important;
-  }
-  .vuePickera .area_roll{
-    background-color: white!important;
-    -webkit-mask:none!important;
-  }
-  .vuePickera .area_btn_box{
-    background-color: white!important;
-  }
-  .vuePickera .area_grid{
-    border-bottom: 1px solid #eee!important;
-    border-top: 1px solid #eee!important;
-  }
-  .vuePickera .area_ctrl{
-    color:gray!important;
-  }
-  .vuePickera .larea_cancel{
-    color:gray!important;
-  }
+
 
   }
 
