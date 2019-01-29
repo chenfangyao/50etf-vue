@@ -119,13 +119,7 @@ export default new Router({
 })
 var pages = [
   // "enablePullDownRefresh" : true
-  {
-    "path": "pages/quotes_sub/entrust_succ/entrust_succ",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
+
   {
     "path": "pages/risk_book/risk_book",
     "style": {
@@ -142,13 +136,6 @@ var pages = [
   },
   {
     "path": "pages/forget_pwd/tep3/tep3",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/change_password/change_password",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"
@@ -182,36 +169,9 @@ var pages = [
       "scrollIndicator": "none"
     }
   },
-  {
-    "path": "pages/mine_sub/trading_rules/trading_rules",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/red_envelope/red_envelope",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
+
   {
     "path": "pages/mine_sub/invite_friends/invite_friends",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/msg_common/list/list",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/msg_common/detail/detail",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"
@@ -249,13 +209,7 @@ var pages = [
       "scrollIndicator": "none"
     }
   },
-  {
-    "path": "pages/assets_sub/recording/recording",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
+
   {
     "path": "pages/registers/registers",
     "style": {
