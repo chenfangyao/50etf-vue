@@ -248,6 +248,7 @@ div.h1 {
 .wrap_op {
   background-color: #ededed;
   min-height: 100vh;
+  width: 100%;
 }
 
 .h12 {

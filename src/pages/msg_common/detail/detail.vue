@@ -3,8 +3,7 @@
     <base-header has-back='1'></base-header>
     <div class="title">{{conent.title}}</div>
     <div class="timeTitle">{{datetimes}}</div>
-    <!-- <div class="content">{{conent.content}}</div> -->
-	<rich-text :nodes="conent.content"></rich-text>
+    <div class="content" v-html='conent.content'></div>
   </div>
 </template>
 
@@ -84,6 +83,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   text-align: center;
+  width: 100%;
   .title {
     font-size: 20px;
     color: rgba(24, 28, 40, 1);

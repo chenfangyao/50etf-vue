@@ -113,18 +113,17 @@ export default {
       switch (i) {
         case 0:
         case 1:
-          this.$navigateTo({ url: '/pages/holding_sub/full_and_lose/full_and_lose?isfull=' + i })
+          this.$navigateTo({ url: '/pages/holding_sub/full_and_lose/full_and_lose', query: { isfull: i, } })
           break
         case 2:
-          this.$navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=0&code=' + code })
+          this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 0 } })
           break
         case 3:
-          this.$navigateTo({ url: '/pages/quotes_sub/open_close/open_close?pinkaiC=1&code=' + code })
+          this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 1 } })
           break
         case 4:
           this.$redirectTo({ url: '/quotes' })
           break
-
       }
     },
     oneKeyHandle(str) {
@@ -132,7 +131,6 @@ export default {
       str == 'deep' && this.closeMe()
     },
     openPop() {
-
       this.showPop = true
     },
     openPop2() {
