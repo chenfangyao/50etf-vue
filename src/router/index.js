@@ -15,6 +15,7 @@ const stockDetail = resolve => require(['@/pages/stock_detail/stock_detail'], re
 const quotes = resolve => require(['@/pages/tabBar/quotes/quotes'], resolve)
 const quotesDetail = resolve => require(['@/pages/quotes_sub/qi_quan_xiang_qing/qi_quan_xiang_qing'], resolve)
 const openClose = resolve => require(['@/pages/quotes_sub/open_close/open_close'], resolve)
+const entrustSucc = resolve => require(['@/pages/quotes_sub/entrust_succ/entrust_succ'], resolve)
 //持仓
 const holding_warehouse = resolve => require(['@/pages/tabBar/holding_warehouse/holding_warehouse'], resolve)
 const clinch = resolve => require(['@/pages/holding_sub/clinch/clinch'], resolve)
@@ -44,7 +45,7 @@ const newcenterlist = resolve => require(['@/pages/msg_common/list/list'], resol
 const newdetail = resolve => require(['@/pages/msg_common/detail/detail'], resolve)
 
 // 测试
-const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
+// const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
 
 
 Vue.use(Router)
@@ -60,6 +61,7 @@ export default new Router({
     { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1 } },
     { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail,  },
     { path: '/open_close', name: 'openClose', component: openClose,  },
+    { path: '/entrustSucc', name: 'entrustSucc', component: entrustSucc,  },
     //持仓
     { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2 } },
     { path: '/clinch', name: 'clinch', component: clinch },
@@ -111,7 +113,7 @@ export default new Router({
 
 
     // 测试
-    { path: '/pages/mine_sub/test/test', name: 'test', component: test,  },
+    // { path: '/pages/mine_sub/test/test', name: 'test', component: test,  },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
     { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     // { path: '*', redirect: '/' }
@@ -119,13 +121,6 @@ export default new Router({
 })
 var pages = [
   // "enablePullDownRefresh" : true
-  {
-    "path": "pages/quotes_sub/entrust_succ/entrust_succ",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
   {
     "path": "pages/risk_book/risk_book",
     "style": {
