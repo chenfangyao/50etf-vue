@@ -118,20 +118,6 @@ export default new Router({
   ]
 })
 var pages = [
-  {
-    "path": "pages/mine_sub/about_us/about_us",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/capital_flow/capital_flow",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
   // "enablePullDownRefresh" : true
   {
     "path": "pages/quotes_sub/entrust_succ/entrust_succ",

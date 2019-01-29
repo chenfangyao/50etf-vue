@@ -23,7 +23,6 @@ export default {
   components: { uniBadge },
 	computed: mapState(['sid','newlengths']),
 	created(){
-		console.log(4444)
 		if(this.sid){
 			this.txt=this.newlengths.toString()
 		}else{
@@ -86,9 +85,9 @@ export default {
   }
   .uni-badge {
     position: absolute;
-    right: -32upx;
+    right: -0.32rem;
     top:.20rem;
-    padding:.04rem.08rem;
+    padding:.04rem .08rem;
     font-size: 11px;
   }
 }

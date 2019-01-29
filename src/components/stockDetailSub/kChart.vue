@@ -162,7 +162,6 @@ export default {
                 var num = Number(val.toFixed(4))
                 var max = Number(this.Ymax)
                 var min = Number(this.Ymin)
-                console.log(num);
                 switch (num) {
                   case this.stockInfo.preClosePrice://没分到，出不来这种结果
                   case max:

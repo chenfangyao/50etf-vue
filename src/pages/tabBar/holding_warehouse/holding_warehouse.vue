@@ -140,8 +140,8 @@ export default {
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
     next(vm => {
+      vm.tabI = vm.weituoindex
       if (vm.weituoindex == 2) {
-        vm.tabI = 2
         vm.titleList[2].startI = 0
         vm.getFenbiList(2)
         return

@@ -41,11 +41,11 @@ export default {
       switch (i) {
         case 3: url = '/pages/assets_sub/recharge/recharge'
           break
-        case 4: uni.switchTab({ url: '/pages/tabBar/quotes/quotes' })
+        case 4: this.$redirectTo({ url: '/quotes' })
           return
-        default: url = '/pages/msg_common/list/list?type=' + i
+        default: url = '/pages/msg_common/list/list'
       }
-      this.$navigateTo({ url })
+      this.$navigateTo({ url,query:{type:i} })
     }
   },
 }

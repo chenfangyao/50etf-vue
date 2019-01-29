@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <base-header :title="title" has-back='1'></base-header>
     <div class="listItem" v-for="(item,i) in lists" :key="i" hover-class='self-hover' @click='go(item.id)'>
       <div class="title uni-flex">
@@ -95,6 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div.wrap{width: 100%;}
 div.listItem {
   padding:.35rem 0;
   padding-left:.27rem;

@@ -5,7 +5,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-
 $v1bg: #409de5;
 $v2bg: #e6aa12;
 div.uni-flex {
@@ -13,11 +12,11 @@ div.uni-flex {
   bottom: 0;
   left: 0;
   right: 0;
-  height:.98rem;
+  height: 0.98rem;
   font-size: 16px;
   text-align: center;
   .v1 {
-    line-height:.98rem;
+    line-height: 0.98rem;
     background-color: $v1bg;
     width: 50%;
   }
@@ -28,7 +27,7 @@ div.uni-flex {
     background: darken($v2bg, 5%);
   }
   .v2 {
-    line-height:.98rem;
+    line-height: 0.98rem;
     width: 50%;
     background-color: $v2bg;
   }
@@ -41,32 +40,25 @@ export default {
   data() {
     return {}
   },
-  props:['resObj'],
-	computed: mapState(['sid']),
+  props: ['resObj'],
+  computed: mapState(['sid']),
   methods: {
     ...mapMutations(['sethycode']),
     go(val) {
-				if(!this.sid){
-				 uni.showModal({
-				        title:'您还未登录',
-				        content:'现在去登录',
-				        success:(res)=>{
-				            if (res.confirm) {
-				                this.$navigateTo({
-				                	url: '/pages/login/login',
-				                	success: res => {},
-				                	fail: () => {},
-				                	complete: () => {}
-				                });
-				            } else if (res.cancel) {
-				                console.log('用户点击取消');
-				            }
-				        }
-				    })
-						return
-			}
+      if (!this.sid) {
+        this.$dialog.confirm({
+          message: '现在去登录',
+          title: '您还未登录',
+          lockScroll: true,
+          beforeClose(action, done) {
+            done()
+            action==='confirm'&& this.$navigateTo({url: '/pages/login/login', });
+          }
+        });
+        return
+      }
       this.sethycode(this.resObj.stockCode)
-      this.$navigateTo({ url: '/open_close',query:{pinkaiC:val,code:this.resObj.stockCode}})
+      this.$navigateTo({ url: '/open_close', query: { pinkaiC: val, code: this.resObj.stockCode } })
 
     }
   }

@@ -13,7 +13,7 @@
 				type: Boolean,
 				default: false
 			},
-			span: {
+			text: {
 				type: String,
 				default: ''
 			}

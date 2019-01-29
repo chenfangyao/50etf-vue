@@ -54,14 +54,7 @@ export default {
     };
   },
   computed: mapState(['sid', 'hycode']),
-  components: {
-    headerTitle,
-    containChart,
-    miniTable,
-    newPrice,
-    totalCost,
-    bottomBtn
-  },
+  components: { headerTitle, containChart, miniTable, newPrice, totalCost, bottomBtn },
   methods: {
     ...mapMutations(['setmaxbuy', 'setstockamunt', 'setcctotalmoney']),
     // 合并、分笔
@@ -211,8 +204,7 @@ export default {
     next()
   },
   beforeRouteEnter(to, from, next) {
-    next(vm=>{
-
+    next(vm => {
       vm.setstockamunt(0)
       vm.symbol = to.query.code
       vm.getartlelist()
@@ -224,7 +216,7 @@ export default {
           vm.getartlelist()
         }, 2500)
       }
-  
+
       // 合并持仓分笔持仓
       vm.getfbchic()
       vm.gethbchic()
@@ -248,6 +240,7 @@ div.h1 {
 .wrap_op {
   background-color: #ededed;
   min-height: 100vh;
+  width: 100%;
 }
 
 .h12 {

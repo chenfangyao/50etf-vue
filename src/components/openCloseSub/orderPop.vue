@@ -129,10 +129,7 @@ export default {
           })
         }
         else {
-          uni.showToast({
-            title: res.info ? res.info : '买入失败',
-            duration: 2000
-          });
+          this.$toast(res.info ? res.info : '买入失败')
         }
       }).catch((err) => {
         // 请求失败的回调

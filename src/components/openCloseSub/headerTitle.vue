@@ -3,12 +3,12 @@
     <div class="headerContainer">
       <div class="occupy"></div>
       <div class="wrap uni-flex">
-        <div class="leftPart"  @click="back" >
-          <img src="../../assets/arrow/l.png"/>
+        <div class="leftPart" @click="back">
+          <img src="../../assets/arrow/l.png">
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
-          <div @click='tapChange'>开仓</div>
-          <div @click='tapChange'>平仓</div>
+          <div @click="tapChange">开仓</div>
+          <div @click="tapChange">平仓</div>
           <div class="slider">{{tabActive?'平仓':'开仓'}}</div>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default {
   methods: {
     ...mapMutations(['setstockamunt']),
     back() {
-    this.$router.goBack()
+      this.$router.goBack()
     },
     tapChange() {
       this.$emit('change-close')
@@ -56,7 +56,7 @@ div.h44 {
   background-color: #fff;
   div.wrap {
     div.leftPart {
-      padding: 13px .20rem 0 .30rem;
+      padding: 13px 0.2rem 0 0.3rem;
       height: 44px;
       position: absolute;
       left: 0;

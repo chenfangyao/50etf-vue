@@ -13,18 +13,16 @@
           <h6>{{resObj.priceChangeRate}}%</h6>
         </div>
       </div>
-
     </div>
     <div class="df_wh" id="canvas2">缩略图</div>
   </div>
 </template>
 <script>
 import echarts from 'echarts'
-let chart = null;
 
 var option = {
   xAxis: {
-    data: [],
+    data: [1,2,3,4,5,6],
     show: false,
   },
   legend: {
@@ -41,6 +39,7 @@ var option = {
   yAxis: {
     show: false,
     type: 'value',
+    scale:true
   },
   series: [{
     data: [15, 20, 36, 14, 10, 26],
@@ -53,7 +52,6 @@ export default {
     return {
       echarts,
       subCodeName: '',//处理子字符串
-      newprices: '0.2527'
     }
   },
   methods: {
@@ -73,16 +71,16 @@ export default {
   },
   props: ['resObj'],
   mounted() {
-    //#ifdef H5
     this.showH5Echarts()
-    //#endif
+    
   }
 }
 </script>
 <style lang="scss" scoped>
 div.wrap {
-  padding:.26rem .26rem 0;
+  padding: 0.26rem 0.26rem 0;
   background-color: #fff;
+  justify-content: space-between;
   div.info {
     div.line1 {
       font-size: 14px;
@@ -95,7 +93,7 @@ div.wrap {
         font-size: 32px;
         font-weight: bold;
         color: rgba(240, 95, 92, 1);
-        margin-right:.26rem;
+        margin-right: 0.26rem;
       }
       > div {
         align-self: center;
@@ -103,16 +101,15 @@ div.wrap {
     }
     h6 {
       font-size: 12px;
-      margin: 0 0 .10rem 0;
+      margin: 0 0 0.1rem 0;
       line-height: 12px;
       font-weight: 400;
       color: rgba(240, 95, 92, 1);
     }
   }
   div.df_wh {
-    height: 80px;
-    flex-grow: 1;
-	width: 180px;
+    height: 70px;
+    width: 180px;
   }
 }
 </style>
