@@ -51,6 +51,14 @@
         <span class="tip" v-if="true"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
+
+      <div class="uni-flex" hover-class="self-hover" @click="go('test/test')" >
+        <img src="../../../assets/mineImg/08.png" />
+        <span>test</span>
+        <span class="tip" v-if="true"></span>
+        <img src="../../../assets/mineImg/arrow.png" />
+      </div>
+
     </div>
   </div>
 </template>

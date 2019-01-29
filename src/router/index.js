@@ -43,6 +43,10 @@ const change_password = resolve => require(['@/pages/mine_sub/change_password/ch
 const newcenterlist = resolve => require(['@/pages/msg_common/list/list'], resolve)
 const newdetail = resolve => require(['@/pages/msg_common/detail/detail'], resolve)
 
+// 测试
+const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
+
+
 Vue.use(Router)
 export default new Router({
   base: process.env.NODE_ENV === 'web' ? '/h5/' : '',
@@ -103,6 +107,11 @@ export default new Router({
     { path: '/pages/mine_sub/about_us/about_us', name: 'about_us', component: about_us,  },
     // 修改密码
     { path: '/pages/mine_sub/change_password/change_password', name: 'change_password', component: change_password,  },
+
+
+
+    // 测试
+    { path: '/pages/mine_sub/test/test', name: 'test', component: test,  },
     { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
     { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     // { path: '*', redirect: '/' }
