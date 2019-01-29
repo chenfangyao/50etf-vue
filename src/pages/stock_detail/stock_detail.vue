@@ -20,7 +20,6 @@ export default {
   components: { stockTitle, manyInfo, kChart },
 	created(){
     this.index=this.$route.query.index
-    console.log(this.index);
 	}
 }
 </script>

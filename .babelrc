@@ -13,7 +13,7 @@
         }
       }
     ],
-    "stage-2"
+    "stage-2",
   ],
   "plugins": [
     "transform-vue-jsx",
@@ -24,6 +24,13 @@
         "libraryName": "vant",
         "libraryDirectory": "es",
         "style": true
+      }
+    ],
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
       }
     ]
   ]
