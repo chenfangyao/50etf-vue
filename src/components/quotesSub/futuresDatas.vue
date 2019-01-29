@@ -164,7 +164,9 @@ export default {
   },
   watch: {
     quoteList(newval, oldval) {
-      //  this.calcBg(this.latestPrice, this.calcOnce)
+      if(newval.length==0){
+        return this.inTemArr=[]
+      }
       if (newval.length != oldval.length) {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))

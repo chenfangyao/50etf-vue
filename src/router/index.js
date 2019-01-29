@@ -4,8 +4,6 @@ Router.prototype.goBack = function () {
   this.isBack = true
   history.back(-1)
 }
-const HelloWorld = resolve => require(['@/components/HelloWorld'], resolve)
-const bv = resolve => require(['@/components/bv'], resolve)
 //首页
 const index = resolve => require(['@/pages/tabBar/index/index'], resolve)
 const newsDetail = resolve => require(['@/pages/index_sub/new_xiang_qing/new_xiang_qing'], resolve)
@@ -37,12 +35,15 @@ const credentials2 = resolve => require(['@/pages/mine_sub/credentials_upload/te
 const capital_flow = resolve => require(['@/pages/mine_sub/capital_flow/capital_flow'], resolve)
 const trading_rules = resolve => require(['@/pages/mine_sub/trading_rules/trading_rules'], resolve)
 const red_envelope = resolve => require(['@/pages/mine_sub/red_envelope/red_envelope'], resolve)
-// const invite_friends = resolve => require(['@/pages/mine_sub/invite_friends/invite_friends'], resolve)
+const invite_friends = resolve => require(['@/pages/mine_sub/invite_friends/invite_friends'], resolve)
 const customer_service = resolve => require(['@/pages/mine_sub/my_customer_service/my_customer_service'], resolve)
 const about_us = resolve => require(['@/pages/mine_sub/about_us/about_us'], resolve)
 const change_password = resolve => require(['@/pages/mine_sub/change_password/change_password'], resolve)
 const newcenterlist = resolve => require(['@/pages/msg_common/list/list'], resolve)
 const newdetail = resolve => require(['@/pages/msg_common/detail/detail'], resolve)
+const riskBook = resolve => require(['@/pages/risk_book/risk_book'], resolve)
+const registers = resolve => require(['@/pages/registers/registers'], resolve)
+const forgets_pwd = resolve => require(['@/pages/forgets_pwd/forgets_pwd'], resolve)
 
 // 测试
 // const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
@@ -109,25 +110,20 @@ export default new Router({
     { path: '/pages/mine_sub/about_us/about_us', name: 'about_us', component: about_us,  },
     // 修改密码
     { path: '/pages/mine_sub/change_password/change_password', name: 'change_password', component: change_password,  },
+    { path: '/risk_book', name: 'riskBook', component: riskBook,  },
+    { path: '/pages/registers/registers', name: 'registers', component: registers,  },
+    { path: '/pages/forgets_pwd/forgets_pwd', name: 'forgets_pwd', component: forgets_pwd,  },
+    { path: '/pages/mine_sub/invite_friends/invite_friends', name: 'invite_friends', component: invite_friends,  },
 
 
 
     // 测试
     // { path: '/pages/mine_sub/test/test', name: 'test', component: test,  },
-    { path: '/b', name: 'bv', component: bv, meta: { isKeepAlive: true, } },
-    { path: '/h', name: 'HelloWorld', component: HelloWorld, meta: { isKeepAlive: true } },
     // { path: '*', redirect: '/' }
   ]
 })
 var pages = [
   // "enablePullDownRefresh" : true
-  {
-    "path": "pages/risk_book/risk_book",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
   {
     "path": "pages/forget_pwd/tep2/tep2",
     "style": {
@@ -211,18 +207,4 @@ var pages = [
     }
   },
 
-  {
-    "path": "pages/registers/registers",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/forgets_pwd/forgets_pwd",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  }
 ]

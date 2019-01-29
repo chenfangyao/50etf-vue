@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="wrap">
 		<base-header title='风险揭示书' has-back='1'></base-header>
 <!--    <div class="txt">     尊敬的投资者:
 投资是有风险的。当你认购或认购私募股权基金时，你可能会获得投资回报，但同时你也会面临投资风险。在进行投资决策之前，您/您的组织应该仔细阅读风险揭示和基金契约，充分了解基金的风险收益特征和产品特征，认真考虑基金中存在的风险因素，充分考虑其风险承受能力，做出理性判断，慎重做出投资决策。
@@ -12,7 +12,7 @@
 			<span>{{rescontent.title}}</span>
 		</div>
 		<div class="artwenan">
-			<rich-text :nodes="rescontent.content"></rich-text>
+      <div v-html="rescontent.content"></div>
 		</div>
 	</div>
 	</div>
@@ -25,7 +25,7 @@
 				rescontent:{}
 			};
 		},
-		onLoad(){
+		created(){
 			this.conf()
 		},
 		methods:{

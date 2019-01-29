@@ -5,7 +5,8 @@
             <span>共{{total}}笔</span>
             <img class="right" @click="showDatepick" src="../../../assets/mineImg/datePicker.png"/>
         </div>
-        <scroll-view class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
+        <scroll-view class='listscrow' lower-threshold='10' ref="scroll3" scroll-y @scrollToEnd="loadMore">
+          <div>
             <div class="listsContainer" v-for="(item,i) in monetlist" :key="i">
                 <div class="line1 uni-flex">
                     <div>
@@ -32,6 +33,7 @@
                 </div>
             </div>
             <uni-load-more :loading-type="resquestState"></uni-load-more>
+          </div>
         </scroll-view>
 
         <date-pick v-if="showPick" @hid-me='closeme' @select-complete='getTime'></date-pick>
@@ -41,6 +43,8 @@
 <script>
 import datePick from '@/components/datePick2.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
+import scrollView from '@/components/other/scroll-view'
+
 export default {
   data() {
     return {
@@ -92,6 +96,8 @@ export default {
           this.total = res.data.total
           if (add) {
             this.monetlist = this.monetlist.concat(res.data.list)
+           this.$refs.scroll3.refresh()
+
             var temarr = []
             for (let i = 0; i < res.data.list.length; i++) {
               temarr.push(this.$formatetimestr(res.data.list[i].create_time))
@@ -112,15 +118,7 @@ export default {
       })
     }
   },
-  components: { datePick, uniLoadMore },
-  onLoad() {
-    // uni.startPullDownRefresh();
-  },
-  onPullDownRefresh() {
-    // 		setTimeout(()=>{
-    // 			uni.stopPullDownRefresh();
-    // 		},1000)
-  },
+  components: { datePick, uniLoadMore ,scrollView},
   created() {
     this.capicalflow()
   }
@@ -130,11 +128,12 @@ export default {
 <style lang="scss" scoped>
 div.Bigwrap {
   min-height: 100vh;
+  width: 100%;
   background-color: #f5f5f5;
   div.line1 {
     height:.88rem;
     justify-content: space-between;
-    padding: 0.26rem;
+    padding: 0 .26rem;
     background-color: #fff;
     align-items: center;
     margin-top: 1px;
@@ -144,12 +143,8 @@ div.Bigwrap {
     }
   }
   .listscrow {
-    /* #ifndef H5 */
-    height: calc(100vh -1.78rem - var(--status-bar-height));
-    /* #endif */
-    /* #ifdef H5 */
-    height: calc(100vh -1.78rem);
-    /* #endif */
+    height: calc(100vh - 1.78rem);
+    overflow: hidden;
   }
   div.listsContainer {
     background-color: #fff;
@@ -157,7 +152,7 @@ div.Bigwrap {
     div.line1 {
       justify-content: space-between;
       height:.72rem;
-      padding: 0.26rem;
+      padding: 0 .26rem;
 
       border-bottom: 1px solid #f5f5f5;
       span.txt1 {
@@ -184,14 +179,14 @@ div.Bigwrap {
     }
 
     div.line2 {
-      padding: 0.26rem;
+      padding: 0 .26rem;
 
       div.bigTxt {
         font-size: 26px;
         font-family: ArialMT;
         color: rgba(240, 95, 92, 1);
         line-height: 26px;
-        margin:.32rem 0.25rem;
+        margin: .32rem 0 .25rem;
       }
       div.info {
         justify-content: space-between;

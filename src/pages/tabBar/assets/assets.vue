@@ -111,7 +111,7 @@ export default {
 div.wrap {
   background-color: #f5f5f5;
   height: calc(100vh - .70rem);
-
+padding-top: 0.1px;
   div.info {
     margin-bottom:.12rem;
 

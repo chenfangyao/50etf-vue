@@ -35,7 +35,7 @@ div.wrap {
     font-size: 15px;
     color: rgba(24, 28, 40, 1);
     line-height: 21px;
-    margin:.54rem.75rem;
+    margin:.54rem .75rem;
   }
 }
 </style>

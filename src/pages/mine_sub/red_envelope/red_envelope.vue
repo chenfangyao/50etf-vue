@@ -18,7 +18,10 @@
         <span>200</span>
         <span>元</span>
       </div>
-      <input type="number" maxlength='11' placeholder-class='placeholderTxt' placeholder='请输入手机号'>
+      <div class="inputParent">
+
+        <input type="tel" maxlength='11' placeholder-class='placeholderTxt' placeholder='请输入手机号'>
+      </div>
       <div class="btn" hover-class='active'>领取奖励</div>
     </div>
 	</div>
@@ -36,7 +39,6 @@ export default {
 
 <style lang="scss" scoped>
 div.wrap {
-  position: relative;
   img.bg {
     height: calc(100vh - 44px);
     position: absolute;
@@ -63,14 +65,14 @@ div.wrap {
     font-size: 14px;
     color: rgba(255, 255, 255, 1);
     line-height: 14px;
-    margin:.30rem 0.70rem;
+    margin:.30rem 0 .70rem;
     text-align: center;
     span:nth-child(2) {
       color: #fcd334;
     }
   }
   div.redBadge {
-    margin: 0.66rem;
+    margin: 0 .66rem;
     position: relative;
     height:5.59rem;
     padding-top: 1px;
@@ -84,12 +86,16 @@ div.wrap {
       color: rgba(102, 102, 102, 1);
       line-height:.98rem;
     }
+    div.inputParent{
+
+      margin:.45rem .49rem .30rem;
+    }
     input {
       text-align: center;
       height:.98rem;
       background-color: #fff;
       border-radius:.10rem;
-      margin:.45rem.49rem.30rem;
+      width: 100%;
     }
     div.price {
       font-size: 18px;
@@ -107,7 +113,7 @@ div.wrap {
     div.btn {
       background: rgba(253, 210, 66, 1);
       border-radius:.10rem;
-      margin: 0.49rem;
+      margin: 0 .49rem;
       font-size: 16px;
       color: rgba(51, 51, 51, 1);
       line-height:.98rem;

@@ -34,7 +34,7 @@ export default {
   },
   created() {
     document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton", () => {
-        if (this.$route.meta.tabbar) {
+        if (!this.$route.meta.tabbar) {
           this.$router.goBack()
           return
         }
@@ -84,6 +84,7 @@ $c1: #007aff;
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
+  will-change: transform;
   transition: transform 0.2s;
   position: absolute;
   top: 0;

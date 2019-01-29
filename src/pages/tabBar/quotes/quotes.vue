@@ -141,7 +141,6 @@ export default {
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
         this.dealquotationStr()
-        this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
         console.error(err, '捕捉')
@@ -157,12 +156,13 @@ export default {
       }
       this.newsitems[e].loadingType = 1;
     },
-    tapTab(e) { //点击tab-bar
+    tapTab(e) { //点击tab
       if (this.tabIndex === e.target.dataset.current) {
         return false;
       } else {
         this.tabIndex = e.target.dataset.current
         this.settaglist(this.groupLabel[this.tabIndex])
+        this.quoteList=[]
         this.getartlelist()
       }
     },
@@ -171,6 +171,8 @@ export default {
       this.codeList.forEach(item => {
         this.quotationStr += '?' + item.stock_code
       });
+      this.getquoteList()
+
     },
     // 获取50etf指数
     getcommonselectstock(timestrs) {
