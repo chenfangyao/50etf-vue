@@ -143,13 +143,6 @@ var pages = [
     }
   },
   {
-    "path": "pages/mine_sub/change_password/change_password",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/mine_sub/credentials_upload/tep1/tep1",
     "style": {
       "titleNView": false,
@@ -177,36 +170,9 @@ var pages = [
       "scrollIndicator": "none"
     }
   },
-  {
-    "path": "pages/mine_sub/trading_rules/trading_rules",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/mine_sub/red_envelope/red_envelope",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
+
   {
     "path": "pages/mine_sub/invite_friends/invite_friends",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/msg_common/list/list",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/msg_common/detail/detail",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"
@@ -244,13 +210,7 @@ var pages = [
       "scrollIndicator": "none"
     }
   },
-  {
-    "path": "pages/assets_sub/recording/recording",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
+
   {
     "path": "pages/registers/registers",
     "style": {
