@@ -9,7 +9,7 @@
     <div class='mb26 uni-flex' hover-class='self-hover' >
       <span>关于</span>
       <div class="uni-flex verView">
-        <span class="verTxt">版本号：10.1.38</span>
+        <span class="verTxt">版本号：1.0</span>
         <img src="../../../assets/arrow/r.png">
       </div>
     </div>

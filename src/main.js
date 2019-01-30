@@ -21,6 +21,12 @@ function add0(m) {
 }
 Vue.config.productionTip = false
 Vue.prototype.$httpReq = request
+// 时间转时间戳
+Vue.prototype.$timestamp = function (str) {
+  let timestamp = new Date(str)
+  timestamp = timestamp.getTime() / 1000//取到秒
+  return parseInt(timestamp)
+}
 Vue.prototype.$navigateTo = opt => { router.push({ path: opt.url, query: opt.query}) }
 Vue.prototype.$redirectTo = opt => { router.replace({ path: opt.url, query: opt.query}) }
 Vue.prototype.$formatetimestr = function (str, onlyTime) {

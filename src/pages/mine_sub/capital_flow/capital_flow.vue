@@ -36,7 +36,7 @@
           </div>
         </scroll-view>
 
-        <date-pick v-if="showPick" @hid-me='closeme' @select-complete='getTime'></date-pick>
+        <date-pick  @hid-me='closeme' :show-pick='showPick' @select-complete='getTime'></date-pick>
     </div>
 </template>
 
