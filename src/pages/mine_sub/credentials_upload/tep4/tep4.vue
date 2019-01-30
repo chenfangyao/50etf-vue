@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <base-header title="开户状态" has-back='1'></base-header>
     <div class="border1">
 		<div class='textview'><span>{{text1}}</span></div>
@@ -81,16 +81,10 @@ div.border1 {
 }
 div.title {
   font-size: 16px;
-  padding: 0.43rem;
+  padding: 0 .43rem;
   color: rgba(24, 28, 40, 1);
-  margin:.50rem 0.34rem;
+  margin:.50rem 0 .34rem;
   line-height: 16px;
-}
-div.content {
-  font-size: 15px;
-  color: rgba(112, 118, 128, 1);
-  line-height:.58rem;
-  padding: 0.43rem;
 }
 </style>
 

@@ -34,7 +34,7 @@ export default {
   },
   created() {
     document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton", () => {
-        if (this.$route.meta.tabbar) {
+        if (!this.$route.meta.tabbar) {
           this.$router.goBack()
           return
         }
@@ -56,12 +56,14 @@ export default {
         this.$router.isBack = false
         return
       }
-      if (this.$router.isBack) {
+      if (to.meta.noAnimate) {
+        this.transitionName = '';
+      } else if (this.$router.isBack) {
         this.transitionName = 'slide-right';
       } else {
         this.transitionName = 'slide-left';
       }
-      this.$router.isBack = false
+        this.$router.isBack = false
     }
   }
 }
@@ -84,6 +86,7 @@ $c1: #007aff;
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
+  will-change: transform;
   transition: transform 0.2s;
   position: absolute;
   top: 0;

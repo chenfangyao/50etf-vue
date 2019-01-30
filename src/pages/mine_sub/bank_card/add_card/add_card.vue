@@ -484,7 +484,6 @@
   div.wrap {
   // background-color: #f5f5f5;
     min-height: 100vh;
-    margin-top: 20px;
 
   div.list-row {
     width:6.80rem;

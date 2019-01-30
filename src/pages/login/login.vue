@@ -54,7 +54,7 @@ export default {
           break
         case 2: url = '/pages/forgets_pwd/forgets_pwd'
           break
-        case 3: url = '/pages/risk_book/risk_book'
+        case 3: url = '/risk_book'
 				  break
       }
       this.$navigateTo({ url })

@@ -1475,3 +1475,6 @@ input{
 .vuePickera .larea_cancel{
   color:gray!important;
 }
+div.wrap{
+  width: 100%;
+}

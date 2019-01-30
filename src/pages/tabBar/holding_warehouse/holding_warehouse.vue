@@ -40,7 +40,6 @@ import scrollView from '@/components/other/scroll-view'
 import hebingPop from '@/components/holdingSub/hebingPop.vue'
 import fenbiPop from '@/components/holdingSub/fenbiPop.vue'
 import { mapState, mapMutations } from 'vuex';
-import util from '@/common/util.js'
 
 export default {
   data() {
@@ -131,14 +130,6 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    clearInterval(util.indextimmer.indexCommonSelectStock)
-    util.indextimmer.indexCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesCommonSelectStock)
-    util.indextimmer.quotesCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesQryQuotationList)
-    util.indextimmer.quotesQryQuotationList = null
-    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-    util.indextimmer.quotesQrySingleQuotationMsg = null
     next(vm => {
       vm.tabI = vm.weituoindex
       if (vm.weituoindex == 2) {

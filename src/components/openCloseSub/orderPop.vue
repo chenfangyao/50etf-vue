@@ -125,7 +125,8 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$redirectTo({
-            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
+            url: '/entrust_succ' ,
+            query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
           })
         }
         else {
@@ -154,15 +155,13 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          this.$redirectTo({
-            url: '/pages/quotes_sub/entrust_succ/entrust_succ?type=' + this.onClose + '&code=' + parseInt(this.resObj.stockCode) + ''
+           this.$redirectTo({
+            url: '/entrust_succ' ,
+            query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
           })
         }
         else {
-          uni.showToast({
-            title: res.info ? res.info : '卖出失败',
-            duration: 2000
-          });
+          this.$toast(res.info ? res.info : '卖出失败')
         }
       }).catch((err) => {
         // 请求失败的回调

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="wrap">
 		<base-header has-back='1'></base-header>
     <div class="title">忘记密码</div>
     <div class="container">
@@ -44,23 +44,20 @@ export default {
   components: { submitBtn, inputItem ,errTip,countDown},
   methods: {
     go() {
-      let url = '/pages/risk_book/risk_book'
+      let url = '/risk_book'
       this.$navigateTo({ url })
     },
 	resetped(){
 				var options = {
-						url: '/Sapi/User/resetPwd ', //请求接口
+						url: '/Sapi/User/resetPwd ', 
 						data: {
 								mobile: this.tel,
 								user_pwd:this.pwd,
 								mobile_verify:this.verificationCode,
-						}, //发送给服务端的数据
-						method: 'POST', //请求方法全部大写，默认GET
+						}, 
+						method: 'POST', 
 				}
 				this.$httpReq(options).then((res) => {
-						// 请求成功的回调
-						// res为服务端返回数据的根对象
-						console.log(res)
 						if (res.status == 1) {
 							this.showErr=false
 							 uni.showModal({
@@ -143,14 +140,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div.wrap{height: 100vh;}
 div.title {
   font-size: 28px;
   font-weight: 500;
   color: rgba(51, 51, 51, 1);
-  margin: 0 0.88rem.32rem;
+  margin: 0 0 .88rem .32rem;
 }
 div.container {
-  margin: 0.55rem;
+  margin: 0 .55rem;
   div.vCode {
     height:1.04rem;
   }
@@ -167,10 +165,10 @@ div.container {
   	  margin-top: 10px;
   }
     div.bottom-part{
-  	  position: fixed;
+  	  position: absolute;
   	  bottom: 10px;
-      left:55upx;
-  	  right:55upx;
+      left: .55rem;
+  	  right: .55rem;
   }
 }
 </style>

@@ -159,12 +159,16 @@ export default {
         obj[str].isDown = false
         this.$set(this.inTemArr, i, obj)
       }, 500)
-    }
+    },
+    
 
   },
   watch: {
     quoteList(newval, oldval) {
-      //  this.calcBg(this.latestPrice, this.calcOnce)
+      if (newval.length == 0) {
+        return this.inTemArr = []
+      }
+      this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length != oldval.length) {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))

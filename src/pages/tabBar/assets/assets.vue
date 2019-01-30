@@ -31,7 +31,6 @@
 <script>
 import headerCard from '@/components/assetsSub/headerCard.vue'
 import { mapState, mapMutations } from 'vuex';
-import util from '@/common/util.js'
 export default {
 
   data() {
@@ -92,15 +91,6 @@ export default {
     },
   },
   created: function () {
-		clearInterval(util.indextimmer.indexCommonSelectStock)
-		util.indextimmer.indexCommonSelectStock = null
-		clearInterval(util.indextimmer.quotesCommonSelectStock)
-		util.indextimmer.quotesCommonSelectStock=null
-		clearInterval(util.indextimmer.quotesQryQuotationList)
-		util.indextimmer.quotesQryQuotationList=null
-		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
-
     this.getassets()
     // this.$refs.ff.getassets()
   }
@@ -111,7 +101,7 @@ export default {
 div.wrap {
   background-color: #f5f5f5;
   height: calc(100vh - .70rem);
-
+padding-top: 0.1px;
   div.info {
     margin-bottom:.12rem;
 

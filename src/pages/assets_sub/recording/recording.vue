@@ -5,7 +5,8 @@
         <span>总计：{{total}}笔</span>
         <img class="right" @click="switchDatepick" src="../../../assets/mineImg/datePicker.png">
     </div>
-    <scroll-view v-if='type==1' class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
+    <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
+      <div>
         <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
           <div class="middle">
@@ -16,8 +17,10 @@
           <div class="money">{{item.pay_money}}</div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
+      </div>
     </scroll-view>
-    <scroll-view v-else class='listscrow' lower-threshold='10' scroll-y @scrollToEnd="loadMore">
+    <scroll-view v-else class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
+      <div>
         <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.status}}</div>
           <div class="middle">
@@ -28,6 +31,7 @@
           <div class="money">{{item.money}}</div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
+      </div>
     </scroll-view>
     <date-pick v-if="showPick" @hid-me='switchDatepick' @select-complete='getTime'></date-pick>
 
@@ -35,6 +39,8 @@
 </template>
 
 <script>
+import scrollView from '@/components/other/scroll-view'
+
 import datePick from '@/components/datePick.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 export default {
@@ -50,7 +56,7 @@ export default {
       bank_code: []
     };
   },
-  components: { datePick, uniLoadMore },
+  components: { datePick, uniLoadMore ,scrollView},
   methods: {
     switchDatepick() {
       this.showPick = !this.showPick
@@ -83,6 +89,7 @@ export default {
         if (res.status) {
           if (add) {
             this.recordlist = this.recordlist.concat(res.data.list)
+            this.$refs.scroll10.refresh()
             var temarr = []
             for (let i = 0; i < res.data.list.length; i++) {
               temarr.push(this.$formatetimestr(res.data.list[i].create_time))
@@ -128,7 +135,7 @@ div.wrap {
   div.line1 {
     height:.88rem;
     justify-content: space-between;
-    padding: 0.26rem;
+    padding: 0 .26rem;
     background-color: #fff;
     align-items: center;
     margin-top: 1px;
@@ -138,16 +145,13 @@ div.wrap {
     }
   }
   .listscrow {
-    /* #ifndef H5 */
-    height: calc(100vh -1.78rem - var(--status-bar-height));
-    /* #endif */
-    /* #ifdef H5 */
-    height: calc(100vh -1.78rem);
-    /* #endif */
+    // height: calc(100vh -1.78rem - var(--status-bar-height));
+    height: calc(100vh - 1.78rem);
+    overflow: hidden;
     div.listsContainer {
       background-color: #fff;
       margin:.12rem 0;
-      padding:.08rem.32rem 0;
+      padding: .08rem .32rem 0;
       justify-content: space-between;
       div.money {
         font-size: 20px;

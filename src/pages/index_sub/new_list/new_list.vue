@@ -1,9 +1,11 @@
 <template>
   <div class="wrap">
     <base-header title="资讯" :hasBack="true"></base-header>
-    <scroll-view class="listscrow" scroll-y @scrollToEnd="loadMore">
-      <news-view :newlists="newsItem"></news-view>
-      <uni-load-more :loading-type="resquestState"></uni-load-more>
+    <scroll-view class="listscrow" ref='scroll5' @scrollToEnd="loadMore">
+      <div>
+        <news-view :newlists="newsItem"></news-view>
+        <uni-load-more :loading-type="resquestState"></uni-load-more>
+      </div>
     </scroll-view>
   </div>
 </template>
@@ -43,20 +45,18 @@ export default {
         context: '',
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('文章列表', res)
         // this.newsItem=res.data.list
         if (res.status) {
           if (add) {
             this.newsItem = this.newsItem.concat(res.data.list)
+          this.$refs.scroll5.refresh()
+
           } else {
             this.newsItem = res.data.list
           }
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err, '捕捉')
       })
     }

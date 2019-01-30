@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="wrap">
 		<base-header has-back='1'></base-header>
     <div class="title">实名认证</div>
     <div class="container">
@@ -40,10 +40,9 @@ export default {
 					return
 			}
 			this.showErr=false
-      this.$navigateTo({ url:'/pages/mine_sub/credentials_upload/tep2/tep2?username='+this.uName+'&IDcard='+this.IDcard+'&telnum='+this.telnum+'' })
+      this.$navigateTo({ url:'/pages/mine_sub/credentials_upload/tep2/tep2' ,query:{username:this.uName,IDcard:this.IDcard,telnum:this.telnum}})
     },
     handleBlur() {
-      console.log('input失去焦点时触发');
       this.verifyYes = true
     },
   }
@@ -54,10 +53,10 @@ export default {
 div.title {
   font-size: 28px;
   font-weight: 500;
-  margin: 0 0.88rem.32rem;
+  margin: 0 0 .88rem .32rem;
   color: #333;
 }
 div.container {
-  margin: 0.55rem;
+  margin: 0 .55rem;
 }
 </style>

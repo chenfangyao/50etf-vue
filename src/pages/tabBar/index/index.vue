@@ -136,20 +136,13 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    clearInterval(util.indextimmer.indexCommonSelectStock)
-    util.indextimmer.indexCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesCommonSelectStock)
-    util.indextimmer.quotesCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesQryQuotationList)
-    util.indextimmer.quotesQryQuotationList = null
-    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-    util.indextimmer.quotesQrySingleQuotationMsg = null
     next(vm=>{
       // 获取文章列表
       vm.getartlelist()
       vm.getconfinfo()
       vm.getImgList()
       vm.getcommonselectstock(['', '', ''])
+      if (!util.calcLegalTime()) return;
       if (util.indextimmer.indexCommonSelectStock === null) {
         util.indextimmer.indexCommonSelectStock = setInterval(() => {
           vm.getcommonselectstock(vm.timestr)

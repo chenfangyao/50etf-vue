@@ -13,7 +13,7 @@
         </div>
       </div>
       <futures-title></futures-title>
-      <scroll-view class="list2"   @scrollToEnd="loadMore(1)">
+      <scroll-view class="list2" @scrollToEnd="loadMore(1)">
         <futures-datas :quote-list="quoteList" :code-list="codeList" :latest-price="commonstock"></futures-datas>
         <!-- <div class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
@@ -62,16 +62,11 @@ export default {
     next()
   },
   beforeRouteEnter(to, from, next) {
-    clearInterval(util.indextimmer.indexCommonSelectStock)
-    util.indextimmer.indexCommonSelectStock = null
-    clearInterval(util.indextimmer.quotesQryQuotationList)
-    util.indextimmer.quotesQryQuotationList = null
-    clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-    util.indextimmer.quotesQrySingleQuotationMsg = null
     next(vm => {
       vm.quotationStr || vm.getgroupLabel()//获取那一串股票码
-      vm.beginPolling()
       vm.getcommonselectstock([''])
+      if (!util.calcLegalTime()) return;
+      vm.beginPolling()
       if (util.indextimmer.quotesCommonSelectStock === null) {
         util.indextimmer.quotesCommonSelectStock = setInterval(() => {
           vm.getcommonselectstock([vm.commonstock[0].tradeMins])
@@ -90,7 +85,7 @@ export default {
     },
     beginPolling() {
       if (util.indextimmer.quotesQryQuotationList === null) {
-        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 30000)
+        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
       }
     },
     getquoteList() {
@@ -119,7 +114,7 @@ export default {
       this.$httpReq(options).then((res) => {
         this.groupLabel = res.data.list
         this.getartlelist()
-        this.beginPolling()//启动轮询
+        util.calcLegalTime() && this.beginPolling()//启动轮询
         this.settaglist(this.groupLabel[0])
       })
     },
@@ -141,7 +136,6 @@ export default {
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
         this.dealquotationStr()
-        this.getquoteList()
       }).catch((err) => {
         // 请求失败的回调
         console.error(err, '捕捉')
@@ -157,12 +151,13 @@ export default {
       }
       this.newsitems[e].loadingType = 1;
     },
-    tapTab(e) { //点击tab-bar
+    tapTab(e) { //点击tab
       if (this.tabIndex === e.target.dataset.current) {
         return false;
       } else {
         this.tabIndex = e.target.dataset.current
         this.settaglist(this.groupLabel[this.tabIndex])
+        this.quoteList = []
         this.getartlelist()
       }
     },
@@ -171,6 +166,8 @@ export default {
       this.codeList.forEach(item => {
         this.quotationStr += '?' + item.stock_code
       });
+      this.getquoteList()
+
     },
     // 获取50etf指数
     getcommonselectstock(timestrs) {
