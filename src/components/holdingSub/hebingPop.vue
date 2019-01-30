@@ -59,7 +59,7 @@ export default {
       switch (i) {
         case 0:
         case 1:
-          this.$navigateTo({ url: '/pages/holding_sub/full_and_lose/full_and_lose',query:{isfull:i,} })
+          this.$navigateTo({ url: '/full_and_lose',query:{isfull:i,} })
           break
         case 2:
           this.$navigateTo({ url: '/open_close',query:{code,pinkaiC:0}})

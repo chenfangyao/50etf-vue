@@ -211,6 +211,7 @@ export default {
       setTimeout(() => {
         vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
       }, 1500)
+      if (!util.calcLegalTime()) return;
       if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
         util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
           vm.getartlelist()

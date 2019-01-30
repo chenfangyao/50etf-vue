@@ -5,7 +5,7 @@
             <span>共{{total}}笔</span>
             <img class="right" @click="showDatepick" src="../../../assets/mineImg/datePicker.png"/>
         </div>
-        <scroll-view class='listscrow' lower-threshold='10' ref="scroll3" scroll-y @scrollToEnd="loadMore">
+        <scroll-view class='listscrow'  ref="scroll3"  @scrollToEnd="loadMore">
           <div>
             <div class="listsContainer" v-for="(item,i) in monetlist" :key="i">
                 <div class="line1 uni-flex">

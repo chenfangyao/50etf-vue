@@ -2,14 +2,19 @@
   <div>
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex">
-        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
+        <div
+          v-for="(tab,i) in topTabs"
+          :key="i"
+          :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']"
+          :data-current="i"
+          @click="tapTab"
+        >{{tab.name}}</div>
       </div>
     </div>
     <!-- #ifdef H5 -->
     <div class="h278" id="canvas1" v-show="tabIndex==0">k线图1</div>
     <div class="h324" id="canvas2" v-show="tabIndex!=0">k线图2</div>
     <!-- #endif -->
-
   </div>
 </template>
 <script>
@@ -17,6 +22,7 @@ import echarts from 'echarts'
 // import mpvueEcharts from 'mpvue-echarts'
 import { option, optionK, option1k, option5k, optionRk } from './EchartOption.js'
 import { fenshiT, fiveMinK } from './time.js'
+import util from '@/common/util.js'
 
 
 var h5Chart = null;//h5echarts实例
@@ -32,9 +38,7 @@ export default {
       Ymin: '',
       resquestState: 1,//为1时可发请求
       stockInfo: {},//分时信息对象，内含最高，最低，昨收
-      timmer1: null,//分时线定时器
-      timmer2: null,//1分线定时器
-      timmer3: null,//5分线定时器
+      timmer: null,//分时线定时器
       topTabs: [
         {
           name: '分时',
@@ -58,7 +62,11 @@ export default {
     },
     tapTab(e) { //点击tab-bar
       if (this.tabIndex === e.target.dataset.current) return false;
+      clearInterval(this.timmer)
+      this.timmer = null
       this.tabIndex = e.target.dataset.current
+      util.calcLegalTime() && this.beginPolling(this.tabIndex)
+
       this.$emit('change-i', this.tabIndex)
       let j = 1
       switch (Number(this.tabIndex)) {
@@ -69,25 +77,31 @@ export default {
         case 3: j = 2
           break
       }
-      //#ifdef H5
       if (!h5ChartK) {
         setTimeout(() => {
           h5ChartK = echarts.init(document.getElementById('canvas2'));
           h5ChartK.setOption(optionK)
         }, 50)
       }
-      //#endif
       this.getDayK(j)
 
     },
-    beginPolling() {
-      this.timmer1 === null && (this.timmer1 = setInterval(() => this.getfenshi(), 30000))
-
-    },
-    beginPollingK() {
-      if (h5ChartK || chartK) {//定时器未加！！
-        this.timmer2 === null && (this.timmer2 = setInterval(() => this.getDayK(), 3000))
-        this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(2), 60000 * 3))
+    beginPolling(i) {
+      if (this.timmer === null) {
+        switch (i) {
+          case 0:
+            this.timmer = setInterval(() => this.getfenshi(), 30000)
+            return
+          case 1:
+            this.timmer = setInterval(() => this.getDayK(4), 60000 * 60)
+            break
+          case 2:
+            this.timmer = setInterval(() => this.getDayK(), 30000)
+            break
+          case 3:
+            this.timmer = setInterval(() => this.getDayK(2), 60000 * 3)
+            break
+        }
       }
     },
     getMaxBar(val) {
@@ -310,7 +324,8 @@ export default {
     //#endif
   },
   beforeDestroy() {
-    clearInterval(this.timmer1)
+    clearInterval(this.timmer)
+    this.timmer = null
     //#ifdef H5
     h5Chart = null
     h5ChartK = null
@@ -318,7 +333,7 @@ export default {
   },
   created() {
     this.getfenshi()
-    this.beginPolling()
+    util.calcLegalTime() && this.beginPolling()
   }
 }
 </script>
@@ -327,8 +342,8 @@ div.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
     justify-content: space-around;
-    padding:.10rem .56rem  0;
-    height:.72rem;
+    padding: 0.1rem 0.56rem 0;
+    height: 0.72rem;
     font-size: 14px;
     background-color: #ededed;
     .swiper-tab-list2.active {
@@ -336,7 +351,7 @@ div.uni-tab-bar {
       color: #409de5;
     }
     .swiper-tab-list2 {
-      font-size:.30rem;
+      font-size: 0.3rem;
       font-family: MicrosoftYaHei;
       font-weight: 400;
       color: #707680;
@@ -346,11 +361,9 @@ div.uni-tab-bar {
 .h278 {
   height: 278px;
   background-color: #fff;
-
 }
 .h324 {
   height: 324px;
   background-color: #fff;
-
 }
 </style>

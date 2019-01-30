@@ -56,12 +56,14 @@ export default {
         this.$router.isBack = false
         return
       }
-      if (this.$router.isBack) {
+      if (to.meta.noAnimate) {
+        this.transitionName = '';
+      } else if (this.$router.isBack) {
         this.transitionName = 'slide-right';
       } else {
         this.transitionName = 'slide-left';
       }
-      this.$router.isBack = false
+        this.$router.isBack = false
     }
   }
 }

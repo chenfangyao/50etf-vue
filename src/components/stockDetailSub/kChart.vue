@@ -18,6 +18,7 @@ import { option, optionK, option1k, option5k, optionRk } from './echartOption.js
 import { fenshiT } from '@/components/qiQuanXiangQingSub/time.js'
 
 import { mapState } from 'vuex';
+import util from '@/common/util.js'
 
 var h5Chart = null;//h5echarts实例
 var h5ChartK = null;//h5echarts实例K线图
@@ -32,10 +33,7 @@ export default {
       Ymin: '',
       resquestState: 1,//为1时可发请求
       stockInfo: {},//分时信息对象，内含最高，最低，昨收
-      checkTimmer: null,//监听mpvue-echart 加载完事件
-      timmer1: null,//分时线定时器
-      timmer2: null,//1分线定时器
-      timmer3: null,//5分线定时器
+      timmer: null,//分时线定时器
       topTabs: [
         {
           name: '分时',
@@ -60,26 +58,17 @@ export default {
       if (this.tabIndex === e.target.dataset.current) return false;
       this.tabIndex = e.target.dataset.current
       this.$emit('change-i', this.tabIndex)
-      //#ifdef H5
       if (!h5ChartK) {
         setTimeout(() => {
           h5ChartK = echarts.init(document.getElementById('canvas2'));
           h5ChartK.setOption(optionK)
         }, 50)
       }
-      //#endif
       this.tabIndex != 0 && this.getDayK()
 
     },
     beginPolling() {
-      this.timmer1 === null && (this.timmer1 = setInterval(() => this.getfenshi(), 30000))
-
-    },
-    beginPollingK() {
-      if (h5ChartK || chartK) {//定时器未加！！
-        this.timmer2 === null && (this.timmer2 = setInterval(() => this.getDayK(), 3000))
-        this.timmer3 === null && (this.timmer3 = setInterval(() => this.getDayK(), 60000 * 3))
-      }
+      this.timmer === null && (this.timmer = setInterval(() => this.getfenshi(), 30000))
     },
     getMaxBar(val) {
       this.maxBar < val && (this.maxBar = val)
@@ -308,8 +297,8 @@ export default {
     //#endif
   },
   beforeDestroy() {
-    clearInterval(this.timmer1)
-    clearInterval(this.checkTimmer)
+    clearInterval(this.timmer)
+    this.timmer=null
     //#ifdef H5
     h5Chart = null
     h5ChartK = null
@@ -317,7 +306,7 @@ export default {
   },
   created() {
     this.getfenshi()
-    this.beginPolling()
+   util.calcLegalTime() && this.beginPolling()
   }
 }
 </script>

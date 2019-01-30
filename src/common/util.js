@@ -84,5 +84,13 @@ module.exports = {
 	formatLocation: formatLocation,
 	dateUtils: dateUtils,
 	formateTimeStr:formateTimeStr,
-	indextimmer:timemers
+  indextimmer:timemers,
+  calcLegalTime() {
+    var T = new Date(),
+      H = T.getHours(),
+      Min = T.getMinutes()
+    if (H == 10 || H == 13 || H == 14) return true;
+    if (H == 9 && Min > 29 || H == 11 && Min < 31) return true;
+    return false
+  },
 }

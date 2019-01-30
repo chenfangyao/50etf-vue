@@ -71,11 +71,13 @@ div.h44 {
       position: absolute;
     }
     span.right {
-      right:.20rem;
+      right: .20rem;
       font-size: 14px;
+      padding-bottom:0;//兼容持仓页headerTab
+
     }
     div.left {
-      padding: 13px.20rem 0.30rem;
+      padding: 13px .20rem 0 .30rem;
       height: 44px;
       left: 0;
       img {

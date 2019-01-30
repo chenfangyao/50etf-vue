@@ -66,7 +66,6 @@
 <script>
 import headerCard from '@/components/mineSub/headerCard.vue'
 import { mapState, mapMutations } from 'vuex';
-import util from '@/common/util.js'
 export default {
   data() {
     return {
@@ -129,14 +128,6 @@ export default {
   },
 	created(){
 		this.getmymessage()
-		clearInterval(util.indextimmer.indexCommonSelectStock)
-		util.indextimmer.indexCommonSelectStock = null
-		clearInterval(util.indextimmer.quotesCommonSelectStock)
-		util.indextimmer.quotesCommonSelectStock=null
-		clearInterval(util.indextimmer.quotesQryQuotationList)
-		util.indextimmer.quotesQryQuotationList=null
-		clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
-		util.indextimmer.quotesQrySingleQuotationMsg = null
 	},
   components: {
     headerCard
