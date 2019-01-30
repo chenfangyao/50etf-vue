@@ -4,43 +4,25 @@
     <div class="list-row">
       <span>开户银行</span>
       <div class="chooseCount">
-
-
-        <!--<div @click="showPicker">-->
-        <!--{{pickerText}}-->
-        <!--<span v-if="editdefault" class="arrowDown"></span>-->
-        <!--</div>-->
-
         <div  @click.self="showpicker1" >
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <!--<van-popup v-model="show"   position="bottom"  >-->
-            <!--<van-picker show-toolbar :columns="pickerValueArray" :ids="columns" @cancel="onCancelPicker" @confirm="onConfirmPicker"  @change="onChange" />-->
-          <!--</van-popup>-->
-
           <vue-pickers class="vuePickera"
                        :show="show1"
                        :columns="column1"
                        :defaultData="defaultData"
                        :selectData="pickerValueArray"
                        @cancel="onCancelPicker"
-                       @confirm="confirmFn"></vue-pickers>
-
+                       @confirm="onConfirm"></vue-pickers>
         </div>
-
       </div>
     </div>
     <div class="list-row">
       <span>开户省市</span>
       <div class="chooseCount">
-
         <div  @click.self="showpicker2" >
-          {{pickerText}}
+          {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <!--<van-popup v-model="show"   position="bottom"  >-->
-            <!--<van-picker show-toolbar :columns="pickerValueArray" :ids="columns" @cancel="onCancelPicker" @confirm="onConfirmPicker"  @change="onChange" />-->
-          <!--</van-popup>-->
-
           <vue-pickers class="vuePickera"
                        :show="show2"
                        :columns="column2"
@@ -48,16 +30,25 @@
                        :link="link"
                        :selectData="pickerCityValueArray"
                        v-on:cancel="onCancelPicker"
-                       v-on:confirm="confirmFn"></vue-pickers>
-
+                       v-on:confirm="onConfirm"
+                       @touchend="touchEnd"></vue-pickers>
         </div>
-
       </div>
     </div>
     <div class="list-row">
       <span>开户支行</span>
       <div class="chooseCount">
-
+        <div  @click.self="showpicker3" >
+          {{pickSubBankText}}
+          <span v-if="editdefault" class="arrowDown"></span>
+          <vue-pickers class="vuePickera"
+                       :show="show3"
+                       :columns="column1"
+                       :defaultData="defaultData"
+                       :selectData="pickerSubBankArray"
+                       @cancel="onCancelPicker"
+                       @confirm="onConfirm"></vue-pickers>
+        </div>
 
       </div>
     </div>
@@ -76,14 +67,6 @@
     <div class="fixBottom">
       <btn-block :txt="btntxt" @v-tap="addbank"></btn-block>
     </div>
-
-    <!--<div  @click.self="showpopup" style="background-color: gray;width: 100%;height: 20px">-->
-        <!--<van-popup v-model="show"   position="bottom"  >-->
-          <!--<van-picker show-toolbar :columns="columns"  @cancel="onCancelPicker" @confirm="onConfirmPicker"  @change="onChange" />-->
-        <!--</van-popup>-->
-    <!--</div>-->
-
-
   </div>
 </template>
 
@@ -99,7 +82,7 @@
       return {
         pickerValueArray: {},
         pickerCityValueArray: {},
-        pickerSubBankArray: [],
+        pickerSubBankArray: {},
         pickerText: '',
         pickerCityText: '',
         pickSubBankText: '',
@@ -116,6 +99,7 @@
         editdefault: false,
         show1:false,
         show2:false,
+        show3:false,
         column1: 1,
         column2: 2,
         defaultData:[],
@@ -239,9 +223,11 @@
           this.bankOrCity = 0
         }
       },
-      onChange(picker, value, index) {
-        // this.$toast(`当前值：${value}, 当前索引：${index},`);
-        // console.log(55,picker.$attrs.ids[index])
+      // 二级表单联动
+      touchEnd(val,type){
+        if(type==='provs'){
+          this.getcitylist(0, val.value)
+        }
       },
       showpicker1(){
         console.log(666)
@@ -270,32 +256,28 @@
         this.show1=false
         this.show2=false
       },
-      onConfirmPicker(value, index){
-        this.show=false
-        this.$toast(`当前值：${value}, 当前索引：${index},`);
-      },
       onConfirm(val) {
-        console.log()
+        console.log(777,val)
         // 开户银行
-        if (this.bankOrCity === 0) {
-          this.pickerText = val.label
-          this.bankid = val.value[0]
-          this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
-        }
-        // 开户省市
-        else if (this.bankOrCity === 1) {
-          let oneIndex = val.index[0]
-          let twoIndex = val.index[1]
-          this.prov_cd = this.pickerCityValueArray[oneIndex].value
-          this.city_cd = this.pickerCityValueArray[oneIndex].children[twoIndex].value
-          this.pickerCityText = val.label
-          this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
-        }
-        // 开户支行
-        else if (this.bankOrCity === 2) {
-          this.pickSubBankText = val.label
-          this.sub_id = val.value
-        }
+        // if (this.bankOrCity === 0) {
+        //   this.pickerText = val.label
+        //   this.bankid = val.value[0]
+        //   this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
+        // }
+        // // 开户省市
+        // else if (this.bankOrCity === 1) {
+        //   let oneIndex = val.index[0]
+        //   let twoIndex = val.index[1]
+        //   this.prov_cd = this.pickerCityValueArray[oneIndex].value
+        //   this.city_cd = this.pickerCityValueArray[oneIndex].children[twoIndex].value
+        //   this.pickerCityText = val.label
+        //   this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
+        // }
+        // // 开户支行
+        // else if (this.bankOrCity === 2) {
+        //   this.pickSubBankText = val.label
+        //   this.sub_id = val.value
+        // }
       },
       getbanklist() {
         var options = {
@@ -393,8 +375,7 @@
               childlist.push(childObj)
             }
             this.pickerCityValueArray.data2[prov_cd] = childlist
-            // this.pickerCityText = this.pickerCityValueArray[0].label + '-' + this.pickerCityValueArray[0].children[0].label
-            // this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
+
           } else {
 
           }
