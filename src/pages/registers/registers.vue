@@ -76,13 +76,10 @@ export default {
           user_pwd: this.pwd,
           mobile_verify: this.verificationCode,
           rel_user: ''
-        }, //发送给服务端的数据
-        method: 'POST', //请求方法全部大写，默认GET
+        }, 
+        method: 'POST', 
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log(res)
         if (res.status == 1) {
           this.showErr = false
           uni.showModal({
@@ -91,7 +88,7 @@ export default {
             success: (res) => {
               if (res.confirm) {
                 this.$navigateTo({
-                  url: '/pages/login/login',
+                  url: '/',
                   success: res => { },
                   fail: () => { },
                   complete: () => { }
@@ -189,6 +186,8 @@ export default {
 <style lang="scss" scoped>
 div.wrap{
   height: 100vh;
+  min-height: 550px;
+  position: absolute;
 }
 div.title {
   font-size: 28px;

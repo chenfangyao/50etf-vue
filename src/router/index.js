@@ -58,6 +58,7 @@ const add_card2 = resolve => require(['@/pages/forget_pwd/tep2/tep2'], resolve)
 Vue.use(Router)
 export default new Router({
   base: process.env.NODE_ENV === 'web' ? '/h5/' : '',
+  mode: process.env.NODE_ENV === 'web' ? 'history' :'hash',
   routes: [
     //首页
     { path: '/', name: 'index', component: index, meta: { isKeepAlive: true, tabbar: true, index: 0 } },

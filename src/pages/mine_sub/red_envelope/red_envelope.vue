@@ -48,7 +48,7 @@ div.wrap {
   }
   .logo {
     text-align: center;
-    margin:1.10rem 0.30rem;
+    margin:1.10rem 0 .25rem;
     img {
       width:1.40rem;
       height:1.40rem;
@@ -87,7 +87,6 @@ div.wrap {
       line-height:.98rem;
     }
     div.inputParent{
-
       margin:.45rem .49rem .30rem;
     }
     input {

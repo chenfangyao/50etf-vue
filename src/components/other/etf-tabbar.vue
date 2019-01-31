@@ -70,10 +70,10 @@ export default {
   height: 50px;
 }
 .van-tabbar-item__icon  {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
   img {
     width: 24px;
-    height: 24px;
+    height: 24px !important;
   }
 }
 </style>

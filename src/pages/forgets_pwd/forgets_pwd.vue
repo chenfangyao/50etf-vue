@@ -140,7 +140,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.wrap{height: 100vh;}
+div.wrap{height: 100vh; min-height: 550px;position: absolute;}
 div.title {
   font-size: 28px;
   font-weight: 500;
