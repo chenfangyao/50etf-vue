@@ -90,7 +90,7 @@
       <div class="sliderItem">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
-         <el-slider v-model="sliderVal" :max='maxprice.maxcounts' :disabled="sliderdisable" :min='0' :show-tooltip="false"></el-slider>
+         <el-slider v-model="sliderVal" @change="slidering" :max='maxprice.maxcounts' :disabled="sliderdisable" :min='0' :show-tooltip="false"></el-slider>
       </div>
     </div>
   </div>
@@ -227,8 +227,8 @@ export default {
       })
     },
     // 滑块滑动事件
-    slidering(e) {
-      this.sliderVal = e.detail.value
+    slidering() {
+      // this.sliderVal = e.detail.value
       this.setstockamunt(this.sliderVal)
       this.$emit('price-step', {
         num: this.sliderVal,
