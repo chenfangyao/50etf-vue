@@ -36,12 +36,12 @@
           </div>
         </scroll-view>
 
-        <date-pick v-if="showPick" @hid-me='closeme' @select-complete='getTime'></date-pick>
+        <date-pick  @hid-me='closeme' :show-pick='showPick' @select-complete='getTime'></date-pick>
     </div>
 </template>
 
 <script>
-import datePick from '@/components/datePick2.vue';
+import datePick from '@/components/datePick.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 import scrollView from '@/components/other/scroll-view'
 

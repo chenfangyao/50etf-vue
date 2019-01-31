@@ -180,11 +180,12 @@ div.newsViewTitle {
 
 .banner {
   height: 2.6rem;
-  border-radius: 0.2rem;
   overflow: hidden;
+    border-radius: 0.2rem;
   img {
     width: 100%;
     height: 100%;
+    border-radius: 0.2rem;
   }
 }
 </style>

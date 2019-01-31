@@ -33,7 +33,7 @@
         <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
     </scroll-view>
-    <date-pick v-if="showPick" @hid-me='switchDatepick' @select-complete='getTime'></date-pick>
+    <date-pick :show-pick="showPick" sb-format='1' @hid-me='switchDatepick' @select-complete='getTime'></date-pick>
 
 	</div>
 </template>

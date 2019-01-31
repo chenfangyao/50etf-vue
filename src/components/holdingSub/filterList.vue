@@ -7,7 +7,7 @@
         <img src="../../assets/mineImg/datePicker.png" />
       </div>
     </div>
-    <date-pick v-if="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
+    <date-pick sb-format='1' :show-pick="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
 
   </div>
 </template>
@@ -24,11 +24,9 @@ export default {
   },
   methods: {
     showDatepick() {
-      this.$emit('begin-choose')
       this.showPick = true
     },
     hidDatePick() {
-      this.$emit('end-choose')
       this.showPick = false
     },
     getTime(obj) {

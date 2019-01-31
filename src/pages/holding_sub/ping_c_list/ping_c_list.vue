@@ -1,9 +1,9 @@
 <template>
 	<div class="wrap">
-		<base-header title="平仓结算" v-if='showHeader' has-back='1'></base-header>
+		<base-header title="平仓结算" class='lowZindex' has-back='1'></base-header>
     <div class="heightUp">
       <div class="fix">
-        <filter-list :total='total' @begin-choose='beginChoose' @end-choose='endChoose' @select-complete='getChooseTime'></filter-list>
+        <filter-list :total='total'  @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
@@ -48,7 +48,6 @@ import scrollView from '@/components/other/scroll-view'
 export default {
   data() {
     return {
-      showHeader: true,
       list: [],
       startI: 0,
       total: '',
@@ -75,12 +74,6 @@ export default {
         this.startI++
         this.getDatas('add')
       }
-    },
-    beginChoose() {
-      this.showHeader = false
-    },
-    endChoose() {
-      this.showHeader = true
     },
     go(item) {
       this.$store.commit('setpingCItem', item)
