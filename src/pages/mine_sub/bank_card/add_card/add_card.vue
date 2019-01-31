@@ -392,7 +392,7 @@
     margin-top:.20rem;
     background: rgba(255, 255, 255, 1);
     border-bottom: 1px solid #eee;
-    line-height:1.10rem;
+    line-height:1.0rem;
     padding-left:.37rem;
     display: flex;
     align-items: center;
