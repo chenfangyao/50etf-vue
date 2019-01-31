@@ -72,7 +72,6 @@
 
 <script>
   import btnBlock from '@/components/btnBlock.vue'
-  // import mpvuePicker from '@/components/mpvuePicker.vue';
   import { Picker ,Popup } from 'vant';
   import { mapState, mapMutations } from 'vuex';
   import vuePickers from 'vue-pickers'
@@ -84,14 +83,13 @@
         pickerCityValueArray: {},
         pickerSubBankArray: {},
         pickerText: '',
-        pickerCityText: '',
+        pickerCityText: '北京-北京',
         pickSubBankText: '',
         bankid: '',
         identifica: '',
         username: '',
         bankcardid: '',
         tel: '',
-        bankOrCity: 0,
         prov_cd: '',
         city_cd: '',
         sub_id: '',
@@ -104,109 +102,7 @@
         column2: 2,
         defaultData:[],
         link: true, // 联动必须需要link 参数
-        pickData1: {
-          // 第一列的数据结构
-          data1: [
-            {
-              text: 1999,
-              value: 1999
-            },
-            {
-              text: 2001,
-              value: 2001
-            },
-            {
-              text: 2002,
-              value: 2002
-            },
-            {
-              text: 2003,
-              value: 2003
-            },
-            {
-              text: 2004,
-              value: 2004
-            },
-            {
-              text: 2005,
-              value: 2005
-            },
-          ]
-        },
-        pickData2: {
-          // 第一列数据结构
-          data1: [
-            {
-              text: '数码',
-              value: 1999,
-              id:1,
-            },
-            {
-              text: '水果',
-              value: 2001,
-              id:1,
-            },
-            {
-              text: '衣服',
-              value: 2002,
-              id:1,
-            }
-          ],
-          // 第二列数据结构
-          data2: {
-            '1999': [
-              {
-                text: '相机',
-                value: 101,
-                id:1,
-              },
-              {
-                text: '手机',
-                value: 102,
-                id:1,
-              },
-              {
-                text: '音箱',
-                value: 103,
-                id:1,
-              }
-            ],
-            '2001': [
-              {
-                text: '苹果',
-                value: 104,
-                id:1,
-              },
-              {
-                text: '香蕉',
-                value: 105,
-                id:1,
-              },
-              {
-                text: '西红柿',
-                value: 106,
-                id:1,
-              }
-            ],
-            '2002': [
-              {
-                text: '衬衫',
-                value: 107,
-                id:1,
-              },
-              {
-                text: '短裤',
-                value: 108,
-                id:1,
-              },
-              {
-                text: '上衣',
-                value: 109,
-                id:1,
-              }
-            ]
-          }
-        },
+        popindex:0,
       };
     },
     computed: mapState(['mobile', 'userinfo']),
@@ -217,67 +113,59 @@
       [Popup .name]: Popup ,
     },
     methods: {
-      showPicker() {
-        if (this.editdefault) {
-          this.$refs.typePick.show()
-          this.bankOrCity = 0
-        }
-      },
       // 二级表单联动
       touchEnd(val,type){
         if(type==='provs'){
-          this.getcitylist(0, val.value)
+          // this.getcitylist(0, val.value)
         }
       },
       showpicker1(){
-        console.log(666)
+        this.popindex=0
         if (this.editdefault) {
           this.show1 = true
         }
       },
       showpicker2(){
+        this.popindex=1
         if (this.editdefault) {
           this.show2 = true
         }
       },
-      showCityPicker() {
+      showpicker3(){
+        this.popindex=2
         if (this.editdefault) {
-          this.$refs.cityPick.show()
-          this.bankOrCity = 1
-        }
-      },
-      showBankPicker() {
-        if (this.editdefault) {
-          this.$refs.subBankPick.show()
-          this.bankOrCity = 2
+          this.show3 = true
         }
       },
       onCancelPicker() {
         this.show1=false
         this.show2=false
+        this.show3=false
       },
       onConfirm(val) {
-        console.log(777,val)
-        // 开户银行
-        // if (this.bankOrCity === 0) {
-        //   this.pickerText = val.label
-        //   this.bankid = val.value[0]
-        //   this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
-        // }
-        // // 开户省市
-        // else if (this.bankOrCity === 1) {
-        //   let oneIndex = val.index[0]
-        //   let twoIndex = val.index[1]
-        //   this.prov_cd = this.pickerCityValueArray[oneIndex].value
-        //   this.city_cd = this.pickerCityValueArray[oneIndex].children[twoIndex].value
-        //   this.pickerCityText = val.label
-        //   this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
-        // }
-        // // 开户支行
-        // else if (this.bankOrCity === 2) {
-        //   this.pickSubBankText = val.label
-        //   this.sub_id = val.value
-        // }
+        console.log(33,val)
+        switch (this.popindex){
+          case 0:
+            this.pickerText=val.select1.text
+            this.bankid=val.select1.value
+            this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
+                break
+          case 1:
+            this.pickerCityText=val.select1.text+'-'+val.select2.text
+            this.prov_cd=val.select1.value
+            this.city_cd=val.select2.value
+            this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
+            break
+          case 2:
+            var text=val.select1.text.replace(this.pickerText,'')
+            text=text.replace('股份有限公司','')
+            this.pickSubBankText=text
+            this.sub_id = val.select1.value
+            break
+        }
+        this.show1=false
+        this.show2=false
+        this.show3=false
       },
       getbanklist() {
         var options = {
@@ -300,6 +188,7 @@
               data1.push(newpickarry)
             }
             this.pickerValueArray.data1=data1
+            console.log(444,this.pickerValueArray)
           } else {
             this.bankid = ''
             this.pickerText = '获取银行卡列表失败'
@@ -320,15 +209,6 @@
           console.log('省列表', res)
           if (res.status) {
             this.prov_cd = res.data.list[0].prov_cd
-            // this.pickerCityValueArray = []
-            // for (let i = 0; i < res.data.list.length; i++) {
-            //   let provObj = {}
-            //   provObj.label = res.data.list[i].prov_nm
-            //   provObj.value = res.data.list[i].prov_cd
-            //   provObj.children = []
-            //   this.pickerCityValueArray.push(provObj)
-            // }
-
             this.pickerCityValueArray = {}
             let data1=[]
             let data2={}
@@ -338,11 +218,12 @@
               provObj.text = res.data.list[i].prov_nm
               provObj.value = res.data.list[i].prov_cd
               data1.push(provObj)
-              // data2.keyvalue=[]
-              data2[keyvalue]=res.data.list[i].prov_cd
+              data2[keyvalue]=keyvalue
             }
             this.pickerCityValueArray.data1=data1
             this.pickerCityValueArray.data2=data2
+            // 默认设置第一个市为北京
+            this.pickerCityValueArray.data2['110']=[{text:'北京',value:'1100'}]
             // 加载第一个市
             this.getcitylist(0, this.pickerCityValueArray.data1[0].value)
           } else {
@@ -375,7 +256,7 @@
               childlist.push(childObj)
             }
             this.pickerCityValueArray.data2[prov_cd] = childlist
-
+            this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
           } else {
 
           }
@@ -400,15 +281,23 @@
           // res为服务端返回数据的根对象
           console.log('支行列表', res)
           if (res.status) {
-            this.pickSubBankText = res.data.list[0].sub_name
-            this.pickerSubBankArray = []
+            var subBankText=res.data.list[0].sub_name
+            subBankText=subBankText.replace(this.pickerText,'')
+            subBankText=subBankText.replace('股份有限公司','')
+            this.pickSubBankText = subBankText
+            let data1 = []
             this.sub_id = res.data.list[0].sub_id
+            this.pickerSubBankArray={}
             for (let i = 0; i < res.data.list.length; i++) {
               let bankObj = {}
-              bankObj.label = res.data.list[i].sub_name
+              var text=res.data.list[i].sub_name
+              text=text.replace(this.pickerText,'')
+              text=text.replace('股份有限公司','')
+              bankObj.text = text
               bankObj.value = res.data.list[i].sub_id
-              this.pickerSubBankArray.push(bankObj)
+              data1.push(bankObj)
             }
+            this.pickerSubBankArray.data1=data1
             if (this.btntxt == '修改') {
               this.mybankinfo()
             }
@@ -450,7 +339,17 @@
       },
       addbank() {
         if (this.btntxt == '保存') {
-          this.$navigateTo({ url: '/pages/forget_pwd/tep2/tep2?type=1&sub_id=' + this.sub_id + '&identifica=' + this.identifica + '&username=' + this.username + '&bankcardid=' + this.bankcardid + '' })
+          // this.$navigateTo({ url: '/pages/forget_pwd/tep2/tep2?type=1&sub_id=' + this.sub_id + '&identifica=' + this.identifica + '&username=' + this.username + '&bankcardid=' + this.bankcardid + '' })
+          this.$router.push({
+            path:'/pages/forget_pwd/tep2/tep2',
+            query:({
+              type:1,
+              sub_id:this.sub_id,
+              identifica:this.identifica,
+              username:this.username,
+              bankcardid:this.bankcardid
+            })
+          })
         }
         this.btntxt = '保存'
         this.editdefault = true
@@ -458,19 +357,20 @@
       pickChange(e) {
       }
     },
-    onLoad(opt) {
-      this.getbanklist()
-      this.getprovlist()
-      // this.mybankinfo()
-      // this.username=this.userinfo.real_name
-      if (opt.bankinfo == 0) {
-        this.editdefault = true
-        this.btntxt = '保存'
-      }
-    },
+    // onLoad(opt) {
+    //   this.getbanklist()
+    //   this.getprovlist()
+    //   // this.mybankinfo()
+    //   // this.username=this.userinfo.real_name
+    //   if (opt.bankinfo == 0) {
+    //     this.editdefault = true
+    //     this.btntxt = '保存'
+    //   }
+    // },
     created(){
       this.getbanklist()
       this.getprovlist()
+      // this.getsubbanklist('102', '110', '1000')
       // if (opt.bankinfo == 0) {
       //   this.editdefault = true
       //   this.btntxt = '保存'
@@ -537,9 +437,6 @@
     border-left-color: transparent;
     border-right-color: transparent;
   }
-
-
-
   }
 
 </style>

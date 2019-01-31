@@ -49,6 +49,7 @@ const newdetail = resolve => require(['@/pages/msg_common/detail/detail'], resol
 const riskBook = resolve => require(['@/pages/risk_book/risk_book'], resolve)
 const registers = resolve => require(['@/pages/registers/registers'], resolve)
 const forgets_pwd = resolve => require(['@/pages/forgets_pwd/forgets_pwd'], resolve)
+const add_card2 = resolve => require(['@/pages/forget_pwd/tep2/tep2'], resolve)
 
 // 测试
 // const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
@@ -106,6 +107,8 @@ export default new Router({
     { path: '/pages/mine_sub/capital_flow/capital_flow', name: 'capital_flow', component: capital_flow,  },
     // 添加银行卡
     { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card,  },
+    // 添加银行卡第二步
+    { path: '/pages/forget_pwd/tep2/tep2', name: 'add_card2', component: add_card2,  },
     // 交易规则
     { path: '/pages/mine_sub/trading_rules/trading_rules', name: 'trading_rules', component: trading_rules, },
     // 我的红包
@@ -159,7 +162,7 @@ var pages = [
       "scrollIndicator": "none"
     }
   },
-  
+
   {
     "path": "pages/mine_sub/bank_card/add_card_btn/add_card_btn",
     "style": {

@@ -52,7 +52,7 @@ export default {
 			}else if(this.type==1){
 				this.addmybankcard()
 			}
-      
+
     },
     handleBlur() {
       console.log('input失去焦点时触发');
@@ -68,7 +68,7 @@ export default {
                                     // cardname:this.userinfo.real_name,
 									idno:this.identifica,
 									mobile:this.userinfo.mobile,
-									mobile_verify:this.vCode			
+									mobile_verify:this.vCode
 								}
 						}
 						this.$httpReq(options).then((res) => {
@@ -111,9 +111,9 @@ export default {
 					// res为服务端返回数据的根对象
 					console.log('验证码', res)
 					if(res.status){
-					
+
 					}else{
-						
+
 					}
 			}).catch((err) => {
 					// 请求失败的回调
@@ -121,22 +121,39 @@ export default {
 			})
 			}
   },
-	onLoad(opt){
-		this.type=opt.type
-		// 忘记密码
-		if(opt.type==0){
-			this.tel=opt.uName
-		}
-		// 绑定银行类型
-		else if(opt.type==1){
-			this.username=opt.username
-			this.sub_id=opt.sub_id
-			this.identifica=opt.identifica
-			this.bankcardid=opt.bankcardid
-			this.tel=this.userinfo.mobile
-			this.getverificacode()
-		}
-	}
+	// onLoad(opt){
+	// 	this.type=opt.type
+	// 	// 忘记密码
+	// 	if(opt.type==0){
+	// 		this.tel=opt.uName
+	// 	}
+	// 	// 绑定银行类型
+	// 	else if(opt.type==1){
+	// 		this.username=opt.username
+	// 		this.sub_id=opt.sub_id
+	// 		this.identifica=opt.identifica
+	// 		this.bankcardid=opt.bankcardid
+	// 		this.tel=this.userinfo.mobile
+	// 		this.getverificacode()
+	// 	}
+	// }
+
+  created(){
+    var opt=this.$route.query
+    // 忘记密码
+    if(opt.type==0){
+      this.tel=opt.uName
+    }
+    // 绑定银行类型
+    else if(opt.type==1){
+      this.username=opt.username
+      this.sub_id=opt.sub_id
+      this.identifica=opt.identifica
+      this.bankcardid=opt.bankcardid
+      this.tel=this.userinfo.mobile
+      this.getverificacode()
+    }
+  }
 }
 </script>
 
@@ -144,17 +161,17 @@ export default {
 div.title {
   font-size: 28px;
   font-weight: 500;
-  margin: 0 0.24rem.32rem;
+  margin: 0 0 .24rem .32rem;
   color: #333;
 }
 div.subTitle {
-  margin: 01.46rem2.12rem.32rem;
+  margin: 0 1.46rem 2.12rem .32rem;
   font-size: 14px;
   font-weight: 500;
   color: #454545;
   line-height:.40rem;
 }
 div.container {
-  margin: 0.55rem;
+  margin: 0 .55rem;
 }
 </style>
