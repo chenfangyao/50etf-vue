@@ -13,13 +13,47 @@
         </div>
         <div class="chooseCount">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
-          <div v-show="!tabActive" @click="showPicker">
+          <div v-show="!tabActive" @click.self="showPopCheckbox">
             <span class="txt">{{maxprice.own_amount}}张</span>
             <uni-icon type="arrowdown" size="24"></uni-icon>
+            <van-popup v-model="showpop" position="bottom">
+              <div >
+                <div class="pop-title">
+                  <span class="cancelCheck" @click="cancelCheck">取消</span>
+                  <span class="confirmCheck" @click="confirmCheck">确认</span>
+                </div>
+                <div style="height: 200px;overflow-y: auto">
+                  <van-cell clickable >
+                    <van-checkbox v-model='checked' @change="allcheckbox" />
+                    <span style="position: absolute;left:40px;top:5px">全部</span>
+                  </van-cell>
+                  <van-checkbox-group v-model="result" >
+                    <van-cell-group>
+                      <!--<van-cell v-for="(item,index) in items" clickable :key="index" :title="item.name" @click="toggle(index)" style="position: relative">-->
+                      <van-cell v-for="(item,index) in items" clickable :key="index" @click="toggle(index)" style="position: relative">
+                        <van-checkbox :name="item.valueid" ref="checkboxes" />
+                        <img :src="props.checked ? icon.active : icon.normal" slot="icon"
+                             slot-scope="props">
+                        <span style="position: absolute;left:40px;top:5px">{{item.name}}</span>
+                        <span style="position: absolute;right:100px;top:5px">{{item.value}}张</span>
+                      </van-cell>
+                    </van-cell-group>
+                  </van-checkbox-group>
+                </div>
+              </div>
+            </van-popup>
+
           </div>
-          <div v-show="tabActive" @click="showPicker">
+          <div v-show="tabActive" @click.self="showPickers">
             <span class="txt">{{pickerText}}</span>
             <uni-icon type="arrowdown" size="24"></uni-icon>
+            <vue-pickers class="vuePickera"
+                         :show="show1"
+                         :columns="column1"
+                         :defaultData="defaultData"
+                         :selectData="pickerValueArray"
+                         @cancel="onCancelPicker"
+                         @confirm="onConirmPicker"></vue-pickers>
           </div>
         </div>
       </div>
@@ -27,7 +61,6 @@
     <div class="commonStyle1">{{pricetitle}}</div>
     <div class="uni-flex line2">
       <div>
-        <!-- <img v-if="btn3_i" @click="plusStep2(-1)" class='opacityclass' src="/assets/openCloseImg/minus.png"> -->
         <img
           @click="plusStep2(-1)"
           :class="!btn3_i?'opacityclass':''"
@@ -63,24 +96,24 @@
         <span class="commonStyle2">{{maxprice.own_amount}}</span>
       </div>
     </div>
-    <mpvue-picker
-      themeColor="#007AFF"
-      ref="typePick"
-      mode="selector"
-      :deepLength="1"
-      :pickerValueDefault="[0]"
-      @onConfirm="onConfirm"
-      @onCancel="onCancel"
-      :picker-value-array="pickerValueArray"
-    ></mpvue-picker>
-    <mpvue-checkbox
-      themeColor="#007AFF"
-      ref="typeCheckbox"
-      :pickerValueDefault="[0]"
-      @onConfirm="onConfirms"
-      @onCancel="onCancel"
-      :picker-value-array="items"
-    ></mpvue-checkbox>
+    <!--<mpvue-picker-->
+      <!--themeColor="#007AFF"-->
+      <!--ref="typePick"-->
+      <!--mode="selector"-->
+      <!--:deepLength="1"-->
+      <!--:pickerValueDefault="[0]"-->
+      <!--@onConfirm="onConfirm"-->
+      <!--@onCancel="onCancel"-->
+      <!--:picker-value-array="pickerValueArray"-->
+    <!--&gt;</mpvue-picker>-->
+    <!--<mpvue-checkbox-->
+      <!--themeColor="#007AFF"-->
+      <!--ref="typeCheckbox"-->
+      <!--:pickerValueDefault="[0]"-->
+      <!--@onConfirm="onConfirms"-->
+      <!--@onCancel="onCancel"-->
+      <!--:picker-value-array="items"-->
+    <!--&gt;</mpvue-checkbox>-->
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div>
         <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
@@ -96,11 +129,13 @@
   </div>
 </template>
 <script>
-import mpvuePicker from '@/components/mpvuePicker.vue';
-import mpvueCheckbox from '@/components/mpvueCheckbox.vue';
+// import mpvuePicker from '@/components/mpvuePicker.vue';
+// import mpvueCheckbox from '@/components/mpvueCheckbox.vue';
 import uniIcon from "@/components/uni-icon.vue";
 import { mapState, mapMutations } from 'vuex';
 import { Slider  } from 'element-ui';
+import { Popup,Cell, CellGroup,Checkbox, CheckboxGroup} from 'vant';
+import vuePickers from 'vue-pickers'
 
 export default {
   props: {
@@ -121,10 +156,16 @@ export default {
     },
   },
   components: {
-    mpvuePicker,
+    // mpvuePicker,
     uniIcon,
-    mpvueCheckbox,
-    [Slider.name]:Slider
+    // mpvueCheckbox,
+    vuePickers,
+    [Slider.name]:Slider,
+    [Popup.name]:Popup,
+    [Cell.name]:Cell,
+    [CellGroup.name]:CellGroup,
+    [Checkbox.name]:Checkbox,
+    [CheckboxGroup.name]:CheckboxGroup,
   },
   data() {
     return {
@@ -133,19 +174,32 @@ export default {
       btn3_i: 0,
       sliderVal: 0,
       pickerText: '', //选择的值,默认取lists的第一个值，从后端获取后初始化
-      pickerValueArray: [], //后端获得lists替换此处
+      pickerValueArray: {}, //后端获得lists替换此处
       pricevalue: '',
       pricetitle: '最新价',
       fbcclength: '',
       hbcclength: '',
-      items: [],
       sliderdisable: false,
+      show1:false,
+      column1:1,
+      defaultData:[],
+      showpop:false,
+      checked:false,
+      icon: {
+        normal: '../../assets/holdingImg/unchecked.png',
+        active: '../../assets/holdingImg/checked.png'
+      },
+      result: [],
+      items: []
     }
   },
   methods: {
     ...mapMutations(['setnewprice', 'setstockamunt', 'setenttype', 'setentrusttype', 'setfbccid', 'sethbfbcell',
       'setcctotalmoney'
     ]),
+    cancelCheck(){
+      this.showpop=false
+    },
     // 合并分笔
     tapChange(val) {
       this.tabActive = val
@@ -228,7 +282,6 @@ export default {
     },
     // 滑块滑动事件
     slidering() {
-      // this.sliderVal = e.detail.value
       this.setstockamunt(this.sliderVal)
       this.$emit('price-step', {
         num: this.sliderVal,
@@ -283,35 +336,46 @@ export default {
         price: this.pricevalue
       })
     },
-
-    onCancel(e) {
-      // console.log(e)
+    toggle(index) {
+      this.$refs.checkboxes[index].toggle();
+      console.log(55, this.result)
     },
-    onConfirm(val) {
-      this.setfbccid(val.id[0])
-      this.pickerText = '笔 ' + (parseInt(val.index) + 1) + ' | ' + val.value + '张'
+    allcheckbox(e) {
+      this.result = []
+      if (e == true) {
+        for (var i = 0; i < this.items.length; i++) {
+          this.result[i] = this.items[i].valueid
+        }
+      }
+    },
+    onCancelPicker(){
+      this.show1=false
+    },
+    // 新的分笔平仓确认
+    onConirmPicker(val){
+      console.log(5555,val)
+      this.show1=false
+      this.setfbccid(val.select1.id)
+      this.$emit('fb-num', parseInt(val.select1.value))
+      this.pickerText = '笔 ' + parseInt(val.select1.index) + ' | ' + val.select1.value + '张'
       if (this.onClose) {
-        this.maxprice.maxcounts = parseInt(val.value[0])
+        this.maxprice.maxcounts = parseInt(val.select1.value[0])
       }
       this.sliderVal = 0
-      this.$emit('fb-num', parseInt(val.value[0]))
     },
-    // checkbox确认
-    onConfirms(val) {
-      // 全卖调用合并持仓接口
+    // 合并平仓确认
+    confirmCheck(){
+      console.log(444,this.result)
+      this.showpop=false
       var totalhynum = 0
-
-      this.sethbfbcell(val)
-      if (val[0] == 'all') {
+      this.sethbfbcell(this.result)
+      if(this.checked){
         this.setstockamunt(this.maxprice.enable_amount)
         totalhynum = this.maxprice.enable_amount
-      }
-      // 循环调用分笔持仓接口
-      else {
-        var tempArr = []
+      }else{
         var allNum = 0
-        for (var k = 0; k < val.length; k++) {
-          var hynum = val[k].split('-')[0]
+        for (var k = 0; k < this.result.length; k++) {
+          var hynum = this.result[k].split('-')[0]
           allNum += parseInt(hynum)
         }
         this.setstockamunt(allNum)
@@ -321,17 +385,12 @@ export default {
       var djmoney = parseFloat(totalhynum * parseFloat(this.pricevalue) * hycsnum)
       this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)).toFixed(2))
     },
-    // 单列
-    showPicker() {
-      if (this.tabActive) {
-        if (this.pickerValueArray[0]) {
-          this.$refs.typePick.show()
-        }
-      } else {
-        this.$refs.typeCheckbox.show()
-      }
-
+    showPickers(){
+      this.show1=true
     },
+    showPopCheckbox(){
+      this.showpop=true
+    }
   },
   watch: {
     qrysingle(val) {
@@ -390,32 +449,25 @@ export default {
       if (val) {
         this.fbcclength = this.fbcclist.length
         this.hbcclength = this.hbcclist.length
-        this.pickerValueArray = []
         this.pickerText = '0'
         // 设置默认分笔持仓id
         this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         if (this.fbcclist[0]) {
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
+          var data1=[]
+          this.pickerValueArray={}
           for (var i = 0; i < this.fbcclist.length; i++) {
-            var pickobj = new Object()
-            pickobj.label = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
+            var pickobj = {}
+            pickobj.text = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
             pickobj.name = '第' + parseInt(i + 1) + '笔'
             pickobj.value = this.fbcclist[i].enable_amount.toString()
             pickobj.index = parseInt(i + 1)
-            pickobj.id = this.fbcclist[i].id
+            pickobj.valueid = this.fbcclist[i].enable_amount.toString()+'-'+this.fbcclist[i].id
             pickobj.checked = false
-            this.pickerValueArray.push(pickobj)
-
+            data1.push(pickobj)
           }
-          this.items = []
-          var firtArr = [{
-            value: 'All',
-            name: '全部',
-            id: '000',
-            checked: false
-          },]
-          // this.items=this.items.concat(firtArr).concat(this.pickerValueArray)
-          this.items = this.pickerValueArray
+          this.pickerValueArray.data1=data1
+          this.items = data1
         }
       }
     },
@@ -557,7 +609,6 @@ div.wrap {
     background-color: #efefef;
     margin: 0.3rem 0 0.3rem 1px;
     position: relative;
-
     .slider {
       position: absolute;
       width: 52%;
@@ -628,6 +679,25 @@ div.wrap {
   .opacityclass {
     opacity: 0;
   }
+  .pop-title{
+    height: 50px;
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid #eeeeee;
+    span{
+      position: absolute;
+      top:10px;
+      font-size: 16px;
+    }
+  }
+.confirmCheck{
+  right:10px;
+  color: #3b7bd5;
+}
+.cancelCheck{
+  left:10px;
+  color: #9c9c9c;
+}
 }
 
 </style>
