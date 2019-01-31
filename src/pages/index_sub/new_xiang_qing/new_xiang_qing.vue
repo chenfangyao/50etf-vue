@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <base-header title="资讯详情" :hasBack="true"></base-header>
     <div class="grayline"></div>
     <div class="artconent">
@@ -11,8 +11,7 @@
           <span>{{artlittle}}</span>
           <span>{{update_time}}</span>
         </div>
-        <div class="artwenan" v-html="artwenan">
-        </div>
+        <div class="artwenan" v-html="artwenan"></div>
       </div>
     </div>
   </div>

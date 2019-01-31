@@ -135,7 +135,7 @@ export default {
 
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
-        this.dealquotationStr()
+        this.codeList&&this.dealquotationStr()
       }).catch((err) => {
         // 请求失败的回调
         console.error(err, '捕捉')

@@ -1,7 +1,7 @@
 export const commonOption = {
   tooltip: {
-    trigger: 'item',
-    triggerOn: 'mousemove',
+    trigger: 'axis',
+    // triggerOn: 'mousemove',
     axisPointer: {
       type: 'cross'
     },
@@ -114,7 +114,7 @@ export const optionK = {
   },
   series: [
     {
-      name: 'K',
+      name: 'K线',
       type: 'candlestick',
       data: [],
       xAxisIndex: 0,

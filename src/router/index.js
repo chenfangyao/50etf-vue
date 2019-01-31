@@ -135,13 +135,6 @@ export default new Router({
 var pages = [
   // "enablePullDownRefresh" : true
   {
-    "path": "pages/forget_pwd/tep2/tep2",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
     "path": "pages/forget_pwd/tep3/tep3",
     "style": {
       "titleNView": false,

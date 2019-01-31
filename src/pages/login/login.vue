@@ -145,7 +145,7 @@ export default {
 
 <style lang="scss" scoped>
 div.wrap {
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   div.img {
     text-align: center;
