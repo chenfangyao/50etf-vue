@@ -1,12 +1,10 @@
 <template>
   <div class="wrap">
-    <base-header title="成交结果" has-back="1" v-if="showHeader"></base-header>
+    <base-header title="成交结果" class='lowZindex' has-back="1" ></base-header>
     <div class="heightUp">
       <div class="fix">
         <filter-list
           :total="total"
-          @begin-choose="beginChoose"
-          @end-choose="endChoose"
           @select-complete="getChooseTime"
         ></filter-list>
       </div>
@@ -68,7 +66,6 @@ export default {
       resquestState: 0,
       businessTime: [],//过滤用
       business_amount: [],//过滤用
-      showHeader: true,
       sdate: 20080101,
       edate: 20300101,
 
@@ -94,12 +91,6 @@ export default {
         this.businessTime.push(this.$formatetimestr(item.business_time))
         this.business_amount.push(parseInt(item.business_amount))
       });
-    },
-    beginChoose() {
-      this.showHeader = false
-    },
-    endChoose() {
-      this.showHeader = true
     },
     getDatas(add) {
       this.resquestState = 1

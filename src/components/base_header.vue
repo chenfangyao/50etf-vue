@@ -90,4 +90,6 @@ div.h44 {
     height: var(--status-bar-height);
   }
 }
+  .lowZindex{div.headerContainer{z-index: 0}}
+
 </style>

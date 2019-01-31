@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import datePick from '@/components/datePick2.vue';
+import datePick from '@/components/datePick.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 import scrollView from '@/components/other/scroll-view'
 
