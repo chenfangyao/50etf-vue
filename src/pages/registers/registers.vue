@@ -82,22 +82,8 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
           this.showErr = false
-          uni.showModal({
-            title: '注册成功',
-            content: '现在去登录',
-            success: (res) => {
-              if (res.confirm) {
-                this.$navigateTo({
-                  url: '/',
-                  success: res => { },
-                  fail: () => { },
-                  complete: () => { }
-                });
-              } else if (res.cancel) {
-                console.log('用户点击取消');
-              }
-            }
-          })
+          this.$toast('注册成功')
+          this.$navigateTo({url: '/pages/login/login', });
         } else {
           this.showErr = true
           if (res.info) {
