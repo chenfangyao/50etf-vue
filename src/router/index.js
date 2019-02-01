@@ -68,7 +68,11 @@ export default new Router({
     { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1 } },
     { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail, meta:{noAnimate:true} },
     { path: '/open_close', name: 'openClose', component: openClose,  },
+    // 开仓下单
     { path: '/entrustSucc', name: 'entrustSucc', component: entrustSucc,  },
+
+
+
     //持仓
     { path: '/holding_warehouse', name: 'holding_warehouse', component: holding_warehouse, meta: { isKeepAlive: true, tabbar: true, index: 2 } },
     { path: '/clinch', name: 'clinch', component: clinch },

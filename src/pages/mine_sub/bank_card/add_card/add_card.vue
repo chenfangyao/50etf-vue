@@ -143,7 +143,6 @@
         this.show3=false
       },
       onConfirm(val) {
-        console.log(33,val)
         switch (this.popindex){
           case 0:
             this.pickerText=val.select1.text
@@ -188,7 +187,6 @@
               data1.push(newpickarry)
             }
             this.pickerValueArray.data1=data1
-            console.log(444,this.pickerValueArray)
           } else {
             this.bankid = ''
             this.pickerText = '获取银行卡列表失败'

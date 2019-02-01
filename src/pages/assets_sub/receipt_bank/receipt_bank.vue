@@ -61,10 +61,9 @@ export default {
       oInput.select();
       document.execCommand('copy');
       document.body.removeChild(oInput);
-      uni.showToast({
-        title: '复制成功',
-        duration: 500
-      });
+      this.$toast.success({
+        message:'复制成功'
+      })
       //#endif
       //#ifndef H5
       uni.setClipboardData({

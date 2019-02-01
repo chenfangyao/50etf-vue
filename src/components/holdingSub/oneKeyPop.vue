@@ -62,11 +62,9 @@ export default {
     },
     stocksell() {
 			if(this.resObj.last_price<0.0002){
-				uni.showToast({
-					title: '当前价格无法一键平仓',
-					mask: false,
-					duration: 1500
-				});
+				this.$toast.fail({
+          message:'当前价格无法一键平仓'
+        })
 				return
 			}
       let hid = ''

@@ -122,7 +122,6 @@
 				var items = this.pickerValueArray,
 					values = e.detail.value;
 				this.seleclCheckArr = values
-				console.log(999, values)
 				//             for (var i = 0, lenI = items.length; i < lenI; ++i) {
 				//                 items[i].checked = false;
 				//                 for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
@@ -135,7 +134,6 @@
 			},
 			checkboxChangeAll: function() {
 				this.checkboxAll = !this.checkboxAll
-				console.log(999, this.checkboxAll)
 				var items = this.pickerValueArray
 				if (this.checkboxAll) {
 					for (var k = 0; k < items.length; k++) {

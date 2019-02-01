@@ -4,10 +4,10 @@
 
     <img class="bg" src="../../../assets/mineImg/inviteFriendBg.png">
     <div class="QRcode">
-      
+
 			<qrcode-vue :logoSrc="imageUrl" :text="imageUrl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
     </div>
-		
+
     <div class="txt">{{baseurl}}</div>
 
     <div class="btn">
@@ -47,10 +47,9 @@ export default {
       oInput.select();
       document.execCommand('copy');
       document.body.removeChild(oInput);
-      uni.showToast({
-        title: '复制成功',
-        duration: 500
-      });
+      this.$toast.success({
+        message:'复制成功'
+      })
       //#endif
       //#ifndef H5
       uni.setClipboardData({

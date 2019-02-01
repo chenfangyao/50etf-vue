@@ -62,11 +62,9 @@ export default {
 			//平仓
       if (this.onClose) {
 				if(this.newprice<0.0002){
-					uni.showToast({
-						title: '当前价格无法平仓！',
-						mask: false,
-						duration: 1500
-					});
+					this.$toast.fail({
+            message:'当前价格无法平仓！'
+          })
 					return
 				}
 				if(this.hbfbcell.length && !this.entrusttype){
@@ -74,8 +72,12 @@ export default {
 					if(this.hbfbcell[0]==='all'){
 						this.stocksell('',this.maxbuy.enable_amount)
 					}else{//合并分笔平仓
-						var ii=0
+            // 定时器选执行一次
+            var idnumber=this.hbfbcell[0].split('-')
+            this.stocksell(parseInt(idnumber[1]),parseInt(idnumber[0]))
+						var ii=1
 						var hbfbcellinterval=null
+            // 执行定时器
 						hbfbcellinterval=setInterval(()=>{
 							if(ii<this.hbfbcell.length){
 								var hynum=this.hbfbcell[ii].split('-')[0]
@@ -86,7 +88,7 @@ export default {
 								clearInterval(hbfbcellinterval)
 							}
 						},3500)
-					}		
+					}
 				}else{//分笔平仓
 					this.stocksell(this.fbccid,this.stockamunt)
 				}
@@ -124,9 +126,16 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          this.$redirectTo({
-            url: '/entrust_succ' ,
-            query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
+          // this.$redirectTo({
+          //   url: '/entrust_succ' ,
+          //   query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
+          // })
+          this.$router.push({
+            path:'/entrustSucc',
+            query:({
+              type:this.onClose,
+              code:parseInt(this.resObj.stockCode)
+            })
           })
         }
         else {
@@ -138,7 +147,7 @@ export default {
       })
     },
     stocksell(fbccid,number) {
-      let hid
+      let hid=parseInt(fbccid)
       if (this.entrusttype || this.hbfbcell.length) {
         hid = parseInt(fbccid)
       }
@@ -155,7 +164,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-           this.$redirectTo({
+           this.$router.push({
             url: '/entrust_succ' ,
             query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
           })

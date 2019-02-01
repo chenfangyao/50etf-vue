@@ -21,26 +21,38 @@ export default {
   methods: {
     ...mapMutations(['setweituoindex']),
     go() {
-      this.$redirectTo({
-        url: '/pages/quotes_sub/open_close/open_close?pinkaiC=' + this.type + '&code=' + this.code + '',
-      });
-
+      this.$router.push({
+        path:'/open_close',
+        query:{
+          pinkaiC:this.type,
+          code:this.code
+        }
+      })
     },
     gowt() {
       this.setweituoindex(2)
-      uni.switchTab({
-        url: '/pages/tabBar/holding_warehouse/holding_warehouse'
+      this.$router.push({
+        path:'/holding_warehouse'
       })
     }
   },
-  onLoad(opt) {
+  // onLoad(opt) {
     // 暂时注释
-    // 		if(opt.type=="true"){
-    // 			this.type=1
-    // 		}else{
-    // 			this.type=0
-    // 		}	
-    this.code = opt.code
+  // 		if(opt.type=="true"){
+  // 			this.type=1
+  // 		}else{
+  // 			this.type=0
+  // 		}
+  //   this.code = opt.code
+  // }
+  created(){
+    var opt=this.$route.query
+    		if(opt.type=="true"){
+    			this.type=1
+    		}else{
+    			this.type=0
+    		}
+    this.code=opt.code
   }
 }
 </script>

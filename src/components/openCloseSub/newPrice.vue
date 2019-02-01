@@ -96,24 +96,6 @@
         <span class="commonStyle2">{{maxprice.own_amount}}</span>
       </div>
     </div>
-    <!--<mpvue-picker-->
-      <!--themeColor="#007AFF"-->
-      <!--ref="typePick"-->
-      <!--mode="selector"-->
-      <!--:deepLength="1"-->
-      <!--:pickerValueDefault="[0]"-->
-      <!--@onConfirm="onConfirm"-->
-      <!--@onCancel="onCancel"-->
-      <!--:picker-value-array="pickerValueArray"-->
-    <!--&gt;</mpvue-picker>-->
-    <!--<mpvue-checkbox-->
-      <!--themeColor="#007AFF"-->
-      <!--ref="typeCheckbox"-->
-      <!--:pickerValueDefault="[0]"-->
-      <!--@onConfirm="onConfirms"-->
-      <!--@onCancel="onCancel"-->
-      <!--:picker-value-array="items"-->
-    <!--&gt;</mpvue-checkbox>-->
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div>
         <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
@@ -129,14 +111,11 @@
   </div>
 </template>
 <script>
-// import mpvuePicker from '@/components/mpvuePicker.vue';
-// import mpvueCheckbox from '@/components/mpvueCheckbox.vue';
 import uniIcon from "@/components/uni-icon.vue";
 import { mapState, mapMutations } from 'vuex';
 import { Slider  } from 'element-ui';
 import { Popup,Cell, CellGroup,Checkbox, CheckboxGroup} from 'vant';
 import vuePickers from 'vue-pickers'
-
 export default {
   props: {
     onClose: {
@@ -156,9 +135,7 @@ export default {
     },
   },
   components: {
-    // mpvuePicker,
     uniIcon,
-    // mpvueCheckbox,
     vuePickers,
     [Slider.name]:Slider,
     [Popup.name]:Popup,
@@ -338,7 +315,6 @@ export default {
     },
     toggle(index) {
       this.$refs.checkboxes[index].toggle();
-      console.log(55, this.result)
     },
     allcheckbox(e) {
       this.result = []
@@ -353,7 +329,6 @@ export default {
     },
     // 新的分笔平仓确认
     onConirmPicker(val){
-      console.log(5555,val)
       this.show1=false
       this.setfbccid(val.select1.id)
       this.$emit('fb-num', parseInt(val.select1.value))
@@ -365,7 +340,6 @@ export default {
     },
     // 合并平仓确认
     confirmCheck(){
-      console.log(444,this.result)
       this.showpop=false
       var totalhynum = 0
       this.sethbfbcell(this.result)
@@ -463,6 +437,7 @@ export default {
             pickobj.value = this.fbcclist[i].enable_amount.toString()
             pickobj.index = parseInt(i + 1)
             pickobj.valueid = this.fbcclist[i].enable_amount.toString()+'-'+this.fbcclist[i].id
+            pickobj.id =this.fbcclist[i].id
             pickobj.checked = false
             data1.push(pickobj)
           }
