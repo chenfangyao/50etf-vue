@@ -3,7 +3,7 @@
 		<base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
     <div class="line1 uni-flex">
         <span>总计：{{total}}笔</span>
-        <img class="right" @click="switchDatepick" src="../../../assets/mineImg/datePicker.png">
+        <img class="right" @click="switchDatepick(true)" src="../../../assets/mineImg/datePicker.png">
     </div>
     <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
@@ -33,7 +33,7 @@
         <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
     </scroll-view>
-    <date-pick :show-pick="showPick" sb-format='1' @hid-me='switchDatepick' @select-complete='getTime'></date-pick>
+    <date-pick :show-pick="showPick" sb-format='1' @hid-me='switchDatepick(false)' @select-complete='getTime'></date-pick>
 
 	</div>
 </template>
@@ -58,8 +58,8 @@ export default {
   },
   components: { datePick, uniLoadMore ,scrollView},
   methods: {
-    switchDatepick() {
-      this.showPick = !this.showPick
+    switchDatepick(tf) {
+      this.showPick = tf
     },
     loadMore() {
       if (this.resquestState < 2) {
@@ -68,7 +68,7 @@ export default {
       }
     },
     getTime(val) {
-      this.showPick = false;
+     this.showPick = false;
       this.getRecords(val.starttime, val.endtime, 0)
     },
     getRecords(starttime, endtime, index, add) {
@@ -113,16 +113,13 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err,'捕捉')
       })
     }
   },
-  onLoad(opts) {
-    this.type = opts.type
-  },
   created() {
-    this.getRecords(1)
+    this.type = this.$route.query.type||1
+    this.getRecords()
   }
 }
 </script>

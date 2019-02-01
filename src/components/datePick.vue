@@ -110,7 +110,7 @@ export default {
     [Actionsheet.name]: Actionsheet,
   },
   watch: {
-    showPick(val) { this.showPickSelf = this.showPick },
+    showPick(val) { this.showPickSelf = val },
     showPickSelf(val) { !val && this.hidMe() }
   }
 }

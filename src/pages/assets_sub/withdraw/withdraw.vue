@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     rightTap() {
-      this.$navigateTo({ url: '/pages/assets_sub/recording/recording?type=2' })
+      this.$navigateTo({ url: '/pages/assets_sub/recording/recording' ,query:{type:2}})
     },
     doWhat() {
       this.ufundcash()

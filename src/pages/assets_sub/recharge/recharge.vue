@@ -96,9 +96,6 @@ export default {
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('支付方式列表列表', res)
         if (res.status) {
           this.setpaylist(res.data)
           // 设置默认下一步传递参数
@@ -111,7 +108,6 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err,'捕捉')
       })
     },

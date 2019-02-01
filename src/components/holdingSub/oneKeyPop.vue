@@ -141,7 +141,7 @@ export default {
       margin-bottom:.55rem;
       .flr {
         position: absolute;
-        left: -10upx;
+        left: -0.1rem;
         top: 4px;
       }
     }

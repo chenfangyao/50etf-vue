@@ -31,6 +31,7 @@ const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_ca
 const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'], resolve)
 const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
 const recording = resolve => require(['@/pages/assets_sub/recording/recording'], resolve)
+const bankHelp = resolve => require(['@/pages/assets_sub/help/help'], resolve)
 
 const credentials1 = resolve => require(['@/pages/mine_sub/credentials_upload/tep1/tep1'], resolve)
 const credentials2 = resolve => require(['@/pages/mine_sub/credentials_upload/tep2/tep2'], resolve)
@@ -94,6 +95,8 @@ export default new Router({
     { path: '/pages/assets_sub/gatherinfo/gatherinfo', name: 'gatherinfo', component: gatherinfo,  },
     // 充值记录
     { path: '/pages/assets_sub/recording/recording', name: 'recording', component: recording,  },
+    //充值帮助
+    { path: '/pages/assets_sub/help/help', name: 'bankHelp', component: bankHelp,  },
     // 我的页面
     // 消息
     { path: '/pages/msg_common/list/list', name: 'newcenterlist', component: newcenterlist,  },
@@ -137,13 +140,6 @@ var pages = [
   // "enablePullDownRefresh" : true
   {
     "path": "pages/forget_pwd/tep3/tep3",
-    "style": {
-      "titleNView": false,
-      "scrollIndicator": "none"
-    }
-  },
-  {
-    "path": "pages/assets_sub/help/help",
     "style": {
       "titleNView": false,
       "scrollIndicator": "none"

@@ -57,21 +57,18 @@ Vue.prototype.$validata = function(str, mode) {
       if (str.length < 6) {
         return '您输入的用户名不能小于6位'
       }
-      return 1;
       break;
     // 密码
     case 1:
       if (str.length < 6) {
         return '您输入的密码不能小于6位'
       }
-      return 1;
       break;
     // 手机号
     case 2:
-      if (str.length < 11) {
+      if (str.length != 11) {
         return '您输入的手机号不正确'
       }
-      return 1;
       break;
     // 身份证号码
     case 3:
@@ -79,7 +76,6 @@ Vue.prototype.$validata = function(str, mode) {
       if (reg.test(str) === false) {
         return '您输入的身份证号码不合法'
       }
-      return 1;
       break;
   }
   return 1
