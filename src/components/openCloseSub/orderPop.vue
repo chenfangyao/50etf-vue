@@ -164,9 +164,14 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
+          this.$toast.success(res.info ? res.info : '卖出成功')
            this.$router.push({
-            url: '/entrust_succ' ,
-            query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
+            path: '/entrustSucc' ,
+            // path: '/entrust_succ' ,
+            query:{
+              type:this.onClose,
+              code:parseInt(this.resObj.stockCode)
+            }
           })
         }
         else {

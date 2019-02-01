@@ -84,8 +84,11 @@ export default {
 
         if (res.status) {
            this.$navigateTo({
-            url: '/entrust_succ' ,
-            query:{type:this.onClose,code:parseInt(this.resObj.stock_code)+''}
+            url: '/entrustSucc' ,
+            query:{
+              type:this.onClose,
+              code:parseInt(this.resObj.stock_code)
+            }
           })
         } else {
           this.$toast(res.info ? res.info : '卖出失败',)
