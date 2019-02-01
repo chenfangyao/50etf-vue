@@ -60,6 +60,10 @@ export default {
   methods: {
 		...mapMutations(['setbankinfo']),
     go(i) {
+      if(i==1){
+        this.$navigateTo({url:"/pages/assets_sub/help/help"})
+        return
+        }
 			let bankInfo={
 				paymoney:this.paymoney,
 				paytype:this.paytype,
@@ -74,19 +78,6 @@ export default {
       this.$navigateTo({
         url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
       })
-      // switch(this.paytype){
-		// 		case 'remit_alipay':
-		// 		this.$navigateTo({
-		// 			url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
-		// 			})
-		// 		break
-		// 		case 'remit_icbc':
-		// 		this.$navigateTo({
-		// 			url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
-		// 			})
-		// 		break
-		// 	}
-
     },
 
   },

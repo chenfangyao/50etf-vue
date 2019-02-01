@@ -6,7 +6,7 @@
 
       <input-item placeholderTxt='输入您的姓名'  @now-blur='handleBlur' v-model="uName"></input-item>
         <input-item placeholderTxt='输入您的身份证号'  @now-blur='handleBlur' v-model="IDcard"></input-item>
-        <input-item placeholderTxt='输入您的手机号'  @now-blur='handleBlur' v-model="telnum"></input-item>
+        <input-item placeholderTxt='输入您的手机号'  @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
 			<err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
       <submit-btn btnTxt='完成' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -26,9 +26,9 @@ export default {
       verifyYes: true,
       IDcard:'',
       uName:'',
-	showErr:false,
-	tipContent: '您输入的身份证信息有误',
-    telnum:'',
+	    showErr:false,
+	    tipContent: '您输入的身份证信息有误',
+      telnum:'',
     };
   },
   components: { submitBtn, inputItem, errTip },
@@ -38,7 +38,16 @@ export default {
 					this.showErr=true
 					this.tipContent=this.$validata(this.IDcard,3)
 					return
-			}
+      }else if(this.$validata(this.uName)!=1){
+					this.showErr=true
+					this.tipContent=this.$validata(this.uName)
+					return
+      }else if(this.$validata(this.telnum,2)!=1){
+					this.showErr=true
+					this.tipContent=this.$validata(this.telnum,2)
+					return
+      }
+      
 			this.showErr=false
       this.$navigateTo({ url:'/pages/mine_sub/credentials_upload/tep2/tep2' ,query:{username:this.uName,IDcard:this.IDcard,telnum:this.telnum}})
     },

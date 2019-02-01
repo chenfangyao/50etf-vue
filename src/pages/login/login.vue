@@ -145,7 +145,8 @@ export default {
 
 <style lang="scss" scoped>
 div.wrap {
-  min-height: 100vh;
+  height: 100vh ;
+  min-height: 550px;
   position: relative;
   div.img {
     text-align: center;
@@ -173,7 +174,7 @@ div.wrap {
   }
   div.bottomTxt {
     position: absolute;
-    bottom:.60rem;
+    bottom:.4rem;
     left: 0;
     right: 0;
     text-align: center;

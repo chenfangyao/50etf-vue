@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="codeList">
     <div class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
       <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span
@@ -27,6 +27,7 @@
       </div>
     </div>
   </div>
+  <h2 v-else>空空如野~您还未登录吧</h2>
 </template>
 <script>
 
@@ -50,7 +51,7 @@ export default {
       });
     },
     calcBg(val, old) {
-      if (old == 2) return;
+      if (old == 2 || !this.codeList) return;
       if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
       this.codeList.forEach(item => {
         var snap = item.exercise_price
@@ -160,11 +161,12 @@ export default {
         this.$set(this.inTemArr, i, obj)
       }, 500)
     },
-    
+
 
   },
   watch: {
     quoteList(newval, oldval) {
+
       if (newval.length == 0) {
         return this.inTemArr = []
       }
@@ -184,6 +186,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  text-align: center;
+  color: #aaa;
+}
 div.wrap {
   justify-content: space-between;
   height: 0.7rem;

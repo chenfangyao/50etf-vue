@@ -104,12 +104,11 @@ export default {
 									},
 			}
 			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				// res为服务端返回数据的根对象
 				if(res.status){
 					this.$toast.success({
             message:res.info?res.info:'信息提交成功',
-					})
+          })
+          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
 				}else{
           this.$toast.fail({
             message:res.info?res.info:'信息提交失败'
@@ -133,13 +132,11 @@ export default {
 									},
 			}
 			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				// res为服务端返回数据的根对象
-				console.log('支付信息', res)
 					if(res.status){
             this.$toast.success({
               message:res.info?res.info:'信息提交成功',
             })
+          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
 					}else{
             this.$toast.fail({
               message:res.info?res.info:'信息提交失败',
