@@ -64,8 +64,6 @@ export default {
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
         console.log('我的银行', res)
         if (res.status) {
           if (res.data.sub_id != undefined) {

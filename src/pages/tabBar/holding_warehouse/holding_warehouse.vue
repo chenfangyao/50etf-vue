@@ -16,7 +16,7 @@
     <scroll-view  :class="[objI<2?'list2':objI==2?'list3':'list4']"    v-for="(obj,objI) in titleList"  :key="objI"    v-show="tabI==objI"   ref='scroll2' @scrollToEnd="loadMore(objI)"  >
       <list-one :tab-i="objI" :list="obj.list" @gou-shi="openPop" v-if="objI<2"></list-one>
       <list-two :tab-i="objI" :list="obj.list" v-else-if="objI==2"></list-two>
-      <list-three :tab-i="objI" :list="obj.list" v-else></list-three>
+      <list-three :tab-i="objI" :list="obj.list" @re-get='getFenbiList(3)' v-else></list-three>
       <div v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</div>
       <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
     </scroll-view>

@@ -23,6 +23,8 @@
 
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
+import checkUpdate from '@/common/update.js'
+
 export default {
   name: 'App',
   components: { etfTabbar },
@@ -33,7 +35,10 @@ export default {
     }
   },
   created() {
-    document.addEventListener('plusready', () => {      plus.key.addEventListener("backbutton", () => {
+    document.addEventListener('plusready', () => { 
+      //checkUpdate(plus.runtime.version)
+      alert(plus.runtime.version)
+         plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {
           this.$router.goBack()
           return
@@ -63,7 +68,7 @@ export default {
       } else {
         this.transitionName = 'slide-left';
       }
-        this.$router.isBack = false
+      this.$router.isBack = false
     }
   }
 }

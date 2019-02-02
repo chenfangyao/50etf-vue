@@ -2,16 +2,8 @@
 	<div class="wrap">
 		<base-header :hasBack="true" title='我的客服'></base-header>
     <div class="h50"></div>
-    <btn-block txt='电话客服' @v-tap='showPop'></btn-block>
+    <btn-block txt='QQ : 3074732530'></btn-block>
     <!--<div class="h577"></div>-->
-	  <div class="telPop" v-show="telShow">
-      <div class="fixed"  @click="showPop"></div>
-      <div class="container">
-        <div class="txt">是否拨打电话</div>
-        <div class="telNum">9-559-555</div>
-        <div class="btn" hover-class='self-hover' @click='call'>拨打</div>
-      </div>
-    </div>
 	</div>
 </template>
 
@@ -20,7 +12,6 @@ import btnBlock from '@/components/btnBlock.vue'
 export default {
   data() {
     return {
-      telShow: false,
     };
   },
   components:{btnBlock},
@@ -29,9 +20,7 @@ export default {
       this.telShow = !this.telShow
     },
     call() {
-      uni.makePhoneCall({
-        phoneNumber: '9-559-555'
-      });
+      plus.device.dial( '' );
     }
   },
   created(){

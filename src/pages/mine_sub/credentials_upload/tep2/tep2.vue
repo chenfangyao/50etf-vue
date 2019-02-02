@@ -80,26 +80,14 @@ export default {
       plus.gallery.pick(path => {
         this.$set(this.imgUrl, i, path)
         this.tobase64_app(path, i)
-      }, e => { }, { filename: '_doc/gallery/', system: true });
-      /*    uni.chooseImage({
-           count: 1,
-           success: (res) => {
-             this.$set(this.imgUrl, i, res.tempFilePaths[0])
-             //#ifdef H5
-             this.convertImgToBase64(this.imgUrl[i], base64img => {
+        /*  this.convertImgToBase64(path, base64img => {
                if (i == 0) {
                  this.f0 = base64img
                } else if (i == 1) {
                  this.f1 = base64img
                }
-             })
-             //#endif     
-             //#ifdef APP-PLUS
-             this.tobase64_app(res.tempFilePaths[0], i)
-             //#endif     
-           }
-         }) */
-
+             }) */
+      }, e => { }, { filename: '_doc/gallery/', system: true });
     },
     previewImage(e) {
       if (process.env.NODE_ENV !== 'production') {
@@ -114,14 +102,16 @@ export default {
     //#ifdef APP-PLUS
 
     tobase64_app(path, i) {
-      var img = new plus.nativeObj.Bitmap('ff', path);
-      var base64str = img.toBase64Data()
-      if (i == 0) {
-        this.f0 = base64str
-      } else if (i == 1) {
-        this.f1 = base64str
-      }
+      var img = new plus.nativeObj.Bitmap('ff');
+      img.load( path, ()=>{
+        var base64str = img.toBase64Data()
+        if (i == 0) {
+          this.f0 = base64str
+        } else if (i == 1) {
+          this.f1 = base64str
+        }
       img.clear()
+      } ,()=>{console.log('图片失败');})
     },
     //#endif
     //#ifdef H5

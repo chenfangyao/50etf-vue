@@ -65,18 +65,6 @@ export default {
         message:'复制成功'
       })
       //#endif
-      //#ifndef H5
-      uni.setClipboardData({
-        data: str,
-        success() {
-          console.log('success');
-          uni.showToast({
-            title: '复制成功',
-            duration: 500
-          });
-        }
-      });
-      //#endif
     }
   }
 }

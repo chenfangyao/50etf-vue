@@ -85,18 +85,12 @@ export default {
                 method: 'POST', //请求方法全部大写，默认GET
             }
             this.$httpReq(options).then((res) => {
-                // 请求成功的回调
-                // res为服务端返回数据的根对象
-                console.log(res)
                 if (res.status == 1) {
                     this.verifyYes=true
                     this.setsid(res.data.sid)
-                    // #ifdef H5
                     sessionStorage.setItem('etf_sid',res.data.sid)
-                    // #endif
                     // 获取用户信息
                     this.getuserinfo()
-                    // uni.switchTab({ url: '/pages/tabBar/index/index'})
                   this.$router.replace('/')
                 }else{
                     this.showErr=true
@@ -107,7 +101,6 @@ export default {
                     }
                 }
             }).catch((err) => {
-                // 请求失败的回调
                 console.error(err,'捕捉')
             })
     },
