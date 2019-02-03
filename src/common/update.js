@@ -1,29 +1,27 @@
-var wgtVer = null;
-function plusReady() {
-  // 获取本地应用资源版本号
+var responseOK=true
+export function checkUpdate() {
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
-    wgtVer = inf.version;
+    responseOK &&  _checkUpdate( inf.version)
   });
 }
-/* if (window.plus) {
-  plusReady();
-} else {
-  document.addEventListener('plusready', plusReady, false);
-} */
-var checkUrl = "http://demo.dcloud.net.cn/test/update/check.php";
-export function checkUpdate(wgtVer) {
-  plus.nativeUI.showWaiting("检测更新...");
+var checkUrl = "http://192.168.0.109:8085/apk/version";
+ function _checkUpdate(wgtVer) {
+  // plus.nativeUI.showWaiting("检测更新...");
+   responseOK=false
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     switch (xhr.readyState) {
       case 4:
-        plus.nativeUI.closeWaiting();
+        // plus.nativeUI.closeWaiting();
+        responseOK = true
         if (xhr.status == 200) {
           var newVer = xhr.responseText;
           if (wgtVer && newVer && (wgtVer != newVer)) {
-            downWgt();  
+            plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
+              e.index === 0 && downWgt()
+            } );
           } else {
-            // plus.nativeUI.alert("当前已是最新版本");
+            //plus.nativeUI.alert("当前已是最新版本");
           }
         } else {
           plus.nativeUI.alert("检测更新失败！");
@@ -35,7 +33,7 @@ export function checkUpdate(wgtVer) {
   xhr.send();
 }
 // 下载wgt文件
-var wgtUrl = "http://demo.dcloud.net.cn/test/update/H5EF3C469.wgt";
+var wgtUrl = "http://192.168.0.109:8085/apk/50etf.wgt";
 function downWgt() {
   plus.nativeUI.showWaiting("下载wgt文件...");
   plus.downloader.createDownload(wgtUrl, { filename: "_doc/update/" }, function (d, status) {

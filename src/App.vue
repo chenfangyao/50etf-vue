@@ -23,7 +23,7 @@
 
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
-import checkUpdate from '@/common/update.js'
+import {checkUpdate} from '@/common/update.js'
 
 export default {
   name: 'App',
@@ -36,9 +36,9 @@ export default {
   },
   created() {
     document.addEventListener('plusready', () => { 
-      //checkUpdate(plus.runtime.version)
-      alert(plus.runtime.version)
-         plus.key.addEventListener("backbutton", () => {
+      
+      // setInterval(()=>{checkUpdate()},60000)
+      plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {
           this.$router.goBack()
           return

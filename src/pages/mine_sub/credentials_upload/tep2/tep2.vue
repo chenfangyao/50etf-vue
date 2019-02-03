@@ -9,6 +9,7 @@
         <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
       </div>
       <div class="cardPhoto" v-else @click="chooseImage(0)">
+      <!-- <input type="file"> -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
@@ -17,7 +18,9 @@
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
         <img :src="imgUrl[1]" :data-src="imgUrl[1]" @click="previewImage">
       </div>
+
       <div class="cardPhoto mt20" v-else @click="chooseImage(1)">
+      <!-- <input type="file" > -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证反面</div>
       </div>
@@ -58,10 +61,13 @@ export default {
             f2: ""
           },
           mobile: this.mobile,
-
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: 'POST',
       }
+      console.log('发请求');
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
           this.$navigateTo({ url: '../tep3/tep3' })
@@ -78,15 +84,15 @@ export default {
         return
       }
       plus.gallery.pick(path => {
-        this.$set(this.imgUrl, i, path)
-        this.tobase64_app(path, i)
-        /*  this.convertImgToBase64(path, base64img => {
-               if (i == 0) {
-                 this.f0 = base64img
-               } else if (i == 1) {
-                 this.f1 = base64img
-               }
-             }) */
+        // this.tobase64_app(path, i)
+         this.convertImgToBase64(path, base64img => {
+          if (i == 0) {
+            this.f0 = base64img
+          } else if (i == 1) {
+            this.f1 = base64img
+          }
+          this.$set(this.imgUrl, i, path)
+        })
       }, e => { }, { filename: '_doc/gallery/', system: true });
     },
     previewImage(e) {
