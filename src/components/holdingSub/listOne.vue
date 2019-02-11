@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="has-padding">
     <div v-for='(item,i) in list' class="list1Item " @click='popShow(i)' hover-class='self-hover' :key="i">
       <div class="line1 uni-flex">
         <div>
@@ -75,6 +75,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div.has-padding{
+  padding: 0.1px 0;
+}
 div.list1Item {
   > div {
     padding: 0 .25rem;
