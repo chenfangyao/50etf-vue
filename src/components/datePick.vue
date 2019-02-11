@@ -88,8 +88,8 @@ export default {
     },
     verify() {
       if (this.year > this.year2) return true;
-      if (this.year <= this.year2 && this.month > this.month2) return true;
-      if (this.year <= this.year2 && this.month <= this.month2 && this.day > this.day2) return true;
+      if ((this.year == this.year2) && (this.month > this.month2)) return true;
+      if ((this.year == this.year2) && (this.month == this.month2) && (this.day > this.day2)) return true;
       return false
     },
     handleConfirm() {

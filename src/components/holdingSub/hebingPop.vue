@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="rightPart">
-            <div :class="{green:resObj.profit_money<0}">{{resObj.profit_money}}</div>
+            <div :class="{green:parseInt(resObj.profit_money)<0}">{{resObj.profit_money}}</div>
           </div>
         </div>
         <div class="btn3 uni-flex">
