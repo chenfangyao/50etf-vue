@@ -76,35 +76,36 @@ export default {
         },
         dataType: 'json',
         header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Requested-With':'XMLHttpRequest'
         },
         method: 'POST',
       }
-      var ajax = new XMLHttpRequest();
-      ajax.onreadystatechange =  ()=> {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          var res = JSON.parse(ajax.responseText)
-          if (res.status == 1) {
-            this.$navigateTo({ url: '../tep3/tep3' })
-          } else {
-            this.$toast(res.info ? res.info : '实名认证失败')
-          }
-        }
-      }
-      ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
-
-      ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      ajax.send(Qs.stringify(options.data));
-
-      // this.$httpReq(options).then((res) => {
-      //   if (res.status == 1) {
-      //     this.$navigateTo({ url: '../tep3/tep3' })
-      //   } else {
-      //     this.$toast(res.info ? res.info : '实名认证失败')
+      // var ajax = new XMLHttpRequest();
+      // ajax.onreadystatechange =  ()=> {
+      //   if (ajax.readyState == 4 && ajax.status == 200) {
+      //     var res = JSON.parse(ajax.responseText)
+      //     if (res.status == 1) {
+      //       this.$navigateTo({ url: '../tep3/tep3' })
+      //     } else {
+      //       this.$toast(res.info ? res.info : '实名认证失败')
+      //     }
       //   }
-      // }).catch((err) => {
-      //   console.error(err, '捕捉')
-      // })
+      // }
+      // ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
+      //
+      // ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      // ajax.send(Qs.stringify(options.data));
+
+      this.$httpReq(options).then((res) => {
+        if (res.status == 1) {
+          this.$navigateTo({ url: '../tep3/tep3' })
+        } else {
+          this.$toast(res.info ? res.info : '实名认证失败')
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
     },
     chooseImage(i) {
       if (process.env.NODE_ENV !== 'production') {
