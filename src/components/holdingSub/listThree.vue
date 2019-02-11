@@ -89,7 +89,10 @@ export default {
         header: { 'Content-Type': 'application/json' }
       }
       this.$httpReq(options).then((res) => {
-        if (res.status) { this.showResult() } else {
+        if (res.status) { 
+          this.showResult() 
+          this.$emit('re-get')
+        } else {
           this.$toast(res.info)
         }
       })

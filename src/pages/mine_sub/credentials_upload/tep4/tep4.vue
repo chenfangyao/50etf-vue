@@ -42,7 +42,6 @@ export default {
           break
       }
       this.$navigateTo({ url:url })
-      // if (this.type == 3) { this.$navigateTo({ url }) } else { uni.switchTab({ url }) }
     },
   },
   created() {

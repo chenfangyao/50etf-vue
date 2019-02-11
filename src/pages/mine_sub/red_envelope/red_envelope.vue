@@ -1,7 +1,8 @@
 <template>
 	<div class="wrap">
 		<base-header title="我的红包" has-back='1'></base-header>
-    <img class="bg" src="../../../assets/mineImg/hong_bao_bg.jpg">
+    <img class="bg" :src="img1">
+    <!-- <img class="bg" src="../../../assets/mineImg/hong_bao_bg.jpg"> -->
     <div class='logo'>
       <img  src="../../../assets/mineImg/logo.png">
     </div>
@@ -28,10 +29,11 @@
 </template>
 
 <script>
+import img1 from '@/assets/mineImg/hong_bao_bg.png'
 export default {
   data() {
     return {
-
+      img1
     };
   }
 }

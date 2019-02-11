@@ -1,4 +1,10 @@
 export const commonOption = {
+  
+  // animation: false,
+  itemStyle: { color: '#7fbe9e' },
+
+}
+export const optionK = {
   tooltip: {
     trigger: 'axis',
     // triggerOn: 'mousemove',
@@ -13,13 +19,17 @@ export const commonOption = {
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
     },
+    formatter: function (params) {
+      var str = ''
+      for (let i = 1; i < params.length; i++) {
+        str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
+      }
+      return '开:' + params[0].data[1] + '<br>' +
+        '高:' + params[0].data[4] + '<br>' +
+        '收:' + params[0].data[2] + '<br>' +
+        '低:' + params[0].data[3] + '<br>' + str
+    }
   },
-  // animation: false,
-  itemStyle: { color: '#7fbe9e' },
-
-}
-export const optionK = {
-  ...commonOption,
   xAxis: [
     {
       data: [],
@@ -259,7 +269,21 @@ export const optionRk = {
     }],
 }
 export const option = {
-  ...commonOption,
+  tooltip: {
+    trigger: 'axis',
+    // triggerOn: 'mousemove',
+    axisPointer: {
+      type: 'cross'
+    },
+    alwaysShowContent: false,
+    position(pos, params, el, elRect, size) {
+      const obj = {
+        top: 60
+      };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    },
+  },
   xAxis: [
     {
       data: [],

@@ -60,7 +60,6 @@ export default {
       visible: false,
       showPickSelf: this.showPick,
       timeDatas:[{values:years,defaultIndex:100},{values:months},{values:days},]
-      //  indicatorStyle: `height: ${Math.round(uni.getSystemInfoSync().screenWidth / (750 / 100))}px;`
     }
   },
   created() {

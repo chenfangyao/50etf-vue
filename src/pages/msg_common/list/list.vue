@@ -123,4 +123,8 @@ div.listItem {
     margin-right:.52rem;
   }
 }
+div.listItem:last-child{
+  border-bottom:0.12rem solid #f5f5f5;
+
+}
 </style>

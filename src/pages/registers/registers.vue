@@ -83,7 +83,7 @@ export default {
         if (res.status == 1) {
           this.showErr = false
           this.$toast('注册成功')
-          this.$navigateTo({url: '/pages/login/login', });
+          this.$router.goBack()
         } else {
           this.showErr = true
           if (res.info) {

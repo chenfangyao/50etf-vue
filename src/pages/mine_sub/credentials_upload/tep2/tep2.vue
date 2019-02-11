@@ -9,18 +9,24 @@
         <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
       </div>
       <div class="cardPhoto" v-else @click="chooseImage(0)">
+        <!-- <input type="file"> -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
+      <input type="file" @change="fun1">
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
         <img :src="imgUrl[1]" :data-src="imgUrl[1]" @click="previewImage">
       </div>
+
       <div class="cardPhoto mt20" v-else @click="chooseImage(1)">
+        <!-- <input type="file" > -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证反面</div>
       </div>
+      <input type="file" @change="fun1">
+
     </div>
 
     <btn-block txt="下一步" @v-tap="goNext"></btn-block>
@@ -30,6 +36,7 @@
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
+import Qs from 'qs'
 
 export default {
   data() {
@@ -45,6 +52,14 @@ export default {
   },
   components: { btnBlock },
   methods: {
+    fun1(e) {
+      var url1 = URL.createObjectURL(e.target.files[0]);
+      this.convertImgToBase64(url1, base64img => {
+        this.f0 = base64img
+        this.f1 = base64img
+        this.$set(this.imgUrl, 0, url1)
+      })
+    },
     goNext() {
       var options = {
         url: '/Sapi/User/realn',
@@ -58,19 +73,38 @@ export default {
             f2: ""
           },
           mobile: this.mobile,
-
+        },
+        dataType: 'json',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
         method: 'POST',
       }
-      this.$httpReq(options).then((res) => {
-        if (res.status == 1) {
-          this.$navigateTo({ url: '../tep3/tep3' })
-        } else {
-          this.$toast(res.info ? res.info : '实名认证失败')
+      var ajax = new XMLHttpRequest();
+      ajax.onreadystatechange =  ()=> {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          var res = JSON.parse(ajax.responseText)
+          if (res.status == 1) {
+            this.$navigateTo({ url: '../tep3/tep3' })
+          } else {
+            this.$toast(res.info ? res.info : '实名认证失败')
+          }
         }
-      }).catch((err) => {
-        console.error(err, '捕捉')
-      })
+      }
+      ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
+
+      ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      ajax.send(Qs.stringify(options.data));
+
+      // this.$httpReq(options).then((res) => {
+      //   if (res.status == 1) {
+      //     this.$navigateTo({ url: '../tep3/tep3' })
+      //   } else {
+      //     this.$toast(res.info ? res.info : '实名认证失败')
+      //   }
+      // }).catch((err) => {
+      //   console.error(err, '捕捉')
+      // })
     },
     chooseImage(i) {
       if (process.env.NODE_ENV !== 'production') {
@@ -78,28 +112,16 @@ export default {
         return
       }
       plus.gallery.pick(path => {
-        this.$set(this.imgUrl, i, path)
-        this.tobase64_app(path, i)
+        // this.tobase64_app(path, i)
+        this.convertImgToBase64(path, base64img => {
+          if (i == 0) {
+            this.f0 = base64img
+          } else if (i == 1) {
+            this.f1 = base64img
+          }
+          this.$set(this.imgUrl, i, path)
+        })
       }, e => { }, { filename: '_doc/gallery/', system: true });
-      /*    uni.chooseImage({
-           count: 1,
-           success: (res) => {
-             this.$set(this.imgUrl, i, res.tempFilePaths[0])
-             //#ifdef H5
-             this.convertImgToBase64(this.imgUrl[i], base64img => {
-               if (i == 0) {
-                 this.f0 = base64img
-               } else if (i == 1) {
-                 this.f1 = base64img
-               }
-             })
-             //#endif     
-             //#ifdef APP-PLUS
-             this.tobase64_app(res.tempFilePaths[0], i)
-             //#endif     
-           }
-         }) */
-
     },
     previewImage(e) {
       if (process.env.NODE_ENV !== 'production') {
@@ -114,14 +136,16 @@ export default {
     //#ifdef APP-PLUS
 
     tobase64_app(path, i) {
-      var img = new plus.nativeObj.Bitmap('ff', path);
-      var base64str = img.toBase64Data()
-      if (i == 0) {
-        this.f0 = base64str
-      } else if (i == 1) {
-        this.f1 = base64str
-      }
-      img.clear()
+      var img = new plus.nativeObj.Bitmap('ff');
+      img.load(path, () => {
+        var base64str = img.toBase64Data()
+        if (i == 0) {
+          this.f0 = base64str
+        } else if (i == 1) {
+          this.f1 = base64str
+        }
+        img.clear()
+      }, () => { console.log('图片失败'); })
     },
     //#endif
     //#ifdef H5
