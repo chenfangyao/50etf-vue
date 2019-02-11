@@ -7,7 +7,7 @@
             <span class="nameTxt">{{resObj.stock_name}}</span>
             <span>{{resObj.stock_code}}</span>
           </div>
-          <div>{{resObj.own_amount}}</div>
+          <div>持仓数：{{resObj.own_amount}}</div>
         </div>
         <div class="infoView uni-flex">
           <div class="leftPart uni-flex">

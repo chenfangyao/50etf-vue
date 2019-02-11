@@ -130,8 +130,8 @@ export default {
           //   url: '/entrust_succ' ,
           //   query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
           // })
-          this.$router.push({
-            path:'/entrustSucc',
+          this.$redirectTo({
+            url:'/entrustSucc',
             query:({
               type:this.onClose,
               code:parseInt(this.resObj.stockCode)
@@ -165,9 +165,8 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$toast.success(res.info ? res.info : '卖出成功')
-           this.$router.push({
-            path: '/entrustSucc' ,
-            // path: '/entrust_succ' ,
+           this.$redirectTo({
+            url: '/entrustSucc' ,
             query:{
               type:this.onClose,
               code:parseInt(this.resObj.stockCode)
