@@ -13,12 +13,17 @@
       <div class="heightUp" v-show="tabI!=3"></div>
       <div class="h40" v-show="tabI==2"></div>
     </div>
-    <scroll-view  :class="[objI<2?'list2':objI==2?'list3':'list4']"    v-for="(obj,objI) in titleList"  :key="objI"    v-show="tabI==objI"   ref='scroll2' @scrollToEnd="loadMore(objI)"  >
-      <list-one :tab-i="objI" :list="obj.list" @gou-shi="openPop" v-if="objI<2"></list-one>
-      <list-two :tab-i="objI" :list="obj.list" v-else-if="objI==2"></list-two>
-      <list-three :tab-i="objI" :list="obj.list" @re-get='getFenbiList(3)' v-else></list-three>
-      <div v-if="obj.total==0" class="nullTxt">您还未开仓，空空如也</div>
-      <uni-load-more v-else :loading-type="obj.resquestState"></uni-load-more>
+    <scroll-view  class="list2"   v-show="tabI<2"  ref="s1"  @scrollToEnd="loadMore(tabI)"  >
+      <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop" ></list-one>
+      <div v-if="titleList[tabI].total==0" class="nullTxt">您还未开仓，空空如也</div>
+    </scroll-view>
+    <scroll-view  class="list3"   @scrollToEnd="loadMore(2)" ref="s2" v-show="tabI==2" >
+      <list-two :tab-i="tabI" :list="titleList[2].list" ></list-two>
+      <div v-if="titleList[2].total==0" class="nullTxt">您还未开仓，空空如也</div>
+    </scroll-view>
+    <scroll-view  class='list4'   @scrollToEnd="loadMore(3)" ref="s3" v-show="tabI==3" >
+      <list-three :tab-i="tabI" :list="titleList[3].list" @re-get='getFenbiList(3)' ></list-three>
+      <div v-if="titleList[3].total==0" class="nullTxt">您还未开仓，空空如也</div>
     </scroll-view>
     <div class="h5"></div>
     <fenbi-pop v-if="showFenbiPop" :hebin-hide="tabI==0" :res-obj="listItem" @close-me="closePop"></fenbi-pop>
@@ -50,10 +55,10 @@ export default {
       listItem: {},//给fenbiPop的数据
       revokeTimer: null,//撤单定时器
       titleList: [
-        { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0, },
-        { name: '合并', startI: 0, list: [], resquestState: 0, total: 0, },
-        { name: '委托', startI: 0, list: [], resquestState: 0, total: 0, },
-        { name: '撤单', startI: 0, list: [], resquestState: 0, total: 0, },
+        { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0,},
+        { name: '合并', startI: 0, list: [], resquestState: 0, total: 0,},
+        { name: '委托', startI: 0, list: [], resquestState: 0, total: 0,},
+        { name: '撤单', startI: 0, list: [], resquestState: 0, total: 0,},
       ],
 
     };
@@ -90,6 +95,15 @@ export default {
         this.getFenbiList(i, 'add')
       }
     },
+    refreshScroll(){
+      if(this.tabI<2){
+        this.$refs.s1.refresh()
+      }else if(this.tabI==2){
+        this.$refs.s2.refresh()
+      }else{
+        this.$refs.s3.refresh()
+      }
+    },
     getFenbiList(i, add) {
       this.titleList[i].resquestState = 1
       let url = ''
@@ -119,7 +133,7 @@ export default {
         this.titleList[i].total = res.data.total
         if (add) {
           this.titleList[i].list = this.titleList[i].list.concat(res.data.list)
-          this.$refs.scroll2.refresh()
+          this.refreshScroll()
         } else {
           this.titleList[i].list = res.data.list
         }
@@ -150,16 +164,11 @@ export default {
 
 <style lang="scss" scoped>
 div.wrap {
-  /* #ifdef H5 */
-  min-height: calc(100vh - 50px);
-  /* #endif */
-  /* #ifndef H5 */
-  height: 100vh;
-  /* #endif */
+  height: calc(100vh - 50px);
   background-color: #f5f5f5;
   .list2 {
     overflow: hidden;
-    height: calc(100vh - 0.68rem - 86px);
+    height: calc(100vh - 0.68rem - 94px);
     // height: calc(100vh -.68rem - 44px - var(--status-bar-height));
   }
   .list3 {
@@ -181,9 +190,6 @@ div.wrap {
     background-color: #f5f5f5;
     position: relative;
     z-index: 50;
-  }
-  div.h5 {
-    height: 5px;
   }
   div.fix {
     position: fixed;

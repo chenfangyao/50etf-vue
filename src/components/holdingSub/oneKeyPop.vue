@@ -83,7 +83,7 @@ export default {
        this.$emit('close-pop','deep')
 
         if (res.status) {
-           this.$navigateTo({
+           this.$redirectTo({
             url: '/entrustSucc' ,
             query:{
               type:this.onClose,

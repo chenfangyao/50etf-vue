@@ -7,7 +7,7 @@
             <span class="nameTxt">{{resObj.stock_name}}</span>
             <span>{{resObj.stock_code}}</span>
           </div>
-          <div>{{resObj.own_amount}}</div>
+          <div>持仓数：{{resObj.own_amount}}</div>
         </div>
         <div class="infoView uni-flex">
           <div class="leftPart uni-flex">
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="rightPart">
-            <div :class="{green:resObj.profit_money<0}">{{resObj.profit_money}}</div>
+            <div :class="{green:parseInt(resObj.profit_money)<0}">{{resObj.profit_money}}</div>
           </div>
         </div>
         <div class="btn3 uni-flex">

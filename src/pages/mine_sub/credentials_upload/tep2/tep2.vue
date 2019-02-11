@@ -9,11 +9,9 @@
         <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
       </div>
       <div class="cardPhoto" v-else @click="chooseImage(0)">
-        <!-- <input type="file"> -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
-      <input type="file" @change="fun1">
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
@@ -21,11 +19,9 @@
       </div>
 
       <div class="cardPhoto mt20" v-else @click="chooseImage(1)">
-        <!-- <input type="file" > -->
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证反面</div>
       </div>
-      <input type="file" @change="fun1">
 
     </div>
 
@@ -52,14 +48,6 @@ export default {
   },
   components: { btnBlock },
   methods: {
-    fun1(e) {
-      var url1 = URL.createObjectURL(e.target.files[0]);
-      this.convertImgToBase64(url1, base64img => {
-        this.f0 = base64img
-        this.f1 = base64img
-        this.$set(this.imgUrl, 0, url1)
-      })
-    },
     goNext() {
       var options = {
         url: '/Sapi/User/realn',
@@ -81,25 +69,10 @@ export default {
         },
         method: 'POST',
       }
-      // var ajax = new XMLHttpRequest();
-      // ajax.onreadystatechange =  ()=> {
-      //   if (ajax.readyState == 4 && ajax.status == 200) {
-      //     var res = JSON.parse(ajax.responseText)
-      //     if (res.status == 1) {
-      //       this.$navigateTo({ url: '../tep3/tep3' })
-      //     } else {
-      //       this.$toast(res.info ? res.info : '实名认证失败')
-      //     }
-      //   }
-      // }
-      // ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
-      //
-      // ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      // ajax.send(Qs.stringify(options.data));
 
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
-          this.$navigateTo({ url: '../tep3/tep3' })
+          this.$redirectTo({ url: '../tep3/tep3' })
         } else {
           this.$toast(res.info ? res.info : '实名认证失败')
         }

@@ -15,6 +15,5 @@ div {
   border-top: 1px solid #f5f5f5;
   padding-left:.26rem;
   background: rgba(255, 255, 255, 1);
-  margin-bottom:.12rem;
 }
 </style>

@@ -21,8 +21,8 @@ export default {
   methods: {
     ...mapMutations(['setweituoindex']),
     go() {
-      this.$router.push({
-        path:'/open_close',
+      this.$redirectTo({
+        url:'/open_close',
         query:{
           pinkaiC:this.type,
           code:this.code
@@ -31,8 +31,8 @@ export default {
     },
     gowt() {
       this.setweituoindex(2)
-      this.$router.push({
-        path:'/holding_warehouse'
+      this.$redirectTo({
+        url:'/holding_warehouse'
       })
     }
   },
