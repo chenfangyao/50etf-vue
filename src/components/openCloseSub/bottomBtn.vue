@@ -25,11 +25,16 @@ export default {
   },
   props: ['onClose', 'totalmoney','resObj'],
   components: { orderPop },
-  computed: mapState(['sid','cctotalmoney']),
+  computed: mapState(['sid','cctotalmoney','stockamunt']),
   methods: {
     showPop() {
       if (this.sid) {
-        this.popShow = true
+        if(this.stockamunt!=0){
+          this.popShow = true
+        }else{
+          this.$toast('数量不能为0！')
+          return
+        }
       } else {
         this.$tipLogin()
       }

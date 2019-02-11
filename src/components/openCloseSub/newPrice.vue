@@ -14,13 +14,13 @@
         <div class="chooseCount">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
           <div v-show="!tabActive" @click.self="showPopCheckbox">
-            <span class="txt">{{maxprice.enable_amount}}张</span>
-            <!--<span class="txt">{{maxprice.own_amount}}张</span>-->
+            <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
+            <span class="txt">{{sellnumber}}</span>
             <uni-icon type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div >
                 <div class="pop-title">
-                  <span class="cancelCheck" @click="cancelCheck">取消</span>
+                  <!--<span class="cancelCheck" @click="cancelCheck">取消</span>-->
                   <span class="confirmCheck" @click="confirmCheck">确认</span>
                 </div>
                 <div style="height: 200px;overflow-y: auto">
@@ -36,7 +36,7 @@
                         <img :src="props.checked ? icon.active : icon.normal" slot="icon"
                              slot-scope="props">
                         <span style="position: absolute;left:40px;top:5px">{{item.name}}</span>
-                        <span style="position: absolute;right:100px;top:5px">{{item.value}}张</span>
+                        <span style="position: absolute;right:100px;top:5px">{{item.texts}}</span>
                       </van-cell>
                     </van-cell-group>
                   </van-checkbox-group>
@@ -98,16 +98,24 @@
     </div>
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div>
-        <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
+        <img  @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
         <span class="countxt">{{sliderVal}}</span>
-        <img @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
+
+        <img  @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
       </div>
-      <div class="sliderItem">
+      <div  class="sliderItem">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
          <el-slider v-model="sliderVal" @change="slidering" :max='maxprice.maxcounts' :disabled="sliderdisable" :min='0' :show-tooltip="false"></el-slider>
       </div>
     </div>
+
+
+    <div v-else class="sliderPart uni-flex">
+      <span class="countxt">{{stockamunt}}</span>
+    </div>
+
+
   </div>
 </template>
 <script>
@@ -167,7 +175,8 @@ export default {
         active: '../../assets/holdingImg/checked.png'
       },
       result: [],
-      items: []
+      items: [],
+      sellnumber:'全部'
     }
   },
   methods: {
@@ -432,7 +441,12 @@ export default {
           this.pickerValueArray={}
           for (var i = 0; i < this.fbcclist.length; i++) {
             var pickobj = {}
-            pickobj.text = '第' + parseInt(i + 1) + '笔' + ' ' + this.fbcclist[i].enable_amount + '张'
+            var secpartcontent=this.fbcclist[i].enable_amount + '张'
+            if(this.fbcclist[i].enable_amount==0){
+              secpartcontent='不可卖'
+            }
+            pickobj.text = '第' + parseInt(i + 1) + '笔' + ' ' + secpartcontent
+            pickobj.texts = secpartcontent
             pickobj.name = '第' + parseInt(i + 1) + '笔'
             pickobj.value = this.fbcclist[i].enable_amount.toString()
             pickobj.index = parseInt(i + 1)
@@ -465,7 +479,7 @@ export default {
     this.pricetitle = this.btn3Arr[0]
   },
   computed: {
-    ...mapState(['softconf', 'maxbuy'])
+    ...mapState(['softconf', 'maxbuy','stockamunt'])
   }
 }
 </script>
