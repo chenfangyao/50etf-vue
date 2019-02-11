@@ -1,8 +1,8 @@
 <template>
   <div class=" self-mask">
     <div class="wrap">
-      <img v-if="isErr" src="/assets/holdingImg/cedan-err.png">
-      <img v-else src="/assets/holdingImg/cedan-succ.png">
+      <img v-if="isErr" src="../../assets/holdingImg/cedan-err.png">
+      <img v-else src="../../assets/holdingImg/cedan-succ.png">
       <div>{{isErr?'交易已完成，撤单失败':'撤单成功'}}</div>
     </div>
   </div>
@@ -10,7 +10,6 @@
 <script>
 export default {
   props: ['isErr'],
-
 }
 </script>
 <style lang="scss" scoped>

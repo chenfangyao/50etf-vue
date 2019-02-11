@@ -14,7 +14,8 @@
         <div class="chooseCount">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
           <div v-show="!tabActive" @click.self="showPopCheckbox">
-            <span class="txt">{{maxprice.own_amount}}张</span>
+            <span class="txt">{{maxprice.enable_amount}}张</span>
+            <!--<span class="txt">{{maxprice.own_amount}}张</span>-->
             <uni-icon type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div >
@@ -42,7 +43,6 @@
                 </div>
               </div>
             </van-popup>
-
           </div>
           <div v-show="tabActive" @click.self="showPickers">
             <span class="txt">{{pickerText}}</span>
