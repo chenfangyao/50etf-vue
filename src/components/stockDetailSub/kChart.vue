@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="root-el">
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex">
         <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
@@ -311,7 +311,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   margin-bottom: 20px;
 }
 div.uni-tab-bar {

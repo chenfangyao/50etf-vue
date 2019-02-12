@@ -1,5 +1,5 @@
 <template>
-  <div class="uni-flex wrap">
+  <div class="uni-flex root-el">
     <div class="left">
       <div class="title">
         <span>买</span>
@@ -100,7 +100,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   padding:.26rem;
   background-color: #fff;
   div.left {

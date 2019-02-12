@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'isshow':isshowDetail} " class="wrap">
+  <div :class="{'isshow':isshowDetail} " class="root-el">
     <div class="line1 uni-flex">
       <div>
         <span>最高</span>
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   margin: 0 0 0 .25rem;
   transition: height 300ms;
   height: 0 ;

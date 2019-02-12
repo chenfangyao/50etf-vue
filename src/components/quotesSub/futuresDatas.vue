@@ -1,6 +1,6 @@
 <template>
   <div v-if="codeList">
-    <div class="uni-flex wrap" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
+    <div class="uni-flex root-el" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
       <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span
           :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"
@@ -53,6 +53,7 @@ export default {
     calcBg(val, old) {
       if (old == 2 || !this.codeList) return;
       if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
+      console.log(old);
       this.codeList.forEach(item => {
         var snap = item.exercise_price
         if (snap.indexOf('A') == -1) {
@@ -63,6 +64,7 @@ export default {
           }
         }
       })
+      console.log(this.ltPrice, this.gtPrice);
       this.gtPrice !== 0 && (this.calcOnce = 2)
     },
     dealCodeList() {//把传进来的合约代码分购、沽两组
@@ -167,10 +169,10 @@ export default {
   watch: {
     quoteList(newval, oldval) {
 
+      this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length == 0) {
         return this.inTemArr = []
       }
-      this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length != oldval.length) {
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
@@ -190,7 +192,10 @@ h2 {
   text-align: center;
   color: #aaa;
 }
-div.wrap {
+div.specialBg{
+  background: #f5f5ff
+}
+div.root-el {
   justify-content: space-between;
   height: 0.7rem;
   line-height: 0.7rem;

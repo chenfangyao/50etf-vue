@@ -1,21 +1,21 @@
 <template>
   <div class="subWrap ">
-    <div class="panel1">
-      <h2>可用资金（元）</h2>
+    <div class="panel1 black2">
+      <h2 class="textc2">可用资金（元）</h2>
       <h1>{{transmoney.enable_money}}</h1><h1 v-if='!transmoney.enable_money'>0.00</h1>
       <div class="h3">
         <!-- <span>总资产</span>
         <span>{{transmoney.dta_money}}</span><span v-if='!transmoney.enable_money'>0.00</span> -->
       </div>
     </div>
-    <div class="panel2 uni-flex">
+    <div class="panel2 black2 uni-flex">
       <div>
         <h4>{{transmoney.royalty_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
-        <h4>权益金</h4>
+        <h4 class="textc2">权益金</h4>
       </div>
 			<div>
 			  <h4>{{transmoney.dta_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
-			  <h4>总资产</h4>
+			  <h4 class="textc2">总资产</h4>
 			</div>
       <!-- <div>
         <h4>{{transmoney.freeze_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
@@ -26,12 +26,12 @@
         <h4>管理费</h4>
       </div> -->
     </div>
-    <div class="uni-flex btn2">
-      <div class="hasBorder" @click='go(1)'>
+    <div class="uni-flex btn2 black4">
+      <div class="hasBorder blue1" @click='go(1)'>
         <img src="../../assets/assetsImg/recharge.png">
         <span>充值</span>
       </div>
-      <div  @click='go(2)'>
+      <div  @click='go(2)' >
         <img src="../../assets/assetsImg/withdraw.png">
         <span>提现</span>
       </div>
@@ -81,7 +81,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 div.subWrap {
-  margin:.12rem.22rem;
+  margin:.12rem .22rem;
   .panel1 {
     background: linear-gradient(
       0deg,
@@ -123,8 +123,9 @@ div.subWrap {
   }
   div.btn2 {
     background-color: #fff;
-    padding:.19rem 0;
-    border-radius: 0 0.20rem.20rem;
+    height: 0.93rem;
+    border-radius: 0  0 .20rem .20rem;
+    overflow: hidden;
     span {
       font-size: 15px;
       vertical-align: middle;
@@ -132,6 +133,8 @@ div.subWrap {
     > div {
       text-align: center;
       flex-grow: 1;
+      height: 100%;
+      padding: 0.19rem 0;
     }
     div.hasBorder {
       border-right: solid 1px #e6e6e6;

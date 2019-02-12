@@ -2,7 +2,7 @@
   <div>
     <div class="headerContainer">
       <div class="occupy"></div>
-      <div class="wrap">
+      <div class="root-el">
         <div class="left commonStyle" @click="back"  v-if="hasBack">
           <img src="../assets/arrow/l.png">
         </div>
@@ -58,7 +58,7 @@ div.h44 {
   top: 0;
   z-index: 50;
   background-color: #fff;
-  div.wrap {
+  div.root-el {
     text-align: center;
     height: 44px;
     font-size: 16px;

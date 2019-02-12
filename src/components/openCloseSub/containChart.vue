@@ -1,5 +1,5 @@
 <template>
-  <div class="uni-flex wrap">
+  <div class="uni-flex root-el">
     <div class="info">
       <div class="line1">
         <!-- <span>购12月2250</span> -->
@@ -65,7 +65,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   padding: 0.26rem 0.26rem 0;
   background-color: #fff;
   justify-content: space-between;

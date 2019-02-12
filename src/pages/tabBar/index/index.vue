@@ -1,5 +1,5 @@
 <template>
-  <div :class="isWhite?'white':'black'" class="wrap">
+  <div  class="wrap">
     <base-header title="首页"></base-header>
     <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
       <van-swipe-item v-for="(item,i) in imgList" :key="i">
@@ -41,7 +41,7 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState(['isWhite', 'sid', 'username', 'mobile', 'indextimmer']),
+  computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer']),
   methods: {
     // 登录
     ...mapMutations(['setsid', 'setusername', 'setmobile', 'setsoftconf', 'setindextimmer']),

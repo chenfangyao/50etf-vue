@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="root-el">
     <div class="title">费用总计</div>
     <div class="uni-flex row">
       <div class="uni-flex col hasMargin">
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   padding:.30rem.33rem;
   background-color: #fff;
   div.title {

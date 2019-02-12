@@ -17,19 +17,25 @@
         <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @click='choosePriceItem(i,item)'>{{item}} 元</div>
       </div>
     </div>
+    <div class="tip">
+      <span>温馨提醒：</span>
+      <span class="_a">充值限额表</span>
+    </div>
     <div class="fixView">
       <btn-block txt='下一步' @v-tap='go'></btn-block>
     </div>
+    <!-- <limit-table></limit-table> -->
 	</div>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
+import limitTable from '@/components/assetsSub/recharge-limit-table.vue'
 import { mapState, mapMutations } from 'vuex';
 
 export default {
-  components: { btnBlock, rechargeWay },
+  components: { btnBlock, rechargeWay,limitTable },
   data() {
     return {
       money: '',
@@ -197,6 +203,15 @@ div.wrap {
         background-color: #409de5;
         color: #fff;
       }
+    }
+  }
+  div.tip{
+    margin: 0.35rem 0 0 0.46rem;
+    font-size:13px;
+    color: #181c28;
+    span._a{
+      text-decoration:underline;
+      color:rgba(64,157,229,1);
     }
   }
   div.fixView {

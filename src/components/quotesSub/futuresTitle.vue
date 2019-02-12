@@ -1,5 +1,5 @@
 <template>
-  <div class="uni-flex wrap">
+  <div class="uni-flex root-el">
     <span><span>涨跌</span><span class="small">(%)</span></span>
     <span>现价</span>
     <div class="uni-flex">
@@ -12,7 +12,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   justify-content: space-between;
   padding:.18rem .25rem;
   border-bottom: 1px solid #f5f5f5;

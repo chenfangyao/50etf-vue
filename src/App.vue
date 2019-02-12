@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'at-night':atNight}">
     <template v-if="$route.meta.tabbar">
       <transition :name="transitionName">
         <keep-alive>
@@ -53,6 +53,9 @@ export default {
       });
     }, false);
   },
+  computed:{
+    atNight(){return this.$store.state.atNight}
+  },
   watch: {
     $route(to, from) {
       if (to.meta.tabbar) {
@@ -82,7 +85,6 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 } */
-$c1: #007aff;
 
 #app {
   font-size: 14px;

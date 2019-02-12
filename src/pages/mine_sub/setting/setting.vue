@@ -1,36 +1,38 @@
 <template>
-	<div class="wrap">
-		<base-header title="设置" has-back='1'></base-header>
-    <div class=' uni-flex' hover-class='self-hover' @click='go(1)'>
+  <div class="wrap">
+    <base-header title="设置" has-back="1"></base-header>
+    <div class="item1 uni-flex black2 textc1" hover-class="self-hover" @click="go(1)">
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>
-    <!-- <div class='mb26 uni-flex' hover-class='self-hover' @click='go(2)'> -->
-    <div class='mb26 uni-flex' hover-class='self-hover' >
+    <div class="item1 uni-flex black2 textc1" hover-class="self-hover">
+      <span>夜间模式</span>
+      <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="setatNight"/>
+    </div>
+    <div class="mb26 item1 uni-flex black2 textc1" hover-class="self-hover">
       <span>关于</span>
       <div class="uni-flex verView">
-        <span class="verTxt">版本号：1.0</span>
-        <img src="../../../assets/arrow/r.png">
+        <span class="verTxt textc2">版本号：1.0</span>
+        <!-- <img src="../../../assets/arrow/r.png"> -->
       </div>
     </div>
-    <btn-block txt='退出登录' @v-tap='logOut'></btn-block>
-
-	</div>
+    <btn-block txt="退出登录" @v-tap="logOut"></btn-block>
+  </div>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
-import { mapMutations } from 'vuex';
-
+import { mapMutations,mapState } from 'vuex';
+import { Switch } from 'vant';
 export default {
   data() {
     return {
-
     };
   },
-  components: { btnBlock },
+  components: { btnBlock ,[Switch.name]:Switch},
+  computed:mapState(['atNight']),
   methods: {
-    ...mapMutations(['setuserinfo','setsid']),
+    ...mapMutations(['setuserinfo', 'setsid','setatNight']),
     logOut() {
       this.$dialog.confirm({
         title: '退出登录',
@@ -53,12 +55,12 @@ export default {
         if (res.status == 1) {
           this.setuserinfo({})
           this.setsid('')
-          this.$router.push({name:'index'})
+          this.$router.push({ name: 'index' })
         } else {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     go(i) {
@@ -71,7 +73,8 @@ export default {
       }
       this.$navigateTo({ url })
     }
-  }
+  },
+  
 }
 </script>
 
@@ -80,31 +83,33 @@ div.wrap {
   height: 100vh;
   width: 100%;
   background-color: #f5f5f5;
-  > div {
-    height:.98rem;
-    padding: 0 .26rem 0 .30rem;
+  div.item1 {
     background-color: #fff;
+    color: rgba(24, 28, 40, 1);
+    border-top: solid 1px #ededed;
+  }
+  > div {
+    height: 0.98rem;
+    padding: 0 0.26rem 0 0.3rem;
     align-items: center;
     font-size: 15px;
-    color: rgba(24, 28, 40, 1);
     justify-content: space-between;
-    border-top: solid 1px #ededed;
     div.verView {
       align-items: center;
       span.verTxt {
         font-size: 14px;
         color: rgba(112, 118, 128, 1);
-        margin-right:.20rem;
+        margin-right: 0.2rem;
       }
     }
   }
   div.mb26 {
-    margin-bottom:.26rem;
+    margin-bottom: 0.26rem;
   }
   img {
-    width:.26rem;
+    width: 0.26rem;
 
-    height:.30rem;
+    height: 0.3rem;
   }
 }
 </style>

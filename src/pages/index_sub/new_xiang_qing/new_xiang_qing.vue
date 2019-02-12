@@ -32,7 +32,7 @@ export default {
       update_time: '',
     };
   },
-  computed: mapState(['isWhite', 'sid']),
+  computed: mapState(['atNight', 'sid']),
   methods: {},
   created(opts) {
     var id = parseInt(this.$route.query.id)

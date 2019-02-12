@@ -1,6 +1,6 @@
 <template>
   <div class=" self-mask">
-    <div class="wrap">
+    <div class="root-el">
       <img v-if="isErr" src="../../assets/holdingImg/cedan-err.png">
       <img v-else src="../../assets/holdingImg/cedan-succ.png">
       <div>{{isErr?'交易已完成，撤单失败':'撤单成功'}}</div>
@@ -13,7 +13,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   width:3.80rem;
   height:3.80rem;
   background-color: #fff;

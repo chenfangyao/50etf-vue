@@ -43,7 +43,7 @@ export default {
 			this.verifyYes==true
 		}
 	},
-    computed: mapState(['isWhite','sid','username','mobile','userinfo']),
+    computed: mapState(['atNight','sid','username','mobile','userinfo']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
       ...mapMutations(['setsid','setusername','setmobile','setuserinfo']),
