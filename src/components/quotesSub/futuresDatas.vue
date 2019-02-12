@@ -36,7 +36,7 @@ export default {
     return {
       res2arr: [],//暂存分好购沽的数据,
       inTemArr: [],
-      ltPrice: 1000000,
+      ltPrice: 10000,
       gtPrice: 0,//先置为大值
       calcOnce: 1,
     }
@@ -52,8 +52,7 @@ export default {
     },
     calcBg(val, old) {
       if (old == 2 || !this.codeList) return;
-      if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
-      console.log(old);
+      // if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
       this.codeList.forEach(item => {
         var snap = item.exercise_price
         if (snap.indexOf('A') == -1) {
@@ -64,8 +63,7 @@ export default {
           }
         }
       })
-      console.log(this.ltPrice, this.gtPrice);
-      this.gtPrice !== 0 && (this.calcOnce = 2)
+      this.gtPrice !== 0&&this.ltPrice!==10000 && (this.calcOnce = 2)
     },
     dealCodeList() {//把传进来的合约代码分购、沽两组
       var arr = [...this.codeList]
