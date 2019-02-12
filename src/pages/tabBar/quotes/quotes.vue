@@ -54,7 +54,6 @@ export default {
   },
   computed: mapState(['taglist']),
   beforeRouteLeave(to, from, next) {
-    console.log('关闭了第二个页面的定时器')
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
     util.indextimmer.quotesQryQuotationList = null

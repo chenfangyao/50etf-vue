@@ -56,12 +56,10 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-        console.log('最大可买量', res)
         if (res.status) {
           this.hynumbers = res.data.volume_multiple
         }
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err,'捕捉')
       })
     },

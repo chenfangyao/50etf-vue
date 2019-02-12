@@ -172,9 +172,6 @@
           method: 'GET', //请求方法全部大写，默认GET
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('银行卡列表', res)
           if (res.status) {
             this.bankid = res.data.list[0].bank_id
             this.pickerText = res.data.list[0].name
@@ -202,9 +199,6 @@
           method: 'GET', //请求方法全部大写，默认GET
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('省列表', res)
           if (res.status) {
             this.prov_cd = res.data.list[0].prov_cd
             this.pickerCityValueArray = {}
@@ -241,9 +235,6 @@
           }
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('城市列表', res)
           if (res.status) {
             this.city_cd = res.data.list[0].city_cd
             var childlist = []
@@ -275,9 +266,6 @@
           }
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('支行列表', res)
           if (res.status) {
             var subBankText=res.data.list[0].sub_name
             subBankText=subBankText.replace(this.pickerText,'')
@@ -314,9 +302,6 @@
           method: 'GET', //请求方法全部大写，默认GET
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('我的银行', res)
           if (res.status) {
             if (res.data.sub_id != undefined) {
               this.pickerText = res.data.bank_name

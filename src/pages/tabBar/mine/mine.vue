@@ -80,9 +80,6 @@ export default {
 						method: 'GET', //请求方法全部大写，默认GET
 				}
 				this.$httpReq(options).then((res) => {
-						// 请求成功的回调
-						// res为服务端返回数据的根对象
-						console.log('我的银行', res)
 						if(res.status){
 							if(res.data.sub_id!=undefined){
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card/add_card' })
@@ -91,7 +88,6 @@ export default {
 							}
 						}
 				}).catch((err) => {
-						// 请求失败的回调
 						console.error(err,'捕捉')
 				})
 			}else{
@@ -108,14 +104,10 @@ export default {
 					},
 			}
 			this.$httpReq(options).then((res) => {
-					// 请求成功的回调
-					// res为服务端返回数据的根对象
-					console.log('我的消息', res)
 					if(res.status){
 						this.setnewlengths(res.data.list.length.toString())
 					}
 			}).catch((err) => {
-					// 请求失败的回调
 					console.error(err,'捕捉')
 			})
 		},

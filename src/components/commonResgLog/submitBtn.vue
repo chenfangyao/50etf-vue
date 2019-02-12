@@ -6,7 +6,6 @@ export default {
   props:['btnTxt','verifyOk'],
   methods:{
     doWhat(){
-      console.log('verifyOk',this.verifyOk)
       if(this.verifyOk){
         this.$emit('v-tap')
       }

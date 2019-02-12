@@ -151,7 +151,6 @@ export default {
     })
   },
   beforeRouteLeave(to, from, next) {
-    console.log('关闭了第一个页面的定时器')
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
     next()

@@ -55,7 +55,6 @@
 
       },
       handleBlur() {
-        console.log('input失去焦点时触发');
       },
       addmybankcard() {
         var options = {
@@ -72,9 +71,6 @@
           }
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('银行', res)
           if (res.status) {
             this.$toast.success({
               message:res.info?res.info:'绑定成功',
@@ -103,9 +99,6 @@
           }
         }
         this.$httpReq(options).then((res) => {
-          // 请求成功的回调
-          // res为服务端返回数据的根对象
-          console.log('验证码', res)
           if (res.status) {
 
           } else {

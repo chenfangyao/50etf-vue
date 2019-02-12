@@ -110,7 +110,6 @@ export default {
               method: 'GET', //请求方法全部大写，默认GET
           }
           this.$httpReq(options).then((res) => {
-              console.log('用户信息', res)
               if(res.status){
 				this.setuserinfo(res.data)
               }
@@ -119,7 +118,6 @@ export default {
           })
       },
     handleBlur(){
-      console.log('input失去焦点时触发');
     },
     handChange(){
         this.showErr=false

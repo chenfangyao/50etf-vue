@@ -5,17 +5,7 @@
     <contain-chart :res-obj="QuotationMsg"></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
     <div class="h12"></div>
-    <new-price
-      :on-close="onClose"
-      :maxprice="maxbuy"
-      :qrysingle="QuotationMsg"
-      :fbcclist="fbcclist"
-      :hbcclist="hbcclist"
-      @fb-num="fbNum"
-      @hbfb-switch="hbfbSwitch"
-      @plus-step="plusStepNum"
-      @price-step="priceStep"
-    ></new-price>
+    <new-price  :on-close="onClose"  :maxprice="maxbuy"  :qrysingle="QuotationMsg"  :fbcclist="fbcclist"  :hbcclist="hbcclist"  @fb-num="fbNum"  @hbfb-switch="hbfbSwitch"  @plus-step="plusStepNum"  @price-step="priceStep"   ></new-price>
     <div class="h12"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
@@ -110,7 +100,6 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          console.log(22, res)
           this.maxbuy = res.data
           this.setmaxbuy(res.data)
           // 开仓
@@ -140,7 +129,6 @@ export default {
           this.setcctotalmoney(this.totalmoney)
         }
       }).catch((err) => {
-        // 请求失败的回调
         console.error(err, '捕捉')
       })
     },
@@ -174,8 +162,6 @@ export default {
         dataType: "json",
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        console.log('可卖合并持仓数量', res)
         if (res.status) {
           this.hbcclist = []
           for (var i = 0; i < res.data.list.length; i++) {
@@ -198,7 +184,6 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    console.log('关闭开仓平仓定时器')
     clearInterval(util.indextimmer.quotesQrySingleQuotationMsg)
     util.indextimmer.quotesQrySingleQuotationMsg = null
     next()

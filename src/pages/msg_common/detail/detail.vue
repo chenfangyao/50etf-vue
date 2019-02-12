@@ -27,9 +27,6 @@ export default {
 				method: 'GET', //请求方法全部大写，默认GET
 			}
 			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				// res为服务端返回数据的根对象
-				console.log('文章详情',res)
 				if (res.status == 1) {
 					this.conent=res.data
 					this.datetimes=this.$formatetimestr(this.conent.update_time || this.conent.create_time)
@@ -48,9 +45,6 @@ export default {
 				method: 'GET', //请求方法全部大写，默认GET
 			}
 			this.$httpReq(options).then((res) => {
-				// 请求成功的回调
-				// res为服务端返回数据的根对象
-				console.log('文章详情',res)
 				if (res.status == 1) {
 					this.conent=res.data
 				}

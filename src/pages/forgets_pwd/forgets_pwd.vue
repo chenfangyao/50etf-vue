@@ -106,9 +106,6 @@ export default {
         method: 'POST', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log(res)
         if (res.status == 1) {
         } else {
           if (res.info) {
