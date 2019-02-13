@@ -17,6 +17,9 @@
         </keep-alive>
       </transition>
     </template>
+    <div class="self-mask maskLoading" v-show="loadingFlag">
+      <van-loading type="spinner" color="#999"/>
+    </div>
     <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
   </div>
 </template>
@@ -24,10 +27,12 @@
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
 import {checkUpdate} from '@/common/update.js'
+import { Loading  } from 'vant';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
-  components: { etfTabbar },
+  components: { etfTabbar,[Loading .name]:Loading  },
 
   data() {
     return {
@@ -53,9 +58,7 @@ export default {
       });
     }, false);
   },
-  computed:{
-    atNight(){return this.$store.state.atNight}
-  },
+  computed:mapState(['atNight','loadingFlag']),
   watch: {
     $route(to, from) {
       if (to.meta.tabbar) {
@@ -113,5 +116,11 @@ export default {
 .slide-left-leave-active {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
+}
+div.maskLoading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
 }
 </style>

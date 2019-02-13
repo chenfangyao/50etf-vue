@@ -52,7 +52,6 @@ export default {
     },
     calcBg(val, old) {
       if (old == 2 || !this.codeList) return;
-      // if (this.gtPrice !== 0 && val[0].latestPrice == old[0].latestPrice) return;
       this.codeList.forEach(item => {
         var snap = item.exercise_price
         if (snap.indexOf('A') == -1) {

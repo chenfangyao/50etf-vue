@@ -68,6 +68,7 @@ export default {
           'X-Requested-With':'XMLHttpRequest'
         },
         method: 'POST',
+        loading:true
       }
 
       this.$httpReq(options).then((res) => {
@@ -87,6 +88,8 @@ export default {
       }
       plus.gallery.pick(path => {
         // this.tobase64_app(path, i)
+        // this.$set(this.imgUrl, i, path)
+        this.$store.commit("setloadingFlag", true);
         this.convertImgToBase64(path, base64img => {
           if (i == 0) {
             this.f0 = base64img
@@ -94,6 +97,7 @@ export default {
             this.f1 = base64img
           }
           this.$set(this.imgUrl, i, path)
+          this.$store.commit("setloadingFlag", false);
         })
       }, e => { }, { filename: '_doc/gallery/', system: true });
     },
@@ -119,7 +123,7 @@ export default {
           this.f1 = base64str
         }
         img.clear()
-      }, () => { console.log('图片失败'); })
+      }, () => { console.error('图片失败'); })
     },
     //#endif
     //#ifdef H5
