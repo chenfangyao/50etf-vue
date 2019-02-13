@@ -1,6 +1,6 @@
 <template>
   <div v-if="codeList">
-    <div class="uni-flex root-el" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
+    <div class="uni-flex root-el textc1" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
       <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span
           :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"
@@ -12,7 +12,7 @@
       <div class="uni-flex">
         <!-- <span class="gou">{{item.buy_amount1}}</span> -->
         <span
-          class="midTxt"
+          class="midTxt textc1"
           :class="{bg1:item.gou.exercise_price==gtPrice,bg2:item.gou.exercise_price==ltPrice}"
         >{{item.gou.exercise_price}}</span>
         <!-- <span class="gou">{{item.sale_amount1}}</span> -->
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <h2 v-else>空空如野~您还未登录吧</h2>
+  <h2 v-else class="textc1">空空如野~您还未登录吧</h2>
 </template>
 <script>
 
@@ -192,15 +192,16 @@ h2 {
 div.specialBg{
   background: #f5f5ff
 }
+
 div.root-el {
   justify-content: space-between;
   height: 0.7rem;
   line-height: 0.7rem;
   border-bottom: 1px solid #f5f5f5;
+    color: #454545;
   span {
     font-size: 14px;
     // color: rgba(31, 31, 38, 1);
-    color: #454545;
     width: 51px;
   }
   span.txtred {
@@ -209,6 +210,7 @@ div.root-el {
   span.txtgreen {
     color: #3aba8f;
   }
+  
   span.midTxt {
     background-color: #eaeeed;
     display: inline-block;
@@ -302,6 +304,14 @@ div.root-el {
     span {
       color: #fff;
     }
+  }
+}
+div.at-night{
+ span.midTxt{
+    background-color: #2E3245;
+  }
+  div.specialBg{
+    background-color: #2E3245 !important;
   }
 }
 </style>

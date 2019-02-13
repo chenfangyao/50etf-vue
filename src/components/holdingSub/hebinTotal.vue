@@ -1,5 +1,5 @@
 <template>
-  <div>总计共{{total}}笔</div>
+  <div class="black2">总计共{{total}}笔</div>
 </template>
 <script>
 export default {

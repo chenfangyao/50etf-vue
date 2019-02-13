@@ -1,12 +1,12 @@
 <template>
   <section class="uni-flex">
-    <div :class="item.priceChange>0?'redclass':'greenclass'" v-for='(item,i) in commonstock' :key="i" @click='go(i)'>
+    <div :class="item.priceChange>0?'redclass':'greenclass'" class="black2" v-for='(item,i) in commonstock' :key="i" @click='go(i)'>
       <h5 >{{item.latestPrice}}</h5>
       <div>
         <span >{{item.priceChange}}</span>
         <span >{{item.priceChangeRate}}%</span>
       </div>
-      <h4>{{item.stockName}}</h4>
+      <h4 class="textc1">{{item.stockName}}</h4>
     </div>
     
   </section>

@@ -9,7 +9,7 @@
     <four-tips></four-tips>
     <three-securities :commonstock="commonstock"></three-securities>
     <div class="uni-flex newsViewTitle">
-      <span>资讯</span>
+      <span class="textc1">资讯</span>
       <span @click="getmoreart()">更多></span>
     </div>
     <news-view :newlists="newsItem"></news-view>

@@ -13,6 +13,8 @@ div#app.at-night{
   }
   div.root-el{
     background-color: $black2;
+    border-color: $black1;
+
   }
   .textc1{
     color: #fff;
@@ -23,11 +25,14 @@ div#app.at-night{
   .black1{
     background-color: $black1;
     background: $black1;
+    box-shadow:none
   }
   .black2{
     background-color: $black2;
     background: $black2;
     border-color: $black1;
+    box-shadow:none
+
   }
   .black4{
     background-color: #1f2e23;

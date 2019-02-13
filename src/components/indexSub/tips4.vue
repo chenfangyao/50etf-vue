@@ -1,28 +1,28 @@
 <template>
-  <div class="tipItems">
+  <div class="tipItems black2">
     <div @click='go(4)'>
       <div class="hasBg">
         <img :src="img1" >
       </div>
-      <span>交易</span>
+      <span  class="textc1">交易</span>
     </div>
     <div @click='go(1)' hover-class='self-hover'>
       <div class="hasBg bg2">
         <img :src="img2" >
       </div>
-      <span>公告</span>
+      <span class="textc1">公告</span>
     </div>
     <div @click='go(3)'>
       <div class="hasBg bg3">
         <img :src="img3" >
       </div>
-      <span>充值</span>
+      <span class="textc1">充值</span>
     </div>
     <div @click='go(2)' hover-class='self-hover'>
       <div class="hasBg bg4">
         <img :src="img4" >
       </div>
-      <span>新手指引</span>
+      <span class="textc1">新手指引</span>
     </div>
   </div>
 </template>

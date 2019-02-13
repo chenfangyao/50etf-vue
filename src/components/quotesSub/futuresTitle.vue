@@ -1,5 +1,5 @@
 <template>
-  <div class="uni-flex root-el">
+  <div class="uni-flex root-el textc2">
     <span><span>涨跌</span><span class="small">(%)</span></span>
     <span>现价</span>
     <div class="uni-flex">
@@ -16,9 +16,9 @@ div.root-el {
   justify-content: space-between;
   padding:.18rem .25rem;
   border-bottom: 1px solid #f5f5f5;
+    color: rgba(31, 31, 38, 1);
   span {
     font-size: 14px;
-    color: rgba(31, 31, 38, 1);
     text-align: center;
   }
   span.small{

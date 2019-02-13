@@ -2,11 +2,11 @@
   <div class="wrap">
     <header-tab @tab-tap="tabTap" :title-list="titleList" :tabI="tabI"></header-tab>
     <div>
-      <div class="fix">
+      <div class="fix black2">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
         <hebin-total :total="titleList[tabI].total" v-if="tabI<2"></hebin-total>
         <template v-else-if="tabI==2">
-          <div class="h8"></div>
+          <div class="h8 black1"></div>
           <top-btn></top-btn>
         </template>
       </div>
@@ -25,7 +25,7 @@
       <list-three :tab-i="tabI" :list="titleList[3].list" @re-get='getFenbiList(3)' ></list-three>
       <div v-if="titleList[3].total==0" class="nullTxt">您还未开仓，空空如也</div>
     </scroll-view>
-    <div class="h5"></div>
+    <div class="h5 black1"></div>
     <fenbi-pop v-if="showFenbiPop" :hebin-hide="tabI==0" :res-obj="listItem" @close-me="closePop"></fenbi-pop>
     <hebing-pop v-if="showHebingPop" :res-obj="listItem" @close-me="closePop"></hebing-pop>
   </div>

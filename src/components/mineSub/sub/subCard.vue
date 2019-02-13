@@ -1,12 +1,12 @@
 <template>
-<div class="subCard">
+<div class="subCard black2">
     <div class=" uni-flex ml50">
         <div class="imgContainer">
           <img src="../../../assets/mineImg/touxiang.png"/>
         </div>
         <div>
-          <h2>{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
-          <h3>{{sid?userinfo.mobile:'— —'}}</h3>
+          <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
+          <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
         </div>
     </div>
     <button hover-class='self-hover' @click='go'>{{sid?'实名认证':'登录'}}</button>
@@ -100,7 +100,7 @@ div.subCard {
   margin:.66rem.20rem 0;
   background-color: #fff;
   border-radius:.20rem;
-  box-shadow:.00rem.05rem.05rem.00rem rgba(245, 245, 245, 0.6);
+  box-shadow:0 .05rem .05rem 0 rgba(245, 245, 245, 0.6);
   min-height:2.00rem;
 }
 </style>

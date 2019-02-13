@@ -1,31 +1,31 @@
 <template>
   <div class="has-padding">
-    <div v-for='(item,i) in list' class="list1Item " @click='popShow(i)' hover-class='self-hover' :key="i">
+    <div v-for='(item,i) in list' class="list1Item black2" @click='popShow(i)' hover-class='self-hover' :key="i">
       <div class="line1 uni-flex">
         <div>
-          <span class="nameTxt">{{item.stock_name}}</span>
+          <span class="nameTxt textc1">{{item.stock_name}}</span>
           <span class="codeTxt">{{item.stock_code}}</span>
         </div>
-        <div class="timeTxt" v-if="item.in_time">{{create_time[i]}}</div>
+        <div class="timeTxt textc2" v-if="item.in_time">{{create_time[i]}}</div>
       </div>
       <div class="line2 uni-flex">
         <div class='uni-flex leftPart fg1'>
           <div class="uni-flex" :class="[tabI==1?'fg1':'w240']">
-            <div class="itemView">
+            <div class="itemView textc2">
               <span>{{tabI==0?'成交价：':'总市值：'}}</span>
               <span>{{tabI==0?'市值：':'平均成交价：'}}</span>
             </div>
-            <div class="itemView c1">
+            <div class="itemView c1 textc1">
               <span>{{tabI==0?item.avg_buy_price:item.royalty_money}}</span>
               <span>{{tabI==0?item.market_value:item.avg_buy_price}}</span>
             </div>
           </div>
           <div class=" uni-flex" v-if='tabI==0'>
-            <div class="itemView">
+            <div class="itemView textc2">
               <span>延期费：</span>
               <span>持仓：</span>
             </div>
-            <div class="itemView c1">
+            <div class="itemView c1 textc1">
               <span>{{item.add_fee_money}}</span>
               <span>{{item.own_amount}}</span>
             </div>
@@ -138,5 +138,8 @@ div.list1Item {
   }
   background-color: #fff;
   margin-bottom:.11rem;
+}
+div.black2>div.line1{
+  border-color: #0f131f
 }
 </style>
