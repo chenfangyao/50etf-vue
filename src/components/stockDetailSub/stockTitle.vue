@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrap">
+    <div class="root-el">
       <div class="occupy"></div>
       <div class="wrap2">
         <div class="left" @click="back">
@@ -36,7 +36,7 @@ export default {
 div.h44 {
   height: 44px;
 }
-div.wrap {
+div.root-el {
   border-bottom: 1px solid #ededed;
   position: fixed;
   left: 0;

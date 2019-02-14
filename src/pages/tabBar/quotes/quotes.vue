@@ -3,8 +3,8 @@
     <base-header title="行情"></base-header>
     <stock-tip-bar :commonstock="commonstock"></stock-tip-bar>
     <div class="uni-tab-bar">
-      <div class="swiper-tab uni-flex">
-        <div v-for="(tab,index) in groupLabel" :key="tab.id" class="swiper-tab-list2" :id="tab.id">
+      <div class="swiper-tab uni-flex black2 ">
+        <div v-for="(tab,index) in groupLabel" :key="tab.id" class="swiper-tab-list2 textc1" :id="tab.id">
           <span
             :class="[tabIndex==index ? 'active' : '']"
             @click="tapTab"
@@ -54,7 +54,6 @@ export default {
   },
   computed: mapState(['taglist']),
   beforeRouteLeave(to, from, next) {
-    console.log('关闭了第二个页面的定时器')
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
     util.indextimmer.quotesQryQuotationList = null

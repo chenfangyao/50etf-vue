@@ -64,7 +64,6 @@ export default {
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        console.log('我的银行', res)
         if (res.status) {
           if (res.data.sub_id != undefined) {
             this.hasBank = true

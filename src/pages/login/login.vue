@@ -43,7 +43,7 @@ export default {
 			this.verifyYes==true
 		}
 	},
-    computed: mapState(['isWhite','sid','username','mobile','userinfo']),
+    computed: mapState(['atNight','sid','username','mobile','userinfo']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
       ...mapMutations(['setsid','setusername','setmobile','setuserinfo']),
@@ -110,7 +110,6 @@ export default {
               method: 'GET', //请求方法全部大写，默认GET
           }
           this.$httpReq(options).then((res) => {
-              console.log('用户信息', res)
               if(res.status){
 				this.setuserinfo(res.data)
               }
@@ -119,7 +118,6 @@ export default {
           })
       },
     handleBlur(){
-      console.log('input失去焦点时触发');
     },
     handChange(){
         this.showErr=false

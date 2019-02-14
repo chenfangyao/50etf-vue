@@ -32,10 +32,9 @@ export default {
       update_time: '',
     };
   },
-  computed: mapState(['isWhite', 'sid']),
+  computed: mapState(['atNight', 'sid']),
   methods: {},
   created(opts) {
-    console.log('opts', opts)
     var id = parseInt(this.$route.query.id)
     var options = {
       url: '/Sapi/Article/cont', //请求接口
@@ -47,9 +46,6 @@ export default {
       },
     }
     this.$httpReq(options).then((res) => {
-      // 请求成功的回调
-      // res为服务端返回数据的根对象
-      console.log('文章详情', res)
       this.arttitle = res.data.title
       this.artlittle = res.data.source
       this.artwenan = res.data.content.replace(/<br \/>/g, "<br/> <span style='margin-left:2em'></span>")

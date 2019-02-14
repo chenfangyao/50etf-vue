@@ -1,7 +1,7 @@
 <template>
   <div >
     <div class="base-spase"></div>
-    <van-tabbar v-model="active" :z-index="100">
+    <van-tabbar v-model="active" :z-index="100" class="black2">
       <van-tabbar-item to="/" replace>
         <span>首页</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img1s : icon.img1">
@@ -75,5 +75,11 @@ export default {
     width: 24px;
     height: 24px !important;
   }
+}
+[class*=van-hairline]::after {
+  border: 0
+}
+.van-tabbar--fixed{
+  padding-top: 6px;
 }
 </style>

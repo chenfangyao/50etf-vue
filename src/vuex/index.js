@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     hasLogin: false,
     loginProvider: "",
     openid: null,
-    isWhite: true,
+    atNight: false,
     sid: '',
     username: '',
     mobile: '',
@@ -56,8 +56,8 @@ const store = new Vuex.Store({
       state.hasLogin = true;
       state.loginProvider = provider;
     },
-    setisWhite(state, data) {
-      state.isWhite = data
+    setatNight(state, data) {
+      state.atNight = data
     },
     settabIndex(state, data) {
       state.tabIndex = data

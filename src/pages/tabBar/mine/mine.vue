@@ -2,38 +2,38 @@
   <div class="wrap">
     <headerCard ></headerCard>
     <div class="items" >
-      <div class="uni-flex" hover-class="self-hover"  @click="go('capital_flow/capital_flow')" >
+      <div class="uni-flex black2 textc1" hover-class="self-hover"  @click="go('capital_flow/capital_flow')" >
         <img src="../../../assets/mineImg/01.png" />
         <span>资金流水</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
       <!-- <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/card_list/card_list')"> -->
-      <div class="uni-flex" hover-class="self-hover" @click="go('bank_card/add_card/add_card')">
+      <div class="uni-flex black2 textc1" hover-class="self-hover" @click="go('bank_card/add_card/add_card')">
         <img src="../../../assets/mineImg/02.png" />
         <span>银行卡</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex bb6" hover-class="self-hover" @click="go('trading_rules/trading_rules')">
+      <div class="uni-flex bb6 black2 textc1" hover-class="self-hover" @click="go('trading_rules/trading_rules')">
         <img src="../../../assets/mineImg/03.png" />
         <span>交易规则</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex" hover-class="self-hover" @click="go('red_envelope/red_envelope')">
+      <div class="uni-flex black2 textc1" hover-class="self-hover" @click="go('red_envelope/red_envelope')">
         <img src="../../../assets/mineImg/04.png" />
         <span>我的红包</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex bb6" hover-class="self-hover"  @click="go('invite_friends/invite_friends')">
+      <div class="uni-flex bb6 black2 textc1" hover-class="self-hover"  @click="go('invite_friends/invite_friends')">
         <img src="../../../assets/mineImg/05.png" />
         <span>邀请好友</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex" hover-class="self-hover"  @click="go('my_customer_service/my_customer_service')">
+      <div class="uni-flex black2 textc1" hover-class="self-hover"  @click="go('my_customer_service/my_customer_service')">
         <img src="../../../assets/mineImg/06.png" />
         <span>联系客服</span>
         <span class="tip" v-if="false"></span>
@@ -45,7 +45,7 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../static/mineImg/arrow.png" />
       </div> -->
-      <div class="uni-flex" hover-class="self-hover" @click="go('about_us/about_us')" >
+      <div class="uni-flex black2 textc1" hover-class="self-hover" @click="go('about_us/about_us')" >
         <img src="../../../assets/mineImg/08.png" />
         <span>关于我们</span>
         <!-- <span class="tip" v-if="true"></span> -->
@@ -80,9 +80,6 @@ export default {
 						method: 'GET', //请求方法全部大写，默认GET
 				}
 				this.$httpReq(options).then((res) => {
-						// 请求成功的回调
-						// res为服务端返回数据的根对象
-						console.log('我的银行', res)
 						if(res.status){
 							if(res.data.sub_id!=undefined){
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card/add_card' })
@@ -91,7 +88,6 @@ export default {
 							}
 						}
 				}).catch((err) => {
-						// 请求失败的回调
 						console.error(err,'捕捉')
 				})
 			}else{
@@ -108,14 +104,10 @@ export default {
 					},
 			}
 			this.$httpReq(options).then((res) => {
-					// 请求成功的回调
-					// res为服务端返回数据的根对象
-					console.log('我的消息', res)
 					if(res.status){
 						this.setnewlengths(res.data.list.length.toString())
 					}
 			}).catch((err) => {
-					// 请求失败的回调
 					console.error(err,'捕捉')
 			})
 		},

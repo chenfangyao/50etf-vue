@@ -2,24 +2,24 @@
 	<div class="wrap">
 		<base-header title="资产"></base-header>
 		<header-card :transmoney='res_data'></header-card>
-		<div class="info">
-			<div>权益金</div>
-			<div class="uni-flex">
+		<div class="info ">
+			<div class="black2 textc2">权益金</div>
+			<div class="uni-flex black2 textc1">
 				<span>权益金</span>
 				<span>{{royalty_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
-			<div class="uni-flex">
+			<div class="uni-flex black2 textc1">
 				<span>盈亏</span>
 				<span :class="greenredclass?'greenColor':'redColor'">{{profit_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
 		</div>
-		<div class="info">
-			<div>其他</div>
-			<div class="uni-flex">
+		<div class="info ">
+			<div class="black2 textc2">其他</div>
+			<div class="uni-flex black2 textc1">
 				<span>待扣延期费</span>
 				<span>{{add_fee_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
-			<div class="uni-flex">
+			<div class="uni-flex black2 textc1">
 				<span>提现冻结</span>
 				<span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
@@ -66,9 +66,6 @@ export default {
         method: 'GET', //请求方法全部大写，默认GET
       }
       this.$httpReq(options).then((res) => {
-        // 请求成功的回调
-        // res为服务端返回数据的根对象
-        console.log('资金列表', res)
         if (res.status == 1) {
 					this.setassets(res.data)
           this.enable_money = res.data.enable_money
@@ -100,7 +97,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  height: calc(100vh - .70rem);
+  height: calc(100vh - 50px);
 padding-top: 0.1px;
   div.info {
     margin-bottom:.12rem;

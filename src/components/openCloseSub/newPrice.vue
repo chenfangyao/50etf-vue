@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="root-el">
     <div v-show="onClose">
       <div class="entrustType">
         <span class="type commonStyle1">委托类型</span>
@@ -483,7 +483,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   padding: 0.3rem 0.32rem;
   background-color: #fff;
 

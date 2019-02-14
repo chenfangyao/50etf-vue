@@ -1,0 +1,46 @@
+$black1:#0f131f;//页面背景，描边，分割线
+$black2:#181c28;//每个内容区域的背景
+$black3:#2c2c33;//底部一级导航分割线
+$gray1:#828597;//icon 普通文字，用户名，正文内容，时间
+$green1:#1bd091;//行情下跌，亏损时
+$blue1:#409de5;//主蓝色
+div#app.at-night{
+  min-height: 100vh;
+  background-color: $black1;
+  div.wrap{
+    background-color: $black1;
+    color: #fff;
+  }
+  div.root-el{
+    background-color: $black2;
+    border-color: $black1;
+
+  }
+  .textc1{
+    color: #fff;
+  }
+  .textc2{
+    color: $gray1;
+  }
+  .black1{
+    background-color: $black1;
+    background: $black1;
+    box-shadow:none
+  }
+  .black2{
+    background-color: $black2;
+    background: $black2;
+    border-color: $black1;
+    box-shadow:none
+
+  }
+  .black4{
+    background-color: #1f2e23;
+    background: #1f2423;
+  }
+  .blue1{
+    background-color: $blue1;
+    background: $blue1;
+    border-color: $blue1
+  }
+}

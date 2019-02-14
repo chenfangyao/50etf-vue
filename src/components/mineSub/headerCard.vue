@@ -1,5 +1,5 @@
 <template>
-  <div class="hwrap">
+  <div class="hwrap black1">
     <div class="h44"></div>
     <header-title ></header-title>
     <sub-card></sub-card>

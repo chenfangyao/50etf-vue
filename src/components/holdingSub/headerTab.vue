@@ -2,7 +2,7 @@
   <div>
     <div class="headerContainer">
       <div class="occupy"></div>
-      <div class="wrap">
+      <div class="root-el">
         <span @click='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
       </div>
     </div>
@@ -39,7 +39,7 @@ div.h44 {
   top: 0;
   z-index: 50;
   background-color: #fff;
-  div.wrap {
+  div.root-el {
     text-align: center;
     height: 44px;
     font-size: 16px;

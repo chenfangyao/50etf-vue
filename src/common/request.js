@@ -1,9 +1,15 @@
 import axios from 'axios'
 import store from '../vuex'
 import Qs from 'qs'
+var isShowLoading = true;
+
 axios.interceptors.response.use(function (response) {
+  store.commit("setloadingFlag", false);
+  isShowLoading = false;
   return response.data;
 }, function (error) {
+  store.commit("setloadingFlag", false);
+    isShowLoading = false;
   return Promise.reject(error);
 });
 axios.interceptors.request.use(function (config) {
@@ -16,10 +22,10 @@ axios.interceptors.request.use(function (config) {
 });
 export default function (obj) {
 
-  var isShowLoading = true;
-  if (obj.loading == undefined) {
+  /* if (obj.loading == undefined) {
     obj.loading = true
-  }
+  } */
+  isShowLoading = true;
   setTimeout(() => {
     if (isShowLoading && obj.loading) {
       store.commit("setloadingFlag", true);
@@ -50,7 +56,7 @@ export default function (obj) {
     baseURL,//: process.env.NODE_ENV === 'production' ? baseURL : '',
     method: obj.method || 'get',
     headers: obj.header || {},
-    timeout: 10000,
+    timeout: 30000,
     responseType: obj.dataType || '',
   }
   if (obj.method === 'GET') {//|| (obj.header['Content-Type'] == 'application/x-www-form-urlencoded')

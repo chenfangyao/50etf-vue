@@ -1,18 +1,12 @@
 <template>
 	<div>
-		<div v-for="(item,i) in newlists" :key="i" class="newsView" @click="getartdetil(item.id)">
-			<h3 class='titlelength'>{{item.title}}</h3>
-			<div class="uni-flex">
+		<div v-for="(item,i) in newlists" :key="i" class="newsView black2 textc1" @click="getartdetil(item.id)">
+			<h3 class='titlelength textc1'>{{item.title}}</h3>
+			<div class="uni-flex textc2">
 				<span>{{item.source}}</span>
 				<span>
-					<span class="newsTime">{{update_time[i]}}</span>
+					<span class="newsTime textc2">{{update_time[i]}}</span>
 				</span>
-			</div>
-			<div class="uni-flex">
-				<!-- <span>{{item.source}}</span> -->
-				<!-- <span>
-					<span class="newsTime">{{update_time[i]}}</span>
-				</span> -->
 			</div>
 		</div>
 	</div>
@@ -61,7 +55,6 @@ div.newsView {
     max-height: 50px;
     overflow: hidden;
     margin: 0;
-    background-color: #fff;
     color: rgba(24, 28, 40, 1);
   }
 
@@ -78,7 +71,6 @@ div.newsView {
   > div.uni-flex {
     justify-content: space-between;
     margin-top:.10rem;
-    background-color: #fff;
 
   }
 }

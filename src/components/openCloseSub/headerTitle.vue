@@ -2,7 +2,7 @@
   <div>
     <div class="headerContainer">
       <div class="occupy"></div>
-      <div class="wrap uni-flex">
+      <div class="root-el uni-flex">
         <div class="leftPart" @click="back">
           <img src="../../assets/arrow/l.png">
         </div>
@@ -54,7 +54,7 @@ div.h44 {
   top: 0;
   z-index: 200;
   background-color: #fff;
-  div.wrap {
+  div.root-el {
     div.leftPart {
       padding: 13px 0.2rem 0 0.3rem;
       height: 44px;

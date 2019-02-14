@@ -1,9 +1,9 @@
 <template>
-  <div class="uni-flex wrap">
+  <div class="uni-flex root-el">
     <div class="info">
       <div class="line1">
         <!-- <span>购12月2250</span> -->
-        <span>{{subCodeName}}</span>
+        <span>{{resObj.stockName | dealName}}</span>
         <span>({{resObj.stockCode}})</span>
       </div>
       <div class="uni-flex line2">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="df_wh" id="canvas2">缩略图</div>
+    <div class="df_wh" id="canvas3">缩略图</div>
   </div>
 </template>
 <script>
@@ -50,34 +50,22 @@ var option = {
 export default {
   data() {
     return {
-      echarts,
-      subCodeName: '',//处理子字符串
-    }
-  },
-  methods: {
-    showH5Echarts() {
-      var myChart = echarts.init(document.getElementById('canvas2'));
-      myChart.setOption(option);
-    },
-
-  },
-  watch: {
-    resObj: {
-      handler(val) {
-        this.subCodeName = val.stockName.substring(5)
-      },
-      deep: true
     }
   },
   props: ['resObj'],
   mounted() {
-    this.showH5Echarts()
-    
+    echarts.init(document.getElementById('canvas3')).setOption(option)
+  },
+  filters:{
+    dealName(val){
+      if(val) return val.substring(5)
+      else return ''
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
-div.wrap {
+div.root-el {
   padding: 0.26rem 0.26rem 0;
   background-color: #fff;
   justify-content: space-between;

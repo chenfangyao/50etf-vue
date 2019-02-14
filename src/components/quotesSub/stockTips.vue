@@ -1,6 +1,6 @@
 <template>
-  <div class="stock50 uni-flex" @click='go'>
-      <span class="stockNmae">50ETF</span>
+  <div class="stock50 uni-flex black2 " @click='go'>
+      <span class="stockNmae textc1">50ETF</span>
       <div class="df_wh" id="mini-canvas">缩略图</div>
       <div class="txtContainer">
 				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>

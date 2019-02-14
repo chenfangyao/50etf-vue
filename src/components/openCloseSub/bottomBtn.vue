@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="wrap uni-flex">
+    <div class="root-el uni-flex">
       <div class="txt">
         <span class="total">合计</span>
         <!-- <span class="totalPrice">￥{{totalmoney||0}}</span> -->
@@ -52,7 +52,7 @@ div.h98 {
   margin-top:.98rem;
   background-color: #ededed;
 }
-div.wrap {
+div.root-el {
   height:.98rem;
   position: fixed;
   left: 0;

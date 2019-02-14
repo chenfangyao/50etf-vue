@@ -36,8 +36,8 @@ export default {
 <style scoped>
 div.txt {
   font-size: .3rem;
-  width: 120px;
+  width: 135px;
   color: rgba(24, 144, 255, 1);
-  margin-left:.56rem;
+  text-align: right;
 }
 </style>

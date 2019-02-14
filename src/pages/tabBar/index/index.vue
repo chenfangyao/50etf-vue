@@ -1,5 +1,5 @@
 <template>
-  <div :class="isWhite?'white':'black'" class="wrap">
+  <div  class="wrap">
     <base-header title="首页"></base-header>
     <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
       <van-swipe-item v-for="(item,i) in imgList" :key="i">
@@ -9,7 +9,7 @@
     <four-tips></four-tips>
     <three-securities :commonstock="commonstock"></three-securities>
     <div class="uni-flex newsViewTitle">
-      <span>资讯</span>
+      <span class="textc1">资讯</span>
       <span @click="getmoreart()">更多></span>
     </div>
     <news-view :newlists="newsItem"></news-view>
@@ -41,7 +41,7 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState(['isWhite', 'sid', 'username', 'mobile', 'indextimmer']),
+  computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer']),
   methods: {
     // 登录
     ...mapMutations(['setsid', 'setusername', 'setmobile', 'setsoftconf', 'setindextimmer']),
@@ -151,7 +151,6 @@ export default {
     })
   },
   beforeRouteLeave(to, from, next) {
-    console.log('关闭了第一个页面的定时器')
     clearInterval(util.indextimmer.indexCommonSelectStock)
     util.indextimmer.indexCommonSelectStock = null
     next()
