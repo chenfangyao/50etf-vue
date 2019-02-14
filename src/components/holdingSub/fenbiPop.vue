@@ -1,7 +1,7 @@
 <template>
   <div class="fixWrap self-mask" @touchmove.prevent>
-    <div class="subWrap">
-      <div class="topTip uni-flex">
+    <div class="subWrap black2">
+      <div class="topTip uni-flex black2">
         <div>自动延期</div>
         <div @click="openPop2" class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
@@ -9,32 +9,32 @@
           <img src="../../assets/holdingImg/meigou.png" v-else>
         </div>
       </div>
-      <div class="container">
+      <div class="container black2">
         <div class="title uni-flex">
           <div>
-            <span class="nameTxt">{{resObj.stock_name}}</span>
-            <span>{{resObj.stock_code}}</span>
+            <span class="nameTxt textc1">{{resObj.stock_name}}</span>
+            <span class="textc2">{{resObj.stock_code}}</span>
           </div>
-          <div>{{timeDeal}}</div>
+          <div class="textc2">{{timeDeal}}</div>
         </div>
         <div class="infoView uni-flex">
           <div class="leftPart uni-flex">
             <div class="uni-flex left1">
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc2">
                 <span>成交价：</span>
                 <span>延期费：</span>
               </div>
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc1">
                 <span>{{resObj.avg_buy_price}}</span>
                 <span>{{resObj.add_fee_money}}</span>
               </div>
             </div>
             <div class="uni-flex">
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc2">
                 <span>市值：</span>
                 <span>持仓：</span>
               </div>
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc1">
                 <span>{{resObj.market_value}}</span>
                 <span>{{resObj.own_amount}}</span>
               </div>

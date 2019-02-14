@@ -166,7 +166,7 @@ export default {
   watch: {
     quoteList(newval, oldval) {
 
-      this.calcBg(this.latestPrice, this.calcOnce)
+     this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length == 0) {
         return this.inTemArr = []
       }

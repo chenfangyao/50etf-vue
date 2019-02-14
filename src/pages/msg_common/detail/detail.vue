@@ -1,9 +1,9 @@
 <template>
-  <div class="wrap">
+  <div class="wrap black2">
     <base-header has-back='1'></base-header>
-    <div class="title">{{conent.title}}</div>
-    <div class="timeTitle">{{datetimes}}</div>
-    <div class="content" v-html='conent.content'></div>
+    <div class="title textc1 black1">{{conent.title}}</div>
+    <div class="timeTitle textc2">{{datetimes}}</div>
+    <div class="content  textc2" v-html='conent.content'></div>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-           artid:'',
+      artid:'',
 		   conent:'',
 		   formatecontent:'',
 		   datetimes:''

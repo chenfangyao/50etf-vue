@@ -1,11 +1,11 @@
 <template>
 <div>
 
-  <div v-for='(item,i) in list' class="list2Item "  :key="i">
+  <div v-for='(item,i) in list' class="list2Item black2"  :key="i">
     <div class="line1 uni-flex">
         <div >
-          <span class="nameTxt">{{item.stock_name}}</span>
-          <span class="codeTxt">{{item.stock_code}}</span>
+          <span class="nameTxt textc1">{{item.stock_name}}</span>
+          <span class="codeTxt textc2">{{item.stock_code}}</span>
         </div>
         <div class="badgeView">{{item.status}}</div>
     </div>
@@ -13,18 +13,18 @@
       <div class='uni-flex leftPart'>
         <div>
           <div class="itemView">
-            <span>委托价</span>
-            <span>{{item.entrust_price}}</span>
+            <span class="textc2">委托价</span>
+            <span class="textc1">{{item.entrust_price}}</span>
           </div>
           <div>
-            <span>委托数</span>
-            <span>{{item.entrust_amount}}</span>
+            <span class="textc2">委托数</span>
+            <span class="textc1">{{item.entrust_amount}}</span>
           </div>
         </div>
       </div>
       <div class="businessType" >
-        <span> 交易类型</span>
-        <span  :class="{yellow:moneyColor[i]}">{{item.entrust_bs==2?'平仓':'开仓'}}</span>
+        <span class="textc1"> 交易类型</span>
+        <span  :class="{yellow:item.entrust_bs==2}">{{item.entrust_bs==2?'平仓':'开仓'}}</span>
       </div>
 
     </div>
@@ -49,7 +49,6 @@ export default {
       countdownArr:[],//倒计时数组存定时器和倒计数字
       showCedanPop: false,
       showResultPop: false,
-      moneyColor: [],
       createTime: [],//时间数组
       eid: ''
     }
@@ -119,6 +118,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div#app.at-night .line1{
+  border-color:#0f131f
+}
 div.list2Item {
   > div {
     padding: 0 .25rem;
@@ -159,7 +161,7 @@ div.list2Item {
         color: #409de5;
       }
       span.yellow:last-child {
-        color: #e6aa12;
+        color: #e6aa12 !important;
       }
     }
     div.itemView {

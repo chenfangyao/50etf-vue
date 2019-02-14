@@ -1,3 +1,4 @@
+import store from '@/vuex'
 export const commonOption = {
   tooltip: {
     trigger: 'item',
@@ -42,7 +43,8 @@ export const optionK = {
       axisLine: { show: false },
     }],
   legend: {
-    data: ['MA5', 'MA10', 'MA20', 'MA30']
+    data: ['MA5', 'MA10', 'MA20', 'MA30'],
+    textStyle:{color:store.state.atNight?'#fff':'#333'}
   },
   visualMap: {
     show: false,
@@ -110,9 +112,9 @@ export const optionK = {
       yAxisIndex: 0,
       itemStyle: {
         normal: {
-          color: '#f05f5c',
+          color: '#ec605e',
           color0: '#3aba8f',
-          borderColor: '#f05f5c',
+          borderColor: '#ec605e',
           borderColor0: '#3aba8f'
         }
       },

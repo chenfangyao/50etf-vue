@@ -1,17 +1,17 @@
 <template>
-    <div class="Bigwrap">
+    <div class="Bigwrap black1">
         <base-header :hasBack="true"  title='资金流水'></base-header>
-        <div class="line1 uni-flex">
+        <div class="line1 uni-flex black2 textc1">
             <span>共{{total}}笔</span>
             <img class="right" @click="showDatepick" src="../../../assets/mineImg/datePicker.png"/>
         </div>
         <scroll-view class='listscrow'  ref="scroll3"  @scrollToEnd="loadMore">
           <div>
-            <div class="listsContainer" v-for="(item,i) in monetlist" :key="i">
-                <div class="line1 uni-flex">
+            <div class="listsContainer black2 textc1" v-for="(item,i) in monetlist" :key="i">
+                <div class="line1 black2 uni-flex">
                     <div>
-                        <span class="txt1">{{item.stock_name}}</span>
-                        <span class="txt2">{{item.stock_code}}</span>
+                        <span class="txt1 textc1">{{item.stock_name}}</span>
+                        <span class="txt2 textc2">{{item.stock_code}}</span>
                     </div>
                     <div class="timetxt">
                         <!-- <span>{{$formatetimestr(item.create_time)}}</span> -->
@@ -23,11 +23,11 @@
                     <div class="uni-flex info">
                         <div>
                             <span class="infoName">手续费：</span>
-                            <span>{{item.fee_money}}</span>
+                            <span class="textc1">{{item.fee_money}}</span>
                         </div>
                         <div>
                             <span class="infoName">账户余额：</span>
-                            <span>{{item.bal_money}}</span>
+                            <span class="textc1">{{item.bal_money}}</span>
                         </div>
                     </div>
                 </div>

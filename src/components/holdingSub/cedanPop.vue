@@ -1,12 +1,12 @@
 <template>
-  <div class="maskWrap self-mask">
-    <div class="container">
-      <div class="txt">撤单确认</div>
+  <div class="maskWrap self-mask ">
+    <div class="container black2">
+      <div class="txt textc1">撤单确认</div>
       <img src="../../assets/holdingImg/cedan.png">
-      <div class="txt">是否撤单？</div>
+      <div class="txt textc2">是否撤单？</div>
       <div class="btn2 uni-flex">
         <div @click='cancle'>取消</div>
-        <div @click='yesTap'>确定</div>
+        <div @click='yesTap' class="nightStyle">确定</div>
       </div>
     </div>
   </div>
@@ -26,6 +26,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div#app.at-night .nightStyle{
+  background-color: #409de5;
+  color: #fff;
+  border-color: transparent;
+}
 div.maskWrap {
   div.container {
     background-color: #fff;

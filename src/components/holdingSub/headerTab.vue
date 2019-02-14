@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="headerContainer">
+    <div class="_headerContainer">
       <div class="occupy"></div>
       <div class="root-el">
         <span @click='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
@@ -32,7 +32,7 @@ export default {
 div.h44 {
   height: 44px;
 }
-.headerContainer {
+._headerContainer {
   position: fixed;
   left: 0;
   right: 0;

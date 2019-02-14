@@ -2,16 +2,20 @@
   <div class="wrap">
     <base-header title="邀请好友" has-back='1'></base-header>
 
-    <img class="bg" src="../../../assets/mineImg/inviteFriendBg.png">
-    <div class="QRcode">
+    <img class="bg" v-if='atNight' src="../../../assets/mineImg/bg-black.png">
+    <img class="bg" v-else src="../../../assets/mineImg/inviteFriendBg.png">
+    <div class="aboveZindx">
 
-			<qrcode-vue :logoSrc="imageUrl" :text="imageUrl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
-    </div>
+      <div class="QRcode aboveZindex">
 
-    <div class="txt">{{baseurl}}</div>
+        <qrcode-vue :logoSrc="imageUrl" :text="imageUrl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
+      </div>
 
-    <div class="btn">
-      <btn-block txt='复制' @v-tap='copy'></btn-block>
+      <div class="txt textc1">{{baseurl}}</div>
+
+      <div class="btn">
+        <btn-block txt='复制' @v-tap='copy'></btn-block>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +35,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userinfo']),
+    ...mapState(['userinfo','atNight']),
     baseurl() {
       return this.codeValue + '/' + this.userinfo.user_id
     }
@@ -62,12 +66,16 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   position: relative;
+  div.aboveZindex{
+    position: relative;
+    z-index: 2;
+  }
   img.bg {
     height:6.34rem;
     left: 0;
     width: 100%;
     position: absolute;
-    z-index: -5;
+    // z-index: -5;
   }
   div.QRcode {
     width: 158px;

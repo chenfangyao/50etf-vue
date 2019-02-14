@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="wrap">
 		<base-header has-back='1'></base-header>
-    <div class="title">修改密码</div>
+    <div class="title textc1">修改密码</div>
     <div class="container">
 
       <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' @now-change='handChange' v-model="pwd1"></input-item>

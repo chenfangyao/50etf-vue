@@ -1,22 +1,22 @@
 <template>
   <div class="fixWrap self-mask" @touchmove.prevent>
-    <div class="subWrap">
-      <div class="container">
+    <div class=" subWrap">
+      <div class="container black2">
         <div class="title uni-flex">
           <div>
-            <span class="nameTxt">{{resObj.stock_name}}</span>
-            <span>{{resObj.stock_code}}</span>
+            <span class="nameTxt textc1">{{resObj.stock_name}}</span>
+            <span class="textc2">{{resObj.stock_code}}</span>
           </div>
-          <div>持仓数：{{resObj.own_amount}}</div>
+          <div class="textc1">持仓数：{{resObj.own_amount}}</div>
         </div>
         <div class="infoView uni-flex">
           <div class="leftPart uni-flex">
             <div class="uni-flex left1">
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc2">
                 <span>成交价：</span>
                 <span>市值：</span>
               </div>
-              <div class="uni-flex uni-column">
+              <div class="uni-flex uni-column textc1">
                 <span>{{resObj.avg_buy_price}}</span>
                 <span>{{resObj.market_value}}</span>
               </div>
@@ -77,6 +77,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+div#app.at-night div.title{
+  border-color: #0f131f
+}
 div.fixWrap {
   display: flex;
   align-items: center;

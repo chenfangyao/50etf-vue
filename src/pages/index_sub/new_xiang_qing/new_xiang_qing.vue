@@ -58,7 +58,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.wrap{
+  padding-bottom: 0.1px;
+}
 .artconent {
   text-align: center;
   margin: 10px 15px;

@@ -1,13 +1,13 @@
 <template>
 	<div class="wrap">
 		<base-header title="平仓结算" has-back='1'></base-header>
-    <div class="title">
-      <span class="nameTxt">{{pingCItem.stock_name}}</span>
-      <span class="codeTxt">{{pingCItem.stock_code}}</span>
+    <div class="title black2">
+      <span class="nameTxt textc1">{{pingCItem.stock_name}}</span>
+      <span class="codeTxt textc2">{{pingCItem.stock_code}}</span>
     </div>
-    <div class="buy uni-flex">
+    <div class="buy uni-flex black2">
       <div class="leftPart">
-        <div class="subTitle">买入</div>
+        <div class="subTitle textc1">买入</div>
         <div class="uni-flex ">
 
           <div class="uni-flex flexColumn txt">
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="rightPart">
+      <div class="rightPart textc2">
         <div class="time">{{buss_time}}</div>
         <div>
           <span class='txt'>数量：</span>
@@ -28,9 +28,9 @@
         </div>
       </div>
     </div>
-    <div class="sell uni-flex">
+    <div class="sell uni-flex black2">
       <div class="leftPart">
-        <div class="subTitle">卖出</div>
+        <div class="subTitle textc1">卖出</div>
         <div class="uni-flex ">
 
           <div class="uni-flex flexColumn txt">
@@ -51,15 +51,15 @@
         </div>
       </div>
     </div>
-    <div class="uni-flex lastLine">
-      <div class="uni-flex">
+    <div class="uni-flex lastLine black2">
+      <div class="uni-flex textc2">
         <span>合约乘数：</span>
         <span>缴纳手续费：</span>
         <span>合约盈亏：</span>
         <span>缴纳保证金：</span>
         <span>总净值：</span>
       </div>
-      <div class="uni-flex">
+      <div class="uni-flex textc1">
         <span>{{hynumber}}</span>
         <span>{{pingCItem.fee}}</span>
         <span>{{pingCItem.all_income}}</span>

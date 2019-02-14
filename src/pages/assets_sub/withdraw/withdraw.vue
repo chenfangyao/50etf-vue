@@ -3,11 +3,11 @@
 	  <base-header title="提现"  has-back='1'  right-txt='提现记录'  @right-tap='rightTap'></base-header>
     <recharge-way v-if="hasBank" :way-lists='wayLists' :showbanklogo="showbanklogo" txt1='' :txt2='txts1' go-to='1'></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' go-to='1'></recharge-way>
-		<div class="panel">
+		<div class="panel black2">
       <div class="inputContainer">
-        <div class="moneyTitle">提现金额</div>
-        <input type="number" v-model="money">
-        <span>￥</span>
+        <div class="moneyTitle textc1">提现金额</div>
+        <input type="number" class="black2 textc1" v-model="money">
+        <span class="textc1">￥</span>
       </div>
       <div class="overage">
         <span>可提现余额：</span>
