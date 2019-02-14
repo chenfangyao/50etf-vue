@@ -16,7 +16,7 @@
           <div v-show="!tabActive" @click.self="showPopCheckbox">
             <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
             <span class="txt">{{sellnumber}}</span>
-            <uni-icon type="arrowdown" size="24"></uni-icon>
+            <uni-icon @click.native.self="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div >
                 <div class="pop-title">
@@ -46,7 +46,7 @@
           </div>
           <div v-show="tabActive" @click.self="showPickers">
             <span class="txt">{{pickerText}}</span>
-            <uni-icon type="arrowdown" size="24"></uni-icon>
+            <uni-icon @click.native.self="showPickers" type="arrowdown" size="24"></uni-icon>
             <vue-pickers class="vuePickera"
                          :show="show1"
                          :columns="column1"

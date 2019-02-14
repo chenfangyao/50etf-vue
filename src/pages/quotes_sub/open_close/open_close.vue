@@ -211,15 +211,12 @@ export default {
       setTimeout(() => {
         vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
       }, 1500)
-
         if (!util.calcLegalTime()) return;
         if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
             vm.getartlelist()
           }, 2500)
         }
-   
-
       // 合并持仓分笔持仓
       vm.getfbchic()
       vm.gethbchic()
