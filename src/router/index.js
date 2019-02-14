@@ -28,6 +28,7 @@ const recharge = resolve => require(['@/pages/assets_sub/recharge/recharge'], re
 const withdraw = resolve => require(['@/pages/assets_sub/withdraw/withdraw'], resolve)
 const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve)
 const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
+const add_card_btn = resolve => require(['@/pages/mine_sub/bank_card/add_card_btn/add_card_btn'], resolve)
 const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'], resolve)
 const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
 const recording = resolve => require(['@/pages/assets_sub/recording/recording'], resolve)
@@ -115,6 +116,8 @@ export default new Router({
     { path: '/pages/mine_sub/capital_flow/capital_flow', name: 'capital_flow', component: capital_flow,  },
     // 添加银行卡
     { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card,  },
+    // 无绑定过银行卡信息
+    { path: '/pages/mine_sub/bank_card/add_card_btn/add_card_btn', name: 'add_card_btn', component: add_card_btn,  },
     // 添加银行卡第二步
     { path: '/pages/forget_pwd/tep2/tep2', name: 'add_card2', component: add_card2,  },
     // 交易规则

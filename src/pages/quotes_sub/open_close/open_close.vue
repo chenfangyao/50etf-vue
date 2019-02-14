@@ -110,7 +110,6 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          console.log(22, res)
           this.maxbuy = res.data
           this.setmaxbuy(res.data)
           // 开仓
@@ -211,12 +210,15 @@ export default {
       setTimeout(() => {
         vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
       }, 1500)
-      if (!util.calcLegalTime()) return;
-      if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
-        util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
-          vm.getartlelist()
-        }, 2500)
-      }
+
+      setTimeout(()=>{
+        if (!util.calcLegalTime()) return;
+        if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
+          util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
+            vm.getartlelist()
+          }, 2500)
+        }
+      },0)
 
       // 合并持仓分笔持仓
       vm.getfbchic()

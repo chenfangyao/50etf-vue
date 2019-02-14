@@ -109,8 +109,6 @@
          <el-slider v-model="sliderVal" @change="slidering" :max='maxprice.maxcounts' :disabled="sliderdisable" :min='0' :show-tooltip="false"></el-slider>
       </div>
     </div>
-
-
     <div v-else class="sliderPart uni-flex">
       <span class="countxt">{{stockamunt}}</span>
     </div>
@@ -349,6 +347,7 @@ export default {
     },
     // 合并平仓确认
     confirmCheck(){
+      this.sellnumber='共'+this.result.length+'笔'
       this.showpop=false
       var totalhynum = 0
       this.sethbfbcell(this.result)
