@@ -111,6 +111,7 @@
     </div>
     <div v-else class="sliderPart uni-flex">
       <span class="countxt">{{stockamunt}}</span>
+      <!--<span class="countxt">{{stockamunt}}</span>-->
     </div>
 
 
@@ -138,6 +139,9 @@ export default {
     },
     fbcclist: {
       require: true
+    },
+    fborhb:{
+      require:true
     },
   },
   components: {
@@ -465,6 +469,9 @@ export default {
     onClose(val) {
       // 切换委托数量重置为1
       this.sliderVal = 0
+    },
+    fborhb(val){
+      this.tabActive=this.fborhb
     }
   },
   created() {
@@ -476,7 +483,14 @@ export default {
       this.btn3Arr = ['市价', '限价']
     }
     this.pricetitle = this.btn3Arr[0]
+    // 合并平仓默认设置卖出全部
+    setTimeout(()=>{
+      this.setstockamunt(this.maxprice.enable_amount)
+      var totalmoney=this.maxprice.enable_amount*this.maxprice.volume_multiple*this.pricevalue+parseFloat(this.maxprice.fee_money)
+      this.setcctotalmoney(totalmoney)
+    },2000)
   },
+
   computed: {
     ...mapState(['softconf', 'maxbuy','stockamunt'])
   }
@@ -679,7 +693,7 @@ div.root-el {
     }
   }
 .confirmCheck{
-  right:10px;
+  left:10px;
   color: #3b7bd5;
 }
 .cancelCheck{

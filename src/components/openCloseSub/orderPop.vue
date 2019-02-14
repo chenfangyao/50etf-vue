@@ -67,6 +67,7 @@ export default {
           })
 					return
 				}
+        console.log(333,this.hbfbcell)
 				if(this.hbfbcell.length && !this.entrusttype){
 					// 全部平仓
 					if(this.hbfbcell[0]==='all'){
@@ -74,6 +75,7 @@ export default {
 					}else{//合并分笔平仓
             // 定时器选执行一次
             var idnumber=this.hbfbcell[0].split('-')
+            console.log(444,idnumber)
             this.stocksell(parseInt(idnumber[1]),parseInt(idnumber[0]))
 						var ii=1
 						var hbfbcellinterval=null
@@ -90,7 +92,9 @@ export default {
 						},3500)
 					}
 				}else{//分笔平仓
+          console.log(555)
 					this.stocksell(this.fbccid,this.stockamunt)
+
 				}
       } else {//开仓
         this.stockbuy()

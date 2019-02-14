@@ -1475,6 +1475,9 @@ input{
 .vuePickera .larea_cancel{
   color:gray!important;
 }
+.vuePickera .larea_cancel{
+  display:none!important;
+}
 div.wrap{
   width: 100%;
 }

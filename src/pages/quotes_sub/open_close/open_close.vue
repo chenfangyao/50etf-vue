@@ -7,6 +7,7 @@
     <div class="h12"></div>
     <new-price
       :on-close="onClose"
+      :fborhb="fborhb"
       :maxprice="maxbuy"
       :qrysingle="QuotationMsg"
       :fbcclist="fbcclist"
@@ -51,6 +52,7 @@ export default {
       // cclist:{},
       symbol: '',
       bussinesdata: '',
+      fborhb:false,
     };
   },
   computed: mapState(['sid', 'hycode']),
@@ -205,6 +207,14 @@ export default {
       } else {
         vm.onClose = false
       }
+      if(to.query.isActive==1){
+        vm.fborhb=true
+      }else{
+        vm.fborhb=false
+      }
+      // 合并持仓分笔持仓
+      vm.getfbchic()
+      vm.gethbchic()
       vm.setstockamunt(0)
       vm.symbol = to.query.code
       vm.getartlelist()
@@ -217,9 +227,6 @@ export default {
             vm.getartlelist()
           }, 2500)
         }
-      // 合并持仓分笔持仓
-      vm.getfbchic()
-      vm.gethbchic()
 
     })
   },

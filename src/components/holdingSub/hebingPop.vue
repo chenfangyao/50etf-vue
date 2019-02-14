@@ -65,7 +65,7 @@ export default {
           this.$navigateTo({ url: '/open_close',query:{code,pinkaiC:0}})
           break
         case 3:
-          this.$navigateTo({ url: '/open_close'  ,query:{code,pinkaiC:1}})
+          this.$navigateTo({ url: '/open_close'  ,query:{code,pinkaiC:1,isActive:0}})
           break
         case 4:
           this.$redirectTo({ url: '/quotes' })
