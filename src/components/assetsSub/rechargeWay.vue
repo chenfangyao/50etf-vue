@@ -1,14 +1,14 @@
 <template>
-<div>
-  <div class="rechargeWay uni-flex" @click='switchPop'>
+<div >
+  <div class="rechargeWay root-el uni-flex" @click='switchPop'>
 		<!-- wayLists是否绑定银行 -->
 		<!-- 暂时无logo先隐藏 -->
       <img  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'>
       <div class="txt">
-        <div>{{wayLists[way_i]||textbank}}</div>
+        <div class="textc1">{{wayLists[way_i]||textbank}}</div>
         <div>
           <!-- <span v-if="wayLists[way_i]">{{txt2}}</span> -->
-          <span>{{txt2}}</span>
+          <span class="textc2">{{txt2}}</span>
         </div>
       </div>
       <img  class="to_r" src="../../assets/arrow/r.png">

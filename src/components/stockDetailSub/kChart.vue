@@ -1,7 +1,7 @@
 <template>
   <div class="root-el">
     <div class="uni-tab-bar">
-      <div class="swiper-tab uni-flex">
+      <div class="swiper-tab uni-flex black2">
         <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
       </div>
     </div>
@@ -318,7 +318,7 @@ div.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
     justify-content: space-around;
-    padding:.10rem.56rem 0;
+    padding:.10rem .56rem 0;
     height:.72rem;
     font-size: 14px;
     background-color: #ededed;

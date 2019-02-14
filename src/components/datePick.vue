@@ -1,12 +1,12 @@
 <template>
-  <van-actionsheet v-model="showPickSelf" :close-on-click-overlay='true'>
-    <div class="uni-title self">
+  <van-actionsheet v-model="showPickSelf" class='black1' :close-on-click-overlay='true'>
+    <div class="uni-title self textc1">
       <span :class="{active:inLeft}" @click="changeActive(true)">{{year}}-{{month}}-{{day}}</span> 至
       <span :class="{active:!inLeft}" @click="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</span>
       <span class='okTap' @click='handleConfirm'>确认</span>
     </div>
     <div v-show="showTips" class="tips">开始时间不能大于结束时间</div>
-    <van-picker :columns="timeDatas" @change="bindChange"   type="date"/>
+    <van-picker class='black2' :columns="timeDatas" @change="bindChange"   type="date"/>
   </van-actionsheet>
 </template>
 
@@ -115,7 +115,9 @@ export default {
 }
 </script>
 
+
 <style lang='scss' scoped>
+
 div.tips {
     color: #f05f5c;
     text-align: center;

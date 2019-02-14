@@ -1,15 +1,15 @@
 <template>
 	<div class="wrap">
 		<base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
-    <div class="line1 uni-flex">
+    <div class="line1 uni-flex black2">
         <span>总计：{{total}}笔</span>
         <img class="right" @click="switchDatepick(true)" src="../../../assets/mineImg/datePicker.png">
     </div>
     <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
-        <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
+        <div class="listsContainer uni-flex black2" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
-          <div class="middle">
+          <div class="middle textc1">
             <div>人民币账户</div>
             <div>平台充值</div>
             <div class="time">{{formatetime[i]}}</div>
@@ -21,9 +21,9 @@
     </scroll-view>
     <scroll-view v-else class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
-        <div class="listsContainer uni-flex" v-for="(item,i) in recordlist" :key="i">
+        <div class="listsContainer uni-flex black2" v-for="(item,i) in recordlist" :key="i">
           <div class="left">{{item.status}}</div>
-          <div class="middle">
+          <div class="middle textc1">
             <div>{{bank_code[i][0]}}</div>
             <div>{{bank_code[i][1]}}</div>
             <div class="time">{{formatetime[i]}}</div>
@@ -163,7 +163,7 @@ div.wrap {
         line-height:1.64rem;
         width:1.22rem;
         font-weight: 500;
-        color: rgba(24, 144, 255, 1);
+        color: #409de5;
         letter-spacing: 1px;
       }
       div.middle {

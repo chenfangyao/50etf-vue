@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
     <base-header :title="title" has-back='1'></base-header>
-    <div class="listItem" v-for="(item,i) in lists" :key="i" hover-class='self-hover' @click='go(item.id)'>
+    <div class="listItem black2" v-for="(item,i) in lists" :key="i" hover-class='self-hover' @click='go(item.id)'>
       <div class="title uni-flex">
-        <span>{{item.title}}</span>
+        <span class="textc1">{{item.title}}</span>
         <span class="time">{{$formatetimestr(item.update_time || item.create_time)}}</span>
       </div>
       <div class="miniContent">{{item.source}}</div>

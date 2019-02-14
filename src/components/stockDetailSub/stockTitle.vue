@@ -7,8 +7,8 @@
           <img src="../../assets/arrow/l.png" />
         </div>
         <div>
-          <h4>{{commonstock[index].stockName}} </h4>
-          <h5>{{commonstock[index].stockCode}}</h5>
+          <h4 class="textc1">{{commonstock[index].stockName}} </h4>
+          <h5 class="textc2">{{commonstock[index].stockCode}}</h5>
         </div>
       </div>
     </div>

@@ -1,31 +1,31 @@
 <template>
 	<div class="wrap">
 		<base-header title="平仓结算" class='lowZindex' has-back='1'></base-header>
-    <div class="heightUp">
-      <div class="fix">
+    <div class="heightUp ">
+      <div class="fix black2">
         <filter-list :total='total'  @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
       <div class='padding1'>
-        <div v-for="(item,i) in list" hover-class='self-hover' @click='go(item)' :key="i" class='listItem uni-flex'>
+        <div v-for="(item,i) in list" hover-class='self-hover' @click='go(item)' :key="i" class='listItem uni-flex black2'>
           <div class="content">
             <div class="line1 uni-flex">
               <div>
-                <span class="nameTxt">{{item.stock_name}}</span>
-                <span class='codeTxt'>{{item.stock_code}}</span>
+                <span class="nameTxt textc1">{{item.stock_name}}</span>
+                <span class='codeTxt textc2'>{{item.stock_code}}</span>
               </div>
-              <div class="price">{{item.all_income}}</div>
+              <div class="price textc1">{{item.all_income}}</div>
             </div>
             <div class="line2 uni-flex">
               <div>
                 <span>
-                  <span>持仓数：</span>
-                  <span class="digital">{{item.sum_buy_amount}}</span>
+                  <span class="textc2">持仓数：</span>
+                  <span class="digital textc1">{{item.sum_buy_amount}}</span>
                 </span>
                 <span>
-                  <span>平仓数：</span>
-                  <span class="digital">{{sell_amount[i]}}</span>
+                  <span class="textc2">平仓数：</span>
+                  <span class="digital textc1">{{sell_amount[i]}}</span>
                 </span>
               </div>
               <div class="time">{{close_time[i]}}</div>
@@ -165,9 +165,10 @@ div.wrap {
     div.content {
       flex-grow: 1;
       div.line1 {
-        margin-bottom:.38rem;
+        // margin-bottom:.38rem;
         justify-content: space-between;
         align-items: center;
+        line-height: 14px;
         span.nameTxt {
           margin-right:.16rem;
           font-size: 14px;

@@ -3,11 +3,11 @@
 	  <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
     <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
     <recharge-way :way-lists='wayList' :showbanklogo="showbanklogo" @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
-    <div class="panel">
+    <div class="panel black2">
       <div class="inputContainer">
-        <div class="moneyTitle">充值金额</div>
-        <input type="tel" v-model="money" :disabled='inputDisabled'>
-        <span>￥</span>
+        <div class="moneyTitle textc1">充值金额</div>
+        <input type="tel" class="black2 textc1" v-model="money" :disabled='inputDisabled'>
+        <span class="textc1">￥</span>
       </div>
       <div class="overage">
         <span>账户余额：</span>
@@ -17,7 +17,7 @@
         <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @click='choosePriceItem(i,item)'>{{item}} 元</div>
       </div>
     </div>
-    <div class="tip">
+    <div class="tip textc1">
       <span>温馨提醒：</span>
       <span class="_a">充值限额表</span>
     </div>

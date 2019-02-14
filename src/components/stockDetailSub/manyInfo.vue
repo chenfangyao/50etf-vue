@@ -1,5 +1,5 @@
  <template>
-   <div class='infoWrap uni-flex'>
+   <div class='infoWrap uni-flex black2'>
      <div class="leftPart">
        <div class="line1">
          <div class="bigTxt">{{latestPrice}}</div>
@@ -12,27 +12,27 @@
      <div class="middlePart">
        <div class="line1 uni-flex">
          <div class="uni-flex uni-column">
-           <span>今&nbsp&nbsp&nbsp开</span>
-           <span>最&nbsp&nbsp&nbsp高</span>
+           <span class="textc2">今&nbsp&nbsp&nbsp开</span>
+           <span class="textc2">最&nbsp&nbsp&nbsp高</span>
          </div>
          <div class="uni-flex uni-column">
-           <span>{{openPrice=='NaN'?'--':openPrice}}</span>
-           <span>{{highPrice=='NaN'?'--':highPrice}}</span>
+           <span class="textc1">{{openPrice=='NaN'?'--':openPrice}}</span>
+           <span class="textc1">{{highPrice=='NaN'?'--':highPrice}}</span>
          </div>
        </div>
      </div>
      <div class="rightPart">
        <div class="line1 uni-flex">
          <div class="uni-flex uni-column">
-           <span>昨&nbsp&nbsp&nbsp收</span>
-           <span>最&nbsp&nbsp&nbsp低</span>
-           <span>成交额</span>
+           <span class="textc2">昨&nbsp&nbsp&nbsp收</span>
+           <span class="textc2">最&nbsp&nbsp&nbsp低</span>
+           <span class="textc2">成交额</span>
 
          </div>
          <div class="uni-flex uni-column">
-           <span>{{preclosePrice}}</span>
-           <span>{{lowPrice=='NaN'?'--':lowPrice}}</span>
-           <span>{{dealAmount=='NaN'?'--':dealAmount}}亿</span>
+           <span class="textc1">{{preclosePrice}}</span>
+           <span class="textc1">{{lowPrice=='NaN'?'--':lowPrice}}</span>
+           <span class="textc1">{{dealAmount=='NaN'?'--':dealAmount}}亿</span>
          </div>
        </div>
      </div>

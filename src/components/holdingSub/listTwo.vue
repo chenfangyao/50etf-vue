@@ -1,22 +1,22 @@
 <template>
 <div>
 
-  <div v-for='(item,i) in list' class="list2Item " :key="i">
+  <div v-for='(item,i) in list' class="list2Item black2" :key="i">
     <div class="line1 ">
         <div >
-          <span class="nameTxt">{{item.stock_name}}</span>
+          <span class="nameTxt textc1">{{item.stock_name}}</span>
           <span class="codeTxt">{{item.stock_code}}</span>
         </div>
     </div>
     <div class="line2 uni-flex ">
       <div class="leftPart">
-        <div class="buyOrSell">{{item.entrust_bs==1?'开仓':'平仓'}} ({{item.entrust_amount}}张)</div>
+        <div class="buyOrSell textc2">{{item.entrust_bs==1?'开仓':'平仓'}} ({{item.entrust_amount}}张)</div>
         <div class="price">
           <span>￥</span>
-          <span>{{item.entrust_price}}</span>
+          <span class="textc1">{{item.entrust_price}}</span>
         </div>
         <div class="time">
-          <img src="/assets/holdingImg/clock.png">
+          <img src="../../assets/holdingImg/clock.png">
           <span>{{createTime[i]}}</span>
         </div>
       </div>
@@ -24,7 +24,7 @@
         <div :class="[item.status=='撤单'?'c1':'c2']">{{item.status}} ({{item.business_amount}}张)</div>
         <div class="price">
           <span>￥</span>
-          <span>{{item.business_price}}</span>
+          <span class="textc1">{{item.business_price}}</span>
         </div>
         <div class="time">
           <img src="/assets/holdingImg/clock.png">
@@ -60,6 +60,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div#app.at-night div.line1{
+  border-color: #0f131f
+}
 div.list2Item {
   > div {
     padding: 0 .25rem;

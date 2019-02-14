@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
     <base-header title="交易规则" has-back="1"></base-header>
-    <div class="border1"></div>
-    <div class="title">{{rules.title}}</div>
+    <div class="border1 black1"></div>
+    <!-- <div class="title">{{rules.title}}</div> -->
     <!-- <div class="content">{{rules.content}}</div> -->
     <div class="content" v-html="rules.content"></div>
   </div>
@@ -41,7 +41,8 @@ export default {
 
 <style lang="scss" scoped>
 div.border1 {
-  border-bottom: 1px solid #ededed;
+  height: 1px;
+  background-color: #ededed;
 }
 div.title {
   font-size: 16px;

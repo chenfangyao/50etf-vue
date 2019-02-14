@@ -2,7 +2,7 @@
   <div class="wrap">
     <base-header title="成交结果" class='lowZindex' has-back="1" ></base-header>
     <div class="heightUp">
-      <div class="fix">
+      <div class="fix black2">
         <filter-list
           :total="total"
           @select-complete="getChooseTime"
@@ -11,15 +11,15 @@
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
       <div class='padding1'>
-        <div v-for="(item,i) in list" :key="i" class="listItem uni-flex">
+        <div v-for="(item,i) in list" :key="i" class="listItem uni-flex black2">
           <div class="leftPart">
             <div class="title">
-              <span>{{item.stock_name}}</span>
+              <span class="textc1">{{item.stock_name}}</span>
               <span>{{item.stock_code}}</span>
             </div>
             <div class="uni-flex tip4">
               <div class="uni-flex">
-                <div class="uni-flex uni-column">
+                <div class="uni-flex uni-column textc2">
                   <span>委托：</span>
                   <span>成交：</span>
                 </div>
@@ -29,7 +29,7 @@
                 </div>
               </div>
               <div class="uni-flex">
-                <div class="uni-flex uni-column">
+                <div class="uni-flex uni-column textc2">
                   <span>方向：</span>
                   <span>方式：</span>
                 </div>
@@ -42,7 +42,7 @@
           </div>
           <div class="rightPart">
             <div class="time">{{businessTime[i]}}</div>
-            <div class="price">{{item.business_price}}</div>
+            <div class="price textc1">{{item.business_price}}</div>
             <div class="txt">均价</div>
           </div>
         </div>

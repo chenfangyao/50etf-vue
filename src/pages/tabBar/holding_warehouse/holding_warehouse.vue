@@ -2,7 +2,7 @@
   <div class="wrap">
     <header-tab @tab-tap="tabTap" :title-list="titleList" :tabI="tabI"></header-tab>
     <div>
-      <div class="fix black2">
+      <div class="fix black1">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
         <hebin-total :total="titleList[tabI].total" v-if="tabI<2"></hebin-total>
         <template v-else-if="tabI==2">
@@ -10,8 +10,8 @@
           <top-btn></top-btn>
         </template>
       </div>
-      <div class="heightUp" v-show="tabI!=3"></div>
-      <div class="h40" v-show="tabI==2"></div>
+      <div class="heightUp black1" v-show="tabI!=3"></div>
+      <div class="h40 black1" v-show="tabI==2"></div>
     </div>
     <scroll-view  class="list2"   v-show="tabI<2"  ref="s1"  @scrollToEnd="loadMore(tabI)"  >
       <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop" ></list-one>
