@@ -3,29 +3,29 @@
     <div class="line1 uni-flex">
       <div>
         <span>最高</span>
-        <span>{{resdata.highPrice}}</span>
+        <span class="textc1">{{resdata.highPrice}}</span>
       </div>
       <div>
         <span>最低</span>
-        <span>{{resdata.lowPrice}}</span>
+        <span class="textc1">{{resdata.lowPrice}}</span>
       </div>
       <div>
         <span>剩余天数</span>
-        <span>{{hyinfos.tag_expiry}}天</span>
+        <span class="textc1">{{hyinfos.tag_expiry}}天</span>
       </div>
     </div>
     <div class="line2 uni-flex">
       <div>
         <span>行权日</span>
-        <span>{{hyinfos.expire_date}}</span>
+        <span class="textc1">{{hyinfos.expire_date}}</span>
       </div>
       <div>
         <span>行权价格</span>
-        <span>{{hyinfos.exercise_price}}</span>
+        <span class="textc1">{{hyinfos.exercise_price}}</span>
       </div>
       <div>
         <span>合约单位</span>
-        <span>{{hynumbers}}</span>
+        <span class="textc1">{{hynumbers}}</span>
         <!-- <span>{{hyinfos.volume_multiple}}</span> -->
       </div>
     </div>

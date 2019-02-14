@@ -1,6 +1,6 @@
 
 <template>
-  <div class="bgfff">
+  <div class="bgfff black2">
     <div class="uni-flex">
       <div class="leftPart">
         <div class="leftTop uni-flex">
@@ -22,21 +22,21 @@
         <div class="uni-flex rightTop">
           <div>
             <span>今开</span>
-            <span>{{resObj.openPrice}}</span>
+            <span class="textc1">{{resObj.openPrice}}</span>
           </div>
           <div>
             <span>昨收</span>
-            <span>{{resObj.preclosePrice}}</span>
+            <span class="textc1">{{resObj.preclosePrice}}</span>
           </div>
         </div>
         <div class="uni-flex rightBottom">
           <div>
             <span>成交量</span>
-            <span>{{resObj.dealAmount}}</span>
+            <span class="textc1">{{resObj.dealAmount}}</span>
           </div>
           <div>
             <span>持仓量</span>
-            <span>{{resObj.openInterest}}</span>
+            <span class="textc1">{{resObj.openInterest}}</span>
           </div>
         </div>
       </div>

@@ -364,6 +364,18 @@
 
 
 <style lang="scss" scoped>
+div#app.at-night div.list-row{
+  background-color: #181c28;
+  border-color:#0f131f;
+  >span:first-child{
+    color: #fff;
+  }
+  input{
+  background-color: #181c28;
+  color: #fff
+
+  }
+}
   div.wrap {
   // background-color: #f5f5f5;
     min-height: 100vh;

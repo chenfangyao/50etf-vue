@@ -1,15 +1,15 @@
 <template>
-  <div class="wrap2">
+  <div class="wrap2 black1">
     <header-title :res-obj='detailObj'></header-title>
     <header-part :res-obj='detailObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part>
-    <div class="h12"></div>
+    <div class="h12 black1"></div>
     <k-chart  @change-i='changeI' :symbol-str='symbol'></k-chart>
     <template v-if="onDayKTab">
 
-      <div class="h12"></div>
+      <div class="h12 black1"></div>
       <mini-table :hydetils='detailObj'></mini-table>
     </template>
-      <div class="h100"></div>
+      <div class="h100 black1"></div>
     
     <btn-bottom :res-obj='detailObj'></btn-bottom>
   </div>

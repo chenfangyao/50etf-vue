@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="uni-tab-bar">
-      <div class="swiper-tab uni-flex">
+      <div class="swiper-tab uni-flex black2">
         <div
           v-for="(tab,i) in topTabs"
           :key="i"
@@ -12,8 +12,8 @@
       </div>
     </div>
     <!-- #ifdef H5 -->
-    <div class="h278" id="canvas1" v-show="tabIndex==0">k线图1</div>
-    <div class="h324" id="canvas2" v-show="tabIndex!=0">k线图2</div>
+    <div class="h278 black1" id="canvas1" v-show="tabIndex==0">k线图1</div>
+    <div class="h324 black1" id="canvas2" v-show="tabIndex!=0">k线图2</div>
     <!-- #endif -->
   </div>
 </template>

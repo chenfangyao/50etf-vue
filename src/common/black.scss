@@ -10,9 +10,9 @@ div#app.at-night{
   .van-picker-column__item--selected{
   color: #fff;
   } 
-  /* .self-mask{
-    background-color: rgba(255,255,255,0.3);
-  } */
+  .self-mask{
+    background-color: rgba(0,0,0,0.7);
+  }
   div.wrap{
     background-color: $black1;
     color: #fff;

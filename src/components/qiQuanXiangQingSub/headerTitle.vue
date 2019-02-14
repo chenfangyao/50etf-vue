@@ -7,8 +7,8 @@
           <img src="../../assets/arrow/l.png" />
         </div>
         <div>
-          <h4>{{resObj.stockName}}</h4>
-          <h5>{{resObj.stockCode}}</h5>
+          <h4 class="textc1">{{resObj.stockName}}</h4>
+          <h5 class="textc2">{{resObj.stockCode}}</h5>
         </div>
       </div>
     </div>
@@ -59,8 +59,8 @@ div.root-el {
     left: 0;
     top: 0;
     img {
-      width: 13px;
-      height: 15px;
+      width: 15px;
+      height: 18px;
     }
   }
   h4 {
