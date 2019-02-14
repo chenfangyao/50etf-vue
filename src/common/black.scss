@@ -4,12 +4,31 @@ $black3:#2c2c33;//底部一级导航分割线
 $gray1:#828597;//icon 普通文字，用户名，正文内容，时间
 $green1:#1bd091;//行情下跌，亏损时
 $blue1:#409de5;//主蓝色
+.van-cell:not(:last-child)::after{
+  border-color: transparent
+}
 div#app.at-night{
   min-height: 100vh;
   background-color: $black1;
   .van-picker-column__item--selected{
   color: #fff;
   } 
+   .van-popup--bottom{
+     background-color: $black2;
+     .pop-title{
+      background-color: $black2;
+      border-color: $black1;
+    }
+    .van-cell{
+      background-color: $black3;
+      span{
+        color: #fff;
+      }
+     } 
+   }
+  .el-slider__runway{
+    background-color: $black1;
+  }
   .self-mask{
     background-color: rgba(0,0,0,0.7);
   }

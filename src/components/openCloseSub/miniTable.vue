@@ -100,6 +100,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+div#app.at-night div.title{
+  background-color: #1f2433;
+}
 div.root-el {
   padding:.26rem;
   background-color: #fff;

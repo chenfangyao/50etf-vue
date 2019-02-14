@@ -2,39 +2,48 @@
   <div class="root-el">
     <div v-show="onClose">
       <div class="entrustType">
-        <span class="type commonStyle1">委托类型</span>
-        <span class="commonStyle2">持仓笔数 {{fbcclength}}</span>
+        <span class="type commonStyle1 textc1">委托类型</span>
+        <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
       </div>
       <div class="chooseType uni-flex">
-        <div class="tabOpen uni-flex">
+        <div class="tabOpen uni-flex black2">
           <div @click="tapChange(false)">合并</div>
           <div @click="tapChange(true)">分笔</div>
           <div :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</div>
         </div>
-        <div class="chooseCount">
+        <div class="chooseCount black1">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
           <div v-show="!tabActive" @click.self="showPopCheckbox">
             <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
             <span class="txt">{{sellnumber}}</span>
             <uni-icon @click.native.self="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
-            <van-popup v-model="showpop" position="bottom">
-              <div >
+            <van-popup v-model="showpop"  position="bottom">
+              <div>
                 <div class="pop-title">
                   <!--<span class="cancelCheck" @click="cancelCheck">取消</span>-->
                   <span class="confirmCheck" @click="confirmCheck">确认</span>
                 </div>
                 <div style="height: 200px;overflow-y: auto">
-                  <van-cell clickable >
-                    <van-checkbox v-model='checked' @change="allcheckbox" />
+                  <van-cell clickable>
+                    <van-checkbox v-model="checked" @change="allcheckbox"/>
                     <span style="position: absolute;left:40px;top:5px">全部</span>
                   </van-cell>
-                  <van-checkbox-group v-model="result" >
+                  <van-checkbox-group v-model="result">
                     <van-cell-group>
                       <!--<van-cell v-for="(item,index) in items" clickable :key="index" :title="item.name" @click="toggle(index)" style="position: relative">-->
-                      <van-cell v-for="(item,index) in items" clickable :key="index" @click="toggle(index)" style="position: relative">
-                        <van-checkbox :name="item.valueid" ref="checkboxes" />
-                        <img :src="props.checked ? icon.active : icon.normal" slot="icon"
-                             slot-scope="props">
+                      <van-cell
+                        v-for="(item,index) in items"
+                        clickable
+                        :key="index"
+                        @click="toggle(index)"
+                        style="position: relative"
+                      >
+                        <van-checkbox :name="item.valueid" ref="checkboxes"/>
+                        <img
+                          :src="props.checked ? icon.active : icon.normal"
+                          slot="icon"
+                          slot-scope="props"
+                        >
                         <span style="position: absolute;left:40px;top:5px">{{item.name}}</span>
                         <span style="position: absolute;right:100px;top:5px">{{item.texts}}</span>
                       </van-cell>
@@ -47,18 +56,20 @@
           <div v-show="tabActive" @click.self="showPickers">
             <span class="txt">{{pickerText}}</span>
             <uni-icon @click.native.self="showPickers" type="arrowdown" size="24"></uni-icon>
-            <vue-pickers class="vuePickera"
-                         :show="show1"
-                         :columns="column1"
-                         :defaultData="defaultData"
-                         :selectData="pickerValueArray"
-                         @cancel="onCancelPicker"
-                         @confirm="onConirmPicker"></vue-pickers>
+            <vue-pickers
+              class="vuePickera"
+              :show="show1"
+              :columns="column1"
+              :defaultData="defaultData"
+              :selectData="pickerValueArray"
+              @cancel="onCancelPicker"
+              @confirm="onConirmPicker"
+            ></vue-pickers>
           </div>
         </div>
       </div>
     </div>
-    <div class="commonStyle1">{{pricetitle}}</div>
+    <div class="commonStyle1 textc1">{{pricetitle}}</div>
     <div class="uni-flex line2">
       <div>
         <img
@@ -86,42 +97,47 @@
     </div>
     <div class="uni-flex entrustCount">
       <div>
-        <span class="commonStyle1">委托数量</span>
+        <span class="commonStyle1 textc1">委托数量</span>
         <span class="useCount mr5 commonStyle2">{{onClose?'可用数':'最大可买'}}</span>
-        <span class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts||0}}</span>
-        <span class="commonStyle2" v-else>{{maxprice.enable_amount}}</span>
+        <span class="commonStyle2 " v-if="!onClose">{{maxprice.maxcounts||0}}</span>
+        <span class="commonStyle2 " v-else>{{maxprice.enable_amount}}</span>
       </div>
       <div v-show="!onClose">
         <span class="commonStyle2 mr5">当前持仓</span>
-        <span class="commonStyle2">{{maxprice.own_amount}}</span>
+        <span class="commonStyle2 textc1">{{maxprice.own_amount}}</span>
       </div>
     </div>
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div>
-        <img  @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
-        <span class="countxt">{{sliderVal}}</span>
-
-        <img  @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
+        <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
+        <span class="countxt textc1">{{sliderVal}}</span>
+        
+        <img @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
       </div>
-      <div  class="sliderItem">
+      <div class="sliderItem">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
-         <el-slider v-model="sliderVal" @change="slidering" :max='maxprice.maxcounts' :disabled="sliderdisable" :min='0' :show-tooltip="false"></el-slider>
+        <el-slider
+          v-model="sliderVal"
+          @change="slidering"
+          :max="maxprice.maxcounts"
+          :disabled="sliderdisable"
+          :min="0"
+          :show-tooltip="false"
+        ></el-slider>
       </div>
     </div>
     <div v-else class="sliderPart uni-flex">
-      <span class="countxt">{{stockamunt}}</span>
+      <span class="countxt textc1">{{stockamunt}}</span>
       <!--<span class="countxt">{{stockamunt}}</span>-->
     </div>
-
-
   </div>
 </template>
 <script>
 import uniIcon from "@/components/uni-icon.vue";
 import { mapState, mapMutations } from 'vuex';
-import { Slider  } from 'element-ui';
-import { Popup,Cell, CellGroup,Checkbox, CheckboxGroup} from 'vant';
+import { Slider } from 'element-ui';
+import { Popup, Cell, CellGroup, Checkbox, CheckboxGroup } from 'vant';
 import vuePickers from 'vue-pickers'
 export default {
   props: {
@@ -140,19 +156,19 @@ export default {
     fbcclist: {
       require: true
     },
-    fborhb:{
-      require:true
+    fborhb: {
+      require: true
     },
   },
   components: {
     uniIcon,
     vuePickers,
-    [Slider.name]:Slider,
-    [Popup.name]:Popup,
-    [Cell.name]:Cell,
-    [CellGroup.name]:CellGroup,
-    [Checkbox.name]:Checkbox,
-    [CheckboxGroup.name]:CheckboxGroup,
+    [Slider.name]: Slider,
+    [Popup.name]: Popup,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Checkbox.name]: Checkbox,
+    [CheckboxGroup.name]: CheckboxGroup,
   },
   data() {
     return {
@@ -167,26 +183,26 @@ export default {
       fbcclength: '',
       hbcclength: '',
       sliderdisable: false,
-      show1:false,
-      column1:1,
-      defaultData:[],
-      showpop:false,
-      checked:false,
+      show1: false,
+      column1: 1,
+      defaultData: [],
+      showpop: false,
+      checked: false,
       icon: {
         normal: '../../assets/holdingImg/unchecked.png',
         active: '../../assets/holdingImg/checked.png'
       },
       result: [],
       items: [],
-      sellnumber:'全部'
+      sellnumber: '全部'
     }
   },
   methods: {
     ...mapMutations(['setnewprice', 'setstockamunt', 'setenttype', 'setentrusttype', 'setfbccid', 'sethbfbcell',
       'setcctotalmoney'
     ]),
-    cancelCheck(){
-      this.showpop=false
+    cancelCheck() {
+      this.showpop = false
     },
     // 合并分笔
     tapChange(val) {
@@ -335,12 +351,12 @@ export default {
         }
       }
     },
-    onCancelPicker(){
-      this.show1=false
+    onCancelPicker() {
+      this.show1 = false
     },
     // 新的分笔平仓确认
-    onConirmPicker(val){
-      this.show1=false
+    onConirmPicker(val) {
+      this.show1 = false
       this.setfbccid(val.select1.id)
       this.$emit('fb-num', parseInt(val.select1.value))
       this.pickerText = '笔 ' + parseInt(val.select1.index) + ' | ' + val.select1.value + '张'
@@ -350,15 +366,15 @@ export default {
       this.sliderVal = 0
     },
     // 合并平仓确认
-    confirmCheck(){
-      this.sellnumber='共'+this.result.length+'笔'
-      this.showpop=false
+    confirmCheck() {
+      this.sellnumber = '共' + this.result.length + '笔'
+      this.showpop = false
       var totalhynum = 0
       this.sethbfbcell(this.result)
-      if(this.checked){
+      if (this.checked) {
         this.setstockamunt(this.maxprice.enable_amount)
         totalhynum = this.maxprice.enable_amount
-      }else{
+      } else {
         var allNum = 0
         for (var k = 0; k < this.result.length; k++) {
           var hynum = this.result[k].split('-')[0]
@@ -371,11 +387,11 @@ export default {
       var djmoney = parseFloat(totalhynum * parseFloat(this.pricevalue) * hycsnum)
       this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)).toFixed(2))
     },
-    showPickers(){
-      this.show1=true
+    showPickers() {
+      this.show1 = true
     },
-    showPopCheckbox(){
-      this.showpop=true
+    showPopCheckbox() {
+      this.showpop = true
     }
   },
   watch: {
@@ -440,25 +456,25 @@ export default {
         this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         if (this.fbcclist[0]) {
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
-          var data1=[]
-          this.pickerValueArray={}
+          var data1 = []
+          this.pickerValueArray = {}
           for (var i = 0; i < this.fbcclist.length; i++) {
             var pickobj = {}
-            var secpartcontent=this.fbcclist[i].enable_amount + '张'
-            if(this.fbcclist[i].enable_amount==0){
-              secpartcontent='不可卖'
+            var secpartcontent = this.fbcclist[i].enable_amount + '张'
+            if (this.fbcclist[i].enable_amount == 0) {
+              secpartcontent = '不可卖'
             }
             pickobj.text = '第' + parseInt(i + 1) + '笔' + ' ' + secpartcontent
             pickobj.texts = secpartcontent
             pickobj.name = '第' + parseInt(i + 1) + '笔'
             pickobj.value = this.fbcclist[i].enable_amount.toString()
             pickobj.index = parseInt(i + 1)
-            pickobj.valueid = this.fbcclist[i].enable_amount.toString()+'-'+this.fbcclist[i].id
-            pickobj.id =this.fbcclist[i].id
+            pickobj.valueid = this.fbcclist[i].enable_amount.toString() + '-' + this.fbcclist[i].id
+            pickobj.id = this.fbcclist[i].id
             pickobj.checked = false
             data1.push(pickobj)
           }
-          this.pickerValueArray.data1=data1
+          this.pickerValueArray.data1 = data1
           this.items = data1
         }
       }
@@ -470,8 +486,8 @@ export default {
       // 切换委托数量重置为1
       this.sliderVal = 0
     },
-    fborhb(val){
-      this.tabActive=this.fborhb
+    fborhb(val) {
+      this.tabActive = this.fborhb
     }
   },
   created() {
@@ -484,19 +500,23 @@ export default {
     }
     this.pricetitle = this.btn3Arr[0]
     // 合并平仓默认设置卖出全部
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setstockamunt(this.maxprice.enable_amount)
-      var totalmoney=this.maxprice.enable_amount*this.maxprice.volume_multiple*this.pricevalue+parseFloat(this.maxprice.fee_money)
+      var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
       this.setcctotalmoney(totalmoney)
-    },2000)
+    }, 2000)
   },
 
   computed: {
-    ...mapState(['softconf', 'maxbuy','stockamunt'])
+    ...mapState(['softconf', 'maxbuy', 'stockamunt'])
   }
 }
 </script>
 <style lang="scss" scoped>
+div#app.at-night div.tabOpen {
+  border-color: #828097;
+  border: solid 1px #828097;
+}
 div.root-el {
   padding: 0.3rem 0.32rem;
   background-color: #fff;
@@ -509,7 +529,7 @@ div.root-el {
   }
   span.commonStyle2 {
     font-size: 12px !important;
-    color: rgba(153, 153, 153, 1) !important;
+    color: rgba(153, 153, 153, 1) ;
     line-height: 16px;
     font-family: MicrosoftYaHei;
     font-weight: normal !important;
@@ -681,26 +701,25 @@ div.root-el {
   .opacityclass {
     opacity: 0;
   }
-  .pop-title{
+  .pop-title {
     height: 50px;
     background-color: white;
     position: relative;
     border-bottom: 1px solid #eeeeee;
-    span{
+    span {
       position: absolute;
-      top:10px;
+      top: 10px;
       font-size: 16px;
     }
   }
-.confirmCheck{
-  left:10px;
-  color: #3b7bd5;
+  .confirmCheck {
+    left: 10px;
+    color: #3b7bd5;
+  }
+  .cancelCheck {
+    left: 10px;
+    color: #9c9c9c;
+  }
 }
-.cancelCheck{
-  left:10px;
-  color: #9c9c9c;
-}
-}
-
 </style>
 

@@ -1,10 +1,10 @@
 <template>
-  <div class="wrap_op">
+  <div class="wrap_op black1">
     <header-title :tab-active="onClose" @change-close="reGetSth"></header-title>
-    <div class="h1"></div>
+    <div class="h1 black1"></div>
     <contain-chart :res-obj="QuotationMsg"></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
-    <div class="h12"></div>
+    <div class="h12 black1"></div>
     <new-price
       :on-close="onClose"
       :fborhb="fborhb"
@@ -17,10 +17,10 @@
       @plus-step="plusStepNum"
       @price-step="priceStep"
     ></new-price>
-    <div class="h12"></div>
+    <div class="h12 black1"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
-    <div class="h12" v-if="!onClose"></div>
+    <div class="h12 black1" v-if="!onClose"></div>
     <bottom-btn :on-close="onClose" :totalmoney="totalmoney" :res-obj="QuotationMsg"></bottom-btn>
   </div>
 </template>
