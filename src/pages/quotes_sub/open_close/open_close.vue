@@ -5,7 +5,17 @@
     <contain-chart :res-obj="QuotationMsg"></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
     <div class="h12"></div>
-    <new-price  :on-close="onClose"  :maxprice="maxbuy"  :qrysingle="QuotationMsg"  :fbcclist="fbcclist"  :hbcclist="hbcclist"  @fb-num="fbNum"  @hbfb-switch="hbfbSwitch"  @plus-step="plusStepNum"  @price-step="priceStep"   ></new-price>
+    <new-price
+      :on-close="onClose"
+      :maxprice="maxbuy"
+      :qrysingle="QuotationMsg"
+      :fbcclist="fbcclist"
+      :hbcclist="hbcclist"
+      @fb-num="fbNum"
+      @hbfb-switch="hbfbSwitch"
+      @plus-step="plusStepNum"
+      @price-step="priceStep"
+    ></new-price>
     <div class="h12"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
@@ -190,6 +200,11 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
+      if (to.query.pinkaiC == '1') {
+        vm.onClose = true
+      } else {
+        vm.onClose = false
+      }
       vm.setstockamunt(0)
       vm.symbol = to.query.code
       vm.getartlelist()
@@ -197,25 +212,18 @@ export default {
         vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
       }, 1500)
 
-      setTimeout(()=>{
         if (!util.calcLegalTime()) return;
         if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
             vm.getartlelist()
           }, 2500)
         }
-      },0)
+   
 
       // 合并持仓分笔持仓
       vm.getfbchic()
       vm.gethbchic()
-      if (to.query.pinkaiC == '1') {
-        vm.onClose = true
-        return
-      } else {
-        vm.onClose = false
-        return
-      }
+
     })
   },
 }

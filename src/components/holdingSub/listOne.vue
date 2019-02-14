@@ -139,7 +139,7 @@ div.list1Item {
   background-color: #fff;
   margin-bottom:.11rem;
 }
-div.black2>div.line1{
+div.at-night div.line1{
   border-color: #0f131f
 }
 </style>
