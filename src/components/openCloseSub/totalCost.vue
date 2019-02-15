@@ -1,14 +1,14 @@
 <template>
   <div class="root-el">
-    <div class="title">费用总计</div>
+    <div class="title textc1">费用总计</div>
     <div class="uni-flex row">
-      <div class="uni-flex col hasMargin">
-        <span>手续费：</span>
-        <span>冻结权利金：</span>
+      <div class="uni-flex col hasMargin ">
+        <span class="textc2">手续费：</span>
+        <span class="textc2">冻结权利金：</span>
       </div>
-      <div class="uni-flex col">
-        <span>￥{{feemoney.feemoney}}</span>
-        <span>￥{{feemoney.djmoney}}</span>
+      <div class="uni-flex col ">
+        <span class="textc1">￥{{feemoney.feemoney}}</span>
+        <span class="textc1">￥{{feemoney.djmoney}}</span>
       </div>
     </div>
   </div>

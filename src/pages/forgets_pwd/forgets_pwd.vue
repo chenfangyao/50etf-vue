@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header has-back="1"></base-header>
-    <div class="title">忘记密码</div>
+    <div class="title textc1">忘记密码</div>
     <div class="container">
       <input-item placeholderTxt="手机号" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>
       <div class="uni-flex vCode">

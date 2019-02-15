@@ -2,14 +2,14 @@
   <div>
 
     <div class="root-el uni-flex">
-      <div class="txt">
-        <span class="total">合计</span>
+      <div class="txt black2 ">
+        <span class="total textc2">合计</span>
         <!-- <span class="totalPrice">￥{{totalmoney||0}}</span> -->
-        <span class="totalPrice">￥{{cctotalmoney||0}}</span>
+        <span class="totalPrice textc1">￥{{cctotalmoney||0}}</span>
       </div>
       <div class="buyBtn" :class="{c1:onClose==1}" @click='showPop' hover-class='tap-hover'>{{onClose?'平仓':'开仓'}}</div>
     </div>
-    <div class="h98"></div>
+    <div class="h1 black1"></div>
     <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop' :res-obj='resObj' :total-money='cctotalmoney'></order-pop>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-div.h98 {
+div.h1 {
   height: 1px;
   margin-top:.98rem;
   background-color: #ededed;

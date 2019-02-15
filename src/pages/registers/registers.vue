@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header has-back="1"></base-header>
-    <div class="title">注册新账号</div>
+    <div class="title textc1">注册新账号</div>
     <div class="container">
       <input-item placeholderTxt="您的账号" @now-blur="handleBlur" v-model="uName"></input-item>
       <input-item placeholderTxt="手机号" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>

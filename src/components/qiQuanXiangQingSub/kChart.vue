@@ -200,7 +200,8 @@ export default {
                   default:
                     return ''
                 }
-              }
+              },
+              color: this.$store.state.atNight ? '#fff' : '#666'
             },
 
           },
@@ -247,7 +248,7 @@ export default {
       });
       let obj = optionK
       if (this.tabIndex == 2) {//1分K
-        X = fenshiT
+        // X = fenshiT不开启全程
         obj = option1k
       } else if (this.tabIndex == 1) {//日K的情况
         X.length < 60 && (X.length = 60)

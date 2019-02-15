@@ -30,7 +30,9 @@ export const optionK = {
       // axisTick: { show: false },
       axisLabel: {
         splitNumber: 2,
-        margin: 10
+        margin: 10,
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+
       },
     },
     {
@@ -63,12 +65,13 @@ export const optionK = {
     {
       axisLine: { show: false, },
       axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#eee' } },
+      splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
       scale: true,
       // interval: 0.01,
       axisLabel: {
         margin: 5,
-        color: '#999',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+
       },
     },
     {
@@ -81,20 +84,23 @@ export const optionK = {
         margin: -35,
         showMaxLabel: true,
         showMinLabel: false,
+        // color: store.state.atNight ? '#fff' : '#999'
+        color:'#fff'
+
       },
       axisTick: { show: false },
       splitLine: { show: false }
     }],
   grid: [
     {
-      left: 45,
-      right: 5,
+      left: 40,
+      right: 25,
       top: 30,
       bottom: 140,
     },
     {
-      left: 45,
-      right: 5,
+      left: 40,
+      right: 25,
       top: 254,
       bottom: 3
     },
@@ -211,6 +217,7 @@ export const option = {
         },
         margin: 10,
         align: 'left',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
       },
     },
     {
@@ -229,6 +236,8 @@ export const option = {
         margin:0,
         showMaxLabel: true,
         showMinLabel: true,
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+
       },
       splitNumber: 2,
 
@@ -302,7 +311,7 @@ export const option = {
           colorStops: [{
             offset: 0, color: '#4AB9BB' // 0% 处的颜色
           }, {
-            offset: 1, color: '#ffffff' // 100% 处的颜色
+              offset: 1, color: store.state.atNight ? '#0f131f' : '#fff'// 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
         }

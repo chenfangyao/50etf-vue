@@ -1,13 +1,13 @@
 <template>
   <div class="mask uni-flex">
-    <div :class="['container',{show}]">
-      <div class="title">
+    <div :class="['container black4',{show}]">
+      <div class="title textc1">
         <span @click="closePop" class="uni-icon uni-icon-close flr"></span>
         <span v-if="holding">一键平仓确认</span>
         <span v-else>委托{{onClose?'平仓':'开仓'}}确认</span>
       </div>
       <div class="list uni-flex">
-        <div class="uni-flex">
+        <div class="uni-flex textc2">
           <span>合约名称</span>
           <span>合约代码</span>
           <span>委托价格</span>
@@ -20,7 +20,7 @@
           <span v-if="onClose">预估金额</span>
           <span v-else>预估支付金额</span>
         </div>
-        <div class="uni-flex">
+        <div class="uni-flex textc1">
           <span>{{subCodeName}}</span>
           <span>{{resObj.stockCode}}</span>
           <span class="c_red">{{newprice}}</span>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div hover-class='tap-hover' @click='closePop'>取消</div>
+        <div hover-class='tap-hover' class="black2" @click='closePop'>取消</div>
         <div hover-class='tap-hover' @click='yesTap'>确定</div>
       </div>
     </div>

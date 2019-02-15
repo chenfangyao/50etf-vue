@@ -1,6 +1,7 @@
+import store from '@/vuex'
 export const commonOption = {
   
-  // animation: false,
+  animation: false,
   itemStyle: { color: '#7fbe9e' },
 
 }
@@ -46,7 +47,9 @@ export const optionK = {
               return true
           }
         },
-        margin: 15, align: 'left'
+        margin: 15, align: 'left',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+
       },
     },
     {
@@ -59,7 +62,9 @@ export const optionK = {
       axisLine: { show: false },
     }],
   legend: {
-    data: ['MA5', 'MA10', 'MA20', 'MA30']
+    data: ['MA5', 'MA10', 'MA20', 'MA30'],
+    textStyle: { color: store.state.atNight ? '#fff' : '#333' }
+
   },
   visualMap: {
     show: false,
@@ -80,9 +85,13 @@ export const optionK = {
       axisLine: { show: false },
       axisTick: { show: false },
       scale: true,
+      splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
+
       splitNumber: 2,
       axisLabel: {
         margin: 3,
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+
         // showMaxLabel: true,
         // showMinLabel: true,
       },
@@ -233,8 +242,8 @@ export const option1k = {
 
   dataZoom: [{
     type: 'inside',
-    start: 0,
-    end: 10,
+    start: 85,
+    end: 100,
     xAxisIndex: [0, 1],
     zoomLock: true,
     throttle: 0
@@ -378,7 +387,7 @@ export const option = {
           colorStops: [{
             offset: 0, color: '#4AB9BB' // 0% 处的颜色
           }, {
-            offset: 1, color: '#ffffff' // 100% 处的颜色
+              offset: 1, color: store.state.atNight ?'#0f131f':'#fff' // 100% 处的颜色
           }],
           globalCoord: false // 缺省为 false
         }
