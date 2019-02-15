@@ -12,6 +12,7 @@
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
+      <input type="file" @change="imgchange($event)">
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
@@ -32,6 +33,7 @@
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
+import lrz from 'lrz'
 import Qs from 'qs'
 
 export default {
@@ -81,6 +83,20 @@ export default {
         console.error(err, '捕捉')
       })
     },
+    imgchange(event){
+      let file = event.target.files[0]
+      lrz(file)
+        .then(function (rst) {
+          // 处理成功会执行
+          console.log(2222,rst.base64);
+        })
+        .catch(function (err) {
+          // 处理失败会执行
+        })
+        .always(function () {
+          // 不管是成功失败，都会执行
+        });
+    },
     chooseImage(i) {
       if (process.env.NODE_ENV !== 'production') {
         this.$toast('请使用APP上传图片')
@@ -128,15 +144,37 @@ export default {
     //#endif
     //#ifdef H5
     convertImgToBase64(url, callback, outputFormat) {
+      // lrz(url).then(function(rst){
+      //   console.log(22,rst)
+      //   var canvas = document.createElement('CANVAS'),
+      //     ctx = canvas.getContext('2d'),
+      //     img = new Image;
+      //   img.crossOrigin = 'Anonymous';
+      //   img.onload = function () {
+      //     canvas.height = img.height/3;
+      //     canvas.width = img.width/3;
+      //     ctx.drawImage(img, 0, 0,img.width/3,img.height/3);
+      //     var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.2);
+      //     callback.call(this, dataURL);
+      //     canvas = null;
+      //   };
+      //   img.src = rst;
+      // })
+      //   .catch(function(err){
+      //
+      //     })
+      //   .always(function(){
+      //
+      //   })
       var canvas = document.createElement('CANVAS'),
         ctx = canvas.getContext('2d'),
         img = new Image;
-      img.crossOrigin = 'Anonymous';
-      img.onload = function () {
+        img.crossOrigin = 'Anonymous';
+        img.onload = function () {
         canvas.height = img.height/3;
         canvas.width = img.width/3;
         ctx.drawImage(img, 0, 0,img.width/3,img.height/3);
-        var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.3);
+        var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.2);
         callback.call(this, dataURL);
         canvas = null;
       };
