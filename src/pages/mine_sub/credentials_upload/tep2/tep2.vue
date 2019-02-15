@@ -12,7 +12,7 @@
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
-      <input type="file" @change="imgchange($event)">
+      <!-- <input type="file" @change="imgchange($event)"> -->
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
@@ -83,10 +83,10 @@ export default {
         console.error(err, '捕捉')
       })
     },
-    imgchange(event){
-      let file = event.target.files[0]
+    imgchange(path, i){
+      // let file = event.target.files[0]
       lrz(file)
-        .then(function (rst) {
+        .then (rst=> {
           // 处理成功会执行
           console.log(2222,rst.base64);
         })
@@ -103,10 +103,20 @@ export default {
         return
       }
       plus.gallery.pick(path => {
-        // this.tobase64_app(path, i)
-        // this.$set(this.imgUrl, i, path)
         this.$store.commit("setloadingFlag", true);
-        this.convertImgToBase64(path, base64img => {
+        // this.tobase64_app(path, i)
+         lrz(path).then (rst=> {
+           if (i == 0) {
+            this.f0 = rst.base64
+          } else if (i == 1) {
+            this.f1 = rst.base64
+          }
+          this.$set(this.imgUrl, i, path)
+          this.$store.commit("setloadingFlag", false);
+        }).catch(function (err) {
+          console.error(err)
+        })
+        /* this.convertImgToBase64(path, base64img => {
           if (i == 0) {
             this.f0 = base64img
           } else if (i == 1) {
@@ -114,7 +124,7 @@ export default {
           }
           this.$set(this.imgUrl, i, path)
           this.$store.commit("setloadingFlag", false);
-        })
+        }) */
       }, e => { }, { filename: '_doc/gallery/', system: true });
     },
     previewImage(e) {
