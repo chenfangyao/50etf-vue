@@ -133,10 +133,10 @@ export default {
         img = new Image;
       img.crossOrigin = 'Anonymous';
       img.onload = function () {
-        canvas.height = img.height;
-        canvas.width = img.width;
-        ctx.drawImage(img, 0, 0);
-        var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+        canvas.height = img.height/3;
+        canvas.width = img.width/3;
+        ctx.drawImage(img, 0, 0,img.width/3,img.height/3);
+        var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.3);
         callback.call(this, dataURL);
         canvas = null;
       };

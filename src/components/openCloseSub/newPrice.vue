@@ -364,6 +364,7 @@ export default {
         this.maxprice.maxcounts = parseInt(val.select1.value[0])
       }
       this.sliderVal = 0
+      console.log(555,this.maxprice.maxcounts)
     },
     // 合并平仓确认
     confirmCheck() {
@@ -501,9 +502,11 @@ export default {
     this.pricetitle = this.btn3Arr[0]
     // 合并平仓默认设置卖出全部
     setTimeout(() => {
-      this.setstockamunt(this.maxprice.enable_amount)
-      var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
-      this.setcctotalmoney(totalmoney)
+      if(this.onClose==true && this.tabActive==false){
+        this.setstockamunt(this.maxprice.enable_amount)
+        var totalmoney=this.maxprice.enable_amount*this.maxprice.volume_multiple*this.pricevalue+parseFloat(this.maxprice.fee_money)
+        this.setcctotalmoney(totalmoney)
+      }
     }, 2000)
   },
 
