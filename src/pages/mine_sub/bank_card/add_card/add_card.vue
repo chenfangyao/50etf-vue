@@ -74,7 +74,7 @@
   import btnBlock from '@/components/btnBlock.vue'
   import { Picker ,Popup } from 'vant';
   import { mapState, mapMutations } from 'vuex';
-  import vuePickers from 'vue-pickers'
+  import vuePickers from '@/components/vue-pickers'
 
   export default {
     data() {

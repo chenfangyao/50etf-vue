@@ -138,7 +138,7 @@ import uniIcon from "@/components/uni-icon.vue";
 import { mapState, mapMutations } from 'vuex';
 import { Slider } from 'element-ui';
 import { Popup, Cell, CellGroup, Checkbox, CheckboxGroup } from 'vant';
-import vuePickers from 'vue-pickers'
+import vuePickers from '@/components/vue-pickers'
 export default {
   props: {
     onClose: {
