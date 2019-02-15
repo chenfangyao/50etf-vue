@@ -7,7 +7,7 @@
     </div>
     <div class="item1 uni-flex black2 textc1" hover-class="self-hover">
       <span>夜间模式</span>
-      <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="setatNight"/>
+      <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="changeTheme"/>
     </div>
     <div class="mb26 item1 uni-flex black2 textc1" hover-class="self-hover">
       <span>关于</span>
@@ -72,6 +72,18 @@ export default {
           break
       }
       this.$navigateTo({ url })
+    },
+    changeTheme(val){
+       this.$dialog.confirm({
+        title: '切换皮肤',
+        message: '确认切换皮肤吗？'
+      }).then(() => {
+        // on confirm
+        this.setatNight(val)
+        location.reload()
+      }).catch(() => {
+        // on cancel
+      });
     }
   },
   

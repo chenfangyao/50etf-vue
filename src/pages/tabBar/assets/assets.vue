@@ -3,9 +3,9 @@
 		<base-header title="资产"></base-header>
 		<header-card :transmoney='res_data'></header-card>
 		<div class="info ">
-			<div class="black2 textc2">权益金</div>
+			<div class="black2 textc2">权利金</div>
 			<div class="uni-flex black2 textc1">
-				<span>权益金</span>
+				<span>权利金</span>
 				<span>{{royalty_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
 			<div class="uni-flex black2 textc1">
