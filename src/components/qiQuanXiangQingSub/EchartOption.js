@@ -7,22 +7,24 @@ export const commonOption = {
 }
 export const optionK = {
   tooltip: {
-    trigger: 'items',
+    trigger: 'axis',
     // triggerOn: 'mousemove',
     axisPointer: {
       type: 'cross'
     },
     alwaysShowContent: false,
-    position(pos, params, el, elRect, size) {
+    /* position(pos, params, el, elRect, size) {
       const obj = {
         top: 60
       };
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
-    },
+    }, */
     formatter: function (params) {
-      return
       var str = ''
+      if (params.length===1){
+        return params[0].data[0] + '<br>'+ '成交量：' + params[0].data[1]
+      }
       for (let i = 1; i < params.length; i++) {
         str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
       }

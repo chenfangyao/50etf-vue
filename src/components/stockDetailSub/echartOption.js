@@ -1,6 +1,6 @@
 import store from '@/vuex'
 export const commonOption = {
-  tooltip: {
+ /*  tooltip: {
     trigger: 'item',
     triggerOn: 'mousemove',
     axisPointer: {
@@ -14,13 +14,41 @@ export const commonOption = {
       obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
       return obj;
     },
-  },
+  }, */
   animation: false,
   itemStyle: { color: '#7fbe9e' },
 
 }
 export const optionK = {
   ...commonOption,
+  tooltip: {
+    trigger: 'axis',
+    // triggerOn: 'mousemove',
+    axisPointer: {
+      type: 'cross'
+    },
+    alwaysShowContent: false,
+    /* position(pos, params, el, elRect, size) {
+      const obj = {
+        top: 60
+      };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    }, */
+    formatter: function (params) {
+      var str = ''
+      if (params.length === 1) {
+        return params[0].data[0] + '<br>' + '成交量：' + params[0].data[1]
+      }
+      for (let i = 1; i < params.length; i++) {
+        str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
+      }
+      return '开:' + params[0].data[1] + '<br>' +
+        '高:' + params[0].data[4] + '<br>' +
+        '收:' + params[0].data[2] + '<br>' +
+        '低:' + params[0].data[3] + '<br>' + str
+    }
+  },
   xAxis: [
     {
       data: [],
