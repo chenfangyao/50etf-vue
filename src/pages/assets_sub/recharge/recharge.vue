@@ -1,5 +1,5 @@
 <template>
-	<div class="wrap">
+	<div class="wrap" :class="showTable? 'mengban':''" >
 	  <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
     <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
     <recharge-way :way-lists='wayList' :showbanklogo="showbanklogo" @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
@@ -19,12 +19,133 @@
     </div>
     <div class="tip textc1">
       <span>温馨提醒：</span>
-      <span class="_a">充值限额表</span>
+      <span class="_a" @click="showtables">充值限额表</span>
     </div>
     <div class="fixView">
       <btn-block txt='下一步' @v-tap='go'></btn-block>
     </div>
     <!-- <limit-table></limit-table> -->
+    <div v-if="showTable">
+      <div  class="alipayLimit prevent-rubber-band" >
+        <table cellspacing="0">
+          <thead>
+          <tr>
+            <td class="tr-title">银行</td>
+            <td>单笔额度</td>
+            <td>单日额度</td>
+            <td>单月额度</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="tr-title">中国银行</td>
+            <td>1万</td>
+            <td>1万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">农业银行</td>
+            <td>1万</td>
+            <td>1万</td>
+            <td>30万</td>
+          </tr>
+          <tr>
+            <td class="tr-title">工商银行</td>
+            <td>1万</td>
+            <td>10万</td>
+            <td>10万</td>
+          </tr>
+          <tr>
+            <td class="tr-title">交通银行</td>
+            <td>1万</td>
+            <td>1万</td>
+            <td>20万</td>
+          </tr>
+          <tr>
+            <td class="tr-title">建设银行</td>
+            <td>1万</td>
+            <td>5万</td>
+            <td>10万</td>
+          </tr>
+          <tr>
+            <td class="tr-title">平安银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">中信银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">光大银行</td>
+            <td>6万</td>
+            <td>6万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">浦发银行</td>
+            <td>50万</td>
+            <td>50万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">招商银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">广发银行</td>
+            <td>3万</td>
+            <td>3万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">邮储银行</td>
+            <td>1万</td>
+            <td>1万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">民生银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">兴业银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">华夏银行</td>
+            <td>50万</td>
+            <td>50万</td>
+            <td>无限额</td>
+          </tr>
+          <tr>
+            <td class="tr-title">上海银行</td>
+            <td>5万</td>
+            <td>5万</td>
+            <td>10万</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td class="tr-title"> 各城市商业银行</td>
+            <td colspan="3" style="text-align: left">
+              以收银台显示为准。若支付时收银页面无限额提示，超限后会进行提示。
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="closepop" @click="closeTable"><span>关闭</span></div>
+    </div>
 	</div>
 </template>
 
@@ -47,11 +168,18 @@ export default {
       payeeinfo: {},
 			showbanklogo:true,
 			defaultitemmoney:'',
+      showTable:false,
     }
   },
   computed: mapState(['assets']),
   methods: {
     ...mapMutations(['setpaylist']),
+    showtables(){
+      this.showTable=!this.showTable
+    },
+    closeTable(){
+      this.showTable=false
+    },
     go() {
       if (this.money == '') {
         alert('请输入金额')
@@ -143,9 +271,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div.mengban{
+  opacity: 0.6;
+  z-index: 999;
+}
 div.wrap {
   height: 100vh;
   background-color: #f5f5f5;
+  position: relative;
   div.panel {
     padding: 0.1px .46rem;
     background-color: #fff;
@@ -220,5 +353,44 @@ div.wrap {
     left: 0;
     right: 0;
   }
+.alipayLimit{
+  display: block;
+  overflow-y: scroll;
+  height: 7.8rem;
+  background-color: white;
+  margin-left:30px;
+  margin-right:30px;
+  position: absolute;
+  top:2rem;
+  z-index: 1000;
+  table{
+    font-size: 12px;
+    color:#3c3c41;
+    text-align: center;
+    width: 100%;
+    border:solid #808080;
+    border-width:1px;
+    .tr-title{
+              width: 34%;
+              }
+td{
+  text-align: center;
+  border:solid #808080;
+  border-width:0px 1px 1px 0px;
+}
+  }
+}
+.closepop{
+  position: absolute;
+  top:9.8rem;
+  display: inline-block;
+  margin-left:30px;
+  margin-right:30px;
+  text-align: center;
+  left:3rem;
+  span{
+    /*margin-left: ;*/
+  }
+}
 }
 </style>
