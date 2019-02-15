@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header title="开户状态" has-back='1'></base-header>
-    <div class="border1">
+    <div class="border1 black2">
 		<div class='textview'><span>{{text1}}</span></div>
 		<div class='textview'><span>{{text2}}</span></div>
 		<div class='textview'><span>{{text3}}</span></div>
