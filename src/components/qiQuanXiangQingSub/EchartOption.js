@@ -7,7 +7,7 @@ export const commonOption = {
 }
 export const optionK = {
   tooltip: {
-    trigger: 'axis',
+    trigger: 'items',
     // triggerOn: 'mousemove',
     axisPointer: {
       type: 'cross'
@@ -21,6 +21,7 @@ export const optionK = {
       return obj;
     },
     formatter: function (params) {
+      return
       var str = ''
       for (let i = 1; i < params.length; i++) {
         str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
@@ -78,7 +79,7 @@ export const optionK = {
       color: '#3aba8f'
     }]
   },
-
+  animation: false,
   yAxis: [
     {
       position: 'right',
