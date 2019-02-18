@@ -25,7 +25,7 @@
                 </div>
                 <div style="height: 200px;overflow-y: auto">
                   <van-cell clickable>
-                    <van-checkbox v-model="checked" @change="allcheckbox"/>
+                    <van-checkbox v-model="checked" @click.native="allcheckbox"/>
                     <span style="position: absolute;left:40px;top:5px">全部</span>
                   </van-cell>
                   <van-checkbox-group v-model="result">
@@ -111,7 +111,7 @@
       <div>
         <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
         <span class="countxt textc1">{{sliderVal}}</span>
-        
+
         <img @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
       </div>
       <div class="sliderItem">

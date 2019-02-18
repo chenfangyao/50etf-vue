@@ -60,7 +60,6 @@ export default {
     ...mapMutations(['setmaxbuy', 'setstockamunt', 'setcctotalmoney']),
     // 合并、分笔
     hbfbSwitch(val) {
-      console.log(999,val)
       this.hbfbswitch = val.val
       this.fbnum = val.picktext
     },
