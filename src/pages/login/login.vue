@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
     <base-header :has-back='true' title='登录'></base-header>
-    <div class="h1"></div>
+    <div class="h1 black2"></div>
     <div class="img"><img src="../../assets/loginResgImg/logo.png"></div>
     <div class="container">
       <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->

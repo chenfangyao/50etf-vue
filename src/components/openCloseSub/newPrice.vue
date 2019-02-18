@@ -17,7 +17,7 @@
             <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
             <span class="txt">{{sellnumber}}</span>
             <uni-icon @click.native.self="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
-            <van-popup v-model="showpop"  position="bottom">
+            <van-popup v-model="showpop" position="bottom">
               <div>
                 <div class="pop-title">
                   <!--<span class="cancelCheck" @click="cancelCheck">取消</span>-->
@@ -25,7 +25,7 @@
                 </div>
                 <div style="height: 200px;overflow-y: auto">
                   <van-cell clickable>
-                    <van-checkbox v-model="checked" @change="allcheckbox"/>
+                    <van-checkbox v-model="checked" @click.native="allcheckbox(1)"/>
                     <span style="position: absolute;left:40px;top:5px">全部</span>
                   </van-cell>
                   <van-checkbox-group v-model="result">
@@ -99,8 +99,8 @@
       <div>
         <span class="commonStyle1 textc1">委托数量</span>
         <span class="useCount mr5 commonStyle2">{{onClose?'可用数':'最大可买'}}</span>
-        <span class="commonStyle2 " v-if="!onClose">{{maxprice.maxcounts||0}}</span>
-        <span class="commonStyle2 " v-else>{{maxprice.enable_amount}}</span>
+        <span class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts||0}}</span>
+        <span class="commonStyle2" v-else>{{maxprice.enable_amount}}</span>
       </div>
       <div v-show="!onClose">
         <span class="commonStyle2 mr5">当前持仓</span>
@@ -342,14 +342,20 @@ export default {
     },
     toggle(index) {
       this.$refs.checkboxes[index].toggle();
+      if (this.result.length == this.items.length) this.checked = true
+      else this.checked = false
     },
     allcheckbox(e) {
-      this.result = []
-      if (e == true) {
-        for (var i = 0; i < this.items.length; i++) {
-          this.result[i] = this.items[i].valueid
-        }
+      console.log(e)
+      if(e === 1){
+        this.result = []
+         if (this.checked) {
+           for (var i = 0; i < this.items.length; i++) {
+             this.result[i] = this.items[i].valueid
+           }
+         }
       }
+
     },
     onCancelPicker() {
       this.show1 = false
@@ -364,7 +370,7 @@ export default {
         this.maxprice.maxcounts = parseInt(val.select1.value[0])
       }
       this.sliderVal = 0
-      console.log(555,this.maxprice.maxcounts)
+      console.log(555, this.maxprice.maxcounts)
     },
     // 合并平仓确认
     confirmCheck() {
@@ -502,9 +508,9 @@ export default {
     this.pricetitle = this.btn3Arr[0]
     // 合并平仓默认设置卖出全部
     setTimeout(() => {
-      if(this.onClose==true && this.tabActive==false){
+      if (this.onClose == true && this.tabActive == false) {
         this.setstockamunt(this.maxprice.enable_amount)
-        var totalmoney=this.maxprice.enable_amount*this.maxprice.volume_multiple*this.pricevalue+parseFloat(this.maxprice.fee_money)
+        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney)
       }
     }, 2000)
@@ -532,7 +538,7 @@ div.root-el {
   }
   span.commonStyle2 {
     font-size: 12px !important;
-    color: rgba(153, 153, 153, 1) ;
+    color: rgba(153, 153, 153, 1);
     line-height: 16px;
     font-family: MicrosoftYaHei;
     font-weight: normal !important;
