@@ -137,6 +137,7 @@ export default {
         }
         YBar.push(subBar)
       });
+      this.$store.commit('setminuteLineData',Yline.slice(-15))
       this.calcMinMax()
       let obj = {
         xAxis: [
@@ -308,7 +309,7 @@ export default {
         if (res.result == 1) {
           this.stockInfo = res.mdata.stockInfo
           this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
-
+          
         }
       })
     },
