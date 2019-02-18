@@ -7,7 +7,6 @@
 
 /*通用 */
 div{
-	font-size:28upx;
 	line-height:1.8;
 }
 progress, checkbox-group{
@@ -1454,8 +1453,6 @@ input{
 }
 .el-slider__runway .el-slider__button-wrapper{z-index: 100 ;}
 .el-slider__runway .el-slider__bar{    background-color: #409dE5;}
-
-
 div.wrap{
   width: 100%;
 }

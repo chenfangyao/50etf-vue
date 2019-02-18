@@ -12,7 +12,6 @@
         <div class="iconView" hover-class="self-hover">+</div>
         <div>点击上传身份证正面</div>
       </div>
-      <!-- <input type="file" @change="imgchange($event)"> -->
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
@@ -51,9 +50,23 @@ export default {
   components: { btnBlock },
   methods: {
     goNext() {
-      var options = {
-        url: '/Sapi/User/realn',
-        data: {
+      this.$store.commit("setloadingFlag", true);
+      var ajax = new XMLHttpRequest();
+      ajax.onreadystatechange =  ()=> {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          var res = JSON.parse(ajax.responseText)
+          this.$store.commit("setloadingFlag", false);
+          if (res.status == 1) {
+            this.$navigateTo({ url: '../tep3/tep3' })
+          } else {
+            this.$toast(res.info ? res.info : '实名认证失败')
+          }
+        }
+      }
+      ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
+      ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      ajax.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      ajax.send(Qs.stringify({
           real_name: this.uName,
           idtp: '00',
           idno: this.IDcard,
@@ -63,39 +76,7 @@ export default {
             f2: ""
           },
           mobile: this.mobile,
-        },
-        dataType: 'json',
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-Requested-With':'XMLHttpRequest'
-        },
-        method: 'POST',
-        loading:true
-      }
-
-      this.$httpReq(options).then((res) => {
-        if (res.status == 1) {
-          this.$redirectTo({ url: '../tep3/tep3' })
-        } else {
-          this.$toast(res.info ? res.info : '实名认证失败')
-        }
-      }).catch((err) => {
-        console.error(err, '捕捉')
-      })
-    },
-    imgchange(path, i){
-      // let file = event.target.files[0]
-      lrz(file)
-        .then (rst=> {
-          // 处理成功会执行
-          console.log(2222,rst.base64);
-        })
-        .catch(function (err) {
-          // 处理失败会执行
-        })
-        .always(function () {
-          // 不管是成功失败，都会执行
-        });
+        }));
     },
     chooseImage(i) {
       if (process.env.NODE_ENV !== 'production') {
@@ -104,7 +85,6 @@ export default {
       }
       plus.gallery.pick(path => {
         this.$store.commit("setloadingFlag", true);
-        // this.tobase64_app(path, i)
          lrz(path).then (rst=> {
            if (i == 0) {
             this.f0 = rst.base64
@@ -116,15 +96,6 @@ export default {
         }).catch(function (err) {
           console.error(err)
         })
-        /* this.convertImgToBase64(path, base64img => {
-          if (i == 0) {
-            this.f0 = base64img
-          } else if (i == 1) {
-            this.f1 = base64img
-          }
-          this.$set(this.imgUrl, i, path)
-          this.$store.commit("setloadingFlag", false);
-        }) */
       }, e => { }, { filename: '_doc/gallery/', system: true });
     },
     previewImage(e) {
@@ -137,60 +108,6 @@ export default {
         indicator: 'number'
       });
     },
-    //#ifdef APP-PLUS
-
-    tobase64_app(path, i) {
-      var img = new plus.nativeObj.Bitmap('ff');
-      img.load(path, () => {
-        var base64str = img.toBase64Data()
-        if (i == 0) {
-          this.f0 = base64str
-        } else if (i == 1) {
-          this.f1 = base64str
-        }
-        img.clear()
-      }, () => { console.error('图片失败'); })
-    },
-    //#endif
-    //#ifdef H5
-    convertImgToBase64(url, callback, outputFormat) {
-      // lrz(url).then(function(rst){
-      //   console.log(22,rst)
-      //   var canvas = document.createElement('CANVAS'),
-      //     ctx = canvas.getContext('2d'),
-      //     img = new Image;
-      //   img.crossOrigin = 'Anonymous';
-      //   img.onload = function () {
-      //     canvas.height = img.height/3;
-      //     canvas.width = img.width/3;
-      //     ctx.drawImage(img, 0, 0,img.width/3,img.height/3);
-      //     var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.2);
-      //     callback.call(this, dataURL);
-      //     canvas = null;
-      //   };
-      //   img.src = rst;
-      // })
-      //   .catch(function(err){
-      //
-      //     })
-      //   .always(function(){
-      //
-      //   })
-      var canvas = document.createElement('CANVAS'),
-        ctx = canvas.getContext('2d'),
-        img = new Image;
-        img.crossOrigin = 'Anonymous';
-        img.onload = function () {
-        canvas.height = img.height/3;
-        canvas.width = img.width/3;
-        ctx.drawImage(img, 0, 0,img.width/3,img.height/3);
-        var dataURL = canvas.toDataURL(outputFormat || 'image/png',0.2);
-        callback.call(this, dataURL);
-        canvas = null;
-      };
-      img.src = url;
-    }
-    //#endif
   },
   created() {
     var opt = this.$route.query
