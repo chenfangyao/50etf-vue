@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<base-header has-back='1'></base-header>
-    <div class="title">实名认证</div>
+    <div class="title textc1">实名认证</div>
     <div class="container">
 
       <input-item placeholderTxt='输入您的姓名'  @now-blur='handleBlur' v-model="uName"></input-item>

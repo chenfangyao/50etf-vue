@@ -2,8 +2,8 @@
   <div class="wrap">
     <base-header title="证件上传" has-back="1"></base-header>
     <div class="subwrap">
-      <div class="line1">证件上传</div>
-      <div class="line2">证件类型：中国大陆剧名身份证</div>
+      <div class="line1 textc1">证件上传</div>
+      <div class="line2 textc2">证件类型：中国大陆剧名身份证</div>
       <!-- 正面 -->
       <div class="uploader_img" v-if="imgUrl[0]">
         <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
