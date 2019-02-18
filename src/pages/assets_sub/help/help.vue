@@ -2,8 +2,8 @@
   <div class="wrap">
     <base-header title="转账帮助" has-back="1"></base-header>
     <div class="linkWrap">
-      <div class="link" @click="show(0)">手机App快速转账</div>
-      <div class="link" @click="show(1)">柜台汇款单</div>
+      <div class="link black4 textc1" @click="show(0)">手机App快速转账</div>
+      <div class="link black4 textc1" @click="show(1)">柜台汇款单</div>
     </div>
     <help-detail :img-i='i' v-if="showHelp" @close-me='hide'></help-detail>
   </div>
@@ -41,6 +41,9 @@ div.linkWrap {
   transform: translateY(-22px);
   > div:first-child {
     margin-bottom: 1.08rem;
+  }
+  div.black4{
+    background-color: #0f131f !important;
   }
   div.link {
     font-size: 18px;

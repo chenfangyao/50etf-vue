@@ -2,9 +2,9 @@
 	<div class="wrap">
 		<base-header title="支付银行" has-back='1' right-txt='帮助' @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
-    <div class="subWrap">
+    <div class="subWrap black2">
       <!-- <input-item placeholderTxt='银行名称' v-model="bankName" ></input-item> -->
-			<div class='payMoney'>支付金额:{{paymoney}}</div>
+			<div class='payMoney black2 textc1'>支付金额：{{paymoney}}</div>
 			<div class=inputcommon>
       <input-item placeholderTxt='付款人' v-model="uName" ></input-item>
       <input-item placeholderTxt='付款账号' v-model="bankCode" ></input-item>

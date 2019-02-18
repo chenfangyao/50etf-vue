@@ -8,9 +8,10 @@ export const commonOption = {
 export const optionK = {
   tooltip: {
     trigger: 'axis',
-    // triggerOn: 'mousemove',
+    triggerOn: 'click',
     axisPointer: {
-      type: 'cross'
+      type: 'cross',
+      label:{show:false}
     },
     alwaysShowContent: false,
     /* position(pos, params, el, elRect, size) {
@@ -284,9 +285,6 @@ export const option = {
   tooltip: {
     trigger: 'axis',
     // triggerOn: 'mousemove',
-    axisPointer: {
-      type: 'cross'
-    },
     alwaysShowContent: false,
     position(pos, params, el, elRect, size) {
       const obj = {

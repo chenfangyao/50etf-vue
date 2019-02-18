@@ -43,11 +43,11 @@ export default {
 <style lang="scss" scoped>
 div._input {
   border-bottom: 1px solid #ccc;
-  padding-bottom:.10rem;
   margin-bottom:.62rem;
   position: relative;
   color: rgba(51, 51, 53, 1);
   font-size: 16px;
+  line-height: 1.2;
   input{
     position: relative;
     z-index: 20;
