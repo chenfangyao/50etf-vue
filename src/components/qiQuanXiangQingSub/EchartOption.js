@@ -243,10 +243,30 @@ export const option1k = {
       axisLine: { show: false },
 
     }],
-
+  tooltip: {
+    trigger: 'axis',
+    triggerOn: 'click',
+    axisPointer: {
+      type: 'cross',
+    },
+    alwaysShowContent: false,
+    formatter: function (params) {
+      var str = ''
+      if (params.length === 1) {
+        return params[0].data[0] + '<br>' + '成交量：' + params[0].data[1]
+      }
+      for (let i = 1; i < params.length; i++) {
+        str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
+      }
+      return '开:' + params[0].data[1] + '<br>' +
+        '高:' + params[0].data[4] + '<br>' +
+        '收:' + params[0].data[2] + '<br>' +
+        '低:' + params[0].data[3] + '<br>' + str
+    }
+  },
   dataZoom: [{
     type: 'inside',
-    start: 85,
+    start: 65,
     end: 100,
     xAxisIndex: [0, 1],
     zoomLock: true,
