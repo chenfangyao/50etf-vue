@@ -116,18 +116,15 @@ export default {
           // 开仓
           if (!this.onClose) {
             this.maxbuy.maxcounts = parseInt(this.maxbuy.maxcount)
-            console.log(1111,this.maxbuy.maxcounts)
           }
           // 平仓
           else {
             // 合并
             if (!this.hbfbswitch) {
               this.maxbuy.maxcounts = parseInt(this.maxbuy.own_amount)
-              console.log(2222,this.maxbuy.maxcounts)
             }
             // 分笔
             else {
-              console.log(3333,this.fbnum)
               this.maxbuy.maxcounts = this.fbnum
             }
           }

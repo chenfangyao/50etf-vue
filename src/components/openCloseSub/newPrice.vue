@@ -370,7 +370,6 @@ export default {
         this.maxprice.maxcounts = parseInt(val.select1.value[0])
       }
       this.sliderVal = 0
-      console.log(555, this.maxprice.maxcounts)
     },
     // 合并平仓确认
     confirmCheck() {

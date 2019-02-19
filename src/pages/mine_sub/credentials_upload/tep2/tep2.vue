@@ -88,7 +88,6 @@ export default {
       lrz(file)
         .then (rst=> {
           // 处理成功会执行
-          console.log(2222,rst.base64);
         })
         .catch(function (err) {
           // 处理失败会执行
