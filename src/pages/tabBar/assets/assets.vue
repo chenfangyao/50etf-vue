@@ -20,7 +20,7 @@
 				<span>{{add_fee_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
 			<div class="uni-flex black2 textc1">
-				<span>提现冻结</span>
+				<span>冻结资金</span>
 				<span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
 			</div>
 		</div>

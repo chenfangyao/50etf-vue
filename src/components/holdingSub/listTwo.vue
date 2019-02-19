@@ -26,10 +26,10 @@
           <span>￥</span>
           <span class="textc1">{{item.business_price}}</span>
         </div>
-        <div class="time">
-          <img src="/assets/holdingImg/clock.png">
+        <!-- <div class="time"> 暂时隐藏，后端不支持
+          <img src="../../assets/holdingImg/clock.png">
           <span>{{cancelTime[i]}}</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
