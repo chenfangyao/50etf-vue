@@ -6,27 +6,6 @@ const packageConfig = require('../package.json')
 function resolveResource(name) {
   return path.resolve(__dirname, '../src/style/' + name);
 }
-function generateSassResourceLoader() {
-  var loaders = [
-    'cssLoader',
-    'sass-loader',
-    {
-      loader: 'sass-resources-loader',
-      options: {
-        // 多个文件时用数组的形式传入，单个文件时可以直接使用 path.resolve(__dirname, '../static/style/common.scss'
-        resources: [resolveResource('color.scss')]
-      }
-    }
-  ];
-  if (options.extract) {
-    return ExtractTextPlugin.extract({
-      use: loaders,
-      fallback: 'vue-style-loader'
-    })
-  } else {
-    return ['vue-style-loader'].concat(loaders)
-  }
-}
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -83,9 +62,7 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    // sass: generateSassResourceLoader(),有问题
-    // scss: generateSassResourceLoader(),
+    scss: generateLoaders('sass').concat({ loader: 'sass-resources-loader', options: { resources: path.resolve(__dirname, '../src/common/black.scss') } } ),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
