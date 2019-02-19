@@ -1,20 +1,6 @@
 import store from '@/vuex'
 export const commonOption = {
- /*  tooltip: {
-    trigger: 'item',
-    triggerOn: 'mousemove',
-    axisPointer: {
-      type: 'cross'
-    },
-    alwaysShowContent: false,
-    position(pos, params, el, elRect, size) {
-      const obj = {
-        top: 60
-      };
-      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-      return obj;
-    },
-  }, */
+ 
   animation: false,
   itemStyle: { color: '#7fbe9e' },
 
@@ -25,16 +11,11 @@ export const optionK = {
     trigger: 'axis',
     // triggerOn: 'mousemove',
     axisPointer: {
-      type: 'cross'
+      type: 'cross',
+      label: { show: false }
+
     },
     alwaysShowContent: false,
-    /* position(pos, params, el, elRect, size) {
-      const obj = {
-        top: 60
-      };
-      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-      return obj;
-    }, */
     formatter: function (params) {
       var str = ''
       if (params.length === 1) {
@@ -227,6 +208,22 @@ export const option5k = {}
 export const optionRk = {}
 export const option = {
   ...commonOption,
+ tooltip: {
+   trigger: 'axis',
+  triggerOn: 'click',
+  axisPointer: {
+    type: 'cross',
+    label: { show: false }
+  },
+  alwaysShowContent: false,
+  position(pos, params, el, elRect, size) {
+    const obj = {
+      top: 60
+    };
+    obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+    return obj;
+  },
+},
   xAxis: [
     {
       data: [],

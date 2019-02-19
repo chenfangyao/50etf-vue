@@ -19,10 +19,11 @@
 </template>
 <script>
 import echarts from 'echarts'
+import { mapState, mapMutations } from 'vuex';
 
 var option = {
   xAxis: {
-    data: [1,2,3,4,5,6],
+    data: [],
     show: false,
   },
   legend: {
@@ -39,14 +40,17 @@ var option = {
   yAxis: {
     show: false,
     type: 'value',
-    scale:true
+    scale: true
   },
   series: [{
-    data: [15, 20, 36, 14, 10, 26],
+    // data: [15, 20, 36, 14, 10, 26,11,21,33,29,16,25,18,15,35],
+    data: [],
     type: 'line',
-    symbol: 'none'
+    symbol: 'none',
+    smooth: true
   }]
 }
+var echartInstance = null
 export default {
   data() {
     return {
@@ -54,12 +58,26 @@ export default {
   },
   props: ['resObj'],
   mounted() {
-    echarts.init(document.getElementById('canvas3')).setOption(option)
+    echartInstance = echarts.init(document.getElementById('canvas3'))
+    if (this.minuteLineData.length > 5) {
+      option.series[0].data = this.minuteLineData
+      echartInstance.setOption(option)
+    }
   },
-  filters:{
-    dealName(val){
-      if(val) return val.substring(5)
+  filters: {
+    dealName(val) {
+      if (val) return val.substring(5)
       else return ''
+    }
+  },
+  computed: mapState(['minuteLineData']),
+  methods: mapMutations(['setminuteLineData']),
+  watch:{
+    minuteLineData(val){
+      if (this.minuteLineData.length > 5) {
+        option.series[0].data = this.minuteLineData
+        echartInstance.setOption(option)
+      }
     }
   }
 }

@@ -67,5 +67,6 @@ div.title {
 }
 div.container {
   margin: 0 .55rem;
+  padding-bottom: 0.1px;
 }
 </style>

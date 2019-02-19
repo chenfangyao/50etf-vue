@@ -7,6 +7,7 @@
           <span class="codeTxt">{{item.stock_code}}</span>
         </div>
         <div class="timeTxt textc2" v-if="item.in_time">{{create_time[i]}}</div>
+        <div class="timeTxt textc2" v-else>持仓数：{{item.own_amount}}</div>
       </div>
       <div class="line2 uni-flex">
         <div class='uni-flex leftPart fg1'>

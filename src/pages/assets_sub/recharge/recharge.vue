@@ -17,7 +17,7 @@
         <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @click='choosePriceItem(i,item)'>{{item}} 元</div>
       </div>
     </div>
-    <div class="tip textc1">
+    <div class="tip textc1" v-show="inputDisabled"><!--支付宝限额，银行不限额-->
       <span>温馨提醒：</span>
       <span class="_a" @click="showtables">充值限额表</span>
     </div>
@@ -25,9 +25,9 @@
       <btn-block txt='下一步' @v-tap='go'></btn-block>
     </div>
     <!-- <limit-table></limit-table> -->
-    <div v-if="showTable">
-      <div  class="alipayLimit prevent-rubber-band" >
-        <table cellspacing="0">
+    <div v-if="showTable" class="self-mask ">
+      <div  class="alipayLimit black2 "  >
+        <table cellspacing="0" class="textc1">
           <thead>
           <tr>
             <td class="tr-title">银行</td>
@@ -144,7 +144,10 @@
           </tfoot>
         </table>
       </div>
-      <div class="closepop" @click="closeTable"><span>关闭</span></div>
+      <div class="closepop" >
+        <img src="../../../assets/holdingImg/popClose.png" @click="closeTable">
+      </div>
+      
     </div>
 	</div>
 </template>
@@ -353,16 +356,16 @@ div.wrap {
     left: 0;
     right: 0;
   }
+  div.self-mask{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 .alipayLimit{
   display: block;
   overflow-y: scroll;
-  height: 7.8rem;
   background-color: white;
-  margin-left:30px;
-  margin-right:30px;
-  position: absolute;
-  top:2rem;
-  z-index: 1000;
+  margin:0 30px 10px;
   table{
     font-size: 12px;
     color:#3c3c41;
@@ -371,8 +374,8 @@ div.wrap {
     border:solid #808080;
     border-width:1px;
     .tr-title{
-              width: 34%;
-              }
+      width: 34%;
+    }
 td{
   text-align: center;
   border:solid #808080;
@@ -381,16 +384,15 @@ td{
   }
 }
 .closepop{
-  position: absolute;
-  top:9.8rem;
-  display: inline-block;
-  margin-left:30px;
-  margin-right:30px;
+//   position: absolute;
+//   bottom: 2rem;
+// left: 0;right: 0;
   text-align: center;
-  left:3rem;
-  span{
-    /*margin-left: ;*/
-  }
+      img {
+    margin: 0.26rem auto 0;
+        width: 0.72rem;
+        height: 0.72rem;
+      }
 }
 }
 </style>
