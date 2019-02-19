@@ -4,7 +4,7 @@ export function checkUpdate() {
     responseOK &&  _checkUpdate( inf.version)
   });
 }
-var checkUrl = "http://192.168.0.109:8085/apk/version";
+var checkUrl = "http://47.100.226.135:8040 /Sapi/Soft/last?version=1";
  function _checkUpdate(wgtVer) {
   // plus.nativeUI.showWaiting("检测更新...");
    responseOK=false

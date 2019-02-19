@@ -398,7 +398,7 @@ export const option = {
         normal: { opacity: 1, width: 1 },
       },
       areaStyle: {
-        opacity: 0.5,
+        opacity: store.state.atNight? 0.2:0.5,
         color: {
           type: 'linear',
           x: 0,

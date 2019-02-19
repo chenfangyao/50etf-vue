@@ -118,6 +118,14 @@ export default {
       this.Ymax = (this.stockInfo.preClosePrice + val * 1.005).toFixed(4)
       this.Ymin = (this.stockInfo.preClosePrice - val * 1.005).toFixed(4)
     },
+    getNowTime(){
+      var T = new Date(),
+      H = T.getHours(),
+      Min = T.getMinutes()
+      if(H===9&&Min<50)return 0
+      else if(H===13&&Min>10)return 85
+       else return 65
+    },
     dealFenshiData(arr) {
       var Yline = []
       var YBar = []
@@ -250,6 +258,7 @@ export default {
       let obj = optionK
       if (this.tabIndex == 2) {//1分K
         // X = fenshiT不开启全程
+        option1k.dataZoom[0].start=this.getNowTime()
         obj = option1k
       } else if (this.tabIndex == 1) {//日K的情况
         X.length < 60 && (X.length = 60)
