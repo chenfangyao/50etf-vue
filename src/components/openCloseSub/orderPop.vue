@@ -92,7 +92,6 @@ export default {
 						},3500)
 					}
 				}else{//分笔平仓
-          console.log(555)
 					this.stocksell(this.fbccid,this.stockamunt)
 
 				}
