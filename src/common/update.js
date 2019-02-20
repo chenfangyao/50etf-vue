@@ -4,7 +4,7 @@ export function checkUpdate() {
     responseOK &&  _checkUpdate( inf.version)
   });
 }
-var checkUrl = "http://192.168.0.109:8085/apk/version";
+var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?version=";
  function _checkUpdate(wgtVer) {
   // plus.nativeUI.showWaiting("检测更新...");
    responseOK=false
@@ -15,10 +15,11 @@ var checkUrl = "http://192.168.0.109:8085/apk/version";
         // plus.nativeUI.closeWaiting();
         responseOK = true
         if (xhr.status == 200) {
-          var newVer = xhr.responseText;
+          var newVer = xhr.responseText.data.list[0].version;
+          var downurl = xhr.responseText.data.list[0].downurl;
           if (wgtVer && newVer && (wgtVer != newVer)) {
             plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
-              e.index === 0 && downWgt()
+              e.index === 0 && downWgt(downurl)
             } );
           } else {
             //plus.nativeUI.alert("当前已是最新版本");
@@ -29,14 +30,13 @@ var checkUrl = "http://192.168.0.109:8085/apk/version";
         break;
     }
   }
-  xhr.open('GET', checkUrl);
+  xhr.open('GET', checkUrl + wgtVer);
   xhr.send();
 }
 // 下载wgt文件
-var wgtUrl = "http://192.168.0.109:8085/apk/50etf.wgt";
-function downWgt() {
+function downWgt(url) {
   plus.nativeUI.showWaiting("下载更新包，请耐心等待…");
-  plus.downloader.createDownload(wgtUrl, { filename: "_doc/update/" }, function (d, status) {
+  plus.downloader.createDownload(url, { filename: "_doc/update/" }, function (d, status) {
     if (status == 200) {
       installWgt(d.filename); // 安装wgt包
     } else {

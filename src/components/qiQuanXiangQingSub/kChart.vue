@@ -2,13 +2,7 @@
   <div>
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex black2">
-        <div
-          v-for="(tab,i) in topTabs"
-          :key="i"
-          :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']"
-          :data-current="i"
-          @click="tapTab"
-        >{{tab.name}}</div>
+        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab"><span :data-current="i">{{tab.name}}</span></div>
       </div>
     </div>
     <!-- #ifdef H5 -->
@@ -118,6 +112,14 @@ export default {
       this.Ymax = (this.stockInfo.preClosePrice + val * 1.005).toFixed(4)
       this.Ymin = (this.stockInfo.preClosePrice - val * 1.005).toFixed(4)
     },
+    getNowTime() {
+      var T = new Date(),
+        H = T.getHours(),
+        Min = T.getMinutes()
+      if (H === 9 && Min < 50 && Min > 30) return 0
+      else if (H >= 13 && Min > 10 || H < 10) return 85
+      else return 65
+    },
     dealFenshiData(arr) {
       var Yline = []
       var YBar = []
@@ -137,7 +139,6 @@ export default {
         }
         YBar.push(subBar)
       });
-      this.$store.commit('setminuteLineData',Yline.slice(-15))
       this.calcMinMax()
       let obj = {
         xAxis: [
@@ -225,6 +226,10 @@ export default {
       //#endif
     },
     dealKData(arr) {
+      if (arr === undefined) {
+        h5ChartK && h5ChartK.clear()
+        return
+      }
       this.maxBar = 0
       var X = []
       var YBar = []
@@ -250,6 +255,7 @@ export default {
       let obj = optionK
       if (this.tabIndex == 2) {//1分K
         // X = fenshiT不开启全程
+        option1k.dataZoom[0].start = this.getNowTime()
         obj = option1k
       } else if (this.tabIndex == 1) {//日K的情况
         X.length < 60 && (X.length = 60)
@@ -309,7 +315,7 @@ export default {
         if (res.result == 1) {
           this.stockInfo = res.mdata.stockInfo
           this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
-          
+
         }
       })
     },
@@ -344,19 +350,21 @@ div.uni-tab-bar {
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
     justify-content: space-around;
-    padding: 0.1rem 0.56rem 0;
+    padding: 0 0.56rem ;
     height: 0.72rem;
     font-size: 14px;
     background-color: #ededed;
     .swiper-tab-list2.active {
-      border-bottom: 2px solid #409de5;
-      color: #409de5;
+      span{
+        border-bottom: 2px solid #409de5;
+        color: #409de5;
+        padding-bottom: 0.1rem;
+      }
     }
     .swiper-tab-list2 {
       font-size: 0.3rem;
-      font-family: MicrosoftYaHei;
-      font-weight: 400;
       color: #707680;
+      padding: 0.1rem 10px 0;
     }
   }
 }

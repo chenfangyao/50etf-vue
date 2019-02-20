@@ -4,14 +4,12 @@
   <div class="title">
     <div class="msg">
       <span @click='go(3) ' class="commonStyle1">消息</span>
-      <!--<uni-badge :text="sid?newlengths:'0'" type="danger"></uni-badge>-->
     </div>
     <span class="commonStyle1" @click='go'>设置</span>
   </div>
 </div>
 </template>
 <script>
-import uniBadge from "@/components/uni-badge.vue"
 import { mapState } from 'vuex';
 export default {
 	data(){
@@ -19,7 +17,6 @@ export default {
 			txt:'0'
 		}
 	},
-  components: { uniBadge },
 	computed: mapState(['sid','newlengths']),
 	created(){
 		if(this.sid){
@@ -80,13 +77,6 @@ export default {
     color: #fff;
     font-size: 14px;
     line-height: 44px;
-  }
-  .uni-badge {
-    position: absolute;
-    right: -0.32rem;
-    top:.20rem;
-    padding:.04rem .08rem;
-    font-size: 11px;
   }
 }
 </style>

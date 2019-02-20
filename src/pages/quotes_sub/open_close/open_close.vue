@@ -2,7 +2,7 @@
   <div class="wrap_op black1">
     <header-title :tab-active="onClose" @change-close="reGetSth"></header-title>
     <div class="h1 black1"></div>
-    <contain-chart :res-obj="QuotationMsg"></contain-chart>
+    <contain-chart :res-obj="QuotationMsg" :symbol-str='symbol'></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
     <div class="h12 black1"></div>
     <new-price

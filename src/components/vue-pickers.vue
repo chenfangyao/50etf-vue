@@ -4,7 +4,7 @@
       <div class="self-mask" v-if="isOpened > 0"  v-show="show">
       <div class="area_ctrl">
         <div class="area_btn_box">
-          <div class="area_btn larea_cancel" @click="close">取消</div>
+          <div class="area_btn larea_cancel" v-if="false" @click="close">取消</div>
           <div class="area_btn larea_finish" @click="finish">确定</div>
         </div>
         <div class="area_roll_mask">

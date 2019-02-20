@@ -28,11 +28,13 @@
     </div>
     <div class="uni-flex btn2 black4">
       <div class="hasBorder blue1" @click='go(1)'>
-        <img src="../../assets/assetsImg/recharge.png">
+        <img v-if="atNight" src="../../assets/assetsImg/recharge1.png">
+        <img v-else src="../../assets/assetsImg/recharge.png">
         <span>充值</span>
       </div>
       <div  @click='go(2)' >
-        <img src="../../assets/assetsImg/withdraw.png">
+        <img v-if="atNight" src="../../assets/assetsImg/withdraw1.png">
+        <img v-else src="../../assets/assetsImg/withdraw.png">
         <span>提现</span>
       </div>
     </div>
@@ -47,7 +49,7 @@ export default {
 
     }
   },
-  computed: mapState(['sid']),
+  computed: mapState(['sid','atNight']),
   props: ['transmoney'],
   methods: {
     go(i) {
