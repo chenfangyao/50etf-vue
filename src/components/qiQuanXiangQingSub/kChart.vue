@@ -139,7 +139,6 @@ export default {
         }
         YBar.push(subBar)
       });
-      this.$store.commit('setminuteLineData', Yline.slice(-15))
       this.calcMinMax()
       let obj = {
         xAxis: [

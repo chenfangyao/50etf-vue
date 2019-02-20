@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    minuteLineData:[],
     hasLogin: false,
     loginProvider: "",
     openid: null,
@@ -59,9 +58,6 @@ const store = new Vuex.Store({
     },
     setatNight(state, data) {
       state.atNight = data
-    },
-    setminuteLineData(state, data) {
-      state.minuteLineData = data
     },
     settabIndex(state, data) {
       state.tabIndex = data

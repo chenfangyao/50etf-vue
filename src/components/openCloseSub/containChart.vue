@@ -19,7 +19,6 @@
 </template>
 <script>
 import echarts from 'echarts'
-import { mapState, mapMutations } from 'vuex';
 
 var option = {
   xAxis: {
@@ -56,13 +55,16 @@ export default {
     return {
     }
   },
-  props: ['resObj'],
+  props:{
+    resObj:{
+      default(){return{}},
+    },
+    symbolStr:{
+      default:''
+    }
+  },
   mounted() {
     echartInstance = echarts.init(document.getElementById('canvas3'))
-    if (this.minuteLineData.length > 5) {
-      option.series[0].data = this.minuteLineData
-      echartInstance.setOption(option)
-    }
   },
   filters: {
     dealName(val) {
@@ -70,14 +72,38 @@ export default {
       else return ''
     }
   },
-  computed: mapState(['minuteLineData']),
-  methods: mapMutations(['setminuteLineData']),
-  watch:{
-    minuteLineData(val){
-      if (this.minuteLineData.length > 5) {
-        option.series[0].data = this.minuteLineData
-        echartInstance.setOption(option)
+  methods: {
+    getfenshi() {
+      var options = {
+        url: '/fiftyEtf/QryMinuteLine',
+        method: 'POST',
+        data: {
+          symbol: this.symbolStr,
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       }
+      this.$httpReq(options).then((res) => {
+        if (res.result == 1) {
+          this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
+        }
+      })
+    },
+    dealFenshiData(arr) {
+      var Yline = []
+      arr.slice(-15).forEach((item, i) => {
+        Yline.push(item.closePrice)
+      });
+       if (Yline.length > 5) {
+        option.series[0].data = Yline
+        echartInstance.setOption(option)
+       }
+    },
+  },
+  watch:{
+    symbolStr(val){
+      if(val!=='')this.getfenshi()
     }
   }
 }
