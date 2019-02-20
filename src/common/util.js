@@ -76,7 +76,7 @@ var timemers={
 	// 行情页50etf股票定时器
 	quotesCommonSelectStock:null,
 	// 行情页单个合约定时器
-	quotesQrySingleQuotationMsg:null	
+	quotesQrySingleQuotationMsg:null
 }
 
 module.exports = {
@@ -89,6 +89,7 @@ module.exports = {
     var T = new Date(),
       H = T.getHours(),
       Min = T.getMinutes()
+    // console.log(222,T,H,Min)
     if (H == 10 || H == 13 || H == 14) return true;
     if (H == 9 && Min > 29 || H == 11 && Min < 31) return true;
     return false
