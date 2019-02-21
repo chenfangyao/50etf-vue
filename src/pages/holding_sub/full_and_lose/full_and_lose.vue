@@ -1,16 +1,16 @@
 <template>
   <div>
-    <base-header has-back='1'></base-header>
+    <base-header  :hasBack="true" :title='title'></base-header>
     <div class="border1"></div>
     <div class="wrap ">
       <div class="title textc1">止{{isFull==1?'盈':'损'}}设置</div>
-      <div class="subTitle textc2">开启止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
-      <div class="subTitle textc2">参考价</div>
-      <div class="price">2,326.06</div>
+      <div class="subTitle textc2">止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
+      <div class="subTitle textc2">最新价：</div>
+      <div class="price">{{resObj.last_price}}</div>
       <div class="inputContainer">
-
-        <input-item :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"></input-item>
+        <input-item class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"  ></input-item>
       </div>
+      <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
       <submit-btn btnTxt='确定' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
 
     </div>
@@ -24,24 +24,76 @@ export default {
   data() {
     return {
       isFull: '',
-      inputPrice: '',
-      verifyYes: false,
+      inputPrice: '0.99',
+      verifyYes: true,
+      title:'',
+      resObj:{},
+      singykprice:'0.00',
+      singykroute:'0.00',
     };
   },
   watch: {
     inputPrice(val) {
-      if (val.trim() !== '') this.verifyYes = true;
+      console.log(3,this.resObj.avg_buy_price,this.inputPrice)
+      // 成交价
+      this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(4)
+
+      this.singykroute=parseFloat(this.singykprice*100/this.resObj.avg_buy_price).toFixed(4)
     },
 
   },
   components: { submitBtn, inputItem },
   methods: {
     handleNext() {
-     this.$router.goBack()
+     // this.$router.goBack()
+      var options = {
+        url: '/Sapi/Hold/sltp_set', //请求接口
+        method: 'POST', //请求方法全部大写，默认GET
+        data: {
+          hid: this.resObj.id,
+          // 止盈价
+          sltp_price_tp: this.resObj.sltp_price_tp,
+          // 止损价
+          sltp_price_sl: this.resObj.sltp_price_sl
+        },
+        // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$toast(res.info?res.info:'设置成功')
+        }
+        else {
+          this.$toast(res.info ? res.info : '设置失败')
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err,'捕捉')
+        this.$toast('设置失败')
+      })
     },
+    inputchange(){
+      console.log(3,this.resObj.avg_buy_price,this.inputPrice)
+      // 成交价
+      this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(2)
+
+      this.singykroute=parseFloat(this.singykprice/this.resObj.avg_buy_price).toFixed(2)
+    }
   },
   created() {
+    console.log(555,this.$route.query.resObj)
+    this.resObj=this.$route.query.resObj
     this.isFull = this.$route.query.isfull
+    this.price=this.$route.query.price
+    this.code=this.$route.query.code
+    if(this.isFull==1){
+      this.title='止盈'
+      this.inputPrice=this.resObj.sltp_price_tp
+      console.log(11,this.inputPrice)
+    }else{
+      this.title='止损'
+      this.inputPrice=this.resObj.sltp_price_sl
+      console.log(22,this.inputPrice)
+    }
   }
 }
 </script>
@@ -68,13 +120,24 @@ div.wrap {
   div.price {
     font-size: 24px;
     font-weight: bold;
-    margin:.33rem 01.74rem.12rem;
+    margin:.33rem 0 1.54rem.12rem;
 
     color: rgba(240, 95, 92, 1);
   }
   div.inputContainer{
     padding: 0.12rem;
-    margin-bottom:1.20rem;
+    margin-bottom:-0.1rem;
+  }
+  div.zyzsspan{
+    padding-left: 0.12rem;
+    margin-bottom:.8rem;
+    span:nth-child(2) {
+     /*color: #fcd334;*/
+      margin-left: .5rem;
+     }
+  }
+  div.inputContainer .partinput-style{
+    margin-bottom:.1rem
   }
 }
 </style>

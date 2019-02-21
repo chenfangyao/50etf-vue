@@ -113,7 +113,14 @@ export default {
       switch (i) {
         case 0:
         case 1:
-          this.$navigateTo({ url: '/full_and_lose', query: { isfull: i, } })
+          this.$navigateTo({
+            url: '/full_and_lose',
+            query: {
+              isfull: i,
+              code:this.resObj.stock_code,
+              price:this.resObj.last_price,
+              resObj:this.resObj
+            } })
           break
         case 2:
           this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 0 } })
@@ -160,7 +167,6 @@ export default {
     yesHandle(i) {
       this.showPop2 = false
       i == 1 && this.sendAutodelay(0)
-
     },
 
   },

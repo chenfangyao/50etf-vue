@@ -67,7 +67,6 @@ export default {
           })
 					return
 				}
-        console.log(333,this.hbfbcell)
 				if(this.hbfbcell.length && !this.entrusttype){
 					// 全部平仓
 					if(this.hbfbcell[0]==='all'){
