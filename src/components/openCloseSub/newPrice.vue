@@ -210,10 +210,12 @@ export default {
       this.setentrusttype(val)
       this.sliderVal = 0
       if (val == true) {
+        this.setcctotalmoney(0)
         this.maxprice.maxcounts = 0.1
         var picktext = this.pickerText
         picktext = picktext.split(' ')
         picktext = picktext[1]
+        this.setstockamunt(0)
         if (picktext != undefined) {
           picktext = picktext.replace('张', '')
           this.maxprice.maxcounts = parseInt(picktext)
@@ -221,6 +223,12 @@ export default {
         if (this.maxprice.maxcounts == 0.1) {
           this.sliderdisable = true
         }
+      }else{
+        this.setstockamunt(this.maxprice.enable_amount)
+        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
+        this.setcctotalmoney(totalmoney.toFixed(2))
+        // console.log(3333,this.stockamunt)
+
       }
       this.$emit('hbfb-switch', {
         val: val,
@@ -460,6 +468,8 @@ export default {
         this.pickerText = '0'
         // 设置默认分笔持仓id
         this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
+        // 把分笔持仓第一笔持仓数量带到默认持仓数量中
+        this.$emit('fb-num', parseInt(val[0].enable_amount))
         if (this.fbcclist[0]) {
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
           var data1 = []
@@ -510,7 +520,7 @@ export default {
       if (this.onClose == true && this.tabActive == false) {
         this.setstockamunt(this.maxprice.enable_amount)
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
-        this.setcctotalmoney(totalmoney)
+        this.setcctotalmoney(totalmoney.toFixed(2))
       }
     }, 2000)
   },
