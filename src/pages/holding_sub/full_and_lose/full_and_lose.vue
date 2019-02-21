@@ -2,11 +2,10 @@
   <div>
     <base-header has-back='1'></base-header>
     <div class="border1"></div>
-    <div class="wrap">
-
-      <div class="title">止{{isFull==1?'盈':'损'}}设置</div>
-      <div class="subTitle">开启止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
-      <div class="subTitle">参考价</div>
+    <div class="wrap ">
+      <div class="title textc1">止{{isFull==1?'盈':'损'}}设置</div>
+      <div class="subTitle textc2">开启止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
+      <div class="subTitle textc2">参考价</div>
       <div class="price">2,326.06</div>
       <div class="inputContainer">
 
@@ -41,8 +40,8 @@ export default {
      this.$router.goBack()
     },
   },
-  onLoad(option) {
-    this.isFull = option.isfull
+  created() {
+    this.isFull = this.$route.query.isfull
   }
 }
 </script>
@@ -53,6 +52,7 @@ div.border1 {
 }
 div.wrap {
   padding: 0.23rem;
+  min-height: 100vh;
   div.title {
     font-size: 20px;
     line-height: 20px;

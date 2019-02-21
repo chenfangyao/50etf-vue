@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="btn2 uni-flex">
-          <div class="uni-flex full" hover-class="self-hover">
+          <div class="uni-flex full" hover-class="self-hover" @click="go(1)">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span>未接</span>
@@ -58,7 +58,7 @@
               <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" hover-class="self-hover">
+          <div class="uni-flex lose" hover-class="self-hover" @click="go(0)">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>未接</span>
