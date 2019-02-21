@@ -25,7 +25,7 @@
         <div class="inputParent">
           <input type="tel" maxlength="11" placeholder-class="placeholderTxt" placeholder="请输入手机号">
         </div>
-        <div class="btn" hover-class="active">领取奖励</div>
+        <div class="btn" v-hover-class="'active'">领取奖励</div>
       </div>
     </div>
   </div>

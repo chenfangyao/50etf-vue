@@ -7,7 +7,7 @@
         </div>
         <span class="textc1">支付方式</span>
       </div>
-      <div class="item uni-flex black1 " v-for="(item,i) in wayLists" :key='i' @click='chooseWay(item)' hover-class='self-hover'>
+      <div class="item uni-flex black1 " v-for="(item,i) in wayLists" :key='i' @click='chooseWay(item)' v-hover-class='"self-hover"'>
         <img :src="item.logo">
         <div class="txt">
           <div class="wayName textc1">{{item.pay_name}}</div>

@@ -9,7 +9,7 @@
           <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
         </div>
     </div>
-    <button hover-class='self-hover' @click='go'>{{sid?'实名认证':'登录'}}</button>
+    <button v-hover-class='"self-hover"' @click='go'>{{sid?'实名认证':'登录'}}</button>
   </div>
 </template>
 <script>

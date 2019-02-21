@@ -1,6 +1,6 @@
 <template>
   <div  class="wrap">
-    <base-header title="首页"></base-header>
+    <!-- <base-header title="首页"></base-header> -->
     <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
       <van-swipe-item v-for="(item,i) in imgList" :key="i">
 		  	<img :src="item.img" >
@@ -160,7 +160,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  padding: 0 .2rem 1px;
+  padding: 0.1px .2rem ;
 }
 
 div.newsViewTitle {
@@ -180,7 +180,8 @@ div.newsViewTitle {
 .banner {
   height: 2.6rem;
   overflow: hidden;
-    border-radius: 0.2rem;
+  margin-top:0.1rem ;
+  border-radius: 0.2rem;
   img {
     width: 100%;
     height: 100%;

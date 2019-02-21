@@ -1,6 +1,6 @@
 <template>
   <div v-if="codeList">
-    <div class="uni-flex root-el textc1" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" hover-class="self-hover" :key="i">
+    <div class="uni-flex root-el textc1" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" v-hover-class="'self-hover'" :key="i">
       <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span
           :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"

@@ -7,7 +7,7 @@
           <img src="../assets/arrow/l.png">
         </div>
         <span>{{title}}</span>
-        <span class="right commonStyle" hover-class='self-hover' @click="rightTap" v-if="rightTxt">{{rightTxt}}</span>
+        <span class="right commonStyle" v-hover-class='"self-hover"' @click="rightTap" v-if="rightTxt">{{rightTxt}}</span>
       </div>
     </div>
     <div class="h44"></div>

@@ -87,8 +87,8 @@ export default {
             this.$httpReq(options).then((res) => {
                 if (res.status == 1) {
                     this.verifyYes=true
+                    process.env.NODE_ENV === 'production'&& localStorage.setItem('etfSid',res.data.sid)
                     this.setsid(res.data.sid)
-                    sessionStorage.setItem('etf_sid',res.data.sid)
                     // 获取用户信息
                     this.getuserinfo()
                   this.$router.replace('/')
@@ -111,7 +111,9 @@ export default {
           }
           this.$httpReq(options).then((res) => {
               if(res.status){
-				this.setuserinfo(res.data)
+                this.setuserinfo(res.data)
+               process.env.NODE_ENV === 'production'&& localStorage.setItem('userinfo',JSON.stringify( res.data))
+                
               }
           }).catch((err) => {
               console.error(err,'捕捉')

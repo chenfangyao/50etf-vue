@@ -9,7 +9,7 @@
         <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
       </div>
       <div class="cardPhoto" v-else @click="chooseImage(0)">
-        <div class="iconView" hover-class="self-hover">+</div>
+        <div class="iconView" v-hover-class="'self-hover'">+</div>
         <div>点击上传身份证正面</div>
       </div>
 
@@ -19,7 +19,7 @@
       </div>
 
       <div class="cardPhoto mt20" v-else @click="chooseImage(1)">
-        <div class="iconView" hover-class="self-hover">+</div>
+        <div class="iconView" v-hover-class="'self-hover'">+</div>
         <div>点击上传身份证反面</div>
       </div>
 

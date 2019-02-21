@@ -1,7 +1,7 @@
 <template>
   <div class="uni-flex">
-    <div class="v1" @click="go(0)" hover-class="tap-hover">开仓</div>
-    <div class="v2" @click="go(1)" hover-class="tap-hover">平仓</div>
+    <div class="v1" @click="go(0)" v-hover-class="'tap-hover'">开仓</div>
+    <div class="v2" @click="go(1)" v-hover-class="'tap-hover'">平仓</div>
   </div>
 </template>
 <style lang="scss" scoped>

@@ -5,7 +5,7 @@
         <div>自动延期</div>
         <div @click="openPop2" class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
-          <img src="../../assets/holdingImg/dagou.png" v-if="showDagou == 1">
+          <img src="../../assets/holdingImg/dagou.png" v-if="resObj.auto_delay == 1">
           <img src="../../assets/holdingImg/meigou.png" v-else>
         </div>
       </div>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="btn2 uni-flex">
-          <div class="uni-flex full" hover-class="self-hover" @click="go(1)">
+          <div class="uni-flex full" v-hover-class="'self-hover'" @click="go(1)">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span>未接</span>
@@ -58,7 +58,7 @@
               <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" hover-class="self-hover" @click="go(0)">
+          <div class="uni-flex lose" v-hover-class="'self-hover'" @click="go(0)">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>未接</span>
@@ -94,7 +94,6 @@ export default {
       showPop: false,
       showPop2: false,
       timeDeal: '',
-      showDagou: false,
       oneKeyObj: {}
     }
   },
@@ -141,7 +140,7 @@ export default {
       this.showPop = true
     },
     openPop2() {
-      if (this.showDagou) {
+      if (this.resObj.auto_delay==1) {
         this.showPop2 = true
       } else {
         this.sendAutodelay(1)
@@ -158,7 +157,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.info === "ok") {
-          this.showDagou = !this.showDagou
+          this.resObj.auto_delay=i
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -171,7 +170,6 @@ export default {
 
   },
   mounted() {
-    this.showDagou = this.resObj.auto_delay == 1
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   }
 }

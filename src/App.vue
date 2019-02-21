@@ -27,6 +27,7 @@
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
 import {checkUpdate} from '@/common/update.js'
+import saveLogin from '@/common/saveLogin.js'
 import { Loading  } from 'vant';
 import { mapState } from 'vuex';
 
@@ -40,6 +41,7 @@ export default {
     }
   },
   created() {
+    process.env.NODE_ENV === 'production' && saveLogin()
     document.addEventListener('plusready', () => { 
       
       // setInterval(()=>{checkUpdate()},60000)
