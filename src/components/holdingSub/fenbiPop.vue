@@ -5,7 +5,7 @@
         <div>自动延期</div>
         <div @click="openPop2" class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
-          <img src="../../assets/holdingImg/dagou.png" v-if="showDagou == 1">
+          <img src="../../assets/holdingImg/dagou.png" v-if="resObj.auto_delay == 1">
           <img src="../../assets/holdingImg/meigou.png" v-else>
         </div>
       </div>
@@ -94,7 +94,6 @@ export default {
       showPop: false,
       showPop2: false,
       timeDeal: '',
-      showDagou: false,
       oneKeyObj: {}
     }
   },
@@ -134,7 +133,7 @@ export default {
       this.showPop = true
     },
     openPop2() {
-      if (this.showDagou) {
+      if (this.resObj.auto_delay==1) {
         this.showPop2 = true
       } else {
         this.sendAutodelay(1)
@@ -151,7 +150,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.info === "ok") {
-          this.showDagou = !this.showDagou
+          this.resObj.auto_delay=i
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -160,12 +159,10 @@ export default {
     yesHandle(i) {
       this.showPop2 = false
       i == 1 && this.sendAutodelay(0)
-
     },
 
   },
   mounted() {
-    this.showDagou = this.resObj.auto_delay == 1
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   }
 }

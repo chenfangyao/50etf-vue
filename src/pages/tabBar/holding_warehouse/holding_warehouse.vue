@@ -68,8 +68,8 @@ export default {
   methods: {
     ...mapMutations(['setweituoindex']),
     openPop(i) {
-      this.tabI == 1 ? (this.showHebingPop = true) : (this.showFenbiPop = true)
       this.listItem = this.titleList[this.tabI].list[i]//分笔pop
+      this.tabI == 1 ? (this.showHebingPop = true) : (this.showFenbiPop = true)
     },
     closePop() {
       this.tabI == 1 ? (this.showHebingPop = false) : (this.showFenbiPop = false)
