@@ -31,7 +31,7 @@ export default function (obj) {
       store.commit("setloadingFlag", true);
     }
   }, 500);
-  let sid = store.state.sid || sessionStorage.getItem('etf_sid') || ""
+  let sid = store.state.sid 
   obj.header = obj.header || {}
   Object.assign(obj.header, {
     clienttype: 'web',

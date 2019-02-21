@@ -53,6 +53,8 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
+          localStorage.removeItem('etfSid')
+          localStorage.removeItem('userinfo')
           this.setuserinfo({})
           this.setsid('')
           this.$router.push({ name: 'index' })
