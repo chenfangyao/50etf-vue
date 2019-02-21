@@ -6,7 +6,7 @@
       </div>
       <span  class="textc1">交易</span>
     </div>
-    <div @click='go(1)' hover-class='self-hover'>
+    <div @click='go(1)' v-hover-class='"self-hover"'>
       <div class="hasBg bg2">
         <img :src="img2" >
       </div>
@@ -18,7 +18,7 @@
       </div>
       <span class="textc1">充值</span>
     </div>
-    <div @click='go(2)' hover-class='self-hover'>
+    <div @click='go(2)' v-hover-class='"self-hover"'>
       <div class="hasBg bg4">
         <img :src="img4" >
       </div>

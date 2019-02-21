@@ -4,8 +4,8 @@
       <div class="title textc1"> 延期关闭</div>
       <div class="subTitle textc1">是否关闭延期，关闭后当日会自动平仓！</div>
       <div class="btn2 uni-flex">
-        <div hover-class='tap-hover' @click='yesTap'>确定</div>
-        <div hover-class='tap-hover' @click='cancleTap'>取消</div>
+        <div v-hover-class="'tap-hover'" @click='yesTap'>确定</div>
+        <div v-hover-class="'tap-hover'" @click='cancleTap'>取消</div>
       </div>
     </div>
   </div>

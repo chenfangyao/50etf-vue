@@ -1,5 +1,5 @@
 <template>
-  <div :class="['btn',{verifyOk}]" hover-class='tap-hover' @click='doWhat'>{{btnTxt}}</div>
+  <div :class="['btn',{verifyOk}]" v-hover-class="'tap-hover'" @click='doWhat'>{{btnTxt}}</div>
 </template>
 <script>
 export default {

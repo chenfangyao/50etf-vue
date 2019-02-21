@@ -36,8 +36,8 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div hover-class='tap-hover' class="black2" @click='closePop'>取消</div>
-        <div hover-class='tap-hover' @click='yesTap'>确定</div>
+        <div v-hover-class="'tap-hover'" class="black2" @click='closePop'>取消</div>
+        <div v-hover-class="'tap-hover'" @click='yesTap'>确定</div>
       </div>
     </div>
   </div>

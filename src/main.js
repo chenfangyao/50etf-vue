@@ -9,6 +9,17 @@ import '@/common/uni.css'
 import '@/common/black.scss'
 import { Toast,Dialog} from 'vant';
 Vue.use(Toast,Dialog,router  )
+Vue.directive('hover-class', {
+  bind: function (el, binding) {
+    el.addEventListener("touchstart", function (e) {
+      el.classList.add(binding.value);
+    }, false);
+
+    el.addEventListener("touchend", function (e) {
+      el.classList.remove(binding.value);
+    }, false);
+  }
+})
 Toast.setDefaultOptions({
   duration: 2000,
   position: 'middle'

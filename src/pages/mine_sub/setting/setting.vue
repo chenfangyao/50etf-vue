@@ -1,15 +1,15 @@
 <template>
   <div class="wrap">
     <base-header title="设置" has-back="1"></base-header>
-    <div class="item1 uni-flex black2 textc1" hover-class="self-hover" @click="go(1)">
+    <div class="item1 uni-flex black2 textc1" v-hover-class="'self-hover'" @click="go(1)">
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>
-    <div class="item1 uni-flex black2 textc1" hover-class="self-hover">
+    <div class="item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>夜间模式</span>
       <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="changeTheme"/>
     </div>
-    <div class="mb26 item1 uni-flex black2 textc1" hover-class="self-hover">
+    <div class="mb26 item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>关于</span>
       <div class="uni-flex verView">
         <span class="verTxt textc2">版本号：1.0</span>
