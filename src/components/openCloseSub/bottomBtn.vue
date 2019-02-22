@@ -30,6 +30,12 @@ export default {
     showPop() {
       if (this.sid) {
         if(this.stockamunt!=0){
+          if(this.onClose){
+            if(this.stockamunt>89){
+              this.$toast('合并平仓数量不能大于90，请减少平仓数量！')
+              return
+            }
+          }
           this.popShow = true
         }else{
           this.$toast('数量不能为0！')

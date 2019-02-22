@@ -52,7 +52,7 @@
           <div class="uni-flex full" v-hover-class="'self-hover'" @click="go(1)">
             <div class="uni-flex uni-column">
               <span>止盈</span>
-              <span>未接</span>
+              <span >{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
             </div>
             <div>
               <img src="../../assets/holdingImg/setIcon.png">
@@ -61,7 +61,7 @@
           <div class="uni-flex lose" v-hover-class="'self-hover'" @click="go(0)">
             <div class="uni-flex uni-column">
               <span>止损</span>
-              <span>未接</span>
+              <span>{{resObj.sltp_price_sl?resObj.sltp_price_sl:'添加止损'}}</span>
             </div>
             <div>
               <img src="../../assets/holdingImg/setIcon.png">
@@ -111,7 +111,24 @@ export default {
       let code = this.resObj.stock_code
       switch (i) {
         case 0:
+          if(this.resObj.status==7){
+            this.$toast('止损中')
+            return
+          }
+          this.$navigateTo({
+            url: '/full_and_lose',
+            query: {
+              isfull: i,
+              code:this.resObj.stock_code,
+              price:this.resObj.last_price,
+              resObj:this.resObj
+            } })
+          break
         case 1:
+          if(this.resObj.status==6){
+            this.$toast('止盈中')
+            return
+          }
           this.$navigateTo({
             url: '/full_and_lose',
             query: {

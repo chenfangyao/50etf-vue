@@ -34,7 +34,6 @@ export default {
   },
   watch: {
     inputPrice(val) {
-      console.log(3,this.resObj.avg_buy_price,this.inputPrice)
       // 成交价
       this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(4)
 
@@ -45,31 +44,50 @@ export default {
   components: { submitBtn, inputItem },
   methods: {
     handleNext() {
+      let sltp_price_tp='',sltp_price_sl='',sltp_name=''
+      if(this.isFull==1){
+        sltp_price_tp=this.inputPrice
+        sltp_price_sl=this.resObj.sltp_price_sl
+        sltp_name='止盈'
+      }else{
+        sltp_price_tp=this.resObj.sltp_price_tp
+        sltp_price_sl=this.inputPrice
+        sltp_name='止损'
+      }
      // this.$router.goBack()
       var options = {
         url: '/Sapi/Hold/sltp_set', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
         data: {
-          hid: this.resObj.id,
+          hid: parseInt(this.resObj.id),
           // 止盈价
-          sltp_price_tp: this.resObj.sltp_price_tp,
+          sltp_price_tp: parseFloat(sltp_price_tp),
           // 止损价
-          sltp_price_sl: this.resObj.sltp_price_sl
+          sltp_price_sl: parseFloat(sltp_price_sl)
         },
         // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
-      this.$httpReq(options).then((res) => {
-        if (res.status) {
-          this.$toast(res.info?res.info:'设置成功')
-        }
-        else {
-          this.$toast(res.info ? res.info : '设置失败')
-        }
-      }).catch((err) => {
-        // 请求失败的回调
-        console.error(err,'捕捉')
-        this.$toast('设置失败')
-      })
+      this.$dialog.confirm({
+        title: '设置'+sltp_name+'',
+        message: ''+sltp_name+'价：'+this.inputPrice+''
+      }).then(() => {
+        // on confirm
+        this.$httpReq(options).then((res) => {
+          if (res.status) {
+            this.$toast(res.info?res.info:'设置成功')
+          }
+          else {
+            this.$toast(res.info ? res.info : '设置失败')
+          }
+        }).catch((err) => {
+          // 请求失败的回调
+          console.error(err,'捕捉')
+          this.$toast('设置失败')
+        })
+      }).catch(() => {
+        // on cancel
+      });
+
     },
     inputchange(){
       console.log(3,this.resObj.avg_buy_price,this.inputPrice)
