@@ -9,7 +9,14 @@
 </template>
 <script>
 export default {
-  props: ['placeholderTxt', 'isPwd', 'isTel', 'input6', 'focusNow'],
+  props:{
+    placeholderTxt: { 　default: '',},
+    isPwd: { 　default: '',},
+    isTel: { 　default: '',},
+    input6: { 　default: '',},
+    focusNow: { 　default: '',},
+    value: { 　default: '00',},
+  },
   data() {
     return {
       valtxt: '',
@@ -19,8 +26,13 @@ export default {
   },
   watch: {
     valtxt(val) {
+      val!==''&&(this.focusInput = true)
       this.$emit('input', val)
-    }
+    },
+    value(val) {
+      this.valtxt=val
+    },
+
   },
   methods: {
     getFocus(i) {
@@ -37,7 +49,7 @@ export default {
     getChange() {
       this.$emit('now-change')
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

@@ -97,7 +97,7 @@ export default {
       this.singykroute=parseFloat(this.singykprice/this.resObj.avg_buy_price).toFixed(2)
     }
   },
-  created() {
+  mounted() {
     console.log(555,this.$route.query.resObj)
     this.resObj=this.$route.query.resObj
     this.isFull = this.$route.query.isfull
@@ -105,11 +105,11 @@ export default {
     this.code=this.$route.query.code
     if(this.isFull==1){
       this.title='止盈'
-      this.inputPrice=this.resObj.sltp_price_tp
+     this.inputPrice=this.resObj.sltp_price_tp
       console.log(11,this.inputPrice)
     }else{
       this.title='止损'
-      this.inputPrice=this.resObj.sltp_price_sl
+    this.inputPrice=this.resObj.sltp_price_sl
       console.log(22,this.inputPrice)
     }
   }
