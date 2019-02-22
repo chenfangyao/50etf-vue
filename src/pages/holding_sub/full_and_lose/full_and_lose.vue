@@ -12,7 +12,6 @@
       </div>
       <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
       <submit-btn btnTxt='确定' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
-
     </div>
   </div>
 </template>
@@ -54,6 +53,10 @@ export default {
         sltp_price_sl=this.inputPrice
         sltp_name='止损'
       }
+      if(parseFloat(this.inputPrice)<=0.003){
+        this.$toast(""+sltp_name+"价格设置不能低于0.003！")
+        return
+      }
      // this.$router.goBack()
       var options = {
         url: '/Sapi/Hold/sltp_set', //请求接口
@@ -67,6 +70,7 @@ export default {
         },
         // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
+
       this.$dialog.confirm({
         title: '设置'+sltp_name+'',
         message: ''+sltp_name+'价：'+this.inputPrice+''
@@ -89,28 +93,26 @@ export default {
       });
 
     },
-    inputchange(){
-      console.log(3,this.resObj.avg_buy_price,this.inputPrice)
-      // 成交价
-      this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(2)
-
-      this.singykroute=parseFloat(this.singykprice/this.resObj.avg_buy_price).toFixed(2)
-    }
   },
   mounted() {
-    console.log(555,this.$route.query.resObj)
     this.resObj=this.$route.query.resObj
     this.isFull = this.$route.query.isfull
     this.price=this.$route.query.price
     this.code=this.$route.query.code
     if(this.isFull==1){
       this.title='止盈'
-     this.inputPrice=this.resObj.sltp_price_tp
-      console.log(11,this.inputPrice)
+      if(this.resObj.sltp_price_tp){
+        this.inputPrice=this.resObj.sltp_price_tp
+      }else{
+        this.inputPrice=this.resObj.avg_buy_price
+      }
     }else{
       this.title='止损'
-    this.inputPrice=this.resObj.sltp_price_sl
-      console.log(22,this.inputPrice)
+      if(this.resObj.sltp_price_sl){
+        this.inputPrice=this.resObj.sltp_price_sl
+      }else{
+        this.inputPrice=this.resObj.avg_buy_price
+      }
     }
   }
 }

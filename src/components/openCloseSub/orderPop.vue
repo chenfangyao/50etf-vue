@@ -114,12 +114,13 @@ export default {
       })
     },
     stockbuy() {
+      console.log(111,this.priceshock(),this.newprice)
       var options = {
         url: '/Sapi/Stock/buy', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: parseFloat(this.newprice),
+          price: this.enttype==2?this.priceshock():parseFloat(this.newprice),
           amount: parseInt(this.stockamunt),
           enttype: parseInt(this.enttype),
           is_pay_bean: 0
@@ -128,10 +129,6 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          // this.$redirectTo({
-          //   url: '/entrust_succ' ,
-          //   query:{type:this.onClose,code:parseInt(this.resObj.stockCode)+''}
-          // })
           this.$redirectTo({
             url:'/entrustSucc',
             query:({
@@ -153,12 +150,13 @@ export default {
       if (this.entrusttype || this.hbfbcell.length) {
         hid = parseInt(fbccid)
       }
+      console.log(222,this.priceshock(),this.newprice)
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: this.newprice,
+          price: this.enttype==2?this.priceshock():parseFloat(this.newprice),
           amount: number,
           enttype: parseInt(this.enttype),
           hid: hid
@@ -182,6 +180,38 @@ export default {
         // 请求失败的回调
         console.error(err,'捕捉')
       })
+    },
+    priceshock(){
+      let shockprice=''
+      let curruentPrice=parseFloat(this.newprice)
+      if(curruentPrice > 0.3){
+        if(this.onClose == false){
+          shockprice = curruentPrice*1.01;
+        }else {
+          shockprice = curruentPrice*0.99;
+        }
+      }else if(0.1<curruentPrice && curruentPrice<=0.3){
+        if(this.onClose == false){
+          shockprice = curruentPrice*1.025;
+        }else {
+          shockprice = curruentPrice*0.975;
+        }
+      }
+      else if(0.01<curruentPrice && curruentPrice<=0.1){
+        if(this.onClose == false){
+          shockprice = curruentPrice*1.05;
+        }else {
+          shockprice = curruentPrice*0.95;
+        }
+      }
+      else if(0.001<curruentPrice && curruentPrice<=0.01){
+        if(this.onClose == false){
+          shockprice = curruentPrice*1.1;
+        }else {
+          shockprice = curruentPrice*0.9;
+        }
+      }
+      return shockprice.toFixed(4)
     }
   },
   props: ['onClose', 'holding', 'resObj', 'totalMoney'],

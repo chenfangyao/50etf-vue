@@ -74,7 +74,7 @@ export default {
           price: this.resObj.last_price,
           code: this.resObj.stock_code,
           amount: this.resObj.own_amount,
-          enttype: 1,
+          enttype: 2,
           hid: this.resObj.id
         },
       }

@@ -227,19 +227,22 @@ export default {
         this.setstockamunt(this.maxprice.enable_amount)
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
-        // console.log(3333,this.stockamunt)
-
       }
       this.$emit('hbfb-switch', {
         val: val,
         picktext: parseInt(picktext)
       })
     },
-    // 最新、对手、排队价格
+    // 最新、对手、排队价格 市价限价
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      this.setenttype = i + 1
+      console.log(666,i)
+      if(i==0){
+        this.setenttype(2)
+      }else if(i==1){
+        this.setenttype(1)
+      }
       if (this.softconf.ent_price_type == 0) {
         switch (i) {
           // 最新价
