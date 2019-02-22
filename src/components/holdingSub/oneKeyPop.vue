@@ -67,7 +67,6 @@ export default {
         })
 				return
 			}
-      let hid = ''
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
@@ -76,7 +75,7 @@ export default {
           code: this.resObj.stock_code,
           amount: this.resObj.own_amount,
           enttype: 1,
-          hid: hid
+          hid: this.resObj.id
         },
       }
       this.$httpReq(options).then((res) => {
