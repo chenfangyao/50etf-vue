@@ -163,7 +163,7 @@ export default {
   data() {
     return {
       money: '',
-      priceLists: [, , , , , ,],
+      priceLists: [],
       priceItem_i: 0,
       wayList: ['支付宝', '银行转账'],
       inputDisabled: true,
