@@ -1,10 +1,10 @@
 <template>
-	<div class="wrap">
+	<div class="wrap ">
 		<base-header title="收款信息" has-back='1'  @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
-    <div class="subWrap">
+    <div class="subWrap black2">
 		<div class='gatherInfo'>
-		<div  class='payMoney'>
+		<div  class='payMoney textc1'>
 			<span>收款账号:</span>
 			<span v-show="showBank">{{cardno}}</span>
 			<div v-show="!showBank" class="chooseCount">
@@ -16,11 +16,11 @@
 			</div>
 		</div>
 
-		<div class='payMoney'>
+		<div class='payMoney textc1'>
 			<span>收款人:</span>
 			<span>{{cardname}}</span>
 			</div>
-		<div class='payMoney'>
+		<div class='payMoney textc1'>
 			<span>客户代码:</span>
 			<span>{{userinfo.mobile}}-{{userinfo.user_id}}</span></div>
 		</div>

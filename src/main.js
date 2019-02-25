@@ -5,7 +5,6 @@ import store from './vuex'
 import request from '@/common/request.js'
 import baseHeader from '@/components/base_header.vue'
 
-import '@/common/uni.css'
 import '@/common/black.scss'
 import { Toast,Dialog} from 'vant';
 Vue.use(Toast,Dialog,router  )
