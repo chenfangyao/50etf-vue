@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <base-header  :hasBack="true" :title='title'></base-header>
     <div class="border1"></div>
     <div class="wrap ">
