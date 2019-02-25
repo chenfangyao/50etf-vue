@@ -53,8 +53,8 @@ export default {
         sltp_price_sl=this.inputPrice
         sltp_name='止损'
       }
-      if(parseFloat(this.inputPrice)<=0.003){
-        this.$toast(""+sltp_name+"价格设置不能低于0.003！")
+      if(parseFloat(this.inputPrice)<=0.001){
+        this.$toast(""+sltp_name+"价格设置不能低于0.001！")
         return
       }
      // this.$router.goBack()
