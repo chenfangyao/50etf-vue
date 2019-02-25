@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header title="设置" has-back="1"></base-header>
-    <div class="item1 uni-flex black2 textc1" v-hover-class="'self-hover'" @click="go(1)">
+    <div class="item1 uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 1}">
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>

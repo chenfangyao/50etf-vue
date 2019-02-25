@@ -30,7 +30,7 @@
     </div>
     <div class='line3 uni-flex'>
       <span>委托时间：{{createTime[i]}}</span>
-      <div class='countdownBtn' v-hover-class='"hover1"' @click='showPop(i)'>撤单</div>   <!-- （{{countdown}} S） -->
+      <div class='countdownBtn' v-hover-class='"hover1"' v-vtap="{method: showPop , params: i}">撤单</div>   <!-- （{{countdown}} S） -->
     </div>
   </div>
   <cedan-pop v-if='showCedanPop' @close-me='closePop'></cedan-pop>

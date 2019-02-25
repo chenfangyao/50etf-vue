@@ -1,5 +1,5 @@
 <template>
-  <div class="stock50 uni-flex black2 " @click='go'>
+  <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
       <span class="stockNmae textc1">50ETF</span>
       <div class="df_wh" id="mini-canvas">缩略图</div>
       <div class="txtContainer">

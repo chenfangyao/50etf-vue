@@ -1,7 +1,7 @@
 <template>
   <div class="uni-flex itemwrap black1 textc1">
-    <div v-hover-class='"self-hover"' class="black2"  @click="go('/clinch')">成交记录</div>
-    <div v-hover-class='"self-hover"' class="black2"  @click="go('/ping_c_list')">平仓结算</div>
+    <div v-hover-class='"self-hover"' class="black2"  v-vtap="{method: go , params: '/clinch'}">成交记录</div>
+    <div v-hover-class='"self-hover"' class="black2"  v-vtap="{method: go , params: '/ping_c_list'}">平仓结算</div>
   </div>
 </template>
 <script>

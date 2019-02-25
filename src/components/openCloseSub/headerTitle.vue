@@ -3,12 +3,12 @@
     <div class="headerContainer">
       <div class="occupy"></div>
       <div class="root-el uni-flex">
-        <div class="leftPart" @click="back">
+        <div class="leftPart" v-vtap="{method:back}">
           <img src="../../assets/arrow/l.png">
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
-          <div @click="tapChange">开仓</div>
-          <div @click="tapChange">平仓</div>
+          <div v-vtap="{method:tapChange}">开仓</div>
+          <div v-vtap="{method:tapChange}">平仓</div>
           <div class="slider">{{tabActive?'平仓':'开仓'}}</div>
         </div>
       </div>

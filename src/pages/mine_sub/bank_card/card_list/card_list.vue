@@ -10,7 +10,7 @@
             <span>尾号1123储蓄卡</span>
           </div>
         </div>
-        <div  class="scroll-view-item_H bg-blue" v-hover-class='"self-hover"' @click='delbank(key)'><span>删除</span></div>
+        <div  class="scroll-view-item_H bg-blue" v-hover-class='"self-hover"' v-vtap="{method: delbank , params: key}"><span>删除</span></div>
 		</scroll-view>
 	</div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div v-hover-class='"self-hover"' @click='sendCode' class="txt">{{verifyCodeContent||initTxt}}</div>
+  <div v-hover-class='"self-hover"' v-vtap="{method:sendCode}" class="txt">{{verifyCodeContent||initTxt}}</div>
 </template>
 <script>
 export default {

@@ -27,12 +27,12 @@
       </div> -->
     </div>
     <div class="uni-flex btn2 black4">
-      <div class="hasBorder blue1" @click='go(1)'>
+      <div class="hasBorder blue1" v-vtap="{method: go , params: 1}">
         <img v-if="atNight" src="../../assets/assetsImg/recharge1.png">
         <img v-else src="../../assets/assetsImg/recharge.png">
         <span>充值</span>
       </div>
-      <div  @click='go(2)' >
+      <div  v-vtap="{method: go , params: 2}" >
         <img v-if="atNight" src="../../assets/assetsImg/withdraw1.png">
         <img v-else src="../../assets/assetsImg/withdraw.png">
         <span>提现</span>

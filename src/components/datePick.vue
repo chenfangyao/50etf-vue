@@ -1,9 +1,9 @@
 <template>
   <van-actionsheet v-model="showPickSelf" class='black1' :close-on-click-overlay='true'>
     <div class="uni-title self textc1">
-      <span :class="{active:inLeft}" @click="changeActive(true)">{{year}}-{{month}}-{{day}}</span> 至
-      <span :class="{active:!inLeft}" @click="changeActive(false)">{{year2}}-{{month2}}-{{day2}}</span>
-      <span class='okTap' @click='handleConfirm'>确认</span>
+      <span :class="{active:inLeft}" v-vtap="{method: changeActive , params: true}">{{year}}-{{month}}-{{day}}</span> 至
+      <span :class="{active:!inLeft}" v-vtap="{method: changeActive , params: false}">{{year2}}-{{month2}}-{{day2}}</span>
+      <span class='okTap' v-vtap="{method:handleConfirm}">确认</span>
     </div>
     <div v-show="showTips" class="tips">开始时间不能大于结束时间</div>
     <van-picker class='black2' :columns="timeDatas" @change="bindChange"   type="date"/>

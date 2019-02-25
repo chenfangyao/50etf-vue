@@ -3,7 +3,7 @@
     <div class="_headerContainer">
       <div class="occupy"></div>
       <div class="root-el">
-        <span @click='tabTap' :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
+        <span v-vtap="{method:tabTap}" :class="{now:tabI==i}" :data-tabi='i' :key="i"  v-for='(item,i) in titleList'>{{item.name}}</span>
       </div>
     </div>
     <div class="h44"></div>

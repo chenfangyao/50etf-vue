@@ -3,7 +3,7 @@
     <div class="subWrap black2">
       <div class="topTip uni-flex black2">
         <div>自动延期</div>
-        <div @click="openPop2" class="iconWrap">
+        <div v-vtap="{method:openPop2}" class="iconWrap">
           <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
           <img src="../../assets/holdingImg/dagou.png" v-if="resObj.auto_delay == 1">
           <img src="../../assets/holdingImg/meigou.png" v-else>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="btn2 uni-flex">
-          <div class="uni-flex full" v-hover-class="'self-hover'" @click="go(1)">
+          <div class="uni-flex full" v-hover-class="'self-hover'" v-vtap="{method: go , params: 1}">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span >{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
@@ -58,7 +58,7 @@
               <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" v-hover-class="'self-hover'" @click="go(0)">
+          <div class="uni-flex lose" v-hover-class="'self-hover'" v-vtap="{method: go , params: 0}">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>{{resObj.sltp_price_sl?resObj.sltp_price_sl:'添加止损'}}</span>
@@ -69,14 +69,14 @@
           </div>
         </div>
         <div class="btn3 uni-flex">
-          <div @click="go(2)">开仓</div>
-          <div class="pingC" @click="go(3)">平仓</div>
-          <div @click="go(4)">行情</div>
+          <div v-vtap="{method: go , params: 2}">开仓</div>
+          <div class="pingC" v-vtap="{method: go , params: 3}">平仓</div>
+          <div v-vtap="{method: go , params: 4}">行情</div>
         </div>
         <btn-block txt="一键平仓" @v-tap="openPop"></btn-block>
       </div>
       <div class="closeIcom">
-        <img src="../../assets/holdingImg/popClose.png" @click="closeMe">
+        <img src="../../assets/holdingImg/popClose.png" v-vtap="{method:closeMe}">
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="has-padding">
-    <div v-for='(item,i) in list' class="list1Item black2" @click='popShow(i)' v-hover-class='"self-hover"' :key="i">
+    <div v-for='(item,i) in list' class="list1Item black2" v-vtap="{method: popShow , params: i}" v-hover-class='"self-hover"' :key="i">
       <div class="line1 uni-flex">
         <div>
           <span class="nameTxt textc1">{{item.stock_name}}</span>

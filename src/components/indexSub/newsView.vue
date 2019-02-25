@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-for="(item,i) in newlists" :key="i" class="newsView black2 textc1" @click="getartdetil(item.id)">
+		<div v-for="(item,i) in newlists" :key="i" class="newsView black2 textc1" v-vtap="{method: getartdetil , params: item.id}">
 			<h3 class='titlelength textc1'>{{item.title}}</h3>
 			<div class="uni-flex textc2">
 				<span>{{item.source}}</span>

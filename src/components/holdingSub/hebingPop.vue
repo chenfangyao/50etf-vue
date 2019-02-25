@@ -27,13 +27,13 @@
           </div>
         </div>
         <div class="btn3 uni-flex">
-          <div @click="go(2)">开仓</div>
-          <div class="pingC" @click="go(3)">平仓</div>
-          <div @click="go(4)">行情</div>
+          <div v-vtap="{method: go , params: 2}">开仓</div>
+          <div class="pingC" v-vtap="{method: go , params: 3}">平仓</div>
+          <div v-vtap="{method: go , params: 4}">行情</div>
         </div>
       </div>
       <div class="closeIcom">
-        <img src="../../assets/holdingImg/popClose.png" @click="closeMe">
+        <img src="../../assets/holdingImg/popClose.png" v-vtap="{method:closeMe}">
       </div>
     </div>
   </div>

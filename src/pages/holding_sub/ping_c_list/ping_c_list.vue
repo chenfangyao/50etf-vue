@@ -8,7 +8,7 @@
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
       <div class='padding1'>
-        <div v-for="(item,i) in list" v-hover-class='"self-hover"' @click='go(item)' :key="i" class='listItem uni-flex black2'>
+        <div v-for="(item,i) in list" v-hover-class='"self-hover"' v-vtap="{method: go , params: item}" :key="i" class='listItem uni-flex black2'>
           <div class="content">
             <div class="line1 uni-flex">
               <div>

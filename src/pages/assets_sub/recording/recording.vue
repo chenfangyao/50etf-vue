@@ -3,7 +3,7 @@
 		<base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
     <div class="line1 uni-flex black2">
         <span>总计：{{total}}笔</span>
-        <img class="right" @click="switchDatepick(true)" src="../../../assets/mineImg/datePicker.png">
+        <img class="right" v-vtap="{method: switchDatepick , params: true}" src="../../../assets/mineImg/datePicker.png">
     </div>
     <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>

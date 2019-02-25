@@ -6,19 +6,19 @@
       <div class="line2 textc2">证件类型：中国大陆剧名身份证</div>
       <!-- 正面 -->
       <div class="uploader_img" v-if="imgUrl[0]">
-        <img :src="imgUrl[0]" :data-src="imgUrl[0]" @click="previewImage">
+        <img :src="imgUrl[0]" :data-src="imgUrl[0]" v-vtap="{method:previewImage}">
       </div>
-      <div class="cardPhoto" v-else @click="chooseImage(0)">
+      <div class="cardPhoto" v-else v-vtap="{method: chooseImage , params: 0}">
         <div class="iconView" v-hover-class="'self-hover'">+</div>
         <div>点击上传身份证正面</div>
       </div>
 
       <!-- 反面 -->
       <div class="uploader_img imgView2" v-if="imgUrl[1]">
-        <img :src="imgUrl[1]" :data-src="imgUrl[1]" @click="previewImage">
+        <img :src="imgUrl[1]" :data-src="imgUrl[1]" v-vtap="{method:previewImage}">
       </div>
 
-      <div class="cardPhoto mt20" v-else @click="chooseImage(1)">
+      <div class="cardPhoto mt20" v-else v-vtap="{method: chooseImage , params: 1}">
         <div class="iconView" v-hover-class="'self-hover'">+</div>
         <div>点击上传身份证反面</div>
       </div>

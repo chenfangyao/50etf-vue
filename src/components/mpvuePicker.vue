@@ -1,10 +1,10 @@
 <template>
     <div class="mpvue-picker">
-        <div :class="{'pickerMask':showPicker}" @click="maskClick" catchtouchmove="true"></div>
+        <div :class="{'pickerMask':showPicker}" v-vtap="{method:maskClick}" catchtouchmove="true"></div>
         <div class="mpvue-picker-content " :class="{'mpvue-picker-view-show':showPicker}">
             <div class="mpvue-picker__hd" catchtouchmove="true">
-                <div class="mpvue-picker__action" @click="pickerCancel">取消</div>
-                <div class="mpvue-picker__action" :style="{color:themeColor}" @click="pickerConfirm">确定</div>
+                <div class="mpvue-picker__action" v-vtap="{method:pickerCancel}">取消</div>
+                <div class="mpvue-picker__action" :style="{color:themeColor}" v-vtap="{method:pickerConfirm}">确定</div>
             </div>
             <!-- 单列 -->
             <picker-view indicator-style="height: 40px;" class="mpvue-picker-view" :value="pickerValue" @change="pickerChange" v-if="mode==='selector' && pickerValueSingleArray.length > 0">

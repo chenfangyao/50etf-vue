@@ -3,7 +3,7 @@
         <base-header :hasBack="true"  title='资金流水'></base-header>
         <div class="line1 uni-flex black2 textc1">
             <span>共{{total}}笔</span>
-            <img class="right" @click="showDatepick" src="../../../assets/mineImg/datePicker.png"/>
+            <img class="right" v-vtap="{method:showDatepick}" src="../../../assets/mineImg/datePicker.png"/>
         </div>
         <scroll-view class='listscrow'  ref="scroll3"  @scrollToEnd="loadMore">
           <div>

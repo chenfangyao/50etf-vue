@@ -12,14 +12,14 @@
           <div class="l1">张三</div>
           <div class="l2">转账人</div>
         </div>
-        <div class="copy" @click='handleCopy'>复制</div>
+        <div class="copy" v-vtap="{method:handleCopy}">复制</div>
       </div>
       <div class="item uni-flex">
         <div>
           <div class="l1">6222 2222 0000 0000</div>
           <div class="l2">银行账号</div>
         </div>
-        <div class="copy" @click='handleCopy'>复制</div>
+        <div class="copy" v-vtap="{method:handleCopy}">复制</div>
 
       </div>
     </div>

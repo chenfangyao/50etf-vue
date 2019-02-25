@@ -1,7 +1,7 @@
 <template>
   <div v-if="codeList">
     <div class="uni-flex root-el textc1" :class="{specialBg:item.gou.exercise_price==gtPrice||item.gou.exercise_price==ltPrice}" v-for="(item,i) in inTemArr" v-hover-class="'self-hover'" :key="i">
-      <div @click="go(item.gou)" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
+      <div v-vtap="{method: go , params: item.gou}" class="wrap1" :class="{down_c:item.gou.isDown,up_c:item.gou.isUp}">
         <span
           :class="{txtred:item.gou.incr_percent>0,txtgreen:item.gou.incr_percent<0}"
         >{{item.gou.incr_percent}}</span>
@@ -17,7 +17,7 @@
         >{{item.gou.exercise_price}}</span>
         <!-- <span class="gou">{{item.sale_amount1}}</span> -->
       </div>
-      <div @click="go(item.gu)" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
+      <div v-vtap="{method: go , params: item.gu}" class="wrap1" :class="{down_c:item.gu.isDown,up_c:item.gu.isUp}">
         <span
           :class="{txtred:item.gu.incr_percent>0,txtgreen:item.gu.incr_percent<0}"
         >{{item.gu.last_price}}</span>

@@ -1,9 +1,9 @@
 <template>
-  <div class="a1" @click.self="closeMe">
+  <div class="a1" v-vtap.self="{method:closeMe}">
     <div :class="{show}" >
       <img src="../../../assets/assetsImg/help2.png" v-if="imgI" >
       <img src="../../../assets/assetsImg/help1.png" v-else  >
-      <div class="closeIcom" @click="closeMe">
+      <div class="closeIcom" v-vtap="{method:closeMe}">
         <img src="../../../assets/holdingImg/popClose.png" >
       </div>
     </div>

@@ -20,6 +20,42 @@ Vue.directive('hover-class', {
     }, false);
   }
 })
+Vue.directive('vtap', {
+  bind: function (el, binding, vnode) {
+    var startTx, startTy, endTx, endTy, startTime, endTime;
+    el.addEventListener("touchstart", function (e) {
+      if (e.target !== e.currentTarget && binding.modifiers.self)return;
+      var touch = e.touches[0];
+      startTx = touch.clientX;
+      startTy = touch.clientY;
+      startTime = +new Date()
+    }, false);
+
+    el.addEventListener("touchend", function (e) {
+      if (e.target !== e.currentTarget && binding.modifiers.self) return;
+      e.preventDefault()
+      endTime = +new Date()
+      if (endTime - startTime > 300) {
+        return
+      }
+
+      var touch = e.changedTouches[0];
+      endTx = touch.clientX;
+      endTy = touch.clientY;
+      if (Math.abs(startTx - endTx) < 6 && Math.abs(startTy - endTy) < 6) {
+        var method = binding.value.method;
+        var arr = binding.value.arr;
+        var params = binding.value.params;
+        params = params === undefined ? e : params
+        if(arr){
+          method(arr[0],arr[1]);
+        }else{
+          method(params);
+        }
+      }
+    }, false);
+  }
+})
 Toast.setDefaultOptions({
   duration: 2000,
   position: 'middle'

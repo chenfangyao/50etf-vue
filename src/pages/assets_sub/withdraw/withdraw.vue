@@ -12,7 +12,7 @@
       <div class="overage">
         <span>可提现余额：</span>
         <span>{{assets.enable_money}}元</span>
-        <span class="allWithdraw" @click='allGet'>全部提现</span>
+        <span class="allWithdraw" v-vtap="{method:allGet}">全部提现</span>
       </div>
     </div>
     <div class="fixView">

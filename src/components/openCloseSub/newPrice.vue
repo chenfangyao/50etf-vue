@@ -7,43 +7,31 @@
       </div>
       <div class="chooseType uni-flex">
         <div class="tabOpen uni-flex black2">
-          <div @click="tapChange(false)">合并</div>
-          <div @click="tapChange(true)">分笔</div>
+          <div v-vtap="{method: tapChange , params: false}">合并</div>
+          <div v-vtap="{method: tapChange , params: true}">分笔</div>
           <div :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</div>
         </div>
         <div class="chooseCount black1">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
-          <div v-show="!tabActive" @click.self="showPopCheckbox">
+          <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}">
             <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
             <span class="txt">{{sellnumber}}</span>
-            <uni-icon @click.native.self="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
+            <uni-icon  @define-click="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div>
                 <div class="pop-title">
-                  <!--<span class="cancelCheck" @click="cancelCheck">取消</span>-->
-                  <span class="confirmCheck" @click="confirmCheck">确认</span>
+                  <!--<span class="cancelCheck" v-vtap="{method:cancelCheck}">取消</span>-->
+                  <span class="confirmCheck" v-vtap="{method:confirmCheck}">确认</span>
                 </div>
                 <div style="height: 200px;overflow-y: auto">
                   <van-cell clickable>
-                    <van-checkbox v-model="checked" @click.native="allcheckbox(1)"/>
+                    <van-checkbox v-model="checked" @click.native="allcheckbox(1)" />
                     <span style="position: absolute;left:40px;top:5px">全部</span>
                   </van-cell>
                   <van-checkbox-group v-model="result">
                     <van-cell-group>
-                      <!--<van-cell v-for="(item,index) in items" clickable :key="index" :title="item.name" @click="toggle(index)" style="position: relative">-->
-                      <van-cell
-                        v-for="(item,index) in items"
-                        clickable
-                        :key="index"
-                        @click="toggle(index)"
-                        style="position: relative"
-                      >
-                        <van-checkbox :name="item.valueid" ref="checkboxes"/>
-                        <img
-                          :src="props.checked ? icon.active : icon.normal"
-                          slot="icon"
-                          slot-scope="props"
-                        >
+                      <van-cell v-for="(item,index) in items" clickable :key="index" v-vtap="{method: toggle , params: index}" style="position: relative">
+                        <van-checkbox :name="item.valueid" ref="checkboxes" />
                         <span style="position: absolute;left:40px;top:5px">{{item.name}}</span>
                         <span style="position: absolute;right:100px;top:5px">{{item.texts}}</span>
                       </van-cell>
@@ -53,18 +41,10 @@
               </div>
             </van-popup>
           </div>
-          <div v-show="tabActive" @click.self="showPickers">
+          <div v-show="tabActive"  v-vtap.self="{method:showPickers}">
             <span class="txt">{{pickerText}}</span>
-            <uni-icon @click.native.self="showPickers" type="arrowdown" size="24"></uni-icon>
-            <vue-pickers
-              class="vuePickera"
-              :show="show1"
-              :columns="column1"
-              :defaultData="defaultData"
-              :selectData="pickerValueArray"
-              @cancel="onCancelPicker"
-              @confirm="onConirmPicker"
-            ></vue-pickers>
+            <uni-icon @define-click="showPickers" type="arrowdown" size="24"></uni-icon>
+            <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
           </div>
         </div>
       </div>
@@ -72,27 +52,13 @@
     <div class="commonStyle1 textc1">{{pricetitle}}</div>
     <div class="uni-flex line2">
       <div>
-        <img
-          @click="plusStep2(-1)"
-          :class="!btn3_i?'opacityclass':''"
-          src="../../assets/openCloseImg/minus.png"
-        >
+        <img v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/minus.png">
         <span class="newPrice" :class="{yellow1:onClose}">{{pricevalue}}</span>
-        <img
-          @click="plusStep2(1)"
-          :class="!btn3_i?'opacityclass':''"
-          src="../../assets/openCloseImg/plus.png"
-        >
+        <img v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/plus.png">
       </div>
 
       <div class="uni-flex btn3">
-        <div
-          v-for="(item,i) in btn3Arr"
-          :key="i"
-          :class="{active:btn3_i==i,yellow1:onClose}"
-          :data-i="i"
-          @click="changePriceType(i,item)"
-        >{{item}}</div>
+        <div v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i,yellow1:onClose}" :data-i="i" v-vtap="{method: changePriceType , arr: [ i,item]}">{{item}}</div>
       </div>
     </div>
     <div class="uni-flex entrustCount">
@@ -109,22 +75,15 @@
     </div>
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div>
-        <img @click="plusStep(-1)" src="../../assets/openCloseImg/minus.png">
+        <img v-vtap="{method: plusStep , params: -1}" src="../../assets/openCloseImg/minus.png">
         <span class="countxt textc1">{{sliderVal}}</span>
 
-        <img @click="plusStep(1)" src="../../assets/openCloseImg/plus.png">
+        <img v-vtap="{method: plusStep , params: 1}" src="../../assets/openCloseImg/plus.png">
       </div>
       <div class="sliderItem">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
-        <el-slider
-          v-model="sliderVal"
-          @change="slidering"
-          :max="maxprice.maxcounts"
-          :disabled="sliderdisable"
-          :min="0"
-          :show-tooltip="false"
-        ></el-slider>
+        <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
       </div>
     </div>
     <div v-else class="sliderPart uni-flex">
@@ -223,7 +182,7 @@ export default {
         if (this.maxprice.maxcounts == 0.1) {
           this.sliderdisable = true
         }
-      }else{
+      } else {
         this.setstockamunt(this.maxprice.enable_amount)
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
@@ -354,14 +313,13 @@ export default {
       else this.checked = false
     },
     allcheckbox(e) {
-      console.log(e)
-      if(e === 1){
+      if (e === 1) {
         this.result = []
-         if (this.checked) {
-           for (var i = 0; i < this.items.length; i++) {
-             this.result[i] = this.items[i].valueid
-           }
-         }
+        if (this.checked) {
+          for (var i = 0; i < this.items.length; i++) {
+            this.result[i] = this.items[i].valueid
+          }
+        }
       }
 
     },

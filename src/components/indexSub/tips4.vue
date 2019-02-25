@@ -1,24 +1,24 @@
 <template>
   <div class="tipItems black2">
-    <div @click='go(4)'>
+    <div v-vtap="{method: go , params: 4}">
       <div class="hasBg">
         <img :src="img1" >
       </div>
       <span  class="textc1">交易</span>
     </div>
-    <div @click='go(1)' v-hover-class='"self-hover"'>
+    <div v-vtap="{method: go , params: 1}" v-hover-class='"self-hover"'>
       <div class="hasBg bg2">
         <img :src="img2" >
       </div>
       <span class="textc1">公告</span>
     </div>
-    <div @click='go(3)'>
+    <div v-vtap="{method: go , params: 3}">
       <div class="hasBg bg3">
         <img :src="img3" >
       </div>
       <span class="textc1">充值</span>
     </div>
-    <div @click='go(2)' v-hover-class='"self-hover"'>
+    <div v-vtap="{method: go , params: 2}" v-hover-class='"self-hover"'>
       <div class="hasBg bg4">
         <img :src="img4" >
       </div>

@@ -4,7 +4,7 @@
     <div class="list-row">
       <span>开户银行</span>
       <div class="chooseCount">
-        <div @click.self="showpicker1">
+        <div v-vtap.self="{method:showpicker1}">
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
@@ -14,7 +14,7 @@
     <div class="list-row">
       <span>开户省市</span>
       <div class="chooseCount">
-        <div @click.self="showpicker2">
+        <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show2" :columns="column2" :defaultData="defaultData" :link="link" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
@@ -24,7 +24,7 @@
     <div class="list-row">
       <span>开户支行</span>
       <div class="chooseCount">
-        <div @click.self="showpicker3">
+        <div v-vtap.self="{method:showpicker3}">
           {{pickSubBankText}}
           <span v-if="editdefault" class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show3" :columns="column1" :defaultData="defaultData" :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>

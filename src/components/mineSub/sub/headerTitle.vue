@@ -3,9 +3,9 @@
   <div class="occupy"></div>
   <div class="title">
     <div class="msg">
-      <span @click='go(3) ' class="commonStyle1">消息</span>
+      <span v-vtap="{method:go,params:3}" class="commonStyle1">消息</span>
     </div>
-    <span class="commonStyle1" @click='go'>设置</span>
+    <span class="commonStyle1" v-vtap="{method:go}">设置</span>
   </div>
 </div>
 </template>
@@ -27,8 +27,8 @@ export default {
 	},
   methods: {
     go(i) {
-				if(!this.sid){
-          this.$tipLogin()
+      if(!this.sid){
+        this.$tipLogin()
 						return
 			}
       if (i == 3) {

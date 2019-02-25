@@ -2,7 +2,7 @@
   <div class="mask uni-flex">
     <div :class="['container black4',{show}]">
       <div class="title textc1">
-        <span @click="closePop" class="uni-icon uni-icon-close flr"></span>
+        <span v-vtap="{method:closePop}" class="uni-icon uni-icon-close flr"></span>
         <span v-if="holding">一键平仓确认</span>
         <span v-else>委托{{onClose?'平仓':'开仓'}}确认</span>
       </div>
@@ -36,8 +36,8 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div v-hover-class="'tap-hover'" class="black2" @click='closePop'>取消</div>
-        <div v-hover-class="'tap-hover'" @click='yesTap'>确定</div>
+        <div v-hover-class="'tap-hover'" class="black2" v-vtap="{method:closePop}">取消</div>
+        <div v-hover-class="'tap-hover'" v-vtap="{method:yesTap}">确定</div>
       </div>
     </div>
   </div>

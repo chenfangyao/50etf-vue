@@ -7,7 +7,7 @@
         <div v-for="(tab,index) in groupLabel" :key="tab.id" class="swiper-tab-list2 textc1" :id="tab.id">
           <span
             :class="[tabIndex==index ? 'active' : '']"
-            @click="tapTab"
+            v-vtap="{method:tapTab}"
             :data-current="index"
           >{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
         </div>

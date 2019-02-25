@@ -2,7 +2,7 @@
   <div class="root-el">
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex black2">
-        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" @click="tapTab">{{tab.name}}</div>
+        <div v-for="(tab,i) in topTabs" :key="i" :class="['swiper-tab-list2',tabIndex==i ? 'active' : '']" :data-current="i" v-vtap="{method:tapTab}">{{tab.name}}</div>
       </div>
     </div>
     <!-- #ifdef H5 -->

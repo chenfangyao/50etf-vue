@@ -3,7 +3,7 @@
 
     <div class="uni-flex container">
       <div>总计：{{total}}笔</div>
-      <div class="right" @click="showDatepick">
+      <div class="right" v-vtap="{method:showDatepick}">
         <img src="../../assets/mineImg/datePicker.png" />
       </div>
     </div>

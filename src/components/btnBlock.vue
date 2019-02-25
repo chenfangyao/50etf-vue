@@ -1,5 +1,5 @@
 <template>
-  <div class=" bigBtn" v-hover-class="'active'" @click="handleTap">{{txt}}</div>
+  <div class=" bigBtn" v-hover-class="'active'" v-vtap="{method:handleTap}">{{txt}}</div>
 
 </template>
 <script>

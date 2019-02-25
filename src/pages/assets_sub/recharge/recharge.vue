@@ -14,12 +14,12 @@
         <span>{{assets.enable_money}}</span>
       </div>
       <div class="priceItem uni-flex">
-        <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" @click='choosePriceItem(i,item)'>{{item}} 元</div>
+        <div v-for="(item, i) in priceLists" :key="i"  :class="{active:priceItem_i==i}" v-vtap="{method: choosePriceItem , params: i}">{{item}} 元</div>
       </div>
     </div>
     <div class="tip textc1" v-show="inputDisabled"><!--支付宝限额，银行不限额-->
       <span>温馨提醒：</span>
-      <span class="_a" @click="showtables">充值限额表</span>
+      <span class="_a" v-vtap="{method:showtables}">充值限额表</span>
     </div>
     <div class="fixView">
       <btn-block txt='下一步' @v-tap='go'></btn-block>
@@ -145,7 +145,7 @@
         </table>
       </div>
       <div class="closepop" >
-        <img src="../../../assets/holdingImg/popClose.png" @click="closeTable">
+        <img src="../../../assets/holdingImg/popClose.png" v-vtap="{method:closeTable}">
       </div>
       
     </div>
@@ -261,10 +261,10 @@ export default {
         this.inputDisabled = false
       }
     },
-    choosePriceItem(i, item) {
+    choosePriceItem(i) {
       this.priceItem_i = i
-			this.defaultitemmoney=item
-      this.money = item//支付宝状态下点击充值金额选项，改变input的值，当前写假的
+			this.defaultitemmoney=this.priceLists[i]
+      this.money = this.priceLists[i]//支付宝状态下点击充值金额选项，改变input的值，当前写假的
     }
   },
   created() {

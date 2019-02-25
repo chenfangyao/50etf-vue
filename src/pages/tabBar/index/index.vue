@@ -10,7 +10,7 @@
     <three-securities :commonstock="commonstock"></three-securities>
     <div class="uni-flex newsViewTitle">
       <span class="textc1">资讯</span>
-      <span @click="getmoreart()">更多></span>
+      <span v-vtap="{method: getmoreart  }">更多></span>
     </div>
     <news-view :newlists="newsItem"></news-view>
   </div>

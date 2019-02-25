@@ -5,8 +5,8 @@
       <img src="../../assets/holdingImg/cedan.png">
       <div class="txt textc2">是否撤单？</div>
       <div class="btn2 uni-flex">
-        <div @click='cancle'>取消</div>
-        <div @click='yesTap' class="nightStyle">确定</div>
+        <div v-vtap="{method:cancle}">取消</div>
+        <div v-vtap="{method:yesTap}" class="nightStyle">确定</div>
       </div>
     </div>
   </div>

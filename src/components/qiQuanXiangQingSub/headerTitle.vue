@@ -3,7 +3,7 @@
     <div class="root-el">
       <div class="occupy"></div>
       <div class="wrap2">
-        <div class="left" @click="back">
+        <div class="left" v-vtap="{method:back}">
           <img src="../../assets/arrow/l.png" />
         </div>
         <div>

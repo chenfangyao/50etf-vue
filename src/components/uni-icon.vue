@@ -1,5 +1,5 @@
 <template>
-    <div class="uni-icon" :class="['uni-icon-'+type]" :style="{color:color,'font-size':fontSize}" @click="onClick()"></div>
+    <div class="uni-icon" :class="['uni-icon-'+type]" :style="{color:color,'font-size':fontSize}" v-vtap="{method: onClick  }"></div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@
         },
         methods: {
             onClick() {
-                this.$emit('click')
+                this.$emit('define-click')
             }
         }
     }

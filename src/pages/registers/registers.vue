@@ -20,7 +20,7 @@
       <div class="bottom-part">
         <div class="bottomTxt">
           <span>注册即代表阅读并同意</span>
-          <span class="blueTxt" @click="go(3)">风险揭示书</span>
+          <span class="blueTxt" v-vtap="{method: go , params: 3}">风险揭示书</span>
         </div>
         <submit-btn btnTxt="完成" @v-tap="handleLogin" :verify-ok="verifyYes"></submit-btn>
       </div>

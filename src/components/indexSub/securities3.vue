@@ -1,6 +1,6 @@
 <template>
   <section class="uni-flex">
-    <div :class="item.priceChange>0?'redclass':'greenclass'" class="black2" v-for='(item,i) in commonstock' :key="i" @click='go(i)'>
+    <div :class="item.priceChange>0?'redclass':'greenclass'" class="black2" v-for='(item,i) in commonstock' :key="i" v-vtap="{method: go , params: i}">
       <h5 >{{item.latestPrice}}</h5>
       <div>
         <span >{{item.priceChange}}</span>
