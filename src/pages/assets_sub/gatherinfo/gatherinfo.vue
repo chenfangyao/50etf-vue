@@ -9,10 +9,8 @@
 			<span v-show="showBank">{{cardno}}</span>
 			<div v-show="!showBank" class="chooseCount">
 					<!--<div v-vtap="{method:showPicker}">-->
-					<div >
 							{{pickerText}}
 							<!--<span class="arrowDown"></span>-->
-					</div>
 			</div>
 		</div>
 
@@ -81,6 +79,12 @@ export default {
       if (i == 1) {
         this.$navigateTo({ url: '../help/help' })
       }
+       var oInput = document.createElement('input');
+        oInput.value = this.showBank?this.cardno:this.pickerText;
+        document.body.appendChild(oInput);
+        oInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(oInput);
       switch(this.paytype){
 				case 'remit_alipay':
 				this.remit_alipay()
@@ -195,6 +199,10 @@ div.wrap {
 		}
 		div.payMoney >span:nth-child(2){
 			margin-left:.50rem;
+		}
+		div.payMoney >span:nth-child(1){
+      width: 68px;
+      display: inline-block;
 		}
   }
 }
