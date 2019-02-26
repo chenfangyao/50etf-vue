@@ -1,11 +1,11 @@
 var responseOK=true
 export function checkUpdate() {
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
-    responseOK &&  _checkUpdate( inf.version)
+    responseOK &&  getVer( inf.version)
   });
 }
 var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?version=";
- function _checkUpdate(wgtVer) {
+ function getVer(wgtVer) {
   // plus.nativeUI.showWaiting("检测更新...");
    responseOK=false
   var xhr = new XMLHttpRequest();

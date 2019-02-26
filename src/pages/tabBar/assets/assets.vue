@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap">
-		<!-- <base-header title="资产"></base-header> -->
+		<base-header title="资产"></base-header>
 		<header-card :transmoney='res_data'></header-card>
 		<div class="info ">
 			<div class="black2 textc2">权利金</div>

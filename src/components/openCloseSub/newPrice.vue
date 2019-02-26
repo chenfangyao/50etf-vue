@@ -6,7 +6,7 @@
         <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
       </div>
       <div class="chooseType uni-flex">
-        <div class="tabOpen uni-flex black2">
+        <div class="tabOpen uni-flex black2" >
           <div v-vtap="{method: tapChange , params: false}">合并</div>
           <div v-vtap="{method: tapChange , params: true}">分笔</div>
           <div :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</div>
@@ -493,8 +493,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 div#app.at-night div.tabOpen {
-  border-color: #828097;
-  border: solid 1px #828097;
+  // border-color: #828097;
+  border: solid 1px $yellow1;
 }
 div.root-el {
   padding: 0.3rem 0.32rem;
