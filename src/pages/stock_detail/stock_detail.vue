@@ -27,5 +27,6 @@ export default {
 <style>
 .wrap3{
   width: 100%;
+  padding-bottom: 0.1px;
 }
 </style>

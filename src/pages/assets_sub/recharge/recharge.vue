@@ -6,10 +6,12 @@
     <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">充值金额</div>
-        <input type="tel" class="black2 textc1" v-model="money" :disabled='inputDisabled'>
-        <span class="textc1">￥</span>
+        <div class="uni-flex inputContainer2">
+          <span class="textc1">￥</span>
+          <input type="tel" class="black2 textc1" v-model="money" :disabled='inputDisabled'>
+        </div>
       </div>
-      <div class="overage">
+      <div class="overage textc1">
         <span>账户余额：</span>
         <span>{{assets.enable_money}}</span>
       </div>
@@ -287,31 +289,32 @@ div.wrap {
     background-color: #fff;
     div.inputContainer {
       padding-top: .36rem;
-      position: relative;
       margin-bottom:.29rem;
       div.moneyTitle {
         font-size: 14px;
         color: rgba(24, 28, 40, 1);
         margin-bottom:.37rem;
       }
+      
+    }
+    div.inputContainer2{
+      align-items: center;
       input {
-        font-size: 32px;
-        color: rgba(24, 28, 40, 1);
-        background-color: white;
-        border-bottom: 1px solid #ccc;
-        padding: 0 0 .20rem 20px;
-        background-color: #fff;
-        width: 100%;
-        height: 38px !important;
-      }
-      > span {
-        font-size: 18px;
-        color: rgba(24, 28, 40, 1);
-        line-height:.33rem;
-        position: absolute;
-        left: -3px;
-        top:1.30rem;
-      }
+          font-size: 32px;
+          color: rgba(24, 28, 40, 1);
+          background-color: white;
+          border-bottom: 1px solid #ccc;
+          padding-left: 5px;
+          background-color: #fff;
+          width: 100%;
+          height: 38px !important;
+          display: inline-block;
+        }
+        > span {
+          font-size: 18px;
+          color: rgba(24, 28, 40, 1);
+          line-height:.33rem;
+        }
     }
     div.overage {
       font-size: 14px;

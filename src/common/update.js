@@ -4,7 +4,7 @@ export function checkUpdate() {
     responseOK &&  getVer( inf.version)
   });
 }
-var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?version=";
+var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version=";
  function getVer(wgtVer) {
   // plus.nativeUI.showWaiting("检测更新...");
    responseOK=false
