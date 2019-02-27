@@ -22,7 +22,7 @@ export default {
     },
     hasBack: {
       default: false,
-      
+
     },
     rightTxt: {
       default: ''
@@ -34,6 +34,7 @@ export default {
   methods: {
     back() {
       if (this.specialBack) {
+        console.log(2222)
         this.$emit('special-back')
         return
       }

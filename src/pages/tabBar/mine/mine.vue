@@ -21,7 +21,7 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'red_envelope/red_envelope'}">
+      <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'red_envelope_1/red_envelope_1'}">
         <img src="../../../assets/mineImg/04.png" />
         <span>我的红包</span>
         <span class="tip" v-if="false"></span>

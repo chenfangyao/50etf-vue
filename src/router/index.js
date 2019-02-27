@@ -42,6 +42,7 @@ const credentials4 = resolve => require(['@/pages/mine_sub/credentials_upload/te
 const capital_flow = resolve => require(['@/pages/mine_sub/capital_flow/capital_flow'], resolve)
 const trading_rules = resolve => require(['@/pages/mine_sub/trading_rules/trading_rules'], resolve)
 const red_envelope = resolve => require(['@/pages/mine_sub/red_envelope/red_envelope'], resolve)
+const red_envelope_1 = resolve => require(['@/pages/mine_sub/red_envelope_1/red_envelope_1'], resolve)
 const invite_friends = resolve => require(['@/pages/mine_sub/invite_friends/invite_friends'], resolve)
 const customer_service = resolve => require(['@/pages/mine_sub/my_customer_service/my_customer_service'], resolve)
 const about_us = resolve => require(['@/pages/mine_sub/about_us/about_us'], resolve)
@@ -124,6 +125,8 @@ export default new Router({
     { path: '/pages/mine_sub/trading_rules/trading_rules', name: 'trading_rules', component: trading_rules, },
     // 我的红包
     { path: '/pages/mine_sub/red_envelope/red_envelope', name: 'red_envelope', component: red_envelope,},
+    // 新红包页面
+    { path: '/pages/mine_sub/red_envelope_1/red_envelope_1', name: 'red_envelope_1', component: red_envelope_1,},
     // 邀请好友
     { path: '/pages/mine_sub/invite_friends/invite_friends', name: 'invite_friends', component: invite_friends,  },
     // 联系客服

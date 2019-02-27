@@ -150,7 +150,6 @@ export default {
       if (this.entrusttype || this.hbfbcell.length) {
         hid = parseInt(fbccid)
       }
-      console.log(222,this.priceshock(),this.newprice)
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
         method: 'POST', //请求方法全部大写，默认GET
