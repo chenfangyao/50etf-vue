@@ -5,7 +5,6 @@ import store from './vuex'
 import request from '@/common/request.js'
 import baseHeader from '@/components/base_header.vue'
 
-import '@/common/uni.css'
 import '@/common/black.scss'
 import { Toast,Dialog} from 'vant';
 Vue.use(Toast,Dialog,router  )
@@ -38,7 +37,6 @@ Vue.directive('vtap', {
       if (endTime - startTime > 300) {
         return
       }
-
       var touch = e.changedTouches[0];
       endTx = touch.clientX;
       endTy = touch.clientY;
@@ -129,8 +127,8 @@ Vue.prototype.$validata = function(str, mode) {
 //登入提示
 Vue.prototype.$tipLogin = () => {
   Dialog.confirm({
-    title: '您还未登录',
-    message: '是否登录？'
+    title: '是否登录？',
+    message: '登录账号，交易持仓'
   }).then(() => {
     // on confirm
     router.push({name:'login'})

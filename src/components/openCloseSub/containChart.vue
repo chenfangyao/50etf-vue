@@ -6,8 +6,8 @@
         <span>{{resObj.stockName | dealName}}</span>
         <span>({{resObj.stockCode}})</span>
       </div>
-      <div class="uni-flex line2">
-        <div>{{resObj.latestPrice}}</div>
+      <div class="uni-flex line2" :class="{lt0:resObj.priceChange<0}">
+        <div>{{resObj.latestPrice | fix4}}</div>
         <div>
           <h6>{{resObj.priceChange}}</h6>
           <h6>{{resObj.priceChangeRate}}%</h6>
@@ -55,12 +55,12 @@ export default {
     return {
     }
   },
-  props:{
-    resObj:{
-      default(){return{}},
+  props: {
+    resObj: {
+      default() { return {} },
     },
-    symbolStr:{
-      default:''
+    symbolStr: {
+      default: ''
     }
   },
   mounted() {
@@ -70,6 +70,13 @@ export default {
     dealName(val) {
       if (val) return val.substring(5)
       else return ''
+    },
+    fix4(val) {
+      if (val === undefined) {
+        return
+      } else {
+        return Number(val).toFixed(4)
+      }
     }
   },
   methods: {
@@ -95,15 +102,15 @@ export default {
       arr.slice(-15).forEach((item, i) => {
         Yline.push(item.closePrice)
       });
-       if (Yline.length > 5) {
+      if (Yline.length > 5) {
         option.series[0].data = Yline
         echartInstance.setOption(option)
-       }
+      }
     },
   },
-  watch:{
-    symbolStr(val){
-      if(val!=='')this.getfenshi()
+  watch: {
+    symbolStr(val) {
+      if (val !== '') this.getfenshi()
     }
   }
 }
@@ -121,22 +128,25 @@ div.root-el {
       }
     }
     div.line2 {
+      color: $red1;
       > div:first-child {
         font-size: 32px;
         font-weight: bold;
-        color: rgba(240, 95, 92, 1);
         margin-right: 0.26rem;
       }
       > div {
         align-self: center;
       }
+      h6 {
+        font-size: 12px;
+        margin: 0 0 0.1rem 0;
+        line-height: 12px;
+        font-weight: 400;
+      }
     }
-    h6 {
-      font-size: 12px;
-      margin: 0 0 0.1rem 0;
-      line-height: 12px;
-      font-weight: 400;
-      color: rgba(240, 95, 92, 1);
+    div.line2.lt0{
+      color: $green1;
+
     }
   }
   div.df_wh {

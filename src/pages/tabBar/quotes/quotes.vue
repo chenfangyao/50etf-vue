@@ -199,7 +199,7 @@ export default {
 <style lang="scss" scoped>
 div.uni-tab-bar {
   .list2 {
-    height: calc(100vh - 2.48rem - 94px);
+    height: calc(100vh - 2.48rem - 97px);
     overflow: hidden;
     // height: calc(100vh -2.48rem - 44px - var(--status-bar-height));
   }

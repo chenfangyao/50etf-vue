@@ -15,15 +15,15 @@
     </div>
     <scroll-view  class="list2"   v-show="tabI<2"  ref="s1"  @scrollToEnd="loadMore(tabI)"  >
       <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop" ></list-one>
-      <div v-if="titleList[tabI].total==0" class="nullTxt">您还未开仓，空空如也</div>
+      <div v-if="titleList[tabI].total==0" class="nullTxt">您还未持仓，去持仓盈利吧！</div>
     </scroll-view>
     <scroll-view  class="list3"   @scrollToEnd="loadMore(2)" ref="s2" v-show="tabI==2" >
       <list-two :tab-i="tabI" :list="titleList[2].list" ></list-two>
-      <div v-if="titleList[2].total==0" class="nullTxt">您还未开仓，空空如也</div>
+      <div v-if="titleList[2].total==0" class="nullTxt">今日未有交易委托！</div>
     </scroll-view>
     <scroll-view  class='list4'   @scrollToEnd="loadMore(3)" ref="s3" v-show="tabI==3" >
       <list-three :tab-i="tabI" :list="titleList[3].list" @re-get='getFenbiList(3)' ></list-three>
-      <div v-if="titleList[3].total==0" class="nullTxt">您还未开仓，空空如也</div>
+      <div v-if="titleList[3].total==0" class="nullTxt">无可撤的委托！</div>
     </scroll-view>
     <div class="h5 black1"></div>
     <fenbi-pop v-if="showFenbiPop" :hebin-hide="tabI==0" :res-obj="listItem" @close-me="closePop"></fenbi-pop>

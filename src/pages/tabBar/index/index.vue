@@ -1,6 +1,6 @@
 <template>
   <div  class="wrap">
-    <!-- <base-header title="首页"></base-header> -->
+    <base-header title="首页"></base-header>
     <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
       <van-swipe-item v-for="(item,i) in imgList" :key="i">
 		  	<img :src="item.img" >

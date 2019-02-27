@@ -101,7 +101,7 @@ div.wrap {
       }
       div.copy {
         font-size: 14px;
-        color: rgba(64, 157, 229, 1);
+        color: $blue1;
         line-height:1.00rem;
         margin-right:.25rem;
       }

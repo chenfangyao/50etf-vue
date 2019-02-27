@@ -56,7 +56,7 @@ div.content {
   font-size: 15px;
   color: rgba(112, 118, 128, 1);
   line-height: 0.58rem;
-  padding: 0 0.43rem;
+  padding: 0 0.43rem 0.1px;
 }
 </style>
 

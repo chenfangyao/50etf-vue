@@ -1,14 +1,20 @@
 import store from '@/vuex'
 export const commonOption = {
   
-  animation: false,
-  itemStyle: { color: '#7fbe9e' },
+  dataZoom: [{
+    type: 'inside',
+    start: 0,
+    end: 100,
+    xAxisIndex: [0, 1],
+    // zoomLock: true,
+    // throttle: 0
+  },],
 
 }
 export const optionK = {
+  ...commonOption,
   tooltip: {
     trigger: 'axis',
-    triggerOn: 'click',
     axisPointer: {
       type: 'cross',
       label:{show:false}
@@ -90,11 +96,13 @@ export const optionK = {
       axisTick: { show: false },
       scale: true,
       splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
-
-      splitNumber: 2,
+      max: 'dataMax',
+      min: 'dataMin',
+      // interval: 0.0001,
+      // splitNumber: 2,
       axisLabel: {
         margin: 3,
-        color: store.state.atNight ? '#f0f0f0' : '#333'
+        color: store.state.atNight ? '#f0f0f0' : '#333',
 
         // showMaxLabel: true,
         // showMinLabel: true,
@@ -230,7 +238,6 @@ export const option1k = {
       axisLine: { show: false },
       axisTick: { show: false },
       axisLabel: {
-        interval: 11,
         margin: 15, align: 'left'
       },
     },
@@ -269,7 +276,7 @@ export const option1k = {
     start: 65,
     end: 100,
     xAxisIndex: [0, 1],
-    zoomLock: true,
+    // zoomLock: true,
     throttle: 0
   },],
 }
@@ -302,6 +309,7 @@ export const optionRk = {
     }],
 }
 export const option = {
+  ...commonOption,
   tooltip: {
     trigger: 'axis',
     // triggerOn: 'mousemove',
