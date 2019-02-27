@@ -14,7 +14,7 @@
       <div class="txt textc1">{{baseurl}}</div>
 
       <div class="btn">
-        <btn-block txt='复制' @v-tap='copy'></btn-block>
+        <btn-block txt='分享' @v-tap='copy'></btn-block>
       </div>
     </div>
   </div>

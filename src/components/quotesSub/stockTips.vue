@@ -1,7 +1,7 @@
 <template>
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
       <span class="stockNmae textc1">50ETF</span>
-      <div class="df_wh" id="mini-canvas">缩略图</div>
+      <div class="df_wh" id="mini-canvas"></div>
       <div class="txtContainer">
 				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
 				<span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     //#ifdef H5
-    this.showH5Echarts()
+  //  this.showH5Echarts()
     //#endif
   }
 }

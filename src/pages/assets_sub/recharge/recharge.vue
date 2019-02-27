@@ -308,6 +308,7 @@ div.wrap {
           background-color: #fff;
           width: 100%;
           height: 38px !important;
+          line-height: 38px;
           display: inline-block;
         }
         > span {

@@ -3,7 +3,7 @@
   <div class="bgfff black2">
     <div class="uni-flex">
       <div class="leftPart">
-        <div class="leftTop uni-flex">
+        <div class="leftTop uni-flex" :class="{lt0:resObj.priceChange<0}">
           <div class="price">{{resObj.latestPrice}}</div>
           <div class="flexColumn">
             <span>{{resObj.priceChange}}</span>
@@ -82,7 +82,7 @@ export default {
 div.leftPart {
   margin:.30rem  0  0 .26rem;
   div.leftTop {
-    color: rgba(240, 95, 92, 1);
+    color: $red1;
     font-family: MicrosoftYaHei;
     .price {
       font-size: 32px;
@@ -90,6 +90,9 @@ div.leftPart {
       line-height: 32px;
       margin-right:.04rem;
     }
+  }
+  div.leftTop.lt0{
+    color: $green1;
   }
   .flexColumn {
     display: flex;

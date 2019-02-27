@@ -2,23 +2,23 @@
   <div >
     <div class="base-spase"></div>
     <van-tabbar v-model="active" :z-index="100" class="black2">
-      <van-tabbar-item to="/" replace v-hover-class='"self-hover"'>
+      <van-tabbar-item  v-vtap="{method: go , params: '/'}"   v-hover-class='"self-hover"'>
         <span>首页</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img1s : icon.img1">
       </van-tabbar-item>
-      <van-tabbar-item to="/quotes" replace v-hover-class='"self-hover"'>
+      <van-tabbar-item  v-vtap="{method: go , params: '/quotes'}"  v-hover-class='"self-hover"'>
         <span>行情</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img2s : icon.img2">
       </van-tabbar-item>
-      <van-tabbar-item to="/holding_warehouse" replace v-hover-class='"self-hover"'>
+      <van-tabbar-item v-vtap="{method: go , params: '/holding_warehouse'}"   v-hover-class='"self-hover"'>
         <span>持仓</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img3s : icon.img3">
       </van-tabbar-item>
-      <van-tabbar-item to="/assets" replace v-hover-class='"self-hover"'>
+      <van-tabbar-item v-vtap="{method: go , params: '/assets'}"   v-hover-class='"self-hover"'>
         <span>资产</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img4s : icon.img4">
       </van-tabbar-item>
-      <van-tabbar-item to="/mine" replace v-hover-class='"self-hover"'>
+      <van-tabbar-item v-vtap="{method: go , params: '/mine'}"   v-hover-class='"self-hover"'>
         <span>我的</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img5s : icon.img5">
       </van-tabbar-item>
@@ -52,6 +52,12 @@ export default {
     return {
       active: this.tabIndex,
       icon: { img1, img1s, img2, img2s, img3, img3s, img4, img4s, img5, img5s, }
+    }
+  },
+  methods:{
+    go(url){
+      console.log(this);
+      this.$redirectTo({url})
     }
   },
   mounted() {

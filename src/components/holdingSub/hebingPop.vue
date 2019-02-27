@@ -1,5 +1,5 @@
 <template>
-  <div class="fixWrap self-mask" @touchmove.prevent>
+  <div class="fixWrap self-mask" @touchmove.prevent v-vtap.self="{method:closeMe}">
     <div class=" subWrap">
       <div class="container black2">
         <div class="title uni-flex">

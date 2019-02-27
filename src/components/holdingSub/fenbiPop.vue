@@ -1,5 +1,5 @@
 <template>
-  <div class="fixWrap self-mask" @touchmove.prevent>
+  <div class="fixWrap self-mask" @touchmove.prevent v-vtap.self="{method:closeMe}">
     <div class="subWrap black2">
       <div class="topTip uni-flex black2">
         <div>自动延期</div>

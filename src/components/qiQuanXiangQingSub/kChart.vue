@@ -205,7 +205,6 @@ export default {
               },
               color: this.$store.state.atNight ? '#fff' : '#666'
             },
-
           },
           {
             scale: true,
@@ -216,9 +215,6 @@ export default {
                 else return ''
               }
             },
-            axisLine: { show: false },
-            axisTick: { show: false },
-            splitLine: { show: false }
           }],
       }
       //#ifdef H5

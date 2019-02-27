@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <h2 v-else class="textc1">空空如野~您还未登录吧</h2>
+  <h2 v-else class="textc1">请登录，查看行情</h2>
 </template>
 <script>
 
