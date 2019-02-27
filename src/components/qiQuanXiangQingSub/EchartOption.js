@@ -12,136 +12,9 @@ export const commonOption = {
 
 }
 export const optionK = {
-  ...commonOption,
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross',
-      label:{show:false}
-    },
-    alwaysShowContent: false,
-    /* position(pos, params, el, elRect, size) {
-      const obj = {
-        top: 60
-      };
-      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
-      return obj;
-    }, */
-    formatter: function (params) {
-      var str = ''
-      if (params.length===1){
-        return params[0].data[0] + '<br>'+ '成交量：' + params[0].data[1]
-      }
-      for (let i = 1; i < params.length; i++) {
-        str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
-      }
-      return '开:' + params[0].data[1] + '<br>' +
-        '高:' + params[0].data[4] + '<br>' +
-        '收:' + params[0].data[2] + '<br>' +
-        '低:' + params[0].data[3] + '<br>' + str
-    }
-  },
-  xAxis: [
-    {
-      data: [],
-      boundaryGap: false,
-      splitLine: { show: false, },
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: {
-        interval: (i, val) => {
-          switch (val) {
-            case '09:30':
-            case '11:30':
-            case '15:00':
-              return true
-          }
-        },
-        margin: 15, align: 'left',
-        color: store.state.atNight ? '#f0f0f0' : '#333'
-
-      },
-    },
-    {
-      gridIndex: 1,
-      data: [],
-      boundaryGap: false,
-      splitLine: { show: false },
-      axisLabel: { show: false },
-      axisTick: { show: false },
-      axisLine: { show: false },
-    }],
   legend: {
     data: ['MA5', 'MA10', 'MA20', 'MA30'],
     textStyle: { color: store.state.atNight ? '#fff' : '#333' }
-
-  },
-  visualMap: {
-    show: false,
-    seriesIndex: 5,
-    dimension: 2,
-    pieces: [{
-      value: 1,
-      color: '#f05f5c'
-    }, {
-      value: -1,
-      color: '#3aba8f'
-    }]
-  },
-  animation: false,
-  yAxis: [
-    {
-      position: 'right',
-      axisLine: { show: false },
-      axisTick: { show: false },
-      scale: true,
-      splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
-      max: 'dataMax',
-      min: 'dataMin',
-      // interval: 0.0001,
-      // splitNumber: 2,
-      axisLabel: {
-        margin: 3,
-        color: store.state.atNight ? '#f0f0f0' : '#333',
-
-        // showMaxLabel: true,
-        // showMinLabel: true,
-      },
-    },
-    {
-      scale: true,
-      gridIndex: 1,
-      position: 'right',
-
-      axisLabel: {
-        margin: -15,
-        showMaxLabel: true,
-        showMinLabel: false,
-      },
-      max: 'dataMax',
-      min: 'dataMin',
-
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { show: false }
-    }],
-  grid: [
-    {
-      left: 5,
-      right: 45,
-      top: 30,
-      bottom: 130,
-    },
-    {
-      left: 5,
-      right: 45,
-      top: 244,
-      bottom: 3
-    },
-  ],
-  title: {
-    text: '',
-    left: 0
   },
   series: [
     {
@@ -226,10 +99,7 @@ export const optionK = {
         }
       },
     }
-  ]
-}
-export const option1k = {
-  ...optionK,
+  ],
   xAxis: [
     {
       data: [],
@@ -238,7 +108,181 @@ export const option1k = {
       axisLine: { show: false },
       axisTick: { show: false },
       axisLabel: {
-        margin: 15, align: 'left'
+        interval: (i, val) => {
+          switch (val) {
+            case '09:30':
+            case '11:30':
+            case '15:00':
+              return true
+          }
+        },
+        margin: 15, align: 'left',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
+      },
+    },
+    {
+      gridIndex: 1,
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false },
+      axisLabel: { show: false },
+      axisTick: { show: false },
+      axisLine: { show: false },
+    }],
+  yAxis: [
+    {
+      position: 'right',
+      axisLine: { show: false },
+      axisTick: { show: false },
+      scale: true,
+      splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
+      max: 'dataMax',
+      min: 'dataMin',
+      // interval: 0.0174,
+      // splitNumber: 2,
+      axisLabel: {
+        margin: 3,
+        // show:false,
+        formatter: val => { return val.toFixed(4) },
+        color: store.state.atNight ? '#f0f0f0' : '#333',
+        // showMaxLabel: true,
+        // showMinLabel: true,
+
+      },
+    },
+    {
+      scale: true,
+      gridIndex: 1,
+      position: 'right',
+      axisLabel: {
+        margin: -15,
+        showMaxLabel: true,
+        showMinLabel: false,
+        // color: store.state.atNight ? '#f0f0f0' : '#333',
+      },
+      max: 'dataMax',
+      min: 'dataMin',
+
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { show: false }
+    }],
+
+  grid: [
+    {
+      left: 5,
+      right: 50,
+      top: 30,
+      bottom: 130,
+    },
+    {
+      left: 5,
+      right: 50,
+      top: 244,
+      bottom: 3
+    },
+  ],
+
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        precision: 4,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        color: '#fff',
+        formatter (obj){
+          if(obj.value==='undefined')return ''
+          else if(typeof(obj.value)==='number') return obj.value.toFixed(4)
+          else return obj.value
+        }
+      }
+    },
+    alwaysShowContent: false,
+    /* position(pos, params, el, elRect, size) {
+      const obj = {
+        top: 60
+      };
+      obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 5;
+      return obj;
+    }, */
+    formatter: function (params) {
+      var str = ''
+      if (params.length===1){
+        return params[0].data[0] + '<br>'+ '成交量：' + params[0].data[1]
+      }
+      for (let i = 1; i < params.length; i++) {
+        str += params[i].marker + params[i].seriesName + ' : ' + params[i].value + '<br>'
+      }
+      return '开:' + params[0].data[1] + '<br>' +
+        '高:' + params[0].data[4] + '<br>' +
+        '收:' + params[0].data[2] + '<br>' +
+        '低:' + params[0].data[3] + '<br>' + str
+    }
+  },
+  
+  visualMap: {
+    show: false,
+    seriesIndex: 5,
+    dimension: 2,
+    pieces: [{
+      value: 1,
+      color: '#f05f5c'
+    }, {
+      value: -1,
+      color: '#3aba8f'
+    }]
+  },
+  animation: false,
+}
+export const option1k = {
+  ...optionK,
+  yAxis: [
+    {
+      position: 'right',
+      axisLine: { show: false, lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
+      axisTick: { show: false },
+      scale: true,
+      splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
+      max: 'dataMax',
+      min: 'dataMin', 
+      // splitNumber: 2,
+      // interval: 0.0174,
+      axisLabel: {
+        margin: 3,
+        color: store.state.atNight ? '#f0f0f0' : '#333',
+        formatter:val=>{ return val.toFixed(4)}
+      },
+    },
+    {
+      scale: true,
+      gridIndex: 1,
+      position: 'right',
+      axisLabel: {
+        margin: -15,
+        showMaxLabel: true,
+        showMinLabel: false,
+        color: store.state.atNight ? '#f0f0f0' : '#333',
+      },
+      max: 'dataMax',
+      min: 'dataMin',
+
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { show: false }
+    }],
+
+  xAxis: [
+    {
+      data: [],
+      boundaryGap: false,
+      splitLine: { show: false, },
+      axisLine: { show: false },
+      // axisTick: { show: false },
+      axisLabel: {
+        margin: 15, 
+        // align: 'left',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
       },
     },
     {
@@ -255,6 +299,11 @@ export const option1k = {
     triggerOn: 'click',
     axisPointer: {
       type: 'cross',
+      label:{
+        precision :4,
+        backgroundColor:'rgba(0,0,0,0.5)',
+        color:'#fff'
+      }
     },
     alwaysShowContent: false,
     formatter: function (params) {
@@ -280,7 +329,9 @@ export const option1k = {
     throttle: 0
   },],
 }
-export const option5k = {}
+export const option5k = {
+  ...optionK,
+ }
 export const optionRk = {
   ...optionK,
   xAxis: [
@@ -288,14 +339,15 @@ export const optionRk = {
       data: [],
       boundaryGap: false,
       splitLine: { show: false, },
-      axisLine: { show: false },
+      axisLine: {},
       axisLabel: {
         margin: 15,
         interval: 'auto',
         formatter: (val, i) => {
           if (val == 'undefined') { return '' } else { return val }
         },
-        align: 'left'
+        align: 'left',
+        color: store.state.atNight ? '#f0f0f0' : '#333'
       },
     },
     {

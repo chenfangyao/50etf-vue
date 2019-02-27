@@ -56,7 +56,6 @@ export default {
   },
   methods:{
     go(url){
-      console.log(this);
       this.$redirectTo({url})
     }
   },
