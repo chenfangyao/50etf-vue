@@ -200,7 +200,6 @@ div.wrap {
       bottom:10px;
       color:rgba(240, 95, 92, 1);
     }
-
 }
 }
 </style>

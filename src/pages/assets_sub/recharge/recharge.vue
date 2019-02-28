@@ -27,6 +27,7 @@
       <btn-block txt='下一步' @v-tap='go'></btn-block>
     </div>
     <!-- <limit-table></limit-table> -->
+    <div id="alipayform" v-show="false" v-html="alipayRes"></div>
     <div v-if="showTable" class="self-mask ">
       <div  class="alipayLimit black2 "  >
         <table cellspacing="0" class="textc1">
@@ -149,7 +150,7 @@
       <div class="closepop" >
         <img src="../../../assets/holdingImg/popClose.png" v-vtap="{method:closeTable}">
       </div>
-      
+
     </div>
 	</div>
 </template>
@@ -174,6 +175,7 @@ export default {
 			showbanklogo:true,
 			defaultitemmoney:'',
       showTable:false,
+      alipayRes:'',
     }
   },
   computed: mapState(['assets']),
@@ -190,6 +192,7 @@ export default {
         alert('请输入金额')
         return
       }
+      console.log(333,this.paytype)
       //跳转银行卡页
       switch (this.paytype) {
         case 'remit_alipay':
@@ -219,6 +222,30 @@ export default {
             }
           })
           break
+        case 'alipay_wap':
+          var formdata = new FormData();
+          formdata.append("uid",'5270');
+          formdata.append("v_amount",this.money);
+          formdata.append("pay_code",this.paytype);
+          formdata.append("pay_type",this.paytype);
+          var options = {
+            url: '/Sapi/Payment/pay', //请求接口
+            method: 'POST', //请求方法全部大写，默认GET
+            data:formdata,
+          }
+          this.$httpReq(options).then((res) => {
+            this.alipayRes=res
+            var a=document.getElementById('alipayform')
+            // dom操作效率问题，能获取到a节点但是getElementsByTagName对dom结构树查找不能马上获取
+            setTimeout(()=>{
+              var b=a.getElementsByTagName('form')[0]
+              b.submit()
+            },100)
+          }).catch((err) => {
+            console.error(err,'捕捉')
+          })
+              break
+
       }
     },
     rightTap() {
@@ -295,7 +322,7 @@ div.wrap {
         color: rgba(24, 28, 40, 1);
         margin-bottom:.37rem;
       }
-      
+
     }
     div.inputContainer2{
       align-items: center;

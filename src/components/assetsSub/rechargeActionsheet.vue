@@ -40,7 +40,14 @@ export default {
   },
   props: ['showAction'],
   mounted() {
-    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
+    let alipay_wap=[]
+    for(let i=0;i<this.paylist['online'].length;i++){
+      if(this.paylist['online'][i].pay_name=="支付宝（wap）"){
+        alipay_wap.push(this.paylist['online'][i])
+      }
+    }
+    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance']).concat(alipay_wap)
+    // this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
   },
   components: { uniIcon }
 }
@@ -63,6 +70,8 @@ div.mask {
     background-color: #fff;
     left: 0;
     right: 0;
+   height:300px;
+  overflow-y:auto;
     div.title {
       position: relative;
       height:.98rem;
