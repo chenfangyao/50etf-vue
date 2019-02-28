@@ -31,6 +31,8 @@ export default {
       maxBar: 0,//最大成交量
       Ymax: '',
       Ymin: '',
+      dayKmax:0,
+      dayKmin:1000,
       resquestState: 1,//为1时可发请求
       stockInfo: {},//分时信息对象，内含最高，最低，昨收
       timmer: null,//分时线定时器
@@ -187,6 +189,8 @@ export default {
       var YBar = []
       var subBar = []
       var MA_k = [[], [], [], [], []]
+      this.dayKmax=0
+      this.dayKmin=1000
       arr.forEach(item => {
         subBar = [item.tradeDate]
         X.push(item.tradeDate)
@@ -197,6 +201,8 @@ export default {
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
         this.getMaxBar(item.amount)
+        item.highPrice>this.dayKmax&&(this.dayKmax=item.highPrice)
+        item.lowPrice<this.dayKmin&&(this.dayKmin=item.lowPrice)
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
         } else {
@@ -232,6 +238,7 @@ export default {
       for (let i = 0; i < MA_k.length; i++) {
         obj.series[i].data = MA_k[i]
       }
+      obj.yAxis[0].interval=(this.dayKmax-this.dayKmin)/4
       obj.series[0].itemStyle = {
         color: '#f05f5c',
         color0: '#3aba8f',

@@ -12,7 +12,15 @@ export const optionK = {
     // triggerOn: 'mousemove',
     axisPointer: {
       type: 'cross',
-      label: { show: false }
+      label: {
+        precision: 4,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        color: '#fff',
+        formatter(obj) {
+          if (obj.value === 'undefined') return ''
+          else if (typeof (obj.value) === 'number') return obj.value.toFixed(4)
+          else return obj.value
+        }}
 
     },
     alwaysShowContent: false,
@@ -79,9 +87,11 @@ export const optionK = {
       // interval: 0.01,
       axisLabel: {
         margin: 5,
-        color: store.state.atNight ? '#f0f0f0' : '#333'
-
+        color: store.state.atNight ? '#f0f0f0' : '#333',
+        formatter: val => { return val.toFixed(4) },
       },
+      max: 'dataMax',
+      min: 'dataMin',
     },
     {
       scale: true,
@@ -102,14 +112,14 @@ export const optionK = {
     }],
   grid: [
     {
-      left: 40,
-      right: 25,
+      left: 50,
+      right: 15,
       top: 30,
       bottom: 140,
     },
     {
-      left: 40,
-      right: 25,
+      left: 50,
+      right: 15,
       top: 254,
       bottom: 3
     },
@@ -210,7 +220,6 @@ export const option = {
   ...commonOption,
  tooltip: {
    trigger: 'axis',
-  triggerOn: 'click',
   axisPointer: {
     type: 'cross',
     label: { show: false }
