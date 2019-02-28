@@ -5,17 +5,13 @@
     <img class="bg" v-if='atNight' src="../../../assets/mineImg/bg-black.png">
     <img class="bg" v-else src="../../../assets/mineImg/inviteFriendBg.png">
     <div class="aboveZindx">
-
       <div class="QRcode aboveZindex">
-
         <qrcode-vue :logoSrc="imageUrl" :text="link" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
       </div>
-
       <div class="btn" v-if="onApp">
         <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
       </div>
       <div class="txt textc1" v-else>{{baseurl}}</div>
-
     </div>
   </div>
 </template>
@@ -45,26 +41,12 @@ export default {
   },
   components: { btnBlock, QrcodeVue },
   methods: {
-    copy() {
-      var str = this.baseurl;
-      //#ifdef H5
-      var oInput = document.createElement('input');
-      oInput.value = str;
-      document.body.appendChild(oInput);
-      oInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(oInput);
-      this.$toast.success({
-        message: '复制成功'
-      })
-      //#endif
-    },
     shareSystem() {
       var msg = { 
-        content: '漂洋过海来看你', 
+        content: this.userinfo.user_name+'邀请您：', 
         href: 'http://50etfvue.cardoctor.com.cn/h5/pages/mine_sub/red_envelope/red_envelope',
         type:'web',
-        title:'form lcs',
+        title:'from linChengShu',
         thumbs:['../../../assets/mineImg/logo.png']
       }
       plus.share.sendWithSystem(msg, function () {

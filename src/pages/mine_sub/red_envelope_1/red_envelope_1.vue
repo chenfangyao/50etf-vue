@@ -1,17 +1,17 @@
 <template>
-  <div class="wrap22">
+  <div class="wrap22 black1">
     <base-header title="我的红包" has-back="1"></base-header>
     <div class="red-envelope">
-      <div class="red-list" v-for="(item,i) in redList" :key="i">
+      <div class="red-list black2" v-for="(item,i) in redList" :key="i">
         <div class="red-left">
           <span>￥</span>
           <span>{{parseInt(item.amount)}}</span>
         </div>
-        <div class="red-right">
-          <label>{{item.type}}盈利</label>
-          <label>·发生时间:{{$formatetimestr(item.create_time)}}</label>
-          <label>·来自:{{item.giver_uname}}</label>
-          <label>·限50etf交易使用</label>
+        <div class="red-right ">
+          <label class="textc1">{{item.type}}盈利</label>
+          <label class="textc1">·发生时间:{{$formatetimestr(item.create_time)}}</label>
+          <label class="textc1">·来自:{{item.giver_uname}}</label>
+          <label class="textc1">·限50etf交易使用</label>
         </div>
       </div>
       <div class="not-red-list"></div>
@@ -25,8 +25,8 @@ import img1 from '@/assets/mineImg/hong_bao_bg.png'
 export default {
   data() {
     return {
-      redList:[,,,]
-    };
+      redList:[]
+    }
   },
   methods:{
     getredEnvList(){
@@ -98,11 +98,11 @@ div.wrap22 {
           display: block;
           font-size: 11px;
           line-height: 16px;
-          color: #999999;
+          color: #999;
         }
         label:nth-child(1){
           font-size: 14px;
-          color: #333333;
+          color: #333;
           font-weight: 600;
           margin-bottom: 4px;
           line-height: 20px;
