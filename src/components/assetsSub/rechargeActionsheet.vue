@@ -42,7 +42,7 @@ export default {
   mounted() {
     let alipay_wap=[]
     for(let i=0;i<this.paylist['online'].length;i++){
-      if(this.paylist['online'][i].pay_name=="支付宝（wap）"){
+      if(this.paylist['online'][i].pay_code=="alipay_wap"){
         alipay_wap.push(this.paylist['online'][i])
       }
     }
