@@ -3,6 +3,7 @@ export function checkUpdate() {
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
     responseOK &&  getVer( inf.version)
   });
+    // plus.device.imei plus.os.version setRequestHeader
 }
 var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version=";
  function getVer(wgtVer) {

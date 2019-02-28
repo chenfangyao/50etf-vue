@@ -34,7 +34,7 @@ export default function (obj) {
   let sid = store.state.sid 
   obj.header = obj.header || {}
   Object.assign(obj.header, {
-    clienttype: 'web',
+    clienttype: process.env.NODE_ENV !== 'production'?'app':'web',
     ver: 'v1.0',
     sid,
   })
@@ -55,7 +55,7 @@ export default function (obj) {
     url: obj.url,
     baseURL:process.env.NODE_ENV === 'production' ? baseURL : '',
     method: obj.method || 'get',
-    headers: obj.header || {},
+    headers: obj.header ,
     timeout: 30000,
     responseType: obj.dataType || '',
   }

@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     //#ifdef H5
-  //  this.showH5Echarts()
+   this.showH5Echarts()
     //#endif
   }
 }
