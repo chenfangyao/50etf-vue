@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header  :hasBack="true" :title='title' :specialBack="true" @special-back="goBack"></base-header>
-    <div class="border1"></div>
+    <!--<div class="border1"></div>-->
     <div class="wrap ">
       <div class="title textc1">止{{isFull==1?'盈':'损'}}设置</div>
       <div class="subTitle textc2">止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
@@ -16,6 +16,7 @@
         <span class="inputspan">{{title}}值{{moreless}}于最新价成效</span>
       </div>
       <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
+      <div class="subTitle textc2 margin-bottom">当最新价{{isFull==1?'≥':'≤'}}止{{isFull==1?'盈':'损'}}价时，触发市价止{{isFull==1?'盈':'损'}}卖出</div>
       <submit-btn btnTxt='确定' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
     </div>
   </div>
@@ -182,12 +183,15 @@ div.wrap {
   }
   div.zyzsspan{
     padding-left: 0.12rem;
-    margin-bottom:.8rem;
+    /*margin-bottom:.8rem;*/
     span:nth-child(2) {
      /*color: #fcd334;*/
       margin-left: .5rem;
      }
   }
+div .margin-bottom{
+  margin-bottom:.8rem;
+}
   div.inputContainer{
     position: relative;
    .partinput-style{
