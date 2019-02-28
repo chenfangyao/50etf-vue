@@ -82,7 +82,7 @@ export default {
                     clienttype: 'web',
                     ver: 'v1.0'
                 },
-                method: 'POST', //请求方法全部大写，默认GET
+                method: 'POST', 
             }
             this.$httpReq(options).then((res) => {
                 if (res.status == 1) {
@@ -107,7 +107,7 @@ export default {
     getuserinfo() {
           var options = {
               url: '/Sapi/User/info', //请求接口
-              method: 'GET', //请求方法全部大写，默认GET
+              method: 'GET', 
           }
           this.$httpReq(options).then((res) => {
               if(res.status){

@@ -91,7 +91,7 @@ export default {
       this.resquestState = 0
       var options = {
         url: '/fiftyEtf/QryQuotationList', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           quotation_list: this.quotationStr
         },
@@ -108,7 +108,7 @@ export default {
     getgroupLabel() {
       var options = {
         url: '/fiftyEtf/list_tag', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         this.groupLabel = res.data.list
@@ -122,7 +122,7 @@ export default {
       this.resquestState = 0
       var options = {
         url: '/Sapi/Squery/list_stocks', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           page_index: 0,
           page_size: 10000,
@@ -175,7 +175,7 @@ export default {
         stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: { stockTradeMins: stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }

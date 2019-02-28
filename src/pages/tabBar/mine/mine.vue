@@ -77,7 +77,7 @@ export default {
 			if(href=='bank_card/add_card/add_card'){
 				var options = {
 						url:'/Sapi/Ubank/info', //请求接口
-						method: 'GET', //请求方法全部大写，默认GET
+						method: 'GET', 
 				}
 				this.$httpReq(options).then((res) => {
 						if(res.status){
@@ -97,7 +97,7 @@ export default {
 		getmymessage(){
 			var options = {
 					url: '/Sapi/Ucenter/message_list', //请求接口
-					method: 'GET', //请求方法全部大写，默认GET
+					method: 'GET', 
 					data: {
 							page_index: 0,
 							page_size: 7,

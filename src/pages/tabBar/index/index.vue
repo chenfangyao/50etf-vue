@@ -104,7 +104,7 @@ export default {
       stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: { stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }

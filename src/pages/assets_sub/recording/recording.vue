@@ -76,7 +76,7 @@ export default {
       let url = this.type == 1 ? '/Sapi/Ufund/pay_list' : '/Sapi/Ufund/cash_list'
       var options = {
         url, //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           page_index: index || 0,
           page_size: 10,

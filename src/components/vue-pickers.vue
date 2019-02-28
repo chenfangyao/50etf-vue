@@ -394,7 +394,7 @@
       getcitylist(index, prov_cd,endVal) {
         var options = {
           url: '/Sapi/Ubank/city_list', //请求接口
-          method: 'GET', //请求方法全部大写，默认GET
+          method: 'GET', 
           data: {
             prov_cd: prov_cd
           }

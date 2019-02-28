@@ -70,7 +70,7 @@ export default {
     getartlelist() {
       var options = {
         url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         dataType: "json",
         data: {
           symbol: this.symbol,
@@ -98,7 +98,7 @@ export default {
     getmaxbuy(codes, prices, amounts) {
       var options = {
         url: '/Sapi/Stock/max_buy', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         dataType: "json",
         data: {
           // 股票代码
@@ -147,7 +147,7 @@ export default {
     getfbchic() {
       var options = {
         url: '/Sapi/Squery/list_fbcc_dropdown_sell', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         dataType: "json",
       }
       this.$httpReq(options).then((res) => {

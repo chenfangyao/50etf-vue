@@ -1,6 +1,6 @@
 <template>
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
-      <span class="stockNmae textc1">50ETF</span>
+      <span class="stockNmae textc1" >50ETF</span>
       <div class="df_wh" id="mini-canvas"></div>
       <div class="txtContainer">
 				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
@@ -11,7 +11,7 @@
 </template>
 <script>
 import echarts from 'echarts'
-let chart = null;
+let myChart = null;
 
 var option = {
   xAxis: {
@@ -31,9 +31,10 @@ var option = {
   yAxis: {
     show: false,
     type: 'value',
+    scale: true
   },
   series: [{
-    data: [15, 20, 36, 14, 10, 26],
+    data: [],
     type: 'line',
     symbol: 'none'
   }]
@@ -47,16 +48,43 @@ export default {
 	props:['commonstock'],
   methods: {
     showH5Echarts() {
-      var myChart = echarts.init(document.getElementById('mini-canvas'));
-      myChart.setOption(option);
+       myChart = echarts.init(document.getElementById('mini-canvas'));
     },
     go() {
       this.$navigateTo({ url: '/stock_detail',query:{index:0} })
-    }
+    },
+    getfenshi() {
+      var options = {
+        url: '/market/getTimeSharingInfo',
+        method: 'GET',
+        data: {
+          stockCodeInternal: 510050,
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.result == 1) {
+          this.dealFenshiData(res.mdata.timeSharingList[0].periodData);
+        }
+      })
+    },
+    dealFenshiData(arr) {
+      var Yline = []
+      arr.slice(-15).forEach((item, i) => {
+        Yline.push(item.closePrice)
+      });
+      if (Yline.length > 5) {
+        option.series[0].data = Yline
+        myChart.setOption(option)
+      }
+    },
   },
   mounted() {
     //#ifdef H5
    this.showH5Echarts()
+   this.getfenshi()
     //#endif
   }
 }

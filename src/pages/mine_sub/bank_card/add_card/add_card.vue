@@ -149,7 +149,7 @@ export default {
     getbanklist() {
       var options = {
         url: '/Sapi/Ubank/bank_list', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -176,7 +176,7 @@ export default {
     getprovlist(index) {
       var options = {
         url: '/Sapi/Ubank/province_list', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -209,7 +209,7 @@ export default {
     getcitylist(index, prov_cd) {
       var options = {
         url: '/Sapi/Ubank/city_list', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           prov_cd: prov_cd
         }
@@ -238,7 +238,7 @@ export default {
     getsubbanklist(bank_id, prov_cd, city_cd) {
       var options = {
         url: '/Sapi/Ubank/sub_list', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           bank_id: bank_id,
           prov_cd: prov_cd,
@@ -279,7 +279,7 @@ export default {
     mybankinfo() {
       var options = {
         url: '/Sapi/Ubank/info', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {

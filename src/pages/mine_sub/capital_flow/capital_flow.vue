@@ -83,7 +83,7 @@ export default {
       this.resquestState = 1
       var options = {
         url: '/Sapi/Squery/list_funds', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           page_index: this.pageindex,
           page_size: 10,

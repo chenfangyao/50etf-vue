@@ -344,7 +344,6 @@ export default {
         if (res.result == 1) {
           this.stockInfo = res.mdata.stockInfo
           this.dealFenshiData(res.mdata.timeSharingList[0].periodData)
-
         }
       })
     },

@@ -76,7 +76,7 @@ export default {
                   mobile_verify:this.verificationCode,
                   rel_user:''
               }, //发送给服务端的数据
-              method: 'POST', //请求方法全部大写，默认GET
+              method: 'POST', 
           }
           this.$httpReq(options).then((res) => {
               if (res.status == 1) {
@@ -103,7 +103,7 @@ export default {
 								user_pwd:this.pwd2,
 								mobile_verify:this.verificationCode,
 						}, //发送给服务端的数据
-						method: 'POST', //请求方法全部大写，默认GET
+						method: 'POST', 
 				}
 				this.$httpReq(options).then((res) => {
 						if (res.status == 1) {

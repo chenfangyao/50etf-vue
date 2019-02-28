@@ -102,7 +102,7 @@ export default {
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
@@ -117,7 +117,7 @@ export default {
       console.log(111,this.priceshock(),this.newprice)
       var options = {
         url: '/Sapi/Stock/buy', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           code: parseInt(this.resObj.stockCode),
           price: this.enttype==2?this.priceshock():parseFloat(this.newprice),
@@ -152,7 +152,7 @@ export default {
       }
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           code: parseInt(this.resObj.stockCode),
           price: this.enttype==2?this.priceshock():parseFloat(this.newprice),

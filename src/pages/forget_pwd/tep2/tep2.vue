@@ -59,7 +59,7 @@
       addmybankcard() {
         var options = {
           url: '/Sapi/Ubank/bind', //请求接口
-          method: 'POST', //请求方法全部大写，默认GET
+          method: 'POST', 
           data: {
             sub_id: this.sub_id,
             cardno: this.bankcardid,
@@ -92,7 +92,7 @@
       getverificacode() {
         var options = {
           url: '/Sapi/Code/sendex', //请求接口
-          method: 'POST', //请求方法全部大写，默认GET
+          method: 'POST', 
           data: {
             mobile: this.userinfo.mobile,
             type: "bind"

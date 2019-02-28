@@ -110,7 +110,7 @@ export default {
           mobile: this.tel,
           user_name: this.uName
         }, //发送给服务端的数据
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
       }
       this.$httpReq(options).then((res) => {
         this.verifyYes = true
@@ -142,7 +142,7 @@ export default {
           mobile: this.tel,
           type: 'register'
         }, //发送给服务端的数据
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {

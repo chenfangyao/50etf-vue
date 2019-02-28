@@ -44,7 +44,7 @@ export default {
     getmaxbuy(codes, prices, amounts) {
       var options = {
         url: '/Sapi/Stock/max_buy', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         dataType: "json",
         data: {
           // 股票代码
@@ -66,7 +66,7 @@ export default {
     getItem() {
       var obj = {
         url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         dataType: "json",
         data: {
           symbol: this.symbol,
@@ -83,7 +83,7 @@ export default {
     gethyinfoprice() {
       var obj = {
         url: '/Sapi/Stock/hyinfo', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         dataType: "json",
         data: {
           stock_code: this.symbol,

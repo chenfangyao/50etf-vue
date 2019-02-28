@@ -61,7 +61,7 @@ export default {
     mybankinfo() {
       var options = {
         url: '/Sapi/Ubank/info', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -90,7 +90,7 @@ export default {
     ufundcash() {
       var options = {
         url: '/Sapi/Ufund/cash', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           money: this.money
         }

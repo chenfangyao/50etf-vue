@@ -19,7 +19,7 @@ export default {
     tradrule() {
       var options = {
         url: '/Sapi/Article/cont', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           id: 6
         },

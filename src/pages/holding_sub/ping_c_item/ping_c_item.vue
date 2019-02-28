@@ -89,7 +89,7 @@ export default {
 		gethyinfoprice(){
 			 var obj = {
 			  url: '/Sapi/Stock/hyinfo', //请求接口
-			  method: 'POST', //请求方法全部大写，默认GET
+			  method: 'POST', 
 			  dataType: "json",
 			  data: {
 			    stock_code: this.pingCItem.stock_code,

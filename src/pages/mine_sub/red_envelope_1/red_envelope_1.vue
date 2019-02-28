@@ -32,7 +32,7 @@ export default {
     getredEnvList(){
       var options = {
         url: '/Sapi/Ufund/redbag_list', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
         data: {
           page_index: 0,
           page_size: 15,

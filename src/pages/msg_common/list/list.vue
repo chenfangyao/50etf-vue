@@ -50,7 +50,7 @@ export default {
       getartlelist(id) {
           var options = {
               url: '/Sapi/Article/notice', //请求接口
-              method: 'POST', //请求方法全部大写，默认GET
+              method: 'POST', 
               data: {
                   page_index: 0,
                   page_size: 7,
@@ -69,7 +69,7 @@ export default {
 			getmymessage(){
 				var options = {
 						url: '/Sapi/Ucenter/message_list', //请求接口
-						method: 'GET', //请求方法全部大写，默认GET
+						method: 'GET', 
 						data: {
 								page_index: 0,
 								page_size: 7,

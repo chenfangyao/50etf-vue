@@ -230,7 +230,7 @@ export default {
           formdata.append("pay_type",this.paytype);
           var options = {
             url: '/Sapi/Payment/pay', //请求接口
-            method: 'POST', //请求方法全部大写，默认GET
+            method: 'POST', 
             data:formdata,
           }
           this.$httpReq(options).then((res) => {
@@ -259,7 +259,7 @@ export default {
     getpayway() {
       var options = {
         url: '/Sapi/Ufund/payway', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {

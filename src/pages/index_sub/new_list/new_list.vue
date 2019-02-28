@@ -36,7 +36,7 @@ export default {
     getartlist(index, number, add) {
       var options = {
         url: '/Sapi/Article/notice', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           page_index: index,
           page_size: number,

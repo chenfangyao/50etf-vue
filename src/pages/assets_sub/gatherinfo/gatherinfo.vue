@@ -98,7 +98,7 @@ export default {
 		remit_alipay(){
 			var options = {
 				url: '/Sapi/Ufund/remit_alipay', //请求接口
-				method: 'POST', //请求方法全部大写，默认GET
+				method: 'POST', 
 				data: {
 							pay_money: this.paymoney,
 							// 转账人
@@ -127,7 +127,7 @@ export default {
 		remit_bank(){
 			var options = {
 				url: '/Sapi/Ufund/remit_bank', //请求接口
-				method: 'POST', //请求方法全部大写，默认GET
+				method: 'POST', 
 				data: {
 							pay_money: this.paymoney,
 							// 银行id

@@ -69,7 +69,7 @@ export default {
      // this.$router.goBack()
       var options = {
         url: '/Sapi/Hold/sltp_set', //请求接口
-        method: 'POST', //请求方法全部大写，默认GET
+        method: 'POST', 
         data: {
           hid: parseInt(this.resObj.id),
           // 止盈价

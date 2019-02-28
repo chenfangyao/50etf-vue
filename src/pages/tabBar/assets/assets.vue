@@ -63,7 +63,7 @@ export default {
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        method: 'GET', //请求方法全部大写，默认GET
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {

@@ -34,13 +34,13 @@ export default function (obj) {
   let sid = store.state.sid 
   obj.header = obj.header || {}
   Object.assign(obj.header, {
-    clienttype: process.env.NODE_ENV !== 'production'?'app':'web',
+    clienttype: process.env.NODE_ENV === 'production'?'app':'web',
     ver: 'v1.0',
     sid,
   })
   // }
-  var baseURL = 'http://172.26.63.158'
-  if (obj.url.indexOf('/Sapi') != -1) {
+  var baseURL = 'http://dswx.newcard.com.cn'
+  /* if (obj.url.indexOf('/Sapi') != -1) {
     baseURL = 'http://47.100.226.135:8040'
   } else if (obj.url.indexOf('/fiftyEtf') != -1) {
     baseURL = 'http://47.100.174.65:8011'
@@ -50,7 +50,7 @@ export default function (obj) {
     baseURL = 'http://47.100.165.236:8181'
   } else if (obj.url.indexOf('/market') != -1) {
     baseURL = 'http://50etfvue.cardoctor.com.cn'
-  }
+  } */
   var opt = {
     url: obj.url,
     baseURL:process.env.NODE_ENV === 'production' ? baseURL : '',

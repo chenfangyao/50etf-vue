@@ -35,7 +35,7 @@
 			    data: {
 			      id:1
 			    }, //发送给服务端的数据
-			    method: 'GET', //请求方法全部大写，默认GET
+			    method: 'GET', 
 			  }
 			  this.$httpReq(options).then((res) => {
 			    if (res.status == 1) {
