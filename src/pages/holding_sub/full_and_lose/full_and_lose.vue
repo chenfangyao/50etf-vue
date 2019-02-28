@@ -1,14 +1,19 @@
 <template>
   <div class="wrap">
-    <base-header  :hasBack="true" :title='title'></base-header>
+    <base-header  :hasBack="true" :title='title' :specialBack="true" @special-back="goBack"></base-header>
     <div class="border1"></div>
     <div class="wrap ">
       <div class="title textc1">止{{isFull==1?'盈':'损'}}设置</div>
       <div class="subTitle textc2">止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
       <div class="subTitle textc2">最新价：</div>
       <div class="price">{{resObj.last_price}}</div>
+      <div class="subTitle textc2">
+        <span>成交价：{{resObj.cost_price}}</span>
+        <span>持仓数：{{resObj.own_amount}}</span>
+      </div>
       <div class="inputContainer">
         <input-item class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"  ></input-item>
+        <span class="inputspan">{{title}}值{{moreless}}于最新价成效</span>
       </div>
       <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
       <submit-btn btnTxt='确定' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -23,20 +28,24 @@ export default {
   data() {
     return {
       isFull: '',
-      inputPrice: '0.99',
+      inputPrice: '',
       verifyYes: true,
       title:'',
       resObj:{},
       singykprice:'0.00',
       singykroute:'0.00',
+      valChange:false,
+      sureChange:false,
+      changePrice:'',
+      moreless:''
     };
   },
   watch: {
     inputPrice(val) {
       // 成交价
       this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(4)
-
       this.singykroute=parseFloat(this.singykprice*100/this.resObj.avg_buy_price).toFixed(4)
+      // this.valChange=true
     },
 
   },
@@ -76,6 +85,7 @@ export default {
         message: ''+sltp_name+'价：'+this.inputPrice+''
       }).then(() => {
         // on confirm
+        this.sureChange=true
         this.$httpReq(options).then((res) => {
           if (res.status) {
             this.$toast(res.info?res.info:'设置成功')
@@ -93,25 +103,47 @@ export default {
       });
 
     },
+    goBack(){
+      if(this.changePrice!=this.inputPrice && !this.sureChange){
+        this.$dialog.confirm({
+          title: ''+this.title+'值未确认',
+          message: '您设置的止盈值，未确认，是否直接返回上一级页面'
+        }).then(() => {
+          this.$router.goBack()
+        }).catch(() => {
+          // on cancel
+        });
+      }else{
+        this.$router.goBack()
+      }
+
+    }
   },
   mounted() {
     this.resObj=this.$route.query.resObj
+    console.log(555,this.resObj)
     this.isFull = this.$route.query.isfull
     this.price=this.$route.query.price
     this.code=this.$route.query.code
     if(this.isFull==1){
       this.title='止盈'
+      this.moreless='大'
       if(this.resObj.sltp_price_tp){
         this.inputPrice=this.resObj.sltp_price_tp
+        this.changePrice=this.resObj.sltp_price_tp
       }else{
         this.inputPrice=this.resObj.avg_buy_price
+        this.changePrice=this.resObj.avg_buy_price
       }
     }else{
       this.title='止损'
+      this.moreless='小'
       if(this.resObj.sltp_price_sl){
         this.inputPrice=this.resObj.sltp_price_sl
+        this.changePrice=this.resObj.sltp_price_sl
       }else{
         this.inputPrice=this.resObj.avg_buy_price
+        this.changePrice=this.resObj.avg_buy_price
       }
     }
   }
@@ -140,7 +172,7 @@ div.wrap {
   div.price {
     font-size: 24px;
     font-weight: bold;
-    margin:.33rem 0 1.54rem.12rem;
+    margin:.33rem 0 0rem.12rem;
 
     color: rgba(240, 95, 92, 1);
   }
@@ -156,8 +188,19 @@ div.wrap {
       margin-left: .5rem;
      }
   }
-  div.inputContainer .partinput-style{
-    margin-bottom:.1rem
-  }
+  div.inputContainer{
+    position: relative;
+   .partinput-style{
+    margin-bottom:.1rem;
+    margin-top: 1rem;
+   }
+    .inputspan{
+      position: absolute;
+      right:6px;
+      bottom:10px;
+      color:rgba(240, 95, 92, 1);
+    }
+
+}
 }
 </style>
