@@ -1,6 +1,6 @@
 <template>
   <div class="wrap22">
-    <base-header title="我的红包" has-back="1"></base-header>
+    <base-header title="邀请红包" has-back="1"></base-header>
     <img class="bg" :src="img1">
     <!-- <img class="bg" src="../../../assets/mineImg/hong_bao_bg.jpg"> -->
     <div class="logo">
@@ -61,8 +61,11 @@ div.wrap22 {
     width: 100%;
   }
   .logo {
+    z-index: 2;
+    position: relative;
     text-align: center;
     margin: 1.1rem 0 0.25rem;
+
     img {
       width: 1.4rem;
       height: 1.4rem;

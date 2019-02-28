@@ -8,14 +8,14 @@
 
       <div class="QRcode aboveZindex">
 
-        <qrcode-vue :logoSrc="imageUrl" :text="imageUrl" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
+        <qrcode-vue :logoSrc="imageUrl" :text="link" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
       </div>
 
-      <div class="txt textc1">{{baseurl}}</div>
-
-      <div class="btn">
-        <btn-block txt='分享' @v-tap='copy'></btn-block>
+      <div class="btn" v-if="onApp">
+        <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
       </div>
+      <div class="txt textc1" v-else>{{baseurl}}</div>
+
     </div>
   </div>
 </template>
@@ -28,19 +28,22 @@ import imageUrl from '@/assets/mineImg/logo.png'
 export default {
   data() {
     return {
-       codeValue:'http://50etfvue.com:1688/h5#/pages/registers/registers',
+      codeValue: 'http://50etfvue.com:1688/h5#/pages/registers/registers',
+      link: 'http://50etfvue.cardoctor.com.cn/h5/pages/mine_sub/red_envelope/red_envelope',
       //  imageUrl:'http://img.zcool.cn/community/01f9ea56e282836ac72531cbe0233b.jpg@2o.jpg',//默认二维码中间图片
-       // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
-       imageUrl,//默认二维码中间图片
+      // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
+      imageUrl,//默认二维码中间图片
+      shares :{},
+      onApp:false,
     };
   },
   computed: {
-    ...mapState(['userinfo','atNight']),
+    ...mapState(['userinfo', 'atNight']),
     baseurl() {
       return this.codeValue + '/' + this.userinfo.user_id
     }
   },
-  components: { btnBlock, QrcodeVue},
+  components: { btnBlock, QrcodeVue },
   methods: {
     copy() {
       var str = this.baseurl;
@@ -52,13 +55,28 @@ export default {
       document.execCommand('copy');
       document.body.removeChild(oInput);
       this.$toast.success({
-        message:'复制成功'
+        message: '复制成功'
       })
       //#endif
     },
-
+    shareSystem() {
+      var msg = { 
+        content: '漂洋过海来看你', 
+        href: 'http://50etfvue.cardoctor.com.cn/h5/pages/mine_sub/red_envelope/red_envelope',
+        type:'web',
+        title:'form lcs',
+        thumbs:['../../../assets/mineImg/logo.png']
+      }
+      plus.share.sendWithSystem(msg, function () {
+      }, function (e) {
+        console.error('Failed: ' + JSON.stringify(e));
+      })
+    }
 
   },
+  create() {
+   this.onApp= process.env.NODE_ENV !== 'production'
+  }
 }
 </script>
 
@@ -66,12 +84,12 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   position: relative;
-  div.aboveZindex{
+  div.aboveZindex {
     position: relative;
     z-index: 2;
   }
   img.bg {
-    height:6.34rem;
+    height: 6.34rem;
     left: 0;
     width: 100%;
     position: absolute;
@@ -81,7 +99,7 @@ div.wrap {
     width: 158px;
     height: 158px;
     //     background-color: #fff;
-    margin:3.46rem auto .40rem;
+    margin: 3.46rem auto 0.4rem;
     //     img {
     //       width:3.17rem;
     //       height:3.17rem;
@@ -99,8 +117,8 @@ div.wrap {
     margin-left: 10%;
   }
   div.btn {
-    padding: 0 .53rem;
-    margin-top:.57rem;
+    padding: 0 0.53rem;
+    margin-top: 0.57rem;
   }
 }
 </style>
