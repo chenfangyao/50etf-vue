@@ -1,9 +1,12 @@
+import md5 from 'js-md5'
+import store from '../vuex'
+
 var responseOK=true
 export function checkUpdate() {
+  store.commit('setappObj',{ device: plus.device.imei, clientsysver: plus.os.version })
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
     responseOK &&  getVer( inf.version)
   });
-    // plus.device.imei plus.os.version setRequestHeader
 }
 var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version=";
  function getVer(wgtVer) {
@@ -31,9 +34,14 @@ var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version
         break;
     }
   }
+   let hrand = +new Date() + '000'
   xhr.open('GET', checkUrl + wgtVer);
-   xhr.setRequestHeader('clienttype','app')
-  xhr.send();
+  xhr.setRequestHeader('clienttype','app')
+   xhr.setRequestHeader('clientsysver', plus.os.version )
+   xhr.setRequestHeader('device', plus.device.imei )
+   xhr.setRequestHeader('hrand', hrand  )
+   xhr.setRequestHeader('hsign', md5('app|' + hrand) )
+   xhr.send();
 }
 // 下载wgt文件
 function downWgt(url) {

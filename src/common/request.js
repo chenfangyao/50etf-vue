@@ -1,6 +1,8 @@
 import axios from 'axios'
 import store from '../vuex'
 import Qs from 'qs'
+import md5 from 'js-md5'
+
 var isShowLoading = true;
 
 axios.interceptors.response.use(function (response) {
@@ -32,12 +34,22 @@ export default function (obj) {
     }
   }, 500);
   let sid = store.state.sid
+  let hrand = +new Date() + '000'
+
   obj.header = obj.header || {}
   Object.assign(obj.header, {
     clienttype: process.env.NODE_ENV === 'production'?'app':'web',
     ver: 'v1.0',
     sid,
+    hrand,
+    hsign: md5('app|' + hrand)
   })
+  if (store.state.appObj){
+    Object.assign(obj.header, {
+      device: store.state.appObj.device, 
+      clientsysver: store.state.appObj.clientsysver
+    })
+  }
   // }
   var baseURL = 'http://dswx.newcard.com.cn'
   if (obj.url.indexOf('/Sapi') != -1) {

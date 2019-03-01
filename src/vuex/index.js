@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     sid: '',
     username: '',
     mobile: '',
+    appObj:null,
     userinfo: {},
     // 合约code
     hycode: '',
@@ -59,6 +60,9 @@ const store = new Vuex.Store({
     },
     setatNight(state, data) {
       state.atNight = data
+    },
+    setappObj(state, data) {
+      state.appObj = data
     },
     settabIndex(state, data) {
       state.tabIndex = data
