@@ -40,13 +40,21 @@ export default {
   },
   props: ['showAction'],
   mounted() {
-    let alipay_wap=[]
+    let online=[],alipy=[],remitance=[]
     for(let i=0;i<this.paylist['online'].length;i++){
+      this.paylist['online'][i].pay_way='online'
       if(this.paylist['online'][i].pay_code=="alipay_wap"){
-        alipay_wap.push(this.paylist['online'][i])
+        online.push(this.paylist['online'][i])
       }
     }
-    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance']).concat(alipay_wap)
+    for(let k=0;k<this.paylist['alipay'].length;k++){
+      this.paylist['alipay'][k].pay_way='alipay'
+    }
+    for(let j=0;j<this.paylist['remitance'].length;j++){
+      this.paylist['remitance'][j].pay_way='remitance'
+    }
+    console.log(333,this.paylist)
+    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance']).concat(online)
     // this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
   },
   components: { uniIcon }

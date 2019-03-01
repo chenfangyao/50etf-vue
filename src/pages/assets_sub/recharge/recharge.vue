@@ -176,6 +176,7 @@ export default {
 			defaultitemmoney:'',
       showTable:false,
       alipayRes:'',
+      pay_way:'alipay'
     }
   },
   computed: mapState(['assets']),
@@ -192,10 +193,10 @@ export default {
         alert('请输入金额')
         return
       }
-      console.log(333,this.paytype)
+      console.log(333,this.pay_way)
       //跳转银行卡页
-      switch (this.paytype) {
-        case 'remit_alipay':
+      switch (this.pay_way) {
+        case 'alipay':
           // this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '', })
           this.$router.push({
             path:'/pages/assets_sub/bank_card/bank_card',
@@ -208,7 +209,7 @@ export default {
             }
           })
           break
-        case 'remit_icbc':
+        case "remitance":
           // this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '&bank_name=' + this.payeeinfo.bank_name + '' })
           this.$router.push({
             path:'/pages/assets_sub/bank_card/bank_card',
@@ -222,7 +223,7 @@ export default {
             }
           })
           break
-        case 'alipay_wap':
+        case 'online':
           var formdata = new FormData();
           formdata.append("uid",'5270');
           formdata.append("v_amount",this.money);
@@ -278,6 +279,8 @@ export default {
       })
     },
     changeWayI(i) {
+      console.log(222,i)
+      this.pay_way=i.pay_way
       this.payeeinfo = i
       this.priceLists = i.money_selects
       // 支付方式
