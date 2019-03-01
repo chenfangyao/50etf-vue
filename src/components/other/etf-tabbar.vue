@@ -19,7 +19,7 @@
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img4s : icon.img4">
       </van-tabbar-item>
       <van-tabbar-item v-vtap="{method: go , params: '/mine'}"   v-hover-class='"self-hover"'>
-        <span>我的33</span>
+        <span>我的</span>
         <img slot="icon" slot-scope="props" :src="props.active ? icon.img5s : icon.img5">
       </van-tabbar-item>
     </van-tabbar>
