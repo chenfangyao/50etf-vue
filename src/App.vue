@@ -44,8 +44,7 @@ export default {
     this.getConf()
     process.env.NODE_ENV === 'production' && saveLogin()
     document.addEventListener('plusready', () => { 
-      
-      // setInterval(()=>{checkUpdate()},60000)
+      setInterval(()=>{checkUpdate()},60000)
       plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {
           this.$router.goBack()

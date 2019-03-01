@@ -2,13 +2,16 @@ import md5 from 'js-md5'
 import store from '../vuex'
 //plus.storage.getItem(key);
 var responseOK=true
+// const baseURL = 'http://dswx.newcard.com.cn'
+const baseURL = 'http://t50.zhijiancaopan.com:8042'
+
 export function checkUpdate() {
   store.commit('setappObj',{ device: plus.device.imei, clientsysver: plus.os.version })
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
     responseOK &&  getVer( inf.version)
   });
 }
-var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version=";
+var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
  function getVer(wgtVer) {
   // plus.nativeUI.showWaiting("检测更新...");
    responseOK=false
@@ -19,11 +22,12 @@ var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version
         // plus.nativeUI.closeWaiting();
         responseOK = true
         if (xhr.status == 200) {
-          var newVer = xhr.responseText.data.list[0].name;
-          var downurl = xhr.responseText.data.list[0].downurl;
-          if (wgtVer && newVer && (wgtVer != newVer)) {
+          var obj = JSON.parse(xhr.responseText)
+          var newVer = obj.data.list[0].name;
+          var downurl = obj.data.list[0].downurl;
+          if (wgtVer && newVer && (wgtVer < newVer)) {
             plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
-              e.index === 0 && downWgt(downurl)
+              e.index === 0 && downWgt(baseURL+downurl)
             } );
           } else {
             //plus.nativeUI.alert("当前已是最新版本");
@@ -36,11 +40,12 @@ var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version
   }
    let hrand = +new Date() + '000'
   xhr.open('GET', checkUrl + wgtVer);
-  xhr.setRequestHeader('clienttype','app')
+ /*  xhr.setRequestHeader('clienttype','app')
    xhr.setRequestHeader('clientsysver', plus.os.version )
    xhr.setRequestHeader('device', plus.device.imei )
    xhr.setRequestHeader('hrand', hrand  )
-   xhr.setRequestHeader('hsign', md5('app|' + hrand) )
+   xhr.setRequestHeader('hsign', md5('app|' + hrand) ) */
+   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'  )
    xhr.send();
 }
 // 下载wgt文件
