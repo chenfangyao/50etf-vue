@@ -27,7 +27,7 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex bb6 black2 textc1" v-hover-class="'self-hover'"  v-vtap="{method: go , params: 'invite_friends/invite_friends'}">
+      <div class="uni-flex bb6 black2 textc1" v-hover-class="'self-hover'"  v-if='switchObj.show_invite==="1"' v-vtap="{method: go , params: 'invite_friends/invite_friends'}">
         <img src="../../../assets/mineImg/05.png" />
         <span>邀请好友</span>
         <span class="tip" v-if="false"></span>
@@ -66,7 +66,7 @@ export default {
 
 		}
   },
-	computed: mapState(['sid','indextimmer','newlengths']),
+	computed: mapState(['sid','indextimmer','newlengths','switchObj']),
   methods: {
 		...mapMutations(['setnewlengths']),
     go(href) {

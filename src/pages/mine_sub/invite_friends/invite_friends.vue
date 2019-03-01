@@ -27,8 +27,8 @@ export default {
       codeValue: 'http://50etfvue.com:1688/h5#/pages/registers/registers',
       link: 'http://50etfvue.cardoctor.com.cn/h5/pages/mine_sub/red_envelope/red_envelope',
       //  imageUrl:'http://pic168.nipic.com/file/20180607/2546657_191526185031_2.jpg',//默认二维码中间图片
-      // imageUrl:require('../../../static/loginResgImg/logo.png'),//默认二维码中间图片
-      imageUrl,//默认二维码中间图片
+      imageUrl:'http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg',//默认二维码中间图片
+      // imageUrl,//默认二维码中间图片
       shares :{},
       onApp:false,
     };

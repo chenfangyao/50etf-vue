@@ -1,6 +1,6 @@
 import md5 from 'js-md5'
 import store from '../vuex'
-
+//plus.storage.getItem(key);
 var responseOK=true
 export function checkUpdate() {
   store.commit('setappObj',{ device: plus.device.imei, clientsysver: plus.os.version })
