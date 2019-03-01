@@ -31,7 +31,7 @@ export default function (obj) {
       store.commit("setloadingFlag", true);
     }
   }, 500);
-  let sid = store.state.sid 
+  let sid = store.state.sid
   obj.header = obj.header || {}
   Object.assign(obj.header, {
     clienttype: process.env.NODE_ENV === 'production'?'app':'web',
@@ -39,7 +39,7 @@ export default function (obj) {
     sid,
   })
   // }
-  var baseURL = ''//'http://dswx.newcard.com.cn'
+  var baseURL = 'http://dswx.newcard.com.cn'
   if (obj.url.indexOf('/Sapi') != -1) {
     baseURL = 'http://47.100.226.135:8040'
   } else if (obj.url.indexOf('/fiftyEtf') != -1) {
