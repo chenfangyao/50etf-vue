@@ -49,7 +49,8 @@ const store = new Vuex.Store({
     // 合并平仓
     hbfbcell: [],
     // 持仓合计
-    cctotalmoney: 0
+    cctotalmoney: 0,
+    switchObj:{}
   },
   mutations: {
     login(state, provider) {
@@ -74,6 +75,9 @@ const store = new Vuex.Store({
     },
     setsid(state, data) {
       state.sid = data
+    },
+    setswitchObj(state, data) {
+      state.switchObj = data
     },
     setpingCItem(state, data) {
       state.pingCItem = data

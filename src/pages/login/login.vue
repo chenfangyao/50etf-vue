@@ -2,7 +2,7 @@
 	<div class="wrap">
     <base-header :has-back='true' title='登录'></base-header>
     <div class="h1 black2"></div>
-    <div class="img"><img src="../../assets/loginResgImg/logo.png"></div>
+    <div class="img"><img :src="switchObj.logo"></div>
     <div class="container">
       <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->
       <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
@@ -43,7 +43,7 @@ export default {
 			this.verifyYes==true
 		}
 	},
-    computed: mapState(['atNight','sid','username','mobile','userinfo']),
+    computed: mapState(['atNight','sid','username','mobile','userinfo','switchObj']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
       ...mapMutations(['setsid','setusername','setmobile','setuserinfo']),

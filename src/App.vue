@@ -29,7 +29,7 @@ import etfTabbar from '@/components/other/etf-tabbar'
 import {checkUpdate} from '@/common/update.js'
 import saveLogin from '@/common/saveLogin.js'
 import { Loading  } from 'vant';
-import { mapState } from 'vuex';
+import { mapState} from 'vuex';
 
 export default {
   name: 'App',
@@ -41,6 +41,7 @@ export default {
     }
   },
   created() {
+    this.getConf()
     process.env.NODE_ENV === 'production' && saveLogin()
     document.addEventListener('plusready', () => { 
       
@@ -77,6 +78,22 @@ export default {
         this.transitionName = 'slide-left';
       }
       this.$router.isBack = false
+    }
+  },
+  methods:{
+    getConf(){
+       var options = {
+              url: '/Sapi/Soft/conf', //请求接口
+              method: 'GET', 
+          }
+          this.$httpReq(options).then((res) => {
+              if(res.status){
+                this.$store.commit('setswitchObj',res.data)
+                // this.$store.commit('setatNight',res.data.default_skin==='0')
+              }
+          }).catch((err) => {
+              console.error(err,'捕捉')
+          })
     }
   }
 }

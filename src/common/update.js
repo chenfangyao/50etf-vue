@@ -16,7 +16,7 @@ var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version
         // plus.nativeUI.closeWaiting();
         responseOK = true
         if (xhr.status == 200) {
-          var newVer = xhr.responseText.data.list[0].version;
+          var newVer = xhr.responseText.data.list[0].name;
           var downurl = xhr.responseText.data.list[0].downurl;
           if (wgtVer && newVer && (wgtVer != newVer)) {
             plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
@@ -32,6 +32,7 @@ var checkUrl = "http://47.100.226.135:8040/Sapi/Soft/last?clienttype=app&version
     }
   }
   xhr.open('GET', checkUrl + wgtVer);
+   xhr.setRequestHeader('clienttype','app')
   xhr.send();
 }
 // 下载wgt文件

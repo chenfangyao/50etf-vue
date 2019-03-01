@@ -9,7 +9,7 @@
           <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
         </div>
     </div>
-    <button v-hover-class='"self-hover"' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
+    <button v-hover-class='"self-hover"' v-if='switchObj.enable_reg==="1"' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
   </div>
 </template>
 <script>
@@ -50,7 +50,7 @@ export default {
       }
     }
   },
-  computed: mapState(['sid', 'realnstatus','userinfo']),
+  computed: mapState(['sid', 'realnstatus','userinfo','switchObj']),
 }
 </script>
 <style lang="scss">

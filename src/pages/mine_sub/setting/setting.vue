@@ -5,7 +5,7 @@
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>
-    <div class="item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
+    <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'" v-hover-class="'self-hover'">
       <span>夜间模式</span>
       <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="changeTheme"/>
     </div>
@@ -30,7 +30,7 @@ export default {
     };
   },
   components: { btnBlock ,[Switch.name]:Switch},
-  computed:mapState(['atNight']),
+  computed:mapState(['atNight','switchObj']),
   methods: {
     ...mapMutations(['setuserinfo', 'setsid','setatNight']),
     logOut() {

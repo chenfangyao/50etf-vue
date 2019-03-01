@@ -4,7 +4,7 @@
     <img class="bg" :src="img1">
     <!-- <img class="bg" src="../../../assets/mineImg/hong_bao_bg.jpg"> -->
     <div class="logo">
-      <img src="../../../assets/mineImg/logo.png">
+      <img :src="$store.state.switchObj.logo">
     </div>
     <div class="aboveZindex">
       <div class="txt">你投资，我出钱</div>
