@@ -41,7 +41,7 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer']),
+  computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer','atNight']),
   methods: {
     // 登录
     ...mapMutations(['setsid', 'setusername', 'setmobile', 'setsoftconf', 'setindextimmer']),
@@ -83,7 +83,7 @@ export default {
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
-        this.imgList = res.data.top.white
+      this.imgList =this.atNight?res.data.top.black: res.data.top.white
       }).catch((err) => {
         console.error(err, '捕捉')
       })
