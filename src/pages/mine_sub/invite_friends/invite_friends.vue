@@ -44,7 +44,7 @@ export default {
     shareSystem() {
       var msg = { 
         content: this.userinfo.user_name+'邀请您：', 
-        href: 'http://50etfvue.cardoctor.com.cn/h5/pages/mine_sub/red_envelope/red_envelope',
+        href: this.link,
         type:'web',
         title:'from linChengShu',
         thumbs:['../../../assets/mineImg/logo.png']
