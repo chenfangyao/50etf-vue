@@ -23,6 +23,7 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
         responseOK = true
         if (xhr.status == 200) {
           var obj = JSON.parse(xhr.responseText)
+          if (obj.data.list.length==0)return;
           var newVer = obj.data.list[0].version;
           var downurl = obj.data.list[0].downurl;
           if (wgtVer && newVer && (wgtVer < newVer)) {
