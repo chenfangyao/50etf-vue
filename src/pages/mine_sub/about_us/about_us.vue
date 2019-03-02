@@ -4,8 +4,6 @@
     <div class="img">
       <img :src="switchObj.logo">
     </div>
-    <h6 class="textc2" v-if='appObj'>版本号：{{appObj.clientsysver}}</h6>
-    <h6 class="textc2" v-else>版本号：web1.01</h6>
     <div class="txt textc2">
       <span class="space"></span>福建至简智能科技有限公司致力于通过场内期权的不断创新和运用，努力创建业内更加高品质的在线询价，在线操作，在线开户等服务。福建至简智能科技有限公司在任重道远的前进征途上，真诚欢迎广大用户及合作伙伴与我们一起携手同进，共创辉煌
     </div>
@@ -28,11 +26,6 @@ export default {
 div.wrap {
   background-color: #a8a8a8;
   height: 100vh;
-  h6{
-    margin: 10px;
-    font-weight: normal;
-    text-align: center;
-  }
   div.img {
     text-align: center;
     margin-top: 2rem;

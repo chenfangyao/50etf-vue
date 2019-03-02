@@ -12,7 +12,8 @@
     <div class="mb26 item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>关于</span>
       <div class="uni-flex verView">
-        <span class="verTxt textc2">版本号：1.0</span>
+        <span v-if='appObj' class="verTxt textc2">版本号：V{{appObj.clientsysver}}</span>
+        <span v-else class="verTxt textc2">版本号：web1.00</span>
         <!-- <img src="../../../assets/arrow/r.png"> -->
       </div>
     </div>
@@ -30,7 +31,7 @@ export default {
     };
   },
   components: { btnBlock ,[Switch.name]:Switch},
-  computed:mapState(['atNight','switchObj']),
+  computed:mapState(['atNight','switchObj','appObj']),
   methods: {
     ...mapMutations(['setuserinfo', 'setsid','setatNight']),
     logOut() {
@@ -82,6 +83,8 @@ export default {
       }).then(() => {
         // on confirm
         this.setatNight(val)
+        // plus.navigator.setStatusBarBackground("#FFFFFF");
+        // plus.navigator.setStatusBarStyle( "light");
         location.reload()
       }).catch(() => {
         // on cancel
