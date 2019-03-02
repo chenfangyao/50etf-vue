@@ -106,7 +106,7 @@ export const optionK = {
       boundaryGap: false,
       splitLine: { show: false, },
       axisLine: { show: false },
-      axisTick: { show: false },
+      // axisTick: { show: false },
       axisLabel: {
         interval: (i, val) => {
           switch (val) {

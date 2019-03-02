@@ -212,23 +212,6 @@ export default {
       });
       let obj = optionK
       obj.xAxis[0].data = X
-      /*  obj.yAxis[0].axisLabel.formatter = (val, i) => {
-         var num = Number(val.toFixed(4))
-         var max = Number(this.Ymax)
-         // var midMax = (max - this.stockInfo.preClosePrice) / 2 + this.stockInfo.preClosePrice
-         // midMax = Number(midMax.toFixed(4))
-         var min = Number(this.Ymin)
-         // var midMin = (this.stockInfo.preClosePrice - min) / 2 + min
-         // midMin = Number(midMin.toFixed(4))
-         switch (num) {
-           case this.stockInfo.preClosePrice:
-           case max:
-           case min:
-             return num
-           default:
-             return ''
-         }
-       } */
       obj.xAxis[1].data = X
       obj.series[5].data = YBar
       obj.yAxis[1].axisLabel.formatter = val => {

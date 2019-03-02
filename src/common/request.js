@@ -47,7 +47,8 @@ export default function (obj) {
   if (store.state.appObj){
     Object.assign(obj.header, {
       device: store.state.appObj.device, 
-      clientsysver: store.state.appObj.clientsysver
+      clientsysver: store.state.appObj.clientsysver,
+      'X-Requested-With': 'XMLHttpRequest' 
     })
   }
   // }

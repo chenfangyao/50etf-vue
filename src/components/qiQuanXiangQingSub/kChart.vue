@@ -254,6 +254,8 @@ export default {
       var YBar = []
       var subBar = []
       var MA_k = [[], [], [], [], []]
+      this.dayKmax=0
+      this.dayKmin=1000
       arr.forEach(item => {
         subBar = [item.tradeDate]
         X.push(item.tradeDate)
@@ -264,10 +266,8 @@ export default {
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
         this.getMaxBar(item.amount)
-        if(this.tabIndex==1){
-          item.highPrice>this.dayKmax&&(this.dayKmax=item.highPrice)
-          item.lowPrice<this.dayKmin&&(this.dayKmin=item.lowPrice)
-        }
+        item.highPrice>this.dayKmax&&(this.dayKmax=item.highPrice)
+        item.lowPrice<this.dayKmin&&(this.dayKmin=item.lowPrice)
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
         } else {
@@ -294,11 +294,7 @@ export default {
         if (val == this.maxBar) return val + '张'
         else return ''
       }
-      if(this.tabIndex!= 1){
-        obj.yAxis[0].interval=(this.stockInfo.highPrice-this.stockInfo.lowPrice)/4
-      }else{
-        obj.yAxis[0].interval=(this.dayKmax-this.dayKmin)/4
-      }
+      obj.yAxis[0].interval=(this.dayKmax-this.dayKmin)/4
       for (let i = 0; i < MA_k.length; i++) {
         obj.series[i].data = MA_k[i]
       }

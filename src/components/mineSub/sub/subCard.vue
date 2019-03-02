@@ -2,14 +2,15 @@
 <div class="subCard black2">
     <div class=" uni-flex ml50">
         <div class="imgContainer">
-          <img src="../../../assets/mineImg/touxiang.png"/>
+          <img :src="switchObj.logo"/>
+          <!-- <img src="../../../assets/mineImg/touxiang.png"/> -->
         </div>
         <div>
           <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
           <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
         </div>
     </div>
-    <button v-hover-class='"self-hover"' v-if='switchObj.enable_reg==="1"' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
+    <!-- <button v-hover-class='"self-hover"' v-if='switchObj.enable_reg==="1"' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button> -->
   </div>
 </template>
 <script>

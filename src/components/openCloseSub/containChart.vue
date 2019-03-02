@@ -39,7 +39,8 @@ var option = {
   yAxis: {
     show: false,
     type: 'value',
-    scale: true
+    min:'dataMin',
+    max:'dataMax'
   },
   series: [{
     // data: [15, 20, 36, 14, 10, 26,11,21,33,29,16,25,18,15,35],

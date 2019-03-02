@@ -6,8 +6,8 @@ const baseURL = 'http://dswx.newcard.com.cn'
 // const baseURL = 'http://t50.zhijiancaopan.com:8042'
 
 export function checkUpdate() {
-  store.commit('setappObj',{ device: plus.device.imei, clientsysver: plus.os.version })
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+    store.commit('setappObj', { device: plus.device.imei, clientsysver: inf.version })
     responseOK &&  getVer( inf.version)
   });
 }
@@ -23,7 +23,7 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
         responseOK = true
         if (xhr.status == 200) {
           var obj = JSON.parse(xhr.responseText)
-          var newVer = obj.data.list[0].name;
+          var newVer = obj.data.list[0].version;
           var downurl = obj.data.list[0].downurl;
           if (wgtVer && newVer && (wgtVer < newVer)) {
             plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
@@ -40,11 +40,10 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
   }
    let hrand = +new Date() + '000'
   xhr.open('GET', checkUrl + wgtVer);
- /*  xhr.setRequestHeader('clienttype','app')
-   xhr.setRequestHeader('clientsysver', plus.os.version )
+  xhr.setRequestHeader('clienttype','app')
    xhr.setRequestHeader('device', plus.device.imei )
    xhr.setRequestHeader('hrand', hrand  )
-   xhr.setRequestHeader('hsign', md5('app|' + hrand) ) */
+   xhr.setRequestHeader('hsign', md5('app|' + hrand) )
    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'  )
    xhr.send();
 }

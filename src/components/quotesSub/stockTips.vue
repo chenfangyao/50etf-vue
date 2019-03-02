@@ -31,12 +31,14 @@ var option = {
   yAxis: {
     show: false,
     type: 'value',
-    scale: true
+     min:'dataMin',
+    max:'dataMax'
   },
   series: [{
     data: [],
     type: 'line',
-    symbol: 'none'
+    symbol: 'none',
+
   }]
 }
 export default {
