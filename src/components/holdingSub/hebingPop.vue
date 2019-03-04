@@ -67,8 +67,9 @@ export default {
         case 3:
           this.$navigateTo({ url: '/open_close'  ,query:{code,pinkaiC:1,isActive:0}})
           break
-        case 4:
-          this.$redirectTo({ url: '/quotes' })
+         case 4:
+          // this.$redirectTo({ url: '/quotes' })
+          this.$redirectTo({ url: '/qi_quan_xiang_qing',query:{code:this.resObj.stock_code } })
           break
 
       }
