@@ -7,6 +7,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     hasLogin: false,
+    appReady: false,
     loginProvider: "",
     openid: null,
     atNight: true,
@@ -73,6 +74,9 @@ const store = new Vuex.Store({
     },
     setloadingFlag(state, data) {
       state.loadingFlag = data
+    },
+    setappReady(state, data) {
+      state.appReady = data
     },
     setOpenid(state, openid) {
       state.openid = openid

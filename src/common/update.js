@@ -4,8 +4,17 @@ import store from '../vuex'
 var responseOK=true
 const baseURL = 'http://dswx.newcard.com.cn'
 // const baseURL = 'http://t50.zhijiancaopan.com:8042'
-
+function setTheme(val){
+  if (val) {
+    plus.navigator.setStatusBarBackground("#181c28");
+    plus.navigator.setStatusBarStyle("light");
+  } else {
+    plus.navigator.setStatusBarBackground("#f0f0f0");
+    plus.navigator.setStatusBarStyle("dark");
+  }
+}
 export function checkUpdate() {
+  setTheme(store.state.atNight)
   plus.runtime.getProperty(plus.runtime.appid, function (inf) {
     store.commit('setappObj', { device: plus.device.imei, clientsysver: inf.version })
     responseOK &&  getVer( inf.version)

@@ -18,7 +18,7 @@
       </transition>
     </template>
     <div class="self-mask maskLoading" v-show="loadingFlag">
-      <van-loading type="spinner" color="#999"/>
+      <van-loading type="spinner" color="#999" />
     </div>
     <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
   </div>
@@ -26,14 +26,14 @@
 
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
-import {checkUpdate} from '@/common/update.js'
+import { checkUpdate } from '@/common/update.js'
 import saveLogin from '@/common/saveLogin.js'
-import { Loading  } from 'vant';
-import { mapState} from 'vuex';
+import { Loading } from 'vant';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
-  components: { etfTabbar,[Loading .name]:Loading  },
+  components: { etfTabbar, [Loading.name]: Loading },
 
   data() {
     return {
@@ -43,9 +43,10 @@ export default {
   created() {
     this.getConf()
     process.env.NODE_ENV === 'production' && saveLogin()
-    document.addEventListener('plusready', () => { 
+    document.addEventListener('plusready', () => {
+      this.$store.commit('setappReady',true)
       checkUpdate()
-      setInterval(()=>{checkUpdate()},60000)
+      setInterval(() => { checkUpdate() }, 60000)
       plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {
           this.$router.goBack()
@@ -61,7 +62,7 @@ export default {
       });
     }, false);
   },
-  computed:mapState(['atNight','loadingFlag']),
+  computed: mapState(['atNight', 'loadingFlag','appReady']),
   watch: {
     $route(to, from) {
       if (to.meta.tabbar) {
@@ -78,22 +79,32 @@ export default {
         this.transitionName = 'slide-left';
       }
       this.$router.isBack = false
+    },
+    atNight(val) {
+      if (!appReady) return;
+      if (val) {
+        plus.navigator.setStatusBarBackground("#181c28");
+        plus.navigator.setStatusBarStyle("light");
+      }else{
+        plus.navigator.setStatusBarBackground("#f0f0f0");
+        plus.navigator.setStatusBarStyle("dark");
+      }
     }
   },
-  methods:{
-    getConf(){
-       var options = {
-              url: '/Sapi/Soft/conf', //请求接口
-              method: 'GET', 
-          }
-          this.$httpReq(options).then((res) => {
-              if(res.status){
-                this.$store.commit('setswitchObj',res.data)
-                // this.$store.commit('setatNight',res.data.default_skin==='0')
-              }
-          }).catch((err) => {
-              console.error(err,'捕捉')
-          })
+  methods: {
+    getConf() {
+      var options = {
+        url: '/Sapi/Soft/conf', //请求接口
+        method: 'GET',
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$store.commit('setswitchObj', res.data)
+          // this.$store.commit('setatNight',res.data.default_skin==='0')
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
     }
   }
 }
@@ -136,7 +147,7 @@ export default {
   opacity: 0;
   transform: translate3d(-100%, 0, 0);
 }
-div.maskLoading{
+div.maskLoading {
   display: flex;
   justify-content: center;
   align-items: center;

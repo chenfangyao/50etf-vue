@@ -4,14 +4,15 @@
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap black2">
 		<div class='gatherInfo'>
-		<div  class='payMoney textc1'>
+		<div  class='payMoney textc1 hasCopy'>
 			<span>收款账号:</span>
-			<span v-show="showBank">{{cardno}}</span>
-			<div v-show="!showBank" class="chooseCount">
+			<span v-if="showBank">{{cardno}}</span>
+			<div v-else class="chooseCount">
 					<!--<div v-vtap="{method:showPicker}">-->
 							{{pickerText}}
 							<!--<span class="arrowDown"></span>-->
 			</div>
+      <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
 		</div>
 
 		<div class='payMoney textc1'>
@@ -79,12 +80,6 @@ export default {
       if (i == 1) {
         this.$navigateTo({ url: '../help/help' })
       }
-       var oInput = document.createElement('input');
-        oInput.value = this.showBank?this.cardno:this.pickerText;
-        document.body.appendChild(oInput);
-        oInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(oInput);
       switch(this.paytype){
 				case 'remit_alipay':
 				this.remit_alipay()
@@ -93,6 +88,16 @@ export default {
 				this.remit_bank()
 				break
 			}
+    },
+    copyText(){
+       var oInput = document.createElement('textarea');
+        oInput.value = this.showBank?this.cardno:this.pickerText;
+        document.body.appendChild(oInput);
+        oInput.select();
+        oInput.setSelectionRange(0, oInput.value.length)
+        document.execCommand('copy');
+        document.body.removeChild(oInput);
+        this.$toast('复制成功')
     },
 		// 支付宝支付
 		remit_alipay(){
@@ -197,6 +202,13 @@ div.wrap {
 			border-bottom:1px solid rgb(238,237,242);
 			margin-top:.20rem
 		}
+    div.payMoney.hasCopy{
+      .copySpan{
+        float: right;
+        margin-right: 10px;
+        color: $blue1;
+      }
+    }
 		div.payMoney >span:nth-child(2){
 			margin-left:.50rem;
 		}

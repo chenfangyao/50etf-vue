@@ -63,7 +63,7 @@ export default function (obj) {
   } else if (obj.url.indexOf('/market') != -1) {
     baseURL = 'http://50etfvue.cardoctor.com.cn'
   }
-  baseURL = 'http://dswx.newcard.com.cn'
+  // baseURL = 'http://dswx.newcard.com.cn'
 
   var opt = {
     url: obj.url,
