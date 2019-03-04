@@ -107,7 +107,7 @@ export default {
     },
     getgroupLabel() {
       var options = {
-        url: '/fiftyEtf/list_tag', //请求接口
+        url: '/sapi/Squery/list_tag', //请求接口
         method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
@@ -206,8 +206,9 @@ div.uni-tab-bar {
 
   .swiper-tab {
     border-bottom: 1px solid #f4f6f6;
-    justify-content: space-between;
-    padding: 0.1rem 0.25rem 0;
+    // justify-content: space-between;
+    // padding: 0.1rem 0.25rem 0;
+    padding-top: 0.1rem;
     height: 0.84rem;
 
     .swiper-tab-list2 span.active {
