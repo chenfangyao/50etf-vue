@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <h2 v-else class="textc1">请登录，查看行情</h2>
+  <h2 v-else class="textc1" v-vtap="{method:goLogin}" v-hover-class="'self-hover'">请登录，查看行情</h2>
 </template>
 <script>
 
@@ -47,6 +47,9 @@ export default {
         url: '/qi_quan_xiang_qing',
         query: { code: obj.stock_code }
       });
+    },
+    goLogin(){
+      this.$redirectTo({url:'/pages/login/login'})
     },
     calcBg(val) {
       this.ltPrice = 10000

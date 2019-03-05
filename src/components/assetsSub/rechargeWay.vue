@@ -6,9 +6,9 @@
       <img  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'>
       <div class="txt">
         <div class="textc1">{{wayLists[way_i]||textbank}}</div>
-        <div>
+        <div v-if="txt2">
           <!-- <span v-if="wayLists[way_i]">{{txt2}}</span> -->
-          <span class="textc2">{{txt2}}</span>
+          <span class="textc2" >{{txt2}}</span>
         </div>
       </div>
       <img  class="to_r" src="../../assets/arrow/r.png">

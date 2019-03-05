@@ -279,7 +279,6 @@ export default {
       })
     },
     changeWayI(i) {
-      console.log(222,i)
       this.pay_way=i.pay_way
       this.payeeinfo = i
       this.priceLists = i.money_selects

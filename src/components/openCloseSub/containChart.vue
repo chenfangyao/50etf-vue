@@ -47,7 +47,8 @@ var option = {
     data: [],
     type: 'line',
     symbol: 'none',
-    smooth: true
+    smooth: true,
+    lineStyle:{color:'#ec605e'}
   }]
 }
 var echartInstance = null
@@ -105,6 +106,11 @@ export default {
       });
       if (Yline.length > 5) {
         option.series[0].data = Yline
+        if(this.resObj.priceChange<0){
+          option.series[0].lineStyle.color='#1bd091'
+        }else{
+          option.series[0].lineStyle.color='#ec605e'
+        }
         echartInstance.setOption(option)
       }
     },

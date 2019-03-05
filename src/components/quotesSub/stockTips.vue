@@ -2,7 +2,7 @@
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
       <span class="stockNmae textc1" >50ETF</span>
       <div class="df_wh" id="mini-canvas"></div>
-      <div class="txtContainer">
+      <div class="txtContainer" :class="{lt0:commonstock[0].priceChange<0}">
 				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
 				<span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
 				<span>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
@@ -38,7 +38,7 @@ var option = {
     data: [],
     type: 'line',
     symbol: 'none',
-
+    lineStyle:{color:'#ec605e'}
   }]
 }
 export default {
@@ -48,7 +48,11 @@ export default {
       timmer:null
     }
   },
-	props:['commonstock'],
+  props:{
+    commonstock:{
+      default(){return []}
+    }
+  },
   methods: {
     showH5Echarts() {
        myChart = echarts.init(document.getElementById('mini-canvas'));
@@ -80,6 +84,11 @@ export default {
       });
       if (Yline.length > 5) {
         option.series[0].data = Yline
+        if(this.commonstock[0].priceChange<0){
+          option.series[0].lineStyle.color='#1bd091'
+        }else{
+          option.series[0].lineStyle.color='#ec605e'
+        }
         myChart.setOption(option)
       }
     },
@@ -107,6 +116,10 @@ div.stock50 {
     display: flex;
     justify-content: space-between;
     line-height:.71rem;
+    color: rgba(240, 95, 92, 1);
+  }
+  div.txtContainer.lt0{
+    color: $green1;
   }
   span.stockNmae {
     font-size: 17px;
@@ -124,7 +137,6 @@ div.stock50 {
     font-size: 14px;
     font-family: ArialMT;
     font-weight: 400;
-    color: rgba(240, 95, 92, 1);
   }
 }
 div.df_wh {

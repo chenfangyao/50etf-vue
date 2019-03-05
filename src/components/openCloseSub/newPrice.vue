@@ -113,7 +113,7 @@ export default {
       require: true
     },
     fbcclist: {
-      require: true
+      // require: true
     },
     fborhb: {
       require: true
@@ -426,12 +426,12 @@ export default {
       if (val) {
         this.fbcclength = this.fbcclist.length
         this.hbcclength = this.hbcclist.length
-        this.pickerText = '0'
         // 设置默认分笔持仓id
         this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
-        // 把分笔持仓第一笔持仓数量带到默认持仓数量中
-        this.$emit('fb-num', parseInt(val[0].enable_amount))
+        this.pickerText = '0'
         if (this.fbcclist[0]) {
+          // 把分笔持仓第一笔持仓数量带到默认持仓数量中
+          this.$emit('fb-num', parseInt(val[0].enable_amount))
           this.pickerText = '笔 1 | ' + this.fbcclist[0].enable_amount + '张'
           var data1 = []
           this.pickerValueArray = {}

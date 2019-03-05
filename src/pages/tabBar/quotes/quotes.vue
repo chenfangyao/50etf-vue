@@ -48,7 +48,7 @@ export default {
       codeList: [],
       timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
-      commonstock: {},//50etf股票详情
+      commonstock: [{priceChangeRate:0}],//50etf股票详情
       commonstocktimmer: null
     }
   },
