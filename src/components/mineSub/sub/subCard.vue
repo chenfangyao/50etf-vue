@@ -10,7 +10,7 @@
           <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
         </div>
     </div>
-    <button v-hover-class='"self-hover"' v-if='switchObj.enable_reg==="1"' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
+    <button v-hover-class='"self-hover"' v-if='userinfo.is_certified>0' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
   </div>
 </template>
 <script>

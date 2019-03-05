@@ -3,7 +3,6 @@
 		<base-header has-back='1'></base-header>
     <div class="title textc1">修改密码</div>
     <div class="container">
-
       <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' @now-change='handChange' v-model="pwd1"></input-item>
       <input-item placeholderTxt='新密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd2"></input-item>
       <input-item placeholderTxt='确认密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd3"></input-item>
@@ -90,10 +89,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+div.wrap{
+  padding-bottom: 0.1px;
+  height: 100vh;
+}
 div.title {
   font-size: 28px;
   font-weight: 500;
-  margin: 0 0.88rem.32rem;
+  margin: 0.2rem 0.55rem .32rem;
   color: #333;
 }
 div.container {

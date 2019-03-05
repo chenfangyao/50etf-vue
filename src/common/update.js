@@ -29,7 +29,6 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
     switch (xhr.readyState) {
       case 4:
         // plus.nativeUI.closeWaiting();
-        responseOK = true
         if (xhr.status == 200) {
           var obj = JSON.parse(xhr.responseText)
           if (obj.data.list.length==0)return;
@@ -40,6 +39,7 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
               e.index === 0 && downWgt(baseURL+downurl)
             } );
           } else {
+            responseOK = true
             //plus.nativeUI.alert("当前已是最新版本");
           }
         } else {
@@ -64,8 +64,9 @@ function downWgt(url) {
     if (status == 200) {
       installWgt(d.filename); // 安装wgt包
     } else {
-      plus.nativeUI.alert("下载失败！");
+      plus.nativeUI.alert("下载失败！:" + status);
     }
+    responseOK = true
     plus.nativeUI.closeWaiting();
   }).start();
 }

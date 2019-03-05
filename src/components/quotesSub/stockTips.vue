@@ -45,6 +45,7 @@ export default {
   data() {
     return {
       echarts,
+      timmer:null
     }
   },
 	props:['commonstock'],
@@ -83,12 +84,13 @@ export default {
       }
     },
   },
+  deactivated(){clearInterval(this.timmer)},
+
   mounted() {
-    //#ifdef H5
    this.showH5Echarts()
    this.getfenshi()
-    //#endif
-  }
+   this.timmer=setInterval(()=>this.getfenshi(),12000)
+  },
 }
 </script>
 

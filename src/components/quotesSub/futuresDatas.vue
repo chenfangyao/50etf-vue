@@ -37,8 +37,7 @@ export default {
       res2arr: [],//暂存分好购沽的数据,
       inTemArr: [],
       ltPrice: 10000,
-      gtPrice: 0,//先置为大值
-      calcOnce: 1,
+      gtPrice: 0,//小中大
     }
   },
   props: ['quoteList', 'codeList', 'latestPrice'],
@@ -47,11 +46,11 @@ export default {
       this.$navigateTo({
         url: '/qi_quan_xiang_qing',
         query: { code: obj.stock_code }
-
       });
     },
-    calcBg(val, old) {
-      if (old == 2 || !this.codeList) return;
+    calcBg(val) {
+      this.ltPrice = 10000
+      this.gtPrice = 0
       this.codeList.forEach(item => {
         var snap = item.exercise_price
         if (snap.indexOf('A') == -1) {
@@ -62,7 +61,6 @@ export default {
           }
         }
       })
-      this.gtPrice !== 0&&this.ltPrice!==10000 && (this.calcOnce = 2)
     },
     dealCodeList() {//把传进来的合约代码分购、沽两组
       var arr = [...this.codeList]
@@ -166,19 +164,19 @@ export default {
   watch: {
     quoteList(newval, oldval) {
 
-     this.calcBg(this.latestPrice, this.calcOnce)
       if (newval.length == 0) {
         return this.inTemArr = []
       }
       if (newval.length != oldval.length) {
+        this.calcBg(this.latestPrice)
         this.dealCodeList()
         this.getTemDatas(this.toFixed4(newval))
       } else {
         this.compareDiff(this.toFixed4(newval), oldval)
       }
     },
-    latestPrice(val, old) {//股票最新价
-      this.calcBg(val, old)
+    latestPrice(val) {//股票最新价
+      this.calcBg(val)
     }
   }
 }
