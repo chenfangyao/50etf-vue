@@ -51,8 +51,10 @@ export default function (obj) {
       'X-Requested-With': 'XMLHttpRequest' 
     })
   }
-  var baseURL ='';
-  if (obj.url.indexOf('/Sapi') != -1) {
+  // var baseURL ='http://50etfvue.cardoctor.com.cn';
+  var baseURL = 'http://dswx.newcard.com.cn'
+
+ /*  if (obj.url.indexOf('/Sapi') != -1) {
     baseURL = 'http://47.100.226.135:8040'
   } else if (obj.url.indexOf('/fiftyEtf') != -1) {
     baseURL = 'http://47.100.174.65:8011'
@@ -62,8 +64,7 @@ export default function (obj) {
     baseURL = 'http://47.100.165.236:8181'
   } else if (obj.url.indexOf('/market') != -1) {
     baseURL = 'http://50etfvue.cardoctor.com.cn'
-  }
-  // baseURL = 'http://dswx.newcard.com.cn'
+  } */
 
   var opt = {
     url: obj.url,

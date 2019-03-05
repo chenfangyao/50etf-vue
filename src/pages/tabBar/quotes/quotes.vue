@@ -107,8 +107,8 @@ export default {
     },
     getgroupLabel() {
       var options = {
-        // url: '/sapi/Squery/list_tag', 
-        url: '/fiftyEtf/list_tag', //请求接口
+        url: '/Sapi/Squery/list_tag', 
+        // url: '/fiftyEtf/list_tag', //请求接口
         method: 'GET', 
       }
       this.$httpReq(options).then((res) => {

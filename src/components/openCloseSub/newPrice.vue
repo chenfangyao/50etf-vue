@@ -138,7 +138,7 @@ export default {
       pickerText: '', //选择的值,默认取lists的第一个值，从后端获取后初始化
       pickerValueArray: {}, //后端获得lists替换此处
       pricevalue: '',
-      pricetitle: '最新价',
+      pricetitle: '市价',
       fbcclength: '',
       hbcclength: '',
       sliderdisable: false,
@@ -471,7 +471,7 @@ export default {
     // 初始化将合并分笔置空
     this.sethbfbcell([])
     if (this.softconf.ent_price_type == 0) {
-      this.btn3Arr = ['最新价', '对手', '排队']
+      this.btn3Arr = ['市价', '对手', '排队']
     } else {
       this.btn3Arr = ['市价', '限价']
     }
