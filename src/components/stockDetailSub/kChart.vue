@@ -201,9 +201,8 @@ export default {
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
         this.getMaxBar(item.amount)
-        // console.log(item.lowPrice<item.highPrice);祸起萧墙
-        item.highPrice>this.dayKmax&&(this.dayKmax=item.highPrice)
-        item.lowPrice<this.dayKmin&&(this.dayKmin=item.lowPrice)
+        item.highPrice>this.dayKmax&&(this.dayKmax=Number(item.highPrice))
+        item.lowPrice<this.dayKmin&&(this.dayKmin=Number(item.lowPrice))
         if (item.closePrice < item.openPrice) {
           subBar.push(-1)
         } else {
