@@ -52,7 +52,8 @@ export default function (obj) {
     })
   }
   // var baseURL ='http://50etfvue.cardoctor.com.cn';
-  var baseURL = 'http://dswx.newcard.com.cn'
+  // var baseURL = 'http://dswx.newcard.com.cn'
+  var baseURL = 'http://wxv.zjkj888.cn/m/main'
 
  /*  if (obj.url.indexOf('/Sapi') != -1) {
     baseURL = 'http://47.100.226.135:8040'

@@ -1,16 +1,16 @@
 <template>
-<div class="subCard black2">
-    <div class=" uni-flex ml50">
-        <div class="imgContainer">
-          <img :src="switchObj.logo"/>
-          <!-- <img src="../../../assets/mineImg/touxiang.png"/> -->
-        </div>
-        <div>
-          <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
-          <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
-        </div>
+  <div class="subCard black2 uni-flex">
+    <div class="imgContainer">
+      <img :src="switchObj.logo"/>
+      <!-- <img src="../../../assets/mineImg/touxiang.png"/> -->
     </div>
-    <button v-hover-class='"self-hover"' v-if='userinfo.is_certified>0' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
+    <div>
+      <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
+      <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
+    </div>
+    <div >
+      <button v-hover-class='"self-hover"' v-if='userinfo.is_certified>0' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button><!---->
+    </div>
   </div>
 </template>
 <script>
@@ -56,32 +56,31 @@ export default {
 </script>
 <style lang="scss">
 button {
-  width:2.60rem;
-  height:.72rem;
+  width:1.6rem;
+  height:0.66rem;
   background: rgba(64, 157, 229, 1);
   border-radius:.36rem;
   border: 0;
-  font-size:.30rem;
-  line-height:.72rem;
+  font-size:13px;
+  line-height:0.66rem;
   font-family: MicrosoftYaHei;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
-  margin-top:.10rem;
 }
 div.subCard {
-  padding:.22rem 0.34rem;
+  padding:0.7rem 0.3rem;
   text-align: center;
-  div.ml50 {
-    margin-left:.50rem;
-  }
+  height: 2.6rem;
+  align-items: center;
+  justify-content: space-between;
   div.imgContainer {
     img {
       width:1.20rem;
       height:1.20rem;
+      border-radius: 50%;
     }
-    border-radius: 50%;
-    position: relative;
-    bottom:.52rem;
+    // position: relative;
+    // bottom:.52rem;
     margin-right:.30rem;
   }
   h2 {
@@ -97,11 +96,13 @@ div.subCard {
     font-weight: 400;
     color: rgba(130, 133, 151, 1);
   }
-
+div:last-child{
+  flex-grow: 1;
+  text-align: right;
+}
   margin:.66rem.20rem 0;
   background-color: #fff;
   border-radius:.20rem;
   box-shadow:0 .05rem .05rem 0 rgba(245, 245, 245, 0.6);
-  min-height:2.00rem;
 }
 </style>

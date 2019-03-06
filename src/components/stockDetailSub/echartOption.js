@@ -83,10 +83,9 @@ export const optionK = {
       axisLine: { show: false, },
       axisTick: { show: false },
       splitLine: { lineStyle: { color: store.state.atNight ? '#333' : '#eee' } },
-      scale: true,
-      // interval: 0.01,
       axisLabel: {
-        margin: 5,
+        margin: -15,
+        inside :true,
         color: store.state.atNight ? '#f0f0f0' : '#333',
         formatter: val => { return val.toFixed(4) },
       },
@@ -100,11 +99,12 @@ export const optionK = {
       max: 'dataMax',
       min: 'dataMin',
       axisLabel: {
-        margin: -35,
+        margin: -15,
         showMaxLabel: true,
         showMinLabel: false,
-        // color: store.state.atNight ? '#fff' : '#999'
-        color:'#fff'
+        color: store.state.atNight ? '#fff' : '#999',
+        inside: true,
+
 
       },
       axisTick: { show: false },
@@ -112,13 +112,13 @@ export const optionK = {
     }],
   grid: [
     {
-      left: 50,
+      left: 20,
       right: 15,
       top: 30,
       bottom: 140,
     },
     {
-      left: 50,
+      left: 20,
       right: 15,
       top: 254,
       bottom: 3

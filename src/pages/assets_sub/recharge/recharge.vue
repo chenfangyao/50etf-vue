@@ -193,7 +193,6 @@ export default {
         alert('请输入金额')
         return
       }
-      console.log(333,this.pay_way)
       //跳转银行卡页
       switch (this.pay_way) {
         case 'alipay':
@@ -311,6 +310,7 @@ div.mengban{
 }
 div.wrap {
   height: 100vh;
+  min-height: 568px;
   background-color: #f5f5f5;
   position: relative;
   div.panel {
@@ -384,7 +384,7 @@ div.wrap {
     }
   }
   div.fixView {
-    position: fixed;
+    position: absolute;
     bottom:.20rem;
     left: 0;
     right: 0;

@@ -32,7 +32,7 @@ export default {
       Ymax: '',
       Ymin: '',
       dayKmax:0,
-      dayKmin:1000,
+      dayKmin:10000,
       resquestState: 1,//为1时可发请求
       stockInfo: {},//分时信息对象，内含最高，最低，昨收
       timmer: null,//分时线定时器
@@ -190,7 +190,7 @@ export default {
       var subBar = []
       var MA_k = [[], [], [], [], []]
       this.dayKmax=0
-      this.dayKmin=1000
+      this.dayKmin=10000
       arr.forEach(item => {
         subBar = [item.tradeDate]
         X.push(item.tradeDate)
@@ -201,6 +201,7 @@ export default {
         MA_k[4].push(item.ma30)
         subBar.push(item.amount)
         this.getMaxBar(item.amount)
+        // console.log(item.lowPrice<item.highPrice);祸起萧墙
         item.highPrice>this.dayKmax&&(this.dayKmax=item.highPrice)
         item.lowPrice<this.dayKmin&&(this.dayKmin=item.lowPrice)
         if (item.closePrice < item.openPrice) {

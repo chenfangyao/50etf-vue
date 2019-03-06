@@ -117,6 +117,8 @@ export default {
 div.wrap {
   height: 100vh;
   background-color: #f5f5f5;
+  position: relative;
+  min-height: 568px;
   div.panel {
     padding: 0.1px.46rem;
     background-color: #fff;
@@ -179,7 +181,7 @@ div.wrap {
     }
   }
   div.fixView {
-    position: fixed;
+    position: absolute;
     bottom:.60rem;
     left: 0;
     right: 0;

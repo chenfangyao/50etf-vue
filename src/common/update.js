@@ -2,8 +2,8 @@ import md5 from 'js-md5'
 import store from '../vuex'
 //plus.storage.getItem(key);
 var responseOK=true
-const baseURL = 'http://dswx.newcard.com.cn'
-// const baseURL = 'http://t50.zhijiancaopan.com:8042'
+// const baseURL = 'http://dswx.newcard.com.cn'
+const baseURL = 'http://wxv.zjkj888.cn/m/main'
 function setTheme(val){
   if (val) {
     plus.navigator.setStatusBarBackground("#181c28");
