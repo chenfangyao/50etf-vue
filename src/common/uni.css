@@ -95,7 +95,7 @@ input{
 .padding1{
   padding: 0.1px 0;
 }
-.el-slider__runway .el-slider__button-wrapper{z-index: 100 ;}
+.el-slider__runway .el-slider__button-wrapper{z-index: 8 ;}
 .el-slider__runway .el-slider__bar{    background-color: #409dE5;}
 div.wrap{
   width: 100%;

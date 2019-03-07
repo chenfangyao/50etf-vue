@@ -13,9 +13,8 @@
         </div>
         <div class="chooseCount black1">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
-          <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}">
-            <!--<span class="txt">{{maxprice.enable_amount}}张</span>-->
-            <span class="txt">{{sellnumber}}</span>
+          <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}" class="flex1">
+            <span >{{sellnumber}}</span>
             <uni-icon  @define-click="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div>
@@ -41,8 +40,8 @@
               </div>
             </van-popup>
           </div>
-          <div v-show="tabActive"  v-vtap.self="{method:showPickers}">
-            <span class="txt">{{pickerText}}</span>
+          <div v-show="tabActive"  v-vtap.self="{method:showPickers}" class="flex1">
+            <span >{{pickerText}}</span>
             <uni-icon @define-click="showPickers" type="arrowdown" size="24"></uni-icon>
             <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
           </div>
@@ -196,7 +195,6 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      console.log(666,i)
       if(i==0){
         this.setenttype(2)
       }else if(i==1){
@@ -585,7 +583,11 @@ div.root-el {
       font-size: 14px;
       color: #848689;
       background: rgba(239, 239, 239, 1);
-
+div.flex1{
+  display: flex;
+  align-items: center;
+  justify-content: space-around
+}
       uni-icon {
         vertical-align: middle;
       }
@@ -596,9 +598,6 @@ div.root-el {
         line-height: 0.64rem;
       }
 
-      span.txt {
-        margin-right: 0.96rem;
-      }
     }
   }
 
