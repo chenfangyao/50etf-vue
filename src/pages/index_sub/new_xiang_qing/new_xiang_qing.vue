@@ -34,6 +34,10 @@ export default {
   },
   computed: mapState(['atNight', 'sid']),
   methods: {},
+  beforeRouteEnter(to, from, next){
+    scrollTo(0,0)
+    next()
+  },
   created(opts) {
     var id = parseInt(this.$route.query.id)
     var options = {
@@ -61,6 +65,8 @@ export default {
 <style lang="scss" scoped>
 .wrap{
   padding-bottom: 0.1px;
+  min-height: 100vh;
+
 }
 .artconent {
   text-align: center;

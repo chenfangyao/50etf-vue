@@ -21,6 +21,7 @@
       <van-loading type="spinner" color="#999" />
     </div>
     <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
+    <article-popup :notic-list='noticList'></article-popup>
   </div>
 </template>
 
@@ -28,20 +29,22 @@
 import etfTabbar from '@/components/other/etf-tabbar'
 import { checkUpdate } from '@/common/update.js'
 import saveLogin from '@/common/saveLogin.js'
+import articlePopup from '@/components/other/article-popup'
 import { Loading } from 'vant';
 import { mapState } from 'vuex';
-
 export default {
   name: 'App',
-  components: { etfTabbar, [Loading.name]: Loading },
+  components: { etfTabbar, [Loading.name]: Loading,articlePopup },
 
   data() {
     return {
-      transitionName: ''
+      transitionName: '',
+      noticList:[{}]
     }
   },
   created() {
     this.getConf()
+    this.getNotic()
     process.env.NODE_ENV === 'production' && saveLogin()
     document.addEventListener('plusready', () => {
       this.$store.commit('setappReady',true)
@@ -101,6 +104,19 @@ export default {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
           // this.$store.commit('setatNight',res.data.default_skin==='0')
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
+    },
+    getNotic(){
+      var options = {
+        url: '/Sapi/Article/popup', //请求接口
+        method: 'GET',
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.noticList=res.data.list  
         }
       }).catch((err) => {
         console.error(err, '捕捉')
