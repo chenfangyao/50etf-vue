@@ -3,7 +3,7 @@ import store from '../vuex'
 //plus.storage.getItem(key);
 var responseOK=true
 // const baseURL = 'http://dswx.newcard.com.cn'
-const baseURL = 'http://wxv.zjkj888.cn/m/main'
+const baseURL = 'http://wxv.zjkj888.cn'
 function setTheme(val){
   if (val) {
     plus.navigator.setStatusBarBackground("#181c28");
