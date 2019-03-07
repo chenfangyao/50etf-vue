@@ -1,64 +1,64 @@
 <template>
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
-      <span class="stockNmae textc1" >50ETF</span>
-      <div class="df_wh" id="mini-canvas"></div>
-      <div class="txtContainer" :class="{lt0:commonstock[0].priceChange<0}">
-				<span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
-				<span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
-				<span>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
-      </div>
+    <span class="stockNmae textc1">50ETF</span>
+    <div class="df_wh" id="mini-canvas"></div>
+    <div class="txtContainer" :class="{lt0:commonstock[0].priceChange<0}">
+      <span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
+      <span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
+      <span>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
     </div>
+  </div>
 </template>
 <script>
 import echarts from 'echarts'
 let myChart = null;
 
-var option = {
-  xAxis: {
-    data: [],
-    show: false,
-  },
-  legend: {
-    padding: 0
-  },
-  animation: false,
-  grid: {
-    left: 0,
-    right: 0,
-    top: 3,
-    bottom: 3
-  },
-  yAxis: {
-    show: false,
-    type: 'value',
-     min:'dataMin',
-    max:'dataMax'
-  },
-  series: [{
-    data: [],
-    type: 'line',
-    symbol: 'none',
-    lineStyle:{color:'#ec605e'}
-  }]
-}
 export default {
   data() {
     return {
       echarts,
-      timmer:null
+      timmer: null,
+      option: {
+        xAxis: {
+          data: [],
+          show: false,
+        },
+        legend: {
+          padding: 0
+        },
+        animation: false,
+        grid: {
+          left: 0,
+          right: 0,
+          top: 3,
+          bottom: 3
+        },
+        yAxis: {
+          show: false,
+          type: 'value',
+          min: 'dataMin',
+          max: 'dataMax'
+        },
+        series: [{
+          data: [],
+          type: 'line',
+          symbol: 'none',
+          lineStyle: { color: '#ec605e' }
+        }]
+      }
     }
   },
-  props:{
-    commonstock:{
-      default(){return []}
+  props: {
+    commonstock: {
+      default() { return [] }
     }
   },
   methods: {
     showH5Echarts() {
-       myChart = echarts.init(document.getElementById('mini-canvas'));
+      myChart = echarts.init(document.getElementById('mini-canvas'));
     },
     go() {
-      this.$navigateTo({ url: '/stock_detail',query:{index:0} })
+      this.$navigateTo({ url: '/stock_detail', query: { index: 0 } })
     },
     getfenshi() {
       var options = {
@@ -83,49 +83,52 @@ export default {
         Yline.push(item.closePrice)
       });
       if (Yline.length > 5) {
-        option.series[0].data = Yline
-        if(this.commonstock[0].priceChange<0){
-          option.series[0].lineStyle.color='#1bd091'
-        }else{
-          option.series[0].lineStyle.color='#ec605e'
+        this.option.series[0].data = Yline
+        if (this.commonstock[0].priceChange < 0) {
+         this.option.series[0].lineStyle.color = '#1bd091'
+        } else {
+         this.option.series[0].lineStyle.color = '#ec605e'
         }
-        myChart.setOption(option)
+        myChart.setOption(this.option)
       }
     },
   },
-  deactivated(){clearInterval(this.timmer)},
-
+  deactivated() { clearInterval(this.timmer) },
+  watch:{
+    commonstock(val){
+      val[0].priceChange!==undefined&& this.getfenshi()
+    }
+  },
   mounted() {
-   this.showH5Echarts()
-   this.getfenshi()
-   this.timmer=setInterval(()=>this.getfenshi(),12000)
+    this.showH5Echarts()
+    this.timmer = setInterval(() => this.getfenshi(), 12000)
   },
 }
 </script>
 
 <style lang="scss" scoped>
 div.stock50 {
-  height:.84rem;
-  line-height:.84rem;
+  height: 0.84rem;
+  line-height: 0.84rem;
   justify-content: space-between;
-  padding: 0 .27rem;
+  padding: 0 0.27rem;
   border-top: 1px solid #ededed;
-  border-bottom:.12rem solid #ededed;
+  border-bottom: 0.12rem solid #ededed;
   div.txtContainer {
     width: 50%;
     display: flex;
     justify-content: space-between;
-    line-height:.71rem;
+    line-height: 0.71rem;
     color: rgba(240, 95, 92, 1);
   }
-  div.txtContainer.lt0{
+  div.txtContainer.lt0 {
     color: $green1;
   }
   span.stockNmae {
     font-size: 17px;
     font-family: ArialMT;
     font-weight: 400;
-    line-height:.71rem;
+    line-height: 0.71rem;
     color: rgba(24, 28, 40, 1);
   }
   span.currentPrice {
@@ -140,8 +143,8 @@ div.stock50 {
   }
 }
 div.df_wh {
-  width:1.34rem;
-  height:.47rem;
+  width: 1.34rem;
+  height: 0.47rem;
   align-self: center;
 }
 </style>
