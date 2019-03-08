@@ -38,7 +38,7 @@ export default function (obj) {
 
   obj.header = obj.header || {}
   Object.assign(obj.header, {
-    clienttype: process.env.NODE_ENV === 'production'?'app':'web',
+    clienttype: process.env.clienttype,
     ver: 'v1.0',
     sid,
     hrand,
@@ -51,25 +51,11 @@ export default function (obj) {
       'X-Requested-With': 'XMLHttpRequest' 
     })
   }
-  // var baseURL ='http://50etfvue.cardoctor.com.cn';
-  // var baseURL = 'http://dswx.newcard.com.cn'
-  var baseURL = 'http://wxv.zjkj888.cn'
 
- /*  if (obj.url.indexOf('/Sapi') != -1) {
-    baseURL = 'http://47.100.226.135:8040'
-  } else if (obj.url.indexOf('/fiftyEtf') != -1) {
-    baseURL = 'http://47.100.174.65:8011'
-    // baseURL = 'http://47.100.4.249:9221'
-    // baseURL = 'http://172.26.63.164:8184'
-  } else if (obj.url.indexOf('getCommonSelectStock') != -1 || obj.url.indexOf('getTimeSharingInfo') != -1) {
-    baseURL = 'http://47.100.165.236:8181'
-  } else if (obj.url.indexOf('/market') != -1) {
-    baseURL = 'http://50etfvue.cardoctor.com.cn'
-  } */
 
   var opt = {
     url: obj.url,
-    baseURL:process.env.NODE_ENV === 'production' ? baseURL : '',
+    baseURL: process.env.API_HOST,
     method: obj.method || 'get',
     headers: obj.header ,
     timeout: 30000,

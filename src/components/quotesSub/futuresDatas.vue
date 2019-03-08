@@ -49,7 +49,7 @@ export default {
       });
     },
     goLogin(){
-      this.$redirectTo({url:'/pages/login/login'})
+      this.$navigateTo({url:'/pages/login/login'})
     },
     calcBg(val) {
       this.ltPrice = 10000
