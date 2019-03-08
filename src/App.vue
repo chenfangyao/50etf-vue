@@ -103,6 +103,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
+          res.data.is_need_login>0&&this.$redirectTo({url:'/pages/login/login'})
           // this.$store.commit('setatNight',res.data.default_skin==='0')
         }
       }).catch((err) => {

@@ -1,88 +1,122 @@
 <template>
-	<div class="wrap">
-		<base-header :hasBack="true" title='我的客服'></base-header>
-    <div class="h50"></div>
-    <btn-block txt='QQ : 3074732530'></btn-block>
-    <!--<div class="h577"></div>-->
-	</div>
+  <div class="wrap black1">
+    <base-header :hasBack="true" title='我的客服'></base-header>
+    <div class="headlogo">
+      <img :src="switchObj.logo" alt="">
+      <div>{{switchObj.appname}}</div>
+    </div>
+    <div class="uni-flex item textc1">
+      <img :src="img2" alt="">
+      <span>客服电话：</span>
+      <span>{{switchObj.tel}}</span>
+    </div>
+    <div class="line"></div>
+
+    <div class="uni-flex item textc1">
+      <img :src="img1" alt="">
+      <span>客服QQ：</span>
+      <ul class="ml5">
+        <li v-for="(item,i) in qq" :key="i">{{item}}</li>
+      </ul>
+    </div>
+    <div class="line"></div>
+    <div class="uni-flex item textc1">
+      <img :src="img3" alt="">
+      <span>客服微信：</span>
+      <ul>
+        <li v-for="(item,i) in wechat" :key="i">{{item}}</li>
+      </ul>
+    </div>
+    <div class="line"></div>
+    <div class="btn">
+      <div class="txt textc1"><span>服务时间 ：周一 至 周五</span><span>{{switchObj.trade_time_range}}</span></div>
+      <btn-block txt='电话咨询' @v-tap='call'></btn-block>
+    </div>
+  </div>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
+import { mapState } from 'vuex'
+import img1 from '@/assets/mineImg/customer/qq.png'
+import img2 from '@/assets/mineImg/customer/phone.png'
+import img3 from '@/assets/mineImg/customer/wechat.png'
+
 export default {
   data() {
-    return {
+    return {      img1, img2, img3
     };
   },
-  components:{btnBlock},
-  methods: {
-    showPop() {
-      this.telShow = !this.telShow
+  computed: {
+    ...mapState(['switchObj']),
+    qq() {
+      return this.switchObj.qq.split('|')
     },
-    call() {
-      plus.device.dial( '' );
+    wechat() {
+      return this.switchObj.wx.split('|')
     }
   },
-  created(){
-  }
+  components: { btnBlock },
+  methods: {
+    call() {
+     process.env.API_HOST && plus.device.dial(this.switchObj.tel);
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-div.wrap {
-  background-color: #f5f5f5;
-  height: 100vh;
-  div.h50{
-    height:5.00rem;
+div#app.at-night{
+  .line{
+    border-color: #414a66
   }
-  div.telPop {
-    div.fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
+}
+div.wrap {
+  height: 100vh;
+  div.headlogo {
+    text-align: center;
+    margin: 0.59rem 0 0.9rem;
+    img {
+      height: 0.88rem;
+      width: 0.88rem;
     }
-    div.container {
-      text-align: center;
-      background-color: #fff;
-      position: fixed;
-      top: 50%;
-      padding-bottom:.42rem;
-      border-radius:.10rem;
-      transform: translateY(-50%);
-      left:.75rem;
-      right:.75rem;
-      div.txt {
-        font-size: 16px;
-        line-height: 16px;
-        color: rgba(24, 28, 40, 1);
-        margin:.39rem 0.91rem;
-      }
-      div.telNum {
-        font-size: 45px;
-        line-height: 45px;
-        font-family: ArialMT;
-        color: rgba(24, 28, 40, 1);
-        margin-bottom:1.03rem;
-      }
+  }
+
+  div.item {
+    align-items: flex-start;
+    line-height: 0.4rem;
+    font-size: 13px;
+    color: #333;
+    margin-left: 0.44rem;
+    span:not(:last-child) {
+      margin-left: 0.2rem;
     }
+    .ml5 {
+      margin-left: 5px;
+    }
+    img {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 2px;
+    }
+  }
+  div.line {
+    margin: 0.2rem 0.44rem 0.2rem 1.04rem;
+    display: block;
+    border-bottom: 1px solid #ededed;
   }
   div.btn {
-    height:.98rem;
-    margin: 0.20rem;
-    background: rgba(64, 157, 229, 1);
-    border-radius:.10rem;
-    font-size:.32rem;
-    color: rgba(255, 255, 255, 1);
-    line-height:.98rem;
-    text-align: center;
-  }
-  div.h577 {
-    height:5.77rem;
-    background-color: #fff;
-    margin:.50rem.20rem 0;
+    padding: 0 0.22rem;
+    position: absolute;
+    bottom: 1.3rem;
+    left: 0;
+    right: 0;
+    div.txt{
+      text-align: center;
+      font-size: 11px;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
   }
 }
 </style>

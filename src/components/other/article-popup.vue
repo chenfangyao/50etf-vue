@@ -1,12 +1,12 @@
 <template>
   <div class="self-mask" v-if="showMine">
-    <div class="popParent">
+    <div class="popParent black1">
       <div class="close"><img src="../../assets/indexTabImg/close.png" v-vtap="{method:close}"></div>
       <div class="logoimg">
         <img src="../../assets/indexTabImg/notice.png">
       </div>
-      <div class="title">{{noticList[0].title}}</div>
-      <div class="content" v-html="noticList[0].content"></div>
+      <div class="title textc1">{{noticList[0].title}}</div>
+      <div class="content textc2" v-html="noticList[0].content"></div>
       <div class="button" v-vtap="{method:go}">更多详情</div>
     </div>
   </div>
@@ -67,7 +67,7 @@ div.popParent {
     font-weight: bold;
     color: #333;
     width: 3.58rem;
-    line-height: 16px;
+    line-height: 17px;
     margin: 0 auto;
     text-align: center;
     text-overflow: ellipsis-lastline;
@@ -80,7 +80,7 @@ div.popParent {
   div.content {
     width: 4.7rem;
     margin: 0.28rem auto 0;
-    padding-bottom: 15px;
+    // padding-bottom: 15px;
     overflow: hidden;
     height: 1.44rem;
   }
