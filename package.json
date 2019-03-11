@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
-    "build:test": "cross-env NODE_ENV=production env_config=test node build/build.js"
+    "build:test": "cross-env NODE_ENV=production env_config=test node build/build.js",
+    "build:wgt": "cross-env NODE_ENV=production env_config=wgt node build/build.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

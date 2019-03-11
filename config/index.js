@@ -39,6 +39,7 @@ module.exports = {
   build: {
     testEnv: require('./test.env'), //测试配置
     prodEnv: require('./prod.env'), // 生产配置
+    wgtEnv: require('./wgt.env'), 
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 

@@ -1,5 +1,5 @@
 <template>
-<div class="fixWrap black1">
+<div class="fixWrap black2">
   <div class="occupy"></div>
   <div class="title">
     <div class="msg">
@@ -63,7 +63,7 @@ export default {
   }
 }
 .title {
-  height: 44px;
+  height: 54px;
   padding: 0 .26rem;
 
   .msg {

@@ -1,9 +1,7 @@
 import md5 from 'js-md5'
 import store from '../vuex'
-//plus.storage.getItem(key);
 var responseOK=true
-var baseURL = process.env.API_HOST
-
+var baseURL = process.env.API_HOST 
 function setTheme(val){
   if (val) {
     plus.navigator.setStatusBarBackground("#181c28");

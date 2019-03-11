@@ -4,7 +4,8 @@ import Qs from 'qs'
 import md5 from 'js-md5'
 
 var isShowLoading = true;
-
+//plus.storage.setItem(key, value);plus.storage.getItem(key);
+localStorage.setItem('wgtURL', process.env.API_HOST)
 axios.interceptors.response.use(function (response) {
   store.commit("setloadingFlag", false);
   isShowLoading = false;
@@ -38,7 +39,7 @@ export default function (obj) {
 
   obj.header = obj.header || {}
   Object.assign(obj.header, {
-    clienttype: process.env.clienttype,
+    clienttype: process.env.clienttype ,
     ver: 'v1.0',
     sid,
     hrand,
@@ -51,7 +52,6 @@ export default function (obj) {
       'X-Requested-With': 'XMLHttpRequest' 
     })
   }
-
 
   var opt = {
     url: obj.url,

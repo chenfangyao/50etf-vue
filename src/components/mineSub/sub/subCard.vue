@@ -10,7 +10,7 @@
     </div>
     <div >
       <button v-hover-class='"self-hover"' v-if='userinfo.is_certified>0' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
-      <button v-hover-class='"self-hover"' v-else v-vtap="{method:go}">登录</button>
+      <button v-hover-class='"self-hover"' v-else-if="!sid" v-vtap="{method:go}">登录</button>
     </div>
   </div>
 </template>
@@ -85,14 +85,14 @@ div.subCard {
     margin-right:.30rem;
   }
   h2 {
-    font-size:.30rem;
+    font-size:14px;
     font-weight: 400;
     margin: 0;
 
     color: rgba(24, 28, 40, 1);
   }
   h3 {
-    font-size:.22rem;
+    font-size:13px;
     margin: 0;
     font-weight: 400;
     color: rgba(130, 133, 151, 1);
