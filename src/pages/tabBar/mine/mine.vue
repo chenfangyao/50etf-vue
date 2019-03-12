@@ -45,12 +45,11 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../static/mineImg/arrow.png" />
       </div> -->
-      <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'about_us/about_us'}" >
+     <!--  <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'about_us/about_us'}" >
         <img src="../../../assets/mineImg/08.png" />
         <span>关于我们</span>
-        <!-- <span class="tip" v-if="true"></span> -->
         <img src="../../../assets/mineImg/arrow.png" />
-      </div>
+      </div> -->
 
 
     </div>
@@ -63,7 +62,6 @@ import { mapState, mapMutations } from 'vuex';
 export default {
   data() {
     return {
-
 		}
   },
 	computed: mapState(['sid','indextimmer','newlengths','switchObj']),
@@ -123,10 +121,11 @@ export default {
 
 <style scoped lang="scss">
 div.wrap {
+  padding-top: 0.1px;;
   background-color: #f5f5f5;
-  min-height: 100vh;
+  min-height: calc(100vh - 51px);
   div.items {
-    margin-top:1.30rem;
+    margin-top:4.3rem;
     div {
       justify-content: space-between;
       background-color: #fff;

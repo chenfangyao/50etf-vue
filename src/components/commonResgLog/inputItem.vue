@@ -68,16 +68,17 @@ div._input {
   img.openImg {
     width:.42rem;
     height:.33rem;
+    top:0;
   }
   img.closeImg {
     width:.38rem;
     height:.21rem;
+    top:0.05rem
   }
   img {
     position: absolute;
     z-index: 10;
     right:.36rem;
-    top:.16rem;
   }
 
   span.absTxt {

@@ -11,8 +11,8 @@ export default {
 div.tip {
   font-size: 13px;
   color: rgba(240, 95, 92, 1);
-  margin: -36upx 0.32rem;
-  height:.36rem;
+  margin: -0.36rem 0 .32rem;
+  height:0.36rem;
   opacity: 0;
 }
 div.tip.errclass {

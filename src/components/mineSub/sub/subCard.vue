@@ -2,7 +2,6 @@
   <div class="subCard black2 uni-flex">
     <div class="imgContainer">
       <img :src="switchObj.logo"/>
-      <!-- <img src="../../../assets/mineImg/touxiang.png"/> -->
     </div>
     <div>
       <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
@@ -73,6 +72,9 @@ div.subCard {
   text-align: center;
   height: 2.6rem;
   align-items: center;
+  position: fixed;
+  left: 0.2rem;
+  right: 0.2rem;
   justify-content: space-between;
   div.imgContainer {
     img {
@@ -101,7 +103,8 @@ div:last-child{
   flex-grow: 1;
   text-align: right;
 }
-  margin:.66rem.20rem 0;
+  margin-top: 0.5rem;
+  z-index: 5;
   background-color: #fff;
   border-radius:.20rem;
   box-shadow:0 .05rem .05rem 0 rgba(245, 245, 245, 0.6);

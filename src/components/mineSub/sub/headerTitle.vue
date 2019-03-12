@@ -48,23 +48,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .fixWrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 50;
   background: linear-gradient(
     90deg,
     rgba(41, 123, 205, 1),
     rgba(64, 157, 229, 1)
   );
-  right: 0;
   .occupy {
     height: var(--status-bar-height);
   }
 }
 .title {
   height: 54px;
-  padding: 0 .26rem;
+  padding: 0 0.26rem;
 
   .msg {
     position: relative;
