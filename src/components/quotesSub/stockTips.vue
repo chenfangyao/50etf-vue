@@ -101,7 +101,7 @@ export default {
   },
   mounted() {
     this.showH5Echarts()
-    this.timmer = setInterval(() => this.getfenshi(), 12000)
+    this.timmer = setInterval(() => this.getfenshi(), 120000)
   },
 }
 </script>

@@ -42,7 +42,7 @@ const store = new Vuex.Store({
     // 首页股票信息
     commonstock: [],
     // 合约tag
-    taglist: {},
+    taglist: null,
     // 委托的index
     weituoindex: 0,
     // 软件配置信息

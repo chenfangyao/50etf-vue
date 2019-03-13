@@ -27,7 +27,6 @@
 
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
-import { checkUpdate } from '@/common/update.js'
 import saveLogin from '@/common/saveLogin.js'
 import articlePopup from '@/components/other/article-popup'
 import { Loading } from 'vant';
@@ -45,24 +44,10 @@ export default {
   created() {
     this.getConf()
     this.getNotic()
-    process.env.NODE_ENV === 'production' && saveLogin()
     document.addEventListener('plusready', () => {
       this.$store.commit('setappReady',true)
-      checkUpdate()
-      setInterval(() => { checkUpdate() }, 60000)
-      plus.key.addEventListener("backbutton", () => {
-        if (!this.$route.meta.tabbar) {
-          this.$router.goBack()
-          return
-        }
-        this.$dialog.confirm({
-          title: '提示',
-          message: '确定退出吗？'
-        }).then(() => {
-          plus.runtime.quit();
-        }).catch(() => {
-        });
-      });
+      saveLogin()
+      this.backEvent()
     }, false);
   },
   computed: mapState(['atNight', 'loadingFlag','appReady']),
@@ -104,7 +89,7 @@ export default {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
           res.data.is_need_login>0&&this.$redirectTo({url:'/pages/login/login'})
-          // this.$store.commit('setatNight',res.data.default_skin==='0')
+          this.$store.commit('setatNight',res.data.default_skin==='0')
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -122,6 +107,20 @@ export default {
       }).catch((err) => {
         console.error(err, '捕捉')
       })
+    },
+    backEvent(){
+      plus.key.addEventListener("backbutton", () => {
+        if (!this.$route.meta.tabbar) {
+          this.$router.goBack()
+          return
+        }
+        this.$dialog.confirm({
+          title: '提示',
+          message: '确定退出吗？'
+        }).then(() => {
+          plus.runtime.quit();
+        })
+      });
     }
   }
 }

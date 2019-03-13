@@ -26,6 +26,7 @@ import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import inputItem from '@/components/commonResgLog/inputItem.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
 import { mapState, mapMutations } from 'vuex';
+import { checkUpdate } from '@/common/update.js'
 export default {
   data() {
     return {
@@ -87,7 +88,9 @@ export default {
             this.$httpReq(options).then((res) => {
                 if (res.status == 1) {
                     this.verifyYes=true
-                    process.env.NODE_ENV === 'production'&& localStorage.setItem('etfSid',res.data.sid)
+                    if(process.env.NODE_ENV === 'production'){
+                       localStorage.setItem('etfSid',res.data.sid)
+                       checkUpdate()}
                     this.setsid(res.data.sid)
                     // 获取用户信息
                     this.getuserinfo()

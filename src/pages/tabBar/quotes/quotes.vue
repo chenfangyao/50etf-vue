@@ -4,7 +4,7 @@
     <stock-tip-bar :commonstock="commonstock"></stock-tip-bar>
     <div class="uni-tab-bar">
       <div class="swiper-tab uni-flex black2 ">
-        <div v-for="(tab,index) in groupLabel" :key="tab.id" class="swiper-tab-list2 textc1" :id="tab.id">
+        <div v-for="(tab,index) in taglist" :key="tab.id" class="swiper-tab-list2 textc1" :id="tab.id">
           <span
             :class="[tabIndex==index ? 'active' : '']"
             v-vtap="{method:tapTab}"
@@ -44,7 +44,6 @@ export default {
       resquestState: 1,
       newsitems: [1, 2, 3, 4],
       quotationStr: '',//获取列表所需的拼接字符串
-      groupLabel: [],
       codeList: [],
       timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
@@ -111,12 +110,18 @@ export default {
         // url: '/fiftyEtf/list_tag', //请求接口
         method: 'GET', 
       }
+      if(this.taglist){
+        this.startArtlelist()
+        return
+      }
       this.$httpReq(options).then((res) => {
-        this.groupLabel = res.data.list
-        this.getartlelist()
-        util.calcLegalTime() && this.beginPolling()//启动轮询
-        this.settaglist(this.groupLabel[0])
+        this.settaglist(res.data.list)
+        this.startArtlelist()
       })
+    },
+    startArtlelist(){
+      this.getartlelist()
+      util.calcLegalTime() && this.beginPolling()//启动轮询
     },
     // 获取stockCode
     getartlelist() {
@@ -127,7 +132,7 @@ export default {
         data: {
           page_index: 0,
           page_size: 10000,
-          tag_id: this.groupLabel[this.tabIndex].id,
+          tag_id: this.taglist[this.tabIndex].id,
           timestr: [],
           commonstock: {}
         },
@@ -156,7 +161,6 @@ export default {
         return false;
       } else {
         this.tabIndex = e.target.dataset.current
-        this.settaglist(this.groupLabel[this.tabIndex])
         this.quoteList = []
         this.getartlelist()
       }
