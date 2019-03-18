@@ -66,6 +66,7 @@ export default {
       this.$emit('change-i', this.tabIndex)
       let j = 1
       switch (Number(this.tabIndex)) {
+        case 0:return
         case 1: j = 4
           break
         case 2: j = 1
@@ -356,16 +357,25 @@ export default {
     //#endif
   },
   beforeDestroy() {
-    clearInterval(this.timmer)
-    this.timmer = null
     //#ifdef H5
     h5Chart = null
     h5ChartK = null
     //#endif
   },
-  created() {
-    this.getfenshi()
+  deactivated(){
+    clearInterval(this.timmer)
+    this.timmer = null
+      this.$emit('change-i', this.tabIndex=0)
+
+  },
+  activated() {
+  this.symbolStr&&this.getfenshi()
     util.calcLegalTime() && this.beginPolling()
+  },
+  watch:{
+    symbolStr(val){
+      val&&this.getfenshi()
+    }
   }
 }
 </script>

@@ -14,7 +14,7 @@
           <label class="textc1">·限50etf交易使用</label>
         </div>
       </div>
-      <div class="not-red-list"></div>
+      <div class="not-red-list">暂无红包</div>
     </div>
 
   </div>
@@ -60,11 +60,11 @@ export default {
 <style lang="scss" scoped>
 div.wrap22 {
   width: 100%;
-  height: 800px;
+  min-height: 100vh;
   background-color:#F5F5F5 ;
+  padding-bottom: 20px;
   .red-envelope{
     margin: 22px 11px 0 13px;
-    height: 800px;
     .red-list{
       position: relative;
       margin-top: 20px;

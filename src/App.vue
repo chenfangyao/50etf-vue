@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{'at-night':atNight}">
-    <template v-if="$route.meta.tabbar">
+    <template v-if="$route.meta.isKeepAlive">
       <transition :name="transitionName">
         <keep-alive>
           <router-view></router-view>
@@ -9,13 +9,13 @@
     </template>
     <template v-else>
       <transition :name="transitionName">
-        <router-view v-if="!$route.meta.isKeepAlive"></router-view>
+        <router-view ></router-view>
       </transition>
-      <transition :name="transitionName">
+    <!--   <transition :name="transitionName">
         <keep-alive>
           <router-view v-if="$route.meta.isKeepAlive"></router-view>
         </keep-alive>
-      </transition>
+      </transition> -->
     </template>
     <div class="self-mask maskLoading" v-show="loadingFlag">
       <van-loading type="spinner" color="#999" />
@@ -69,7 +69,7 @@ export default {
       this.$router.isBack = false
     },
     atNight(val) {
-      if (!appReady) return;
+      if (!this.appReady) return;
       if (val) {
         plus.navigator.setStatusBarBackground("#181c28");
         plus.navigator.setStatusBarStyle("light");

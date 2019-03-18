@@ -3,11 +3,10 @@
   <div class="rechargeWay root-el uni-flex" v-vtap="{method:switchPop}">
 		<!-- wayLists是否绑定银行 -->
 		<!-- 暂时无logo先隐藏 -->
-      <img  class="zhifubao" :src="banklogo" v-if='wayLists&&showbanklogo'>
+      <img  class="zhifubao" :src="banklogo" >
       <div class="txt">
-        <div class="textc1">{{wayLists[way_i]||textbank}}</div>
+        <div class="textc1">{{textbank}}</div>
         <div v-if="txt2">
-          <!-- <span v-if="wayLists[way_i]">{{txt2}}</span> -->
           <span class="textc2" >{{txt2}}</span>
         </div>
       </div>
@@ -33,14 +32,8 @@ export default {
     }
   },
   props:{
-    wayLists:{
-      default(){
-        return[]
-      }
-    },
     txt1:'',
     txt2:{},
-		showbanklogo:{},
     goTo:'',
   },
   methods: {
@@ -60,12 +53,12 @@ export default {
       this.showAction = !this.showAction
     },
   },
-	created(){
-		setTimeout(()=>{
-			this.textbank=this.paylist.alipay[0].bank_name
-			this.banklogo=this.paylist.alipay[0].logo
-		},500)
-	}
+  watch:{
+    paylist(val){
+	    this.textbank=val.remitance[0].bank_name
+			this.banklogo=val.remitance[0].logo
+    }
+  }
 
 }
 </script>

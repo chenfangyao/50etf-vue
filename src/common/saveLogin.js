@@ -14,8 +14,8 @@ export default function () {
   var userinfo = localStorage.getItem('userinfo')
   setTheme(store.state.atNight)
   if (sid !== null && userinfo !== null) {
-    checkUpdate()
     store.commit('setsid', sid)
     store.commit('setuserinfo', JSON.parse(userinfo))
+    checkUpdate()
   }
 }

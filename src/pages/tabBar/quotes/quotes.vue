@@ -59,18 +59,22 @@ export default {
     util.indextimmer.quotesCommonSelectStock = null
     next()
   },
-  beforeRouteEnter(to, from, next) {
+ /*  beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.quotationStr || vm.getgroupLabel()//获取那一串股票码
-      vm.getcommonselectstock([''])
+    console.log('1212121');
+      
+    })
+  }, */
+  activated(){
+    this.quotationStr || this.getgroupLabel()//获取那一串股票码
+      this.getcommonselectstock([''])
       if (!util.calcLegalTime()) return;
-      vm.beginPolling()
+      this.beginPolling()
       if (util.indextimmer.quotesCommonSelectStock === null) {
         util.indextimmer.quotesCommonSelectStock = setInterval(() => {
-          vm.getcommonselectstock([vm.commonstock[0].tradeMins])
+          this.getcommonselectstock([this.commonstock[0].tradeMins])
         }, 1500)
       }
-    })
   },
   methods: {
     ...mapMutations(['setcommonstock', 'settaglist']),

@@ -35,7 +35,7 @@ div.root-el {
     border-radius: 5px;
     height:.37rem;
     width:.37rem;
-    line-height:.37rem;
+    line-height:.38rem;
     text-align: center;
     display: inline-block;
     align-self: center;

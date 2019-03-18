@@ -88,10 +88,10 @@ export default {
             this.$httpReq(options).then((res) => {
                 if (res.status == 1) {
                     this.verifyYes=true
+                      this.setsid(res.data.sid)
                     if(process.env.NODE_ENV === 'production'){
                        localStorage.setItem('etfSid',res.data.sid)
                        checkUpdate()}
-                    this.setsid(res.data.sid)
                     // 获取用户信息
                     this.getuserinfo()
                   this.$router.replace('/')

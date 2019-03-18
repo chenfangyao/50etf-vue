@@ -6,7 +6,7 @@
         <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
       </div>
       <div class="chooseType uni-flex">
-        <div class="tabOpen uni-flex black2" >
+        <div class="tabOpen uni-flex black2">
           <div v-vtap="{method: tapChange , params: false}">合并</div>
           <div v-vtap="{method: tapChange , params: true}">分笔</div>
           <div :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</div>
@@ -14,8 +14,8 @@
         <div class="chooseCount black1">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
           <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}" class="flex1">
-            <span >{{sellnumber}}</span>
-            <uni-icon  @define-click="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
+            <span>{{sellnumber}}</span>
+            <uni-icon @define-click="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
             <van-popup v-model="showpop" position="bottom">
               <div>
                 <div class="pop-title">
@@ -40,8 +40,8 @@
               </div>
             </van-popup>
           </div>
-          <div v-show="tabActive"  v-vtap.self="{method:showPickers}" class="flex1">
-            <span >{{pickerText}}</span>
+          <div v-show="tabActive" v-vtap.self="{method:showPickers}" class="flex1">
+            <span>{{pickerText}}</span>
             <uni-icon @define-click="showPickers" type="arrowdown" size="24"></uni-icon>
             <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
           </div>
@@ -79,7 +79,7 @@
 
         <img v-vtap="{method: plusStep , params: 1}" src="../../assets/openCloseImg/plus.png">
       </div>
-      <div class="sliderItem">
+      <div class="sliderItem" :class="{yellow:onClose}">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
         <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
@@ -195,9 +195,9 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      if(i==0){
+      if (i == 0) {
         this.setenttype(2)
-      }else if(i==1){
+      } else if (i == 1) {
         this.setenttype(1)
       }
       if (this.softconf.ent_price_type == 0) {
@@ -583,11 +583,11 @@ div.root-el {
       font-size: 14px;
       color: #848689;
       background: rgba(239, 239, 239, 1);
-div.flex1{
-  display: flex;
-  align-items: center;
-  justify-content: space-around
-}
+      div.flex1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
       uni-icon {
         vertical-align: middle;
       }
@@ -597,7 +597,6 @@ div.flex1{
       div {
         line-height: 0.64rem;
       }
-
     }
   }
 
@@ -654,7 +653,6 @@ div.flex1{
     justify-content: space-between;
     margin: 0.35rem 0 0.14rem;
     align-items: center;
-
     span.countxt {
       font-size: 24px;
       font-family: ArialMT;
@@ -664,7 +662,14 @@ div.flex1{
       text-align: center;
       display: inline-block;
     }
-
+    .yellow {
+     /deep/ .el-slider__button {
+        border-color: #e6aa12;
+      }
+    /deep/  .el-slider__bar {
+        background-color: #e6aa12;
+      }
+    }
     div.sliderItem {
       flex-grow: 1;
       padding-left: 0.5rem;

@@ -28,8 +28,8 @@ export default {
     closeMe() {
       this.$emit('close-me')
     },
-    chooseWay(i) {
-      this.$emit('choose-way', i)
+    chooseWay(item) {
+      this.$emit('choose-way', item)
     }
   },
   data() {
@@ -43,7 +43,7 @@ export default {
     let online=[],alipy=[],remitance=[]
     for(let i=0;i<this.paylist['online'].length;i++){
       this.paylist['online'][i].pay_way='online'
-      if(this.paylist['online'][i].pay_code=="alipay_wap"){
+      if(this.paylist['online'][i].pay_code=="alipay_app"){
         online.push(this.paylist['online'][i])
       }
     }
@@ -53,7 +53,6 @@ export default {
     for(let j=0;j<this.paylist['remitance'].length;j++){
       this.paylist['remitance'][j].pay_way='remitance'
     }
-    console.log(333,this.paylist)
     this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance']).concat(online)
     // this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
   },

@@ -96,7 +96,7 @@ export default {
       })
     }
   },
-  created() {
+  activated() {
     this.symbol = this.$route.query.code
     this.getItem()
     this.getmaxbuy()

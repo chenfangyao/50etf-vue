@@ -1,5 +1,5 @@
 <template>
-  <div class="subCard black2 uni-flex">
+  <div class="subCard black2 uni-flex" v-vtap="{method:go}">
     <div class="imgContainer">
       <img :src="switchObj.logo"/>
     </div>
@@ -8,8 +8,8 @@
       <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
     </div>
     <div >
-      <button v-hover-class='"self-hover"' v-if='userinfo.is_certified>0' v-vtap="{method:go}">{{sid?'实名认证':'登录'}}</button>
-      <button v-hover-class='"self-hover"' v-else-if="!sid" v-vtap="{method:go}">登录</button>
+      <button v-hover-class='"self-hover"'  v-if='userinfo.is_certified>0' >{{sid?'实名认证':'登录'}}</button>
+      <button v-hover-class='"self-hover"'  v-else-if="!sid" >登录</button>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     }
   },
   methods: {
-    go() {
+    go(e) {
       if (!this.sid) {
         this.$navigateTo({ url: '/pages/login/login' })
         return

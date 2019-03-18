@@ -70,7 +70,7 @@ export default new Router({
     { path: '/stock_detail', name: 'stockDetail', component: stockDetail, meta: { noAnimate: true } },
     //行情
     { path: '/quotes', name: 'quotes', component: quotes, meta: { isKeepAlive: true, tabbar: true, index: 1 } },
-    { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail, meta:{noAnimate:true} },
+    { path: '/qi_quan_xiang_qing', name: 'quotesDetail', component: quotesDetail, meta: { noAnimate: true, isKeepAlive: true} },
     { path: '/open_close', name: 'openClose', component: openClose,  },
     // 开仓下单
     { path: '/entrustSucc', name: 'entrustSucc', component: entrustSucc,  },
@@ -93,8 +93,8 @@ export default new Router({
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },
 
     // 充值
-    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge, meta: { isKeepAlive: true, } },
-    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw, meta: { isKeepAlive: true, } },
+    { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge,  },
+    { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw,  },
     // 账户充值第二步
     { path: '/pages/assets_sub/bank_card/bank_card', name: 'bank_card', component: bank_card,  },
     // 账户充值第三步

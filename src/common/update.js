@@ -62,7 +62,7 @@ function downWgt(url) {
     responseOK = true
     plus.nativeUI.closeWaiting();
   });
-  // dtask.setRequestHeader('Content-Type', 'application/json');
+  dtask.setRequestHeader('sid', store.state.sid);
   dtask.start();
 }
 function installWgt(path) {

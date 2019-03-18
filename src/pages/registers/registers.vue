@@ -14,6 +14,7 @@
       <div class="pwdclass">
         <input-item placeholderTxt="密码" :isPwd="true" v-model="pwd" @now-blur="handleBlur"></input-item>
       </div>
+      <input-item placeholderTxt="邀请人的邀请码" @now-blur="handleBlur" v-if='$store.state.switchObj.show_reluser==1'  v-model="inviteCode"></input-item>
       <err-tip :err-class="showErr" :tip-content="tipContent"></err-tip>
 
       <!-- <submit-btn btnTxt='完成' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn> -->
@@ -43,7 +44,8 @@ export default {
       verifyYes: true,
       tipContent: '您注册的账号已存在，请重新输入重新输入',
       showErr: false,
-      pwd: ''
+      pwd: '',
+      inviteCode:''//邀请码
     };
   },
   components: { submitBtn, inputItem, errTip, countDown },
@@ -53,6 +55,11 @@ export default {
       this.$navigateTo({ url })
     },
     handleLogin() {
+      if(this.inviteCode===''){
+        this.showErr = true
+        this.tipContent = '邀请码必填'
+        return
+      }
       // 验证输入信息
       if (this.$validata(this.uName, 0) != 1) {
         this.showErr = true
@@ -160,6 +167,7 @@ export default {
       })
     }
   },
+
 }
 </script>
 

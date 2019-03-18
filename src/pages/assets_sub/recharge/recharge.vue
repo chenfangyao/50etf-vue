@@ -2,13 +2,13 @@
 	<div class="wrap" :class="showTable? 'mengban':''" >
 	  <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
     <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
-    <recharge-way :way-lists='wayList' :showbanklogo="showbanklogo" @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
+    <recharge-way :way-lists='wayList'  @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
     <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">充值金额</div>
         <div class="uni-flex inputContainer2">
           <span class="textc1">￥</span>
-          <input type="tel" class="black2 textc1" v-model="money" :disabled='inputDisabled'>
+          <input type="number" min="1" class="black2 textc1" v-model="money" ><!--:disabled='inputDisabled'-->
         </div>
       </div>
       <div class="overage textc1">
@@ -168,18 +168,18 @@ export default {
       money: '',
       priceLists: [],
       priceItem_i: 0,
-      wayList: ['支付宝', '银行转账'],
+      wayList: [],
       inputDisabled: true,
       paytype: 'remit_alipay',
       payeeinfo: {},
-			showbanklogo:true,
 			defaultitemmoney:'',
       showTable:false,
       alipayRes:'',
-      pay_way:'alipay'
+      pay_way:'alipay',
+      alipayChannel:null
     }
   },
-  computed: mapState(['assets']),
+  computed: mapState(['assets','userinfo']),
   methods: {
     ...mapMutations(['setpaylist']),
     showtables(){
@@ -224,7 +224,7 @@ export default {
           break
         case 'online':
           var formdata = new FormData();
-          formdata.append("uid",'5270');
+          formdata.append("uid",this.userinfo.user_id);
           formdata.append("v_amount",this.money);
           formdata.append("pay_code",this.paytype);
           formdata.append("pay_type",this.paytype);
@@ -234,17 +234,17 @@ export default {
             data:formdata,
           }
           this.$httpReq(options).then((res) => {
-            this.alipayRes=res
+            this.doAlipay(res.data.data.ali_ordinfo)
+            /* this.alipayRes=res
             var a=document.getElementById('alipayform')
-            // dom操作效率问题，能获取到a节点但是getElementsByTagName对dom结构树查找不能马上获取
-            setTimeout(()=>{
+            this.$nextTick(()=>{
               var b=a.getElementsByTagName('form')[0]
               b.submit()
-            },100)
+            }) */
           }).catch((err) => {
             console.error(err,'捕捉')
           })
-              break
+          break
 
       }
     },
@@ -264,6 +264,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.setpaylist(res.data)
+          if(res.data.alipay.length===0)return;
           // 设置默认下一步传递参数
           this.payeeinfo = res.data.alipay[0]
           // 设置默认的选择金额
@@ -277,7 +278,30 @@ export default {
         console.error(err,'捕捉')
       })
     },
+    getAppChannels(){
+      if(this.alipayChannel)return;
+      plus.payment.getChannels(channels=>{
+          for(var i in channels){
+            if(channels[i].id==='alipay'){	
+              this.alipayChannel=channels[i]
+              return
+            }
+          }
+					plus.nativeUI.alert('系统未检测到支付宝，可能无法进行支付宝支付',null,'温馨提示');
+        },function(e){
+          console.error('获取支付通道失败：'+e.message);
+        });
+    },
+    doAlipay(order){
+      // var str='alipay_sdk=alipay-sdk-php-20161101&app_id=2015112700878442&biz_content=%7B%22body%22%3A%22DCloud%E8%87%B4%E5%8A%9B%E4%BA%8E%E6%89%93%E9%80%A0HTML5%E6%9C%80%E5%A5%BD%E7%9A%84%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%8C%85%E6%8B%AC%E7%BB%88%E7%AB%AF%E7%9A%84Runtime%E3%80%81%E4%BA%91%E7%AB%AF%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%92%8CIDE%EF%BC%8C%E5%90%8C%E6%97%B6%E6%8F%90%E4%BE%9B%E5%90%84%E9%A1%B9%E9%85%8D%E5%A5%97%E7%9A%84%E5%BC%80%E5%8F%91%E8%80%85%E6%9C%8D%E5%8A%A1%E3%80%82%22%2C%22subject%22%3A+%22DCloud%E9%A1%B9%E7%9B%AE%E6%8D%90%E8%B5%A0%22%2C%22out_trade_no%22%3A+%2220190315075715%22%2C%22timeout_express%22%3A+%2230m%22%2C%22total_amount%22%3A+%221%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=http%253A%252F%252Fdemo.dcloud.net.cn%252Fpayment%252Falipay%252Fnotify.php&sign_type=RSA2&timestamp=2019-03-15+07%3A57%3A15&version=1.0&sign=VOZiu0B3Ifv2whHbd8pJWyExBO1tnvlT6wjTWCJUIOp%2FmASfugC7L6ONLjZhs2x7n8m2btI3tu5rEEe0MgkxXVRWnoFGVAjqWntMfEG5ik60agptEAfDN%2BfR9mkPLSVm8OvoEAgPz1a1ZhQCOPpecTcaPUQxPckrLCoqC9maofdXKJsMQcw3TYIOvYuct6ISCjzdL04s%2FfEWJG8biEeApEdW0oW2MeEdVv70CruQhUxkr7tXNz6B1Z7pQjvPTmCHBw6aNxuNXcTVAUaXenUtXuLRlaC%2FPnlyDMCC00F55TyOLie9WRG2%2FKLwqTE2t2AfCK8FAGz5BsrXudmZeG7o7w%3D%3D'
+      plus.payment.request(this.alipayChannel,order,result=>{
+					plus.nativeUI.alert('支付成功',null,'');
+				},function(e){
+					plus.nativeUI.alert('您可能未开通权限', null, '支付失败：'+e.code);
+				});
+    },
     changeWayI(i) {
+      process.env.API_HOST&&this.getAppChannels()
       this.pay_way=i.pay_way
       this.payeeinfo = i
       this.priceLists = i.money_selects
