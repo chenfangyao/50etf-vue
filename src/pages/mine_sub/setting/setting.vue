@@ -5,7 +5,7 @@
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>
-    <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'"><!---->
+    <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'">
       <span>夜间模式</span>
       <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="changeTheme"/>
     </div>
@@ -82,6 +82,7 @@ export default {
         message: '确认切换皮肤吗？'
       }).then(() => {
         // on confirm
+        val?localStorage.setItem('selfTheme',0):localStorage.setItem('selfTheme',1)
         this.setatNight(val)
         location.reload()
       }).catch(() => {

@@ -160,7 +160,7 @@ import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
 import limitTable from '@/components/assetsSub/recharge-limit-table.vue'
 import { mapState, mapMutations } from 'vuex';
-
+import {openView} from './openNew.js'
 export default {
   components: { btnBlock, rechargeWay,limitTable },
   data() {
@@ -229,18 +229,19 @@ export default {
           formdata.append("pay_code",this.paytype);
           formdata.append("pay_type",this.paytype);
           var options = {
-            url: '/Sapi/Payment/pay', //请求接口
+            url: '/Sapi/Payment/pay', 
             method: 'POST', 
             data:formdata,
           }
           this.$httpReq(options).then((res) => {
-            this.doAlipay(res.data.data.ali_ordinfo)
-            /* this.alipayRes=res
+            // this.doAlipay(res.data.data.ali_ordinfo)
+           /*  this.alipayRes=res
             var a=document.getElementById('alipayform')
             this.$nextTick(()=>{
               var b=a.getElementsByTagName('form')[0]
-              b.submit()
+             b.submit()
             }) */
+             openView(res).show()
           }).catch((err) => {
             console.error(err,'捕捉')
           })
@@ -304,7 +305,7 @@ export default {
       process.env.API_HOST&&this.getAppChannels()
       this.pay_way=i.pay_way
       this.payeeinfo = i
-      this.priceLists = i.money_selects
+      this.priceLists = i.conf_set.money_selects
       // 支付方式
       this.paytype = i.pay_code
       // 支付宝支付禁用输入框

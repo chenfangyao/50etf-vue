@@ -73,11 +73,14 @@
       </div>
     </div>
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
-      <div>
-        <img v-vtap="{method: plusStep , params: -1}" src="../../assets/openCloseImg/minus.png">
+      <div class="imgbtn uni-flex">
+        <div class="hasImg" v-vtap="{method: plusStep , params: -1}" >
+          <img src="../../assets/openCloseImg/minus.png">
+        </div>
         <span class="countxt textc1">{{sliderVal}}</span>
-
-        <img v-vtap="{method: plusStep , params: 1}" src="../../assets/openCloseImg/plus.png">
+        <div class="hasImg" v-vtap="{method: plusStep , params: 1}">
+          <img  src="../../assets/openCloseImg/plus.png">
+        </div>
       </div>
       <div class="sliderItem" :class="{yellow:onClose}">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
@@ -653,12 +656,19 @@ div.root-el {
     justify-content: space-between;
     margin: 0.35rem 0 0.14rem;
     align-items: center;
+    .imgbtn{
+      align-items: center;
+      .hasImg{
+        height: 26px;
+        padding:4px 10px ;
+      }
+    }
     span.countxt {
       font-size: 24px;
       font-family: ArialMT;
       color: rgba(51, 51, 51, 1);
       line-height: 24px;
-      width: 1.85rem;
+      width: 1.75rem;
       text-align: center;
       display: inline-block;
     }

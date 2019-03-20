@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     appReady: false,
     loginProvider: "",
     openid: null,
-    atNight: true,
+    atNight: false,
     sid: '',
     username: '',
     mobile: '',

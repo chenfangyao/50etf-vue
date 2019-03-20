@@ -63,6 +63,7 @@ div._input {
   input{
     position: relative;
     z-index: 20;
+    width: 80%;
     background-color: transparent;
   }
   img.openImg {

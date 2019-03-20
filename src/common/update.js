@@ -18,8 +18,9 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
       case 4:
         if (xhr.status == 200) {
           var obj = JSON.parse(xhr.responseText)
+          if (obj.data.not_auth==1)return;
           if (obj.data.list.length==0)return;
-          var newVer = obj.data.list[0].version;
+          var newVer = Number(obj.data.list[0].version);
           var downurl = obj.data.list[0].downurl;
           var is_force = obj.data.list[0].is_force;
           if (wgtVer && newVer && (wgtVer < newVer)) {
@@ -46,6 +47,7 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
   xhr.setRequestHeader('clienttype','app')
    xhr.setRequestHeader('device', plus.device.imei )
    xhr.setRequestHeader('hrand', hrand  )
+   xhr.setRequestHeader('sid', store.state.sid)
    xhr.setRequestHeader('hsign', md5('app|' + hrand) )
    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'  )
    xhr.send();

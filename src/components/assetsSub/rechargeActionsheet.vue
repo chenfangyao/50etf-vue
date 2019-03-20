@@ -43,7 +43,7 @@ export default {
     let online=[],alipy=[],remitance=[]
     for(let i=0;i<this.paylist['online'].length;i++){
       this.paylist['online'][i].pay_way='online'
-      if(this.paylist['online'][i].pay_code=="alipay_app"){
+      if(["alipay_wap",'aliauto'].indexOf(this.paylist['online'][i].pay_code)>=0){
         online.push(this.paylist['online'][i])
       }
     }
