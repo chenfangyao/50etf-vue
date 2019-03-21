@@ -4,7 +4,7 @@
       <img :src="switchObj.logo"/>
     </div>
     <div>
-      <h2 class="textc1">{{sid?'用户名':'未登录'}}{{userinfo.user_name}}</h2>
+      <h2 class="textc1">{{sid?'':'未登录'}}{{userinfo.user_name}}</h2>
       <h3 class="textc2">{{sid?userinfo.mobile:'— —'}}</h3>
     </div>
     <div >
@@ -90,7 +90,7 @@ div.subCard {
     font-size:14px;
     font-weight: 400;
     margin: 0;
-
+text-align: left;
     color: rgba(24, 28, 40, 1);
   }
   h3 {

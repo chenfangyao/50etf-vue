@@ -85,7 +85,7 @@
       <div class="sliderItem" :class="{yellow:onClose}">
         <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
         backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
-        <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
+        <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts || 0" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
       </div>
     </div>
     <div v-else class="sliderPart uni-flex">

@@ -4,9 +4,9 @@
     <div class="uni-flex">
       <div class="leftPart">
         <div class="leftTop uni-flex" :class="{lt0:resObj.priceChange<0}">
-          <div class="price">{{resObj.latestPrice}}</div>
+          <div class="price">{{resObj.latestPrice | to4bit}}</div>
           <div class="flexColumn">
-            <span>{{resObj.priceChange}}</span>
+            <span>{{resObj.priceChange | to4bit}}</span>
             <span>{{priceChangeRate}}</span>
           </div>
         </div>
@@ -22,11 +22,11 @@
         <div class="uni-flex rightTop">
           <div>
             <span>今开</span>
-            <span class="textc1">{{resObj.openPrice}}</span>
+            <span class="textc1">{{resObj.openPrice | to4bit}}</span>
           </div>
           <div>
             <span>昨收</span>
-            <span class="textc1">{{resObj.preclosePrice}}</span>
+            <span class="textc1">{{resObj.preclosePrice | to4bit}}</span>
           </div>
         </div>
         <div class="uni-flex rightBottom">
@@ -70,6 +70,12 @@ export default {
   methods: {
     showPartDetail() {
       this.isshowDetail = !this.isshowDetail
+    }
+  },
+  filters:{
+    to4bit(val){
+      if(val===undefined)return '';
+      return val.toFixed(4)
     }
   },
 	created(){

@@ -3,11 +3,11 @@
     <div class="line1 uni-flex">
       <div>
         <span>最高</span>
-        <span class="textc1">{{resdata.highPrice}}</span>
+        <span class="textc1">{{resdata.highPrice | to4bit}}</span>
       </div>
       <div>
         <span>最低</span>
-        <span class="textc1">{{resdata.lowPrice}}</span>
+        <span class="textc1">{{resdata.lowPrice | to4bit}}</span>
       </div>
       <div>
         <span>剩余天数</span>
@@ -40,7 +40,13 @@ export default {
   },
 	computed: mapState(['taglist']),
 	methods:{
-	},
+  },
+  filters:{
+    to4bit(val){
+      if(val===undefined)return '';
+      return val.toFixed(4)
+    }
+  },
   props: {
     isshowDetail: {
       default: false,

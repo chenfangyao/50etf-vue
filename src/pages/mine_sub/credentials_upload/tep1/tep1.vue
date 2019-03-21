@@ -6,7 +6,7 @@
 
       <input-item placeholderTxt='输入您的姓名'  @now-blur='handleBlur' v-model="uName"></input-item>
         <input-item placeholderTxt='输入您的身份证号'  @now-blur='handleBlur' v-model="IDcard"></input-item>
-        <input-item placeholderTxt='输入您的手机号'  @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
+        <input-item placeholderTxt='输入您的手机号' v-if="userinfo.is_certified!=5"  @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
 			<err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
       <submit-btn btnTxt='完成' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -19,6 +19,7 @@
 import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import inputItem from '@/components/commonResgLog/inputItem.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -31,6 +32,7 @@ export default {
       telnum:'',
     };
   },
+  computed: mapState([ 'userinfo']),
   components: { submitBtn, inputItem, errTip },
   methods: {
     handleNext() {
@@ -42,7 +44,7 @@ export default {
 					this.showErr=true
 					this.tipContent=this.$validata(this.uName)
 					return
-      }else if(this.$validata(this.telnum,2)!=1){
+      }else if(this.userinfo.is_certified!=5&&this.$validata(this.telnum,2)!=1){
 					this.showErr=true
 					this.tipContent=this.$validata(this.telnum,2)
 					return

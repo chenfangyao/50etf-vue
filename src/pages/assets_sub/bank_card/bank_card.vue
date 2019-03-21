@@ -1,13 +1,13 @@
 <template>
 	<div class="wrap">
-		<base-header title="支付银行" has-back='1' right-txt='帮助' @right-tap='go(1)'></base-header>
+		<base-header title="支付账号" has-back='1' right-txt='帮助' @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap black2">
       <!-- <input-item placeholderTxt='银行名称' v-model="bankName" ></input-item> -->
 			<div class='payMoney black2 textc1'>支付金额：{{paymoney}}</div>
 			<div class=inputcommon>
-      <input-item placeholderTxt='付款人' v-model="uName" ></input-item>
-      <input-item placeholderTxt='付款账号' v-model="bankCode" ></input-item>
+      <input-item :placeholderTxt='whoPaytxt' v-model="uName" ></input-item>
+      <input-item :placeholderTxt='accountPaytxt' v-model="bankCode" ></input-item>
 			</div>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
@@ -28,6 +28,8 @@ export default {
       uName: '',
       showErr: false,
       tipContent: '您的账号和密码错误，请重新输入',
+      whoPaytxt:'',
+      accountPaytxt:'',
       bankCode: '',
       bankName: '',
       verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
@@ -40,14 +42,6 @@ export default {
     };
   },
   components: { submitBtn, inputItem, errTip },
-	// onLoad(opt){
-	// 	this.paymoney=opt.pay_money
-	// 	this.paytype=opt.paytype
-	// 	this.cardname=opt.cardname
-	// 	this.cardno=opt.cardno
-	// 	this.pw_id=opt.pw_id
-	// 	this.bank_name=opt.bank_name
-	// },
   created(){
     let opt=this.$route.query
     this.paymoney=opt.pay_money
@@ -56,6 +50,14 @@ export default {
     this.cardno=opt.cardno
     this.pw_id=opt.pw_id
     this.bank_name=opt.bank_name
+    if(opt.aliORbank==1){
+      this.whoPaytxt='请输入支付宝账号认证的姓名'
+      this.accountPaytxt='请输入支付宝账号'
+    }else{
+      this.whoPaytxt='请输入持卡人名称'
+      this.accountPaytxt='请输入银行账号'
+
+    }
   },
   methods: {
 		...mapMutations(['setbankinfo']),

@@ -55,7 +55,7 @@ export default {
       this.$navigateTo({ url })
     },
     handleLogin() {
-      if(this.inviteCode===''){
+      if(this.inviteCode.trim()===''&&this.$store.state.switchObj.show_reluser==1){
         this.showErr = true
         this.tipContent = '邀请码必填'
         return

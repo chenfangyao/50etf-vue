@@ -12,8 +12,8 @@
      <div class="middlePart">
        <div class="line1 uni-flex">
          <div class="uni-flex uni-column">
-           <span class="textc2">今&nbsp&nbsp&nbsp开</span>
-           <span class="textc2">最&nbsp&nbsp&nbsp高</span>
+           <span class="textc2">今&nbsp;&nbsp;&nbsp;开</span>
+           <span class="textc2">最&nbsp;&nbsp;&nbsp;高</span>
          </div>
          <div class="uni-flex uni-column">
            <span class="textc1">{{openPrice=='NaN'?'--':openPrice}}</span>
@@ -24,8 +24,8 @@
      <div class="rightPart">
        <div class="line1 uni-flex">
          <div class="uni-flex uni-column">
-           <span class="textc2">昨&nbsp&nbsp&nbsp收</span>
-           <span class="textc2">最&nbsp&nbsp&nbsp低</span>
+           <span class="textc2">昨&nbsp;&nbsp;&nbsp;收</span>
+           <span class="textc2">最&nbsp;&nbsp;&nbsp;低</span>
            <span class="textc2">成交额</span>
 
          </div>
@@ -61,14 +61,14 @@ export default {
 
   },
   mounted() {
-    this.latestPrice = parseFloat(this.commonstock[this.index].latestPrice).toFixed(2)
-    this.priceChange = parseFloat(this.commonstock[this.index].priceChange).toFixed(2)
+    this.latestPrice = parseFloat(this.commonstock[this.index].latestPrice).toFixed(4)
+    this.priceChange = parseFloat(this.commonstock[this.index].priceChange).toFixed(4)
     this.priceChangeRate = parseFloat(this.commonstock[this.index].priceChangeRate).toFixed(2)
     this.dealAmount = parseFloat(this.commonstock[this.index].dealAmount / 100000000).toFixed(2)
-    this.openPrice = parseFloat(this.commonstock[this.index].openPrice).toFixed(2)
-    this.highPrice = parseFloat(this.commonstock[this.index].highPrice).toFixed(2)
-    this.preclosePrice = parseFloat(this.commonstock[this.index].preclosePrice).toFixed(2)
-    this.lowPrice = parseFloat(this.commonstock[this.index].lowPrice).toFixed(2)
+    this.openPrice = parseFloat(this.commonstock[this.index].openPrice).toFixed(4)
+    this.highPrice = parseFloat(this.commonstock[this.index].highPrice).toFixed(4)
+    this.preclosePrice = parseFloat(this.commonstock[this.index].preclosePrice).toFixed(4)
+    this.lowPrice = parseFloat(this.commonstock[this.index].lowPrice).toFixed(4)
   },
 }
 </script>

@@ -12,7 +12,7 @@
     </div>
     <div class="line"></div>
 
-    <div class="uni-flex item textc1">
+    <div class="uni-flex item textc1" v-if="qq">
       <img :src="img1" alt="">
       <span>客服QQ：</span>
       <ul class="ml5">
@@ -20,7 +20,7 @@
       </ul>
     </div>
     <div class="line"></div>
-    <div class="uni-flex item textc1">
+    <div class="uni-flex item textc1" v-if="wechat">
       <img :src="img3" alt="">
       <span>客服微信：</span>
       <ul>
@@ -50,9 +50,11 @@ export default {
   computed: {
     ...mapState(['switchObj']),
     qq() {
+      if(this.switchObj.qq===undefined) return'';
       return this.switchObj.qq.split('|')
     },
     wechat() {
+      if(this.switchObj.wx===undefined) return'';
       return this.switchObj.wx.split('|')
     }
   },

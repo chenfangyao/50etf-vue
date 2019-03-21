@@ -1,9 +1,9 @@
 <template>
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
-    <span class="stockNmae textc1">50ETF</span>
+    <div class="stockNmae textc1">50ETF</div>
     <div class="df_wh" id="mini-canvas"></div>
+    <div class="currentPrice" :class="{lt0:commonstock[0].priceChange<0}">{{commonstock[0]?commonstock[0].latestPrice:0}}</div>
     <div class="txtContainer" :class="{lt0:commonstock[0].priceChange<0}">
-      <span class="currentPrice">{{commonstock[0]?commonstock[0].latestPrice:0}}</span>
       <span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
       <span>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
     </div>
@@ -115,36 +115,44 @@ div.stock50 {
   border-top: 1px solid #ededed;
   border-bottom: 0.12rem solid #ededed;
   div.txtContainer {
-    width: 50%;
     display: flex;
     justify-content: space-between;
     line-height: 0.71rem;
     color: rgba(240, 95, 92, 1);
+    span:first-child{
+      margin-right: 0.3rem;
+    }
   }
-  div.txtContainer.lt0 {
+  div.txtContainer.lt0 ,.currentPrice.lt0{
     color: $green1;
   }
-  span.stockNmae {
+  .stockNmae {
     font-size: 17px;
     font-family: ArialMT;
-    font-weight: 400;
     line-height: 0.71rem;
     color: rgba(24, 28, 40, 1);
   }
-  span.currentPrice {
-    font-size: 17px;
-    font-family: ArialMT;
-    font-weight: 400;
-  }
+  
   span {
     font-size: 14px;
     font-family: ArialMT;
     font-weight: 400;
   }
-}
-div.df_wh {
-  width: 1.34rem;
+  div.df_wh {
+  width: 1.24rem;
   height: 0.47rem;
+  margin-left: 0.17rem;
   align-self: center;
+  margin-right: -16px;
 }
+.currentPrice {
+    font-size: 17px;
+    font-family: ArialMT;
+    font-weight: 700;
+    flex-grow: 1;
+    color: rgba(240, 95, 92, 1);
+    text-align: center;
+  }
+}
+
 </style>

@@ -63,7 +63,7 @@ export default {
           }
         }
       }
-      ajax.open('post', 'http://47.100.226.135:8040/Sapi/User/realn');
+      ajax.open('post', process.env.API_HOST+'/Sapi/User/realn');
       ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       ajax.setRequestHeader("X-Requested-With", "XMLHttpRequest");
       ajax.send(Qs.stringify({

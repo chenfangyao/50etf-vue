@@ -11,7 +11,7 @@
       <div class="btn" v-if="onApp">
         <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
       </div>
-      <div class="txt textc1" v-else>{{baseurl}}</div>
+      <div class="txt textc1" v-else>{{link}}</div>
     </div>
   </div>
 </template>
@@ -24,8 +24,7 @@ import imageUrl from '@/assets/mineImg/logo.png'
 export default {
   data() {
     return {
-      codeValue: 'http://50etfvue.com:1688/h5#/pages/registers/registers',
-      link: 'http://50etfvue.cardoctor.com.cn/h5/pages/registers/registers',
+      link: process.env.API_HOST+'/m/register',
       //  imageUrl:'http://pic168.nipic.com/file/20180607/2546657_191526185031_2.jpg',//默认二维码中间图片
       // imageUrl:'http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg',//默认二维码中间图片
       imageUrl,//默认二维码中间图片
@@ -35,9 +34,6 @@ export default {
   },
   computed: {
     ...mapState(['userinfo', 'atNight','switchObj']),
-    baseurl() {
-      return this.codeValue + '/' + this.userinfo.user_id
-    }
   },
   components: { btnBlock, QrcodeVue },
   methods: {

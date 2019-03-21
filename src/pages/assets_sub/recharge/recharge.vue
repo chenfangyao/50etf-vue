@@ -204,7 +204,8 @@ export default {
               paytype:this.paytype,
               cardname:this.payeeinfo.cardname,
               cardno:this.payeeinfo.cardno,
-              pw_id:this.payeeinfo.pw_id
+              pw_id:this.payeeinfo.pw_id,
+              aliORbank:1//1支付宝，0银行
             }
           })
           break
@@ -219,6 +220,7 @@ export default {
               cardno:this.payeeinfo.cardno,
               pw_id:this.payeeinfo.pw_id,
               bank_name:this.payeeinfo.bank_name,
+              aliORbank:0//1支付宝，0银行
             }
           })
           break
