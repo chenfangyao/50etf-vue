@@ -205,6 +205,7 @@ export default {
               cardname:this.payeeinfo.cardname,
               cardno:this.payeeinfo.cardno,
               pw_id:this.payeeinfo.pw_id,
+              orcode_url:this.payeeinfo.orcode_url,
               aliORbank:1//1支付宝，0银行
             }
           })
@@ -307,9 +308,8 @@ export default {
       process.env.API_HOST&&this.getAppChannels()
       this.pay_way=i.pay_way
       this.payeeinfo = i
-      this.priceLists = i.conf_set.money_selects
-      // 支付方式
       this.paytype = i.pay_code
+      // 支付方式
       // 支付宝支付禁用输入框
       if (this.paytype == "remit_alipay") {//此处判断input禁用是以后端传来的实际字段为主
         this.inputDisabled = true
@@ -317,6 +317,7 @@ export default {
       } else {
         this.inputDisabled = false
       }
+      this.priceLists = i.conf_set.money_selects
     },
     choosePriceItem(i) {
       this.priceItem_i = i

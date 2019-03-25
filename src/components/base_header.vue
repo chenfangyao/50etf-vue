@@ -34,7 +34,6 @@ export default {
   methods: {
     back() {
       if (this.specialBack) {
-        console.log(2222)
         this.$emit('special-back')
         return
       }

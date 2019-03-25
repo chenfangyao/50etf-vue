@@ -27,7 +27,7 @@ export default {
     return {
       uName: '',
       showErr: false,
-      tipContent: '您的账号和密码错误，请重新输入',
+      tipContent: '账号和账户名不能空!',
       whoPaytxt:'',
       accountPaytxt:'',
       bankCode: '',
@@ -38,7 +38,8 @@ export default {
 			cardname:'',
 			cardno:'',
 			pw_id:'',
-			bank_name:'',
+      bank_name:'',
+      orcode_url:''
     };
   },
   components: { submitBtn, inputItem, errTip },
@@ -49,6 +50,7 @@ export default {
     this.cardname=opt.cardname
     this.cardno=opt.cardno
     this.pw_id=opt.pw_id
+    this.orcode_url=opt.orcode_url
     this.bank_name=opt.bank_name
     if(opt.aliORbank==1){
       this.whoPaytxt='请输入支付宝账号认证的姓名'
@@ -66,6 +68,10 @@ export default {
         this.$navigateTo({url:"/pages/assets_sub/help/help"})
         return
         }
+        if(this.bankCode.trim()===''||this.uName.trim()===''){
+          this.showErr=true
+          return
+        }
 			let bankInfo={
 				paymoney:this.paymoney,
 				paytype:this.paytype,
@@ -74,10 +80,11 @@ export default {
 				cardname:this.cardname,
 				cardno:this.cardno,
 				pw_id:this.pw_id,
-				bank_name:this.bank_name,
+        bank_name:this.bank_name,
+        orcode_url:this.orcode_url
 			}
 			this.setbankinfo(bankInfo)
-      this.$navigateTo({
+      this.$redirectTo({
         url: '/pages/assets_sub/gatherinfo/gatherinfo' ,
       })
     },

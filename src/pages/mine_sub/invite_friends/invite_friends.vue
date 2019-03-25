@@ -6,7 +6,7 @@
     <img class="bg" v-else src="../../../assets/mineImg/inviteFriendBg.png">
     <div class="aboveZindx">
       <div class="QRcode aboveZindex">
-        <qrcode-vue :logoSrc="imageUrl" :text="link" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
+        <qrcode-vue :logoSrc="imageUrl" :text="realAddress" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
       </div>
       <div class="btn" v-if="onApp">
         <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
@@ -34,6 +34,9 @@ export default {
   },
   computed: {
     ...mapState(['userinfo', 'atNight','switchObj']),
+     realAddress() {
+      return this.link + '/' + this.userinfo.user_id
+    }
   },
   components: { btnBlock, QrcodeVue },
   methods: {
@@ -52,6 +55,7 @@ export default {
     }
 
   },
+  
   created() {
    this.onApp= process.env.NODE_ENV === 'production'
   }

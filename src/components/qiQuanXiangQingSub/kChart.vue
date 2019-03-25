@@ -85,7 +85,7 @@ export default {
     },
     beginPolling(i) {
       if (this.timmer === null) {
-        switch (i) {
+        switch (Number(i)) {
           case 0:
             this.timmer = setInterval(() => this.getfenshi(), 30000)
             return

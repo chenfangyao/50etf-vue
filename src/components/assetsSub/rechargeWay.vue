@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       showAction: false,
-      way_i: 0,
 			textbank:'',
 			banklogo:'',			
     }
@@ -38,7 +37,6 @@ export default {
   },
   methods: {
     chooseWay(i) {
-      this.way_i = i
       this.$emit('change-wayi',i)
 			this.textbank=i.pay_name
 			this.banklogo=i.logo

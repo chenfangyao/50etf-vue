@@ -84,7 +84,7 @@ export default {
 				case 'remit_alipay':
 				this.remit_alipay()
 				break
-				case 'remit_icbc':
+				default:
 				this.remit_bank()
 				break
 			}
@@ -117,7 +117,9 @@ export default {
 					this.$toast.success({
             message:res.info?res.info:'信息提交成功',
           })
-          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
+         this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
+          location.href=this.bankinfo.orcode_url
+
 				}else{
           this.$toast.fail({
             message:res.info?res.info:'信息提交失败'
@@ -136,7 +138,7 @@ export default {
 				data: {
 							pay_money: this.paymoney,
 							// 银行id
-							pw_id: 7,
+							pw_id: this.bankinfo.pw_id,
 							pay_name_bank: this.bankCode
 									},
 			}

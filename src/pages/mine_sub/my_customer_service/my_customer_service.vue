@@ -10,23 +10,29 @@
       <span>客服电话：</span>
       <span>{{switchObj.tel}}</span>
     </div>
+    <template v-if="qq">
+
     <div class="line"></div>
 
-    <div class="uni-flex item textc1" v-if="qq">
+    <div class="uni-flex item textc1" >
       <img :src="img1" alt="">
       <span>客服QQ：</span>
       <ul class="ml5">
         <li v-for="(item,i) in qq" :key="i">{{item}}</li>
       </ul>
     </div>
-    <div class="line"></div>
-    <div class="uni-flex item textc1" v-if="wechat">
-      <img :src="img3" alt="">
-      <span>客服微信：</span>
-      <ul>
-        <li v-for="(item,i) in wechat" :key="i">{{item}}</li>
-      </ul>
-    </div>
+    </template>
+    <template v-if="wechat">
+
+      <div class="line"></div>
+      <div class="uni-flex item textc1" >
+        <img :src="img3" alt="">
+        <span>客服微信：</span>
+        <ul>
+          <li v-for="(item,i) in wechat" :key="i">{{item}}</li>
+        </ul>
+      </div>
+    </template>
     <div class="line"></div>
     <div class="btn">
       <div class="txt textc1"><span>服务时间 ：周一 至 周五</span><span>{{switchObj.trade_time_range}}</span></div>
@@ -50,11 +56,11 @@ export default {
   computed: {
     ...mapState(['switchObj']),
     qq() {
-      if(this.switchObj.qq===undefined) return'';
+      if(this.switchObj.qq===undefined||this.switchObj.qq==='') return'';
       return this.switchObj.qq.split('|')
     },
     wechat() {
-      if(this.switchObj.wx===undefined) return'';
+      if(this.switchObj.wx===undefined||this.switchObj.wx==='') return'';
       return this.switchObj.wx.split('|')
     }
   },
