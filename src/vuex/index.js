@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    articlePop:false,
     hasLogin: false,
     appReady: false,
     loginProvider: "",
@@ -61,6 +62,9 @@ const store = new Vuex.Store({
     },
     setatNight(state, data) {
       state.atNight = data
+    },
+    setarticlePop(state, data) {
+      state.articlePop = data
     },
     setappObj(state, data) {
       state.appObj = data

@@ -21,24 +21,25 @@
       <van-loading type="spinner" color="#999" />
     </div>
     <etf-tabbar v-if="$route.meta.tabbar"></etf-tabbar>
-    <article-popup :notic-list='noticList'></article-popup>
+    <article-popup :notic-obj='noticItem' @show-again='againPop'></article-popup>
   </div>
 </template>
 
 <script>
 import etfTabbar from '@/components/other/etf-tabbar'
 import saveLogin from '@/common/saveLogin.js'
-import articlePopup from '@/components/other/article-popup'
 import { Loading } from 'vant';
-import { mapState } from 'vuex';
+import { mapState,mapMutations } from 'vuex';
+import articlePopup from '@/components/other/article-popup'
+
 export default {
   name: 'App',
-  components: { etfTabbar, [Loading.name]: Loading,articlePopup },
-
+  components: { etfTabbar, [Loading.name]: Loading ,articlePopup,},
   data() {
     return {
       transitionName: '',
-      noticList:[{}]
+      noticItem:false,
+      noticList:[],
     }
   },
   created() {
@@ -50,7 +51,8 @@ export default {
       this.backEvent()
     }, false);
   },
-  computed: mapState(['atNight', 'loadingFlag','appReady']),
+  
+  computed: mapState(['atNight', 'loadingFlag','appReady','articlePop']),
   watch: {
     $route(to, from) {
       if (to.meta.tabbar) {
@@ -77,9 +79,32 @@ export default {
         plus.navigator.setStatusBarBackground("#f0f0f0");
         plus.navigator.setStatusBarStyle("dark");
       }
+    },
+    articlePop(val){
+      if(val){
+        this.noticItem={...this.noticItem}
+        this.$store.commit('setarticlePop',false)
+      }
     }
   },
   methods: {
+    againPop(){
+      this.noticItem=this.noticList.shift()||false
+    },
+    getNotic(){
+      var options = {
+        url: '/Sapi/Article/popup', //请求接口
+        method: 'GET',
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.noticList=res.data.list  
+          this.noticItem=this.noticList.shift()
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
+    },
     getConf() {
       var options = {
         url: '/Sapi/Soft/conf', //请求接口
@@ -88,6 +113,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
+          this.$store.commit('setsoftconf',res.data)
           var theme=localStorage.getItem('selfTheme')
           if(theme===null){
             this.$store.commit('setatNight',res.data.default_skin==='0')
@@ -100,19 +126,7 @@ export default {
         console.error(err, '捕捉')
       })
     },
-    getNotic(){
-      var options = {
-        url: '/Sapi/Article/popup', //请求接口
-        method: 'GET',
-      }
-      this.$httpReq(options).then((res) => {
-        if (res.status) {
-          this.noticList=res.data.list  
-        }
-      }).catch((err) => {
-        console.error(err, '捕捉')
-      })
-    },
+   
     backEvent(){
       plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {

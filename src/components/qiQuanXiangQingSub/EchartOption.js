@@ -381,7 +381,12 @@ export const option = {
       splitLine: { show: false, },
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '15:00') }, margin: 15, align: 'left' },
+      axisLabel: { interval: (i, val) => { return (i == 0 || val == '11:30' || val == '14:42') },
+      formatter:function(val){
+        if(val==='14:42')return '15:00';
+        else return val
+      },
+      margin: 15, align: 'left', },
     },
     {
       gridIndex: 1,
@@ -413,7 +418,7 @@ export const option = {
       position: 'right',
       axisLabel: {
         margin: 0,
-        showMaxLabel: true,
+        showMaxLabel: true, inside: true,
         showMinLabel: false,
       },
       axisLine: { show: false },
@@ -435,13 +440,13 @@ export const option = {
   grid: [
     {
       left: 3,
-      right: 50,
+      right: 5,
       top: 10,
       bottom: 100,
     },
     {
       left: 3,
-      right: 50,
+      right: 5,
       top: 228,
       bottom: 3
     },

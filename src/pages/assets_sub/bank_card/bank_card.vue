@@ -59,7 +59,7 @@ export default {
       this.whoPaytxt='请输入持卡人名称'
       this.accountPaytxt='请输入银行账号'
 
-    }
+}
   },
   methods: {
 		...mapMutations(['setbankinfo']),

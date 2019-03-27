@@ -5,31 +5,31 @@
       <div class="logoimg">
         <img src="../../assets/indexTabImg/notice.png">
       </div>
-      <div class="title textc1">{{noticList[0].title}}</div>
-      <div class="content textc2" v-html="noticList[0].content"></div>
+      <div class="title textc1">{{noticObj.title}}</div>
+      <div class="content textc2" v-html="noticObj.content"></div>
       <div class="button" v-vtap="{method:go}">更多详情</div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: { noticList: { default() { return [] } } },
+  props: { noticObj: { default() { return [] } } },
   data(){return{
-    showMine:false
+    showMine:false,
   }},
   watch:{
-    noticList(val){
-     this.showMine= val.length>0
+    noticObj(val){
+     this.showMine= val?true:false
     }
   },
   methods:{
     close(){
-      this.showMine=false
+      this.$emit('show-again')
     },
     go(){
-      this.close()
+      this.showMine=false
       this.$navigateTo({
-        query:{id:this.noticList[0].id},
+        query:{id:this.noticObj.id, pop:true},
         url: '/pages/index_sub/new_xiang_qing/new_xiang_qing'
       });
     }

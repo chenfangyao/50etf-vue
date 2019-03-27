@@ -83,7 +83,7 @@ export default {
       this.getDayK(j)
 
     },
-    beginPolling(i) {
+    beginPolling(i=0) {
       if (this.timmer === null) {
         switch (Number(i)) {
           case 0:
@@ -137,7 +137,7 @@ export default {
         case min:
         case midMax:
         case midMin:
-          return num
+          return num.toFixed(4)
         default:
           return ''
       }
@@ -167,6 +167,7 @@ export default {
       var Yline = []
       var YBar = []
       var subBar = []
+      this.maxBar = 0
       arr.forEach((item, i) => {
         Yline.push(item.closePrice)
         this.getMaxBar(item.volume)
@@ -199,19 +200,40 @@ export default {
               symbol: ['none', 'none'],
               lineStyle: { opacity: 0.5 },
               data: [
-                {
-                  yAxis: this.stockInfo.preClosePrice.toFixed(4),
-                  lineStyle: { color: '#e6aa12', opacity: 1 },
-                  label: { formatter: '0.00%' },
-                },
-                {
+                [
+                  {
+                    yAxis: this.stockInfo.preClosePrice.toFixed(4),
+                    xAxis:0,
+                    lineStyle: { color: '#e6aa12', opacity: 1 },
+                    label: { formatter: '0.00%' },
+                  },
+                  {
+                    yAxis: this.stockInfo.preClosePrice.toFixed(4),
+                    xAxis:215,
+                  },
+                ],
+               [
+                 {
                   yAxis: this.Ymax + '',
+                  xAxis:0,
                   label: { formatter: () => ((this.Ymax - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
                 },
-                {
-                  yAxis: this.Ymin + '',
-                  label: { formatter: () => ((this.Ymin - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
+                 {
+                  yAxis: this.Ymax + '',
+                  xAxis:215,
                 },
+                ],
+                [
+                  {
+                    yAxis: this.Ymin + '',
+                    xAxis:0,
+                    label: { formatter: () => ((this.Ymin - this.stockInfo.preClosePrice) / this.stockInfo.preClosePrice * 100).toFixed(2) + '%' }
+                  },
+                  {
+                    yAxis: this.Ymin + '',
+                    xAxis:215,
+                  },
+                ]
 
               ]
             }
@@ -365,11 +387,10 @@ export default {
   deactivated(){
     clearInterval(this.timmer)
     this.timmer = null
-      this.$emit('change-i', this.tabIndex=0)
-
+    this.$emit('change-i', this.tabIndex=0)
   },
   activated() {
-  this.symbolStr&&this.getfenshi()
+    this.symbolStr&&this.getfenshi()
     util.calcLegalTime() && this.beginPolling()
   },
   watch:{

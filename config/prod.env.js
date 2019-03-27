@@ -2,7 +2,7 @@
 module.exports = {
   NODE_ENV: '"production"',
   clienttype:'"app"',
-  // API_HOST: '"http://t50.zhijiancaopan.com:8042"',//测试
+  API_HOST: '"http://t50.zhijiancaopan.com:8042"',//测试
   // API_HOST: '"http://50etfvue.cardoctor.com.cn"',//web
   // API_HOST:'"http://wxv.zjkj888.cn"'//模拟
   // API_HOST:'"http://wx.x-hong.cn"',//道森
@@ -23,6 +23,10 @@ module.exports = {
 
   //2019-03-21
   // API_HOST:'"http://wx.vogan.cc"',//	期权大时代
-  API_HOST:'"http://wx.yzqq168.com"',//  赢在期权
+  // API_HOST:'"http://wx.yzqq168.com"',//  赢在期权
+
+  //2019-03-26
+    // API_HOST:'"http://wx.bitguan.com"',//	期权魔方
+    // API_HOST:'" http://wxv.jxb3.cn"'//	期盈宝模拟
 
 }

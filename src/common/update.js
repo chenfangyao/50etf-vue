@@ -69,7 +69,7 @@ function downWgt(url) {
 }
 function installWgt(path) {
   plus.nativeUI.showWaiting("下载完成，正在安装…");
-  plus.runtime.install(path, {}, function () {
+  plus.runtime.install(path, { force: true}, function () {
     plus.nativeUI.closeWaiting();
     plus.nativeUI.alert("应用资源更新完成！", function () {
       plus.runtime.restart();

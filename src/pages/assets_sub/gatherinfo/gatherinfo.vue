@@ -82,6 +82,7 @@ export default {
       }
       switch(this.paytype){
 				case 'remit_alipay':
+				// case 'remit_qrcode_ali':
 				this.remit_alipay()
 				break
 				default:
@@ -110,22 +111,20 @@ export default {
 							pay_name_alipay: this.bankName,
 							// 转账账号
 							pay_account_no: this.bankCode
-									},
+        },
 			}
 			this.$httpReq(options).then((res) => {
 				if(res.status){
 					this.$toast.success({
             message:res.info?res.info:'信息提交成功',
           })
-         this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
           location.href=this.bankinfo.orcode_url
-
+          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
 				}else{
           this.$toast.fail({
             message:res.info?res.info:'信息提交失败'
           })
 				}
-
 			}).catch((err) => {
 				// 请求失败的回调
 			})

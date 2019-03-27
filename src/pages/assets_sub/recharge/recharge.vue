@@ -211,6 +211,7 @@ export default {
           })
           break
         case "remitance":
+        case "offline":
           // this.$navigateTo({ url: '/pages/assets_sub/bank_card/bank_card?pay_money=' + this.money + '&paytype=' + this.paytype + '&cardname=' + this.payeeinfo.cardname + '&cardno=' + this.payeeinfo.cardno + '&pw_id=' + this.payeeinfo.pw_id + '&bank_name=' + this.payeeinfo.bank_name + '' })
           this.$router.push({
             path:'/pages/assets_sub/bank_card/bank_card',
@@ -249,7 +250,6 @@ export default {
             console.error(err,'捕捉')
           })
           break
-
       }
     },
     rightTap() {

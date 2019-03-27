@@ -13,6 +13,7 @@
       <span v-vtap="{method: getmoreart  }">更多></span>
     </div>
     <news-view :newlists="newsItem"></news-view>
+
   </div>
 </template>
 
@@ -44,22 +45,7 @@ export default {
   computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer','atNight']),
   methods: {
     // 登录
-    ...mapMutations(['setsid', 'setusername', 'setmobile', 'setsoftconf', 'setindextimmer']),
-    // 获取配置信息
-    getconfinfo() {
-      var options = {
-        url: '/Sapi/Soft/conf', 
-        method: 'GET', 
-        context: '',
-      }
-      this.$httpReq(options).then((res) => {
-        if (res.status) {
-          this.setsoftconf(res.data)
-        }
-      }).catch((err) => {
-        console.error(err, '捕捉')
-      })
-    },
+    ...mapMutations(['setsid', 'setusername', 'setmobile', 'setindextimmer']),
     // 获取文章信息
     getartlelist() {
       var options = {
@@ -139,7 +125,6 @@ export default {
     next(vm=>{
       // 获取文章列表
       vm.getartlelist()
-      vm.getconfinfo()
       vm.getImgList()
       vm.getcommonselectstock(['', '', ''])
       if (!util.calcLegalTime()) return;

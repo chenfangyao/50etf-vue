@@ -38,7 +38,11 @@ export default {
     scrollTo(0,0)
     next()
   },
-  created(opts) {
+  beforeRouteLeave(to, from, next) {
+    from.query.pop&&this.$store.commit('setarticlePop',true)
+    next()
+  },
+  created() {
     var id = parseInt(this.$route.query.id)
     var options = {
       url: '/Sapi/Article/cont', //请求接口

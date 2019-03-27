@@ -30,31 +30,30 @@ export default {
     },
     chooseWay(item) {
       this.$emit('choose-way', item)
+    },
+    calcPaylist(type){
+      for(let k=0;k<this.paylist[type].length;k++){
+        this.paylist[type][k].pay_way=type
+      }
+      this.wayLists = this.wayLists.concat(this.paylist[type])
     }
   },
   data() {
     return {
       wayLists: [],
-
     }
   },
   props: ['showAction'],
   mounted() {
     let online=[],alipy=[],remitance=[]
     for(let i=0;i<this.paylist['online'].length;i++){
-      this.paylist['online'][i].pay_way='online'
+      this.paylist.online[i].pay_way='online'
       if(["alipay_wap",'aliauto'].indexOf(this.paylist['online'][i].pay_code)>=0){
         online.push(this.paylist['online'][i])
       }
     }
-    for(let k=0;k<this.paylist['alipay'].length;k++){
-      this.paylist['alipay'][k].pay_way='alipay'
-    }
-    for(let j=0;j<this.paylist['remitance'].length;j++){
-      this.paylist['remitance'][j].pay_way='remitance'
-    }
-    this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance']).concat(online)
-    // this.wayLists = this.wayLists.concat(this.paylist['alipay']).concat(this.paylist['remitance'])
+    ['alipay','offline','remitance'].forEach(item=>this.calcPaylist(item))
+    this.wayLists = this.wayLists.concat(online)
   },
   components: { uniIcon }
 }
