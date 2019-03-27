@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  props: { noticObj: { default() { return [] } } },
+  props: ['noticObj'],
   data(){return{
     showMine:false,
   }},

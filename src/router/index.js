@@ -24,7 +24,9 @@ const full_and_lose = resolve => require(['@/pages/holding_sub/full_and_lose/ful
 const assets = resolve => require(['@/pages/tabBar/assets/assets'], resolve)
 const mine = resolve => require(['@/pages/tabBar/mine/mine'], resolve)
 const login = resolve => require(['@/pages/login/login'], resolve)
+//充值 提现
 const recharge = resolve => require(['@/pages/assets_sub/recharge/recharge'], resolve)
+const codePay = resolve => require(['@/pages/assets_sub/recharge/code_pay'], resolve)
 const withdraw = resolve => require(['@/pages/assets_sub/withdraw/withdraw'], resolve)
 const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve)
 const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
@@ -33,7 +35,7 @@ const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'],
 const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
 const recording = resolve => require(['@/pages/assets_sub/recording/recording'], resolve)
 const bankHelp = resolve => require(['@/pages/assets_sub/help/help'], resolve)
-
+//实名认证
 const credentials1 = resolve => require(['@/pages/mine_sub/credentials_upload/tep1/tep1'], resolve)
 const credentials2 = resolve => require(['@/pages/mine_sub/credentials_upload/tep2/tep2'], resolve)
 const credentials3 = resolve => require(['@/pages/mine_sub/credentials_upload/tep3/tep3'], resolve)
@@ -94,6 +96,7 @@ export default new Router({
 
     // 充值
     { path: '/pages/assets_sub/recharge/recharge', name: 'recharge', component: recharge,  },
+    { path: '/recharge/codePay', name: 'codePay', component: codePay,  },
     { path: '/pages/assets_sub/withdraw/withdraw', name: 'withdraw', component: withdraw,  },
     // 账户充值第二步
     { path: '/pages/assets_sub/bank_card/bank_card', name: 'bank_card', component: bank_card,  },
