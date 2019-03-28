@@ -13,6 +13,7 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   store.commit("setloadingFlag", false);
     isShowLoading = false;
+    plus.nativeUI.toast('服务器连接异常')
   return Promise.reject(error);
 });
 axios.interceptors.request.use(function (config) {
