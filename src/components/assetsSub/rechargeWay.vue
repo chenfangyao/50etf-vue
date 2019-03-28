@@ -12,7 +12,7 @@
       </div>
       <img  class="to_r" src="../../assets/arrow/r.png">
   </div>
-  <recharge-actionsheet v-if="showAction" @choose-way='chooseWay'  @close-me='switchPop'></recharge-actionsheet>
+  <recharge-actionsheet :show-action="showAction" @choose-way='chooseWay' @calc-complete='assignment'  @close-me='switchPop'></recharge-actionsheet>
   
 </div>
 </template>
@@ -22,7 +22,7 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: {   rechargeActionsheet },
-	computed: {...mapState(['paylist'])},
+  computed: mapState(['paylist']),
   data() {
     return {
       showAction: false,
@@ -33,7 +33,6 @@ export default {
   props:{
     txt1:'',
     txt2:{},
-    goTo:'',
   },
   methods: {
     chooseWay(i) {
@@ -43,20 +42,19 @@ export default {
       this.switchPop()
     },
     switchPop() {
-      if(this.goTo){
-        // this.$navigateTo({url:'/pages/mine_sub/bank_card/card_list/card_list'})
-        this.$navigateTo({url:'/pages/mine_sub/bank_card/add_card/add_card'})
-        return
-      }
       this.showAction = !this.showAction
     },
-  },
-  watch:{
-    paylist(val){
-	    this.textbank=val.remitance[0].bank_name
-			this.banklogo=val.remitance[0].logo
+    assignment(arr){
+      if(this.paylist.default_pay){
+        this.textbank=this.paylist.default_pay.pay_name  
+        this.banklogo=this.paylist.default_pay.logo
+        return
+      }
+      if(arr.length===0)return;
+      this.textbank=arr[0].pay_name  
+			this.banklogo=arr[0].logo
     }
-  }
+  },
 
 }
 </script>

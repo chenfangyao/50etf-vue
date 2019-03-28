@@ -52,18 +52,26 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'  )
    xhr.send();
 }
+function onStateChanged(download, status) {
+  console.log(download);
+  console.log(status);
+  if (download.state == 4 && status == 200) {
+    // 下载完成 
+  }
+}
 // 下载wgt文件
 function downWgt(url) {
   plus.nativeUI.showWaiting("下载更新包，请耐心等待…");
   var dtask = plus.downloader.createDownload(url, { filename: "_doc/update/" }, function (d, status) {
     if (status == 200) {
-      installWgt(d.filename); // 安装wgt包
+     installWgt(d.filename); // 安装wgt包
     } else {
       plus.nativeUI.alert("下载失败！:" + status);
     }
     responseOK = true
     plus.nativeUI.closeWaiting();
   });
+  // dtask.addEventListener("statechanged", onStateChanged, false);
   dtask.setRequestHeader('sid', store.state.sid);
   dtask.start();
 }

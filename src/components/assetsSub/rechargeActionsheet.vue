@@ -1,5 +1,5 @@
 <template>
-  <div class="mask" >
+  <div class="mask" v-if="showAction">
     <div class="wayList black1 ">
       <div class="title">
         <div class="iconWrap " v-vtap="{method:closeMe}">
@@ -22,7 +22,6 @@ import uniIcon from "@/components/uni-icon.vue"
 import { mapState, mapMutations } from 'vuex';
 export default {
   computed: {    ...mapState(['paylist']),
-
   },
   methods: {
     closeMe() {
@@ -54,8 +53,9 @@ export default {
     }
     ['alipay','offline','remitance'].forEach(item=>this.calcPaylist(item))
     this.wayLists = this.wayLists.concat(online)
+    this.$emit('calc-complete',this.wayLists)
   },
-  components: { uniIcon }
+  components: { uniIcon },
 }
 </script>
 

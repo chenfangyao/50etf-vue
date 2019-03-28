@@ -1,25 +1,25 @@
 <template>
-  <div class="wrap">
+  <div class="wrap black1">
     <base-header title="充值信息确认" has-back='1'></base-header>
-    <div class="codeContainer">
+    <div class="codeContainer black2">
       <img :src="obj.orcode">
     </div>
-    <div class="info1">
+    <div class="info1 black2">
       <div class="orderCode">
-        <span>充值单号</span>
-        <input type="tel" maxlength="6" v-model="orderCode" class="fgrow1" placeholder="请输入单号后六位">
+        <span class="textc2">充值单号</span>
+        <input type="tel" maxlength="6" v-model="orderCode" class="fgrow1  black2" placeholder="请输入单号后六位">
       </div>
-      <div class="secend">
-        <span>充值金额</span>
+      <div class="secend ">
+        <span class="textc2">充值金额</span>
         <div class="uni-flex fgrow1">
-          <span class="moneySpan">{{money}}</span>
-          <span class="mr10">元</span>
+          <span class="moneySpan textc1">{{money}}</span>
+          <span class="mr10 textc1">元</span>
         </div>
       </div>
     </div>
-    <div class="info2">
-      <div><span class="span1">支付方式</span><span>{{obj.pay_name}}</span></div>
-      <div><span class="span1">收款方<span class="empty"></span></span><span>{{obj.cardname}}</span></div>
+    <div class="info2  black2">
+      <div><span class="span1 textc2">支付方式</span><span class="textc1">{{obj.pay_name}}</span></div>
+      <div><span class="span1 textc2">收款方<span class="empty"></span></span><span class="textc1">{{obj.cardname}}</span></div>
     </div>
     <btn-block txt='完成付款，点击提交订单' @v-tap='go'></btn-block>
 

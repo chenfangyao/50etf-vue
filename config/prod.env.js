@@ -15,7 +15,7 @@ module.exports = {
   // API_HOST: '"http://wx.gzyishengkj.com"',//策略家
   // API_HOST: '"http://wx.niuba50.com"',//牛八
   // API_HOST: '"http://wx.zsyqq.com"',//掌上盈ETF
-  //API_HOST:'" http://wx.zttz0554.com"',//	期权伴
+  //API_HOST:'"http://wx.zttz0554.com"',//	期权伴
   // API_HOST:'"http://wx.xiaozey.com"'//	小泽期权
 
   //2019-03-20
@@ -30,7 +30,7 @@ module.exports = {
     // API_HOST:'" http://wxv.jxb3.cn"'//	期盈宝模拟
 
     // 2019-03-28
-  API_HOST:'"http://lmhuawei.longmaoqq.com"'	,//龙猫期权（华为）
+  // API_HOST:'"http://lmhuawei.longmaoqq.com"'	,//龙猫期权（华为）
   // API_HOST: '"http://lmxiaomi.longmaoqq.com"',//龙猫期权（小米）
 
     
