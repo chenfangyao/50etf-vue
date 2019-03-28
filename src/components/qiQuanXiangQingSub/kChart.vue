@@ -390,7 +390,7 @@ export default {
     this.$emit('change-i', this.tabIndex=0)
   },
   activated() {
-    this.symbolStr&&this.getfenshi()
+    // this.symbolStr&&this.getfenshi() 当前有缓存，一次就好，被监听器替代
     util.calcLegalTime() && this.beginPolling()
   },
   watch:{
