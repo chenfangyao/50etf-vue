@@ -97,7 +97,7 @@ export default {
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
-        if (res.status) {
+        if (res.data.list) {
           this.noticList=res.data.list  
           this.noticItem=this.noticList.shift()
         }
