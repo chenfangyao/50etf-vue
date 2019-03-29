@@ -11,14 +11,14 @@
       </div>
       <div class="secend ">
         <span class="textc2">充值金额</span>
-        <div class="uni-flex fgrow1">
+        <div class="uni-flex fgrow1 blackBorder">
           <span class="moneySpan textc1">{{money}}</span>
           <span class="mr10 textc1">元</span>
         </div>
       </div>
     </div>
     <div class="info2  black2">
-      <div><span class="span1 textc2">支付方式</span><span class="textc1">{{obj.pay_name}}</span></div>
+      <div class="blackBorder"><span class="span1 textc2 ">支付方式</span><span class="textc1">{{obj.pay_name}}</span></div>
       <div><span class="span1 textc2">收款方<span class="empty"></span></span><span class="textc1">{{obj.cardname}}</span></div>
     </div>
     <btn-block txt='完成付款，点击提交订单' @v-tap='go'></btn-block>
