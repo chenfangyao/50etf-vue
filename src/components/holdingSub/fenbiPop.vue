@@ -48,7 +48,7 @@
             </div>-->
           </div>
         </div>
-        <div class="btn2 uni-flex">
+        <div class="btn2 uni-flex" v-if="$store.state.switchObj.show_sltp==1">
           <div class="uni-flex full" v-hover-class="'self-hover'" v-vtap="{method: go , params: 1}">
             <div class="uni-flex uni-column">
               <span>止盈</span>
