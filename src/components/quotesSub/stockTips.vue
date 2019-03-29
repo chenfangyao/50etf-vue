@@ -152,6 +152,7 @@ div.stock50 {
     flex-grow: 1;
     color: rgba(240, 95, 92, 1);
     text-align: center;
+    line-height: 0.71rem;
   }
 }
 
