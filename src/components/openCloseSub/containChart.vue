@@ -9,8 +9,8 @@
       <div class="uni-flex line2" :class="{lt0:resObj.priceChange<0}">
         <div>{{resObj.latestPrice | fix4}}</div>
         <div>
-          <h6>{{resObj.priceChange}}</h6>
-          <h6>{{resObj.priceChangeRate}}%</h6>
+          <h6>{{resObj.priceChange | fix4}}</h6>
+          <h6>{{resObj.priceChangeRate*100}}%</h6>
         </div>
       </div>
     </div>
