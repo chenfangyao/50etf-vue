@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part-detail>
+    <header-part-detail :isshowDetail="isshowDetail" :resdata='resObj'  :hyinfos='hyinfos'></header-part-detail>
     <div class="arrowImg" v-vtap="{method:showPartDetail}">
       <img v-show="isshowDetail" src="../../assets/arrow/t.png">
       <img v-show="!isshowDetail" src="../../assets/arrow/b.png">
@@ -60,7 +60,7 @@ export default {
       priceChangeRate: '',
     }
   },
-  props:['resObj','hynumbers','hyinfos'],
+  props:['resObj','hyinfos'],
   components: { headerPartDetail },
   watch: {
     resObj(val) {

@@ -67,7 +67,7 @@ export default {
       this.fbnum = val
     },
     // 买入卖出合约详细
-    getartlelist() {
+    getartlelist(firstReq) {
       var options = {
         url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
         method: 'POST', 
@@ -82,8 +82,9 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
+          firstReq&&this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
         }
-      }).catch((err) => {
+      }).catch(err => {
         // 请求失败的回调
         console.error(err, '捕捉')
       })
@@ -216,10 +217,7 @@ export default {
       vm.gethbchic()
       vm.setstockamunt(0)
       vm.symbol = to.query.code
-      vm.getartlelist()
-      setTimeout(() => {
-        vm.getmaxbuy(vm.symbol, vm.QuotationMsg.latestPrice, 0)
-      }, 1500)
+      vm.getartlelist(true)
         // if (!util.calcLegalTime()) return;
         if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {

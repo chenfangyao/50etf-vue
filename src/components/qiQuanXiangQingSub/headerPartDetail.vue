@@ -25,8 +25,7 @@
       </div>
       <div>
         <span>合约单位</span>
-        <span class="textc1">{{hynumbers}}</span>
-        <!-- <span>{{hyinfos.volume_multiple}}</span> -->
+        <span class="textc1">{{parseInt(hyinfos.volume_multiple)}}</span>
       </div>
     </div>
   </div>
@@ -52,9 +51,6 @@ export default {
       default: false,
     },
 		resdata:{
-			
-		},
-		hynumbers:{
 			
 		},
 		hyinfos:{

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap2 black1">
     <header-title :res-obj='detailObj'></header-title>
-    <header-part :res-obj='detailObj' :hynumbers='hynumbers' :hyinfos='hyinfos'></header-part>
+    <header-part :res-obj='detailObj'  :hyinfos='hyinfos'></header-part>
     <div class="h12 black1"></div>
     <k-chart  @change-i='changeI' :symbol-str='symbol'></k-chart>
     <template v-if="onDayKTab">
@@ -31,7 +31,6 @@ export default {
       symbol: '',
       detailObj: {},
       onDayKTab: true,
-      hynumbers: '',
       hyinfos: {},
     }
   },
@@ -39,29 +38,6 @@ export default {
     changeI(i) {
       if (i == 0) { this.onDayKTab = true }
       else { this.onDayKTab = false }
-    },
-    // 获取最大可买数量
-    getmaxbuy(codes, prices, amounts) {
-      var options = {
-        url: '/Sapi/Stock/max_buy', //请求接口
-        method: 'POST', 
-        dataType: "json",
-        data: {
-          // 股票代码
-          code: this.symbol,
-          // 委托价格
-          price: 0.0017,
-          // 委托数量,默认设置为1
-          amount: 1
-        },
-      }
-      this.$httpReq(options).then((res) => {
-        if (res.status) {
-          this.hynumbers = res.data.volume_multiple
-        }
-      }).catch((err) => {
-        console.error(err,'捕捉')
-      })
     },
     getItem() {
       var obj = {
@@ -99,7 +75,6 @@ export default {
   activated() {
     this.symbol = this.$route.query.code
     this.getItem()
-    this.getmaxbuy()
     this.gethyinfoprice()
   }
 }
