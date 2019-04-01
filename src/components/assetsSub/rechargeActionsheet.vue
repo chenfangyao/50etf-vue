@@ -3,15 +3,17 @@
     <div class="wayList black1 ">
       <div class="title">
         <div class="iconWrap " v-vtap="{method:closeMe}">
-          <uni-icon type="closeempty"   size="30"></uni-icon>
+          <uni-icon type="closeempty" size="30"></uni-icon>
         </div>
         <span class="textc1">支付方式</span>
       </div>
-      <div class="item uni-flex black1 " v-for="(item,i) in wayLists" :key='i' v-vtap="{method: chooseWay , params: item}" v-hover-class='"self-hover"'>
-        <img :src="item.logo">
-        <div class="txt">
-          <div class="wayName textc1">{{item.pay_name}}</div>
-          <!-- <div class="wayTip">提示限额（0-50,000）</div> -->
+      <div class="items">
+        <div class="item uni-flex black1 " v-for="(item,i) in wayLists" :key='i' v-vtap="{method: chooseWay , params: item}" v-hover-class='"self-hover"'>
+          <img :src="item.logo">
+          <div class="txt">
+            <div class="wayName textc1">{{item.pay_name}}</div>
+            <!-- <div class="wayTip">提示限额（0-50,000）</div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -30,9 +32,9 @@ export default {
     chooseWay(item) {
       this.$emit('choose-way', item)
     },
-    calcPaylist(type){
-      for(let k=0;k<this.paylist[type].length;k++){
-        this.paylist[type][k].pay_way=type
+    calcPaylist(type) {
+      for (let k = 0; k < this.paylist[type].length; k++) {
+        this.paylist[type][k].pay_way = type
       }
       this.wayLists = this.wayLists.concat(this.paylist[type])
     }
@@ -44,16 +46,21 @@ export default {
   },
   props: ['showAction'],
   mounted() {
-    let online=[],alipy=[],remitance=[]
-    for(let i=0;i<this.paylist['online'].length;i++){
-      this.paylist.online[i].pay_way='online'
-      if(["alipay_wap",'aliauto'].indexOf(this.paylist['online'][i].pay_code)>=0){
-        online.push(this.paylist['online'][i])
+
+  },
+  watch: {
+    paylist(val) {
+      let online = [], alipy = [], remitance = []
+      for (let i = 0; i < val['online'].length; i++) {
+        val.online[i].pay_way = 'online'
+        if (["alipay_wap", 'aliauto'].indexOf(val['online'][i].pay_code) >= 0) {
+          online.push(val['online'][i])
+        }
       }
+      ['alipay', 'offline', 'remitance'].forEach(item => this.calcPaylist(item))
+      this.wayLists = this.wayLists.concat(online)
+      this.$emit('calc-complete', this.wayLists)
     }
-    ['alipay','offline','remitance'].forEach(item=>this.calcPaylist(item))
-    this.wayLists = this.wayLists.concat(online)
-    this.$emit('calc-complete',this.wayLists)
   },
   components: { uniIcon },
 }
@@ -76,28 +83,31 @@ div.mask {
     background-color: #fff;
     left: 0;
     right: 0;
-   height:300px;
-  overflow-y:auto;
+    height: 300px;
+    div.items{
+     overflow-y: scroll;
+      height: calc(300px - 0.98rem);
+    }
     div.title {
       position: relative;
-      height:.98rem;
+      height: 0.98rem;
       text-align: center;
       .iconWrap {
         position: absolute;
-        left:.16rem;
-        top:.22rem;
+        left: 0.16rem;
+        top: 0.22rem;
       }
       span {
         font-size: 16px;
         color: rgba(24, 28, 40, 1);
-        line-height:.98rem;
+        line-height: 0.98rem;
       }
     }
     div.item {
-      height:1.40rem;
+      height: 1.4rem;
       background-color: #fff;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
-      padding-left:.36rem;
+      padding-left: 0.36rem;
       align-items: center;
       div.wayName {
         font-size: 15px;
@@ -108,9 +118,9 @@ div.mask {
         color: rgba(24, 28, 40, 1);
       }
       img {
-        width:.76rem;
-        height:.76rem;
-        margin-right:.26rem;
+        width: 0.76rem;
+        height: 0.76rem;
+        margin-right: 0.26rem;
       }
     }
   }

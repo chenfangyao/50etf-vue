@@ -82,7 +82,7 @@ export default {
           user_name: this.uName,
           user_pwd: this.pwd,
           mobile_verify: this.verificationCode,
-          rel_user: ''
+          rel_user: this.inviteCode
         }, 
         method: 'POST', 
       }
@@ -96,7 +96,7 @@ export default {
           if (res.info) {
             this.tipContent = res.info
           } else {
-            this.tipContent = '账号或密码错误'
+            this.tipContent = '注册失败'
           }
           return
         }
