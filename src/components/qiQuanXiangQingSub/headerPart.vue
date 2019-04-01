@@ -1,7 +1,7 @@
 
 <template>
   <div class="bgfff black2">
-    <div class="uni-flex">
+    <div class="uni-flex infoContainer">
       <div class="leftPart">
         <div class="leftTop uni-flex" :class="{lt0:resObj.priceChange<0}">
           <div class="price">{{resObj.latestPrice | to4bit}}</div>
@@ -85,8 +85,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bgfff{background: #fff;}
+.infoContainer{
+  justify-content: space-between;
+  padding: 0.3rem 0.53rem 0;
+}
 div.leftPart {
-  margin:.30rem  0  0 .26rem;
+  // margin:.30rem  0  0 .26rem;
   div.leftTop {
     color: $red1;
     font-family: MicrosoftYaHei;
@@ -125,7 +129,8 @@ div.leftPart {
 }
 div.rightPart {
   flex-grow: 1;
-  margin:.30rem .85rem  0 .80rem;
+  // margin:.30rem 0  0 .80rem;
+  margin-left: 0.8rem;
   div.uni-flex {
 		view:nth-child(1){
 			margin-left: 10px;

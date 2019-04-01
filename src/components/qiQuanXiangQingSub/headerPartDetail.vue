@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 div.root-el {
-  margin: 0 0 0 .25rem;
+  margin: 0 0 0 0.53rem;
   transition: height 300ms;
   height: 0 ;
   overflow: hidden;
