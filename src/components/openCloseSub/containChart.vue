@@ -10,7 +10,7 @@
         <div>{{resObj.latestPrice | fix4}}</div>
         <div>
           <h6>{{resObj.priceChange | fix4}}</h6>
-          <h6>{{resObj.priceChangeRate*100}}%</h6>
+          <h6>{{(resObj.priceChangeRate*100).toFixed(2)}}%</h6>
         </div>
       </div>
     </div>
