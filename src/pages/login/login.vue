@@ -70,10 +70,6 @@ export default {
                     user_name: this.uName,
                     user_pwd: this.pwd
                 }, //发送给服务端的数据
-                header: {
-                    clienttype: 'web',
-                    ver: 'v1.0'
-                },
                 method: 'POST', 
             }
             this.$httpReq(options).then((res) => {

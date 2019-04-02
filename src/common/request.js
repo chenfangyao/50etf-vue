@@ -44,13 +44,13 @@ export default function (obj) {
     ver: 'v1.0',
     sid,
     hrand,
-    hsign: md5('app|' + hrand)
+    hsign: md5('app|' + hrand),
+    'X-Requested-With': 'XMLHttpRequest' 
   })
   if (store.state.appObj){
     Object.assign(obj.header, {
       device: store.state.appObj.device, 
       clientsysver: store.state.appObj.clientsysver,
-      'X-Requested-With': 'XMLHttpRequest' 
     })
   }
 

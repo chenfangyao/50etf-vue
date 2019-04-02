@@ -2,7 +2,7 @@
 module.exports = {
   NODE_ENV: '"production"',
   clienttype:'"app"',
-  API_HOST: '"http://t50.zhijiancaopan.com:8042"',//测试
+  // API_HOST: '"http://t50.zhijiancaopan.com:8042"',//测试
   // API_HOST: '"http://50etfvue.cardoctor.com.cn"',//web
   // API_HOST:'"http://wxv.zjkj888.cn"'//模拟
   // API_HOST:'"http://wx.x-hong.cn"',//道森
@@ -30,7 +30,7 @@ module.exports = {
     // API_HOST:'" http://wxv.jxb3.cn"'//	期盈宝模拟
 
     // 2019-03-28
-  // API_HOST:'"http://lmhuawei.longmaoqq.com"'	,//龙猫期权（华为）
+  API_HOST:'"http://lmhuawei.longmaoqq.com"'	,//龙猫期权（华为）
   // API_HOST: '"http://lmxiaomi.longmaoqq.com"',//龙猫期权（小米）
     
 

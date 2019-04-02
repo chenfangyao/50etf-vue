@@ -26,10 +26,6 @@ export function login(uName, pwd){
       user_name: uName,
       user_pwd: pwd
     }, //发送给服务端的数据
-    header: {
-      clienttype: 'web',
-      ver: 'v1.0'
-    },
     method: 'POST',
   }
   request(options).then((res) => {
