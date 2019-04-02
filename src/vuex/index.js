@@ -13,8 +13,6 @@ const store = new Vuex.Store({
     openid: null,
     atNight: false,
     sid: '',
-    username: '',
-    mobile: '',
     appObj:null,
     userinfo: {},
     // 合约code
@@ -93,12 +91,6 @@ const store = new Vuex.Store({
     },
     setpingCItem(state, data) {
       state.pingCItem = data
-    },
-    setusername(state, data) {
-      state.username = data
-    },
-    setmobile(state, data) {
-      state.mobile = data
     },
     sethycode(state, data) {
       state.hycode = data

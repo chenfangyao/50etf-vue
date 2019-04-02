@@ -27,6 +27,8 @@ import inputItem from '@/components/commonResgLog/inputItem.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
 import { mapState, mapMutations } from 'vuex';
 import { checkUpdate } from '@/common/update.js'
+import {getuserinfo} from '@/common/saveLogin.js'
+
 export default {
   data() {
     return {
@@ -44,10 +46,10 @@ export default {
 			this.verifyYes==true
 		}
 	},
-    computed: mapState(['atNight','sid','username','mobile','userinfo','switchObj']),
+    computed: mapState(['atNight','sid','switchObj']),
   components: { submitBtn ,inputItem,errTip},
   methods: {
-      ...mapMutations(['setsid','setusername','setmobile','setuserinfo']),
+      ...mapMutations(['setsid']),
     go(i) {
       let url = ''
       switch (i) {
@@ -62,17 +64,6 @@ export default {
     },
     handleLogin() {
         this.showErr=false
-          // 验证输入信息
-        /*if(this.$validata(this.uName,0)!=1){
-            this.showErr=true
-            this.tipContent=this.$validata(this.uName,0)
-            return
-        }
-        if(this.$validata(this.pwd,1)!=1){
-            this.showErr=true
-            this.tipContent=this.$validata(this.pwd,1)
-            return
-        }*/
             var options = {
                 url: '/Sapi/Login/index', //请求接口
                 data: {
@@ -90,10 +81,11 @@ export default {
                     this.verifyYes=true
                       this.setsid(res.data.sid)
                     if(process.env.NODE_ENV === 'production'){
-                       localStorage.setItem('etfSid',res.data.sid)
+                       localStorage.setItem("user_name", this.uName)
+                       localStorage.setItem("user_pwd", this.pwd)
                        checkUpdate()}
                     // 获取用户信息
-                    this.getuserinfo()
+                    getuserinfo()
                   this.$router.replace('/')
                 }else{
                     this.showErr=true
@@ -107,21 +99,6 @@ export default {
                 console.error(err,'捕捉')
             })
     },
-    getuserinfo() {
-          var options = {
-              url: '/Sapi/User/info', //请求接口
-              method: 'GET', 
-          }
-          this.$httpReq(options).then((res) => {
-              if(res.status){
-                this.setuserinfo(res.data)
-               process.env.NODE_ENV === 'production'&& localStorage.setItem('userinfo',JSON.stringify( res.data))
-                
-              }
-          }).catch((err) => {
-              console.error(err,'捕捉')
-          })
-      },
     handleBlur(){
     },
     handChange(){

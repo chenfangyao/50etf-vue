@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 import newsView from '@/components/indexSub/newsView.vue'
 import threeSecurities from '@/components/indexSub/securities3.vue'
 import fourTips from '@/components/indexSub/tips4.vue'
@@ -42,11 +42,9 @@ export default {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState([ 'sid', 'username', 'mobile', 'indextimmer','atNight']),
+  computed: mapState([  'atNight']),
   methods: {
     // 登录
-    ...mapMutations(['setsid', 'setusername', 'setmobile', 'setindextimmer']),
-    // 获取文章信息
     getartlelist() {
       var options = {
         url: '/Sapi/Article/notice',
