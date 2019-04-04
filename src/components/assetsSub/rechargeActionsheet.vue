@@ -50,15 +50,15 @@ export default {
   },
   watch: {
     paylist(val) {
-      let online = [], alipy = [], remitance = []
+      let online = []
       for (let i = 0; i < val['online'].length; i++) {
         val.online[i].pay_way = 'online'
         if (["alipay_wap", 'aliauto'].indexOf(val['online'][i].pay_code) >= 0) {
           online.push(val['online'][i])
         }
       }
+      this.wayLists = this.wayLists.concat(online);
       ['alipay', 'offline', 'remitance'].forEach(item => this.calcPaylist(item))
-      this.wayLists = this.wayLists.concat(online)
       this.$emit('calc-complete', this.wayLists)
     }
   },
