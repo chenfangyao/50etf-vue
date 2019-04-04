@@ -304,7 +304,7 @@ export default {
         option1k.dataZoom[0].start = this.getNowTime()
         obj = option1k
       } else if (this.tabIndex == 1) {//日K的情况
-        X.length < 60 && (X.length = 60)
+        X.length < 50 && (X.length = 50)
         obj = optionRk 
       } else if (this.tabIndex == 3) {//5分k
         obj = option5k 

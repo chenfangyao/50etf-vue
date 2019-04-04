@@ -374,6 +374,7 @@ export const option = {
       return obj;
     },
   },
+  animation:false,
   xAxis: [
     {
       data: [],
