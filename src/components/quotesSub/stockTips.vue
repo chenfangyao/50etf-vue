@@ -1,11 +1,13 @@
 <template>
   <div class="stock50 uni-flex black2 " v-vtap="{method:go}">
-    <div class="stockNmae textc1">50ETF</div>
-    <div class="df_wh" id="mini-canvas"></div>
+    <div class="uni-flex flg1">
+      <div class="stockNmae textc1">50ETF</div>
+      <div class="df_wh" id="mini-canvas"></div>
+    </div>
     <div class="currentPrice" :class="{lt0:commonstock[0].priceChange<0}">{{commonstock[0]?commonstock[0].latestPrice:0}}</div>
-    <div class="txtContainer" :class="{lt0:commonstock[0].priceChange<0}">
-      <span>{{commonstock[0]?commonstock[0].priceChange:0}}</span>
-      <span>{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
+    <div class="txtContainer flg1" :class="{lt0:commonstock[0].priceChange<0}">
+      <span class="flg1">{{commonstock[0]?commonstock[0].priceChange:0}}</span>
+      <span class="flg1">{{commonstock[0]?commonstock[0].priceChangeRate:0}}%</span>
     </div>
   </div>
 </template>
@@ -111,7 +113,7 @@ div.stock50 {
   height: 0.84rem;
   line-height: 0.84rem;
   justify-content: space-between;
-  padding: 0 0.27rem;
+  padding: 0 0.25rem;
   border-top: 1px solid #ededed;
   border-bottom: 0.12rem solid #ededed;
   div.txtContainer {
@@ -119,8 +121,9 @@ div.stock50 {
     justify-content: space-between;
     line-height: 0.71rem;
     color: rgba(240, 95, 92, 1);
-    span:first-child{
-      margin-right: 0.3rem;
+    span{
+      width: 51px;
+      text-align: right;
     }
   }
   div.txtContainer.lt0 ,.currentPrice.lt0{
@@ -139,7 +142,7 @@ div.stock50 {
     font-weight: 400;
   }
   div.df_wh {
-  width: 1.24rem;
+  width: 1.3rem;
   height: 0.47rem;
   margin-left: 0.17rem;
   align-self: center;
@@ -149,10 +152,13 @@ div.stock50 {
     font-size: 17px;
     font-family: ArialMT;
     font-weight: 700;
-    flex-grow: 1;
     color: rgba(240, 95, 92, 1);
     text-align: center;
     line-height: 0.71rem;
+    padding:  0 0.23rem;
+  }
+  .flg1{
+    flex-grow: 1;
   }
 }
 
