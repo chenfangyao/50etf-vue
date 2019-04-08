@@ -466,6 +466,11 @@ export default {
     },
     fborhb(val) {
       this.tabActive = this.fborhb
+    },
+    'maxprice.maxcounts': {
+      handler(val) {
+        this.sliderdisable = val==0
+      },
     }
   },
   created() {
