@@ -32,6 +32,7 @@ export default {
       detailObj: {},
       onDayKTab: true,
       hyinfos: {},
+      timmer:null
     }
   },
   methods: {
@@ -76,6 +77,11 @@ export default {
     this.symbol = this.$route.query.code
     this.getItem()
     this.gethyinfoprice()
+    this.timmer=setInterval(()=>this.getItem(),1500)
+  },
+  deactivated(){
+    clearInterval(this.timmer)
+    this.timmer=null
   }
 }
 </script>

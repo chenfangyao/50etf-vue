@@ -25,9 +25,10 @@ var checkUrl = baseURL+"/Sapi/Soft/last?clienttype=app&version=";
           var is_force = obj.data.list[0].is_force;
           if (wgtVer && newVer && (wgtVer < newVer)) {
             if (is_force==0){
-              plus.nativeUI.confirm('应用检测到新版本，是否立即更新？', e=>{
-                e.index === 0 && downWgt(baseURL+downurl)
-              } );
+              plus.nativeUI.confirm('应用需要修复一些缺陷，建议修复',
+                  e=>{   e.index === 0 && downWgt(baseURL+downurl) }, 
+                  { "buttons": ["好的", "下次"], }
+              );
             }else{
               // plus.nativeUI.showWaiting("正在更新，请稍后...");
               downWgt(baseURL + downurl)

@@ -23,13 +23,13 @@ module.exports = {
 
   //2019-03-21
   // API_HOST:'"http://wx.vogan.cc"',//	期权大时代
-  // API_HOST:'"http://wx.yzqq168.com"',//  赢在期权
+  // API_HOST:'"http://wx.yzqq168.com"',// 赢在期权
 
   //2019-03-26
     // API_HOST:'"http://wx.bitguan.com"',//	期权魔方
     // API_HOST:'" http://wxv.jxb3.cn"'//	期盈宝模拟
 
-    // 2019-03-28
+  // 2019-03-28
   // API_HOST:'"http://lmhuawei.longmaoqq.com"'	,//龙猫期权（华为）
   // API_HOST: '"http://lmxiaomi.longmaoqq.com"',//龙猫期权（小米）
     

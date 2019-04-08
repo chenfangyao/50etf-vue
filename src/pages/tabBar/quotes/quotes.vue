@@ -87,7 +87,7 @@ export default {
     },
     beginPolling() {
       if (util.indextimmer.quotesQryQuotationList === null) {
-        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1500)
+        util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1000)
       }
     },
     getquoteList() {

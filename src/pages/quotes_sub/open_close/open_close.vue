@@ -222,7 +222,7 @@ export default {
         if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
           util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
             vm.getartlelist()
-          }, 2500)
+          }, 1500)
         }
 
     })
