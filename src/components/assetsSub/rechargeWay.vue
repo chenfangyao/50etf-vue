@@ -51,12 +51,15 @@ export default {
           if (arr[i].pay_code === this.paylist.default_pay) {
             this.textbank = arr[i].pay_name
             this.banklogo = arr[i].logo
+            this.$emit('calc-default',arr[i])
             return
           }
         }
       }
       this.textbank = arr[0].pay_name
       this.banklogo = arr[0].logo
+      this.$emit('calc-default',arr[0])
+
     }
   },
 
