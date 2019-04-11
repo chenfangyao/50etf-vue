@@ -26,6 +26,7 @@ export default {
         this.$navigateTo({ url: '/pages/login/login' })
         return
       }
+      if(this.userinfo.is_certified==0)return;
       // 判断实名认证状态实名认证状态。0=未提交，1=审核成功，2=审核中，3=审核失败"
       let realnstatus=this.userinfo.realn_status;
 			if(realnstatus==0){
@@ -33,13 +34,10 @@ export default {
 			}else{
 			  let type
          if(realnstatus==1){
-          // this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=1' })
            type=1
         }else if(realnstatus==2){
-          // this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=2' })
            type=2
         }else if(realnstatus==3){
-          // this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep4/tep4?type=3' })
            type=3
         }
         this.$router.push({
