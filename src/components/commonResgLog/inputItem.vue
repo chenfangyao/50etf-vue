@@ -55,7 +55,7 @@ export default {
 <style lang="scss" scoped>
 div._input {
   border-bottom: 1px solid #ccc;
-  margin-bottom:.62rem;
+  margin-bottom:.65rem;
   position: relative;
   color: rgba(51, 51, 53, 1);
   font-size: 16px;
@@ -64,17 +64,19 @@ div._input {
     position: relative;
     z-index: 20;
     width: 80%;
+    font-size: 18px;
+    padding:0 0  5px 5px;
     background-color: transparent;
   }
   img.openImg {
     width:.42rem;
     height:.33rem;
-    top:0;
+    top:0.1rem;
   }
   img.closeImg {
     width:.38rem;
     height:.21rem;
-    top:0.05rem
+    top:0.2rem
   }
   img {
     position: absolute;
@@ -95,7 +97,7 @@ div._input {
   }
   span.absTxt.inputFocus {
     font-size: 14px;
-    bottom:.60rem;
+    bottom:.70rem;
   }
 }
 div._input.input6 {

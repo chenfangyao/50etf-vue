@@ -41,7 +41,7 @@ export default {
            type=3
         }
         this.$router.push({
-          path:'/pages/mine_sub/credentials_upload/tep4/tep4',
+          path:'/pages/mine_sub/credentials_upload/tep3/tep3',
           query:{
             type:type,
           }

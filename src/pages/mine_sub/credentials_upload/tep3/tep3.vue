@@ -3,7 +3,7 @@
     <div class="wrap-2">
       <base-header has-back="1"></base-header>
       <div class="line1 textc1">证件信息已提交</div>
-      <div class="line2 textc1">信息正在审核</div>
+      <div class="line2 textc1">{{text1}}</div>
       <div class="line3">审核时间：</div>
       <div class="line3">工作日10:00-18:00：将在30分钟左右完成审核18:00后将在次日审核</div>
     </div>
@@ -19,6 +19,11 @@ import { mapMutations } from 'vuex';
 
 export default {
   components: { btnBlock },
+  data(){
+    return{
+      text1: '',
+    }
+  },
   methods: {
     ...mapMutations(['setuserinfo']),
     goNext() {
@@ -36,6 +41,18 @@ export default {
       })
     },
 
+  },
+  created() {
+    this.type = this.$route.query.type
+    if (this.type == 1) {
+      this.text1 = '申请已通过'
+    }
+    else if (this.type == 2) {
+      this.text1 = '申请已提交请耐心等待'
+    }
+    else if (this.type == 3) {
+      this.text1 = '申请失败'
+    }
   }
 }
 </script>

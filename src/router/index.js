@@ -39,7 +39,6 @@ const bankHelp = resolve => require(['@/pages/assets_sub/help/help'], resolve)
 const credentials1 = resolve => require(['@/pages/mine_sub/credentials_upload/tep1/tep1'], resolve)
 const credentials2 = resolve => require(['@/pages/mine_sub/credentials_upload/tep2/tep2'], resolve)
 const credentials3 = resolve => require(['@/pages/mine_sub/credentials_upload/tep3/tep3'], resolve)
-const credentials4 = resolve => require(['@/pages/mine_sub/credentials_upload/tep4/tep4'], resolve)
 
 const capital_flow = resolve => require(['@/pages/mine_sub/capital_flow/capital_flow'], resolve)
 const trading_rules = resolve => require(['@/pages/mine_sub/trading_rules/trading_rules'], resolve)
@@ -115,7 +114,6 @@ export default new Router({
     { path: '/pages/mine_sub/credentials_upload/tep1/tep1', name: 'credentials1', component: credentials1,  },
     { path: '/pages/mine_sub/credentials_upload/tep2/tep2', name: 'credentials2', component: credentials2,  },
     { path: '/pages/mine_sub/credentials_upload/tep3/tep3', name: 'credentials3', component: credentials3,  },
-    { path: '/pages/mine_sub/credentials_upload/tep4/tep4', name: 'credentials4', component: credentials4,  },
     // 资金流水
     { path: '/pages/mine_sub/capital_flow/capital_flow', name: 'capital_flow', component: capital_flow,  },
     // 添加银行卡

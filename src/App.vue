@@ -120,7 +120,9 @@ export default {
           }else{
             this.$store.commit('setatNight',theme==='0')
           }
-          res.data.is_need_login>0&&this.$redirectTo({url:'/pages/login/login'})
+          if(localStorage.getItem("user_pwd")===null){
+            res.data.is_need_login>0&&this.$redirectTo({url:'/pages/login/login'})
+          }
         }
       }).catch((err) => {
         console.error(err, '捕捉')
