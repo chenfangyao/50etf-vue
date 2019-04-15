@@ -177,7 +177,7 @@ export default {
       defaultitemmoney: '',
       showTable: false,
       alipayRes: '',
-      pay_way: 'alipay',
+      pay_way: '',
       alipayChannel: null
     }
   },
@@ -269,6 +269,8 @@ export default {
     calcDefault(obj) {
       // 设置默认下一步传递参数
       this.payeeinfo = obj
+      this.pay_way = obj.pay_way
+      this.paytype = obj.pay_code
       this.priceLists = obj.conf_set?obj.conf_set.money_selects:obj.money_selects
       this.money = this.priceLists[0]
     },
@@ -280,11 +282,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.setpaylist(res.data)
-          if (res.data.alipay.length === 0) return;
-          // this.pickerValueArray=res.data.list
-        } else {
-
-        }
+        } 
       }).catch((err) => {
         console.error(err, '捕捉')
       })
