@@ -3,7 +3,7 @@
     <base-header has-back="1"></base-header>
     <div class="title textc1">注册新账号</div>
     <div class="container">
-      <input-item placeholderTxt="您的账号" @now-blur="handleBlur" v-model="uName"></input-item>
+      <input-item placeholderTxt="您的账号" @now-blur="handleBlur" v-model="uName" v-if='switchObj.show_reg_username==1'></input-item>
       <input-item placeholderTxt="手机号" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>
       <div class="uni-flex vCode">
         <div>
@@ -14,7 +14,7 @@
       <div class="pwdclass">
         <input-item placeholderTxt="密码" :isPwd="true" v-model="pwd" @now-blur="handleBlur"></input-item>
       </div>
-      <input-item placeholderTxt="邀请人的邀请码" @now-blur="handleBlur" v-if='$store.state.switchObj.show_reluser==1'  v-model="inviteCode"></input-item>
+      <input-item placeholderTxt="邀请人的邀请码" @now-blur="handleBlur" v-if='switchObj.show_reluser==1'  v-model="inviteCode"></input-item>
       <err-tip :err-class="showErr" :tip-content="tipContent"></err-tip>
 
       <!-- <submit-btn btnTxt='完成' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn> -->
@@ -34,6 +34,7 @@ import submitBtn from '@/components/commonResgLog/submitBtn.vue'
 import inputItem from '@/components/commonResgLog/inputItem.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
 import countDown from '@/components/commonResgLog/countdown.vue'
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -167,6 +168,7 @@ export default {
       })
     }
   },
+  computed: mapState(['switchObj']),
 
 }
 </script>

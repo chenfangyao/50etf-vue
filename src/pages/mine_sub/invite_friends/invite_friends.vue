@@ -11,7 +11,7 @@
       <div class="btn" v-if="onApp">
         <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
       </div>
-      <div class="txt textc1" v-else>{{link}}</div>
+      <div class="txt textc1" v-else>{{realAddress}}</div>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ import imageUrl from '@/assets/mineImg/logo.png'
 export default {
   data() {
     return {
-      link: process.env.API_HOST+'/m/register',
+      link: process.env.API_HOST+'/reg/index.html',
       //  imageUrl:'http://pic168.nipic.com/file/20180607/2546657_191526185031_2.jpg',//默认二维码中间图片
       // imageUrl:'http://www.pptok.com/wp-content/uploads/2012/08/xunguang-4.jpg',//默认二维码中间图片
       imageUrl,//默认二维码中间图片
@@ -35,7 +35,7 @@ export default {
   computed: {
     ...mapState(['userinfo', 'atNight','switchObj']),
      realAddress() {
-      return this.link + '/' + this.userinfo.user_id
+      return this.link + '?rel_user=' + this.userinfo.user_id
     }
   },
   components: { btnBlock, QrcodeVue },
@@ -43,7 +43,7 @@ export default {
     shareSystem() {
       var msg = { 
         content: this.userinfo.user_name+'邀请您：', 
-        href: this.link,
+        href: this.realAddress,
         type:'web',
         title:'from linChengShu',
         thumbs:['../../../assets/mineImg/logo.png']

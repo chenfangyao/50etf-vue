@@ -13,16 +13,16 @@
       <div class="heightUp black1" v-show="tabI!=3"></div>
       <div class="h40 black1" v-show="tabI==2"></div>
     </div>
-    <scroll-view  class="list2"   v-show="tabI<2"  ref="s1"  @scrollToEnd="loadMore(tabI)"  >
-      <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop" ></list-one>
+    <scroll-view class="list2" v-show="tabI<2" ref="s1" @scrollToEnd="loadMore(tabI)">
+      <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop"></list-one>
       <div v-if="titleList[tabI].total==0" class="nullTxt">您还未持仓，去持仓盈利吧！</div>
     </scroll-view>
-    <scroll-view  class="list3"   @scrollToEnd="loadMore(2)" ref="s2" v-show="tabI==2" >
-      <list-two :tab-i="tabI" :list="titleList[2].list" ></list-two>
+    <scroll-view class="list3" @scrollToEnd="loadMore(2)" ref="s2" v-show="tabI==2">
+      <list-two :tab-i="tabI" :list="titleList[2].list"></list-two>
       <div v-if="titleList[2].total==0" class="nullTxt">今日未有交易委托！</div>
     </scroll-view>
-    <scroll-view  class='list4'   @scrollToEnd="loadMore(3)" ref="s3" v-show="tabI==3" >
-      <list-three :tab-i="tabI" :list="titleList[3].list" @re-get='getFenbiList(3)' ></list-three>
+    <scroll-view class='list4' @scrollToEnd="loadMore(3)" ref="s3" v-show="tabI==3">
+      <list-three :tab-i="tabI" :list="titleList[3].list" @re-get='getFenbiList(3)'></list-three>
       <div v-if="titleList[3].total==0" class="nullTxt">无可撤的委托！</div>
     </scroll-view>
     <div class="h5 black1"></div>
@@ -55,10 +55,10 @@ export default {
       listItem: {},//给fenbiPop的数据
       revokeTimer: null,//撤单定时器
       titleList: [
-        { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0,},
-        { name: '合并', startI: 0, list: [], resquestState: 0, total: 0,},
-        { name: '委托', startI: 0, list: [], resquestState: 0, total: 0,},
-        { name: '撤单', startI: 0, list: [], resquestState: 0, total: 0,},
+        { name: '分笔', startI: 0, list: [], resquestState: 0, total: 0, },
+        { name: '合并', startI: 0, list: [], resquestState: 0, total: 0, },
+        { name: '委托', startI: 0, list: [], resquestState: 0, total: 0, },
+        { name: '撤单', startI: 0, list: [], resquestState: 0, total: 0, },
       ],
 
     };
@@ -82,11 +82,12 @@ export default {
       this.getFenbiList(i)
     },
     checkRevoke(i) {
-      if (i == 3) {
-        !this.revokeTimer && (this.revokeTimer = setInterval(i => { this.getFenbiList(3) }, 3000))
+      clearInterval(this.revokeTimer)
+      this.revokeTimer = null
+      if (i === 'leave') {
+        return
       } else {
-        clearInterval(this.revokeTimer)
-        this.revokeTimer = null
+        this.revokeTimer = setInterval(() => { this.getFenbiList(i) }, 3000)
       }
     },
     loadMore(i) {
@@ -95,12 +96,12 @@ export default {
         this.getFenbiList(i, 'add')
       }
     },
-    refreshScroll(){
-      if(this.tabI<2){
+    refreshScroll() {
+      if (this.tabI < 2) {
         this.$refs.s1.refresh()
-      }else if(this.tabI==2){
+      } else if (this.tabI == 2) {
         this.$refs.s2.refresh()
-      }else{
+      } else {
         this.$refs.s3.refresh()
       }
     },
@@ -151,12 +152,13 @@ export default {
         vm.getFenbiList(2)
         return
       }
+      vm.checkRevoke(vm.tabI)
       vm.titleList[vm.tabI].list.length || vm.getFenbiList(vm.tabI)
     })
   },
   beforeRouteLeave(to, from, next) {
     // this.setweituoindex(0)
-    this.checkRevoke()//清除撤单定时器
+    this.checkRevoke('leave')//清除撤单定时器
     next()
   }
 }
