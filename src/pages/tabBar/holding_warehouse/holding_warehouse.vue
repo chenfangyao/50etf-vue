@@ -87,7 +87,7 @@ export default {
       if (i === 'leave') {
         return
       } else {
-        this.revokeTimer = setInterval(() => { this.getFenbiList(i) }, 3000)
+        this.revokeTimer = setInterval(() => { this.getFenbiList(i,false,true) }, 3000)
       }
     },
     loadMore(i) {
@@ -105,7 +105,7 @@ export default {
         this.$refs.s3.refresh()
       }
     },
-    getFenbiList(i, add) {
+    getFenbiList(i, add,all) {
       this.titleList[i].resquestState = 1
       let url = ''
       let j = Number(i)
@@ -122,8 +122,8 @@ export default {
       var options = {
         url, //请求接口
         data: {
-          page_index: this.titleList[i].startI,
-          page_size: 10,
+          page_index:all?0: this.titleList[i].startI,
+          page_size:all?this.titleList[i].list.length: 10,
         },
         method: 'GET'
       }

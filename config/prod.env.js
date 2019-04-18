@@ -17,7 +17,8 @@ module.exports = {
   // API_HOST: '"http://wx.zsyqq.com"',//掌上盈ETF
   //API_HOST:'"http://wx.zttz0554.com"',//	期权伴
   // API_HOST:'"http://wx.xiaozey.com"'//	小泽期权
-
+  //H597B188E //热更新
+	//H5E98D807 //上架
   //2019-03-20
   // API_HOST:'"http://wx.080518.cn"'//	牛行长
 
