@@ -58,7 +58,7 @@ export default {
       this.$navigateTo({ url: '/pages/assets_sub/recording/recording' ,query:{type:2}})
     },
     doWhat() {
-      var cash_money=this.assetsList.cash_money.replace(/,/,'')
+      var cash_money=this.assetsList.cash_money.replace(/,/g,'')
        if(cash_money-this.money<0){
         this.$toast('可提现金额不足')
         return
@@ -86,7 +86,7 @@ export default {
       })
     },
     allGet() {
-      this.money = this.assetsList.enable_money.replace(/,/g, '')
+      this.money = this.assetsList.cash_money.replace(/,/g, '')
     },
     // 我的银行
     mybankinfo() {
