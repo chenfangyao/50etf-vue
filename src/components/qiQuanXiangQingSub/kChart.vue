@@ -90,7 +90,7 @@ export default {
             this.timmer = setInterval(() => this.getfenshi(), 30000)
             return
           case 1:
-            this.timmer = setInterval(() => this.getDayK(4), 60000 * 60)
+            this.timmer = setInterval(() => this.getDayK(4), 60000 * 15)
             break
           case 2:
             this.timmer = setInterval(() => this.getDayK(), 30000)

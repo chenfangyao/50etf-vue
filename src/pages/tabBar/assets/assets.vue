@@ -50,7 +50,8 @@ export default {
       add_dpt_money: "保证金",
       add_fee_money: "延期费",
       tip_risk_month: "资金页面底下提示文字，有值才显示。如：需月配请联系客服",
-			greenredclass:false,
+      greenredclass:false,
+      timmer:null,
     };
   },
   // props:{aa:'res_data'},
@@ -87,9 +88,13 @@ export default {
       })
     },
   },
-  created: function () {
+  activated () {
     this.getassets()
-    // this.$refs.ff.getassets()
+    this.timmer=setInterval(()=>this.getassets(),3000)
+  },
+  deactivated(){
+    clearInterval(this.timmer)
+    this.timmer=null
   }
 }
 </script>

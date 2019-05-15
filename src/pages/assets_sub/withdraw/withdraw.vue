@@ -11,7 +11,7 @@
       </div>
       <div class="overage">
         <span>可提现余额：</span>
-        <span>{{assets.enable_money}}元</span>
+        <span>{{assetsList.cash_money}}元</span>
         <span class="allWithdraw" v-vtap="{method:allGet}">全部提现</span>
       </div>
     </div>
@@ -26,7 +26,6 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
-import { mapState } from 'vuex';
 
 export default {
   components: { btnBlock, rechargeWay },
@@ -40,22 +39,54 @@ export default {
       hasBank: false,
       bankName: [],
 			txts1:'',
-			showbanklogo:false
+      showbanklogo:false,
+      timmer:null,
+      assetsList:{}
     }
   },
-  computed: mapState(['assets']),
   created() {
     this.mybankinfo()
+    this.getassets()
+    this.timmer=setInterval(()=>this.getassets(),3000)
+  },
+  beforeDestroy(){
+    clearInterval(this.timmer)
+    this.timmer=null
   },
   methods: {
     rightTap() {
       this.$navigateTo({ url: '/pages/assets_sub/recording/recording' ,query:{type:2}})
     },
     doWhat() {
-      this.ufundcash()
+      var cash_money=this.assetsList.cash_money.replace(/,/,'')
+       if(cash_money-this.money<0){
+        this.$toast('可提现金额不足')
+        return
+      }
+      var options = {
+        url: '/Sapi/Ufund/cash', //请求接口
+        method: 'POST', 
+        data: {
+          money: this.money
+        }
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$router.push({
+            path:'/pages/assets_sub/recording/recording',
+            query:{
+              type:2,
+            }
+          })
+        } else {
+          this.$toast.fail(res.info ? res.info : '提现申请失败')
+        }
+      }).catch((err) => {
+        console.error(err,'捕捉')
+      })
     },
     allGet() {
-      this.money = this.assets.enable_money.replace(/,/g, '')
+      this.money = this.assetsList.enable_money.replace(/,/g, '')
     },
     // 我的银行
     mybankinfo() {
@@ -86,30 +117,18 @@ export default {
         console.error(err,'捕捉')
       })
     },
-    // 提现
-    ufundcash() {
+    getassets() {
       var options = {
-        url: '/Sapi/Ufund/cash', //请求接口
-        method: 'POST', 
-        data: {
-          money: this.money
-        }
+        url: '/Sapi/User/asset', //请求接口
+        method: 'GET', 
       }
       this.$httpReq(options).then((res) => {
-        if (res.status) {
-          this.$router.push({
-            path:'/pages/assets_sub/recording/recording',
-            query:{
-              type:2,
-            }
-          })
-        } else {
-          this.$toast.fail(res.info ? res.info : '提现申请失败')
+        if (res.status == 1) {
+					this.assetsList=res.data
         }
-      }).catch((err) => {
-        console.error(err,'捕捉')
       })
-    }
+    },
+    // 提现
   }
 }
 </script>
