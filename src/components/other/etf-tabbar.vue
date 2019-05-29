@@ -71,8 +71,9 @@ export default {
 </script>
 
 <style  lang="scss">
-.base-spase {
-  height: 50px;
+.base-spase ,.van-tabbar{
+  height: calc(50px + env(safe-area-inset-bottom));
+  height: calc(50px + constant(safe-area-inset-bottom));
 }
 .van-tabbar-item__icon  {
   margin-bottom: 0 !important;
@@ -86,5 +87,7 @@ export default {
 }
 .van-tabbar--fixed{
   padding-top: 6px;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom);
 }
 </style>

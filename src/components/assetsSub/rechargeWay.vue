@@ -3,14 +3,17 @@
     <div class="rechargeWay root-el uni-flex" v-vtap="{method:switchPop}">
       <!-- wayLists是否绑定银行 -->
       <!-- 暂时无logo先隐藏 -->
-      <img class="zhifubao" :src="banklogo">
+      <img class="zhifubao" :src="logoImg||banklogo">
       <div class="txt">
         <div class="textc1">{{textbank}}</div>
         <div v-if="txt2">
           <span class="textc2">{{txt2}}</span>
         </div>
+        <div v-if="txt1">
+          <span class="textc2">{{txt1}}</span>
+        </div>
       </div>
-      <img class="to_r" src="../../assets/arrow/r.png">
+      <img class="to_r" v-if="!logoImg" src="../../assets/arrow/r.png">
     </div>
     <recharge-actionsheet :show-action="showAction" @choose-way='chooseWay' @calc-complete='assignment' @close-me='switchPop'></recharge-actionsheet>
 
@@ -33,6 +36,7 @@ export default {
   props: {
     txt1: '',
     txt2: {},
+    logoImg:''
   },
   methods: {
     chooseWay(i) {
@@ -42,6 +46,7 @@ export default {
       this.switchPop()
     },
     switchPop() {
+      if(this.logoImg)return;
       this.showAction = !this.showAction
     },
     assignment(arr) {
@@ -59,7 +64,6 @@ export default {
       this.textbank = arr[0].pay_name
       this.banklogo = arr[0].logo
       this.$emit('calc-default',arr[0])
-
     }
   },
 

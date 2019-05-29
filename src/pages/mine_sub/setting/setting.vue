@@ -13,7 +13,7 @@
       <span>关于</span>
       <div class="uni-flex verView">
         <span v-if='appObj' class="verTxt textc2">版本号：V{{appObj.clientsysver}}</span>
-        <span v-else class="verTxt textc2">版本号：web1.00</span>
+        <span v-else class="verTxt textc2">版本号：web1.23</span>
         <!-- <img src="../../../assets/arrow/r.png"> -->
       </div>
     </div>

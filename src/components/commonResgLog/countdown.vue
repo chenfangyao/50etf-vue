@@ -17,14 +17,14 @@ export default {
         this.verifyCodeContent = this.countdown + ' S'
       }, 1000)
     },
-    sendCode() {
-      this.timer || this.countdownFun()
-        this.$emit('v-yzm')
+    async sendCode() {
+      await this.$emit('v-yzm');
+      this.timer || this.showErr || this.countdownFun()
     }
   },
-  props:['initTxt'],
-  data(){
-    return{
+  props: ['initTxt', 'showErr'],
+  data() {
+    return {
       verifyCodeContent: '',
       countdown: 60,
       timer: null,
@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 div.txt {
-  font-size: .3rem;
+  font-size: 0.3rem;
   width: 135px;
   color: rgba(24, 144, 255, 1);
   text-align: right;

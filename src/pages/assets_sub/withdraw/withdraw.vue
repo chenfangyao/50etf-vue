@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 	  <base-header title="提现"  has-back='1'  right-txt='提现记录'  @right-tap='rightTap'></base-header>
-    <recharge-way v-if="hasBank" :way-lists='wayLists' :showbanklogo="showbanklogo" txt1='' :txt2='txts1' go-to='1'></recharge-way>
+    <recharge-way v-if="hasBank" :way-lists='wayLists' :logo-img='logoImg' :txt1='bankName' :txt2='txts1' go-to='1'></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' go-to='1'></recharge-way>
 		<div class="panel black2">
       <div class="inputContainer">
@@ -32,16 +32,13 @@ export default {
   data() {
     return {
       money: '',
-      allMoney: '1,104,551.17',
-      priceLists: [, , , , , ,],
-      priceItem_i: 0,
       wayLists: ['招商银行'],
       hasBank: false,
-      bankName: [],
+      bankName: '',
 			txts1:'',
-      showbanklogo:false,
       timmer:null,
-      assetsList:{}
+      assetsList:{},
+      logoImg:''
     }
   },
   created() {
@@ -98,16 +95,10 @@ export default {
         if (res.status) {
           if (res.data.sub_id != undefined) {
             this.hasBank = true
-            this.bankName[0] = res.data.bank_name
+            this.bankName = res.data.bank_name
 						this.wayLists[0]=res.data.bank_name
-            this.pickerText = res.data.bank_name
-            this.pickerCityText = res.data.prov + '-' + res.data.city
-            this.pickSubBankText = res.data.sub_name
-            this.sub_id = res.data.sub_id
-            this.username = res.data.cardname
-            this.bankcardid = res.data.cardno
-            this.identifica = res.data.idno
-						this.txts1=res.data.cardno
+            this.txts1=res.data.cardno
+            this.logoImg=res.data.img
           }
         } else {
 

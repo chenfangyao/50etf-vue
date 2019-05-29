@@ -4,6 +4,10 @@
 .van-cell:not(:last-child)::after{
   border-color: transparent
 }
+body{
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom);
+}
 div#app.at-night{
   min-height: 100vh;
   background-color: $black2;

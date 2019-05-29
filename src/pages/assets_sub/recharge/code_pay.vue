@@ -6,7 +6,7 @@
     </div>
     <div class="info1 black2">
       <div class="orderCode">
-        <span class="textc2">充值单号</span>
+        <span class="textc2">商户单号</span>
         <input type="tel" maxlength="6" v-model="orderCode" class="fgrow1  black2" placeholder="请输入单号后六位">
       </div>
       <div class="secend ">

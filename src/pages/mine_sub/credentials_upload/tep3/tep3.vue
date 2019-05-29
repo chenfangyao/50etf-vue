@@ -19,14 +19,18 @@ import { mapMutations } from 'vuex';
 
 export default {
   components: { btnBlock },
-  data(){
-    return{
+  data() {
+    return {
       text1: '',
     }
   },
   methods: {
     ...mapMutations(['setuserinfo']),
     goNext() {
+      if (this.$route.query.type == 3) {
+        this.$redirectTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+        return
+      }
       var options = {
         url: '/Sapi/User/info',
         method: 'GET',
@@ -43,15 +47,15 @@ export default {
 
   },
   created() {
-    this.type = this.$route.query.type
-    if (this.type == 1) {
-      this.text1 = '申请已通过'
-    }
-    else if (this.type == 2) {
-      this.text1 = '申请已提交请耐心等待'
-    }
-    else if (this.type == 3) {
-      this.text1 = '申请失败'
+    switch (~~this.$route.query.type) {
+      case 1:
+        this.text1 = '申请已通过'
+        break
+      case 2:
+        this.text1 = '申请已提交请耐心等待'
+        break
+      case 3:
+        this.text1 = '申请失败'
     }
   }
 }

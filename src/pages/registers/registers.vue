@@ -9,7 +9,7 @@
         <div>
           <input-item placeholderTxt="验证码" @now-blur="handleBlur" v-model="verificationCode"></input-item>
         </div>
-        <count-down init-txt="发送验证码" @v-yzm="getyamfunc"></count-down>
+        <count-down init-txt="发送验证码" @v-yzm="getyamfunc" :show-err='showErr'></count-down>
       </div>
       <div class="pwdclass">
         <input-item placeholderTxt="密码" :isPwd="true" v-model="pwd" @now-blur="handleBlur"></input-item>
@@ -144,6 +144,11 @@ export default {
     },
     // 获取验证码
     getyamfunc() {
+      if(!this.tel.trim()){
+        this.showErr = true
+        this.tipContent='请填写手机号';
+        return 
+      }
       var options = {
         url: '/Sapi/Code/sendex', //请求接口
         data: {
@@ -152,7 +157,7 @@ export default {
         }, //发送给服务端的数据
         method: 'POST', 
       }
-      this.$httpReq(options).then((res) => {
+      this.$httpReq(options).then(res => {
         if (res.status == 1) {
         } else {
           if (res.info) {
@@ -169,7 +174,13 @@ export default {
     }
   },
   computed: mapState(['switchObj']),
-
+watch:{
+  showErr(val){
+    if(val){
+      setTimeout(()=>this.showErr=false,3000)
+    }
+  }
+}
 }
 </script>
 
