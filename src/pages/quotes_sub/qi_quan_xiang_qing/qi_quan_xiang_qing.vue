@@ -5,7 +5,6 @@
     <div class="h12 black1"></div>
     <k-chart  @change-i='changeI' :symbol-str='symbol'></k-chart>
     <template v-if="onDayKTab">
-
       <div class="h12 black1"></div>
       <mini-table :hydetils='detailObj'></mini-table>
     </template>

@@ -1,6 +1,6 @@
 <template>
 	<div class="wrap ">
-		<base-header title="收款信息" has-back='1'  @right-tap='go(1)'></base-header>
+		<base-header :title="bankName" has-back='1'  @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap black2">
 		<div class='gatherInfo'>
@@ -68,7 +68,7 @@ export default {
 		if(this.paytype=='remit_alipay'){
 			this.showBank=true
 			this.bankName=this.bankinfo.uName
-		}else if(this.paytype=='remit_icbc'){
+		}else if(this.paytype.indexOf('remit')!=-1){
 			this.showBank=false
 			this.bankName=this.bankinfo.bank_name
 			this.pickerText=this.bankinfo.bank_name

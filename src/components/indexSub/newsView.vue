@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-for="(item,i) in newlists" :key="i" class="newsView black2 textc1" v-vtap="{method: getartdetil , params: item.id}">
+		<div v-for="(item,i) in newlists" :key="i" class="newsDiv black2 textc1" v-vtap="{method: getartdetil , params: item.id}">
 			<h3 class='titlelength textc1'>{{item.title}}</h3>
 			<div class="uni-flex textc2">
 				<span>{{item.source}}</span>
@@ -44,7 +44,7 @@ export default {
 }
 </script>
 <style lang="scss">
-div.newsView {
+div.newsDiv {
   background-color: #fff;
   padding:.20rem.24rem;
   border-radius:.20rem;

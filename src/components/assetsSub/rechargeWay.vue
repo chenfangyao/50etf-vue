@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="rechargeWay root-el uni-flex" v-vtap="{method:switchPop}">
-      <!-- wayLists是否绑定银行 -->
-      <!-- 暂时无logo先隐藏 -->
       <img class="zhifubao" :src="logoImg||banklogo">
       <div class="txt">
         <div class="textc1">{{textbank}}</div>

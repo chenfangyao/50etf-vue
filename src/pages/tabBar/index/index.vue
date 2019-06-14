@@ -1,19 +1,21 @@
 <template>
-  <div  class="wrap">
+  <div class="wrap">
     <base-header title="首页"></base-header>
-    <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop >
+    <van-swipe class="banner" :show-indicators='false' :autoplay='3000' loop>
       <van-swipe-item v-for="(item,i) in imgList" :key="i">
-		  	<img :src="item.img" >
+        <img :src="item.img">
       </van-swipe-item>
     </van-swipe>
     <four-tips></four-tips>
     <three-securities :commonstock="commonstock"></three-securities>
-    <div class="uni-flex newsViewTitle">
-      <span class="textc1">资讯</span>
-      <span v-vtap="{method: getmoreart  }">更多></span>
-    </div>
-    <news-view :newlists="newsItem"></news-view>
-
+    <template v-if="switchObj.home==0">
+      <div class="uni-flex newsViewTitle">
+        <span class="textc1">资讯</span>
+        <span v-vtap="{method: go  }">更多></span>
+      </div>
+      <news-view :newlists="newsItem"></news-view>
+    </template>
+    <main-stock v-else></main-stock>
   </div>
 </template>
 
@@ -21,6 +23,7 @@
 import { mapState } from 'vuex';
 import newsView from '@/components/indexSub/newsView.vue'
 import threeSecurities from '@/components/indexSub/securities3.vue'
+import mainStock from '@/components/indexSub/mainStock'
 import fourTips from '@/components/indexSub/tips4.vue'
 import util from '@/common/util.js'
 import { Swipe, SwipeItem } from 'vant';
@@ -38,14 +41,15 @@ export default {
     }
   },
   components: {
-    newsView, threeSecurities, fourTips,
+    newsView, threeSecurities, fourTips,mainStock,
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState([  'atNight']),
+  computed: mapState(['atNight', 'switchObj']),
   methods: {
     // 登录
     getartlelist() {
+      if(this.switchObj.home!=0)return;
       var options = {
         url: '/Sapi/Article/notice',
         method: 'POST',
@@ -67,16 +71,16 @@ export default {
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
-      this.imgList =this.atNight?res.data.top.black: res.data.top.white
+        this.imgList = this.atNight ? res.data.top.black : res.data.top.white
       }).catch((err) => {
         console.error(err, '捕捉')
       })
     },
     // 获取更多文章
-    getmoreart() {
+    go() {
       this.$navigateTo({
         url: '/pages/index_sub/new_list/new_list',
-        query:{symbol:1}
+        query: { symbol: 1 }
       });
     },
     // 获取50etf指数
@@ -88,7 +92,7 @@ export default {
       stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
         url: '/stockStat/getCommonSelectStock', //请求接口
-        method: 'POST', 
+        method: 'POST',
         data: { stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
@@ -120,7 +124,7 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    next(vm=>{
+    next(vm => {
       // 获取文章列表
       vm.getartlelist()
       vm.getImgList()
@@ -143,7 +147,7 @@ export default {
 <style lang="scss" scoped>
 div.wrap {
   background-color: #f5f5f5;
-  padding: 0.1px .2rem ;
+  padding: 0.1px 0.2rem;
 }
 
 div.newsViewTitle {
@@ -163,7 +167,7 @@ div.newsViewTitle {
 .banner {
   height: 2.6rem;
   overflow: hidden;
-  margin-top:0.1rem ;
+  margin-top: 0.1rem;
   border-radius: 0.2rem;
   img {
     width: 100%;

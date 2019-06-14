@@ -2,7 +2,7 @@
   <div class="subWrap ">
     <div class="panel1 black2">
       <h2 class="textc2">可用资金（元）</h2>
-      <h1>{{transmoney.enable_money}}</h1><h1 v-if='!transmoney.enable_money'>0.00</h1>
+      <h1>{{transmoney.enable_money||0.00}}</h1>
       <div class="h3">
         <!-- <span>总资产</span>
         <span>{{transmoney.dta_money}}</span><span v-if='!transmoney.enable_money'>0.00</span> -->
@@ -10,8 +10,8 @@
     </div>
     <div class="panel2 black2 uni-flex">
       <div>
-        <h4>{{transmoney.royalty_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>
-        <h4 class="textc2">权益金</h4>
+        <h4>{{transmoney.stock_enable_money||0.00}}</h4>
+        <h4 class="textc2">可买市值</h4>
       </div>
 			<div>
 			  <h4>{{transmoney.dta_money}}</h4><h4 v-if='!transmoney.enable_money'>0.00</h4>

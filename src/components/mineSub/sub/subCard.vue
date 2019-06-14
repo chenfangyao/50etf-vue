@@ -21,7 +21,7 @@ export default {
     }
   },
   methods: {
-    go(e) {
+    go() {
       if (!this.sid) {
         this.$navigateTo({ url: '/pages/login/login' })
         return
@@ -30,11 +30,24 @@ export default {
       // 判断实名认证状态实名认证状态。0=未提交，1=审核成功，2=审核中，3=审核失败"
       let realnstatus = this.userinfo.realn_status;
       if (realnstatus == 0) {
-        this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+        if (this.userinfo.is_certified < 6) {
+          this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+          return
+        }
+        this.$httpReq({
+          url: '/Sapi/User/realn',
+          method: 'POST'
+        }).then(res => {
+          if (res.status == 1) {
+            this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep3/tep3' })
+          } else {
+            this.$toast(res.info ? res.info : '实名认证失败')
+          }
+        })
       } else {
         this.$router.push({
           path: '/pages/mine_sub/credentials_upload/tep3/tep3',
-          query: { type: realnstatus}
+          query: { type: realnstatus }
         })
       }
     }

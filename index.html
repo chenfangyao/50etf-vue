@@ -3,13 +3,16 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" >
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="Shortcut Icon" type="image/x-icon" href="static/22.png" />
+
   <title>新50etf</title>
   <script>
     (function (doc, win) {
       var htmlFont = function () {
-        var docEl = doc.documentElement,cWidth = docEl.clientWidth, f;
-        f =cWidth / 7.5;cWidth > 750 ? docEl.style.fontSize = 100 + "px" : docEl.style.fontSize = f + "px"
+        var docEl = doc.documentElement, cWidth = docEl.clientWidth, f;
+        f = cWidth / 7.5; cWidth > 750 ? docEl.style.fontSize = 100 + "px" : docEl.style.fontSize = f + "px"
       };
       htmlFont();
       win.addEventListener("resize", htmlFont, false)

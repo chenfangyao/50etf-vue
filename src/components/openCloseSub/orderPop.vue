@@ -28,9 +28,7 @@
           <span>{{stockamunt}}张</span>
           <span v-if="onClose">{{maxbuy.enable_amount}}张</span>
           <span v-else>{{enable_money}}</span>
-          <span>
-            <span>开仓</span>
-            <span class="c_red">{{50}}秒</span>未成单自动撤单</span>
+          <span class="c_red">{{maxbuy.text_buy_revoke}}</span>
           <span v-if="onClose">{{totalMoney}}</span>
           <span v-else>{{totalMoney}}</span>
         </div>
@@ -52,48 +50,48 @@ export default {
       enable_money: ''
     }
   },
-  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid','hbfbcell']),
+  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid', 'hbfbcell']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
     },
     yesTap() {
       this.$emit('close-pop')
-			//平仓
+      //平仓
       if (this.onClose) {
-				if(this.newprice<0.0002){
-					this.$toast.fail({
-            message:'当前价格无法平仓！'
+        if (this.newprice < 0.0002) {
+          this.$toast.fail({
+            message: '当前价格无法平仓！'
           })
-					return
-				}
-				if(this.hbfbcell.length && !this.entrusttype){
-					// 全部平仓
-					if(this.hbfbcell[0]==='all'){
-						this.stocksell('',this.maxbuy.enable_amount)
-					}else{//合并分笔平仓
+          return
+        }
+        if (this.hbfbcell.length && !this.entrusttype) {
+          // 全部平仓
+          if (this.hbfbcell[0] === 'all') {
+            this.stocksell('', this.maxbuy.enable_amount)
+          } else {//合并分笔平仓
             // 定时器选执行一次
-            var idnumber=this.hbfbcell[0].split('-')
-            console.log(444,idnumber)
-            this.stocksell(parseInt(idnumber[1]),parseInt(idnumber[0]))
-						var ii=1
-						var hbfbcellinterval=null
+            var idnumber = this.hbfbcell[0].split('-')
+            console.log(444, idnumber)
+            this.stocksell(parseInt(idnumber[1]), parseInt(idnumber[0]))
+            var ii = 1
+            var hbfbcellinterval = null
             // 执行定时器
-						hbfbcellinterval=setInterval(()=>{
-							if(ii<this.hbfbcell.length){
-								var hynum=this.hbfbcell[ii].split('-')[0]
-								var hyids=this.hbfbcell[ii].split('-')[1]
-								this.stocksell(parseInt(hyids),parseInt(hynum))
-									ii+=1
-							}else{
-								clearInterval(hbfbcellinterval)
-							}
-						},3500)
-					}
-				}else{//分笔平仓
-					this.stocksell(this.fbccid,this.stockamunt)
+            hbfbcellinterval = setInterval(() => {
+              if (ii < this.hbfbcell.length) {
+                var hynum = this.hbfbcell[ii].split('-')[0]
+                var hyids = this.hbfbcell[ii].split('-')[1]
+                this.stocksell(parseInt(hyids), parseInt(hynum))
+                ii += 1
+              } else {
+                clearInterval(hbfbcellinterval)
+              }
+            }, 3500)
+          }
+        } else {//分笔平仓
+          this.stocksell(this.fbccid, this.stockamunt)
 
-				}
+        }
       } else {//开仓
         this.stockbuy()
       }
@@ -102,7 +100,7 @@ export default {
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        method: 'GET', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
@@ -110,17 +108,17 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     stockbuy() {
-      console.log(111,this.priceshock(),this.newprice)
+      console.log(111, this.priceshock(), this.newprice)
       var options = {
         url: '/Sapi/Stock/buy', //请求接口
-        method: 'POST', 
+        method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: this.enttype==2?this.priceshock():parseFloat(this.newprice),
+          price: this.enttype == 2 ? this.priceshock() : parseFloat(this.newprice),
           amount: parseInt(this.stockamunt),
           enttype: parseInt(this.enttype),
           is_pay_bean: 0
@@ -130,10 +128,10 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$redirectTo({
-            url:'/entrustSucc',
-            query:({
-              type:this.onClose,
-              code:parseInt(this.resObj.stockCode)
+            url: '/entrustSucc',
+            query: ({
+              type: this.onClose,
+              code: parseInt(this.resObj.stockCode)
             })
           })
         }
@@ -142,20 +140,20 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
-    stocksell(fbccid,number) {
-      let hid=parseInt(fbccid)
+    stocksell(fbccid, number) {
+      let hid = parseInt(fbccid)
       if (this.entrusttype || this.hbfbcell.length) {
         hid = parseInt(fbccid)
       }
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
-        method: 'POST', 
+        method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: this.enttype==2?this.priceshock():parseFloat(this.newprice),
+          price: this.enttype == 2 ? this.priceshock() : parseFloat(this.newprice),
           amount: number,
           enttype: parseInt(this.enttype),
           hid: hid
@@ -164,11 +162,11 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$toast.success(res.info ? res.info : '卖出成功')
-           this.$redirectTo({
-            url: '/entrustSucc' ,
-            query:{
-              type:this.onClose,
-              code:parseInt(this.resObj.stockCode)
+          this.$redirectTo({
+            url: '/entrustSucc',
+            query: {
+              type: this.onClose,
+              code: parseInt(this.resObj.stockCode)
             }
           })
         }
@@ -177,37 +175,37 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
-    priceshock(){
-      let shockprice=''
-      let curruentPrice=parseFloat(this.newprice)
-      if(curruentPrice > 0.3){
-        if(this.onClose == false){
-          shockprice = curruentPrice*1.01;
-        }else {
-          shockprice = curruentPrice*0.99;
+    priceshock() {
+      let shockprice = ''
+      let curruentPrice = parseFloat(this.newprice)
+      if (curruentPrice > 0.3) {
+        if (this.onClose == false) {
+          shockprice = curruentPrice * 1.01;
+        } else {
+          shockprice = curruentPrice * 0.99;
         }
-      }else if(0.1<curruentPrice && curruentPrice<=0.3){
-        if(this.onClose == false){
-          shockprice = curruentPrice*1.025;
-        }else {
-          shockprice = curruentPrice*0.975;
-        }
-      }
-      else if(0.01<curruentPrice && curruentPrice<=0.1){
-        if(this.onClose == false){
-          shockprice = curruentPrice*1.05;
-        }else {
-          shockprice = curruentPrice*0.95;
+      } else if (0.1 < curruentPrice && curruentPrice <= 0.3) {
+        if (this.onClose == false) {
+          shockprice = curruentPrice * 1.025;
+        } else {
+          shockprice = curruentPrice * 0.975;
         }
       }
-      else if(0.001<curruentPrice && curruentPrice<=0.01){
-        if(this.onClose == false){
-          shockprice = curruentPrice*1.1;
-        }else {
-          shockprice = curruentPrice*0.9;
+      else if (0.01 < curruentPrice && curruentPrice <= 0.1) {
+        if (this.onClose == false) {
+          shockprice = curruentPrice * 1.05;
+        } else {
+          shockprice = curruentPrice * 0.95;
+        }
+      }
+      else if (0.001 < curruentPrice && curruentPrice <= 0.01) {
+        if (this.onClose == false) {
+          shockprice = curruentPrice * 1.1;
+        } else {
+          shockprice = curruentPrice * 0.9;
         }
       }
       return shockprice.toFixed(4)
@@ -242,11 +240,11 @@ export default {
     transition: transform 300ms;
     overflow: hidden;
     flex-grow: 1;
-    margin: 0 .35rem;
+    margin: 0 0.35rem;
     background: #fff;
-    border-radius:.10rem;
+    border-radius: 0.1rem;
     z-index: 310;
-    padding:.28rem .30rem .20rem;
+    padding: 0.28rem 0.3rem 0.2rem;
     .c_red {
       color: #f05f5c;
     }
@@ -256,7 +254,7 @@ export default {
       font-weight: bold;
       color: rgba(24, 28, 40, 1);
       position: relative;
-      margin-bottom:.55rem;
+      margin-bottom: 0.55rem;
       .flr {
         position: absolute;
         left: -0.1rem;
@@ -269,7 +267,7 @@ export default {
         flex-direction: column;
         color: #181c28;
         font-size: 12px;
-        line-height:.52rem;
+        line-height: 0.52rem;
         flex-grow: 1;
       }
       > div:first-child {
@@ -278,19 +276,19 @@ export default {
     }
     div.btn2 {
       justify-content: space-between;
-      margin-top:.53rem;
+      margin-top: 0.53rem;
       > div {
         flex-grow: 1;
-        height:.88rem;
-        border-radius:.10rem;
+        height: 0.88rem;
+        border-radius: 0.1rem;
         font-size: 16px;
         color: rgba(255, 255, 255, 1);
-        line-height:.88rem;
+        line-height: 0.88rem;
         text-align: center;
       }
       > div:first-child {
         background: rgba(153, 153, 153, 1);
-        margin-right:.20rem;
+        margin-right: 0.2rem;
       }
       > div.tap-hover:first-child {
         background: darken(rgba(153, 153, 153, 1), 5%);

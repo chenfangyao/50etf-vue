@@ -48,8 +48,8 @@
             </div>-->
           </div>
         </div>
-        <div class="btn2 uni-flex" v-if="$store.state.switchObj.show_sltp==1">
-          <div class="uni-flex full" v-hover-class="'self-hover'" v-vtap="{method: go , params: 1}">
+        <div class="btn2 uni-flex" v-if="switchObj.show_sltp>=1">
+          <div class="uni-flex full" v-hover-class="'self-hover'" v-if="!(switchObj.show_sltp==3)" v-vtap="{method: go , params: 1}">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span >{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
@@ -58,7 +58,7 @@
               <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" v-hover-class="'self-hover'" v-vtap="{method: go , params: 0}">
+          <div class="uni-flex lose" v-hover-class="'self-hover'" v-if="!(switchObj.show_sltp==2)" v-vtap="{method: go , params: 0}">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>{{resObj.sltp_price_sl?resObj.sltp_price_sl:'添加止损'}}</span>
@@ -88,6 +88,7 @@
 import btnBlock from '@/components/btnBlock.vue'
 import oneKey from '@/components/holdingSub/oneKeyPop.vue'
 import extensionPop from '@/components/holdingSub/extensionPop.vue'
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -115,15 +116,6 @@ export default {
             this.$toast('止损中')
             return
           }
-          this.$navigateTo({
-            url: '/full_and_lose',
-            query: {
-              isfull: i,
-              code:this.resObj.stock_code,
-              price:this.resObj.last_price,
-              resObj:this.resObj
-            } })
-          break
         case 1:
           if(this.resObj.status==6){
             this.$toast('止盈中')
@@ -191,7 +183,8 @@ export default {
   },
   mounted() {
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
-  }
+  },
+  computed:mapState(['switchObj'])
 }
 </script>
 <style lang="scss" scoped>
