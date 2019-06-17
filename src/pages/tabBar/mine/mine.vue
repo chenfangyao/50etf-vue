@@ -8,7 +8,7 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <!-- <div class="uni-flex" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'bank_card/card_list/card_list'}"> -->
+      <!-- <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'bank_card/card_list'}"> -->
       <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'bank_card/add_card/add_card'}">
         <img src="../../../assets/mineImg/02.png" />
         <span>银行卡</span>
@@ -82,7 +82,7 @@ export default {
 							if(res.data.sub_id!=undefined){
 								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card/add_card' })
 							}else{
-								this.$navigateTo({ url:'/pages/mine_sub/bank_card/add_card_btn/add_card_btn'})
+								this.$navigateTo({ url:'/add_card_btn'})
 							}
 						}
 				}).catch((err) => {

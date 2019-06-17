@@ -151,7 +151,6 @@ export default {
       midMax = Number(midMax.toFixed(4))
       var midMin = (mid - min) / 2 + min
       midMin = Number(midMin.toFixed(4))
-      // console.log(max,midMax,mid,midMin,min,num);
       switch (num) {
         case mid:
         case max:

@@ -72,6 +72,7 @@ export default {
 
 <style  lang="scss">
 .base-spase ,.van-tabbar{
+  height: 50px;
   height: calc(50px + env(safe-area-inset-bottom));
   height: calc(50px + constant(safe-area-inset-bottom));
 }

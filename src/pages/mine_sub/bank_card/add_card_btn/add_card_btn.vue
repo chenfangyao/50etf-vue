@@ -17,10 +17,8 @@
 		methods:{
 			addbank(){
 				this.$navigateTo({
-					url: '/pages/mine_sub/bank_card/add_card/add_card?bankinfo=0',
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
+          url: '/pages/mine_sub/bank_card/add_card/add_card',
+          query:{bankinfo:0}
 				});
 			}
 		},

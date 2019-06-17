@@ -61,7 +61,6 @@ export default {
   },
  /*  beforeRouteEnter(to, from, next) {
     next(vm => {
-    console.log('1212121');
       
     })
   }, */

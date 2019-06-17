@@ -249,7 +249,6 @@
                     label: this._getPickerLabelAndValue(this.pickerValue, this.mode).label,
 					id:this._getPickerLabelAndValue(this.pickerValue, this.mode).id,
                 };
-                console.log(pickObj)
                 this.$emit('onConfirm', pickObj);
             },
             showPickerView() {
@@ -410,7 +409,6 @@
 					this.$httpReq(options).then((res) => {
 							// 请求成功的回调
 							// res为服务端返回数据的根对象
-							console.log('城市列表', res)
 							if(res.status){
 									var childlist=[]
 									for(let i=0;i<res.data.list.length;i++){

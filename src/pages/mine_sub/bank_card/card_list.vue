@@ -1,5 +1,6 @@
 <template>
 	<div class="wrap">
+    <!-- 不能用这UI了 -->
 		<base-header has-back='1' right-txt='添加' title='选择银行卡' @right-tap='goAdd'></base-header>
     <div class="h12"></div>
     <scroll-view class="scroll-view_H" scroll-x="true" scroll-left="5" v-for="(value,key) in cardList" :key="key">

@@ -14,7 +14,7 @@
       <div>涨幅比</div>
     </div>
     <div class="list black2">
-      <ul v-for="(item,i) in stockItems" :key="i" class="uni-flex">
+      <ul v-for="(item,i) in stockItems" :key="i" class="uni-flex" v-vtap="{method:go,params:i}">
         <li>
           <div class="textc1">{{item.stock_name.substr(5)}}</div>
           <div class="textc2">{{item.stock_code}}</div>
@@ -43,6 +43,12 @@ export default {
     [Tabs.name]: Tabs
   },
   methods: {
+    go(i){
+      this.$navigateTo({
+        url: '/qi_quan_xiang_qing',
+        query: { code:this.stockItems[i].stock_code }
+      });
+    },
     getMainlist() {
       var options = {
         url: '/Sapi/Squery/main_stock_list',

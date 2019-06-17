@@ -98,7 +98,7 @@ export default {
     // 获取最大可买数量
     getmaxbuy(codes, prices, amounts) {
       var options = {
-        url: '/Sapi/Stock/max_buy', //请求接口
+        url: this.onClose?'/Sapi/Stock/max_sell':'/Sapi/Stock/max_buy', //请求接口
         method: 'POST', 
         dataType: "json",
         data: {

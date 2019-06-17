@@ -29,7 +29,6 @@ const recharge = resolve => require(['@/pages/assets_sub/recharge/recharge'], re
 const codePay = resolve => require(['@/pages/assets_sub/recharge/code_pay'], resolve)
 const withdraw = resolve => require(['@/pages/assets_sub/withdraw/withdraw'], resolve)
 const setting = resolve => require(['@/pages/mine_sub/setting/setting'], resolve)
-const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
 const add_card_btn = resolve => require(['@/pages/mine_sub/bank_card/add_card_btn/add_card_btn'], resolve)
 const bank_card = resolve => require(['@/pages/assets_sub/bank_card/bank_card'], resolve)
 const gatherinfo = resolve => require(['@/pages/assets_sub/gatherinfo/gatherinfo'], resolve)
@@ -54,6 +53,8 @@ const riskBook = resolve => require(['@/pages/risk_book/risk_book'], resolve)
 const registers = resolve => require(['@/pages/registers/registers'], resolve)
 const forgets_pwd = resolve => require(['@/pages/forgets_pwd/forgets_pwd'], resolve)
 const add_card2 = resolve => require(['@/pages/forget_pwd/tep2/tep2'], resolve)
+const add_card = resolve => require(['@/pages/mine_sub/bank_card/add_card/add_card'], resolve)
+const card_list = resolve => require(['@/pages/mine_sub/bank_card/card_list'], resolve)
 
 // 测试
 // const test = resolve => require(['@/pages/mine_sub/test/test'], resolve)
@@ -118,8 +119,9 @@ export default new Router({
     { path: '/pages/mine_sub/capital_flow/capital_flow', name: 'capital_flow', component: capital_flow,  },
     // 添加银行卡
     { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card,  },
+    { path: '/pages/mine_sub/bank_card/card_list', name: 'card_list', component: card_list,  },
     // 无绑定过银行卡信息
-    { path: '/pages/mine_sub/bank_card/add_card_btn/add_card_btn', name: 'add_card_btn', component: add_card_btn,  },
+    { path: '/add_card_btn', name: 'add_card_btn', component: add_card_btn,  },
     // 添加银行卡第二步
     { path: '/pages/forget_pwd/tep2/tep2', name: 'add_card2', component: add_card2,  },
     // 交易规则

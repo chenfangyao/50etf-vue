@@ -16,7 +16,7 @@
           <span v-if="onClose">剩余可用</span>
           <span v-else-if="holding">预计交易后持仓</span>
           <span v-else>可用资金</span>
-          <span>有效期</span>
+          <span v-if="!onClose">有效期</span>
           <span v-if="onClose">预估金额</span>
           <span v-else>预估支付金额</span>
         </div>
@@ -28,7 +28,7 @@
           <span>{{stockamunt}}张</span>
           <span v-if="onClose">{{maxbuy.enable_amount}}张</span>
           <span v-else>{{enable_money}}</span>
-          <span class="c_red">{{maxbuy.text_buy_revoke}}</span>
+          <span class="c_red" v-if="!onClose">{{maxbuy.text_buy_revoke}}</span>
           <span v-if="onClose">{{totalMoney}}</span>
           <span v-else>{{totalMoney}}</span>
         </div>
@@ -72,7 +72,6 @@ export default {
           } else {//合并分笔平仓
             // 定时器选执行一次
             var idnumber = this.hbfbcell[0].split('-')
-            console.log(444, idnumber)
             this.stocksell(parseInt(idnumber[1]), parseInt(idnumber[0]))
             var ii = 1
             var hbfbcellinterval = null
@@ -112,7 +111,6 @@ export default {
       })
     },
     stockbuy() {
-      console.log(111, this.priceshock(), this.newprice)
       var options = {
         url: '/Sapi/Stock/buy', //请求接口
         method: 'POST',

@@ -83,14 +83,11 @@
         </div>
       </div>
       <div class="sliderItem" :class="{yellow:onClose}">
-        <!-- <slider @change="slidering" :disabled="sliderdisable"  :max='maxprice.maxcounts' min='0' :value='sliderVal'
-        backgroundColor='#e6e6e6' block-size='18' :activeColor="onClose?'#e6aa12':'#409de5'" />-->
         <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts || 0" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
       </div>
     </div>
     <div v-else class="sliderPart uni-flex">
       <span class="countxt textc1">{{stockamunt}}</span>
-      <!--<span class="countxt">{{stockamunt}}</span>-->
     </div>
   </div>
 </template>
@@ -170,12 +167,10 @@ export default {
       this.tabActive = val
       this.setentrusttype(val)
       this.sliderVal = 0
-      if (val == true) {
+      if (val == true) {//分笔的情况
         this.setcctotalmoney(0)
         this.maxprice.maxcounts = 0.1
-        var picktext = this.pickerText
-        picktext = picktext.split(' ')
-        picktext = picktext[1]
+        var picktext = this.pickerText.split(' ')[3]
         this.setstockamunt(0)
         if (picktext != undefined) {
           picktext = picktext.replace('张', '')
@@ -184,7 +179,7 @@ export default {
         if (this.maxprice.maxcounts == 0.1) {
           this.sliderdisable = true
         }
-      } else {
+      } else {//合并的情况
         this.setstockamunt(this.maxprice.enable_amount)
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
@@ -335,7 +330,7 @@ export default {
       this.show1 = false
       this.setfbccid(val.select1.id)
       this.$emit('fb-num', parseInt(val.select1.value))
-      this.pickerText = '笔 ' + parseInt(val.select1.index) + ' | ' + val.select1.value + '张'
+      this.pickerText = '笔 ' + parseInt(val.select1.index) + ' | ' + val.select1.value + ' 张'
       if (this.onClose) {
         this.maxprice.maxcounts = parseInt(val.select1.value[0])
       }

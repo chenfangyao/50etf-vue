@@ -1,9 +1,8 @@
 <template>
   <div class="wrap">
-    <base-header  :hasBack="true" :title='title' :specialBack="true" @special-back="goBack"></base-header>
+    <base-header  :hasBack="true" :title="title+'设置'" :specialBack="true" @special-back="goBack"></base-header>
     <!--<div class="border1"></div>-->
     <div class="wrap ">
-      <div class="title textc1">止{{isFull==1?'盈':'损'}}设置</div>
       <div class="subTitle textc2">止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
       <div class="subTitle textc2">最新价：</div>
       <div class="price">{{resObj.last_price}}</div>
@@ -122,7 +121,6 @@ export default {
   },
   mounted() {
     this.resObj=this.$route.query.resObj
-    console.log(555,this.resObj)
     this.isFull = this.$route.query.isfull
     this.price=this.$route.query.price
     this.code=this.$route.query.code
