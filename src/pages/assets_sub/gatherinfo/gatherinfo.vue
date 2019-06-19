@@ -1,34 +1,36 @@
 <template>
-	<div class="wrap ">
-		<base-header :title="bankName" has-back='1'  @right-tap='go(1)'></base-header>
+  <div class="wrap ">
+    <base-header :title="bankName" has-back='1' @right-tap='go(1)'></base-header>
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap black2">
-		<div class='gatherInfo'>
-		<div  class='payMoney textc1 hasCopy'>
-			<span>收款账号:</span>
-			<span v-if="showBank">{{cardno}}</span>
-			<div v-else class="chooseCount">
-					<!--<div v-vtap="{method:showPicker}">-->
-							{{pickerText}}
-							<!--<span class="arrowDown"></span>-->
-			</div>
-      <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
-		</div>
+      <div class='gatherInfo'>
+        <div class='payMoney textc1 hasCopy'>
+          <span>收款账号:</span>
+          <span class="ellipsis">{{cardno}}</span>
+          <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
+          <!-- <div class="chooseCount">
+            <div v-vtap="{method:showPicker}">
+              {{cardno}}
+              <span class="arrowDown"></span>
+            </div>
+          </div> -->
+        </div>
 
-		<div class='payMoney textc1'>
-			<span>收款人:</span>
-			<span>{{cardname}}</span>
-			</div>
-		<div class='payMoney textc1'>
-			<span>客户代码:</span>
-			<span>{{userinfo.mobile}}-{{userinfo.user_id}}</span></div>
-		</div>
-      <submit-btn class='subBtn' btnTxt='复制完成,去转账'  @v-tap='go' :verify-ok='verifyYes'></submit-btn>
+        <div class='payMoney textc1'>
+          <span>收款人:</span>
+          <span class="ellipsis">{{cardname}}</span>
+        </div>
+        <div class='payMoney textc1 hasCopy'>
+          <span>客户代码:</span>
+          <span class="ellipsis">{{userinfo.mobile}}-{{userinfo.user_id}}</span>
+          <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
+        </div>
+      </div>
+      <submit-btn class='subBtn' btnTxt='复制完成,去转账' @v-tap='go' :verify-ok='verifyYes'></submit-btn>
     </div>
-		<mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]"
-										@onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
+    <mpvue-picker themeColor="#007AFF" ref="typePick" mode="selector" :deepLength="1" :pickerValueDefault="[0]" @onConfirm="onConfirm" @onCancel="onCancel" :picker-value-array="pickerValueArray"></mpvue-picker>
 
-	</div>
+  </div>
 </template>
 
 <script>
@@ -46,124 +48,121 @@ export default {
       bankCode: '',
       bankName: '',
       verifyYes: true,//验证通过，把它至为true,登录按钮才会变色且启用
-      paymoney:'',
-	    paytype:'',
-	    pw_id:'',
-			cardname:'',
-			cardno:'',
-			showBank:true,
-			pickerText:'',
-			pickerValueArray: [],
+      paymoney: '',
+      paytype: '',
+      pw_id: '',
+      cardname: '',
+      cardno: '',
+      pickerText: '',
+      pickerValueArray: [],
     };
   },
-  components: { submitBtn, inputItem, errTip,mpvuePicker },
-	computed: mapState(['mobile','userinfo','bankinfo']),
-	created(){
-		this.paytype=this.bankinfo.paytype
-		this.cardname=this.bankinfo.cardname
-		this.cardno=this.bankinfo.cardno
-		this.pw_id=this.bankinfo.pw_id
-		this.paymoney=this.bankinfo.paymoney
-		this.bankCode=this.bankinfo.bankCode
-		if(this.paytype=='remit_alipay'){
-			this.showBank=true
-			this.bankName=this.bankinfo.uName
-		}else if(this.paytype.indexOf('remit')!=-1){
-			this.showBank=false
-			this.bankName=this.bankinfo.bank_name
-			this.pickerText=this.bankinfo.bank_name
-			this.pickerValueArray=[{label:this.bankinfo.bank_name}]
-		}
-	},
+  components: { submitBtn, inputItem, errTip, mpvuePicker },
+  computed: mapState(['mobile', 'userinfo', 'bankinfo']),
+  created() {
+    this.paytype = this.bankinfo.paytype
+    this.cardname = this.bankinfo.cardname
+    this.cardno = this.bankinfo.cardno
+    this.pw_id = this.bankinfo.pw_id
+    this.paymoney = this.bankinfo.paymoney
+    this.bankCode = this.bankinfo.bankCode
+    if (this.paytype == 'remit_alipay') {
+      this.bankName = this.bankinfo.uName
+    } else if (this.paytype.indexOf('remit') != -1) {
+      this.bankName = this.bankinfo.bank_name
+      this.pickerText = this.bankinfo.bank_name
+      this.pickerValueArray = [{ label: this.bankinfo.bank_name }]
+    }
+  },
   methods: {
     go(i) {
       if (i == 1) {
         this.$navigateTo({ url: '../help/help' })
       }
-      switch(this.paytype){
-				case 'remit_alipay':
-				// case 'remit_qrcode_ali':
-				this.remit_alipay()
-				break
-				default:
-				this.remit_bank()
-				break
-			}
+      switch (this.paytype) {
+        case 'remit_alipay':
+          // case 'remit_qrcode_ali':
+          this.remit_alipay()
+          break
+        default:
+          this.remit_bank()
+          break
+      }
     },
-    copyText(){
-       var oInput = document.createElement('textarea');
-        oInput.value = this.showBank?this.cardno:this.pickerText;
-        document.body.appendChild(oInput);
-        oInput.select();
-        oInput.setSelectionRange(0, oInput.value.length)
-        document.execCommand('copy');
-        document.body.removeChild(oInput);
-        this.$toast('复制成功')
+    copyText(e) {
+      var oInput = document.createElement('textarea');
+      oInput.value = e.target.previousElementSibling.innerText;
+      document.body.appendChild(oInput);
+      oInput.select();
+      oInput.setSelectionRange(0, oInput.value.length)
+      document.execCommand('copy');
+      document.body.removeChild(oInput);
+      this.$toast('复制成功')
     },
-		// 支付宝支付
-		remit_alipay(){
-			var options = {
-				url: '/Sapi/Ufund/remit_alipay', //请求接口
-				method: 'POST', 
-				data: {
-							pay_money: this.paymoney,
-							// 转账人
-							pay_name_alipay: this.bankName,
-							// 转账账号
-							pay_account_no: this.bankCode
+    // 支付宝支付
+    remit_alipay() {
+      var options = {
+        url: '/Sapi/Ufund/remit_alipay', //请求接口
+        method: 'POST',
+        data: {
+          pay_money: this.paymoney,
+          // 转账人
+          pay_name_alipay: this.bankName,
+          // 转账账号
+          pay_account_no: this.bankCode
         },
-			}
-			this.$httpReq(options).then((res) => {
-				if(res.status){
-					this.$toast.success({
-            message:res.info?res.info:'信息提交成功',
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$toast.success({
+            message: res.info ? res.info : '信息提交成功',
           })
-          location.href=this.bankinfo.orcode_url
-          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
-				}else{
+          location.href = this.bankinfo.orcode_url
+          this.$redirectTo({ url: '/pages/assets_sub/recording/recording' })
+        } else {
           this.$toast.fail({
-            message:res.info?res.info:'信息提交失败'
+            message: res.info ? res.info : '信息提交失败'
           })
-				}
-			}).catch((err) => {
-				// 请求失败的回调
-			})
-		},
-		// 银行卡支付
-		remit_bank(){
-			var options = {
-				url: '/Sapi/Ufund/remit_bank', //请求接口
-				method: 'POST', 
-				data: {
-							pay_money: this.paymoney,
-							// 银行id
-							pw_id: this.bankinfo.pw_id,
-							pay_name_bank: this.bankCode
-									},
-			}
-			this.$httpReq(options).then((res) => {
-					if(res.status){
-            this.$toast.success({
-              message:res.info?res.info:'信息提交成功',
-            })
-          this.$redirectTo({url:'/pages/assets_sub/recording/recording'})
-					}else{
-            this.$toast.fail({
-              message:res.info?res.info:'信息提交失败',
-            })
-				}
-			}).catch((err) => {
-				// 请求失败的回调
-			})
-		},
-		showPicker() {
-		      this.$refs.typePick.show()
-		    },
-				onCancel(e) {
-				},
-				onConfirm(val) {
-					this.pickerText=val.label
-				},
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+      })
+    },
+    // 银行卡支付
+    remit_bank() {
+      var options = {
+        url: '/Sapi/Ufund/remit_bank', //请求接口
+        method: 'POST',
+        data: {
+          pay_money: this.paymoney,
+          // 银行id
+          pw_id: this.bankinfo.pw_id,
+          pay_name_bank: this.bankCode
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$toast.success({
+            message: res.info ? res.info : '信息提交成功',
+          })
+          this.$redirectTo({ url: '/pages/assets_sub/recording/recording' })
+        } else {
+          this.$toast.fail({
+            message: res.info ? res.info : '信息提交失败',
+          })
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+      })
+    },
+    showPicker() {
+      this.$refs.typePick.show()
+    },
+    onCancel(e) {
+    },
+    onConfirm(val) {
+      this.pickerText = val.label
+    },
   },
 
 }
@@ -176,70 +175,78 @@ div.wrap {
   // background-color: #f5f5f5;
   div.title {
     font-size: 16px;
-    padding-left:.27rem;
+    padding-left: 0.27rem;
     color: rgba(24, 28, 40, 1);
-    line-height:.84rem;
-    height:.84rem;
+    line-height: 0.84rem;
+    height: 0.84rem;
     border-top: solid 1px #f5f5f5;
   }
   div.subWrap {
-    padding:.28rem.27rem 0;
-    margin-top:.12rem;
+    padding: 0.28rem.27rem 0;
+    margin-top: 0.12rem;
     background-color: #fff;
-	div.gatherInfo{
-		// background-color: rgb(238,237,242);
-		margin-top:.20rem;
-	}
-	div.subBtn{
-		margin-top:.70rem;
-	}
+    .ellipsis {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 60%;
+      display: inline-block;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    div.gatherInfo {
+      // background-color: rgb(238,237,242);
+      margin-top: 0.2rem;
+    }
+    div.subBtn {
+      margin-top: 0.7rem;
+    }
 
-		div.payMoney{
-			height:.80rem;
-			line-height:.80rem;
-			color:grey;
-			font-size: 15px;
-			margin-left:.10rem;
-			border-bottom:1px solid rgb(238,237,242);
-			margin-top:.20rem
-		}
-    div.payMoney.hasCopy{
-      .copySpan{
+    div.payMoney {
+      height: 0.8rem;
+      line-height: 0.8rem;
+      color: grey;
+      font-size: 15px;
+      margin-left: 0.1rem;
+      border-bottom: 1px solid rgb(238, 237, 242);
+      margin-top: 0.2rem;
+    }
+    div.payMoney.hasCopy {
+      .copySpan {
         float: right;
         margin-right: 10px;
         color: $blue1;
       }
     }
-		div.payMoney >span:nth-child(2){
-			margin-left:.50rem;
-		}
-		div.payMoney >span:nth-child(1){
+    div.payMoney > span:nth-child(2) {
+      margin-left: 0.5rem;
+    }
+    div.payMoney > span:nth-child(1) {
       width: 68px;
       display: inline-block;
-		}
+    }
   }
 }
 div.chooseCount {
-	      display: inline-block;
-        width:4.50rem;
-        height:.50rem;
-        line-height:.50rem;
-        /*text-align: center;*/
-        font-size: 12px;
-        font-family: Adobe Heiti Std R;
-        font-weight: normal;
-        color: rgba(102, 102, 102, 1);
-        line-height: 43px;
-        /*background: rgba(239, 239, 239, 1);*/
-        border-radius:.08rem;
-				margin-left:.50rem;
-    span.arrowDown {
-        display: inline-block;
-        width:.17rem;
-        border:.09rem solid #666;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        border-right-color: transparent;
-    }
-    }
+  display: inline-block;
+  width: 4.5rem;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  /*text-align: center;*/
+  font-size: 12px;
+  font-family: Adobe Heiti Std R;
+  font-weight: normal;
+  color: rgba(102, 102, 102, 1);
+  line-height: 43px;
+  /*background: rgba(239, 239, 239, 1);*/
+  border-radius: 0.08rem;
+  margin-left: 0.5rem;
+  span.arrowDown {
+    display: inline-block;
+    width: 0.17rem;
+    border: 0.09rem solid #666;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+}
 </style>

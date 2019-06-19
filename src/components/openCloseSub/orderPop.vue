@@ -28,7 +28,7 @@
           <span>{{stockamunt}}张</span>
           <span v-if="onClose">{{maxbuy.enable_amount}}张</span>
           <span v-else>{{enable_money}}</span>
-          <span class="c_red" v-if="!onClose">{{maxbuy.text_buy_revoke}}</span>
+          <span class="c_red" v-if="!onClose">{{switchObj.text_buy_revoke}}</span>
           <span v-if="onClose">{{totalMoney}}</span>
           <span v-else>{{totalMoney}}</span>
         </div>
@@ -50,7 +50,7 @@ export default {
       enable_money: ''
     }
   },
-  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid', 'hbfbcell']),
+  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid', 'hbfbcell','switchObj']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')

@@ -14,12 +14,12 @@
       <div>涨幅比</div>
     </div>
     <div class="list black2">
-      <ul v-for="(item,i) in stockItems" :key="i" class="uni-flex" v-vtap="{method:go,params:i}">
+      <ul v-for="(item,i) in stockArr" :key="i" class="uni-flex" v-vtap="{method:go,params:i}">
         <li>
           <div class="textc1">{{item.stock_name.substr(5)}}</div>
           <div class="textc2">{{item.stock_code}}</div>
         </li>
-        <li>{{item.buy_amount1 | judgeLength}}</li>
+        <li>{{item.trade_volume | judgeLength}}</li>
         <li>{{item.open_interest | judgeLength}}</li>
         <li :class="{inUp:!activeI}" class="price">{{item.last_price}}</li>
         <li :class="{inUp:!activeI}">{{item.incr_percent | percent}}</li>
@@ -34,8 +34,8 @@ export default {
     return {
       activeI: 0,
       stockItems: [],
-      allStock: {},
-      timmer: null
+      timmer: null,
+      stockArr: [],
     }
   },
   components: {
@@ -43,11 +43,27 @@ export default {
     [Tabs.name]: Tabs
   },
   methods: {
-    go(i){
+    go(i) {
       this.$navigateTo({
         url: '/qi_quan_xiang_qing',
-        query: { code:this.stockItems[i].stock_code }
+        query: { code: this.stockArr[i].stock_code }
       });
+    },
+    getquoteList() {
+      this.resquestState = 0
+      var options = {
+        url: '/fiftyEtf/QryQuotationList', //请求接口
+        method: 'POST',
+        data: {
+          quotation_list: this.quotationStr
+        },
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+      this.$httpReq(options).then((res) => {
+        this.stockArr = res.data.list
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
     },
     getMainlist() {
       var options = {
@@ -55,28 +71,35 @@ export default {
         method: 'POST',
       }
       this.$httpReq(options).then((res) => {
-        this.allStock = res.data
         this.stockItems = this.activeI ? res.data.down : res.data.up
+        this.getquoteList()
       }).catch((err) => {
         console.error(err, '捕捉')
       })
     },
     tabClick() {
-      this.activeI = this.activeI == 0?1:0
+      this.activeI = this.activeI == 0 ? 1 : 0
       this.getMainlist()
     },
   },
   filters: {
     percent(val) {
-      return val.toFixed(2) + '%'
+      return (val - 0).toFixed(2) + '%'
     },
     judgeLength(val) {
       return val > 99999 ? (val / 10000).toFixed(2) + '万' : val
     }
   },
+  computed: {
+    quotationStr() {
+      return this.stockItems.map(item => {
+        return '?' + item.stock_code
+      }).join("")
+    }
+  },
   activated() {
     this.getMainlist()
-    this.timmer = setInterval(this.getMainlist, 3000)
+    this.timmer = setInterval(this.getquoteList, 3000)
   },
   deactivated() {
     clearInterval(this.timmer)
@@ -173,11 +196,11 @@ export default {
       color: $green1;
     }
   }
-  ul:not(:last-child){
+  ul:not(:last-child) {
     border-bottom: 1px solid #ddd;
   }
 }
-div#app.at-night ul:not(:last-child){
-  border-color: #000
+div#app.at-night ul:not(:last-child) {
+  border-color: #000;
 }
 </style>

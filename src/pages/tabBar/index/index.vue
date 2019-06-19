@@ -8,14 +8,14 @@
     </van-swipe>
     <four-tips></four-tips>
     <three-securities :commonstock="commonstock"></three-securities>
-    <template v-if="switchObj.home==0">
+    <main-stock v-if="switchObj.home>0"></main-stock>
+    <template v-else>
       <div class="uni-flex newsViewTitle">
         <span class="textc1">资讯</span>
         <span v-vtap="{method: go  }">更多></span>
       </div>
       <news-view :newlists="newsItem"></news-view>
     </template>
-    <main-stock v-else></main-stock>
   </div>
 </template>
 
