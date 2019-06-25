@@ -165,7 +165,7 @@ div.wrap {
       margin-bottom:.49rem;
       span.allWithdraw {
         font-size: 14px;
-        color: rgba(64, 157, 229, 1);
+        color: $primary1;
         margin-left:.15rem;
       }
     }
@@ -176,17 +176,17 @@ div.wrap {
         width:2.00rem;
         height:.74rem;
         background: rgba(245, 245, 245, 0);
-        border: 1px solid rgba(64, 157, 229, 1);
+        border: 1px solid $primary1;
         border-radius:.02rem;
         text-align: center;
         line-height:.74rem;
         font-size: 15px;
         flex-shrink: 0;
         margin-bottom:.36rem;
-        color: rgba(64, 157, 229, 1);
+        color: $primary1;
       }
       div.active {
-        background-color: #409de5;
+        background-color: $primary1;
         color: #fff;
       }
     }
@@ -198,7 +198,7 @@ div.wrap {
     right: 0;
     div.bottomTip {
       font-size: 13px;
-      color: rgba(64, 157, 229, 1);
+      color: $primary1;
       text-align: center;
       line-height: 13px;
       margin-top:.36rem;

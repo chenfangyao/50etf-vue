@@ -220,8 +220,8 @@ div.uni-tab-bar {
     height: 0.84rem;
 
     .swiper-tab-list2 span.active {
-      border-bottom: 1px solid #409de5;
-      color: #409de5;
+      border-bottom: 1px solid $primary1;
+      color: $primary1;
       padding-bottom: 13px;
     }
 

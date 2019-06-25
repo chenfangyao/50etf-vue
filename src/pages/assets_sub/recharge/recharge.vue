@@ -391,17 +391,17 @@ div.wrap {
         width: 2rem;
         height: 0.74rem;
         background: rgba(245, 245, 245, 0);
-        border: 1px solid rgba(64, 157, 229, 1);
+        border: 1px solid $primary1;
         border-radius: 0.02rem;
         text-align: center;
         line-height: 0.74rem;
         font-size: 15px;
         flex-shrink: 0;
         margin-bottom: 0.36rem;
-        color: rgba(64, 157, 229, 1);
+        color: $primary1;
       }
       div.active {
-        background-color: #409de5;
+        background-color: $primary1;
         color: #fff;
       }
     }
@@ -412,7 +412,7 @@ div.wrap {
     color: #181c28;
     span._a {
       text-decoration: underline;
-      color: rgba(64, 157, 229, 1);
+      color: $primary1;
     }
   }
   div.fixView {

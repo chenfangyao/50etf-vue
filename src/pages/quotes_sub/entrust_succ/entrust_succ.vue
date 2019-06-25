@@ -74,15 +74,15 @@ div.wrap {
       flex-grow: 1;
       height:.98rem;
       background: rgba(64, 157, 229, 0);
-      border: 1px solid rgba(64, 157, 229, 1);
+      border: 1px solid $primary1;
       border-radius:.04rem;
       font-size: 16px;
-      color: rgba(64, 157, 229, 1);
+      color: $primary1;
       line-height:.98rem;
     }
     > div:last-child {
       margin-left:.34rem;
-      background: rgba(64, 157, 229, 1);
+      background: $primary1;
       color: #fff;
     }
   }

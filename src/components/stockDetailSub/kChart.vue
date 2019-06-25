@@ -313,8 +313,8 @@ div.uni-tab-bar {
     font-size: 14px;
     background-color: #ededed;
     .swiper-tab-list2.active {
-      border-bottom: 2px solid #409de5;
-      color: #409de5;
+      border-bottom: 2px solid $primary1;
+      color: $primary1;
     }
     .swiper-tab-list2 {
       font-size:.30rem;

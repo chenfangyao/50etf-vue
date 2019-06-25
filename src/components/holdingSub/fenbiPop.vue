@@ -283,10 +283,10 @@ div.fixWrap {
       > div {
         height: 0.72rem;
         width: 2rem;
-        border: 1px solid rgba(64, 157, 229, 1);
+        border: 1px solid $primary1;
         border-radius: 0.04rem;
         font-size: 13px;
-        color: rgba(64, 157, 229, 1);
+        color: $primary1;
         line-height: 0.68rem;
         text-align: center;
       }

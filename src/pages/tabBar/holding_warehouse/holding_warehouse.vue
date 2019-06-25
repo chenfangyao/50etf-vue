@@ -147,11 +147,11 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.tabI = vm.weituoindex
-      if (vm.weituoindex == 2) {
+     /*  if (vm.weituoindex == 2) {
         vm.titleList[2].startI = 0
         vm.getFenbiList(2)
         return
-      }
+      } *///委托也要刷新！
       vm.checkRevoke(vm.tabI)
       vm.titleList[vm.tabI].list.length || vm.getFenbiList(vm.tabI)
     })

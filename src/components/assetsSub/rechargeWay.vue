@@ -78,7 +78,7 @@ div.rechargeWay {
     width: 0.76rem;
     height: 0.76rem;
     margin-left: 0.46rem;
-    // background-color: #409de5;
+    // background-color: $primary1;
   }
   div.txt {
     flex-grow: 1;

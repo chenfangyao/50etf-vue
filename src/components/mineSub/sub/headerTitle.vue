@@ -51,7 +51,7 @@ export default {
   background: linear-gradient(
     90deg,
     rgba(41, 123, 205, 1),
-    rgba(64, 157, 229, 1)
+    $primary1
   );
   .occupy {
     height: var(--status-bar-height);

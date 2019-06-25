@@ -1,43 +1,32 @@
 <template>
   <div >
     <div class="base-spase"></div>
-    <van-tabbar v-model="active" :z-index="100" class="black2">
+    <van-tabbar v-model="active" :z-index="100" class="black2" active-color="#ff3838">
       <van-tabbar-item  v-vtap="{method: go , params: '/'}"   v-hover-class='"self-hover"'>
         <span>首页</span>
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.img1s : icon.img1">
+        <s-icon slot="icon" slot-scope="props" class-name="bottomIcon" :icon-class="props.active ?'tab_home_pre':atNight?'tab_home_nor2':'tab_home_nor'"  />
       </van-tabbar-item>
       <van-tabbar-item  v-vtap="{method: go , params: '/quotes'}"  v-hover-class='"self-hover"'>
         <span>行情</span>
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.img2s : icon.img2">
+        <s-icon slot="icon" slot-scope="props" class-name="bottomIcon" :icon-class="props.active ?'tab_hangqing_pre':atNight?'tab_hangqing_nor2':'tab_hangqing_nor'"  />
       </van-tabbar-item>
       <van-tabbar-item v-vtap="{method: go , params: '/holding_warehouse'}"   v-hover-class='"self-hover"'>
         <span>持仓</span>
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.img3s : icon.img3">
+        <s-icon slot="icon" slot-scope="props" class-name="bottomIcon" :icon-class="props.active ?'tab_chicang_pre':atNight?'tab_chicang_nor2':'tab_chicang_nor'"  />
       </van-tabbar-item>
       <van-tabbar-item v-vtap="{method: go , params: '/assets'}"   v-hover-class='"self-hover"'>
         <span>资产</span>
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.img4s : icon.img4">
+        <s-icon slot="icon" slot-scope="props" class-name="bottomIcon" :icon-class="props.active ?'tab_zichan_pre':atNight?'tab_zichan_nor2':'tab_zichan_nor'"  />
       </van-tabbar-item>
       <van-tabbar-item v-vtap="{method: go , params: '/mine'}"   v-hover-class='"self-hover"'>
         <span>我的</span>
-        <img slot="icon" slot-scope="props" :src="props.active ? icon.img5s : icon.img5">
+        <s-icon slot="icon" slot-scope="props" class-name="bottomIcon" :icon-class="props.active ?'tab_wode_pre':atNight?'tab_wode_nor2':'tab_wode_nor'"  />
       </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
-//导入图片资源
-import img1 from '@/assets/tabBarImg/index.png'
-import img1s from '@/assets/tabBarImg/index_selected.png'
-import img2 from '@/assets/tabBarImg/quotes.png'
-import img2s from '@/assets/tabBarImg/quotes_seleted.png'
-import img3 from '@/assets/tabBarImg/holding_warehouse.png'
-import img3s from '@/assets/tabBarImg/holding_warehouse_selected.png'
-import img4 from '@/assets/tabBarImg/assets.png'
-import img4s from '@/assets/tabBarImg/assets_selected.png'
-import img5 from '@/assets/tabBarImg/mine.png'
-import img5s from '@/assets/tabBarImg/mine_selected.png'
 
 import { Tabbar, TabbarItem } from 'vant'
 
@@ -47,11 +36,10 @@ export default {
     [Tabbar.name]: Tabbar,
     [TabbarItem.name]: TabbarItem
   },
-  computed: mapState(['tabIndex']),
+  computed: mapState(['tabIndex','atNight']),
   data() {
     return {
       active: this.tabIndex,
-      icon: { img1, img1s, img2, img2s, img3, img3s, img4, img4s, img5, img5s, }
     }
   },
   methods:{
@@ -71,16 +59,14 @@ export default {
 </script>
 
 <style  lang="scss">
-.base-spase ,.van-tabbar{
+.base-spase {
   height: 50px;
-  height: calc(50px + env(safe-area-inset-bottom));
-  height: calc(50px + constant(safe-area-inset-bottom));
 }
 .van-tabbar-item__icon  {
   margin-bottom: 0 !important;
-  img {
-    width: 24px;
-    height: 24px !important;
+  font-size: 14px;
+  .bottomIcon{
+    font-size: 24px;
   }
 }
 [class*=van-hairline]::after {
@@ -88,7 +74,5 @@ export default {
 }
 .van-tabbar--fixed{
   padding-top: 6px;
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-bottom: constant(safe-area-inset-bottom);
 }
 </style>

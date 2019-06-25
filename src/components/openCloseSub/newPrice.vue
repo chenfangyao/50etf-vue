@@ -528,7 +528,7 @@ div.root-el {
       display: inline-block;
       width: 1.85rem;
       text-align: center;
-      color: rgba(64, 157, 229, 1);
+      color: $primary1;
     }
 
     .yellow1 {
@@ -549,8 +549,8 @@ div.root-el {
       }
 
       > div.active {
-        border-color: rgba(64, 157, 229, 1);
-        color: #409de5;
+        border-color: $primary1;
+        color: $primary1;
       }
 
       > div.active.yellow1 {

@@ -59,7 +59,7 @@ export default {
 button {
   width: 1.6rem;
   height: 0.66rem;
-  background: rgba(64, 157, 229, 1);
+  background: $primary1;
   border-radius: 0.36rem;
   border: 0;
   font-size: 13px;

@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 div#app.at-night .nightStyle{
-  background-color: #409de5;
+  background-color: $primary1;
   color: #fff;
   border-color: transparent;
 }
@@ -66,7 +66,7 @@ div.maskWrap {
         text-align: center;
       }
       view:last-child {
-        background-color: #409de5;
+        background-color: $primary1;
         color: #fff;
         border: 0;
       }

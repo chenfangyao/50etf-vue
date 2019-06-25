@@ -410,8 +410,8 @@ div.uni-tab-bar {
     background-color: #ededed;
     .swiper-tab-list2.active {
       span{
-        border-bottom: 2px solid #409de5;
-        color: #409de5;
+        border-bottom: 2px solid $primary1;
+        color: $primary1;
         padding-bottom: 0.1rem;
       }
     }

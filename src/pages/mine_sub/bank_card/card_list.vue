@@ -77,7 +77,7 @@ div.wrap {
   }
   .scroll-view-item_H.bg-blue {
     line-height:1.60rem;
-    background-color: #409de5;
+    background-color: $primary1;
     width:2.40rem;
     color: #fff;
     vertical-align: top;

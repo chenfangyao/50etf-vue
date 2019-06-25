@@ -7,7 +7,7 @@
     </div>
     <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'">
       <span>夜间模式</span>
-      <van-switch size="20px" active-color='#409de5'  :value="atNight" @input="changeTheme"/>
+      <van-switch size="20px" active-color='$primary1'  :value="atNight" @input="changeTheme"/>
     </div>
     <div class="mb26 item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>关于</span>

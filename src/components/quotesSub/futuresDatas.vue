@@ -228,7 +228,7 @@ div.root-el {
     background-color: #e6aa12;
   }
   span.midTxt.bg2 {
-    background-color: #409de5;
+    background-color: $primary1;
   }
   div.wrap1 {
     flex-grow: 1;

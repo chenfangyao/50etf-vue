@@ -76,7 +76,7 @@ div.h44 {
       border-radius: 13px;
       margin: 0 auto;
       align-self: center;
-      border: 1px solid #409de5;
+      border: 1px solid $primary1;
       position: relative;
       .slider {
         position: absolute;
@@ -85,7 +85,7 @@ div.h44 {
         bottom: -1px;
         top: -1px;
         left: -1px;
-        background-color: #409de5;
+        background-color: $primary1;
         color: #fff;
         transition: left 80ms;
       }

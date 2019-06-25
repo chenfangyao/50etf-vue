@@ -5,7 +5,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-$v1bg: #409de5;
+$v1bg: $primary1;
 $v2bg: #e6aa12;
 div.uni-flex {
   position: fixed;

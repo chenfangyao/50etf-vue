@@ -88,7 +88,7 @@ div.subWrap {
     background: linear-gradient(
       0deg,
       rgba(41, 123, 205, 1),
-      rgba(64, 157, 229, 1)
+      $primary1
     );
     border-radius:.20rem.20rem 0px 0px;
     text-align: center;

@@ -214,7 +214,7 @@ div.wrap {
       .copySpan {
         float: right;
         margin-right: 10px;
-        color: $blue1;
+        color: $primary1;
       }
     }
     div.payMoney > span:nth-child(2) {

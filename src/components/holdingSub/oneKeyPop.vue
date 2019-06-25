@@ -178,10 +178,10 @@ export default {
         background: darken(rgba(153, 153, 153, 1), 5%);
       }
       > div:last-child {
-        background: #409de5;
+        background: $primary1;
       }
       > div.tap-hover:last-child {
-        background: darken(#409de5, 5%);
+        background: darken($primary1, 5%);
       }
     }
   }

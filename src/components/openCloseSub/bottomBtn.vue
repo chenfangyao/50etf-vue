@@ -88,12 +88,12 @@ div.root-el {
     font-size: 16px;
     flex-grow: 1;
     text-align: center;
-    background: rgba(64, 157, 229, 1);
+    background: $primary1;
     color: rgba(255, 255, 255, 1);
     line-height:.98rem;
   }
   .buyBtn.tap-hover {
-    background: darken(rgb(64, 157, 229), 5%);
+    background: darken($primary1, 5%);
   }
   .c1.buyBtn {
     background-color: #e6ab12;

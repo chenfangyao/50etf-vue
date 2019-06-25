@@ -17,7 +17,7 @@ export default {
 div.bigBtn {
   height: .98rem;
   margin: 0 .22rem; 
-  background: rgba(64, 157, 229, 1);
+  background: $primary1;
   border-radius:.10rem;
   font-size:.32rem; 
   color: rgba(255, 255, 255, 1);
@@ -25,6 +25,6 @@ div.bigBtn {
   text-align: center;
 }
 div.bigBtn.active {
-  background: darken(rgba(64, 157, 229, 1), 5%);
+  background: darken($primary1, 5%);
 }
 </style>

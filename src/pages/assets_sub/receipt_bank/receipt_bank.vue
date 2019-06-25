@@ -101,7 +101,7 @@ div.wrap {
       }
       div.copy {
         font-size: 14px;
-        color: $blue1;
+        color: $primary1;
         line-height:1.00rem;
         margin-right:.25rem;
       }
@@ -121,7 +121,7 @@ div.wrap {
     div.txt2 {
       margin-bottom:.20rem;
       span:nth-child(2) {
-        color: #409de5;
+        color: $primary1;
         margin: 0.08rem;
         text-decoration: underline;
       }

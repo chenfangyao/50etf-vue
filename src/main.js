@@ -4,6 +4,7 @@ import router from './router'
 import store from './vuex'
 import vueUtil from '@/common/vueUtil.js'
 import baseHeader from '@/components/base_header.vue'
+import './icons' 
 
 import '@/common/black.scss'
 import { Toast,Dialog} from 'vant';

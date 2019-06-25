@@ -134,8 +134,8 @@ div.list2Item {
       height:.36rem;
       border-radius:.18rem;
       font-size: 12px;
-      color: #409de5;
-      border: solid 1px #409de5;
+      color: $primary1;
+      border: solid 1px $primary1;
       line-height:.31rem;
       text-align: center;
       align-self: center;
@@ -158,7 +158,7 @@ div.list2Item {
       align-self: center;
       span:last-child {
         margin-left:.39rem;
-        color: #409de5;
+        color: $primary1;
       }
       span.yellow:last-child {
         color: #e6aa12 !important;
@@ -187,7 +187,7 @@ div.list2Item {
     justify-content: space-between;
     align-items: center;
     div.countdownBtn {
-      background: rgba(64, 157, 229, 1);
+      background: $primary1;
       border-radius:.04rem;
       font-size: 12px;
       line-height:.48rem;
@@ -197,7 +197,7 @@ div.list2Item {
       color: rgba(255, 255, 255, 1);
     }
     div.countdownBtn.hover1 {
-      background-color: darken(rgb(64, 157, 229), 10%);
+      background-color: darken($primary1, 10%);
     }
   }
   background-color: #fff;

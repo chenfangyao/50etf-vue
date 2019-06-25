@@ -163,7 +163,7 @@ div.wrap {
         line-height:1.64rem;
         width:1.22rem;
         font-weight: 500;
-        color: #409de5;
+        color: $primary1;
         letter-spacing: 1px;
       }
       div.middle {
