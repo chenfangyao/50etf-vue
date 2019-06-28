@@ -54,7 +54,7 @@ div.h44 {
       padding:0 0.25rem;
       span.now {
       padding-bottom:.19rem;
-        border-bottom:.04rem solid #409DE5;
+        border-bottom:.04rem solid $primary1;
         color: $primary1;
       }
     }

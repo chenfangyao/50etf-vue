@@ -27,10 +27,10 @@ div.btn {
   margin-bottom:.52rem;
 }
 div.btn.verifyOk{
-  background: rgba(24, 144, 255, 1);
+  background: $primary1;
 
 }
 div.btn.tap-hover.verifyOk {
-  background-color: darken(rgb(24, 144, 255), 5%);
+  background-color: darken($primary1, 5%);
 }
 </style>

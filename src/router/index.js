@@ -121,7 +121,7 @@ export default new Router({
     { path: '/pages/mine_sub/bank_card/add_card/add_card', name: 'add_card', component: add_card,  },
     { path: '/pages/mine_sub/bank_card/card_list', name: 'card_list', component: card_list,  },
     // 无绑定过银行卡信息
-    { path: '/add_card_btn', name: 'add_card_btn', component: add_card_btn,  },
+    { path: '/pages/mine_sub/add_card_btn', name: 'add_card_btn', component: add_card_btn,  },
     // 添加银行卡第二步
     { path: '/pages/forget_pwd/tep2/tep2', name: 'add_card2', component: add_card2,  },
     // 交易规则

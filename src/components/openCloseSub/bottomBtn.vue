@@ -7,7 +7,7 @@
         <!-- <span class="totalPrice">￥{{totalmoney||0}}</span> -->
         <span class="totalPrice textc1">￥{{cctotalmoney||0}}</span>
       </div>
-      <div class="buyBtn" :class="{c1:onClose==1}" v-vtap="{method:showPop}" v-hover-class="'tap-hover'">{{onClose?'平仓':'开仓'}}</div>
+      <div class="buyBtn"  v-vtap="{method:showPop}" v-hover-class="'tap-hover'">{{onClose?'平仓':'开仓'}}</div>
     </div>
     <div class="h1 black1"></div>
     <order-pop v-if="popShow" :on-close="onClose" @close-pop='closePop' :res-obj='resObj' :total-money='cctotalmoney'></order-pop>
@@ -94,9 +94,6 @@ div.root-el {
   }
   .buyBtn.tap-hover {
     background: darken($primary1, 5%);
-  }
-  .c1.buyBtn {
-    background-color: #e6ab12;
   }
 }
 </style>

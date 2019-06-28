@@ -1,38 +1,45 @@
 <template>
   <div class="root-el">
-    <div v-show="onClose">
-      <div class="entrustType">
-        <span class="type commonStyle1 textc1">委托类型</span>
-        <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
+    <div v-show="onClose" class="wraper">
+      <div class="tabOpen uni-flex black2">
+        <div v-vtap="{method: tapChange , params: false}">
+          <span :class="{active:!tabActive}">合并</span>
+        </div>
+        <div v-vtap="{method: tapChange , params: true}">
+          <span :class="{active:tabActive}">分笔</span>
+        </div>
       </div>
       <div class="chooseType uni-flex">
-        <div class="tabOpen uni-flex black2">
-          <div v-vtap="{method: tapChange , params: false}">合并</div>
-          <div v-vtap="{method: tapChange , params: true}">分笔</div>
-          <div :class="['slider',{active:tabActive}]">{{tabActive?'分笔':'合并'}}</div>
+        <div class="entrustType">
+          <span class="type commonStyle1 textc1">委托类型</span>
+          <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
         </div>
         <div class="chooseCount black1">
           <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
           <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}" class="flex1">
-            <span>{{sellnumber}}</span>
-            <uni-icon @define-click="showPopCheckbox" type="arrowdown" size="24"></uni-icon>
+            <span class="chooseTxt">{{sellnumber}}</span>
+            <s-icon icon-class="select_down" v-vtap.self="{method:showPopCheckbox}"></s-icon>
+            <!-- 合并弹窗 -->
             <van-popup v-model="showpop" position="bottom">
               <div>
-                <div class="pop-title">
-                  <!--<span class="cancelCheck" v-vtap="{method:cancelCheck}">取消</span>-->
-                  <span class="confirmCheck" v-vtap="{method:confirmCheck}">确认</span>
+                <div class="pop-title uni-flex">
+                  <span v-vtap="{method:cancelCheck}">取消</span>
+                  <span v-vtap="{method:confirmCheck}">确定</span>
                 </div>
-                <div style="height: 200px;overflow-y: auto">
-                  <van-cell clickable>
-                    <van-checkbox v-model="checked" @click.native="allcheckbox(1)" />
-                    <span style="position: absolute;left:40px;top:5px">全部</span>
+                <div>
+                  <van-cell class="vanCell">
+                    <span :class="{itemCheck:allChecked }">全部</span>
+                    <van-checkbox checked-color="#ff3838" icon-size="22px" shape="square" v-model="allChecked" @click="checkAll2" @change="allcheckbox" />
                   </van-cell>
-                  <van-checkbox-group v-model="result">
+                  <van-checkbox-group v-model="result" @change="toggle">
                     <van-cell-group>
-                      <van-cell v-for="(item,index) in items" clickable :key="index" v-vtap="{method: toggle , params: index}" style="position: relative">
-                        <van-checkbox :name="item.valueid" ref="checkboxes" />
-                        <span style="position: absolute;left:40px;top:5px">{{item.name}}</span>
-                        <span style="position: absolute;right:100px;top:5px">{{item.texts}}</span>
+                      <van-cell v-for="(item,index) in items" :key="index" class="vanCell">
+                        <!-- v-vtap="{method: toggle , params: index}" clickable-->
+                        <div :class="{itemCheck:result.indexOf(item.valueid)!=-1 }">
+                          <span>{{item.name}}</span>
+                          <span>{{item.texts}}</span>
+                        </div>
+                        <van-checkbox checked-color="#ff3838" shape="square" icon-size="22px" :name="item.valueid" ref="checkboxes" />
                       </van-cell>
                     </van-cell-group>
                   </van-checkbox-group>
@@ -41,10 +48,10 @@
             </van-popup>
           </div>
           <div v-show="tabActive" v-vtap.self="{method:showPickers}" class="flex1">
-            <span>{{pickerText}}</span>
-            <uni-icon @define-click="showPickers" type="arrowdown" size="24"></uni-icon>
-            <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
+            <span class="chooseTxt">{{pickerText}}</span>
+            <s-icon icon-class="select_down" v-vtap.self="{method:showPickers}"></s-icon>
           </div>
+          <vue-pickers class="vuePickera" :show="show1" :columns="1" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
         </div>
       </div>
     </div>
@@ -52,12 +59,12 @@
     <div class="uni-flex line2">
       <div>
         <img v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/minus.png">
-        <span class="newPrice" :class="{yellow1:onClose}">{{pricevalue}}</span>
+        <span class="newPrice">{{pricevalue}}</span>
         <img v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/plus.png">
       </div>
 
       <div class="uni-flex btn3">
-        <div v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i,yellow1:onClose}" :data-i="i" v-vtap="{method: changePriceType , arr: [ i,item]}">{{item}}</div>
+        <div v-for="(item,i) in btn3Arr" :key="i" :class="{active:btn3_i==i}" :data-i="i" v-vtap="{method: changePriceType , arr: [ i,item]}">{{item}}</div>
       </div>
     </div>
     <div class="uni-flex entrustCount">
@@ -67,22 +74,22 @@
         <span class="commonStyle2" v-if="!onClose">{{maxprice.maxcounts||0}}</span>
         <span class="commonStyle2" v-else>{{maxprice.enable_amount}}</span>
       </div>
-      <div v-show="!onClose">
+      <!-- <div v-show="!onClose">重要 先隐藏!!
         <span class="commonStyle2 mr5">当前持仓</span>
         <span class="commonStyle2 textc1">{{maxprice.own_amount}}</span>
-      </div>
+      </div> -->
     </div>
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div class="imgbtn uni-flex">
-        <div class="hasImg" v-vtap="{method: plusStep , params: -1}" >
+        <div class="hasImg" v-vtap="{method: plusStep , params: -1}">
           <img src="../../assets/openCloseImg/minus.png">
         </div>
         <span class="countxt textc1">{{sliderVal}}</span>
         <div class="hasImg" v-vtap="{method: plusStep , params: 1}">
-          <img  src="../../assets/openCloseImg/plus.png">
+          <img src="../../assets/openCloseImg/plus.png">
         </div>
       </div>
-      <div class="sliderItem" :class="{yellow:onClose}">
+      <div class="sliderItem">
         <el-slider v-model="sliderVal" @change="slidering" :max="maxprice.maxcounts || 0" :disabled="sliderdisable" :min="0" :show-tooltip="false"></el-slider>
       </div>
     </div>
@@ -142,10 +149,9 @@ export default {
       hbcclength: '',
       sliderdisable: false,
       show1: false,
-      column1: 1,
-      defaultData: [],
       showpop: false,
-      checked: false,
+      allChecked: false,
+      allChecked2: false,//此为替身，配合使用，解决bug
       icon: {
         normal: '../../assets/holdingImg/unchecked.png',
         active: '../../assets/holdingImg/checked.png'
@@ -306,21 +312,20 @@ export default {
         price: this.pricevalue
       })
     },
-    toggle(index) {
-      this.$refs.checkboxes[index].toggle();
-      if (this.result.length == this.items.length) this.checked = true
-      else this.checked = false
+    toggle() {
+      if (this.result.length == this.items.length) this.allChecked = true
+      else this.allChecked = false
     },
-    allcheckbox(e) {
-      if (e === 1) {
+    allcheckbox() {
+      if (this.allChecked) {
+        this.result = this.items.map(item => item.valueid)
+      } else if (this.allChecked2) {
         this.result = []
-        if (this.checked) {
-          for (var i = 0; i < this.items.length; i++) {
-            this.result[i] = this.items[i].valueid
-          }
-        }
       }
-
+      this.allChecked2 = false
+    },
+    checkAll2() {
+      this.allChecked2 = true
     },
     onCancelPicker() {
       this.show1 = false
@@ -342,7 +347,7 @@ export default {
       this.showpop = false
       var totalhynum = 0
       this.sethbfbcell(this.result)
-      if (this.checked) {
+      if (this.allChecked) {
         this.setstockamunt(this.maxprice.enable_amount)
         totalhynum = this.maxprice.enable_amount
       } else {
@@ -464,9 +469,9 @@ export default {
     },
     'maxprice.maxcounts': {
       handler(val) {
-        this.sliderdisable = val==0
+        this.sliderdisable = val == 0
       },
-    }
+    },
   },
   created() {
     // 初始化将合并分笔置空
@@ -494,18 +499,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 div#app.at-night div.tabOpen {
-  // border-color: #828097;
-  border: solid 1px $yellow1;
+  border: solid 1px $primary1;
 }
 div.root-el {
-  padding: 0.3rem 0.32rem;
+  padding: 0.1rem 0.32rem 0.3rem;
   background-color: #fff;
-
+  .wraper {
+    margin-bottom: 10px;
+  }
   .commonStyle1 {
-    font-size: 18px;
-    font-weight: 700;
-    color: rgba(69, 69, 69, 1);
-    line-height: 0.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
   }
   span.commonStyle2 {
     font-size: 12px !important;
@@ -518,7 +523,7 @@ div.root-el {
   div.line2 {
     align-items: center;
     justify-content: space-between;
-    margin: 0.29rem 0 0.48rem;
+    margin: 0.1rem 0 0.48rem;
 
     .newPrice {
       font-size: 24px;
@@ -529,10 +534,6 @@ div.root-el {
       width: 1.85rem;
       text-align: center;
       color: $primary1;
-    }
-
-    .yellow1 {
-      color: #e6aa12;
     }
 
     div.btn3 {
@@ -553,11 +554,6 @@ div.root-el {
         color: $primary1;
       }
 
-      > div.active.yellow1 {
-        border-color: #e6aa12;
-        color: #e6aa12;
-      }
-
       > div:nth-child(2) {
         margin: 0 0.26rem;
       }
@@ -574,7 +570,9 @@ div.root-el {
       margin-right: 5px;
     }
   }
-
+  .chooseTxt {
+    color: #333;
+  }
   div.chooseType {
     justify-content: space-between;
     align-items: center;
@@ -605,34 +603,18 @@ div.root-el {
 
   div.tabOpen {
     width: 2.7rem;
-    height: 0.64rem;
-    border-radius: 15px;
+    // height: 0.64rem;
     align-self: center;
-    background-color: #efefef;
-    margin: 0.3rem 0 0.3rem 1px;
-    position: relative;
-    .slider {
-      position: absolute;
-      width: 52%;
-      border-radius: 15px;
-      bottom: 0;
-      top: 0;
-      left: -1%;
-      transition: left 80ms;
-      background-color: #e6aa12;
-      color: #fff;
-    }
-
+    margin-bottom: 0.2rem;
     > div {
       flex-grow: 1;
-      text-align: center;
       line-height: 0.6rem;
-      font-size: 12px;
+      font-size: 14px;
       color: #999;
     }
-
-    > div.active.slider {
-      left: 50%;
+    .active {
+      color: $primary1;
+      border-bottom: solid 2px $primary1;
     }
   }
 
@@ -656,11 +638,11 @@ div.root-el {
     justify-content: space-between;
     margin: 0.35rem 0 0.14rem;
     align-items: center;
-    .imgbtn{
+    .imgbtn {
       align-items: center;
-      .hasImg{
+      .hasImg {
         height: 26px;
-        padding:4px 10px ;
+        padding: 4px 10px;
       }
     }
     span.countxt {
@@ -672,13 +654,11 @@ div.root-el {
       text-align: center;
       display: inline-block;
     }
-    .yellow {
-     /deep/ .el-slider__button {
-        border-color: #e6aa12;
-      }
-    /deep/  .el-slider__bar {
-        background-color: #e6aa12;
-      }
+    /deep/ .el-slider__button {
+      border-color: $primary1;
+    }
+    /deep/ .el-slider__bar {
+      background-color: $primary1;
     }
     div.sliderItem {
       flex-grow: 1;
@@ -697,21 +677,34 @@ div.root-el {
   .pop-title {
     height: 50px;
     background-color: white;
-    position: relative;
     border-bottom: 1px solid #eeeeee;
-    span {
-      position: absolute;
-      top: 10px;
-      font-size: 16px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.37rem;
+    color: #666;
+
+    & + div {
+      //合并弹窗title底下的选项元素包裹
+      height: 200px;
+      overflow-y: auto;
+      .vanCell {
+        > div {
+          //组件内自加的一级
+          display: flex;
+          justify-content: space-between;
+          color: #666;
+        }
+        .itemCheck {
+          color: $primary1;
+        }
+      }
     }
-  }
-  .confirmCheck {
-    left: 10px;
-    color: #3b7bd5;
-  }
-  .cancelCheck {
-    left: 10px;
-    color: #9c9c9c;
+    span {
+      font-size: 16px;
+      &:last-child {
+        color: $primary1;
+      }
+    }
   }
 }
 </style>

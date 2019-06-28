@@ -1,31 +1,33 @@
 <template>
-	<div class="wrap">
-		<base-header title="资产"></base-header>
-		<header-card :transmoney='res_data'></header-card>
-		<div class="info ">
-			<div class="black2 textc2">权利金</div>
-			<div class="uni-flex black2 textc1">
-				<span>权利金</span>
-				<span>{{royalty_money}}</span><span v-if='!royalty_money'>0.00</span>
-			</div>
-			<div class="uni-flex black2 textc1">
-				<span>盈亏</span>
-				<span :class="greenredclass?'greenColor':'redColor'">{{profit_money}}</span><span v-if='!royalty_money'>0.00</span>
-			</div>
-		</div>
-		<div class="info ">
-			<div class="black2 textc2">其他</div>
-			<div class="uni-flex black2 textc1">
-				<span>待扣延期费</span>
-				<span>{{add_fee_money}}</span><span v-if='!royalty_money'>0.00</span>
-			</div>
-			<div class="uni-flex black2 textc1">
-				<span>冻结资金</span>
-				<span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
-			</div>
-		</div>
+  <div class="wrap">
+    <base-header title="资产"></base-header>
+    <header-card :transmoney='res_data'></header-card>
+    <div class="info ">
+      <div class="black2 textc2 ">
+        <span>权利金</span></div>
+      <div class="uni-flex black2 textc1">
+        <span>权利金</span>
+        <span>{{royalty_money}}</span><span v-if='!royalty_money'>0.00</span>
+      </div>
+      <div class="uni-flex black2 textc1">
+        <span>盈亏</span>
+        <span :class="greenredclass?'greenColor':'redColor'">{{profit_money}}</span><span v-if='!royalty_money'>0.00</span>
+      </div>
+    </div>
+    <div class="info ">
+      <div class="black2 textc2 ">
+        <span>其他</span></div>
+      <div class="uni-flex black2 textc1">
+        <span>待扣延期费</span>
+        <span>{{add_fee_money}}</span><span v-if='!royalty_money'>0.00</span>
+      </div>
+      <div class="uni-flex black2 textc1">
+        <span>冻结资金</span>
+        <span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
+      </div>
+    </div>
 
-	</div>
+  </div>
 </template>
 
 <script>
@@ -50,8 +52,8 @@ export default {
       add_dpt_money: "保证金",
       add_fee_money: "延期费",
       tip_risk_month: "资金页面底下提示文字，有值才显示。如：需月配请联系客服",
-      greenredclass:false,
-      timmer:null,
+      greenredclass: false,
+      timmer: null,
     };
   },
   // props:{aa:'res_data'},
@@ -59,42 +61,42 @@ export default {
     headerCard
   },
   methods: {
-		...mapMutations(['setassets']),
+    ...mapMutations(['setassets']),
     // 获取资金列表
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        method: 'GET', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
-					this.setassets(res.data)
+          this.setassets(res.data)
           this.enable_money = res.data.enable_money
           this.dta_money = res.data.dta_money
           this.royalty_money = res.data.royalty_money
           this.freeze_money = res.data.freeze_money
           this.add_fee_money = res.data.add_fee_money
           this.profit_money = res.data.profit_money
-					this.res_data = res.data
-					if(res.data.profit_money.indexOf('-')!=-1){
-						this.greenredclass=true
-					}else{
-						this.greenredclass=false
-					}
+          this.res_data = res.data
+          if (res.data.profit_money.indexOf('-') != -1) {
+            this.greenredclass = true
+          } else {
+            this.greenredclass = false
+          }
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
   },
-  activated () {
+  activated() {
     this.getassets()
-    this.timmer=setInterval(()=>this.getassets(),3000)
+    this.timmer = setInterval(() => this.getassets(), 3000)
   },
-  deactivated(){
+  deactivated() {
     clearInterval(this.timmer)
-    this.timmer=null
+    this.timmer = null
   }
 }
 </script>
@@ -103,36 +105,41 @@ export default {
 div.wrap {
   background-color: #f5f5f5;
   height: calc(100vh - 50px);
-padding-top: 0.1px;
+  padding-top: 0.1px;
   div.info {
-    margin-bottom:.12rem;
+    margin-bottom: 0.12rem;
 
     > div {
       background-color: #fff;
-      line-height:.98rem;
+      line-height: 0.98rem;
       display: flex;
       justify-content: space-between;
-      padding:0 0.26rem;
-      margin-bottom: 1px;
-      font-size: 15px;
-      height:.98rem;
+      padding: 0 0.26rem;
+      font-size: 14px;
+      height: 0.98rem;
       color: rgba(24, 28, 40, 1);
     }
 
     > div:first-child {
-      font-size: 13px;
-      height:.64rem;
-      line-height:.64rem;
-
-      color: rgba(112, 118, 128, 1);
+      align-items: center;
+      padding-left: 5px;
+      height: 0.98rem;
+      span {
+        border-left: solid $primary1 3px;
+        font-weight: bold;
+        color: #333;
+        font-size: 15px;
+        margin-left: 0.22rem;
+        line-height: 15px;
+        padding-left: 5px;
+      }
     }
-
     span.greenColor {
       color: #3aba8f;
     }
-		span.redColor {
-		  color: #ec605e;
-		}
+    span.redColor {
+      color: #ec605e;
+    }
   }
 }
 </style>

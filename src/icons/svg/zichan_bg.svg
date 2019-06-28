@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 353.055 180.5">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        opacity: 0.051;
+      }
+
+      .cls-3 {
+        opacity: 0.05;
+      }
+    </style>
+    <linearGradient id="linear-gradient" y1="0.848" x2="0.53" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f74c58"/>
+      <stop offset="1" stop-color="#fb8f69"/>
+    </linearGradient>
+  </defs>
+  <g id="zichan_bg" transform="translate(-11 -84)">
+    <g id="组_8" data-name="组 8" transform="translate(11 84)">
+      <path id="路径_26" data-name="路径 26" class="cls-1" d="M10,1H343a10,10,0,0,1,10,10V171.006a10,10,0,0,1-10,10H10a10,10,0,0,1-10-10V11A10,10,0,0,1,10,1Z" transform="translate(0 -0.506)"/>
+      <path id="路径_27" data-name="路径 27" class="cls-2" d="M352.506,0V180.5H0V138.664c5.379-.82,27.182-1.453,95.5,20.336,60.683,19.354,222.947-18.995,247.455-159Z"/>
+      <path id="路径_28" data-name="路径 28" class="cls-2" d="M548.009,245.092c47.95-36.184,69.678-86.872,78.011-112.079V245.092Z" transform="translate(-273.02 -65.086)"/>
+      <path id="路径_29" data-name="路径 29" class="cls-2" d="M653.067,297.48c12.561-21.506,21.337-46.38,26.137-61.957V297.48Z" transform="translate(-326.204 -116.98)"/>
+    </g>
+    <g id="组_9" data-name="组 9" class="cls-3" transform="translate(173 84.1)">
+      <path id="路径_30" data-name="路径 30" class="cls-4" d="M278.163,29.782,248.382,0H232.075l29.746,29.782L225.768,65.871,189.678,29.782,219.46,0H203.082L173.3,29.782l52.468,52.432Z" transform="translate(-111.192 -0.064)"/>
+      <path id="路径_31" data-name="路径 31" class="cls-4" d="M114.576,132.717A103.006,103.006,0,0,1,15.984-.1H3.942A114.626,114.626,0,0,0,114.576,144.329a113.86,113.86,0,0,0,76.479-29.388V98.635A102.681,102.681,0,0,1,114.576,132.717Z" transform="translate(0)"/>
+    </g>
+  </g>
+</svg>

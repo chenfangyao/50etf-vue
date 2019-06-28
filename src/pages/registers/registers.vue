@@ -56,13 +56,13 @@ export default {
       this.$navigateTo({ url })
     },
     handleLogin() {
-      if(this.inviteCode.trim()===''&&this.$store.state.switchObj.show_reluser==1){
+      if(this.inviteCode.trim()===''&&this.switchObj.show_reluser==1){
         this.showErr = true
         this.tipContent = '邀请码必填'
         return
       }
       // 验证输入信息
-      if (this.$validata(this.uName, 0) != 1) {
+      if (this.$validata(this.uName, 0) != 1&&this.switchObj.show_reg_username==1) {
         this.showErr = true
         this.tipContent = this.$validata(this.uName, 0)
         return

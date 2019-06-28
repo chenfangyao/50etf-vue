@@ -1,14 +1,13 @@
 <template>
 	<div class="wrap">
-		<base-header has-back='1'></base-header>
-    <div class="title textc1">修改密码</div>
+		<base-header has-back='1' title="重置密码"></base-header>
     <div class="container">
       <input-item placeholderTxt='旧密码' is-pwd='1' @now-blur='handleBlur' @now-change='handChange' v-model="pwd1"></input-item>
       <input-item placeholderTxt='新密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd2"></input-item>
       <input-item placeholderTxt='确认密码' is-pwd='1' @now-blur='handleBlur' v-model="pwd3"></input-item>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 
-      <submit-btn btnTxt='完成' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
+      <submit-btn btnTxt='重置密码' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
 
     </div>
 	</div>
@@ -92,12 +91,6 @@ export default {
 div.wrap{
   padding-bottom: 0.1px;
   height: 100vh;
-}
-div.title {
-  font-size: 28px;
-  font-weight: 500;
-  margin: 0.2rem 0.55rem .32rem;
-  color: #333;
 }
 div.container {
   margin: 0.55rem;

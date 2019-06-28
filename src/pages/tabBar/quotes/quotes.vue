@@ -110,7 +110,6 @@ export default {
     getgroupLabel() {
       var options = {
         url: '/Sapi/Squery/list_tag', 
-        // url: '/fiftyEtf/list_tag', //请求接口
         method: 'GET', 
       }
       if(this.taglist){

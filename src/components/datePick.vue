@@ -1,17 +1,21 @@
 <template>
-  <van-actionsheet v-model="showPickSelf" class='black1' :close-on-click-overlay='true'>
+  <van-popup v-model="showPickSelf" class='black1' position="right" :style="{ height: '100%' ,width:'300px'}">
+    <h3>选择日期</h3>
     <div class="uni-title self textc1">
-      <span :class="{active:inLeft}" v-vtap="{method: changeActive , params: true}">{{year}}-{{month}}-{{day}}</span> 至
+      <span :class="{active:inLeft}" v-vtap="{method: changeActive , params: true}">{{year}}-{{month}}-{{day}}</span><i>~</i>
       <span :class="{active:!inLeft}" v-vtap="{method: changeActive , params: false}">{{year2}}-{{month2}}-{{day2}}</span>
-      <span class='okTap' v-vtap="{method:handleConfirm}">确认</span>
     </div>
-    <div v-show="showTips" class="tips">开始时间不能大于结束时间</div>
-    <van-picker class='black2' :columns="timeDatas" @change="bindChange"   type="date"/>
-  </van-actionsheet>
+    <div class="tips" :class="{showTips}">开始时间不能大于结束时间</div>
+    <van-picker :visible-item-count="8" class='black2' :columns="timeDatas" @change="bindChange" type="date" />
+    <div class="uni-flex btn2">
+      <div v-vtap="{method:hidMe}">取消</div>
+      <div v-vtap="{method:handleConfirm}">确定</div>
+    </div>
+  </van-popup>
 </template>
 
 <script>
-import { Picker, Actionsheet } from 'vant';
+import { Picker, Popup } from 'vant';
 export default {
   data() {
     const date = new Date()
@@ -21,11 +25,11 @@ export default {
     const months = []
     var month = date.getMonth() + 1//todo
     const month2 = month < 10 ? '0' + month : month
-    month=month2
+    month = month2
     const days = []
     var day = date.getDate()//
     const day2 = day < 10 ? '0' + day : day
-    day=day2
+    day = day2
     for (let i = 2008; i <= date.getFullYear(); i++) {
       years.push(i)
     }
@@ -59,7 +63,7 @@ export default {
       inLeft: true,
       visible: false,
       showPickSelf: this.showPick,
-      timeDatas:[{values:years,defaultIndex:100},{values:months},{values:days},]
+      timeDatas: [{ values: years, defaultIndex: 100 }, { values: months }, { values: days },]
     }
   },
   created() {
@@ -68,15 +72,15 @@ export default {
     }, 0)
   },
   methods: {
-    bindChange (_picker,valueArr,i) {
+    bindChange(_picker, valueArr, i) {
       if (this.inLeft) {
         this.year = valueArr[0]
         this.month = valueArr[1]
-        this.day =valueArr[2]
+        this.day = valueArr[2]
       } else {
         this.year2 = valueArr[0]
         this.month2 = valueArr[1]
-        this.day2 =valueArr[2]
+        this.day2 = valueArr[2]
       }
     },
     hidMe() {
@@ -98,15 +102,15 @@ export default {
         return
       }
       this.showTips = false
-      var times = this.sbFormat?{ starttime: this.year + '' + this.month + this.day, endtime: this.year2 + '' + this.month2 + this.day2 }:{ starttime: this.year + '-' + this.month + '-' + this.day, endtime: this.year2 + '-' + this.month2 + '-' + this.day2 }
+      var times = this.sbFormat ? { starttime: this.year + '' + this.month + this.day, endtime: this.year2 + '' + this.month2 + this.day2 } : { starttime: this.year + '-' + this.month + '-' + this.day, endtime: this.year2 + '-' + this.month2 + '-' + this.day2 }
       this.$emit('select-complete', times)
     },
 
   },
-  props: ['showPick','sbFormat'],
+  props: ['showPick', 'sbFormat'],
   components: {
     [Picker.name]: Picker,
-    [Actionsheet.name]: Actionsheet,
+    [Popup.name]: Popup,
   },
   watch: {
     showPick(val) { this.showPickSelf = val },
@@ -117,11 +121,33 @@ export default {
 
 
 <style lang='scss' scoped>
-
 div.tips {
-    color: #f05f5c;
-    text-align: center;
+  color: #f05f5c;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+  &.showTips {
+    opacity: 1;
   }
+}
+div.btn2 {
+  justify-content: space-between;
+  margin:  20px ;
+  div {
+    width: 2.3rem;
+    height: 0.72rem;
+    text-align: center;
+    line-height: 0.72rem;
+    color: #fff;
+    background-color: $primary1;
+  }
+  div:first-child {
+    color: $primary1;
+    background-color: #fff;
+    border: solid 1px $primary1;
+    border-radius: 2px;
+  }
+}
 .item {
   line-height: 1rem;
   text-align: center;
@@ -130,23 +156,31 @@ div.self {
   text-align: center;
   z-index: 10;
   position: relative;
-  margin: 10px 0;
-  span.okTap{
-    position: absolute;
-    right: 0;
-  }
-  span {
-    padding-bottom: 3px;
-    border-bottom: 1px solid #eee;
-    margin: 0 0.35rem;
-  }
+  height: 0.72rem;
+  line-height: 0.72rem;
+  margin: 10px 30px;
+  background-color: #ededed;
+
   span.active {
-    border-color: #409def;
-    color: #409def;
-    /* font-size: 16px; */
+    color: $primary1;
+  }
+  i {
+    font-size: 20px;
+    margin: 0 15px;
   }
   span {
     font-size: 15px;
   }
+}
+.van-picker {
+  margin-top: 20px;
+  /deep/ .van-picker-column__item--selected {
+    color: $primary1;
+  }
+}
+h3 {
+  font-weight: 500;
+  margin-left: 30px;
+  color: #666;
 }
 </style>

@@ -33,11 +33,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 div.txt {
   font-size: 0.3rem;
   width: 135px;
-  color: rgba(24, 144, 255, 1);
+  color: $primary1;
   text-align: right;
 }
 </style>

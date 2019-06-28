@@ -1,43 +1,43 @@
 <template>
-    <div class="Bigwrap black1">
-        <base-header :hasBack="true"  title='资金流水'></base-header>
-        <div class="line1 uni-flex black2 textc1">
-            <span>共{{total}}笔</span>
-            <img class="right" v-vtap="{method:showDatepick}" src="../../../assets/mineImg/datePicker.png"/>
-        </div>
-        <scroll-view class='listscrow'  ref="scroll3"  @scrollToEnd="loadMore">
-          <div>
-            <div class="listsContainer black2 textc1" v-for="(item,i) in monetlist" :key="i">
-                <div class="line1 black2 uni-flex">
-                    <div>
-                        <span class="txt1 textc1">{{item.stock_name}}</span>
-                        <span class="txt2 textc2">{{item.stock_code}}</span>
-                    </div>
-                    <div class="timetxt">
-                        <!-- <span>{{$formatetimestr(item.create_time)}}</span> -->
-                        <span>{{formatetime[i]}}</span>
-                    </div>
-                </div>
-                <div class="line2">
-                    <div class="bigTxt">{{item.pay_money}}</div>
-                    <div class="uni-flex info">
-                        <div>
-                            <span class="infoName">手续费：</span>
-                            <span class="textc1">{{item.fee_money}}</span>
-                        </div>
-                        <div>
-                            <span class="infoName">账户余额：</span>
-                            <span class="textc1">{{item.bal_money}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <uni-load-more :loading-type="resquestState"></uni-load-more>
-          </div>
-        </scroll-view>
-
-        <date-pick  @hid-me='closeme' :show-pick='showPick' @select-complete='getTime'></date-pick>
+  <div class="Bigwrap black1">
+    <base-header :hasBack="true" title='资金流水'></base-header>
+    <div class="line1 uni-flex black2 textc1">
+      <span>共{{total}}笔</span>
+      <img class="right" v-vtap="{method:showDatepick}" src="../../../assets/mineImg/datePicker.png" />
     </div>
+    <scroll-view class='listscrow' ref="scroll3" @scrollToEnd="loadMore">
+      <div>
+        <div class="listsContainer black2 textc1" v-for="(item,i) in monetlist" :key="i">
+          <div class="line1 black2 uni-flex">
+            <div>
+              <span class="txt1 textc1">{{item.stock_name}}</span>
+              <span class="txt2 textc2">{{item.stock_code}}</span>
+            </div>
+            <div class="timetxt">
+              <!-- <span>{{$formatetimestr(item.create_time)}}</span> -->
+              <span>{{formatetime[i]}}</span>
+            </div>
+          </div>
+          <div class="line2 uni-flex">
+            <div>
+              <div>
+                <span class="infoName">手续费：</span>
+                <span class="textc1">{{item.fee_money}}</span>
+              </div>
+              <div>
+                <span class="infoName">账户余额：</span>
+                <span class="textc1">{{item.bal_money}}</span>
+              </div>
+            </div>
+            <div class="bigTxt">{{item.pay_money}}</div>
+          </div>
+        </div>
+        <uni-load-more :loading-type="resquestState"></uni-load-more>
+      </div>
+    </scroll-view>
+
+    <date-pick @hid-me='closeme' :show-pick='showPick' @select-complete='getTime'></date-pick>
+  </div>
 </template>
 
 <script>
@@ -65,7 +65,7 @@ export default {
     loadMore() {
       if (this.resquestState < 2) {
         this.pageindex += 1
-        this.capicalflow( 'add')
+        this.capicalflow('add')
       }
     },
     getTime(val) {
@@ -83,7 +83,7 @@ export default {
       this.resquestState = 1
       var options = {
         url: '/Sapi/Squery/list_funds', //请求接口
-        method: 'GET', 
+        method: 'GET',
         data: {
           page_index: this.pageindex,
           page_size: 10,
@@ -96,7 +96,7 @@ export default {
           this.total = res.data.total
           if (add) {
             this.monetlist = this.monetlist.concat(res.data.list)
-           this.$refs.scroll3.refresh()
+            this.$refs.scroll3.refresh()
 
             var temarr = []
             for (let i = 0; i < res.data.list.length; i++) {
@@ -114,11 +114,11 @@ export default {
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
-  components: { datePick, uniLoadMore ,scrollView},
+  components: { datePick, uniLoadMore, scrollView },
   created() {
     this.capicalflow()
   }
@@ -130,16 +130,17 @@ div.Bigwrap {
   min-height: 100vh;
   width: 100%;
   background-color: #f5f5f5;
-  div.line1 {
-    height:.88rem;
+  > div.line1 {
+    height: 0.78rem;
     justify-content: space-between;
-    padding: 0 .26rem;
-    background-color: #fff;
+    padding: 0 0.26rem;
+    font-size: 12px;
+    color: #666;
     align-items: center;
     margin-top: 1px;
     img.right {
-      width: 15px;
-      height: 17px;
+      width: 20px;
+      height: 20px;
     }
   }
   .listscrow {
@@ -148,30 +149,29 @@ div.Bigwrap {
   }
   div.listsContainer {
     background-color: #fff;
-    margin:.12rem 0;
+    margin: 0.2rem 0.22rem;
+    border-radius: 5px;
     div.line1 {
       justify-content: space-between;
-      height:.72rem;
-      padding: 0 .26rem;
-
+      height: 0.72rem;
+      margin: 0 0.26rem;
+      color: #999;
       border-bottom: 1px solid #f5f5f5;
       span.txt1 {
-        line-height:.72rem;
-        font-size: 15px;
-        color: rgba(24, 28, 40, 1);
-        margin-right:.20rem;
+        line-height: 0.72rem;
+        color: #333;
+        font-weight: bold;
+        margin-right: 0.2rem;
       }
       span.txt2 {
-        line-height:.72rem;
+        line-height: 0.72rem;
         font-size: 13px;
         font-family: ArialMT;
-        color: #999;
       }
       div.timetxt {
         font-size: 13px;
         font-family: ArialMT;
-        color: rgba(130, 133, 151, 1);
-        line-height:.72rem;
+        line-height: 0.72rem;
         span.mr5 {
           margin-right: 5px;
         }
@@ -179,26 +179,29 @@ div.Bigwrap {
     }
 
     div.line2 {
-      padding: 0 .26rem;
+      padding: 0 0.26rem;
 
       div.bigTxt {
-        font-size: 26px;
-        font-family: ArialMT;
-        color: rgba(240, 95, 92, 1);
-        line-height: 26px;
-        margin: .32rem 0 .25rem;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+        margin: 0.32rem 0 0.25rem;
       }
-      div.info {
-        justify-content: space-between;
-        font-size: 14px;
-        font-family: ArialMT;
-        color: rgba(24, 28, 40, 1);
-        line-height: 14px;
+      justify-content: space-between;
+      font-size: 14px;
+      color: rgba(24, 28, 40, 1);
+      line-height: 14px;
 
-        span.infoName {
-          color: rgba(112, 118, 128, 1);
-          line-height: 14px;
-          margin-right:.20rem;
+      span.infoName {
+        color: #666;
+        /* width: 5em;
+        display: inline-block; */
+        font-size: 12px;
+        line-height: 14px;
+        margin-right: 0.2rem;
+        & + span {
+          font-size: 12px;
+          color: #000;
         }
       }
     }

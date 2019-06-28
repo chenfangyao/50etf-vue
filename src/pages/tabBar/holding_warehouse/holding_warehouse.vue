@@ -175,7 +175,7 @@ div.wrap {
   }
   .list3 {
     overflow: hidden;
-    height: calc(100vh - 1.24rem - 94px);
+    height: calc(100vh - 1.24rem - 157px);
     // height: calc(100vh -1.28rem - 44px - var(--status-bar-height));
   }
   .list4 {
@@ -207,7 +207,7 @@ div.wrap {
     // padding-bottom:.16rem;
   }
   div.h40 {
-    height: 0.5rem;
+    height: 1.7rem;
   }
   div.nullTxt {
     text-align: center;

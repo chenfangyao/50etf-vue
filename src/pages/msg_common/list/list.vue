@@ -6,8 +6,8 @@
         <span class="textc1">{{item.title}}</span>
         <span class="time">{{$formatetimestr(item.update_time || item.create_time)}}</span>
       </div>
-      <div class="miniContent">{{item.source}}</div>
-			<!-- <div class="texttime"><span class="time">{{$formatetimestr(item.update_time || item.create_time)}}</span></div> -->
+      <div class="miniContent">{{item.content}}</div>
+      <!-- <div class="texttime"><span class="time">{{$formatetimestr(item.update_time || item.create_time)}}</span></div> -->
     </div>
   </div>
 </template>
@@ -38,86 +38,90 @@ export default {
     }
   },
   methods: {
-    go(ids){
-       this.$router.push({
-         path:'/pages/msg_common/detail/detail',
-         query:{
-           id:ids,
-           title:this.title
-         }
-       })
+    go(ids) {
+      this.$router.push({
+        path: '/pages/msg_common/detail/detail',
+        query: {
+          id: ids,
+          title: this.title
+        }
+      })
     },
-      getartlelist(id) {
-          var options = {
-              url: '/Sapi/Article/notice', //请求接口
-              method: 'POST', 
-              data: {
-                  page_index: 0,
-                  page_size: 7,
-									cate_id:id
-              },
-          }
-          this.$httpReq(options).then((res) => {
-              if(res.status){
-                  this.lists = res.data.list
-              }
-          }).catch((err) => {
-              // 请求失败的回调
-              console.error(err,'捕捉')
-          })
-      },
-			getmymessage(){
-				var options = {
-						url: '/Sapi/Ucenter/message_list', //请求接口
-						method: 'GET', 
-						data: {
-								page_index: 0,
-								page_size: 7,
-						},
-				}
-				this.$httpReq(options).then((res) => {
-						if(res.status){
-							this.lists = res.data.list
-						}
-				}).catch((err) => {
-						console.error(err,'捕捉')
-				})
-			}
+    getartlelist(id) {
+      var options = {
+        url: '/Sapi/Article/notice', //请求接口
+        method: 'POST',
+        data: {
+          page_index: 0,
+          page_size: 7,
+          cate_id: id
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.lists = res.data.list
+        }
+      }).catch((err) => {
+        // 请求失败的回调
+        console.error(err, '捕捉')
+      })
+    },
+    getmymessage() {
+      var options = {
+        url: '/Sapi/Ucenter/message_list', //请求接口
+        method: 'GET',
+        data: {
+          page_index: 0,
+          page_size: 7,
+        },
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.lists = res.data.list
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-div.wrap{width: 100%;}
+div.wrap {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
 div.listItem {
-  padding:.35rem 0;
-  padding-left:.27rem;
-  border-top:.12rem solid #f5f5f5;
+  padding: 0.4rem 0;
+  padding-left: 0.27rem;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 0.2rem 0.22rem;
   div.title {
     justify-content: space-between;
-    margin-right:.27rem;
-    margin-bottom:.10rem;
+    margin-right: 0.27rem;
+    margin-bottom: 0.2rem;
     > span:first-child {
       font-size: 16px;
-      color: rgba(24, 28, 40, 1);
-			text-overflow:ellipsis;overflow:hidden;width:50%;
+      color: #333;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: bold;
+      width: 50%;
     }
     span {
-      line-height:.47rem;
+      line-height: 0.47rem;
       font-size: 12px;
       font-family: ArialMT;
       color: rgba(130, 133, 151, 1);
     }
   }
   div.miniContent {
-    font-size: 14px;
-    color: rgba(112, 118, 128, 1);
-    line-height:.58rem;
-    margin-right:.52rem;
+    font-size: 13px;
+    color: #666;
+    margin-right: 0.52rem;
   }
-}
-div.listItem:last-child{
-  border-bottom:0.12rem solid #f5f5f5;
-
 }
 </style>

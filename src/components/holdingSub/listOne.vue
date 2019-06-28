@@ -76,31 +76,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.has-padding{
-  padding: 0.1px 0;
+div.has-padding {
+  padding: 1px 0;
 }
 div.list1Item {
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 0.22rem;
   > div {
-    padding: 0 .25rem;
+    padding: 0 0.25rem;
   }
   div.line1 {
     border-bottom: 1px solid #f5f5f5;
     justify-content: space-between;
-    height:.64rem;
+    height: 0.64rem;
+    color: #999;
     span.nameTxt {
-      font-size: 15px;
-      line-height:.64rem;
-      margin-right:.14rem;
-      color: rgba(51, 51, 51, 1);
+      line-height: 0.64rem;
+      margin-right: 0.14rem;
+      color: #333;
+      font-weight: bold;
     }
     span.codeTxt {
-      font-size: 13px;
-      color: rgba(102, 102, 102, 1);
+      font-size: 12px;
     }
     div.timeTxt {
-      font-size: 12px;
-      color: rgba(153, 153, 153, 1);
-      line-height:.64rem;
+      font-size: 11px;
+      line-height: 0.64rem;
     }
   }
   .line2 {
@@ -127,20 +129,17 @@ div.list1Item {
       font-size: 12px;
       color: rgba(153, 153, 153, 1);
       .c1 {
-        color: #333;
-        // margin-left: 0.5em;
+        color: #000;
       }
     }
     div.w240 {
-      width:2.50rem;
+      width: 2.5rem;
     }
     justify-content: space-between;
-    padding:.20rem.25rem;
+    padding: 0.2rem.25rem;
   }
-  background-color: #fff;
-  margin-bottom:.11rem;
 }
-div.at-night div.line1{
-  border-color: #0f131f
+div.at-night div.line1 {
+  border-color: #0f131f;
 }
 </style>

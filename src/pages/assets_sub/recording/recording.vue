@@ -1,41 +1,49 @@
 <template>
-	<div class="wrap">
-		<base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
+  <div class="wrap">
+    <base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
     <div class="line1 uni-flex black2">
-        <span>总计：{{total}}笔</span>
-        <img class="right" v-vtap="{method: switchDatepick , params: true}" src="../../../assets/mineImg/datePicker.png">
+      <span>总计：{{total}}笔</span>
+      <img class="right" v-vtap="{method: switchDatepick , params: true}" src="../../../assets/mineImg/datePicker.png">
     </div>
     <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
-        <div class="listsContainer uni-flex black2" v-for="(item,i) in recordlist" :key="i">
-          <div class="left">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
-          <div class="middle textc1">
-            <div>人民币账户</div>
-            <div>平台充值</div>
+        <div class="listsContainer  black2" v-for="(item,i) in recordlist" :key="i">
+          <div class="uni-flex topPart">
             <div class="time">{{formatetime[i]}}</div>
+            <div class="statusTxt" :class="{c1:item.order_status==1,c2:item.order_status==2}">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
           </div>
-          <div class="money">{{item.pay_money}}</div>
+          <div class="uni-flex">
+            <div class="staticTxt textc1">
+              <div>人民币账户</div>
+              <div>充值方式：平台充值</div>
+            </div>
+            <div class="money">{{'+'+item.pay_money}}</div>
+          </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
     </scroll-view>
     <scroll-view v-else class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
-        <div class="listsContainer uni-flex black2" v-for="(item,i) in recordlist" :key="i">
-          <div class="left">{{item.status}}</div>
-          <div class="middle textc1">
-            <div>{{bank_code[i][0]}}</div>
-            <div>{{bank_code[i][1]}}</div>
+        <div class="listsContainer black2" v-for="(item,i) in recordlist" :key="i">
+          <div class="uni-flex topPart">
             <div class="time">{{formatetime[i]}}</div>
+            <div class="statusTxt" :class="{c1:item.status==='已付',c2:item.status==='拒付'}">{{item.status}}</div>
           </div>
-          <div class="money">{{item.money}}</div>
+          <div class="uni-flex">
+            <div class="staticTxt textc1">
+              <div>{{bank_code[i][0]}}</div>
+              <div>{{bank_code[i][1]}}</div>
+            </div>
+            <div class="money">{{item.money}}</div>
+          </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
     </scroll-view>
     <date-pick :show-pick="showPick" sb-format='1' @hid-me='switchDatepick(false)' @select-complete='getTime'></date-pick>
 
-	</div>
+  </div>
 </template>
 
 <script>
@@ -53,10 +61,10 @@ export default {
       formatetime: [],
       total: '',
       type: 1,//1充值、2提现
-      bank_code: []
+      bank_code: [],
     };
   },
-  components: { datePick, uniLoadMore ,scrollView},
+  components: { datePick, uniLoadMore, scrollView },
   methods: {
     switchDatepick(tf) {
       this.showPick = tf
@@ -68,7 +76,7 @@ export default {
       }
     },
     getTime(val) {
-     this.showPick = false;
+      this.showPick = false;
       this.getRecords(val.starttime, val.endtime, 0)
     },
     getRecords(starttime, endtime, index, add) {
@@ -76,7 +84,7 @@ export default {
       let url = this.type == 1 ? '/Sapi/Ufund/pay_list' : '/Sapi/Ufund/cash_list'
       var options = {
         url, //请求接口
-        method: 'GET', 
+        method: 'GET',
         data: {
           page_index: index || 0,
           page_size: 10,
@@ -99,7 +107,7 @@ export default {
             }
             this.formatetime = this.formatetime.concat(temarr)
           } else {
-            this.formatetime=[]
+            this.formatetime = []
             this.recordlist = res.data.list
             for (let i = 0; i < res.data.list.length; i++) {
               this.formatetime.push(this.$formatetimestr(res.data.list[i].create_time))
@@ -113,12 +121,12 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
   created() {
-    this.type = this.$route.query.type||1
+    this.type = this.$route.query.type || 1
     this.getRecords()
   }
 }
@@ -130,10 +138,9 @@ div.wrap {
   min-height: 100vh;
   background-color: #f5f5f5;
   div.line1 {
-    height:.88rem;
+    height: 0.88rem;
     justify-content: space-between;
-    padding: 0 .26rem;
-    background-color: #fff;
+    padding: 0 0.26rem;
     align-items: center;
     margin-top: 1px;
     img.right {
@@ -147,35 +154,51 @@ div.wrap {
     overflow: hidden;
     div.listsContainer {
       background-color: #fff;
-      margin:.12rem 0;
-      padding: .08rem .32rem 0;
-      justify-content: space-between;
+      margin: 0.2rem 0.22rem;
+      border-radius: 5px;
+      padding: 0.08rem 0.32rem 0;
+      .topPart {
+        border-bottom: solid 1px #f5f5f5;
+        & + div {
+          align-items: flex-end;
+          height: 1.16rem;
+          padding-bottom: 0.26rem;
+          color: #333;
+        }
+      }
+      > div {
+        justify-content: space-between;
+      }
       div.money {
         font-size: 20px;
         font-weight: 500;
         flex-grow: 1;
-        color: rgba(240, 95, 92, 1);
         letter-spacing: 1px;
+        font-weight: bold;
         text-align: right;
       }
-      div.left {
+      div.statusTxt {
+        &.c1 {
+          color: #333;
+        }
+        &.c2 {
+          color: $primary1;
+          }
         font-size: 16px;
-        line-height:1.64rem;
-        width:1.22rem;
+          color: $blue1;
         font-weight: 500;
-        color: $primary1;
         letter-spacing: 1px;
       }
-      div.middle {
-        font-size: 14px;
-        color: rgba(51, 51, 51, 1);
-        .time {
-          font-size: 11px;
-          color: rgba(102, 102, 102, 1);
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          overflow: hidden;
-        }
+      div.staticTxt {
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .time {
+        font-size: 12px;
+        color: #999;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }

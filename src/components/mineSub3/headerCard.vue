@@ -1,7 +1,6 @@
 <template>
   <div class="hwrap black1">
-    <s-icon icon-class="my_page_bg"></s-icon>
-    <header-title></header-title>
+    <header-title ></header-title>
     <sub-card></sub-card>
   </div>
 </template>
@@ -14,20 +13,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 div.hwrap {
-  height: 4.3rem;
+  height:3.3rem;
   position: fixed;
-  top: 0;
+  top:0;
   left: 0;
   right: 0;
-  border-radius: 0 0 25% 25%;
-  .s-icon {
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 4.27rem;
-    position: absolute;
-    z-index: -30;
-  }
+  background: linear-gradient(
+    90deg,
+    rgba(41, 123, 205, 1),
+    $primary1
+  );
 }
 </style>

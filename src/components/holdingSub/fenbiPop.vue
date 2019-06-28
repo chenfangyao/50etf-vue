@@ -52,7 +52,7 @@
           <div class="uni-flex full" v-hover-class="'self-hover'" v-if="!(switchObj.show_sltp==3)" v-vtap="{method: go , params: 1}">
             <div class="uni-flex uni-column">
               <span>止盈</span>
-              <span >{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
+              <span>{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
             </div>
             <div>
               <img src="../../assets/holdingImg/setIcon.png">
@@ -68,10 +68,19 @@
             </div>
           </div>
         </div>
-        <div class="btn3 uni-flex">
-          <div v-vtap="{method: go , params: 2}">开仓</div>
-          <div class="pingC" v-vtap="{method: go , params: 3}">平仓</div>
-          <div v-vtap="{method: go , params: 4}">行情</div>
+        <div class="btn3 uni-flex textc2">
+          <div v-vtap="{method: go , params: 2}">
+            <span>开仓</span>
+            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+          </div>
+          <div v-vtap="{method: go , params: 3}">
+            <span>平仓</span>
+            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+          </div>
+          <div v-vtap="{method: go , params: 4}">
+            <span>行情</span>
+            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+          </div>
         </div>
         <btn-block txt="一键平仓" @v-tap="openPop"></btn-block>
       </div>
@@ -88,7 +97,7 @@
 import btnBlock from '@/components/btnBlock.vue'
 import oneKey from '@/components/holdingSub/oneKeyPop.vue'
 import extensionPop from '@/components/holdingSub/extensionPop.vue'
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -112,12 +121,12 @@ export default {
       let code = this.resObj.stock_code
       switch (i) {
         case 0:
-          if(this.resObj.status==7){
+          if (this.resObj.status == 7) {
             this.$toast('止损中')
             return
           }
         case 1:
-          if(this.resObj.status==6){
+          if (this.resObj.status == 6) {
             this.$toast('止盈中')
             return
           }
@@ -125,22 +134,22 @@ export default {
             url: '/full_and_lose',
             query: {
               isfull: i,
-              code:this.resObj.stock_code,
-              price:this.resObj.last_price,
-              resObj:this.resObj
-            } })
+              code: this.resObj.stock_code,
+              price: this.resObj.last_price,
+              resObj: this.resObj
+            }          })
           break
         case 2:
           this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 0 } })
           break
         case 3:
-          this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 1,isActive:1 } })
+          this.$navigateTo({ url: '/open_close', query: { code, pinkaiC: 1, isActive: 1 } })
           break
         case 4:
           // this.$redirectTo({ url: '/quotes' })
-          this.$redirectTo({ url: '/qi_quan_xiang_qing',query:{
-            code:this.resObj.stock_code
-            } })
+          this.$redirectTo({            url: '/qi_quan_xiang_qing', query: {
+              code: this.resObj.stock_code
+            }          })
           break
       }
     },
@@ -152,7 +161,7 @@ export default {
       this.showPop = true
     },
     openPop2() {
-      if (this.resObj.auto_delay==1) {
+      if (this.resObj.auto_delay == 1) {
         this.showPop2 = true
       } else {
         this.sendAutodelay(1)
@@ -169,7 +178,7 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.info === "ok") {
-          this.resObj.auto_delay=i
+          this.resObj.auto_delay = i
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -184,7 +193,7 @@ export default {
   mounted() {
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   },
-  computed:mapState(['switchObj'])
+  computed: mapState(['switchObj','atNight'])
 }
 </script>
 <style lang="scss" scoped>
@@ -279,20 +288,16 @@ div.fixWrap {
     }
     div.btn3 {
       justify-content: space-between;
+      color: #333;
       margin: 0.5rem 0 0.2rem;
       > div {
         height: 0.72rem;
         width: 2rem;
-        border: 1px solid $primary1;
+        border: 1px solid #333;
         border-radius: 0.04rem;
         font-size: 13px;
-        color: $primary1;
         line-height: 0.68rem;
         text-align: center;
-      }
-      div.pingC {
-        border-color: #e6aa12;
-        color: #e6aa12;
       }
     }
     div.bigBtn {

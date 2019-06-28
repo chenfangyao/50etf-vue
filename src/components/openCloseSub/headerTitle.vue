@@ -98,10 +98,10 @@ div.h44 {
       }
     }
     div.tabOpen.active {
-      border-color: #e6aa12;
+      // border-color: #e6aa12;
       .slider {
         left: 49%;
-        background-color: #e6aa12;
+        // background-color: #e6aa12;
       }
     }
   }

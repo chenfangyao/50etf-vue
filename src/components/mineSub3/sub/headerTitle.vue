@@ -48,7 +48,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .fixWrap {
-  background: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(41, 123, 205, 1),
+    $primary1
+  );
   .occupy {
     height: var(--status-bar-height);
   }

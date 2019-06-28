@@ -1,46 +1,43 @@
 <template>
   <div class=" _input" :class="{input6}">
-        <input class="textc1" type="tel"  v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange'  :maxlength='input6?6:11' v-model="valtxt">
-        <input class="textc1" :type="!openEye&&isPwd?'password':'text'" v-else  @focus="getFocus(1)" @blur='getFocus' @input='getChange'  maxlength='20' v-model="valtxt">
-        <span :class="{inputFocus:focusInput}" class='absTxt'>{{placeholderTxt}}</span>
-        <img v-show='!openEye' v-if="isPwd" v-vtap="{method:tabOpen}" class='closeImg' src="../../assets/loginResgImg/close.png">
-        <img v-show='openEye' v-if="isPwd" v-vtap="{method:tabOpen}" class='openImg' src="../../assets/loginResgImg/open.png">
-      </div>
+    <input :placeholder="placeholderTxt" class="textc1" type="tel" v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange' :maxlength='input6?6:11' v-model="valtxt">
+    <input :placeholder="placeholderTxt" class="textc1" :type="!openEye&&isPwd?'password':'text'" v-else @focus="getFocus(1)" @blur='getFocus' @input='getChange' maxlength='20' v-model="valtxt">
+    <template v-if="isPwd">
+      <s-icon :icon-class="openEye?'pwd1':'pwd2'" class='closeImg' v-vtap="{method:tabOpen}"></s-icon>
+      <s-icon icon-class="login_mima" class='leftSvg' v-vtap="{method:tabOpen}"></s-icon>
+    </template>
+  </div>
 </template>
 <script>
 export default {
-  props:{
-    placeholderTxt: { 　default: '',},
-    isPwd: { 　default: '',},
-    isTel: { 　default: '',},
-    input6: { 　default: '',},
-    focusNow: { 　default: '',},
-    value: { 　default: '00',},
+  props: {
+    placeholderTxt: { default: '', },
+    isPwd: { default: '', },
+    isTel: { default: '', },
+    input6: { default: '', },
+    focusNow: { default: '', },
+    value: { default: '00', },
   },
   data() {
     return {
       valtxt: '',
       openEye: false,
-      focusInput: false
     }
   },
   watch: {
     valtxt(val) {
-      val!==''&&(this.focusInput = true)
       this.$emit('input', val)
     },
     value(val) {
-      this.valtxt=val
+      this.valtxt = val
     },
 
   },
   methods: {
     getFocus(i) {
       if (i == 1) {
-        this.focusInput = true
       } else if (this.valtxt === '') {
         this.$emit('now-blur')
-        this.focusInput = false
       }
     },
     tabOpen() {
@@ -55,49 +52,32 @@ export default {
 <style lang="scss" scoped>
 div._input {
   border-bottom: 1px solid #ccc;
-  margin-bottom:.65rem;
+  margin-bottom: 0.65rem;
   position: relative;
   color: rgba(51, 51, 53, 1);
   font-size: 16px;
   line-height: 1.2;
-  input{
+  input {
     position: relative;
     z-index: 20;
-    width: 80%;
+    width: 70%;
     font-size: 18px;
-    padding:0 0  5px 5px;
+    padding-bottom: 5px;
+    left: 1.1rem;
     background-color: transparent;
   }
-  img.openImg {
-    width:.42rem;
-    height:.33rem;
-    top:0.1rem;
+  .closeImg {
+    right: 0.1rem;
   }
-  img.closeImg {
-    width:.38rem;
-    height:.21rem;
-    top:0.2rem
-  }
-  img {
+  .s-icon {
+    width: 0.4rem;
+    height: 0.4rem;
+    top: 0.05rem;
     position: absolute;
-    z-index: 10;
-    right:.36rem;
   }
-
-  span.absTxt {
-    font-size: 18px;
-    color: rgba(153, 153, 153, 1);
-    letter-spacing: 2px;
-    position: absolute;
-    bottom:.10rem;
-    left:.10rem;
-    color: #ccc;
-    font-weight: 500;
-    transition: font-size 300ms, bottom 300ms;
-  }
-  span.absTxt.inputFocus {
-    font-size: 14px;
-    bottom:.70rem;
+  .leftSvg {
+    left: 0.1rem;
+    top: 0;
   }
 }
 div._input.input6 {
