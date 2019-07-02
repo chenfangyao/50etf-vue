@@ -1,20 +1,23 @@
 <template>
-	<div class="wrap">
-		<base-header title="平仓结算" has-back='1'></base-header>
+  <div class="wrap">
+    <base-header title="平仓结算" has-back='1'></base-header>
     <div class="title black2">
       <span class="nameTxt textc1">{{pingCItem.stock_name}}</span>
       <span class="codeTxt textc2">{{pingCItem.stock_code}}</span>
     </div>
     <div class="buy uni-flex black2">
       <div class="leftPart">
-        <div class="subTitle textc1">买入</div>
+        <div class="subTitle textc1">
+          <s-icon icon-class="pingcang_buy" class=''></s-icon>
+          <span>买入</span>
+        </div>
         <div class="uni-flex ">
 
           <div class="uni-flex flexColumn txt">
             <span>价格：</span>
             <span>市值：</span>
           </div>
-          <div class="uni-flex flexColumn">
+          <div class="uni-flex flexColumn val2">
             <span>{{pingCItem.avg_buy_price}}</span>
             <span>{{pingCItem.buy_value}}</span>
           </div>
@@ -30,14 +33,16 @@
     </div>
     <div class="sell uni-flex black2">
       <div class="leftPart">
-        <div class="subTitle textc1">卖出</div>
+        <div class="subTitle textc1">
+          <s-icon icon-class="pingcang_sell" class=''></s-icon>
+          <span>卖出</span>
+        </div>
         <div class="uni-flex ">
-
           <div class="uni-flex flexColumn txt">
             <span>价格：</span>
             <span>市值：</span>
           </div>
-          <div class="uni-flex flexColumn">
+          <div class="uni-flex flexColumn val2">
             <span>{{pingCItem.sell_price}}</span>
             <span>{{pingCItem.sell_value}}</span>
           </div>
@@ -67,8 +72,7 @@
         <span>{{pingCItem.all_realin}}</span>
       </div>
     </div>
-    </div>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -81,32 +85,32 @@ export default {
     return {
       buss_time: '',
       close_time: '',
-      sell_amount:'',
-			hynumber:0
+      sell_amount: '',
+      hynumber: 0
     };
   },
   methods: {
-		gethyinfoprice(){
-			 var obj = {
-			  url: '/Sapi/Stock/hyinfo', //请求接口
-			  method: 'POST', 
-			  dataType: "json",
-			  data: {
-			    stock_code: this.pingCItem.stock_code,
-			  },
-			}
-			this.$httpReq(obj).then((res) => {
-			  if(res.status){
-					this.hynumber=parseInt(res.data.volume_multiple)
-				}
-			})
-		}
+    gethyinfoprice() {
+      var obj = {
+        url: '/Sapi/Stock/hyinfo', //请求接口
+        method: 'POST',
+        dataType: "json",
+        data: {
+          stock_code: this.pingCItem.stock_code,
+        },
+      }
+      this.$httpReq(obj).then((res) => {
+        if (res.status) {
+          this.hynumber = parseInt(res.data.volume_multiple)
+        }
+      })
+    }
   },
   mounted() {
     this.close_time = this.$formatetimestr(this.pingCItem.close_time)
     this.buss_time = this.$formatetimestr(this.pingCItem.buss_time)
-    this.sell_amount=parseInt(this.pingCItem.sell_amount)
-		this.gethyinfoprice()
+    this.sell_amount = parseInt(this.pingCItem.sell_amount)
+    this.gethyinfoprice()
   },
   computed: mapState(['pingCItem'])
 }
@@ -122,41 +126,54 @@ div.wrap {
     font-size: 16px;
     font-family: Arial-BoldMT;
     font-weight: bold;
-    margin:.12rem 0 1px;
-    height:.90rem;
-    line-height:.90rem;
+    margin: 0.12rem 0 1px;
+    height: 0.9rem;
+    line-height: 0.9rem;
     background-color: #fff;
-    padding-left:.26rem;
+    padding-left: 0.26rem;
     .nameTxt {
-      margin-right:.20rem;
+      margin-right: 0.2rem;
+      color: #333;
+      & + .codeTxt {
+        font-weight: normal;
+        color: #666;
+        font-size: 13px;
+      }
     }
   }
   .buy,
   .sell {
     justify-content: space-between;
     background-color: #fff;
-    margin-bottom:.12rem;
-    padding:.36rem;
+    margin-bottom: 0.12rem;
+    padding: 0.36rem;
     font-size: 12px;
+    color: #666;
     div.subTitle {
       font-size: 16px;
       line-height: 16px;
       font-weight: bold;
-      margin-bottom:.28rem;
+      margin-bottom: 0.28rem;
       color: rgba(102, 102, 102, 1);
     }
 
     div.time {
       font-size: 11px;
-      font-family: ArialMT;
-      color: rgba(153, 153, 153, 1);
+      color: #999;
+      & + div {
+        span:last-child {
+          color: $primary1;
+        }
+      }
     }
     div.flexColumn {
       flex-direction: column;
     }
     .txt {
-      color: #888;
-      margin-right:.19rem;
+      margin-right: 0.19rem;
+    }
+    .val2{
+      color: #000;
     }
     div.rightPart {
       justify-content: space-between;
@@ -167,16 +184,21 @@ div.wrap {
   }
   div.lastLine {
     background-color: #fff;
-    padding:.30rem;
+    padding: 0.3rem;
+    justify-content: space-between;
     > div {
       flex-direction: column;
-      line-height:.52rem;
-      color: #181c28;
+      line-height: 0.52rem;
+      color: #333;
     }
     > div:first-child {
       font-size: 12px;
-      color: rgba(136, 136, 136, 1);
-      margin-right:.19rem;
+      color: #666;
+      margin-right: 0.19rem;
+    }
+    >div:last-child{
+      width: 200px;
+      text-align: right;
     }
   }
 }

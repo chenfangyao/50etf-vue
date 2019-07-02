@@ -1,20 +1,22 @@
 <template>
   <div class="wrap22 black1">
     <base-header title="我的红包" has-back="1"></base-header>
-    <div class="red-envelope">
-      <div class="red-list black2" v-for="(item,i) in redList" :key="i">
-        <div class="red-left">
-          <span>￥</span>
-          <span>{{parseInt(item.amount)}}</span>
-        </div>
-        <div class="red-right ">
-          <label class="textc1">{{item.type}}盈利</label>
-          <label class="textc1">·发生时间:{{$formatetimestr(item.create_time)}}</label>
-          <label class="textc1">·来自:{{item.giver_uname}}</label>
-          <label class="textc1">·限50etf交易使用</label>
-        </div>
+    <div class="redEnvelope">
+      <div class="redlist black2" v-for="(item,i) in redList" :key="i">
+        <s-icon icon-class="black_code_bj"></s-icon>
+        <main class="uni-flex">
+          <div class="red-left">
+            <span>￥</span>
+            <span>{{parseInt(item.amount)}}</span>
+          </div>
+          <div class="red-right ">
+            <label class="textc1">{{item.type}}</label>
+            <!-- <label class="textc1">·发生时间:{{$formatetimestr(item.create_time)}}</label> -->
+            <label class="textc1">·来自:{{item.giver_uname}}</label>
+          </div>
+        </main>
       </div>
-      <div class="not-red-list">暂无红包</div>
+      <div v-if="redList.length==0" class="">暂无红包</div>
     </div>
 
   </div>
@@ -25,14 +27,14 @@ import img1 from '@/assets/mineImg/hong_bao_bg.png'
 export default {
   data() {
     return {
-      redList:[]
+      redList: []
     }
   },
-  methods:{
-    getredEnvList(){
+  methods: {
+    getredEnvList() {
       var options = {
         url: '/Sapi/Ufund/redbag_list', //请求接口
-        method: 'GET', 
+        method: 'GET',
         data: {
           page_index: 0,
           page_size: 15,
@@ -40,18 +42,18 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-            this.redList=res.data.list
+          this.redList = res.data.list
         }
         else {
           this.$toast(res.info ? res.info : '暂无记录')
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
-  created(){
+  created() {
     this.getredEnvList()
   }
 }
@@ -61,58 +63,59 @@ export default {
 div.wrap22 {
   width: 100%;
   min-height: 100vh;
-  background-color:#F5F5F5 ;
+  background-color: #f5f5f5;
   padding-bottom: 20px;
-  .red-envelope{
+
+  .redEnvelope {
     margin: 22px 11px 0 13px;
-    .red-list{
-      position: relative;
-      margin-top: 20px;
-      background-color: white;
-      height: 104px;
-      .red-left{
-        position: absolute;
-        top: 27px;
-        left:16px;
-        color:rgba(240,95,92,1);
-        font-family:PingFangSC-Medium;
-        font-weight:500;
-      span{
-        width:58px;
-        height:50px;
-        font-size:36px;
-        font-weight:500;
-        line-height:50px;
+    .redlist {
+      .s-icon {
+        width: 7.06rem;
+        height: 1.6rem;
       }
-        span:nth-child(1){
+      position: relative;
+      align-items: center;
+      margin-top: 20px;
+      line-height: 1;
+      main {
+        position: absolute;
+        color: #fff;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // justify-content: space-between;
+        align-items: center;
+      }
+      .red-left {
+        font-weight: 500;
+        span {
+          width: 58px;
+          height: 50px;
+          font-size: 36px;
+          font-weight: 500;
+          line-height: 50px;
+        }
+        span:nth-child(1) {
           margin-top: 17px;
-          font-size:18px;
-          line-height:25px;
+          font-size: 18px;
+          line-height: 25px;
         }
       }
-      .red-right{
-        position: absolute;
-        left:112px;
-        top:16px;
-        label{
+      .red-right {
+        label {
           display: block;
           font-size: 11px;
           line-height: 16px;
-          color: #999;
         }
-        label:nth-child(1){
+        label:nth-child(1) {
           font-size: 14px;
-          color: #333;
           font-weight: 600;
           margin-bottom: 4px;
           line-height: 20px;
-          font-family:PingFangSC-Semibold;
         }
       }
     }
-  }
-  .not-red-list{
-
   }
 }
 </style>

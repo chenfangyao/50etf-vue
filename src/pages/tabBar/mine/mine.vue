@@ -8,7 +8,6 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <!-- <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'bank_card/card_list'}"> -->
       <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'add_card_btn'}">
         <img src="../../../assets/mineImg/02.png" />
         <span>银行卡</span>
@@ -21,12 +20,12 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
-      <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'red_envelope_1/red_envelope_1'}">
+      <!-- <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'red_envelope_1/red_envelope_1'}">
         <img src="../../../assets/mineImg/04.png" />
         <span>我的红包</span>
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
-      </div>
+      </div> -->
       <div class="uni-flex bb6 black2 textc1" v-hover-class="'self-hover'" v-if='switchObj.show_invite==="1"' v-vtap="{method: go , params: 'invite_friends/invite_friends'}">
         <img src="../../../assets/mineImg/05.png" />
         <span>邀请好友</span>

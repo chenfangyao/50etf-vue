@@ -1,4 +1,5 @@
 <template>
+<!-- 此页暂时无用 -->
 	<div>
 		<base-header has-back='1'></base-header>
     <div class="title">设置您的密码</div>

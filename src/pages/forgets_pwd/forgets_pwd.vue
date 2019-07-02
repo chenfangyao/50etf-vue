@@ -1,21 +1,21 @@
 <template>
   <div class="wrap">
-    <base-header has-back="1"></base-header>
-    <div class="title textc1">忘记密码</div>
+    <base-header has-back="1" title="忘记密码"></base-header>
+    <div class="title textc1"></div>
     <div class="container">
-      <input-item placeholderTxt="手机号" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>
+      <input-item placeholderTxt="手机号" what-icon="login_shouji" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>
       <div class="uni-flex vCode">
         <div>
-          <input-item placeholderTxt="验证码" @now-blur="handleBlur" v-model="verificationCode"></input-item>
+          <input-item what-icon="login_code" placeholderTxt="验证码" @now-blur="handleBlur" v-model="verificationCode"></input-item>
         </div>
-        <count-down init-txt="发送验证码" @v-yzm="getyamfunc"></count-down>
+        <count-down init-txt="发送验证码" @v-yzm="getyamfunc" :countdown-ok="countdownOk"></count-down>
       </div>
       <div class="pwdclass">
         <input-item placeholderTxt="密码" :isPwd="true" v-model="pwd" @now-blur="handleBlur"></input-item>
       </div>
-      <err-tip :err-class="showErr" :tip-content="tipContent"></err-tip>
       <div class="bottom-part">
         <submit-btn btnTxt="完成" @v-tap="handleLogin" :verify-ok="verifyYes"></submit-btn>
+        <err-tip :err-class="showErr" :tip-content="tipContent"></err-tip>
       </div>
     </div>
   </div>
@@ -36,7 +36,8 @@ export default {
       verifyYes: true,
       tipContent: '您注册的账号已存在，请重新输入重新输入',
       showErr: false,
-      pwd: ','
+      pwd: '',
+      countdownOk: false
     };
   },
   components: { submitBtn, inputItem, errTip, countDown },
@@ -103,17 +104,20 @@ export default {
           mobile: this.tel,
           type: 'resetpass'
         }, //发送给服务端的数据
-        method: 'POST', 
+        method: 'POST',
       }
+      this.countdownOk = false
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
+          this.showErr = false
+          this.countdownOk = true
         } else {
+          this.showErr = true
           if (res.info) {
             this.tipContent = res.info
           } else {
-            // this.tipContent='获取验证码失败'
+            this.tipContent = '获取验证码失败'
           }
-          // return
         }
       }).catch((err) => {
         // 请求失败的回调
@@ -137,9 +141,14 @@ div.title {
   margin: 0 0 0.88rem 0.32rem;
 }
 div.container {
-  margin: 0 0.55rem;
+  margin: 0 0.36rem;
   div.vCode {
     height: 1.04rem;
+    justify-content: space-between;
+    > div:first-child {
+      flex-grow: 1;
+      margin-right: 15px;
+    }
   }
   div.bottomTxt {
     font-size: 12px;
@@ -156,8 +165,8 @@ div.container {
   div.bottom-part {
     position: absolute;
     bottom: 10px;
-    left: 0.55rem;
-    right: 0.55rem;
+    left: 0.36rem;
+    right: 0.36rem;
   }
 }
 </style>

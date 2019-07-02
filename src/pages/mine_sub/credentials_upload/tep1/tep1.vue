@@ -1,17 +1,17 @@
 <template>
   <div class="wrap">
-    <base-header has-back='1'></base-header>
-    <div class="title textc1">实名认证</div>
+    <base-header has-back='1' title="实名认证"></base-header>
+    <div class="title">设置成功后，可通过账号密码登录</div>
     <div class="container">
-
-      <input-item placeholderTxt='输入您的姓名' @now-blur='handleBlur' v-model="uName"></input-item>
-      <input-item placeholderTxt='输入您的身份证号' @now-blur='handleBlur' v-model="IDcard"></input-item>
-      <input-item placeholderTxt='输入您的手机号' v-if="userinfo.is_certified!=5" @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
-      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
-
-      <submit-btn btnTxt='完成' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
-
+      <input-item iconTxt='真实姓名' @now-blur='handleBlur' v-model="uName"></input-item>
+      <input-item iconTxt='身份证号' @now-blur='handleBlur' v-model="IDcard"></input-item>
+      <input-item iconTxt='手机号' v-if="userinfo.is_certified!=5" @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
     </div>
+    <div class="btn">
+      <submit-btn btnTxt='下一步' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
+    </div>
+    <br>
+    <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
   </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
             idno: this.IDcard,
             mobile: this.telnum,
           },
-          header: {  'Content-Type': 'application/x-www-form-urlencoded'}
+          header: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
         this.$httpReq(options).then(res => {
           if (res.status == 1) {
@@ -81,14 +81,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.title {
-  font-size: 28px;
-  font-weight: 500;
-  margin: 0 0 0.88rem 0.32rem;
-  color: #333;
-}
-div.container {
-  margin: 0 0.55rem;
-  padding-bottom: 0.1px;
+.wrap {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  .title {
+    font-weight: 500;
+    color: #999;
+    padding: 0.25rem 0.4rem ;
+  }
+  div.container {
+    padding: 0.2rem 0.2rem 1px;
+    background-color: #fff;
+    margin-bottom: 20px;
+  }
+  .btn{
+    padding:  0 0.22rem;
+  }
 }
 </style>

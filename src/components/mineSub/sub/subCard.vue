@@ -9,7 +9,7 @@
     </div>
     <div v-vtap="{method:go}" class="mineSubbtn">
       <button v-hover-class='"self-hover"' v-if="!sid">登录</button>
-      <button v-hover-class='"self-hover"' v-else-if='userinfo.is_certified>0'>{{sid?'实名认证':'登录'}}</button>
+      <!-- <button v-hover-class='"self-hover"' v-else-if='userinfo.is_certified>0'>{{sid?'实名认证':'登录'}}</button> -->
       <button v-hover-class='"self-hover"' v-else>{{sid?'实名认证':'登录'}}</button>
     </div>
   </div>
@@ -28,24 +28,29 @@ export default {
         this.$navigateTo({ url: '/pages/login/login' })
         return
       }
-      if (this.userinfo.is_certified == 0) return;
+        if (this.userinfo.is_certified == 0) return;
       // 判断实名认证状态实名认证状态。0=未提交，1=审核成功，2=审核中，3=审核失败"
       let realnstatus = this.userinfo.realn_status;
       if (realnstatus == 0) {
-        this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
-      } else {
-        let type
-        if (realnstatus == 1) {
-          type = 1
-        } else if (realnstatus == 2) {
-          type = 2
-        } else if (realnstatus == 3) {
-          type = 3
+        if (this.userinfo.is_certified < 6) {
+          this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep1/tep1' })
+          return
         }
+       /*  this.$httpReq({
+          url: '/Sapi/User/realn',
+          method: 'POST'
+        }).then(res => {
+          if (res.status == 1) {
+            this.$navigateTo({ url: '/pages/mine_sub/credentials_upload/tep3/tep3' })
+          } else {
+            this.$toast(res.info ? res.info : '实名认证失败')
+          }
+        }) */
+      } else {
         this.$router.push({
           path: '/pages/mine_sub/credentials_upload/tep3/tep3',
           query: {
-            type: type,
+            type: ~~realnstatus,
           }
         })
       }

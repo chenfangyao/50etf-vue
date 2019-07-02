@@ -17,7 +17,7 @@
         <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show2" :columns="column2" :defaultData="defaultData" :link="link" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show2" :columns="column2" :defaultData="defaultData" :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
         </div>
       </div>
     </div>
@@ -29,20 +29,19 @@
           <span v-if="editdefault" class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show3" :columns="column1" :defaultData="defaultData" :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
-
       </div>
     </div>
     <div class="list-row">
       <span>卡号</span>
-      <input type="text" placeholder-class="_placeholder" v-model="bankcardid" placeholder="填写卡号">
+      <input type="tel" maxlength="19" placeholder-class="_placeholder" v-model="bankcardid" placeholder="填写卡号">
     </div>
     <div class="list-row">
       <span>姓名</span>
-      <input type="text" v-model="username" placeholder="填写姓名">
+      <input type="text" maxlength="10" v-model="cardname" placeholder="填写姓名">
     </div>
     <div class="list-row">
       <span>身份证号</span>
-      <input type="text" v-model="identifica" placeholder="填写收款银行身份证">
+      <input type="text" v-model="idno" maxlength="18" placeholder="填写收款银行身份证">
     </div>
     <div class="fixBottom">
       <btn-block :txt="btntxt" @v-tap="addbank"></btn-block>
@@ -66,10 +65,9 @@ export default {
       pickerCityText: '北京-北京',
       pickSubBankText: '',
       bankid: '',
-      identifica: '',
-      username: '',
+      idno: '',
+      cardname: '',
       bankcardid: '',
-      tel: '',
       prov_cd: '',
       city_cd: '',
       sub_id: '',
@@ -81,7 +79,6 @@ export default {
       column1: 1,
       column2: 2,
       defaultData: [],
-      link: true, // 联动必须需要link 参数
       popindex: 0,
     };
   },
@@ -288,9 +285,9 @@ export default {
             this.pickerCityText = res.data.prov + '-' + res.data.city
             this.pickSubBankText = res.data.sub_name
             this.sub_id = res.data.sub_id
-            this.username = res.data.cardname
+            this.cardname = res.data.cardname
             this.bankcardid = res.data.cardno
-            this.identifica = res.data.idno
+            this.idno = res.data.idno
           }
         } else {
 
@@ -302,15 +299,17 @@ export default {
     },
     addbank() {
       if (this.btntxt == '保存') {
-        // this.$navigateTo({ url: '/pages/forget_pwd/tep2/tep2?type=1&sub_id=' + this.sub_id + '&identifica=' + this.identifica + '&username=' + this.username + '&bankcardid=' + this.bankcardid + '' })
         this.$router.push({
           path: '/pages/forget_pwd/tep2/tep2',
           query: ({
-            type: 1,
+            // idno: this.idno,
+            typeWhat: 1,
             sub_id: this.sub_id,
-            identifica: this.identifica,
-            username: this.username,
-            bankcardid: this.bankcardid
+            cardno: this.bankcardid,
+            cardname: this.cardname,
+            sub_name:this.pickSubBankText,
+            city_id:this.city_cd,
+            bank_id:this.bankid
           })
         })
       }
@@ -320,16 +319,6 @@ export default {
     pickChange(e) {
     }
   },
-  // onLoad(opt) {
-  //   this.getbanklist()
-  //   this.getprovlist()
-  //   // this.mybankinfo()
-  //   // this.username=this.userinfo.real_name
-  //   if (opt.bankinfo == 0) {
-  //     this.editdefault = true
-  //     this.btntxt = '保存'
-  //   }
-  // },
   created() {
     this.getbanklist()
     this.getprovlist()

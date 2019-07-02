@@ -1,19 +1,24 @@
 <template>
-      <div class="tip" :class="{errclass:errClass}">{{tipContent}}</div>
+  <div class="tip" :class="{errclass:errClass}">{{tipContent}}</div>
 </template>
 <script>
 export default {
-  props:['errClass','tipContent']
+  props: ['errClass', 'tipContent']
 }
 </script>
 
 <style scoped>
 div.tip {
-  font-size: 13px;
-  color: rgba(240, 95, 92, 1);
-  margin: -0.36rem 0 .32rem;
-  height:0.36rem;
+  font-size: 12px;
+  color: #333;
+  margin: -0.36rem auto 0.32rem;
+  height: 0.72rem;
   opacity: 0;
+  background-color: #d6d6d6;
+  line-height: 0.72rem;
+  text-align: center;
+  border-radius: 2px;
+  width: 3.3rem;
 }
 div.tip.errclass {
   opacity: 1;

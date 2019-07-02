@@ -5,10 +5,10 @@
     <div class="img"><img :src="switchObj.logo"></div>
     <div class="container">
       <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->
-      <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
+      <input-item what-icon="login_zhanghao" placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
       <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' ></input-item>
-      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
+      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <div class="txt2 uni-flex" >
         <span v-vtap="{method: go , params: 1}">注册用户</span>
         <span v-vtap="{method: go , params: 2}">忘记密码 ？</span>

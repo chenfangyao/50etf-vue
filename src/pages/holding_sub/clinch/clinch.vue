@@ -3,10 +3,7 @@
     <base-header title="成交结果" class='lowZindex' has-back="1" ></base-header>
     <div class="heightUp">
       <div class="fix black2">
-        <filter-list
-          :total="total"
-          @select-complete="getChooseTime"
-        ></filter-list>
+        <filter-list :total="total" @select-complete="getChooseTime"></filter-list>
       </div>
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
@@ -143,7 +140,6 @@ div.wrap {
   div.heightUp {
     height: 0.88rem;
     div.fix {
-      background-color: #fff;
       position: fixed;
       left: 0;
       right: 0;
@@ -168,11 +164,10 @@ div.wrap {
           flex-grow: 1;
           line-height: 0.58rem;
           font-size: 12px;
-          view:first-child {
-            color: rgba(153, 153, 153, 1);
-            // margin-right:.28rem;
+          div:first-child {
+            color: #666;
           }
-          view:last-child {
+          div:last-child {
             color: #333;
           }
         }
@@ -181,16 +176,17 @@ div.wrap {
         }
       }
       div.title {
-        margin-bottom: 0.36rem;
+        margin-bottom: 0.3rem;
         span:first-child {
           font-size: 15px;
-          color: rgba(51, 51, 51, 1);
+          color: #333;
+          font-weight: bold;
           line-height: 15px;
           margin-right: 0.11rem;
         }
         line-height: 15px;
-        font-size: 13px;
-        color: rgba(102, 102, 102, 1);
+        font-size: 12px;
+        color: #999;
       }
     }
     div.rightPart {
@@ -202,15 +198,15 @@ div.wrap {
         line-height: 12px;
       }
       .price {
-        font-size: 24px;
+        font-size: 16px;
         font-weight: bold;
         color: rgba(51, 51, 51, 1);
-        line-height: 24px;
+        line-height: 16px;
         margin: 0.39rem 0 0.12rem;
       }
       .txt {
         font-size: 12px;
-        color: rgba(153, 153, 153, 1);
+        color: #666;
         line-height: 12px;
       }
     }

@@ -11,7 +11,8 @@
           <span class="textc2">{{txt1}}</span>
         </div>
       </div>
-      <img class="to_r" v-if="!logoImg" src="../../assets/arrow/r.png">
+      <s-icon class="to_r" icon-class="enterright"></s-icon>
+
     </div>
     <recharge-actionsheet :show-action="showAction" @choose-way='chooseWay' @calc-complete='assignment' @close-me='switchPop'></recharge-actionsheet>
 
@@ -34,7 +35,7 @@ export default {
   props: {
     txt1: '',
     txt2: {},
-    logoImg:''
+    logoImg: ''
   },
   methods: {
     chooseWay(i) {
@@ -44,7 +45,6 @@ export default {
       this.switchPop()
     },
     switchPop() {
-      if(this.logoImg)return;
       this.showAction = !this.showAction
     },
     assignment(arr) {
@@ -54,14 +54,14 @@ export default {
           if (arr[i].pay_code === this.paylist.default_pay) {
             this.textbank = arr[i].pay_name
             this.banklogo = arr[i].logo
-            this.$emit('calc-default',arr[i])
+            this.$emit('calc-default', arr[i])
             return
           }
         }
       }
       this.textbank = arr[0].pay_name
       this.banklogo = arr[0].logo
-      this.$emit('calc-default',arr[0])
+      this.$emit('calc-default', arr[0])
     }
   },
 
@@ -96,7 +96,7 @@ div.rechargeWay {
       line-height: 0.28rem;
     }
   }
-  img.to_r {
+  .to_r {
     width: 0.25rem;
     margin-right: 0.24rem;
     height: 0.3rem;

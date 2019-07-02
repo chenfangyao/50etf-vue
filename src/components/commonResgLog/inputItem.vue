@@ -1,14 +1,18 @@
 <template>
-  <div class=" _input" :class="{input6}">
+  <div class=" _input uni-flex" :class="{input6}">
+    <template v-if="isPwd">
+      <s-icon :icon-class="pwdIcon" class='closeImg' v-vtap="{method:tabOpen}"></s-icon>
+      <s-icon icon-class="login_mima" class='leftSvg'></s-icon>
+    </template>
+    <span v-if="iconTxt" class="leftSvg">{{iconTxt}}</span>
+    <s-icon v-else :icon-class="noPwdIcon" class='leftSvg'></s-icon>
     <input :placeholder="placeholderTxt" class="textc1" type="tel" v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange' :maxlength='input6?6:11' v-model="valtxt">
     <input :placeholder="placeholderTxt" class="textc1" :type="!openEye&&isPwd?'password':'text'" v-else @focus="getFocus(1)" @blur='getFocus' @input='getChange' maxlength='20' v-model="valtxt">
-    <template v-if="isPwd">
-      <s-icon :icon-class="openEye?'pwd1':'pwd2'" class='closeImg' v-vtap="{method:tabOpen}"></s-icon>
-      <s-icon icon-class="login_mima" class='leftSvg' v-vtap="{method:tabOpen}"></s-icon>
-    </template>
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   props: {
     placeholderTxt: { default: '', },
@@ -17,6 +21,8 @@ export default {
     input6: { default: '', },
     focusNow: { default: '', },
     value: { default: '00', },
+    whatIcon: '',
+    iconTxt: ''
   },
   data() {
     return {
@@ -43,9 +49,21 @@ export default {
     tabOpen() {
       this.openEye = !this.openEye
     },
+
     getChange() {
       this.$emit('now-change')
     }
+  },
+  computed: {
+    ...mapState(['atNight']),
+    pwdIcon() {
+      let str = this.atNight ? 'black_' : '';
+      let str2 = this.openEye ? 'pwd1' : 'pwd2';
+      return str + str2
+    },
+    noPwdIcon() {
+      return this.atNight ? 'black_' + this.whatIcon : this.whatIcon
+    },
   },
 }
 </script>
@@ -54,16 +72,15 @@ div._input {
   border-bottom: 1px solid #ccc;
   margin-bottom: 0.65rem;
   position: relative;
-  color: rgba(51, 51, 53, 1);
   font-size: 16px;
+  padding-left: 2px;
   line-height: 1.2;
   input {
-    position: relative;
-    z-index: 20;
     width: 70%;
-    font-size: 18px;
+    font-size: 14px;
     padding-bottom: 5px;
-    left: 1.1rem;
+    color: #333;
+
     background-color: transparent;
   }
   .closeImg {
@@ -76,8 +93,12 @@ div._input {
     position: absolute;
   }
   .leftSvg {
-    left: 0.1rem;
-    top: 0;
+    position: static;
+  }
+  span.leftSvg {
+    flex-basis: 1.5rem;
+    font-weight: 500;
+    color: rgba(102, 102, 102, 1);
   }
 }
 div._input.input6 {

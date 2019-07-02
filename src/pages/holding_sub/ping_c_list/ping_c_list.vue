@@ -1,13 +1,13 @@
 <template>
-	<div class="wrap">
-		<base-header title="平仓结算" class='lowZindex' has-back='1'></base-header>
+  <div class="wrap">
+    <base-header title="平仓结算" class='lowZindex' has-back='1'></base-header>
     <div class="heightUp ">
       <div class="fix black2">
-        <filter-list :total='total'  @select-complete='getChooseTime'></filter-list>
+        <filter-list :total='total' @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
     <scroll-view class="list2" ref='scroll1' @scrollToEnd="loadMore">
-      <div class='padding1'>
+      <div>
         <div v-for="(item,i) in list" v-hover-class='"self-hover"' v-vtap="{method: go , params: item}" :key="i" class='listItem uni-flex black2'>
           <div class="content">
             <div class="line1 uni-flex">
@@ -15,7 +15,7 @@
                 <span class="nameTxt textc1">{{item.stock_name}}</span>
                 <span class='codeTxt textc2'>{{item.stock_code}}</span>
               </div>
-              <div class="price textc1">{{item.all_income}}</div>
+              <div class="price textc1" :class="{green1:parseInt(item.all_income)<0}">{{item.all_income}}</div>
             </div>
             <div class="line2 uni-flex">
               <div>
@@ -31,13 +31,16 @@
               <div class="time">{{close_time[i]}}</div>
             </div>
           </div>
-          <div class="imgContainer"><img src="../../../assets/arrow/r.png"></div>
+          <div class="imgContainer">
+            <s-icon icon-class="enterright"></s-icon>
+          </div>
+
         </div>
-        <uni-load-more :loading-type="resquestState" ></uni-load-more>
+        <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
 
     </scroll-view>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -58,7 +61,7 @@ export default {
       edate: 20300101,
     };
   },
-  components: { filterList, uniLoadMore ,scrollView},
+  components: { filterList, uniLoadMore, scrollView },
   created() {
     this.getDatas()
   },
@@ -104,7 +107,7 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
@@ -134,10 +137,9 @@ div.wrap {
     /* #endif */
   }
   div.heightUp {
-    height:.88rem;
+    height: 0.88rem;
     div.fix {
       position: fixed;
-      background-color: #fff;
       left: 0;
       right: 0;
       top: 45px;
@@ -150,16 +152,17 @@ div.wrap {
   background-color: #f5f5f5;
   div.listItem {
     background-color: #fff;
-    margin:.13rem 0;
-    padding:.25rem .26rem;
+    margin: 0.13rem 0;
+    padding: 0.2rem 0.26rem;
+    color: #666;
     justify-content: space-between;
     div.imgContainer {
       align-self: center;
       flex-grow: 1;
       text-align: right;
       img {
-        width:.20rem;
-        height:.28rem;
+        width: 0.2rem;
+        height: 0.28rem;
       }
     }
     div.content {
@@ -170,33 +173,35 @@ div.wrap {
         align-items: center;
         line-height: 14px;
         span.nameTxt {
-          margin-right:.16rem;
+          margin-right: 0.16rem;
           font-size: 14px;
-          color: rgba(24, 28, 40, 1);
+          color: #333;
+          font-weight: bold;
         }
         span.codeTxt {
-          font-size: 13px;
+          font-size: 12px;
           font-family: ArialMT;
-          color: rgba(102, 102, 102, 1);
+          color: #999;
         }
         div.price {
-          font-size: 24px;
-          font-family: Arial-BoldMT;
+          font-size: 16px;
           font-weight: bold;
-          color: rgba(51, 51, 51, 1);
+          color: $primary1;
+          &.green1{
+            color: $green1;
+          }
         }
       }
       div.line2 {
         justify-content: space-between;
         align-items: center;
         font-size: 12px;
-        color: #999;
         div.time {
           font-size: 11px;
         }
         span.digital {
-          color: #333;
-          margin-right:.39rem;
+          color: #000;
+          margin-right: 0.39rem;
         }
       }
     }

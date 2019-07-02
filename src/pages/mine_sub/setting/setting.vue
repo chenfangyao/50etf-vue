@@ -7,7 +7,7 @@
     </div>
     <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'">
       <span>夜间模式</span>
-      <van-switch size="20px" active-color='$primary1'  :value="atNight" @input="changeTheme"/>
+      <van-switch size="20px" active-color='$primary1' :value="atNight" @input="changeTheme" />
     </div>
     <div class="mb26 item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>关于</span>
@@ -18,39 +18,38 @@
       </div>
     </div>
     <btn-block txt="退出登录" @v-tap="logOut"></btn-block>
+    <van-action-sheet class="Asheet" v-model="showConfirm" :actions="actions"  cancel-text="取消" @select="sureloginout"  />
   </div>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
-import { mapMutations,mapState } from 'vuex';
-import { Switch } from 'vant';
+import { mapMutations, mapState } from 'vuex';
+import { Switch ,ActionSheet} from 'vant';
 export default {
   data() {
     return {
+      showConfirm:false,
+       actions: [
+        { name: '是否要退出当前账号？',disabled:true,className:'black2' },
+        { name: '确认退出',className:'red1 black2' },
+      ]
     };
   },
-  components: { btnBlock ,[Switch.name]:Switch},
-  computed:mapState(['atNight','switchObj','appObj']),
+  components: { btnBlock, [Switch.name]: Switch ,[ActionSheet.name]:ActionSheet},
+  computed: mapState(['atNight', 'switchObj', 'appObj']),
   methods: {
-    ...mapMutations(['setuserinfo', 'setsid','setatNight']),
+    ...mapMutations(['setuserinfo', 'setsid', 'setatNight']),
     logOut() {
-      this.$dialog.confirm({
-        title: '退出登录',
-        message: '是否确认退出登录？'
-      }).then(() => {
-        // on confirm
-        this.sureloginout()
-      }).catch(() => {
-        // on cancel
-      });
+      this.showConfirm=true
     },
+
     sureloginout() {
       var options = {
         url: '/Sapi/Login/loginout', //请求接口
         data: {
         }, //发送给服务端的数据
-        method: 'POST', 
+        method: 'POST',
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
@@ -76,13 +75,13 @@ export default {
       }
       this.$navigateTo({ url })
     },
-    changeTheme(val){
-       this.$dialog.confirm({
+    changeTheme(val) {
+      this.$dialog.confirm({
         title: '切换皮肤',
         message: '确认切换皮肤吗？'
       }).then(() => {
         // on confirm
-        val?localStorage.setItem('selfTheme',0):localStorage.setItem('selfTheme',1)
+        val ? localStorage.setItem('selfTheme', 0) : localStorage.setItem('selfTheme', 1)
         this.setatNight(val)
         location.reload()
       }).catch(() => {
@@ -90,11 +89,26 @@ export default {
       });
     }
   },
-  
+
 }
 </script>
 
 <style lang="scss" scoped>
+div#app.at-night{
+  .van-action-sheet__item--disabled{
+    color: #797C8F;
+  }
+  .black2::after{
+    border-color: $black1
+  }
+   .van-action-sheet__cancel{
+    background-color: $black2;
+    color: #fff;
+    &::before{
+      background-color: $black1;
+    }
+  }
+}
 div.wrap {
   height: 100vh;
   width: 100%;
@@ -104,7 +118,7 @@ div.wrap {
     color: rgba(24, 28, 40, 1);
     border-top: solid 1px #ededed;
   }
-  > div {
+  > div:not(.Asheet) {
     height: 0.98rem;
     padding: 0 0.26rem 0 0.3rem;
     align-items: center;
@@ -126,6 +140,13 @@ div.wrap {
     width: 0.26rem;
 
     height: 0.3rem;
+  }
+  /deep/ .van-action-sheet__close{
+    display: none;
+  }
+ 
+  .red1{
+    color: $primary1;
   }
 }
 </style>

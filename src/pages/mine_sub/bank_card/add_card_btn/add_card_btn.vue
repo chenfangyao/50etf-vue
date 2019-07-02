@@ -2,17 +2,17 @@
   <div class='wrap black2'>
     <base-header title='我的银行卡' has-back='1'></base-header>
     <ul class="black2">
-      <li class="uni-flex">
+      <li class="uni-flex" v-for="(item ,i) in cardList" :key="i" :style="item | calcBg">
         <div class="iconDiv">
-          <s-icon icon-class="bank_gs"></s-icon>
+          <img :src="item.img_url" alt="">
         </div>
         <div class="rightPart">
-          <div class="flr">解绑</div>
-          <div class="line1">工商银行</div>
+          <div class="flr" v-vtap="{method:unbind,params:item.cardno}">解绑</div>
+          <div class="line1">{{item.bank_name}}</div>
           <div class="line2">储蓄卡</div>
           <div class="line3">
-            <span v-for="(item ,i) in [,,,]" :key="i">****</span>
-            <span>9527</span>
+            <span v-for="(item2 ,i) in [,,,]" :key="i">****</span>
+            <span>{{item.cardno | getLast4}}</span>
           </div>
         </div>
       </li>
@@ -27,22 +27,57 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import { mapState } from 'vuex'
+import $req from '@/common/request.js'
 export default {
   data() {
     return {
-
+      cardList: []
     };
+  },
+  filters: {
+    getLast4(val) {
+      return val.slice(-4)
+    },
+    calcBg(val) {
+      return `background:linear-gradient(106deg,${val.color1} 0%,${val.color2} 99%);`
+    }
   },
   computed: mapState(['atNight']),
   components: { btnBlock },
   methods: {
+
     addbank() {
       this.$navigateTo({
         url: '/pages/mine_sub/bank_card/add_card/add_card',
-        query: { bankinfo: 0 }
+        // query: { bankinfo: 0 }
+      })
+    },
+    unbind(cardno) {
+      let options = {
+        url: ' /Sapi/Ubank/unbind',
+        method: 'POST',
+        data: { cardno }
+      }
+      this.$dialog.confirm({
+        title: '解绑',
+        message: '确定这张解绑银行卡',
+        lockScroll: true,
+        beforeClose:(action, done) =>{
+          done()
+          action === 'confirm' && this.$httpReq(options).then(res => {
+            this.$toast({ message: res.info})
+            this.getCardList()
+          });
+        }
       });
+    },
+    getCardList() {
+      this.$httpReq({ url: '/Sapi/Ubank/bankcard_list' }).then(res => this.cardList = res.data.list)
     }
   },
+  created() {
+    this.getCardList()
+  }
 }
 </script>
 
@@ -61,16 +96,12 @@ li {
   margin: 5px auto;
   align-items: center;
   padding: 0 0.27rem;
-  background: linear-gradient(
-    106deg,
-    rgba(247, 76, 88, 1) 0%,
-    rgba(251, 143, 105, 1) 84%
-  );
+
   box-shadow: 2px 3px 12px 0px rgba(189, 32, 38, 0.4);
   border-radius: 10px;
   .iconDiv {
-    width: 1rem;
-    height: 1rem;
+    width: 50px;
+    height: 50px;
     background-color: #fff;
     border-radius: 50%;
     display: flex;
@@ -78,8 +109,9 @@ li {
     margin-right: 0.39rem;
     justify-content: center;
     transform: translateY(-10px);
-    .s-icon {
-      font-size: 48px;
+    img {
+      width: 48px;
+      height: 48px;
     }
   }
   .rightPart {
@@ -100,10 +132,10 @@ li {
       font-weight: bold;
       line-height: 1;
     }
-    .line3{
+    .line3 {
       font-size: 16px;
       margin-top: 0.2rem;
-      span{
+      span {
         margin-right: 0.4rem;
       }
     }

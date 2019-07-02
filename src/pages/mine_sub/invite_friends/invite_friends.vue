@@ -1,10 +1,8 @@
 <template>
   <div class="wrap">
     <base-header title="邀请好友" has-back='1'></base-header>
-
-    <img class="bg" v-if='atNight' src="../../../assets/mineImg/bg-black.png">
-    <img class="bg" v-else src="../../../assets/mineImg/inviteFriendBg.png">
-    <div class="aboveZindx">
+    <s-icon  icon-class="yaoqing_bg2" class='bg'></s-icon>
+    <div>
       <div class="QRcode aboveZindex">
         <qrcode-vue :logoSrc="imageUrl" :text="realAddress" :margin='0' :logoScale='200' :size='158'></qrcode-vue>
       </div>
@@ -70,10 +68,10 @@ div.wrap {
     position: relative;
     z-index: 2;
   }
-  img.bg {
+  .bg {
     height: 6.34rem;
-    left: 0;
-    width: 100%;
+    width: 100vw;
+    top: 0;
     position: absolute;
     // z-index: -5;
   }
@@ -82,11 +80,6 @@ div.wrap {
     height: 158px;
     //     background-color: #fff;
     margin: 3.46rem auto 0.4rem;
-    //     img {
-    //       width:3.17rem;
-    //       height:3.17rem;
-    //       padding:.21rem;
-    //     }
   }
   div.txt {
     font-size: 15px;
