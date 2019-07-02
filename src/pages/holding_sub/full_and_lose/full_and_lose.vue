@@ -11,7 +11,7 @@
         <span>持仓数：{{resObj.own_amount}}</span>
       </div>
       <div class="inputContainer">
-        <input-item class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"  ></input-item>
+        <input-item what-icon='' class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"  ></input-item>
         <span class="inputspan">{{title}}值{{moreless}}于最新价成效</span>
       </div>
       <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>

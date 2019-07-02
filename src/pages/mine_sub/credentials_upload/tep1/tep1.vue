@@ -2,7 +2,7 @@
   <div class="wrap">
     <base-header has-back='1' title="实名认证"></base-header>
     <div class="title">设置成功后，可通过账号密码登录</div>
-    <div class="container">
+    <div class="container black2">
       <input-item iconTxt='真实姓名' @now-blur='handleBlur' v-model="uName"></input-item>
       <input-item iconTxt='身份证号' @now-blur='handleBlur' v-model="IDcard"></input-item>
       <input-item iconTxt='手机号' v-if="userinfo.is_certified!=5" @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
@@ -90,7 +90,7 @@ export default {
     padding: 0.25rem 0.4rem ;
   }
   div.container {
-    padding: 0.2rem 0.2rem 1px;
+    padding: 0.2rem 0.4rem 1px;
     background-color: #fff;
     margin-bottom: 20px;
   }

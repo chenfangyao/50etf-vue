@@ -1,5 +1,5 @@
 <template>
-  <div class="subCard black2 uni-flex" >
+  <div class="subCard black1 uni-flex" >
     <div class="imgContainer">
       <img :src="switchObj.logo" />
     </div>

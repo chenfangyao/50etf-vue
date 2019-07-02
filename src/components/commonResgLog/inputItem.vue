@@ -1,9 +1,6 @@
 <template>
   <div class=" _input uni-flex" :class="{input6}">
-    <template v-if="isPwd">
-      <s-icon :icon-class="pwdIcon" class='closeImg' v-vtap="{method:tabOpen}"></s-icon>
-      <s-icon icon-class="login_mima" class='leftSvg'></s-icon>
-    </template>
+    <s-icon v-if="isPwd" :icon-class="pwdIcon" class='closeImg' v-vtap="{method:tabOpen}"></s-icon>
     <span v-if="iconTxt" class="leftSvg">{{iconTxt}}</span>
     <s-icon v-else :icon-class="noPwdIcon" class='leftSvg'></s-icon>
     <input :placeholder="placeholderTxt" class="textc1" type="tel" v-if="isTel" :focus='focusNow' @focus="getFocus(1)" @blur='getFocus' @input='getChange' :maxlength='input6?6:11' v-model="valtxt">
@@ -21,7 +18,7 @@ export default {
     input6: { default: '', },
     focusNow: { default: '', },
     value: { default: '00', },
-    whatIcon: '',
+    whatIcon: { default: 'login_mima' },
     iconTxt: ''
   },
   data() {
@@ -68,6 +65,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+#app.at-night {
+  ._input {
+    border-color: $blackTxt1;
+    span {
+      color: $blackTxt1;
+    }
+  }
+}
 div._input {
   border-bottom: 1px solid #ccc;
   margin-bottom: 0.65rem;
@@ -85,15 +90,15 @@ div._input {
   }
   .closeImg {
     right: 0.1rem;
+    position: absolute;
+    top: 0.05rem;
   }
   .s-icon {
     width: 0.4rem;
     height: 0.4rem;
-    top: 0.05rem;
-    position: absolute;
-  }
-  .leftSvg {
-    position: static;
+    &.leftSvg {
+      margin-right: 0.4rem;
+    }
   }
   span.leftSvg {
     flex-basis: 1.5rem;

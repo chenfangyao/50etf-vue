@@ -1,5 +1,5 @@
 <template>
-<div class="fixWrap black2">
+<div class="fixWrap black1">
   <div class="occupy"></div>
   <div class="title">
     <div class="msg">

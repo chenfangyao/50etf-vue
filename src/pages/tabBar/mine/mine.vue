@@ -1,7 +1,7 @@
 <template>
-  <div class="wrap">
+  <div class="wrap black1">
     <headerCard></headerCard>
-    <div class="items">
+    <div class="items black1">
       <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'capital_flow/capital_flow'}">
         <img src="../../../assets/mineImg/01.png" />
         <span>资金流水</span>

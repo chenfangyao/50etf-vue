@@ -1,6 +1,6 @@
 <template>
   <div class="hwrap black1">
-    <s-icon icon-class="my_page_bg"></s-icon>
+    <s-icon icon-class="my_page_bg" v-if="!atNight"></s-icon>
     <header-title></header-title>
     <sub-card></sub-card>
   </div>
@@ -8,8 +8,12 @@
 <script>
 import headerTitle from './sub/headerTitle.vue'
 import subCard from './sub/subCard.vue'
+import { mapState } from 'vuex';
+
 export default {
   components: { subCard, headerTitle },
+  computed: mapState(['atNight']),
+
 }
 </script>
 <style lang="scss" scoped>

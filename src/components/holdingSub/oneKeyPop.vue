@@ -20,7 +20,7 @@
           <span class="c_red">{{resObj.last_price}}</span>
           <span>{{resObj.own_amount}}张</span>
           <span>
-            <span>开仓</span>
+            <!-- <span>开仓</span> -->
             <span class="c_red">{{50}}秒</span>未成单自动撤单</span>
           <span >{{resObj.market_value}}</span>
         </div>
