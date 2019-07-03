@@ -76,6 +76,7 @@ export default {
 div._input {
   border-bottom: 1px solid #ccc;
   margin-bottom: 0.65rem;
+  padding-bottom: 0.1rem;
   position: relative;
   font-size: 16px;
   padding-left: 2px;

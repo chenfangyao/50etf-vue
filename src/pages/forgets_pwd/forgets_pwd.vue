@@ -145,6 +145,9 @@ div.container {
   div.vCode {
     height: 1.04rem;
     justify-content: space-between;
+    >div:last-child{
+      transform: translateY(-5px)
+    }
     > div:first-child {
       flex-grow: 1;
       margin-right: 15px;

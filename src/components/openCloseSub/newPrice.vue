@@ -58,9 +58,10 @@
     <div class="commonStyle1 textc1">{{pricetitle}}</div>
     <div class="uni-flex line2">
       <div>
-        <img v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/minus.png">
+        <s-icon v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_lower"></s-icon>
         <span class="newPrice">{{pricevalue}}</span>
-        <img v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" src="../../assets/openCloseImg/plus.png">
+        <s-icon v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_jia"></s-icon>
+
       </div>
 
       <div class="uni-flex btn3">
@@ -82,11 +83,12 @@
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div class="imgbtn uni-flex">
         <div class="hasImg" v-vtap="{method: plusStep , params: -1}">
-          <img src="../../assets/openCloseImg/minus.png">
+        <s-icon :icon-class="atNight?'black_adjust_lower':'adjust_lower'"></s-icon>
+
         </div>
         <span class="countxt textc1">{{sliderVal}}</span>
         <div class="hasImg" v-vtap="{method: plusStep , params: 1}">
-          <img src="../../assets/openCloseImg/plus.png">
+        <s-icon :icon-class="atNight?'black_adjust_jia':'adjust_jia'"></s-icon>
         </div>
       </div>
       <div class="sliderItem">
@@ -493,7 +495,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['softconf', 'maxbuy', 'stockamunt'])
+    ...mapState(['softconf', 'maxbuy', 'stockamunt','atNight'])
   }
 }
 </script>
@@ -666,7 +668,7 @@ div.root-el {
     }
   }
 
-  img {
+  .s-icon,img {
     width: 18px;
     height: 18px;
   }

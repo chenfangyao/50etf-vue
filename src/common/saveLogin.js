@@ -7,7 +7,7 @@ function setTheme(val) {
     plus.navigator.setStatusBarBackground("#181c28");
     plus.navigator.setStatusBarStyle("light");
   } else {
-    plus.navigator.setStatusBarBackground("#f0f0f0");
+    plus.navigator.setStatusBarBackground("#fff");
     plus.navigator.setStatusBarStyle("dark");
   }
 }

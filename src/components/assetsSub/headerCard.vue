@@ -1,22 +1,22 @@
 <template>
-  <div class="subWrap ">
+  <div class="subWrap black2">
     <s-icon icon-class="zichan_bg"></s-icon>
     <article>
-      <div class="panel1 black2">
-        <h2 class="textc2">可用资金（元）</h2>
+      <div class="panel1 ">
+        <h2 class="textc1">可用资金（元）</h2>
         <h1>{{transmoney.enable_money||0.00}}</h1>
         <div class="h3">
           <!-- <span>总资产</span>
         <span>{{transmoney.dta_money}}</span><span v-if='!transmoney.enable_money'>0.00</span> -->
         </div>
       </div>
-      <div class="panel2 black2 uni-flex">
+      <div class="panel2  uni-flex">
         <div>
-          <h4 class="textc2">可买市值</h4>
+          <h4 class="textc1">可买市值</h4>
           <h4>{{transmoney.stock_enable_money||0.00}}</h4>
         </div>
         <div>
-          <h4 class="textc2">总资产</h4>
+          <h4 class="textc1">总资产</h4>
           <h4>{{transmoney.dta_money}}</h4>
           <h4 v-if='!transmoney.enable_money'>0.00</h4>
         </div>
@@ -30,15 +30,14 @@
       </div> -->
       </div>
     </article>
-    <div class="uni-flex btn2 black4">
-      <div class=" blue1" v-vtap="{method: go , params: 1}">
-        <img v-if="atNight" src="../../assets/assetsImg/recharge1.png">
-        <img v-else src="../../assets/assetsImg/recharge.png">
+    <div class="uni-flex btn2 black2">
+      <div class=" " v-vtap="{method: go , params: 1}">
+        <s-icon icon-class="zichan_chonzhi"></s-icon>
         <span>充值</span>
       </div>
       <div v-vtap="{method: go , params: 2}">
-        <img v-if="atNight" src="../../assets/assetsImg/withdraw1.png">
-        <img v-else src="../../assets/assetsImg/withdraw.png">
+        <s-icon icon-class="zichan_tixian"></s-icon>
+
         <span>提现</span>
       </div>
     </div>
@@ -156,7 +155,7 @@ div.subWrap {
     div.hasBorder {
       border-right: solid 1px #e6e6e6;
     }
-    img {
+    .s-icon {
       width: 0.44rem;
       height: 0.44rem;
       vertical-align: middle;

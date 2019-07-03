@@ -4,8 +4,8 @@
       <div class="title textc1"> 延期关闭</div>
       <div class="subTitle textc1">是否关闭延期，关闭后当日会自动平仓！</div>
       <div class="btn2 uni-flex">
-        <div v-hover-class="'tap-hover'" v-vtap="{method:yesTap}">确定</div>
         <div v-hover-class="'tap-hover'" v-vtap="{method:cancleTap}">取消</div>
+        <div v-hover-class="'tap-hover'" v-vtap="{method:yesTap}">确定</div>
       </div>
     </div>
   </div>
@@ -64,43 +64,48 @@ export default {
       text-align: center;
       font-size: 16px;
       font-weight: bold;
-      color: rgba(24, 28, 40, 1);
+      color: #333;
       position: relative;
       margin-bottom:.20rem;
     }
     div.subTitle {
       font-size: 14px;
-      font-family: PingFangSC-Medium;
       font-weight: 500;
-      color: rgba(102, 102, 102, 1);
+      color: #666;
       line-height: 14px;
       text-align: center;
+      border-bottom: 1px #ccc dashed;
+      padding-bottom: 0.45rem;
     }
     div.btn2 {
       justify-content: space-between;
-      margin-top:.78rem;
+      margin-top:0.6rem;
+      padding-bottom: 0.2rem;
       > div {
         flex-grow: 1;
         height:.88rem;
         border-radius:.10rem;
-        font-size: 14px;
+        font-size: 16px;
         color: rgba(255, 255, 255, 1);
         line-height:.88rem;
+        font-weight: bold;
         text-align: center;
       }
       > div:first-child {
-        background: #f5f5f5;
+        background: $primary1;
         margin-right:.20rem;
-        color: #666;
+        color: #fff;
       }
       > div.tap-hover:first-child {
-        background: darken(rgba(153, 153, 153, 1), 5%);
+        background: darken($primary1, 10%);
       }
       > div:last-child {
-        background: $primary1;
+         
+        border: solid 1px $primary1;
+        color: $primary1;
       }
       > div.tap-hover:last-child {
-        background: darken($primary1, 5%);
+        border-color: darken($primary1, 25%);
       }
     }
   }

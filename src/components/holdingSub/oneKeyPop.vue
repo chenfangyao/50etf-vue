@@ -1,10 +1,7 @@
 <template>
   <div class="mask uni-flex">
     <div :class="['container',{show}]">
-      <div class="title">
-        <span v-vtap="{method:closePop}" class="uni-icon uni-icon-close flr"></span>
-        <span >一键平仓确认</span>
-      </div>
+      <div class="title">一键平仓确认</div>
       <div class="list uni-flex">
         <div class="uni-flex">
           <span>合约名称</span>
@@ -12,7 +9,7 @@
           <span>委托价格</span>
           <span>委托数量</span>
           <span>有效期</span>
-          <span >预估支付金额</span>
+          <span>预估支付金额</span>
         </div>
         <div class="uni-flex">
           <span>{{resObj.stock_name}}</span>
@@ -20,9 +17,8 @@
           <span class="c_red">{{resObj.last_price}}</span>
           <span>{{resObj.own_amount}}张</span>
           <span>
-            <!-- <span>开仓</span> -->
             <span class="c_red">{{50}}秒</span>未成单自动撤单</span>
-          <span >{{resObj.market_value}}</span>
+          <span>{{resObj.market_value}}</span>
         </div>
       </div>
       <div class="btn2 uni-flex">
@@ -49,7 +45,7 @@ export default {
     getassets() {
       var options = {
         url: '/Sapi/User/asset', //请求接口
-        method: 'GET', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
@@ -57,19 +53,19 @@ export default {
         }
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     stocksell() {
-			if(this.resObj.last_price<0.0002){
-				this.$toast.fail({
-          message:'当前价格无法一键平仓'
+      if (this.resObj.last_price < 0.0002) {
+        this.$toast.fail({
+          message: '当前价格无法一键平仓'
         })
-				return
-			}
+        return
+      }
       var options = {
         url: '/Sapi/Stock/sell', //请求接口
-        method: 'POST', 
+        method: 'POST',
         data: {
           price: this.resObj.last_price,
           code: this.resObj.stock_code,
@@ -79,23 +75,23 @@ export default {
         },
       }
       this.$httpReq(options).then((res) => {
-       this.$emit('close-pop','deep')
+        this.$emit('close-pop', 'deep')
 
         if (res.status) {
-           this.$redirectTo({
-            url: '/entrustSucc' ,
-            query:{
-              type:this.onClose,
-              code:parseInt(this.resObj.stock_code)
+          this.$redirectTo({
+            url: '/entrustSucc',
+            query: {
+              type: this.onClose,
+              code: parseInt(this.resObj.stock_code)
             }
           })
         } else {
-          this.$toast(res.info ? res.info : '卖出失败',)
+          this.$toast(res.info ? res.info : '卖出失败')
         }
 
       }).catch((err) => {
         // 请求失败的回调
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     }
   },
@@ -126,9 +122,9 @@ export default {
     flex-grow: 1;
     margin: 0.35rem;
     background: #fff;
-    border-radius:.10rem;
+    border-radius: 0.1rem;
     z-index: 310;
-    padding:.28rem.30rem.20rem;
+    padding: 0.28rem 0.7rem 0.2rem;
     .c_red {
       color: #f05f5c;
     }
@@ -136,52 +132,54 @@ export default {
       text-align: center;
       font-size: 16px;
       font-weight: bold;
-      color: rgba(24, 28, 40, 1);
-      position: relative;
-      margin-bottom:.55rem;
-      .flr {
-        position: absolute;
-        left: -0.1rem;
-        top: 4px;
-      }
+      color: #333;
+      margin-bottom: 0.35rem;
+      border-bottom: solid 1px #ccc;
+      padding-bottom: 10px;
     }
     div.list {
       justify-content: space-between;
+      color: #333;
+      padding-bottom: 0.33rem;
       > div {
         flex-direction: column;
-        color: #181c28;
         font-size: 12px;
-        line-height:.52rem;
         flex-grow: 1;
+        text-align: right;
       }
       > div:first-child {
-        color: #707680;
+        text-align: left;
       }
     }
     div.btn2 {
       justify-content: space-between;
-      margin-top:.53rem;
+      padding: 0.53rem 0;
+      border-top: solid 1px #ccc;
       > div {
         flex-grow: 1;
-        height:.88rem;
-        border-radius:.10rem;
+        height: 0.88rem;
+        border-radius: 0.1rem;
+        width: 2.3rem;
+        height: 0.8rem;
         font-size: 16px;
         color: rgba(255, 255, 255, 1);
-        line-height:.88rem;
+        line-height: 0.8rem;
         text-align: center;
       }
       > div:first-child {
-        background: rgba(153, 153, 153, 1);
-        margin-right:.20rem;
+        margin-right: 0.2rem;
+        color: $primary1;
+        border: 1px solid $primary1;
+        border-radius: 2px;
       }
       > div.tap-hover:first-child {
-        background: darken(rgba(153, 153, 153, 1), 5%);
+        border-color: darken($primary1, 25%);
       }
       > div:last-child {
         background: $primary1;
       }
       > div.tap-hover:last-child {
-        background: darken($primary1, 5%);
+        background: darken($primary1, 15%);
       }
     }
   }

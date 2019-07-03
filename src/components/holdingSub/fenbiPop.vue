@@ -1,21 +1,10 @@
 <template>
   <div class="fixWrap self-mask" @touchmove.prevent v-vtap.self="{method:closeMe}">
     <div class="subWrap black2">
-      <div class="topTip uni-flex black2">
-        <div>自动延期</div>
-        <div v-vtap="{method:openPop2}" class="iconWrap">
-          <!-- <uni-icon type="checkmarkempty" size="20" v-if='resObj.auto_delay==1' color='#409DE5'></uni-icon> -->
-          <img src="../../assets/holdingImg/dagou.png" v-if="resObj.auto_delay == 1">
-          <img src="../../assets/holdingImg/meigou.png" v-else>
-        </div>
-      </div>
       <div class="container black2">
-        <div class="title uni-flex">
-          <div>
-            <span class="nameTxt textc1">{{resObj.stock_name}}</span>
-            <span class="textc2">{{resObj.stock_code}}</span>
-          </div>
-          <div class="textc2">{{timeDeal}}</div>
+        <div class="title ">
+          <span class="nameTxt textc1">{{resObj.stock_name}}</span>
+          <span class="textc2">{{resObj.stock_code}}</span>
         </div>
         <div class="infoView uni-flex">
           <div class="leftPart uni-flex">
@@ -81,6 +70,15 @@
             <span>行情</span>
             <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
           </div>
+        </div>
+        <div class="latterTip uni-flex black2">
+          <div class="uni-flex" v-vtap="{method:openPop2}">
+            <div class="iconWrap">
+              <s-icon v-if="resObj.auto_delay == 1" icon-class="selected"></s-icon>
+            </div>
+            <div class="txt22">自动延期</div>
+          </div>
+          <div class="textc2">{{timeDeal}}</div>
         </div>
         <btn-block txt="一键平仓" @v-tap="openPop"></btn-block>
       </div>
@@ -193,7 +191,7 @@ export default {
   mounted() {
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   },
-  computed: mapState(['switchObj','atNight'])
+  computed: mapState(['switchObj', 'atNight'])
 }
 </script>
 <style lang="scss" scoped>
@@ -203,15 +201,13 @@ div.fixWrap {
     padding: 0 0.35rem 0.5rem;
     div.title {
       height: 0.8rem;
-      font-size: 13px;
-      color: rgba(102, 102, 102, 1);
-      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 33%;
+      color: #999;
       border-bottom: solid 1px #f2f2f2;
-      > div {
-        line-height: 0.8rem;
-      }
       span.nameTxt {
-        font-size: 15px;
+        font-size: 16px;
+        font-weight: bold;
         color: rgba(51, 51, 51, 1);
         line-height: 0.8rem;
         margin-right: 0.16rem;
@@ -312,33 +308,44 @@ div.fixWrap {
       height: 0.72rem;
     }
   }
-  div.topTip {
-    background-color: #000;
-    height: 0.8rem;
+  div.latterTip {
     padding: 0 0.35rem;
-    margin-top: 33%;
 
     justify-content: space-between;
     align-items: center;
     > div {
+      height: 0.8rem;
       font-size: 11px;
       line-height: 0.8rem;
-      color: rgba(255, 255, 255, 1);
+      color: #333;
+      &:last-child {
+        color: #999;
+      }
+      &:first-child {
+        align-items: center;
+      }
     }
-    div.iconWrap {
-      height: 0.4rem;
-      width: 0.4rem;
+    div.txt22 {
+      line-height: 0.8rem;
+    }
+    .iconWrap {
+      width: 0.22rem;
+      height: 0.22rem;
+      border: 1px solid #999;
+      border-radius: 2px;
+      margin-right: 7px;
       line-height: 0;
-      img {
-        width: 100%;
-        height: 100%;
+      text-align: center;
+      .s-icon {
+        width: 0.18rem;
+        height: 0.18rem;
       }
     }
   }
   .green {
     color: #3aba8f !important;
   }
-  div.topTip.hebinHide {
+  div.latterTip.hebinHide {
     margin-top: calc(33% +1.66rem); //经典
   }
 }

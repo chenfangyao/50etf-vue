@@ -9,7 +9,7 @@
       <div class="btn" v-if="onApp">
         <btn-block txt='分享' @v-tap='shareSystem'></btn-block>
       </div>
-      <div class="txt textc1" v-else>{{realAddress}}</div>
+      <div class="txt textc1" v-else>邀请链接：{{realAddress}}</div>
     </div>
   </div>
 </template>
@@ -60,10 +60,10 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
 div.wrap {
   position: relative;
+  min-height: 100vh;
   div.aboveZindex {
     position: relative;
     z-index: 2;

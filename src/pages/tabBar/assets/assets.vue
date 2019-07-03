@@ -3,26 +3,26 @@
     <base-header title="资产"></base-header>
     <header-card :transmoney='res_data'></header-card>
     <div class="info ">
-      <div class="black2 textc2 ">
-        <span>权利金</span></div>
+      <div class="black2">
+        <span class="textc1">权利金</span></div>
       <div class="uni-flex black2 textc1">
-        <span>权利金</span>
+        <span class="textc2">权利金</span>
         <span>{{royalty_money}}</span><span v-if='!royalty_money'>0.00</span>
       </div>
       <div class="uni-flex black2 textc1">
-        <span>盈亏</span>
+        <span class="textc2">盈亏</span>
         <span :class="greenredclass?'greenColor':'redColor'">{{profit_money}}</span><span v-if='!royalty_money'>0.00</span>
       </div>
     </div>
     <div class="info ">
-      <div class="black2 textc2 ">
-        <span>其他</span></div>
+      <div class="black2">
+        <span class="textc1">其他</span></div>
       <div class="uni-flex black2 textc1">
-        <span>待扣延期费</span>
+        <span class="textc2">待扣延期费</span>
         <span>{{add_fee_money}}</span><span v-if='!royalty_money'>0.00</span>
       </div>
       <div class="uni-flex black2 textc1">
-        <span>冻结资金</span>
+        <span class="textc2">冻结资金</span>
         <span>{{freeze_money}}</span><span v-if='!royalty_money'>0.00</span>
       </div>
     </div>
