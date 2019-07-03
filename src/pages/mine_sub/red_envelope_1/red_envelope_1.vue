@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import img1 from '@/assets/mineImg/hong_bao_bg.png'
 export default {
   data() {
     return {
