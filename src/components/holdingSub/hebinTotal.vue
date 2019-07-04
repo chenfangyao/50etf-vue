@@ -8,11 +8,10 @@ export default {
 </script>
 <style scoped>
 div {
-  height:.64rem;
+  height:0.9rem;
   font-size: 13px;
   color: rgba(136, 136, 136, 1);
-  line-height:.64rem;
-  border-top: 1px solid #f5f5f5;
+  line-height:0.9rem;
   padding-left:.26rem;
 }
 </style>

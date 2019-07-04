@@ -2,11 +2,11 @@
   <div class="wrap">
     <header-tab @tab-tap="tabTap" :title-list="titleList" :tabI="tabI"></header-tab>
     <div>
-      <div class="fix black1">
+      <div class="fix black1" :style="{top:40+statusbarHeight+'px'}">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
         <hebin-total :total="titleList[tabI].total" v-if="tabI<2"></hebin-total>
         <template v-else-if="tabI==2">
-          <div class="h8 black1"></div>
+          <!-- <div class="h8 black1"></div> -->
           <top-btn></top-btn>
         </template>
       </div>
@@ -63,7 +63,7 @@ export default {
 
     };
   },
-  computed: mapState(['weituoindex']),
+  computed: mapState(['weituoindex','statusbarHeight']),
   components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop, scrollView },
   methods: {
     ...mapMutations(['setweituoindex']),
@@ -185,7 +185,7 @@ div.wrap {
     margin-top: 0.12rem;
   }
   div.heightUp {
-    height: 0.68rem;
+    height: 0.58rem;
   }
   div.h8 {
     height: 8px;
@@ -197,14 +197,9 @@ div.wrap {
     position: fixed;
     left: 0;
     right: 0;
-    /* #ifdef H5 */
-    top: 44px;
-    /* #endif */
     // top: calc(44px + var(--status-bar-height));
 
     z-index: 20;
-    background-color: #f5f5f5;
-    // padding-bottom:.16rem;
   }
   div.h40 {
     height: 1.7rem;

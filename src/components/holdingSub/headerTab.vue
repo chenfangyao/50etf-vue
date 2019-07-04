@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="_headerContainer ">
-      <div class="black2" :style="{height:statusbarHeight+'px'}"></div>
+    <div class="_headerContainer black2">
+      <div  :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el">
         <span v-vtap="{method:tabTap}" :data-tabi='i' :key="i" v-for='(item,i) in titleList'>
           <span :class="{now:tabI==i}" :data-tabi='i'>{{item.name}}</span>
@@ -40,7 +40,7 @@ export default {
   right: 0;
   top: 0;
   z-index: 50;
-  background-image: linear-gradient(
+  background: linear-gradient(
     4deg,
     rgba(255, 72, 72, 1) 0%,
     rgba(255, 91, 79, 1) 100%
