@@ -51,7 +51,6 @@ export default {
       this.backEvent()
     }, false);
   },
-  
   computed: mapState(['atNight', 'loadingFlag','appReady','articlePop']),
   watch: {
     $route(to, from) {
@@ -73,10 +72,9 @@ export default {
     atNight(val) {
       if (!this.appReady) return;
       if (val) {
-        plus.navigator.setStatusBarBackground("#181c28");
         plus.navigator.setStatusBarStyle("light");
       }else{
-        plus.navigator.setStatusBarBackground("#f0f0f0");
+        // plus.navigator.setStatusBarBackground("#f0f0f0");
         plus.navigator.setStatusBarStyle("dark");
       }
     },

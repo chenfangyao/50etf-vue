@@ -117,8 +117,6 @@ div.wrap {
     background-color: #fff;
     color: rgba(24, 28, 40, 1);
     border-top: solid 1px #ededed;
-  }
-  > div:not(.Asheet) {
     height: 0.98rem;
     padding: 0 0.26rem 0 0.3rem;
     align-items: center;

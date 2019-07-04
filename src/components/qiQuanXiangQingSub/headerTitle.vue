@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="root-el">
-      <div class="occupy"></div>
+      <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="wrap2">
         <div class="left" v-vtap="{method:back}">
           <img src="../../assets/arrow/l.png" />
@@ -12,13 +12,15 @@
         </div>
       </div>
     </div>
-    <div class="h44"></div>
+    <div :style="{height:statusbarHeight+44+'px'}"></div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 
 export default {
   props:['resObj'],
+  computed: mapState(['statusbarHeight']),
   
   methods: {
     back() {
@@ -29,9 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.h44 {
-  height: 44px;
-}
 div.root-el {
   border-bottom: 1px solid #ededed;
   position: fixed;
@@ -44,9 +43,6 @@ div.root-el {
     height: 44px;
     padding-top:.12rem;
     position: relative;
-  }
-  .occupy {
-    height: var(--status-bar-height);
   }
   > div {
     flex-grow: 1;

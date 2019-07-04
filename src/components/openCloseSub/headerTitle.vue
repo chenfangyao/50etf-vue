@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="headerContainer">
-      <div class="occupy"></div>
+      <div class="black2" :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el uni-flex">
         <div class="leftPart" v-vtap="{method:back}">
           <img src="../../assets/arrow/l.png">
@@ -13,12 +13,12 @@
         </div>
       </div>
     </div>
-    <div class="h44"></div>
+    <div :style="{height:statusbarHeight+44+'px'}"></div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations ,mapState} from 'vuex'
 export default {
   props: {
     tabActive: {
@@ -30,6 +30,7 @@ export default {
 
     }
   },
+  computed: mapState(['statusbarHeight']),
   methods: {
     ...mapMutations(['setstockamunt']),
     back() {
@@ -44,9 +45,6 @@ export default {
 </script>
 
 <style lang="scss">
-div.h44 {
-  height: 44px;
-}
 .headerContainer {
   position: fixed;
   left: 0;

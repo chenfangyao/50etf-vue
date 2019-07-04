@@ -51,7 +51,8 @@ const store = new Vuex.Store({
     hbfbcell: [],
     // 持仓合计
     cctotalmoney: 0,
-    switchObj:{}
+    switchObj:{},
+    statusbarHeight:0
   },
   mutations: {
     login(state, provider) {
@@ -60,6 +61,9 @@ const store = new Vuex.Store({
     },
     setatNight(state, data) {
       state.atNight = data
+    },
+    setstatusbarHeight(state, data) {
+      state.statusbarHeight = data
     },
     setarticlePop(state, data) {
       state.articlePop = data

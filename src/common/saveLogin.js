@@ -4,16 +4,15 @@ import request from '@/common/request.js'
 
 function setTheme(val) {
   if (val) {
-    plus.navigator.setStatusBarBackground("#181c28");
     plus.navigator.setStatusBarStyle("light");
   } else {
-    plus.navigator.setStatusBarBackground("#fff");
     plus.navigator.setStatusBarStyle("dark");
   }
 }
 export default function () {
   var user_name= localStorage.getItem("user_name")
   var user_pwd = localStorage.getItem("user_pwd")
+  store.commit("setstatusbarHeight", plus.navigator.getStatusbarHeight());
   setTheme(store.state.atNight)
   if (user_pwd !== null && user_name !== null) {
     login(user_name, user_pwd)

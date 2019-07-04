@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="headerContainer">
-      <div class="occupy"></div>
+      <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el">
         <div class="left commonStyle" v-vtap="{method:back}"  v-if="hasBack">
           <img src="../assets/arrow/l.png">
@@ -10,11 +10,13 @@
         <span class="right commonStyle" v-hover-class='"self-hover"' v-vtap="{method:rightTap}" v-if="rightTxt">{{rightTxt}}</span>
       </div>
     </div>
-    <div class="h44"></div>
+    <div :style="{height:statusbarHeight+44+'px'}"></div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: {
     title: {
@@ -43,14 +45,13 @@ export default {
     rightTap() {
       this.$emit('right-tap')
     }
-  }
+  },
+  computed: mapState(['statusbarHeight']),
+  
 }
 </script>
 
 <style lang="scss">
-div.h44 {
-  height: 44px;
-}
 .headerContainer {
   position: fixed;
   left: 0;
@@ -85,9 +86,6 @@ div.h44 {
         height: 20px;
       }
     }
-  }
-  .occupy {
-    height: var(--status-bar-height);
   }
 }
   .lowZindex{div.headerContainer{z-index: 0}}

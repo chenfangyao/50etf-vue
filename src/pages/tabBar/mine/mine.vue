@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap black1">
+  <div class="wrap black1" :style="{'padding-top': statusbarHeight+140+'px'}">
     <headerCard></headerCard>
     <div class="items black1">
       <div class="uni-flex black2 textc1" v-hover-class="'self-hover'" v-vtap="{method: go , params: 'capital_flow/capital_flow'}">
@@ -62,7 +62,7 @@ export default {
     return {
     }
   },
-  computed: mapState(['sid', 'indextimmer', 'newlengths', 'switchObj']),
+  computed: mapState(['sid', 'indextimmer', 'newlengths', 'switchObj','statusbarHeight']),
   methods: {
     ...mapMutations(['setnewlengths']),
     go(href) {
@@ -101,11 +101,10 @@ export default {
 
 <style scoped lang="scss">
 div.wrap {
-  padding-top: 0.1px;
   background-color: #f5f5f5;
   min-height: calc(100vh - 51px);
   div.items {
-    margin: 2.8rem 0.2rem 0;
+    margin: 0 0.2rem ;
     border-radius: 5px;
     overflow: hidden;
     position: relative;

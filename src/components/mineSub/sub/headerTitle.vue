@@ -1,6 +1,6 @@
 <template>
 <div class="fixWrap black1">
-  <div class="occupy"></div>
+  <div :style="{height:statusbarHeight+'px'}"></div>
   <div class="title">
     <div class="msg">
       <span v-vtap="{method:go,params:3}" class="commonStyle1">消息</span>
@@ -17,7 +17,7 @@ export default {
 			txt:'0'
 		}
 	},
-	computed: mapState(['sid','newlengths']),
+	computed: mapState(['sid','newlengths','statusbarHeight']),
 	created(){
 		if(this.sid){
 			this.txt=this.newlengths.toString()

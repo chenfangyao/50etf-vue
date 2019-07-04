@@ -1,5 +1,5 @@
 <template>
-  <div class="black2">总计共{{total}}笔</div>
+  <div class="black1">总计共{{total}}笔</div>
 </template>
 <script>
 export default {
@@ -14,6 +14,5 @@ div {
   line-height:.64rem;
   border-top: 1px solid #f5f5f5;
   padding-left:.26rem;
-  background: rgba(255, 255, 255, 1);
 }
 </style>

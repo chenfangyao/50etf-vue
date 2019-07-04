@@ -48,9 +48,10 @@ export default {
         this.showErr = true
         this.tipContent = this.$validata(this.telnum, 2)
         return
-      }
+      }//以上冗余
+      
       this.showErr = false
-      if ([2, 3, 5].indexOf(this.userinfo.is_certified) != -1) {
+      if ([2, 3, 5,8,9].indexOf(this.userinfo.is_certified) != -1) {
         var options = {
           url: '/Sapi/User/realn',
           method: 'POST',
