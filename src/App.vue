@@ -91,7 +91,7 @@ export default {
     },
     getNotic(){
       var options = {
-        url: '/Sapi/Article/popup', //请求接口
+        url: '/Sapi/Article/popup', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -105,7 +105,7 @@ export default {
     },
     getConf() {
       var options = {
-        url: '/Sapi/Soft/conf', //请求接口
+        url: '/Sapi/Soft/conf', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {

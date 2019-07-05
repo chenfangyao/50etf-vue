@@ -49,7 +49,7 @@ export default {
     },
     getartlelist(id) {
       var options = {
-        url: '/Sapi/Article/notice', //请求接口
+        url: '/Sapi/Article/notice', 
         method: 'POST',
         data: {
           page_index: 0,
@@ -62,13 +62,13 @@ export default {
           this.lists = res.data.list
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     getmymessage() {
       var options = {
-        url: '/Sapi/Ucenter/message_list', //请求接口
+        url: '/Sapi/Ucenter/message_list', 
         method: 'GET',
         data: {
           page_index: 0,

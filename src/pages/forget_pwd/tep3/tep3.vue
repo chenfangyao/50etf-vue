@@ -69,7 +69,7 @@ export default {
       // 注册
     resignfun(){
           var options = {
-              url: '/Sapi/Reg/index', //请求接口
+              url: '/Sapi/Reg/index', 
               data: {
                   mobile: this.tel,
                   user_name: this.uName,
@@ -91,14 +91,14 @@ export default {
                   return
               }
           }).catch((err) => {
-              // 请求失败的回调
+              
               console.error(err,'捕捉')
           })
       },
 			// 忘记密码
 	resetped(){
 				var options = {
-						url: '/Sapi/User/resetPwd ', //请求接口
+						url: '/Sapi/User/resetPwd ', 
 						data: {
 								mobile: this.tel,
 								user_pwd:this.pwd2,
@@ -118,7 +118,7 @@ export default {
 								return
 						}
 				}).catch((err) => {
-						// 请求失败的回调
+						
 						console.error(err,'捕捉')
 				})
 			}

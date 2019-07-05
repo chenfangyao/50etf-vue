@@ -51,7 +51,7 @@ export default {
         return
       }
       var options = {
-        url: '/Sapi/Ufund/remit_other', //请求接口
+        url: '/Sapi/Ufund/remit_other', 
         method: 'POST',
         data: {
           pay_money: this.money,

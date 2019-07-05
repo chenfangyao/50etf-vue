@@ -79,7 +79,7 @@ export default {
     // 注册
     resignfun() {
       var options = {
-        url: '/Sapi/Reg/index', //请求接口
+        url: '/Sapi/Reg/index', 
         data: {
           mobile: this.tel,
           user_name: this.uName,
@@ -104,7 +104,7 @@ export default {
           return
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -115,7 +115,7 @@ export default {
     phoneisLogin() {
       this.verifyYes = false
       var options = {
-        url: '/Sapi/Reg/existsmobile', //请求接口
+        url: '/Sapi/Reg/existsmobile', 
         data: {
           mobile: this.tel,
           user_name: this.uName
@@ -140,7 +140,7 @@ export default {
           // return
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

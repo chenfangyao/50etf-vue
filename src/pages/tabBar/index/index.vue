@@ -91,7 +91,7 @@ export default {
       { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }]
       stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
-        url: '/stockStat/getCommonSelectStock', //请求接口
+        url: '/stockStat/getCommonSelectStock', 
         method: 'POST',
         data: { stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -118,7 +118,7 @@ export default {
           }
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

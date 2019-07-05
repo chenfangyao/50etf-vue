@@ -1,9 +1,9 @@
 <template>
-	<div class="wrap">
-	  <base-header title="提现"  has-back='1'  right-txt='提现记录'  @right-tap='rightTap'></base-header>
-    <recharge-way v-if="hasBank" :way-lists='wayLists' :logo-img='logoImg' :txt1='bankName' :txt2='txts1' go-to='1'></recharge-way>
-    <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' :logo-img='logoImg' txt1='请绑定银行卡' go-to='1'></recharge-way>
-		<div class="panel black2">
+  <div class="wrap">
+    <base-header title="提现" has-back='1' right-txt='提现记录' @right-tap='rightTap'></base-header>
+    <recharge-way v-if="hasBank"></recharge-way>
+    <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户'  txt1='请绑定银行卡' to-addcard="1"></recharge-way>
+    <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">提现金额</div>
         <input type="number" class="black2 textc1" v-model="money">
@@ -11,7 +11,7 @@
       </div>
       <div class="overage">
         <span>可提现余额：</span>
-        <span>{{assetsList.cash_money}}元</span>
+        <span>{{assetsObj.cash_money}}元</span>
         <span class="allWithdraw" v-vtap="{method:allGet}">全部提现</span>
       </div>
     </div>
@@ -20,49 +20,47 @@
       <div class="bottomTip">温馨提示：最小提现金额100元</div>
 
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import rechargeWay from '@/components/assetsSub/rechargeWay.vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: { btnBlock, rechargeWay },
   data() {
     return {
       money: '',
-      wayLists: ['招商银行'],
       hasBank: false,
-      bankName: '',
-			txts1:'',
-      timmer:null,
-      assetsList:{},
-      logoImg:''
+      timmer: null,
+      assetsObj: {},
     }
   },
   created() {
     this.mybankinfo()
     this.getassets()
-    this.timmer=setInterval(()=>this.getassets(),3000)
+    this.timmer = setInterval(() => this.getassets(), 3000)
   },
-  beforeDestroy(){
+  beforeDestroy() {
     clearInterval(this.timmer)
-    this.timmer=null
+    this.timmer = null
   },
   methods: {
+    ...mapMutations(['setpaylist']),
     rightTap() {
-      this.$navigateTo({ url: '/pages/assets_sub/recording/recording' ,query:{type:2}})
+      this.$navigateTo({ url: '/pages/assets_sub/recording/recording', query: { type: 2 } })
     },
     doWhat() {
-      var cash_money=this.assetsList.cash_money.replace(/,/g,'')
-       if(cash_money-this.money<0){
+      var cash_money = this.assetsObj.cash_money.replace(/,/g, '')
+      if (cash_money - this.money < 0) {
         this.$toast('可提现金额不足')
         return
       }
       var options = {
-        url: '/Sapi/Ufund/cash', //请求接口
-        method: 'POST', 
+        url: '/Sapi/Ufund/cash', 
+        method: 'POST',
         data: {
           money: this.money
         }
@@ -70,56 +68,50 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$router.push({
-            path:'/pages/assets_sub/recording/recording',
-            query:{
-              type:2,
+            path: '/pages/assets_sub/recording/recording',
+            query: {
+              type: 2,
             }
           })
         } else {
           this.$toast.fail(res.info ? res.info : '提现申请失败')
         }
       }).catch((err) => {
-        console.error(err,'捕捉')
+        console.error(err, '捕捉')
       })
     },
     allGet() {
-      this.money = this.assetsList.cash_money.replace(/,/g, '')
+      this.money = this.assetsObj.cash_money.replace(/,/g, '')
     },
     // 我的银行
     mybankinfo() {
       var options = {
-        url: '/Sapi/Ubank/info', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/bankcard_list',
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          this.logoImg=res.data.img
-          if (res.data.sub_id != undefined) {
+          if (res.data.list.length > 0) {
             this.hasBank = true
-            this.bankName = res.data.bank_name
-						this.wayLists[0]=res.data.bank_name
-            this.txts1=res.data.cardno
+            this.setpaylist(res.data.list)
           }
-        } else {
-
         }
       }).catch((err) => {
-        // 请求失败的回调
-        console.error(err,'捕捉')
+        
+        console.error(err, '捕捉')
       })
     },
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', //请求接口
-        method: 'GET', 
+        url: '/Sapi/User/asset', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status == 1) {
-					this.assetsList=res.data
+          this.assetsObj = res.data
         }
       })
     },
-    // 提现
   }
 }
 </script>
@@ -133,56 +125,56 @@ div.wrap {
     padding: 0.1px.46rem;
     background-color: #fff;
     div.inputContainer {
-      padding-top:.36rem;
+      padding-top: 0.36rem;
       position: relative;
-      margin-bottom:.29rem;
+      margin-bottom: 0.29rem;
       div.moneyTitle {
         font-size: 14px;
         color: rgba(24, 28, 40, 1);
-        margin-bottom:.37rem;
+        margin-bottom: 0.37rem;
       }
       input {
         font-size: 32px;
         color: rgba(24, 28, 40, 1);
         border-bottom: 1px solid #ccc;
-        padding: 0 0 .20rem 20px;
+        padding: 0 0 0.2rem 20px;
         /*height: 32px !important;*/
         width: 100%;
       }
       > span {
         font-size: 18px;
         color: rgba(24, 28, 40, 1);
-        line-height:.33rem;
+        line-height: 0.33rem;
         position: absolute;
         left: -3px;
-        top:1.50rem;
+        top: 1.5rem;
       }
     }
     div.overage {
       font-size: 14px;
       color: rgba(136, 138, 161, 1);
       line-height: 14px;
-      margin-bottom:.49rem;
+      margin-bottom: 0.49rem;
       span.allWithdraw {
         font-size: 14px;
         color: $primary1;
-        margin-left:.15rem;
+        margin-left: 0.15rem;
       }
     }
     div.priceItem {
       justify-content: space-between;
       flex-wrap: wrap;
       > div {
-        width:2.00rem;
-        height:.74rem;
+        width: 2rem;
+        height: 0.74rem;
         background: rgba(245, 245, 245, 0);
         border: 1px solid $primary1;
-        border-radius:.02rem;
+        border-radius: 0.02rem;
         text-align: center;
-        line-height:.74rem;
+        line-height: 0.74rem;
         font-size: 15px;
         flex-shrink: 0;
-        margin-bottom:.36rem;
+        margin-bottom: 0.36rem;
         color: $primary1;
       }
       div.active {
@@ -193,7 +185,7 @@ div.wrap {
   }
   div.fixView {
     position: absolute;
-    bottom:.60rem;
+    bottom: 0.6rem;
     left: 0;
     right: 0;
     div.bottomTip {
@@ -201,7 +193,7 @@ div.wrap {
       color: $primary1;
       text-align: center;
       line-height: 13px;
-      margin-top:.36rem;
+      margin-top: 0.36rem;
     }
   }
 }

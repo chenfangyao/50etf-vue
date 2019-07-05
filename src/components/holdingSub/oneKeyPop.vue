@@ -44,7 +44,7 @@ export default {
     // 获取资金列表
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', //请求接口
+        url: '/Sapi/User/asset', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -52,7 +52,7 @@ export default {
           this.enable_money = res.data.enable_money
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -64,7 +64,7 @@ export default {
         return
       }
       var options = {
-        url: '/Sapi/Stock/sell', //请求接口
+        url: '/Sapi/Stock/sell', 
         method: 'POST',
         data: {
           price: this.resObj.last_price,
@@ -90,7 +90,7 @@ export default {
         }
 
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

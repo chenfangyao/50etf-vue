@@ -74,7 +74,7 @@ export default {
     },
     getmymessage() {
       var options = {
-        url: '/Sapi/Ucenter/message_list', //请求接口
+        url: '/Sapi/Ucenter/message_list', 
         method: 'GET',
         data: {
           page_index: 0,

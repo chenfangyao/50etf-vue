@@ -41,7 +41,7 @@ export default {
     },
     getItem() {
       var obj = {
-        url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
+        url: '/fiftyEtf/QrySingleQuotationMsg', 
         method: 'POST', 
         dataType: "json",
         data: {
@@ -58,7 +58,7 @@ export default {
     },
     gethyinfoprice() {
       var obj = {
-        url: '/Sapi/Stock/hyinfo', //请求接口
+        url: '/Sapi/Stock/hyinfo', 
         method: 'POST', 
         dataType: "json",
         data: {

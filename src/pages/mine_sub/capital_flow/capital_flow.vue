@@ -82,7 +82,7 @@ export default {
     capicalflow(add) {
       this.resquestState = 1
       var options = {
-        url: '/Sapi/Squery/list_funds', //请求接口
+        url: '/Sapi/Squery/list_funds', 
         method: 'GET',
         data: {
           page_index: this.pageindex,
@@ -113,7 +113,7 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

@@ -62,7 +62,7 @@ export default {
       pickerCityValueArray: {},
       pickerSubBankArray: {},
       pickerText: '',
-      pickerCityText: '北京-北京',
+      pickerCityText: '北京市-北京',
       pickSubBankText: '',
       bankid: '',
       idno: '',
@@ -145,8 +145,8 @@ export default {
     },
     getbanklist() {
       var options = {
-        url: '/Sapi/Ubank/bank_list', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/bank_list', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -166,14 +166,14 @@ export default {
           this.pickerText = '获取银行卡列表失败'
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     getprovlist(index) {
       var options = {
-        url: '/Sapi/Ubank/province_list', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/province_list', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -199,14 +199,14 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     getcitylist(index, prov_cd) {
       var options = {
-        url: '/Sapi/Ubank/city_list', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/city_list', 
+        method: 'GET',
         data: {
           prov_cd: prov_cd
         }
@@ -227,15 +227,15 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     // 支行列表
     getsubbanklist(bank_id, prov_cd, city_cd) {
       var options = {
-        url: '/Sapi/Ubank/sub_list', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/sub_list', 
+        method: 'GET',
         data: {
           bank_id: bank_id,
           prov_cd: prov_cd,
@@ -268,15 +268,15 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     // 我的银行
     mybankinfo() {
       var options = {
-        url: '/Sapi/Ubank/info', //请求接口
-        method: 'GET', 
+        url: '/Sapi/Ubank/info', 
+        method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
@@ -293,7 +293,7 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -307,9 +307,9 @@ export default {
             sub_id: this.sub_id,
             cardno: this.bankcardid,
             cardname: this.cardname,
-            sub_name:this.pickSubBankText,
-            city_id:this.city_cd,
-            bank_id:this.bankid
+            sub_name: this.pickSubBankText,
+            city_id: this.city_cd,
+            bank_id: this.bankid
           })
         })
       }
@@ -323,10 +323,10 @@ export default {
     this.getbanklist()
     this.getprovlist()
     // this.getsubbanklist('102', '110', '1000')
-    // if (opt.bankinfo == 0) {
-    //   this.editdefault = true
-    //   this.btntxt = '保存'
-    // }
+    if (!this.$route.query.bankinfo) {
+      this.editdefault = true
+      this.btntxt = '保存'
+    }
   }
 }
 </script>

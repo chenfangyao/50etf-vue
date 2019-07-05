@@ -51,7 +51,7 @@ export default {
     },
     resetPwd() {
       var options = {
-        url: '/Sapi/User/savePwd', //请求接口
+        url: '/Sapi/User/savePwd', 
         data: {
           user_oldpwd: this.pwd1,
           user_pwd: this.pwd2
@@ -76,7 +76,7 @@ export default {
           // return
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

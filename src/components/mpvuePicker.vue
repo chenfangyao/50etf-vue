@@ -400,7 +400,7 @@
 			// 获取城市列表
 			getcitylist(e,index,prov_cd){
 					var options = {
-							url: '/Sapi/Ubank/city_list', //请求接口
+							url: '/Sapi/Ubank/city_list', 
 							method: 'GET', 
 							data:{
 								prov_cd:prov_cd
@@ -436,7 +436,7 @@
 									
 							}
 					}).catch((err) => {
-							// 请求失败的回调
+							
 							console.error(err,'捕捉')
 					})
 			},

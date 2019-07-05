@@ -65,7 +65,7 @@ export default {
     // 获取资金列表
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', //请求接口
+        url: '/Sapi/User/asset', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -85,7 +85,7 @@ export default {
           }
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

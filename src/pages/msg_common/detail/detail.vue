@@ -20,7 +20,7 @@ export default {
 	methods:{
 		getartcont(id){
 			var options = {
-				url: '/Sapi/Article/cont', //请求接口
+				url: '/Sapi/Article/cont', 
 				data: {
 					id: id,
 				}, //发送给服务端的数据
@@ -32,13 +32,13 @@ export default {
 					this.datetimes=this.$formatetimestr(this.conent.update_time || this.conent.create_time)
 				}
 			}).catch((err) => {
-				// 请求失败的回调
+				
 				console.error(err,'捕捉')
 			})
 		},
 		getmymessage(id){
 			var options = {
-				url: '/Sapi/Ucenter/message_cont', //请求接口
+				url: '/Sapi/Ucenter/message_cont', 
 				data: {
 					id: id,
 				}, //发送给服务端的数据
@@ -49,7 +49,7 @@ export default {
 					this.conent=res.data
 				}
 			}).catch((err) => {
-				// 请求失败的回调
+				
 				console.error(err,'捕捉')
 			})
 		}

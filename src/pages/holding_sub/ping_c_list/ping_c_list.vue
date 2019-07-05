@@ -85,7 +85,7 @@ export default {
     getDatas(add) {
       this.resquestState = 1
       var options = {
-        url: '/Sapi/Squery/list_balsell', //请求接口
+        url: '/Sapi/Squery/list_balsell', 
         data: {
           page_index: this.startI,
           page_size: 10,

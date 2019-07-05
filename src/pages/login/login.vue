@@ -65,7 +65,7 @@ export default {
     handleLogin() {
         this.showErr=false
             var options = {
-                url: '/Sapi/Login/index', //请求接口
+                url: '/Sapi/Login/index', 
                 data: {
                     user_name: this.uName,
                     user_pwd: this.pwd

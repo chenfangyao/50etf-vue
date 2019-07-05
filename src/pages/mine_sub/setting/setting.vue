@@ -46,7 +46,7 @@ export default {
 
     sureloginout() {
       var options = {
-        url: '/Sapi/Login/loginout', //请求接口
+        url: '/Sapi/Login/loginout', 
         data: {
         }, //发送给服务端的数据
         method: 'POST',
@@ -61,7 +61,7 @@ export default {
         } else {
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

@@ -92,7 +92,7 @@ export default {
     getquoteList() {
       this.resquestState = 0
       var options = {
-        url: '/fiftyEtf/QryQuotationList', //请求接口
+        url: '/fiftyEtf/QryQuotationList', 
         method: 'POST', 
         data: {
           quotation_list: this.quotationStr
@@ -103,7 +103,7 @@ export default {
         this.resquestState = 1//请求状态
         this.quoteList = res.data.list
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -129,7 +129,7 @@ export default {
     getartlelist() {
       this.resquestState = 0
       var options = {
-        url: '/Sapi/Squery/list_stocks', //请求接口
+        url: '/Sapi/Squery/list_stocks', 
         method: 'GET', 
         data: {
           page_index: 0,
@@ -144,7 +144,7 @@ export default {
         this.codeList = res.data.list
         this.codeList&&this.dealquotationStr()
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -181,7 +181,7 @@ export default {
       var stockTradeMins = [{ "stockCodeInternal": "510050", "tradeMins": timestrs[0] }],
         stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
-        url: '/stockStat/getCommonSelectStock', //请求接口
+        url: '/stockStat/getCommonSelectStock', 
         method: 'POST', 
         data: { stockTradeMins: stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -193,7 +193,7 @@ export default {
           this.setcommonstock(res.ldata)
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

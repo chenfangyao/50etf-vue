@@ -45,7 +45,7 @@ export default {
   created() {
     var id = parseInt(this.$route.query.id)
     var options = {
-      url: '/Sapi/Article/cont', //请求接口
+      url: '/Sapi/Article/cont', 
       method: 'GET', 
       data: { id },
       context: '',
@@ -59,7 +59,7 @@ export default {
       this.artwenan = res.data.content.replace(/<br \/>/g, "<br/> <span style='margin-left:2em'></span>")
       this.update_time = this.$formatetimestr(res.data.update_time)
     }).catch((err) => {
-      // 请求失败的回调
+      
       console.error(err, '捕捉')
     })
   }

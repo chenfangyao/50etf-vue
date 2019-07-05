@@ -92,7 +92,7 @@ export default {
   methods: {
     gethyinfoprice() {
       var obj = {
-        url: '/Sapi/Stock/hyinfo', //请求接口
+        url: '/Sapi/Stock/hyinfo', 
         method: 'POST',
         dataType: "json",
         data: {

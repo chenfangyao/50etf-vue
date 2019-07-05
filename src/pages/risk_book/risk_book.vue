@@ -31,7 +31,7 @@
 		methods:{
 			conf() {
 			  var options = {
-			    url: '/Sapi/Article/cont', //请求接口
+			    url: '/Sapi/Article/cont', 
 			    data: {
 			      id:1
 			    }, //发送给服务端的数据
@@ -42,7 +42,7 @@
 					this.rescontent=res.data
 			    }
 			  }).catch((err) => {
-			    // 请求失败的回调
+			    
 			    console.error(err,'捕捉')
 			  })
 			},

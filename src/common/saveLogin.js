@@ -20,7 +20,7 @@ export default function () {
 }
 export function login(uName, pwd){
   var options = {
-    url: '/Sapi/Login/index', //请求接口
+    url: '/Sapi/Login/index', 
     data: {
       user_name: uName,
       user_pwd: pwd
@@ -37,7 +37,7 @@ export function login(uName, pwd){
 }
 export function getuserinfo() {
   var options = {
-    url: '/Sapi/User/info', //请求接口
+    url: '/Sapi/User/info', 
     method: 'GET',
   }
   request(options).then(res => {

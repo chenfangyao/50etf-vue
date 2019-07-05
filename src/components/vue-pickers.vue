@@ -365,7 +365,7 @@ export default {
     // 暂时
     getcitylist(index, prov_cd, endVal) {
       var options = {
-        url: '/Sapi/Ubank/city_list', //请求接口
+        url: '/Sapi/Ubank/city_list', 
         method: 'GET',
         data: {
           prov_cd: prov_cd
@@ -399,7 +399,7 @@ export default {
 
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

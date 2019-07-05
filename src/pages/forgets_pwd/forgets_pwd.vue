@@ -75,7 +75,7 @@ export default {
           return
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -99,7 +99,7 @@ export default {
     // 获取验证码
     getyamfunc() {
       var options = {
-        url: '/Sapi/Code/sendex', //请求接口
+        url: '/Sapi/Code/sendex', 
         data: {
           mobile: this.tel,
           type: 'resetpass'
@@ -120,7 +120,7 @@ export default {
           }
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

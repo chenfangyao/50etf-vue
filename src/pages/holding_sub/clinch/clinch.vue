@@ -92,7 +92,7 @@ export default {
     getDatas(add) {
       this.resquestState = 1
       var options = {
-        url: '/Sapi/Squery/list_buss', //请求接口
+        url: '/Sapi/Squery/list_buss', 
         data: {
           page_index: this.startI,
           page_size: 10,

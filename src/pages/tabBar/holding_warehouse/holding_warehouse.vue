@@ -120,7 +120,7 @@ export default {
           break
       }
       var options = {
-        url, //请求接口
+        url, 
         data: {
           page_index:all?0: this.titleList[i].startI,
           page_size:all?this.titleList[i].list.length: 10,

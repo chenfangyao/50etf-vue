@@ -102,7 +102,7 @@ export default {
     // 支付宝支付
     remit_alipay() {
       var options = {
-        url: '/Sapi/Ufund/remit_alipay', //请求接口
+        url: '/Sapi/Ufund/remit_alipay', 
         method: 'POST',
         data: {
           pay_money: this.paymoney,
@@ -125,13 +125,13 @@ export default {
           })
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
       })
     },
     // 银行卡支付
     remit_bank() {
       var options = {
-        url: '/Sapi/Ufund/remit_bank', //请求接口
+        url: '/Sapi/Ufund/remit_bank', 
         method: 'POST',
         data: {
           pay_money: this.paymoney,
@@ -152,7 +152,7 @@ export default {
           })
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
       })
     },
     showPicker() {

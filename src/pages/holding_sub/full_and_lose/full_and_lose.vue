@@ -68,7 +68,7 @@ export default {
       }
      // this.$router.goBack()
       var options = {
-        url: '/Sapi/Hold/sltp_set', //请求接口
+        url: '/Sapi/Hold/sltp_set', 
         method: 'POST', 
         data: {
           hid: parseInt(this.resObj.id),
@@ -94,7 +94,7 @@ export default {
             this.$toast(res.info ? res.info : '设置失败')
           }
         }).catch((err) => {
-          // 请求失败的回调
+          
           console.error(err,'捕捉')
           this.$toast('设置失败')
         })

@@ -32,7 +32,7 @@ export default {
   methods: {
     getredEnvList() {
       var options = {
-        url: '/Sapi/Ufund/redbag_list', //请求接口
+        url: '/Sapi/Ufund/redbag_list', 
         method: 'GET',
         data: {
           page_index: 0,
@@ -47,7 +47,7 @@ export default {
           this.$toast(res.info ? res.info : '暂无记录')
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     }

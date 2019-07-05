@@ -69,7 +69,7 @@ export default {
     // 买入卖出合约详细
     getartlelist(firstReq) {
       var options = {
-        url: '/fiftyEtf/QrySingleQuotationMsg', //请求接口
+        url: '/fiftyEtf/QrySingleQuotationMsg', 
         method: 'POST', 
         dataType: "json",
         data: {
@@ -85,7 +85,7 @@ export default {
           firstReq&&this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
         }
       }).catch(err => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -98,7 +98,7 @@ export default {
     // 获取最大可买数量
     getmaxbuy(codes, prices, amounts) {
       var options = {
-        url: this.onClose?'/Sapi/Stock/max_sell':'/Sapi/Stock/max_buy', //请求接口
+        url: this.onClose?'/Sapi/Stock/max_sell':'/Sapi/Stock/max_buy', 
         method: 'POST', 
         dataType: "json",
         data: {
@@ -147,7 +147,7 @@ export default {
     // 分笔持仓
     getfbchic() {
       var options = {
-        url: '/Sapi/Squery/list_fbcc_dropdown_sell', //请求接口
+        url: '/Sapi/Squery/list_fbcc_dropdown_sell', 
         method: 'GET', 
         dataType: "json",
       }
@@ -162,14 +162,14 @@ export default {
           }
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     // 合并持仓
     gethbchic() {
       var options = {
-        url: '/Sapi/Squery/list_hbcc_dropdown_sell', //请求接口
+        url: '/Sapi/Squery/list_hbcc_dropdown_sell', 
         method: 'GET', //请求方法全部大写，默认GETGET
         dataType: "json",
       }
@@ -183,7 +183,7 @@ export default {
           }
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

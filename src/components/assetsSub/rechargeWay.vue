@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="rechargeWay root-el uni-flex" v-vtap="{method:switchPop}">
-      <img class="zhifubao" :src="logoImg||banklogo">
+      <img class="zhifubao" :src="banklogo">
       <div class="txt">
         <div class="textc1">{{textbank}}</div>
         <div v-if="txt2">
@@ -30,38 +30,49 @@ export default {
       showAction: false,
       textbank: '',
       banklogo: '',
+      txt2: '',
     }
   },
   props: {
     txt1: '',
-    txt2: {},
-    logoImg: ''
+    logoImg: '',
+    toAddcard: 0
+
   },
   methods: {
-    chooseWay(i) {
-      this.$emit('change-wayi', i)
-      this.textbank = i.pay_name
-      this.banklogo = i.logo
+    chooseWay(obj) {
+      this.$emit('change-wayi', obj)
+      this.setSth(obj)
       this.switchPop()
     },
     switchPop() {
+      if (this.toAddcard) {
+        this.$navigateTo({
+          url: '/pages/mine_sub/bank_card/add_card/add_card',
+          query: { bankinfo: 0 }
+        })
+        return
+      }
       this.showAction = !this.showAction
     },
     assignment(arr) {
       if (arr.length === 0) return;
+      let obj = arr[0]
       if (this.paylist.default_pay) {
         for (let i = 0; i < arr.length; i++) {
           if (arr[i].pay_code === this.paylist.default_pay) {
-            this.textbank = arr[i].pay_name
-            this.banklogo = arr[i].logo
-            this.$emit('calc-default', arr[i])
-            return
+            obj = arr[i]
+            break
           }
         }
-      }
-      this.textbank = arr[0].pay_name
-      this.banklogo = arr[0].logo
-      this.$emit('calc-default', arr[0])
+      } 
+      this.$emit('calc-default', obj)
+      this.setSth(obj)
+    },
+    setSth(obj) {
+      this.textbank = obj.pay_name || obj.bank_name
+      this.banklogo = obj.logo
+      obj.pay_name || (this.txt2 = obj.cardno.slice(-4))
     }
   },
 

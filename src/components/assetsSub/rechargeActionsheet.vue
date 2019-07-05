@@ -11,8 +11,8 @@
         <div class="item uni-flex black1 " v-for="(item,i) in wayLists" :key='i' v-vtap="{method: chooseWay , params: item}" v-hover-class='"self-hover"'>
           <img :src="item.logo">
           <div class="txt">
-            <div class="wayName textc1">{{item.pay_name}}</div>
-            <!-- <div class="wayTip">提示限额（0-50,000）</div> -->
+            <div class="wayName textc1">{{item.pay_name||item.bank_name}}</div>
+            <div class="wayTip" v-if="!item.pay_name">尾号{{item.cardno.slice(-4)}}</div>
           </div>
         </div>
       </div>
@@ -45,11 +45,13 @@ export default {
     }
   },
   props: ['showAction'],
-  mounted() {
-
-  },
   watch: {
     paylist(val) {
+      if (Object.prototype.toString.call(val).indexOf('Array') != -1) {
+        this.wayLists = val
+        this.$emit('calc-complete', this.wayLists)
+        return
+      }
       let online = []
       for (let i = 0; i < val['online'].length; i++) {
         val.online[i].pay_way = 'online'
@@ -84,8 +86,8 @@ div.mask {
     left: 0;
     right: 0;
     height: 300px;
-    div.items{
-     overflow-y: scroll;
+    div.items {
+      overflow-y: scroll;
       height: calc(300px - 0.98rem);
     }
     div.title {
@@ -115,7 +117,7 @@ div.mask {
       }
       div.wayTip {
         font-size: 12px;
-        color: rgba(24, 28, 40, 1);
+        color: #999;
       }
       img {
         width: 0.76rem;

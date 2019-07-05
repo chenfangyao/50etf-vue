@@ -80,7 +80,7 @@ export default {
     },
     revoke() {
       var options = {
-        url: '/Sapi/Stock/revoke', //请求接口
+        url: '/Sapi/Stock/revoke', 
         data: {
           eid: this.eid
         },

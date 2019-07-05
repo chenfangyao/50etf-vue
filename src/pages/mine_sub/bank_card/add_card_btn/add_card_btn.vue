@@ -4,10 +4,10 @@
     <ul class="black2">
       <li class="uni-flex" v-for="(item ,i) in cardList" :key="i" :style="item | calcBg">
         <div class="iconDiv">
-          <img :src="item.img_url" alt="">
+          <img :src="item.logo" alt="">
         </div>
         <div class="rightPart">
-          <div class="flr" v-vtap="{method:unbind,params:item.cardno}">解绑</div>
+          <div class="flr" v-vtap="{method:toUnbind,params:item.cardno}">解绑</div>
           <div class="line1">{{item.bank_name}}</div>
           <div class="line2">储蓄卡</div>
           <div class="line3">
@@ -49,27 +49,18 @@ export default {
     addbank() {
       this.$navigateTo({
         url: '/pages/mine_sub/bank_card/add_card/add_card',
-        // query: { bankinfo: 0 }
+        query: { bankinfo: 0 }
       })
     },
-    unbind(cardno) {
-      let options = {
-        url: ' /Sapi/Ubank/unbind',
-        method: 'POST',
-        data: { cardno }
-      }
-      this.$dialog.confirm({
-        title: '解绑',
-        message: '确定这张解绑银行卡',
-        lockScroll: true,
-        beforeClose:(action, done) =>{
-          done()
-          action === 'confirm' && this.$httpReq(options).then(res => {
-            this.$toast({ message: res.info})
-            this.getCardList()
-          });
+    toUnbind(cardno) {
+      this.$router.push({
+        path: '/pages/forget_pwd/tep2/tep2',
+        query: {
+          type: 'unbind',
+          cardno,
+          typeWhat: 2
         }
-      });
+      })
     },
     getCardList() {
       this.$httpReq({ url: '/Sapi/Ubank/bankcard_list' }).then(res => this.cardList = res.data.list)

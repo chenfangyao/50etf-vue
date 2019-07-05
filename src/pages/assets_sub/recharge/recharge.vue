@@ -1,8 +1,7 @@
 <template>
   <div class="wrap" :class="showTable? 'mengban':''">
     <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
-    <!-- <recharge-way :way-lists='wayList' @change-wayi='changeWayI' txt1='提示限额' txt2='（0-50,000）'></recharge-way> -->
-    <recharge-way :way-lists='wayList' @calc-default='calcDefault' @change-wayi='changeWayI' txt1='' txt2=''></recharge-way>
+    <recharge-way  @calc-default='calcDefault' @change-wayi='changeWayI' ></recharge-way>
     <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">充值金额</div>
@@ -170,7 +169,6 @@ export default {
       money: '',
       priceLists: [],
       priceItem_i: 0,
-      wayList: [],
       inputDisabled: true,
       paytype: 'remit_alipay',
       payeeinfo: {},
@@ -276,7 +274,7 @@ export default {
     },
     getpayway() {
       var options = {
-        url: '/Sapi/Ufund/payway', //请求接口
+        url: '/Sapi/Ufund/payway', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {

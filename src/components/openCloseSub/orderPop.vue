@@ -98,7 +98,7 @@ export default {
     // 获取资金列表
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', //请求接口
+        url: '/Sapi/User/asset', 
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -106,13 +106,13 @@ export default {
           this.enable_money = res.data.enable_money
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
     stockbuy() {
       var options = {
-        url: '/Sapi/Stock/buy', //请求接口
+        url: '/Sapi/Stock/buy', 
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
@@ -137,7 +137,7 @@ export default {
           this.$toast(res.info ? res.info : '买入失败')
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },
@@ -147,7 +147,7 @@ export default {
         hid = parseInt(fbccid)
       }
       var options = {
-        url: '/Sapi/Stock/sell', //请求接口
+        url: '/Sapi/Stock/sell', 
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
@@ -172,7 +172,7 @@ export default {
           this.$toast(res.info ? res.info : '卖出失败')
         }
       }).catch((err) => {
-        // 请求失败的回调
+        
         console.error(err, '捕捉')
       })
     },

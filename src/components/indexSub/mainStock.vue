@@ -52,7 +52,7 @@ export default {
     getquoteList() {
       this.resquestState = 0
       var options = {
-        url: '/fiftyEtf/QryQuotationList', //请求接口
+        url: '/fiftyEtf/QryQuotationList', 
         method: 'POST',
         data: {
           quotation_list: this.quotationStr
