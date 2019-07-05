@@ -26,10 +26,10 @@ export default {
     return {
       vCode: '',
       showErr: false,
+      tipContent: '',
       tel: '',
       uName: '',
       username: '',
-      tipContent: '',
       countdownOk: false,
       typeWhat: '',//为1时 绑定银行卡
     };

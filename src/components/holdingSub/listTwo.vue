@@ -95,7 +95,7 @@ div.list2Item {
       span {
         vertical-align: middle;
         margin-left:.20rem;
-        font-size: 1px;
+        font-size: 11px;
         color: rgba(102, 102, 102, 1);
       }
     }

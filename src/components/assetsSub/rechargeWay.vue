@@ -4,12 +4,13 @@
       <img class="zhifubao" :src="banklogo">
       <div class="txt">
         <div class="textc1">{{textbank}}</div>
-        <div v-if="txt2">
-          <span class="textc2">{{txt2}}</span>
+        <div v-if="txt1" >
+          <span class="textc2 color1">{{txt1}}</span>
         </div>
-        <div v-if="txt1">
-          <span class="textc2">{{txt1}}</span>
+        <div v-if="txt3||txt2">
+          <span class="textc2">{{txt3||txt2}}</span>
         </div>
+        
       </div>
       <s-icon class="to_r" icon-class="enterright"></s-icon>
 
@@ -30,10 +31,11 @@ export default {
       showAction: false,
       textbank: '',
       banklogo: '',
-      txt2: '',
+      txt3: '',
     }
   },
   props: {
+    txt2: '',
     txt1: '',
     logoImg: '',
     toAddcard: 0
@@ -65,14 +67,14 @@ export default {
             break
           }
         }
-      } 
+      }
       this.$emit('calc-default', obj)
       this.setSth(obj)
     },
     setSth(obj) {
       this.textbank = obj.pay_name || obj.bank_name
       this.banklogo = obj.logo
-      obj.pay_name || (this.txt2 = obj.cardno.slice(-4))
+      obj.pay_name || (this.txt3 = obj.cardno.slice(-4) )
     }
   },
 
@@ -94,6 +96,11 @@ div.rechargeWay {
   div.txt {
     flex-grow: 1;
     margin-left: 0.35rem;
+    .color1{
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
     div {
       font-size: 15px;
       color: rgba(24, 28, 40, 1);

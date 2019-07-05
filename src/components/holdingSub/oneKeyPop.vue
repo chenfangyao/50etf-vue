@@ -9,7 +9,7 @@
           <span>委托价格</span>
           <span>委托数量</span>
           <span>有效期</span>
-          <span>预估支付金额</span>
+          <span>预估金额</span>
         </div>
         <div class="uni-flex">
           <span>{{resObj.stock_name}}</span>

@@ -39,12 +39,14 @@
       <span>姓名</span>
       <input type="text" maxlength="10" v-model="cardname" placeholder="填写姓名">
     </div>
-    <div class="list-row">
+    <!-- <div class="list-row">
       <span>身份证号</span>
       <input type="text" v-model="idno" maxlength="18" placeholder="填写收款银行身份证">
-    </div>
+    </div> -->
+
     <div class="fixBottom">
-      <btn-block :txt="btntxt" @v-tap="addbank"></btn-block>
+    <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
+      <btn-block txt="下一步" @v-tap="addbank"></btn-block>
     </div>
   </div>
 </template>
@@ -54,10 +56,13 @@ import btnBlock from '@/components/btnBlock.vue'
 import { Picker, Popup } from 'vant';
 import { mapState, mapMutations } from 'vuex';
 import vuePickers from '@/components/vue-pickers'
+import errTip from '@/components/commonResgLog/errtip.vue'
 
 export default {
   data() {
     return {
+      showErr: false,
+      tipContent: '',
       pickerValueArray: {},
       pickerCityValueArray: {},
       pickerSubBankArray: {},
@@ -72,7 +77,7 @@ export default {
       city_cd: '',
       sub_id: '',
       btntxt: '修改',
-      editdefault: false,
+      editdefault: true,
       show1: false,
       show2: false,
       show3: false,
@@ -83,12 +88,7 @@ export default {
     };
   },
   computed: mapState(['mobile', 'userinfo']),
-  components: {
-    btnBlock,
-    vuePickers,
-    [Picker.name]: Picker,
-    [Popup.name]: Popup,
-  },
+  components: { btnBlock, vuePickers, [Picker.name]: Picker, [Popup.name]: Popup, errTip },
   methods: {
     // 二级表单联动
     touchEnd(val, type) {
@@ -145,7 +145,7 @@ export default {
     },
     getbanklist() {
       var options = {
-        url: '/Sapi/Ubank/bank_list', 
+        url: '/Sapi/Ubank/bank_list',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -166,13 +166,13 @@ export default {
           this.pickerText = '获取银行卡列表失败'
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     getprovlist(index) {
       var options = {
-        url: '/Sapi/Ubank/province_list', 
+        url: '/Sapi/Ubank/province_list',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -199,13 +199,13 @@ export default {
 
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     getcitylist(index, prov_cd) {
       var options = {
-        url: '/Sapi/Ubank/city_list', 
+        url: '/Sapi/Ubank/city_list',
         method: 'GET',
         data: {
           prov_cd: prov_cd
@@ -227,14 +227,14 @@ export default {
 
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     // 支行列表
     getsubbanklist(bank_id, prov_cd, city_cd) {
       var options = {
-        url: '/Sapi/Ubank/sub_list', 
+        url: '/Sapi/Ubank/sub_list',
         method: 'GET',
         data: {
           bank_id: bank_id,
@@ -261,21 +261,16 @@ export default {
             data1.push(bankObj)
           }
           this.pickerSubBankArray.data1 = data1
-          if (this.btntxt == '修改') {
+          /* if (this.btntxt == '修改') {
             this.mybankinfo()
-          }
-        } else {
-
+          } */
         }
-      }).catch((err) => {
-        
-        console.error(err, '捕捉')
       })
     },
     // 我的银行
     mybankinfo() {
       var options = {
-        url: '/Sapi/Ubank/info', 
+        url: '/Sapi/Ubank/info',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -293,31 +288,40 @@ export default {
 
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     addbank() {
-      if (this.btntxt == '保存') {
-        this.$router.push({
-          path: '/pages/forget_pwd/tep2/tep2',
-          query: ({
-            // idno: this.idno,
-            typeWhat: 1,
-            sub_id: this.sub_id,
-            cardno: this.bankcardid,
-            cardname: this.cardname,
-            sub_name: this.pickSubBankText,
-            city_id: this.city_cd,
-            bank_id: this.bankid
-          })
-        })
+      let query = {
+        typeWhat: 1,
+        sub_id: this.sub_id,
+        cardno: this.bankcardid,
+        cardname: this.cardname,
+        sub_name: this.pickSubBankText,
+        city_id: this.city_cd,
+        bank_id: this.bankid
       }
-      this.btntxt = '保存'
-      this.editdefault = true
+      var options = {
+        url: '/Sapi/Ubank/bind_new',
+        method: 'POST',
+        data: {
+          ...query,
+          step: 1
+        }
+      }
+      this.$httpReq(options).then((res) => {
+        if (res.status) {
+          this.$router.push({
+            path: '/pages/forget_pwd/tep2/tep2',
+            query
+          })
+        } else {
+          this.showErr = true
+          this.tipContent = res.info
+        }
+      })
     },
-    pickChange(e) {
-    }
   },
   created() {
     this.getbanklist()
@@ -325,7 +329,6 @@ export default {
     // this.getsubbanklist('102', '110', '1000')
     if (!this.$route.query.bankinfo) {
       this.editdefault = true
-      this.btntxt = '保存'
     }
   }
 }
@@ -356,7 +359,6 @@ div.wrap {
     background: rgba(255, 255, 255, 1);
     border-bottom: 1px solid #eee;
     line-height: 1rem;
-    padding-left: 0.37rem;
     display: flex;
     align-items: center;
     > span:first-child {
@@ -379,7 +381,7 @@ div.wrap {
   }
 }
 div.chooseCount {
-  width: 4.5rem;
+  width: 4.8rem;
   height: 0.5rem;
   line-height: 0.5rem;
   // text-align: center;

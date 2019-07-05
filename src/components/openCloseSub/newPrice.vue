@@ -34,7 +34,6 @@
                   <van-checkbox-group v-model="result" @change="toggle">
                     <van-cell-group>
                       <van-cell v-for="(item,index) in items" :key="index" class="vanCell">
-                        <!-- v-vtap="{method: toggle , params: index}" clickable-->
                         <div :class="{itemCheck:result.indexOf(item.valueid)!=-1 }">
                           <span>{{item.name}}</span>
                           <span>{{item.texts}}</span>
@@ -83,12 +82,11 @@
     <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
       <div class="imgbtn uni-flex">
         <div class="hasImg" v-vtap="{method: plusStep , params: -1}">
-        <s-icon :icon-class="atNight?'black_adjust_lower':'adjust_lower'"></s-icon>
-
+          <s-icon :icon-class="atNight?'black_adjust_lower':'adjust_lower'"></s-icon>
         </div>
         <span class="countxt textc1">{{sliderVal}}</span>
         <div class="hasImg" v-vtap="{method: plusStep , params: 1}">
-        <s-icon :icon-class="atNight?'black_adjust_jia':'adjust_jia'"></s-icon>
+          <s-icon :icon-class="atNight?'black_adjust_jia':'adjust_jia'"></s-icon>
         </div>
       </div>
       <div class="sliderItem">
@@ -189,6 +187,7 @@ export default {
         }
       } else {//合并的情况
         this.setstockamunt(this.maxprice.enable_amount)
+        this.sellnumber='全部'
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
       }
@@ -495,7 +494,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['softconf', 'maxbuy', 'stockamunt','atNight'])
+    ...mapState(['softconf', 'maxbuy', 'stockamunt', 'atNight'])
   }
 }
 </script>
@@ -668,7 +667,8 @@ div.root-el {
     }
   }
 
-  .s-icon,img {
+  .s-icon,
+  img {
     width: 18px;
     height: 18px;
   }

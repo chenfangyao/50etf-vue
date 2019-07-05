@@ -134,7 +134,7 @@ export default {
         this.titleList[i].total = res.data.total
         if (add) {
           this.titleList[i].list = this.titleList[i].list.concat(res.data.list)
-          this.refreshScroll()
+          setTimeout(this.refreshScroll.bind(this),500)
         } else {
           this.titleList[i].list = res.data.list
         }

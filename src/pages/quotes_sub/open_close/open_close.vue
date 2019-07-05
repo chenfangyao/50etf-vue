@@ -8,7 +8,7 @@
     <new-price
       :on-close="onClose"
       :fborhb="hbfbswitch"
-      :maxprice="maxbuy"
+      :maxprice="maxprice"
       :qrysingle="QuotationMsg"
       :fbcclist="fbcclist"
       :hbcclist="hbcclist"
@@ -40,7 +40,7 @@ export default {
     return {
       QuotationMsg: {},
       onClose: false,
-      maxbuy: {},
+      maxprice: {},
       feemoney: '',
       timmer: null,
       // hycode:'',
@@ -112,21 +112,21 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          this.maxbuy = res.data
+          this.maxprice = res.data
           this.setmaxbuy(res.data)
           // 开仓
           if (!this.onClose) {
-            this.maxbuy.maxcounts = parseInt(this.maxbuy.maxcount)
+            this.maxprice.maxcounts = parseInt(this.maxprice.maxcount)
           }
           // 平仓
           else {
             // 合并
             if (!this.hbfbswitch) {
-              this.maxbuy.maxcounts = parseInt(this.maxbuy.own_amount)
+              this.maxprice.maxcounts = parseInt(this.maxprice.own_amount)
             }
             // 分笔
             else {
-              this.maxbuy.maxcounts = this.fbnum
+              this.maxprice.maxcounts = this.fbnum
             }
           }
           var hycsnum = res.data.volume_multiple

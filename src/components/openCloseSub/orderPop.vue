@@ -67,7 +67,7 @@ export default {
         }
         if (this.hbfbcell.length && !this.entrusttype) {
           // 全部平仓
-          if (this.hbfbcell[0] === 'all') {
+          if (this.stockamunt === this.maxbuy.enable_amount) {
             this.stocksell('', this.maxbuy.enable_amount)
           } else {//合并分笔平仓
             // 定时器选执行一次
