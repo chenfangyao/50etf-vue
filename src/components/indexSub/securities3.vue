@@ -64,7 +64,7 @@ section {
   h4 {
     font-size: 13px;
     font-weight: 400;
-    color: #666;
+    color: #333;
     margin: 0;
   }
 	div.redclass{

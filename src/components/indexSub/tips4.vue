@@ -70,7 +70,7 @@ div.tipItems {
   justify-content: space-around;
   span {
     font-size: 13px;
-    color: rgba(24, 28, 40, 1);
+    color: #333;
   }
 }
 </style>
