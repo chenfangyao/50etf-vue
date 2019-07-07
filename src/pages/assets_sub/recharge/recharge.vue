@@ -387,20 +387,21 @@ div.wrap {
       flex-wrap: wrap;
       > div {
         width: 2rem;
-        height: 0.74rem;
+        height: 0.82rem;
         background: rgba(245, 245, 245, 0);
-        border: 1px solid $primary1;
-        border-radius: 0.02rem;
+        border: 1px solid #999;
+        color: #333;
+        border-radius: 1px;
         text-align: center;
-        line-height: 0.74rem;
+        line-height: 0.82rem;
         font-size: 15px;
         flex-shrink: 0;
         margin-bottom: 0.36rem;
-        color: $primary1;
       }
       div.active {
-        background-color: $primary1;
-        color: #fff;
+        background-color: #ffe8e8;
+        color: $primary1;
+        border-color: $primary1;
       }
     }
   }

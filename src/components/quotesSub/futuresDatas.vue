@@ -257,35 +257,14 @@ div.root-el {
     border-radius: 0.11rem;
     text-align: center;
   }
-  div.down_c {
-    background: linear-gradient(
-      90deg,
-      rgba(58, 186, 148, 1),
-      rgba(167, 229, 208, 1)
-    );
-
-    span {
-      color: #fff;
-    }
-  }
   div.up_c {
     background: rgba(255,164,168,0.2)
     span {
       color: #fff;
     }
   }
-  div.down_c:first-child {
+  div.down_c {
     background: rgba(164,255,183,0.2);
-    span {
-      color: #fff;
-    }
-  }
-  div.up_c:first-child {
-    background: linear-gradient(
-      -90deg,
-      rgba(240, 95, 92, 1),
-      rgba(245, 186, 184, 1)
-    );
     span {
       color: #fff;
     }
