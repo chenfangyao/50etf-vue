@@ -1,5 +1,5 @@
 <template>
-  <div class="mask" v-if="showAction">
+  <div class="mask" v-if="showAction" v-vtap.self="{method:closeMe}">
     <div class="wayList black1 ">
       <div class="title">
         <div class="iconWrap " v-vtap="{method:closeMe}">
@@ -96,7 +96,7 @@ div.mask {
       text-align: center;
       .iconWrap {
         position: absolute;
-        left: 0.16rem;
+        right: 0.16rem;
         top: 0.22rem;
       }
       span {

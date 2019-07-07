@@ -2,25 +2,25 @@
   <div class="tipItems black2">
     <div v-vtap="{method: go , params: 4}">
       <div class="hasBg">
-        <img :src="img1" >
+        <img :src="img1">
       </div>
-      <span  class="textc1">交易</span>
+      <span class="textc1">交易</span>
     </div>
     <div v-vtap="{method: go , params: 1}" v-hover-class='"self-hover"'>
       <div class="hasBg bg2">
-        <img :src="img2" >
+        <img :src="img2">
       </div>
       <span class="textc1">公告</span>
     </div>
     <div v-vtap="{method: go , params: 3}">
       <div class="hasBg bg3">
-        <img :src="img3" >
+        <img :src="img3">
       </div>
       <span class="textc1">充值</span>
     </div>
     <div v-vtap="{method: go , params: 2}" v-hover-class='"self-hover"'>
       <div class="hasBg bg4">
-        <img :src="img4" >
+        <img :src="img4">
       </div>
       <span class="textc1">新手指引</span>
     </div>
@@ -29,11 +29,11 @@
 <script>
 import img1 from '@/assets/indexTabImg/jiaoyi.png'
 import img2 from '@/assets/indexTabImg/gonggao.png'
-import img3 from '@/assets/indexTabImg/chongzhi.png'
-import img4 from '@/assets/indexTabImg/xinshouzhiying.png'
+import img3 from '@/assets/indexTabImg/chonzhi.png'
+import img4 from '@/assets/indexTabImg/xinshou.png'
 export default {
-  data(){
-    return{img1,img2,img3,img4,}
+  data() {
+    return { img1, img2, img3, img4, }
   },
   methods: {
     go(i) {
@@ -45,7 +45,7 @@ export default {
           return
         default: url = '/pages/msg_common/list/list'
       }
-      this.$navigateTo({ url,query:{type:i} })
+      this.$navigateTo({ url, query: { type: i } })
     }
   },
 }
@@ -53,17 +53,17 @@ export default {
 <style lang="scss">
 div.tipItems {
   background-color: #fff;
-  padding:.24rem 0;
-  margin-top:0.1rem;
+  padding: 0.24rem 0;
+  margin-top: 0.1rem;
   border-radius: 5px;
   > div {
     text-align: center;
   }
   div.hasBg {
     img {
-      width:.94rem;
-      height:.94rem;
-      margin-top:.22rem;
+      width: 0.94rem;
+      height: 0.94rem;
+      margin-top: 0.22rem;
     }
   }
   display: flex;

@@ -44,10 +44,11 @@ export default {
 }
 </script>
 <style lang="scss">
-div.newsDiv {
+.newsDiv {
   background-color: #fff;
   padding:.20rem.24rem;
-  border-radius:.20rem;
+  border-radius:5px;
+  box-shadow:0px 3px 3px 0px rgba(245,245,245,0.6);
   margin:.20rem 0;
   h3 {
     font-size: 14px;

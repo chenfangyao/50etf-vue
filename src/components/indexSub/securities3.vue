@@ -50,7 +50,6 @@ section {
     font-size: 11px;
     font-family: ArialMT;
     font-weight: 400;
-    // color: rgba(240, 95, 92, 1);
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 5px 5px 0px rgba(245, 245, 245, 0.6);
     border-radius: 5px;
@@ -69,10 +68,10 @@ section {
     margin: 0;
   }
 	div.redclass{
-		color: rgba(240, 95, 92, 1);
+		color: $primary1;
 	}
 	div.greenclass{
-		color:#3ABA8F;
+		color:$green1;
 	}
 }
 </style>

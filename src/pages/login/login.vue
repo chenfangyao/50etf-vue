@@ -1,24 +1,24 @@
 <template>
-	<div class="wrap">
+  <div class="wrap">
     <base-header :has-back='true' title='登录'></base-header>
     <div class="h1 black2"></div>
     <div class="img"><img :src="switchObj.logo"></div>
     <div class="container">
       <!-- <input-item placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' @now-change="handChange"></input-item> -->
-      <input-item what-icon="login_zhanghao" placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur' ></input-item>
-      <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur' ></input-item>
-      <submit-btn btnTxt='登录'  @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
+      <input-item what-icon="login_zhanghao" placeholderTxt='手机号 / 账号' v-model="uName" @now-blur='handleBlur'></input-item>
+      <input-item placeholderTxt='密码' :isPwd='true' v-model="pwd" @now-blur='handleBlur'></input-item>
+      <submit-btn btnTxt='登录' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
-      <div class="txt2 uni-flex" >
+      <div class="txt2 uni-flex">
         <span v-vtap="{method: go , params: 1}">注册用户</span>
         <span v-vtap="{method: go , params: 2}">忘记密码 ？</span>
       </div>
     </div>
     <div class="bottomTxt">
       <span>登录即代表阅读并同意 </span>
-      <span class="blueTxt"  v-vtap="{method: go , params: 3}">风险揭示书</span>
+      <span class="blueTxt" v-vtap="{method: go , params: 3}">风险揭示书</span>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ import inputItem from '@/components/commonResgLog/inputItem.vue'
 import errTip from '@/components/commonResgLog/errtip.vue'
 import { mapState, mapMutations } from 'vuex';
 import { checkUpdate } from '@/common/update.js'
-import {getuserinfo} from '@/common/saveLogin.js'
+import { getuserinfo } from '@/common/saveLogin.js'
 
 export default {
   data() {
@@ -38,18 +38,18 @@ export default {
       uName: '',
       openEye: false,
       focusInput: false,
-      showErr:false
+      showErr: false
     };
   },
-	created(){
-		if(this.$validata(this.uName,0)==1 && this.$validata(this.pwd,1)==1){
-			this.verifyYes==true
-		}
-	},
-    computed: mapState(['atNight','sid','switchObj']),
-  components: { submitBtn ,inputItem,errTip},
+  created() {
+    if (this.$validata(this.uName, 0) == 1 && this.$validata(this.pwd, 1) == 1) {
+      this.verifyYes == true
+    }
+  },
+  computed: mapState(['atNight', 'sid', 'switchObj']),
+  components: { submitBtn, inputItem, errTip },
   methods: {
-      ...mapMutations(['setsid']),
+    ...mapMutations(['setsid']),
     go(i) {
       let url = ''
       switch (i) {
@@ -58,69 +58,66 @@ export default {
         case 2: url = '/pages/forgets_pwd/forgets_pwd'
           break
         case 3: url = '/risk_book'
-				  break
+          break
       }
       this.$navigateTo({ url })
     },
     handleLogin() {
-        this.showErr=false
-            var options = {
-                url: '/Sapi/Login/index', 
-                data: {
-                    user_name: this.uName,
-                    user_pwd: this.pwd
-                }, //发送给服务端的数据
-                method: 'POST', 
-            }
-            this.$httpReq(options).then((res) => {
-                if (res.status == 1) {
-                    this.verifyYes=true
-                      this.setsid(res.data.sid)
-                    if(process.env.NODE_ENV === 'production'){
-                       localStorage.setItem("user_name", this.uName)
-                       localStorage.setItem("user_pwd", this.pwd)
-                       checkUpdate()}
-                    // 获取用户信息
-                    getuserinfo()
-                  this.$router.replace('/')
-                }else{
-                    this.showErr=true
-                    if(res.info){
-                        this.tipContent=res.info
-                    }else{
-                        this.tipContent='账号或密码错误'
-                    }
-                }
-            }).catch((err) => {
-                console.error(err,'捕捉')
-            })
-    },
-    handleBlur(){
-    },
-    handChange(){
-        this.showErr=false
-        if(this.uName && this.pwd){
-            this.verifyYes=true
-        }else if(!this.uName || !this.pwd){
-            this.verifyYes=false
-        }
+      this.showErr = false
+      var options = {
+        url: '/Sapi/Login/index',
+        data: {
+          user_name: this.uName,
+          user_pwd: this.pwd
+        }, //发送给服务端的数据
+        method: 'POST',
       }
+      this.$httpReq(options).then((res) => {
+        if (res.status == 1) {
+          this.verifyYes = true
+          this.setsid(res.data.sid)
+          if (process.env.NODE_ENV === 'production') {
+            localStorage.setItem("user_name", this.uName)
+            localStorage.setItem("user_pwd", this.pwd)
+            checkUpdate()          }
+          // 获取用户信息
+          getuserinfo()
+          this.$router.replace('/')
+        } else {
+          this.showErr = true
+          this.tipContent = res.info || '账号或密码错误'
+          setTimeout(() => { this.showErr = false }, 2000)
+        }
+      }).catch((err) => {
+        console.error(err, '捕捉')
+      })
+    },
+    handleBlur() {
+    },
+    handChange() {
+      this.showErr = false
+      if (this.uName && this.pwd) {
+        this.verifyYes = true
+      } else if (!this.uName || !this.pwd) {
+        this.verifyYes = false
+      }
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
 div.wrap {
-  height: 100vh ;
+  height: 100vh;
   min-height: 550px;
   position: relative;
   div.img {
     text-align: center;
-    margin:1.20rem 0.80rem;
+    margin: 1.2rem 0.8rem;
 
     img {
-      width:1.40rem;
-      height:1.40rem;
+      width: 1.4rem;
+      height: 1.4rem;
     }
   }
   div.h1 {
@@ -140,7 +137,7 @@ div.wrap {
   }
   div.bottomTxt {
     position: absolute;
-    bottom:.4rem;
+    bottom: 0.4rem;
     left: 0;
     right: 0;
     text-align: center;

@@ -109,14 +109,14 @@ div.list1Item {
     .moneyTxt {
       font-size: 24px;
       font-weight: bold;
-      color: rgba(240, 95, 92, 1);
+      color: $primary1;
       line-height: 42px;
       flex-grow: 1;
       text-align: right;
       font-family: Arial;
     }
     .moneyTxt.green {
-      color: #3aba8f;
+      color: $green1;
     }
     div.itemView {
       display: flex;
@@ -127,7 +127,7 @@ div.list1Item {
     }
     .leftPart > div {
       font-size: 12px;
-      color: rgba(153, 153, 153, 1);
+      color: #666;
       .c1 {
         color: #000;
       }

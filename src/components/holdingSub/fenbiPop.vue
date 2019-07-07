@@ -196,7 +196,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 div.fixWrap {
+  .subWrap{
+    margin: 0 0.22rem;
+  }
   div.container {
+    border-radius: 5px;
     background-color: #fff;
     padding: 0 0.35rem 0.5rem;
     div.title {
@@ -215,7 +219,7 @@ div.fixWrap {
     }
     div.infoView {
       font-size: 12px;
-      color: rgba(136, 136, 136, 1);
+      color: #666;
       line-height: 12px;
       margin: 0.35rem 0 0.5rem;
       justify-content: space-between;
@@ -254,9 +258,10 @@ div.fixWrap {
     div.btn2 {
       justify-content: space-between;
       > div {
-        width: 3.2rem;
+        // width: 3.1rem;
+        flex-grow: 1;
         height: 1.5rem;
-        background: rgba(236, 96, 94, 1);
+        background: #ff6b3d;
         border-radius: 0.1rem;
         justify-content: space-between;
         padding: 0.3rem;
@@ -276,6 +281,7 @@ div.fixWrap {
       }
       div.lose {
         background-color: #3aba8f;
+        margin-left: 0.27rem;
       }
       img {
         width: 0.3rem;
@@ -309,7 +315,6 @@ div.fixWrap {
     }
   }
   div.latterTip {
-    padding: 0 0.35rem;
 
     justify-content: space-between;
     align-items: center;

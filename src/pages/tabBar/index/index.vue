@@ -10,9 +10,11 @@
     <three-securities :commonstock="commonstock"></three-securities>
     <main-stock v-if="switchObj.home>0"></main-stock>
     <template v-else>
-      <div class="uni-flex newsViewTitle">
-        <span class="textc1">资讯</span>
-        <span v-vtap="{method: go  }">更多></span>
+      <div class="uni-flex newsViewTitle textc1">
+        <span>资讯</span>
+        <span v-vtap="{method: go }">更多
+          <s-icon :icon-class="toRight"></s-icon>
+        </span>
       </div>
       <news-view :newlists="newsItem"></news-view>
     </template>
@@ -41,15 +43,20 @@ export default {
     }
   },
   components: {
-    newsView, threeSecurities, fourTips,mainStock,
+    newsView, threeSecurities, fourTips, mainStock,
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem
   },
-  computed: mapState(['atNight', 'switchObj']),
+  computed: {
+    ...mapState(['atNight', 'switchObj']),
+    toRight() {
+      return this.atNight ? 'black_enterright' : 'enterright'
+    }
+  },
   methods: {
     // 登录
     getartlelist() {
-      if(this.switchObj.home!=0)return;
+      if (this.switchObj.home != 0) return;
       var options = {
         url: '/Sapi/Article/notice',
         method: 'POST',
@@ -91,7 +98,7 @@ export default {
       { "stockCodeInternal": "1000004", "tradeMins": timestrs[2] }]
       stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
-        url: '/stockStat/getCommonSelectStock', 
+        url: '/stockStat/getCommonSelectStock',
         method: 'POST',
         data: { stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -118,7 +125,7 @@ export default {
           }
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     }
@@ -156,11 +163,12 @@ div.newsViewTitle {
   line-height: 16px;
   color: #333;
   margin: 0.32rem 0.1rem 0.24rem;
-  font-weight: bold;
+  span:first-child {
+    border-left: solid $primary1 3px;
+    padding-left: 6px;
+  }
   span:last-child {
-    color: #a8a8a8;
-    font-size: 12px;
-    font-weight: normal;
+    font-size: 13px;
   }
 }
 

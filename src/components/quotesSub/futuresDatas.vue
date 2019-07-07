@@ -213,7 +213,7 @@ div.root-el {
   }
   
   span.midTxt {
-    background-color: #eaeeed;
+    background-color: rgba(231,231,231,0.5);
     display: inline-block;
     height: 100%;
     line-height: 0.7rem;
@@ -221,14 +221,11 @@ div.root-el {
     padding: 0 0.23rem;
     font-size: 14px;
     width: 1.54rem;
-    color: #333;
+    color: #666;
     text-align: center;
-  }
-  span.midTxt.bg1 {
-    background-color: #e6aa12;
-  }
-  span.midTxt.bg2 {
-    background-color: $primary1;
+    &.bg1,&.bg2{
+      color: #333;
+    }
   }
   div.wrap1 {
     flex-grow: 1;
@@ -272,24 +269,13 @@ div.root-el {
     }
   }
   div.up_c {
-    background: linear-gradient(
-      90deg,
-      rgba(240, 95, 92, 1),
-      rgba(245, 186, 184, 1)
-    );
-
-    // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
+    background: rgba(255,164,168,0.2)
     span {
       color: #fff;
     }
   }
   div.down_c:first-child {
-    background: linear-gradient(
-      -90deg,
-      rgba(58, 186, 148, 1),
-      rgba(167, 229, 208, 1)
-    );
-
+    background: rgba(164,255,183,0.2);
     span {
       color: #fff;
     }
@@ -300,8 +286,6 @@ div.root-el {
       rgba(240, 95, 92, 1),
       rgba(245, 186, 184, 1)
     );
-
-    // box-shadow: 0 0 4px rgba(58, 186, 143, 0.9);
     span {
       color: #fff;
     }

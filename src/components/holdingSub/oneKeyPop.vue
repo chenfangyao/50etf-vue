@@ -146,6 +146,9 @@ export default {
         font-size: 12px;
         flex-grow: 1;
         text-align: right;
+        span{
+          line-height: 2.6;
+        }
       }
       > div:first-child {
         text-align: left;

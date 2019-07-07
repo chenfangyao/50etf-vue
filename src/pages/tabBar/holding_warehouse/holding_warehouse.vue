@@ -63,7 +63,7 @@ export default {
 
     };
   },
-  computed: mapState(['weituoindex','statusbarHeight']),
+  computed: mapState(['weituoindex', 'statusbarHeight', 'atNight']),
   components: { headerTab, filterList, uniLoadMore, listOne, hebinTotal, topBtn, listTwo, listThree, fenbiPop, hebingPop, scrollView },
   methods: {
     ...mapMutations(['setweituoindex']),
@@ -87,7 +87,7 @@ export default {
       if (i === 'leave') {
         return
       } else {
-        this.revokeTimer = setInterval(() => { this.getFenbiList(i,false,true) }, 3000)
+        this.revokeTimer = setInterval(() => { this.getFenbiList(i, false, true) }, 3000)
       }
     },
     loadMore(i) {
@@ -105,7 +105,7 @@ export default {
         this.$refs.s3.refresh()
       }
     },
-    getFenbiList(i, add,all) {
+    getFenbiList(i, add, all) {
       this.titleList[i].resquestState = 1
       let url = ''
       let j = Number(i)
@@ -120,10 +120,10 @@ export default {
           break
       }
       var options = {
-        url, 
+        url,
         data: {
-          page_index:all?0: this.titleList[i].startI,
-          page_size:all?this.titleList[i].list.length: 10,
+          page_index: all ? 0 : this.titleList[i].startI,
+          page_size: all ? this.titleList[i].list.length : 10,
         },
         method: 'GET'
       }
@@ -134,7 +134,7 @@ export default {
         this.titleList[i].total = res.data.total
         if (add) {
           this.titleList[i].list = this.titleList[i].list.concat(res.data.list)
-          setTimeout(this.refreshScroll.bind(this),500)
+          setTimeout(this.refreshScroll.bind(this), 500)
         } else {
           this.titleList[i].list = res.data.list
         }
@@ -146,18 +146,16 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
+      if (process.env.API_HOST) vm.atNigh || plus.navigator.setStatusBarStyle("light");
       vm.tabI = vm.weituoindex
-     /*  if (vm.weituoindex == 2) {
-        vm.titleList[2].startI = 0
-        vm.getFenbiList(2)
-        return
-      } *///委托也要刷新！
       vm.checkRevoke(vm.tabI)
       vm.titleList[vm.tabI].list.length || vm.getFenbiList(vm.tabI)
     })
   },
   beforeRouteLeave(to, from, next) {
     // this.setweituoindex(0)
+    if (process.env.API_HOST) this.atNigh || plus.navigator.setStatusBarStyle("dark");
+
     this.checkRevoke('leave')//清除撤单定时器
     next()
   }

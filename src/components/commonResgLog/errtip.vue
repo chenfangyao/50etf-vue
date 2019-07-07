@@ -19,9 +19,9 @@ div.tip {
   text-align: center;
   border-radius: 2px;
   width: 3.3rem;
+  transition: opacity 900ms;
 }
 div.tip.errclass {
   opacity: 1;
-  transition: opacity 900ms;
 }
 </style>

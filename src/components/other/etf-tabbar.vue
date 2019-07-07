@@ -65,6 +65,7 @@ export default {
 .van-tabbar-item__icon  {
   margin-bottom: 0 !important;
   font-size: 14px;
+  line-height: 1;
   .bottomIcon{
     font-size: 24px;
   }
@@ -73,6 +74,8 @@ export default {
   border: 0
 }
 .van-tabbar--fixed{
-  padding-top: 6px;
+  padding-top: 5px;
+  border-top: solid 1px #e5e5e5;
+
 }
 </style>

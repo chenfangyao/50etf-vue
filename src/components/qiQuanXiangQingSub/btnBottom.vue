@@ -16,6 +16,9 @@ div.uni-flex {
   height: 0.98rem;
   font-size: 16px;
   text-align: center;
+  >div{
+    border-radius: 2px;
+  }
   .v1 {
     line-height: 0.72rem;
     background-color: $primary1;
@@ -27,7 +30,6 @@ div.uni-flex {
   .v2 {
     line-height: 0.72rem;
     width: 2.3rem;
-    border-radius: 2px;
     border: solid 1px $primary1;
     color: $primary1;
   }

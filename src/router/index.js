@@ -88,7 +88,7 @@ export default new Router({
     //资产
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
     // 登录
-    { path: '/pages/login/login', name: 'login', component: login},
+    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true}},
     // 我的页面设置
     { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true, index: 4 } },
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },
@@ -136,8 +136,8 @@ export default new Router({
     { path: '/pages/mine_sub/about_us/about_us', name: 'about_us', component: about_us,  },
     // 修改密码
     { path: '/pages/mine_sub/change_password/change_password', name: 'change_password', component: change_password,  },
-    { path: '/risk_book', name: 'riskBook', component: riskBook,  },
-    { path: '/pages/registers/registers', name: 'registers', component: registers,  },
+    { path: '/risk_book', name: 'riskBook', component: riskBook, meta: { isKeepAlive: true, } },
+    { path: '/pages/registers/registers', name: 'registers', component: registers, meta: { isKeepAlive: true, } },
     { path: '/pages/forgets_pwd/forgets_pwd', name: 'forgets_pwd', component: forgets_pwd,  },
 
 
