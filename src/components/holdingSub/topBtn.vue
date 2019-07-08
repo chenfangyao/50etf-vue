@@ -28,8 +28,8 @@ export default {
 <style scoped lang='scss'>
 div.itemwrap {
   justify-content: space-between;
-  margin: 0 0.22rem 5px;
-  padding: 0.3rem 0;
+  margin: 0 0.22rem ;
+  padding: 0.3rem 0 0.1rem;
   display: flex;
   justify-content: space-around;
   background-color: #f5f5f5;

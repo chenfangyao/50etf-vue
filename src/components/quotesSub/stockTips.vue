@@ -110,8 +110,8 @@ export default {
 
 <style lang="scss" scoped>
 div.stock50 {
-  height: 0.84rem;
-  line-height: 0.84rem;
+  height: 42px;
+  line-height: 42px;
   justify-content: space-between;
   padding: 0 0.25rem;
   border-top: 1px solid #ededed;

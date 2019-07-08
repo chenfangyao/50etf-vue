@@ -2,7 +2,7 @@
   <div class="wrap">
     <base-header title="平仓结算" class='lowZindex' has-back='1'></base-header>
     <div class="heightUp ">
-      <div class="fix black2">
+      <div class="fix black2" :style="{top:45+statusbarHeight+'px'}">
         <filter-list :total='total' @select-complete='getChooseTime'></filter-list>
       </div>
     </div>
@@ -47,6 +47,7 @@
 import filterList from '@/components/holdingSub/filterList.vue';
 import uniLoadMore from '@/components/uni-load-more.vue';
 import scrollView from '@/components/other/scroll-view'
+import { mapState } from 'vuex';
 
 export default {
   data() {
@@ -61,6 +62,7 @@ export default {
       edate: 20300101,
     };
   },
+  computed: mapState(['statusbarHeight']),
   components: { filterList, uniLoadMore, scrollView },
   created() {
     this.getDatas()
@@ -142,7 +144,6 @@ div.wrap {
       position: fixed;
       left: 0;
       right: 0;
-      top: 45px;
       /* #ifndef H5 */
       // top: calc(45px + var(--status-bar-height));
       /* #endif */

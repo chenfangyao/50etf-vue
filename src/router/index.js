@@ -88,7 +88,7 @@ export default new Router({
     //资产
     { path: '/assets', name: 'assets', component: assets, meta: { isKeepAlive: true, tabbar: true, index: 3 } },
     // 登录
-    { path: '/pages/login/login', name: 'login', component: login, meta: { isKeepAlive: true}},
+    { path: '/pages/login/login', name: 'login', component: login},
     // 我的页面设置
     { path: '/mine', name: 'mine', component: mine, meta: { isKeepAlive: true, tabbar: true, index: 4 } },
     { path: '/pages/mine_sub/setting/setting', name: 'setting', component: setting, meta: { isKeepAlive: true, } },

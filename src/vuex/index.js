@@ -51,7 +51,7 @@ const store = new Vuex.Store({
     hbfbcell: [],
     // 持仓合计
     cctotalmoney: 0,
-    switchObj:{},
+    switchObj: { home:0},
     statusbarHeight:0
   },
   mutations: {

@@ -259,15 +259,9 @@ div.root-el {
   }
   div.up_c {
     background: rgba(255,164,168,0.2)
-    span {
-      color: #fff;
-    }
   }
   div.down_c {
     background: rgba(164,255,183,0.2);
-    span {
-      color: #fff;
-    }
   }
 }
 div.at-night{

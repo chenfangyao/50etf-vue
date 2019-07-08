@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="headerContainer">
+    <div class="headerContainer black2">
       <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el">
         <div class="left commonStyle" v-vtap="{method:back}"  v-if="hasBack">

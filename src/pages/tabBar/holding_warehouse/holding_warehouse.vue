@@ -1,24 +1,22 @@
 <template>
   <div class="wrap">
     <header-tab @tab-tap="tabTap" :title-list="titleList" :tabI="tabI"></header-tab>
-    <div>
+    <div v-if="tabI<2">
       <div class="fix black1" :style="{top:40+statusbarHeight+'px'}">
         <!-- <filter-list :total='titleList[0].total' v-if='tabI==0'></filter-list> -->
-        <hebin-total :total="titleList[tabI].total" v-if="tabI<2"></hebin-total>
-        <template v-else-if="tabI==2">
-          <!-- <div class="h8 black1"></div> -->
-          <top-btn></top-btn>
-        </template>
+        <hebin-total :total="titleList[tabI].total" ></hebin-total>
       </div>
-      <div class="heightUp black1" v-show="tabI!=3"></div>
-      <div class="h40 black1" v-show="tabI==2"></div>
+      <div class="heightUp black1"></div>
     </div>
     <scroll-view class="list2" v-show="tabI<2" ref="s1" @scrollToEnd="loadMore(tabI)">
       <list-one :tab-i="tabI" :list="titleList[tabI].list" @gou-shi="openPop"></list-one>
       <div v-if="titleList[tabI].total==0" class="nullTxt">您还未持仓，去持仓盈利吧！</div>
     </scroll-view>
     <scroll-view class="list3" @scrollToEnd="loadMore(2)" ref="s2" v-show="tabI==2">
-      <list-two :tab-i="tabI" :list="titleList[2].list"></list-two>
+      <div>
+        <top-btn></top-btn>
+        <list-two :tab-i="tabI" :list="titleList[2].list"></list-two>
+      </div>
       <div v-if="titleList[2].total==0" class="nullTxt">今日未有交易委托！</div>
     </scroll-view>
     <scroll-view class='list4' @scrollToEnd="loadMore(3)" ref="s3" v-show="tabI==3">
@@ -173,8 +171,7 @@ div.wrap {
   }
   .list3 {
     overflow: hidden;
-    height: calc(100vh - 1.24rem - 157px);
-    // height: calc(100vh -1.28rem - 44px - var(--status-bar-height));
+    height: calc(100vh  - 97px);
   }
   .list4 {
     overflow: hidden;
@@ -200,7 +197,7 @@ div.wrap {
     z-index: 20;
   }
   div.h40 {
-    height: 1.7rem;
+    height: 1.4rem;
   }
   div.nullTxt {
     text-align: center;

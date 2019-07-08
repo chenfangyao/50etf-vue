@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="root-el">
-      <div class="occupy"></div>
+      <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="wrap2">
         <div class="left" v-vtap="{method:back}">
           <img src="../../assets/arrow/l.png" />
@@ -12,7 +12,8 @@
         </div>
       </div>
     </div>
-    <div class="h44"></div>
+    <div :style="{height:statusbarHeight+44+'px'}"></div>
+
   </div>
 </template>
  <script>
@@ -25,17 +26,14 @@ export default {
   },
   methods: {
     back() {
-    this.$router.goBack()
+      this.$router.goBack()
     }
   },
-  computed: mapState(['commonstock']),
+  computed: mapState(['commonstock','statusbarHeight']),
   props: ['index'],
 }
 </script>
 <style lang="scss" scoped>
-div.h44 {
-  height: 44px;
-}
 div.root-el {
   border-bottom: 1px solid #ededed;
   position: fixed;
@@ -46,7 +44,7 @@ div.root-el {
   z-index: 50;
   .wrap2 {
     height: 44px;
-    padding-top:.12rem;
+    padding-top: 0.12rem;
     position: relative;
   }
   .occupy {
@@ -57,7 +55,7 @@ div.root-el {
     text-align: center;
   }
   div.left {
-    padding: 13px.20rem 0.30rem;
+    padding: 13px.20rem 0.3rem;
     height: 44px;
     position: absolute;
     left: 0;
@@ -73,7 +71,7 @@ div.root-el {
     color: rgba(24, 28, 40, 1);
     margin: 0;
     line-height: 15px;
-    margin-bottom:.09rem;
+    margin-bottom: 0.09rem;
   }
   h5 {
     font-size: 10px;
@@ -81,7 +79,7 @@ div.root-el {
     color: rgba(24, 28, 40, 1);
     margin: 0;
     line-height: 10px;
-    margin-bottom:.13rem;
+    margin-bottom: 0.13rem;
   }
 }
 </style>

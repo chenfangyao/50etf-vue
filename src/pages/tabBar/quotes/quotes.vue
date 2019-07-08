@@ -13,7 +13,7 @@
         </div>
       </div>
       <futures-title></futures-title>
-      <scroll-view class="list2" @scrollToEnd="loadMore(1)">
+      <scroll-view class="list2" :style="{height: clacHeight}" @scrollToEnd="loadMore(1)">
         <futures-datas :quote-list="quoteList" :code-list="codeList" :latest-price="commonstock"></futures-datas>
         <!-- <div class="uni-tab-bar-loading">
           <uni-load-more :loading-type="resquestState" ></uni-load-more>
@@ -51,7 +51,12 @@ export default {
       commonstocktimmer: null
     }
   },
-  computed: mapState(['taglist']),
+  computed:{
+    ... mapState(['taglist','statusbarHeight']),
+    clacHeight(){
+     return window.innerHeight-230-this.statusbarHeight+'px'
+    }
+    },
   beforeRouteLeave(to, from, next) {
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
@@ -206,9 +211,7 @@ export default {
 <style lang="scss" scoped>
 div.uni-tab-bar {
   .list2 {
-    height: calc(100vh - 2.48rem - 97px);
     overflow: hidden;
-    // height: calc(100vh -2.48rem - 44px - var(--status-bar-height));
   }
 
   .swiper-tab {

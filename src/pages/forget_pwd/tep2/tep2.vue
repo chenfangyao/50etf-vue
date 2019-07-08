@@ -157,6 +157,10 @@ div.subTitle {
     font-size: 14px;
     margin-bottom: 0;
     border-bottom: 0;
+    padding-bottom: 0;
+   /deep/ input{
+      padding-bottom: 0;
+    }
     /deep/ .leftSvg {
       top: 6px;
     }

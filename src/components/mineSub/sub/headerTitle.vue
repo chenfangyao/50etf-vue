@@ -49,25 +49,25 @@ export default {
 <style lang="scss" scoped>
 .fixWrap {
   background: transparent;
-  .occupy {
-    height: var(--status-bar-height);
-  }
 }
 .title {
   height: 54px;
   padding: 0 0.26rem;
-
   .msg {
     position: relative;
     margin-right:.44rem;
+    .commonStyle1{
+      padding-right: 20px;
+      padding-left: 0;
+    }
   }
-
   display: flex;
   justify-content: space-between;
-  span.commonStyle1 {
+  .commonStyle1 {
     color: #fff;
     font-size: 14px;
     line-height: 44px;
+    padding-left: 20px;
   }
 }
 </style>
