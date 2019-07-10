@@ -1,6 +1,6 @@
 <template>
   <div class="fixWrap self-mask" @touchmove.prevent v-vtap.self="{method:closeMe}">
-    <div class="subWrap black2">
+    <div class="subWrap ">
       <div class="container black2">
         <div class="title ">
           <span class="nameTxt textc1">{{resObj.stock_name}}</span>
@@ -60,15 +60,15 @@
         <div class="btn3 uni-flex textc2">
           <div v-vtap="{method: go , params: 2}">
             <span>开仓</span>
-            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+            <s-icon :icon-class="'enterright' | atNightIcon" />
           </div>
           <div v-vtap="{method: go , params: 3}">
             <span>平仓</span>
-            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+            <s-icon :icon-class="'enterright' | atNightIcon" />
           </div>
           <div v-vtap="{method: go , params: 4}">
             <span>行情</span>
-            <s-icon :icon-class="atNight?'black_enterright':'enterright'" />
+            <s-icon :icon-class="'enterright' | atNightIcon" />
           </div>
         </div>
         <div class="latterTip uni-flex black2">
@@ -76,7 +76,7 @@
             <div class="iconWrap">
               <s-icon v-if="resObj.auto_delay == 1" icon-class="selected"></s-icon>
             </div>
-            <div class="txt22">自动延期</div>
+            <div class="txt22 textc2">自动延期</div>
           </div>
           <div class="textc2">{{timeDeal}}</div>
         </div>
@@ -191,10 +191,15 @@ export default {
   mounted() {
     this.resObj.in_time && (this.timeDeal = this.$formatetimestr(this.resObj.in_time))
   },
-  computed: mapState(['switchObj', 'atNight'])
+  computed: mapState(['switchObj'])
 }
 </script>
 <style lang="scss" scoped>
+#app.at-night{
+  .title{
+    border-color: $black1;
+  }
+}
 div.fixWrap {
   .subWrap{
     margin: 0 0.22rem;

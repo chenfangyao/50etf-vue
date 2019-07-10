@@ -3,10 +3,10 @@
     <div v-show="onClose" class="wraper">
       <div class="tabOpen uni-flex black2">
         <div v-vtap="{method: tapChange , params: false}">
-          <span :class="{active:!tabActive}">合并</span>
+          <span :class="{active:!entrusttype}">合并</span>
         </div>
         <div v-vtap="{method: tapChange , params: true}">
-          <span :class="{active:tabActive}">分笔</span>
+          <span :class="{active:entrusttype}">分笔</span>
         </div>
       </div>
       <div class="chooseType uni-flex">
@@ -15,10 +15,10 @@
           <span class="commonStyle2 textc1">持仓笔数 {{fbcclength}}</span>
         </div>
         <div class="chooseCount black1">
-          <!-- <div v-show="!tabActive">{{maxprice.own_amount}}张</div> -->
-          <div v-show="!tabActive" v-vtap.self="{method:showPopCheckbox}" class="flex1">
-            <span class="chooseTxt">{{sellnumber}}</span>
-            <s-icon icon-class="select_down" v-vtap.self="{method:showPopCheckbox}"></s-icon>
+          <!-- <div v-show="!entrusttype">{{maxprice.own_amount}}张</div> -->
+          <div v-show="!entrusttype" v-vtap.self="{method:showPopCheckbox}" class="flex1">
+            <span class="chooseTxt textc1">{{sellnumber}}</span>
+            <s-icon :icon-class="'select_down' | atNightIcon" v-vtap.self="{method:showPopCheckbox}"></s-icon>
             <!-- 合并弹窗 -->
             <van-popup v-model="showpop" position="bottom">
               <div>
@@ -46,9 +46,9 @@
               </div>
             </van-popup>
           </div>
-          <div v-show="tabActive" v-vtap.self="{method:showPickers}" class="flex1">
-            <span class="chooseTxt">{{pickerText}}</span>
-            <s-icon icon-class="select_down" v-vtap.self="{method:showPickers}"></s-icon>
+          <div v-show="entrusttype" v-vtap.self="{method:showPickers}" class="flex1">
+            <span class="chooseTxt textc1">{{pickerText}}</span>
+            <s-icon :icon-class="'select_down' | atNightIcon" v-vtap.self="{method:showPickers}"></s-icon>
           </div>
           <vue-pickers class="vuePickera" :show="show1" :columns="1" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConirmPicker"></vue-pickers>
         </div>
@@ -79,14 +79,14 @@
         <span class="commonStyle2 textc1">{{maxprice.own_amount}}</span>
       </div> -->
     </div>
-    <div v-if="tabActive || !onClose" class="sliderPart uni-flex">
+    <div v-if="entrusttype || !onClose" class="sliderPart uni-flex">
       <div class="imgbtn uni-flex">
         <div class="hasImg" v-vtap="{method: plusStep , params: -1}">
-          <s-icon :icon-class="atNight?'black_adjust_lower':'adjust_lower'"></s-icon>
+          <s-icon :icon-class="'adjust_lower' | atNightIcon"></s-icon>
         </div>
         <span class="countxt textc1">{{sliderVal}}</span>
         <div class="hasImg" v-vtap="{method: plusStep , params: 1}">
-          <s-icon :icon-class="atNight?'black_adjust_jia':'adjust_jia'"></s-icon>
+          <s-icon :icon-class="'adjust_jia' | atNightIcon"></s-icon>
         </div>
       </div>
       <div class="sliderItem">
@@ -121,9 +121,6 @@ export default {
     fbcclist: {
       // require: true
     },
-    fborhb: {
-      require: true
-    },
   },
   components: {
     uniIcon,
@@ -137,7 +134,6 @@ export default {
   },
   data() {
     return {
-      tabActive: false,
       btn3Arr: ['市价', '限价'],
       btn3_i: 0,
       sliderVal: 0,
@@ -170,7 +166,6 @@ export default {
     },
     // 合并分笔
     tapChange(val) {
-      this.tabActive = val
       this.setentrusttype(val)
       this.sliderVal = 0
       if (val == true) {//分笔的情况
@@ -290,7 +285,7 @@ export default {
       this.sliderVal = parseInt(this.sliderVal)
       this.sliderVal += i
       this.setstockamunt(this.sliderVal)
-      this.$emit('plus-step', {
+      this.$emit('price-step', {
         num: this.sliderVal,
         price: this.pricevalue
       })
@@ -308,7 +303,7 @@ export default {
       var val = Math.round(this.pricevalue * 10000) + Number(i)
       this.pricevalue = Number(val / 10000).toFixed(4)
       this.setnewprice(this.pricevalue)
-      this.$emit('plus-step', {
+      this.$emit('price-step', {
         num: this.sliderVal,
         price: this.pricevalue
       })
@@ -429,7 +424,7 @@ export default {
         this.fbcclength = this.fbcclist.length
         this.hbcclength = this.hbcclist.length
         // 设置默认分笔持仓id
-        this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
+        this.entrusttype&&this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         this.pickerText = '0'
         if (this.fbcclist[0]) {
           // 把分笔持仓第一笔持仓数量带到默认持仓数量中
@@ -465,9 +460,6 @@ export default {
       // 切换委托数量重置为1
       this.sliderVal = 0
     },
-    fborhb(val) {
-      this.tabActive = this.fborhb
-    },
     'maxprice.maxcounts': {
       handler(val) {
         this.sliderdisable = val == 0
@@ -485,7 +477,7 @@ export default {
     this.pricetitle = this.btn3Arr[0]
     // 合并平仓默认设置卖出全部
     setTimeout(() => {
-      if (this.onClose == true && this.tabActive == false) {
+      if (this.onClose == true && this.entrusttype == false) {
         this.setstockamunt(this.maxprice.enable_amount)
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
@@ -494,14 +486,12 @@ export default {
   },
 
   computed: {
-    ...mapState(['softconf', 'maxbuy', 'stockamunt', 'atNight'])
+    ...mapState(['softconf', 'maxbuy', 'stockamunt','entrusttype'])
   }
 }
 </script>
 <style lang="scss" scoped>
-div#app.at-night div.tabOpen {
-  border: solid 1px $primary1;
-}
+
 div.root-el {
   padding: 0.1rem 0.32rem 0.3rem;
   background-color: #fff;
@@ -585,6 +575,10 @@ div.root-el {
       font-size: 14px;
       color: #848689;
       background: rgba(239, 239, 239, 1);
+      .s-icon{
+        width: 10px;
+        height: 10px;
+      }
       div.flex1 {
         display: flex;
         align-items: center;
@@ -641,6 +635,7 @@ div.root-el {
     align-items: center;
     .imgbtn {
       align-items: center;
+      transform: translateX(-10px);
       .hasImg {
         height: 26px;
         padding: 4px 10px;
@@ -664,11 +659,11 @@ div.root-el {
     div.sliderItem {
       flex-grow: 1;
       padding-left: 0.5rem;
+      padding-right: 1px;
     }
   }
 
-  .s-icon,
-  img {
+  .s-icon{
     width: 18px;
     height: 18px;
   }

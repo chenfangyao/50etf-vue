@@ -20,7 +20,6 @@ module.exports = {
   //H597B188E //热更新
 	//H5E98D807 //上架
   //2019-03-20
-  // API_HOST:'"http://wx.080518.cn"'//	牛行长
 
   //2019-03-21
   // API_HOST:'"http://wx.vogan.cc"',//	期权大时代

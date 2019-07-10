@@ -5,18 +5,7 @@
     <contain-chart :res-obj="QuotationMsg" :symbol-str='symbol'></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
     <div class="h12 black1"></div>
-    <new-price
-      :on-close="onClose"
-      :fborhb="hbfbswitch"
-      :maxprice="maxprice"
-      :qrysingle="QuotationMsg"
-      :fbcclist="fbcclist"
-      :hbcclist="hbcclist"
-      @fb-num="fbNum"
-      @hbfb-switch="hbfbSwitch"
-      @plus-step="plusStepNum"
-      @price-step="priceStep"
-    ></new-price>
+    <new-price :on-close="onClose"  :maxprice="maxprice" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @fb-num="fbNum" @hbfb-switch="hbfbSwitch"  @price-step="plusStepNum"></new-price>
     <div class="h12 black1"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
@@ -47,20 +36,18 @@ export default {
       hbcclist: [],
       fbcclist: [],
       totalmoney: '',
-      hbfbswitch: false,
       fbnum: '',
       // cclist:{},
       symbol: '',
       bussinesdata: '',
     };
   },
-  computed: mapState(['sid', 'hycode']),
+  computed: mapState(['sid', 'hycode','entrusttype']),
   components: { headerTitle, containChart, miniTable, newPrice, totalCost, bottomBtn },
   methods: {
-    ...mapMutations(['setmaxbuy', 'setstockamunt', 'setcctotalmoney']),
+    ...mapMutations(['setmaxbuy', 'setstockamunt','setentrusttype', 'setcctotalmoney']),
     // 合并、分笔
     hbfbSwitch(val) {
-      this.hbfbswitch = val.val
       this.fbnum = val.picktext
     },
     fbNum(val) {
@@ -69,8 +56,8 @@ export default {
     // 买入卖出合约详细
     getartlelist(firstReq) {
       var options = {
-        url: '/fiftyEtf/QrySingleQuotationMsg', 
-        method: 'POST', 
+        url: '/fiftyEtf/QrySingleQuotationMsg',
+        method: 'POST',
         dataType: "json",
         data: {
           symbol: this.symbol,
@@ -82,50 +69,38 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-          firstReq&&this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
+          firstReq && this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
         }
       }).catch(err => {
-        
+
         console.error(err, '捕捉')
       })
     },
     plusStepNum(val) {
       this.getmaxbuy(this.symbol, val.price, val.num)
     },
-    priceStep(val) {
-      this.getmaxbuy(this.symbol, val.price, val.num)
-    },
     // 获取最大可买数量
     getmaxbuy(codes, prices, amounts) {
       var options = {
-        url: this.onClose?'/Sapi/Stock/max_sell':'/Sapi/Stock/max_buy', 
-        method: 'POST', 
+        url: this.onClose ? '/Sapi/Stock/max_sell' : '/Sapi/Stock/max_buy',
+        method: 'POST',
         dataType: "json",
         data: {
-          // 股票代码
-          code: codes,
-          // 委托价格
-          price: prices,
-          // 委托数量,默认设置为1
-          amount: amounts
+          code: codes, // 股票代码
+          price: prices,// 委托价格
+          amount: amounts // 委托数量,默认设置为1
         },
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.maxprice = res.data
           this.setmaxbuy(res.data)
-          // 开仓
-          if (!this.onClose) {
+          if (!this.onClose) {// 开仓
             this.maxprice.maxcounts = parseInt(this.maxprice.maxcount)
-          }
-          // 平仓
-          else {
-            // 合并
-            if (!this.hbfbswitch) {
+          }else {// 平仓
+            if (!this.entrusttype) {// 合并
               this.maxprice.maxcounts = parseInt(this.maxprice.own_amount)
-            }
-            // 分笔
-            else {
+            } else { // 分笔
               this.maxprice.maxcounts = this.fbnum
             }
           }
@@ -147,8 +122,8 @@ export default {
     // 分笔持仓
     getfbchic() {
       var options = {
-        url: '/Sapi/Squery/list_fbcc_dropdown_sell', 
-        method: 'GET', 
+        url: '/Sapi/Squery/list_fbcc_dropdown_sell',
+        method: 'GET',
         dataType: "json",
       }
       this.$httpReq(options).then((res) => {
@@ -162,14 +137,14 @@ export default {
           }
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     // 合并持仓
     gethbchic() {
       var options = {
-        url: '/Sapi/Squery/list_hbcc_dropdown_sell', 
+        url: '/Sapi/Squery/list_hbcc_dropdown_sell',
         method: 'GET', //请求方法全部大写，默认GETGET
         dataType: "json",
       }
@@ -183,7 +158,7 @@ export default {
           }
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
@@ -202,28 +177,20 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (to.query.pinkaiC == '1') {
-        vm.onClose = true
-      } else {
-        vm.onClose = false
-      }
-      if(to.query.isActive==1){
-        vm.hbfbswitch=true
-      }else{
-        vm.hbfbswitch=false
-      }
+      vm.onClose = to.query.pinkaiC == '1'
+      vm.setentrusttype(to.query.isActive == 1)
       // 合并持仓分笔持仓
       vm.getfbchic()
       vm.gethbchic()
       vm.setstockamunt(0)
       vm.symbol = to.query.code
       vm.getartlelist(true)
-        // if (!util.calcLegalTime()) return;
-        if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
-          util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
-            vm.getartlelist()
-          }, 1500)
-        }
+      // if (!util.calcLegalTime()) return;
+      if (util.indextimmer.quotesQrySingleQuotationMsg === null) {
+        util.indextimmer.quotesQrySingleQuotationMsg = setInterval(() => {
+          vm.getartlelist()
+        }, 1500)
+      }
 
     })
   },

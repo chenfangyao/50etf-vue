@@ -4,7 +4,7 @@
       <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el">
         <div class="left commonStyle" v-vtap="{method:back}"  v-if="hasBack">
-          <img src="../assets/arrow/l.png">
+          <s-icon :icon-class="'nav_left' | atNightIcon" ></s-icon>
         </div>
         <span>{{title}}</span>
         <span class="right commonStyle" v-hover-class='"self-hover"' v-vtap="{method:rightTap}" v-if="rightTxt">{{rightTxt}}</span>
@@ -64,6 +64,8 @@ export default {
     height: 44px;
     font-size: 16px;
     line-height: 44px;
+  border-bottom: solid 1px #ededed;
+
     position: relative;
     .commonStyle {
       align-self: center;
@@ -78,12 +80,12 @@ export default {
 
     }
     div.left {
-      padding: 13px .20rem 0 .30rem;
+      padding: 10px .20rem 0 .30rem;
       height: 44px;
       left: 0;
-      img {
-        width: 17px;
-        height: 20px;
+      .s-icon {
+        width: 16px;
+        height: 16px;
       }
     }
   }

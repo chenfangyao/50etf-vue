@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header title="提现" has-back='1' right-txt='提现记录' @right-tap='rightTap'></base-header>
-    <recharge-way v-if="hasBank"></recharge-way>
+    <recharge-way v-if="hasBank" @change-wayi="changeWayI"></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户'  txt1='请绑定银行卡' to-addcard="1"></recharge-way>
     <div class="panel black2">
       <div class="inputContainer">
@@ -36,6 +36,7 @@ export default {
       hasBank: false,
       timmer: null,
       assetsObj: {},
+      withdrawId:''
     }
   },
   created() {
@@ -52,6 +53,9 @@ export default {
     rightTap() {
       this.$navigateTo({ url: '/pages/assets_sub/recording/recording', query: { type: 2 } })
     },
+    changeWayI(obj){
+      this.withdrawId=obj.id
+    },
     doWhat() {
       var cash_money = this.assetsObj.cash_money.replace(/,/g, '')
       if (cash_money - this.money < 0) {
@@ -62,7 +66,8 @@ export default {
         url: '/Sapi/Ufund/cash', 
         method: 'POST',
         data: {
-          money: this.money
+          money: this.money,
+          id:this.withdrawId,//提现到账银行卡标识
         }
       }
       this.$httpReq(options).then((res) => {

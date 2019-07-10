@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="root-el">
+    <div class="root-el black2">
       <div :style="{height:statusbarHeight+'px'}"></div>
       <div class="wrap2">
         <div class="left" v-vtap="{method:back}">

@@ -15,7 +15,7 @@
         <span>账户余额：</span>
         <span>{{assets.enable_money}}</span>
       </div>
-      <div class="priceItem uni-flex">
+      <div class="priceItem uni-flex textc2">
         <div v-for="(item, i) in priceLists" :key="i" :class="{active:priceItem_i==i}" v-vtap="{method: choosePriceItem , params: i}">{{item}} 元</div>
       </div>
     </div>
@@ -363,6 +363,9 @@ div.wrap {
         color: rgba(24, 28, 40, 1);
         background-color: white;
         border-bottom: 1px solid #ccc;
+        #app.at-night &{
+          border-color: $black1
+        }
         padding-left: 5px;
         background-color: #fff;
         width: 100%;
@@ -385,12 +388,12 @@ div.wrap {
     div.priceItem {
       justify-content: space-between;
       flex-wrap: wrap;
+        color: #333;
       > div {
         width: 2rem;
         height: 0.82rem;
         background: rgba(245, 245, 245, 0);
         border: 1px solid #999;
-        color: #333;
         border-radius: 1px;
         text-align: center;
         line-height: 0.82rem;
@@ -402,6 +405,10 @@ div.wrap {
         background-color: #ffe8e8;
         color: $primary1;
         border-color: $primary1;
+        #app.at-night &{
+          background-color: transparent;
+
+        }
       }
     }
   }
@@ -411,7 +418,7 @@ div.wrap {
     color: #181c28;
     span._a {
       text-decoration: underline;
-      color: $primary1;
+      color: $blue1;
     }
   }
   div.fixView {

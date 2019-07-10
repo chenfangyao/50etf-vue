@@ -1,12 +1,12 @@
 <template>
   <van-popup v-model="showPickSelf" class='black1' position="right" :style="{ height: '100%' ,width:'300px'}">
-    <h3>选择日期</h3>
-    <div class="uni-title self textc1">
+    <h3 class="textc1">选择日期</h3>
+    <div class="uni-title self textc1 black2">
       <span :class="{active:inLeft}" v-vtap="{method: changeActive , params: true}">{{year}}-{{month}}-{{day}}</span><i>~</i>
       <span :class="{active:!inLeft}" v-vtap="{method: changeActive , params: false}">{{year2}}-{{month2}}-{{day2}}</span>
     </div>
     <div class="tips" :class="{showTips}">开始时间不能大于结束时间</div>
-    <van-picker :visible-item-count="8" class='black2' :columns="timeDatas" @change="bindChange" type="date" />
+    <van-picker :visible-item-count="8" class='' :columns="timeDatas" @change="bindChange" type="date" />
     <div class="uni-flex btn2">
       <div v-vtap="{method:hidMe}">取消</div>
       <div v-vtap="{method:handleConfirm}">确定</div>
@@ -121,6 +121,20 @@ export default {
 
 
 <style lang='scss' scoped>
+#app.at-night {
+  .van-picker {
+    background-color: $black2;
+    /deep/ .van-picker-column__item {
+      color: $blackTxt1;
+    }
+    /deep/ .van-picker__mask {
+      background-image: none;
+    }
+    /deep/ .van-picker__frame{
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
+}
 div.tips {
   color: #f05f5c;
   text-align: center;
@@ -132,7 +146,7 @@ div.tips {
 }
 div.btn2 {
   justify-content: space-between;
-  margin:  20px ;
+  margin: 20px;
   div {
     width: 2.3rem;
     height: 0.72rem;
@@ -146,6 +160,10 @@ div.btn2 {
     background-color: #fff;
     border: solid 1px $primary1;
     border-radius: 2px;
+    margin-right: 15px;
+    #app.at-night &{
+      background-color: transparent;
+    }
   }
 }
 .item {

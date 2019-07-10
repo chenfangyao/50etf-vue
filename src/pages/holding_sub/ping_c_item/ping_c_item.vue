@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header title="平仓结算" has-back='1'></base-header>
-    <div class="title black2">
+    <div class="title black2 ">
       <span class="nameTxt textc1">{{pingCItem.stock_name}}</span>
       <span class="codeTxt textc2">{{pingCItem.stock_code}}</span>
     </div>
@@ -17,14 +17,14 @@
             <span>价格：</span>
             <span>市值：</span>
           </div>
-          <div class="uni-flex flexColumn val2">
+          <div class="uni-flex flexColumn val2 textc1">
             <span>{{pingCItem.avg_buy_price}}</span>
             <span>{{pingCItem.buy_value}}</span>
           </div>
         </div>
       </div>
       <div class="rightPart textc2">
-        <div class="time">{{buss_time}}</div>
+        <div class="time textc2">{{buss_time}}</div>
         <div>
           <span class='txt'>数量：</span>
           <span>{{pingCItem.sum_buy_amount}}张</span>
@@ -42,14 +42,14 @@
             <span>价格：</span>
             <span>市值：</span>
           </div>
-          <div class="uni-flex flexColumn val2">
+          <div class="uni-flex flexColumn val2 textc1">
             <span>{{pingCItem.sell_price}}</span>
             <span>{{pingCItem.sell_value}}</span>
           </div>
         </div>
       </div>
       <div class="rightPart">
-        <div class="time">{{close_time}}</div>
+        <div class="time textc2">{{close_time}}</div>
         <div>
           <span class='txt'>数量：</span>
           <span>{{sell_amount}}张</span>

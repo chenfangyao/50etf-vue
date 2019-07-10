@@ -6,8 +6,8 @@
       <!-- <input-item placeholderTxt='银行名称' v-model="bankName" ></input-item> -->
 			<div class='payMoney black2 textc1'>支付金额：{{paymoney}}</div>
 			<div class=inputcommon>
-      <input-item :placeholderTxt='whoPaytxt' v-model="uName" ></input-item>
-      <input-item :placeholderTxt='accountPaytxt' v-model="bankCode" ></input-item>
+      <input-item what-icon="login_code" :placeholderTxt='whoPaytxt' v-model="uName" ></input-item>
+      <input-item what-icon="login_code" :placeholderTxt='accountPaytxt' v-model="bankCode" ></input-item>
 			</div>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
 

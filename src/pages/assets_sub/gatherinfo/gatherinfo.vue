@@ -4,9 +4,9 @@
     <!-- <div class="title">支付账号</div> -->
     <div class="subWrap black2">
       <div class='gatherInfo'>
-        <div class='payMoney textc1 hasCopy'>
-          <span>收款账号:</span>
-          <span class="ellipsis">{{cardno}}</span>
+        <div class='payMoney textc2 hasCopy'>
+          <span>收款账号</span>
+          <span class="ellipsis textc1">{{cardno}}</span>
           <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
           <!-- <div class="chooseCount">
             <div v-vtap="{method:showPicker}">
@@ -16,13 +16,13 @@
           </div> -->
         </div>
 
-        <div class='payMoney textc1'>
-          <span>收款人:</span>
-          <span class="ellipsis">{{cardname}}</span>
+        <div class='payMoney textc2'>
+          <span>收款人</span>
+          <span class="ellipsis textc1">{{cardname}}</span>
         </div>
-        <div class='payMoney textc1 hasCopy'>
-          <span>客户代码:</span>
-          <span class="ellipsis">{{userinfo.mobile}}-{{userinfo.user_id}}</span>
+        <div class='payMoney textc2 hasCopy'>
+          <span>客户代码</span>
+          <span class="ellipsis textc1">{{userinfo.mobile}}-{{userinfo.user_id}}</span>
           <span class="copySpan" v-hover-class='"self-hover"' v-vtap="{method:copyText}">复制</span>
         </div>
       </div>
@@ -203,22 +203,28 @@ div.wrap {
 
     div.payMoney {
       height: 0.8rem;
+      border-bottom: 1px solid $blackTxt2;
+
       line-height: 0.8rem;
       color: grey;
       font-size: 15px;
       margin-left: 0.1rem;
-      border-bottom: 1px solid rgb(238, 237, 242);
       margin-top: 0.2rem;
     }
     div.payMoney.hasCopy {
       .copySpan {
-        float: right;
         margin-right: 10px;
         color: $primary1;
+        float: right;
+        border: solid 1px $primary1;
+        width: 1.6rem;
+        height: 0.64rem;
+        text-align: center;
+        line-height: 0.64rem;
       }
     }
     div.payMoney > span:nth-child(2) {
-      margin-left: 0.5rem;
+      margin-left: 0.3rem;
     }
     div.payMoney > span:nth-child(1) {
       width: 68px;

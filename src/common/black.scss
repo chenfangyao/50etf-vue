@@ -8,7 +8,7 @@ body{
   padding-bottom: env(safe-area-inset-bottom);
   padding-bottom: constant(safe-area-inset-bottom);
 }
-div#app.at-night{
+#app.at-night{
   min-height: 100vh;
   background-color: $black2;
   .vuePickera .area_roll{
@@ -33,7 +33,7 @@ div#app.at-night{
       border-color: $black1;
     }
     .van-cell{
-      background-color: $black3;
+      background-color: $black2;
       span{
         color: #fff;
       }
@@ -47,17 +47,18 @@ div#app.at-night{
   }
   div.wrap{
     background-color: $black1;
-    color: #fff;
+    color: $blackTxt1;
   }
   div.root-el{
     border-color: $black1;
-    color: #fff;
+    color: $blackTxt1;
+    background-color: $black2;
   }
   .textc1{
-    color: #fff;
+    color: $blackTxt1;
   }
   .textc2{
-    color: $blackTxt1;
+    color: $blackTxt2;
   }
   .black1{
     background-color: $black1;

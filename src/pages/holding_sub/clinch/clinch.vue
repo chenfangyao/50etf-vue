@@ -12,7 +12,7 @@
           <div class="leftPart">
             <div class="title">
               <span class="textc1">{{item.stock_name}}</span>
-              <span>{{item.stock_code}}</span>
+              <span class="textc2">{{item.stock_code}}</span>
             </div>
             <div class="uni-flex tip4">
               <div class="uni-flex">
@@ -20,7 +20,7 @@
                   <span>委托：</span>
                   <span>成交：</span>
                 </div>
-                <div class="uni-flex uni-column">
+                <div class="uni-flex uni-column textc1">
                   <span>{{item.entrust_amount}}张</span>
                   <span>{{business_amount[i]}}张</span>
                 </div>
@@ -30,7 +30,7 @@
                   <span>方向：</span>
                   <span>方式：</span>
                 </div>
-                <div class="uni-flex uni-column">
+                <div class="uni-flex uni-column textc1">
                   <span>{{item.entrust_bs==2?'卖出':'买入'}}</span>
                   <span>{{item.entrust_type==2?'市价':'现价'}}</span>
                 </div>
@@ -40,7 +40,7 @@
           <div class="rightPart">
             <div class="time">{{businessTime[i]}}</div>
             <div class="price textc1">{{item.business_price}}</div>
-            <div class="txt">均价</div>
+            <div class="txt textc1">均价</div>
           </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>

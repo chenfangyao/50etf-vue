@@ -12,7 +12,7 @@
         </div>
         
       </div>
-      <s-icon class="to_r" icon-class="enterright"></s-icon>
+      <s-icon class="to_r" :icon-class="'enterright' | atNightIcon"></s-icon>
 
     </div>
     <recharge-actionsheet :show-action="showAction" @choose-way='chooseWay' @calc-complete='assignment' @close-me='switchPop'></recharge-actionsheet>

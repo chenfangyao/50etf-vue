@@ -4,7 +4,7 @@
       <div class="black2" :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el uni-flex">
         <div class="leftPart" v-vtap="{method:back}">
-          <img src="../../assets/arrow/l.png">
+          <s-icon :icon-class="'nav_left' | atNightIcon" ></s-icon>
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
           <div v-vtap="{method:tapChange}">开仓</div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapMutations ,mapState} from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   props: {
     tabActive: {
@@ -54,14 +54,14 @@ export default {
   background-color: #fff;
   div.root-el {
     div.leftPart {
-      padding: 13px 0.2rem 0 0.3rem;
+      padding: 10px 0.2rem 0 0.3rem;
       height: 44px;
       position: absolute;
       left: 0;
       top: 0;
-      img {
-        width: 13px;
-        height: 15px;
+      .s-icon {
+        width: 16px;
+        height: 16px;
       }
     }
     text-align: center;
@@ -69,7 +69,7 @@ export default {
     line-height: 44px;
     position: relative;
     div.tabOpen {
-      width: 176px;
+      width: 2.08rem;
       height: 27px;
       border-radius: 13px;
       margin: 0 auto;
@@ -92,7 +92,7 @@ export default {
         text-align: center;
         line-height: 27px;
         font-size: 13px;
-        color: #999;
+        color: $primary1;
       }
     }
     div.tabOpen.active {

@@ -3,7 +3,7 @@
     <base-header :hasBack="true" title='资金流水'></base-header>
     <div class="line1 uni-flex black2 textc1">
       <span>共{{total}}笔</span>
-      <img class="right" v-vtap="{method:showDatepick}" src="../../../assets/mineImg/datePicker.png" />
+      <s-icon class="right" v-vtap="{method:showDatepick}" :icon-class="'select_rili' | atNightIcon" />
     </div>
     <scroll-view class='listscrow' ref="scroll3" @scrollToEnd="loadMore">
       <div>
@@ -13,7 +13,7 @@
               <span class="txt1 textc1">{{item.stock_name}}</span>
               <span class="txt2 textc2">{{item.stock_code}}</span>
             </div>
-            <div class="timetxt">
+            <div class="timetxt textc2">
               <!-- <span>{{$formatetimestr(item.create_time)}}</span> -->
               <span>{{formatetime[i]}}</span>
             </div>
@@ -21,15 +21,15 @@
           <div class="line2 uni-flex">
             <div>
               <div>
-                <span class="infoName">手续费：</span>
-                <span class="textc1">{{item.fee_money}}</span>
+                <span class="infoName textc1">手续费：</span>
+                <span class="textc2">{{item.fee_money}}</span>
               </div>
               <div>
-                <span class="infoName">账户余额：</span>
-                <span class="textc1">{{item.bal_money}}</span>
+                <span class="infoName textc1">账户余额：</span>
+                <span class="textc2">{{item.bal_money}}</span>
               </div>
             </div>
-            <div class="bigTxt">{{item.pay_money}}</div>
+            <div class="bigTxt textc1">{{item.pay_money}}</div>
           </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
@@ -82,7 +82,7 @@ export default {
     capicalflow(add) {
       this.resquestState = 1
       var options = {
-        url: '/Sapi/Squery/list_funds', 
+        url: '/Sapi/Squery/list_funds',
         method: 'GET',
         data: {
           page_index: this.pageindex,
@@ -113,7 +113,7 @@ export default {
         }
         this.resquestState = res.data.list.length == 10 ? 0 : 2
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     }
@@ -138,7 +138,7 @@ div.Bigwrap {
     color: #666;
     align-items: center;
     margin-top: 1px;
-    img.right {
+    .right {
       width: 20px;
       height: 20px;
     }

@@ -95,6 +95,12 @@ export default {
   },
   components: {
     headerCard
+  },
+  activated(){
+      if (process.env.API_HOST) vm.atNigh || plus.navigator.setStatusBarStyle("light");
+  },
+  deactivated(){
+    if (process.env.API_HOST) this.atNigh || plus.navigator.setStatusBarStyle("dark");
   }
 }
 </script>

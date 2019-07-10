@@ -1,6 +1,6 @@
 <template>
   <div class="mask uni-flex">
-    <div :class="['container black4',{show}]">
+    <div :class="['container black2',{show}]">
       <div class="title textc1">
         <span v-vtap="{method:closePop}" class="uni-icon uni-icon-close flr"></span>
         <span v-if="holding">一键平仓确认</span>
@@ -24,7 +24,7 @@
           <span>{{subCodeName}}</span>
           <span>{{resObj.stockCode}}</span>
           <span class="c_red">{{newprice}}</span>
-          <span v-if="onClose"><span v-if='entrusttype'>分笔</span><span v-if="!entrusttype">合并</span></span>
+          <span v-if="onClose"><span v-if='entrusttype'>分笔</span><span v-else>合并</span></span>
           <span>{{stockamunt}}张</span>
           <span v-if="onClose">{{maxbuy.enable_amount}}张</span>
           <span v-else>{{enable_money}}</span>
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div v-hover-class="'tap-hover'" class="black2" v-vtap="{method:closePop}">取消</div>
+        <div v-hover-class="'tap-hover'"  v-vtap="{method:closePop}">取消</div>
         <div v-hover-class="'tap-hover'" v-vtap="{method:yesTap}">确定</div>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default {
       enable_money: ''
     }
   },
-  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid', 'hbfbcell','switchObj']),
+  computed: mapState(['newprice', 'stockamunt', 'enttype', 'entrusttype', 'maxbuy', 'fbccid', 'hbfbcell', 'switchObj']),
   methods: {
     closePop: function () {
       this.$emit('close-pop')
@@ -68,7 +68,7 @@ export default {
         if (this.hbfbcell.length && !this.entrusttype) {
           // 全部平仓
           if (this.stockamunt === this.maxbuy.enable_amount) {
-            this.stocksell('', this.maxbuy.enable_amount)
+            this.stocksell(null, this.maxbuy.enable_amount)
           } else {//合并分笔平仓
             // 定时器选执行一次
             var idnumber = this.hbfbcell[0].split('-')
@@ -89,7 +89,6 @@ export default {
           }
         } else {//分笔平仓
           this.stocksell(this.fbccid, this.stockamunt)
-
         }
       } else {//开仓
         this.stockbuy()
@@ -98,7 +97,7 @@ export default {
     // 获取资金列表
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', 
+        url: '/Sapi/User/asset',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -106,13 +105,13 @@ export default {
           this.enable_money = res.data.enable_money
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     stockbuy() {
       var options = {
-        url: '/Sapi/Stock/buy', 
+        url: '/Sapi/Stock/buy',
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
@@ -137,24 +136,23 @@ export default {
           this.$toast(res.info ? res.info : '买入失败')
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
-    stocksell(fbccid, number) {
-      let hid = parseInt(fbccid)
-      if (this.entrusttype || this.hbfbcell.length) {
-        hid = parseInt(fbccid)
-      }
+    stocksell(hid, number) {
+      /* if (this.entrusttype || this.hbfbcell.length) {
+        hid = parseInt(hid)
+      } */
       var options = {
-        url: '/Sapi/Stock/sell', 
+        url: '/Sapi/Stock/sell',
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
           price: this.enttype == 2 ? this.priceshock() : parseFloat(this.newprice),
           amount: number,
           enttype: parseInt(this.enttype),
-          hid: hid
+          hid
         },
       }
       this.$httpReq(options).then((res) => {
@@ -172,7 +170,7 @@ export default {
           this.$toast(res.info ? res.info : '卖出失败')
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
@@ -199,7 +197,7 @@ export default {
           shockprice = curruentPrice * 0.95;
         }
       }
-      else  {
+      else {
         if (this.onClose == false) {
           shockprice = curruentPrice * 1.1;
         } else {
@@ -242,7 +240,7 @@ export default {
     background: #fff;
     border-radius: 0.1rem;
     z-index: 310;
-    padding: 0.28rem 0.3rem 0.2rem;
+    padding: 0.28rem 0.8rem ;
     .c_red {
       color: #f05f5c;
     }
@@ -267,9 +265,11 @@ export default {
         font-size: 12px;
         line-height: 0.52rem;
         flex-grow: 1;
+        text-align: right;
       }
       > div:first-child {
         color: #707680;
+        text-align-last: left;
       }
     }
     div.btn2 {
@@ -285,11 +285,9 @@ export default {
         text-align: center;
       }
       > div:first-child {
-        background: rgba(153, 153, 153, 1);
+        border: solid 1px $primary1 ;
         margin-right: 0.2rem;
-      }
-      > div.tap-hover:first-child {
-        background: darken(rgba(153, 153, 153, 1), 5%);
+        color: $primary1;
       }
       > div:last-child {
         background: $primary1;

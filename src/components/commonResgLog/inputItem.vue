@@ -67,9 +67,9 @@ export default {
 <style lang="scss" scoped>
 #app.at-night {
   ._input {
-    border-color: $blackTxt1;
+    border-color: $blackTxt2;
     span {
-      color: $blackTxt1;
+      color: $blackTxt2;
     }
   }
 }

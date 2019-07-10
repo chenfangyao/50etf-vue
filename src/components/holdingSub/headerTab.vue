@@ -34,6 +34,12 @@ export default {
 </script>
 
 <style lang="scss" >
+#app.at-night{
+  .now{
+    color: $primary1;
+    border-color: $primary1;
+  }
+}
 ._headerContainer {
   position: fixed;
   left: 0;

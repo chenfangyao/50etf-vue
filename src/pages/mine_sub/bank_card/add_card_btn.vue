@@ -7,7 +7,7 @@
           <img :src="item.logo" alt="">
         </div>
         <div class="rightPart">
-          <div class="flr" v-vtap="{method:toUnbind,params:item.cardno}">解绑</div>
+          <div class="flr" v-vtap="{method:showPop,params:item.cardno}">解绑</div>
           <div class="line1">{{item.bank_name}}</div>
           <div class="line2">储蓄卡</div>
           <div class="line3">
@@ -17,10 +17,11 @@
         </div>
       </li>
     </ul>
-    <div class='btnclass black2' v-vtap="{method:addbank}">
+    <div class='btnclass black2' v-vtap="{method:addbank}" v-if="cardList.length<5">
       <s-icon :icon-class="atNight?'add_black':'add_white'" class-name="plusBtn" />
       <div>添加银行卡</div>
     </div>
+    <confirm-pop v-if='popShow' @cancle-tap="hidePop" @yes-tap="toUnbind"></confirm-pop>
   </div>
 </template>
 
@@ -28,10 +29,13 @@
 import btnBlock from '@/components/btnBlock.vue'
 import { mapState } from 'vuex'
 import $req from '@/common/request.js'
+import confirmPop from '@/components/other/confirm_pop'
 export default {
   data() {
     return {
-      cardList: []
+      cardList: [],
+      popShow: false,
+      unbindNo:''
     };
   },
   filters: {
@@ -43,21 +47,27 @@ export default {
     }
   },
   computed: mapState(['atNight']),
-  components: { btnBlock },
+  components: { btnBlock, confirmPop },
   methods: {
-
     addbank() {
       this.$navigateTo({
         url: '/pages/mine_sub/bank_card/add_card/add_card',
         query: { bankinfo: 0 }
       })
     },
-    toUnbind(cardno) {
+    hidePop(){
+      this.popShow=false
+    },
+    showPop(val){
+      this.popShow = true
+      this.unbindNo=val
+    },
+    toUnbind() {
       this.$router.push({
         path: '/pages/forget_pwd/tep2/tep2',
         query: {
           type: 'unbind',
-          cardno,
+          cardno:this.unbindNo,
           typeWhat: 2
         }
       })

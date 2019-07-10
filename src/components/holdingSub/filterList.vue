@@ -1,10 +1,11 @@
 <template>
   <div>
 
-    <div class="uni-flex container">
+    <div class="uni-flex container textc1">
       <div>总计：{{total}}笔</div>
       <div class="right" v-vtap="{method:showDatepick}">
-        <img src="../../assets/mineImg/datePicker.png" />
+        <s-icon :icon-class="'select_rili' | atNightIcon" />
+
       </div>
     </div>
     <date-pick sb-format='1' :show-pick="showPick" @hid-me='hidDatePick' @select-complete='getTime'></date-pick>
@@ -41,15 +42,15 @@ div.container {
   justify-content: space-between;
   padding: 0.24rem;
   font-size: 14px;
-  height:.88rem;
+  height: 0.88rem;
   color: rgba(153, 153, 153, 1);
   align-items: center;
   div.right {
-    height:.88rem;
-    padding:.21rem 0 0.40rem;
-    img {
-      width:.45rem;
-      height:.45rem;
+    height: 0.88rem;
+    padding: 0.21rem 0 0.4rem;
+    .s-icon {
+      width: 0.45rem;
+      height: 0.45rem;
     }
   }
 }

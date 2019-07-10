@@ -1,12 +1,13 @@
 import request from '@/common/request.js'
 import router from '../router'
-import {  Dialog } from 'vant';
+import store from '../vuex'
+import { Dialog } from 'vant';
 
 function add0(m) {
   return m < 10 ? "0" + m : m;
 }
 export default {
-  install(vue){
+  install(vue) {
     vue.directive('hover-class', {
       bind: function (el, binding) {
         el.addEventListener("touchstart", function (e) {
@@ -53,6 +54,7 @@ export default {
         }, false);
       }
     })
+    vue.filter('atNightIcon', val => store.state.atNight ? 'black_' + val : val)
     vue.prototype.$httpReq = request
     // 时间转时间戳
     vue.prototype.$timestamp = function (str) {

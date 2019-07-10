@@ -4,7 +4,7 @@
     <div class="border1 black1"></div>
     <!-- <div class="title">{{rules.title}}</div> -->
     <!-- <div class="content">{{rules.content}}</div> -->
-    <div class="content" v-html="rules.content"></div>
+    <div class="content textc2" v-html="rules.content"></div>
   </div>
 </template>
 

@@ -191,7 +191,7 @@ h2 {
   color: #aaa;
 }
 div.specialBg{
-  background: #f5f5ff
+  background: rgba(235,235,235,0.5)
 }
 
 div.root-el {
@@ -206,7 +206,7 @@ div.root-el {
     width: 51px;
   }
   span.txtred {
-    color: #ec605e;
+    color: $primary1;
   }
   span.txtgreen {
     color: #3aba8f;
@@ -266,10 +266,11 @@ div.root-el {
 }
 div.at-night{
  span.midTxt{
-    background-color: #2E3245;
+   background:rgba(108,114,140,0.2);
+   color: $blackTxt2;
   }
   div.specialBg{
-    background-color: #2E3245 !important;
+    background:rgba(59,63,80,0.5)!important;
   }
 }
 </style>

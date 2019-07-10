@@ -28,17 +28,16 @@
                   <span class="digital textc1">{{sell_amount[i]}}</span>
                 </span>
               </div>
-              <div class="time">{{close_time[i]}}</div>
+              <div class="time textc2">{{close_time[i]}}</div>
             </div>
           </div>
           <div class="imgContainer">
-            <s-icon icon-class="enterright"></s-icon>
+            <s-icon :icon-class="'enterright' | atNightIcon"></s-icon>
           </div>
 
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
       </div>
-
     </scroll-view>
   </div>
 </template>

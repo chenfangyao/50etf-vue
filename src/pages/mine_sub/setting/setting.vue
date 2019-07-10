@@ -122,6 +122,9 @@ div.wrap {
     align-items: center;
     font-size: 15px;
     justify-content: space-between;
+    .van-switch--on{
+      background-color: $primary1;
+    }
     div.verView {
       align-items: center;
       span.verTxt {

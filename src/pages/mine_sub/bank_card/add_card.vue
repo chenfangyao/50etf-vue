@@ -7,7 +7,7 @@
         <div v-vtap.self="{method:showpicker1}">
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show1" :columns="column1" :defaultData="defaultData" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show1" :columns="1"  :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
         <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show2" :columns="column2" :defaultData="defaultData" :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show2" :columns="2"  :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
         </div>
       </div>
     </div>
@@ -27,9 +27,13 @@
         <div v-vtap.self="{method:showpicker3}">
           {{pickSubBankText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show3" :columns="column1" :defaultData="defaultData" :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show3" :columns="1"  :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
+    </div>
+    <div class="list-row">
+      <span>开户详情</span>
+      <input type="text" v-model="selfSubBank">
     </div>
     <div class="list-row">
       <span>卡号</span>
@@ -39,13 +43,9 @@
       <span>姓名</span>
       <input type="text" maxlength="10" v-model="cardname" placeholder="填写姓名">
     </div>
-    <!-- <div class="list-row">
-      <span>身份证号</span>
-      <input type="text" v-model="idno" maxlength="18" placeholder="填写收款银行身份证">
-    </div> -->
 
     <div class="fixBottom">
-    <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
+      <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <btn-block txt="下一步" @v-tap="addbank"></btn-block>
     </div>
   </div>
@@ -63,12 +63,13 @@ export default {
     return {
       showErr: false,
       tipContent: '',
-      pickerValueArray: {},
-      pickerCityValueArray: {},
-      pickerSubBankArray: {},
+      pickerValueArray: { data1: [] },
+      pickerCityValueArray: { data1: [] },
+      pickerSubBankArray: { data1: [] },
       pickerText: '',
       pickerCityText: '北京市-北京',
-      pickSubBankText: '',
+      pickSubBankText: '请选择支行',
+      selfSubBank: '',
       bankid: '',
       idno: '',
       cardname: '',
@@ -81,9 +82,6 @@ export default {
       show1: false,
       show2: false,
       show3: false,
-      column1: 1,
-      column2: 2,
-      defaultData: [],
       popindex: 0,
     };
   },
@@ -133,9 +131,7 @@ export default {
           this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
           break
         case 2:
-          var text = val.select1.text.replace(this.pickerText, '')
-          text = text.replace('股份有限公司', '')
-          this.pickSubBankText = text
+          this.pickSubBankText =val.select1.text
           this.sub_id = val.select1.value
           break
       }
@@ -244,10 +240,8 @@ export default {
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
-          var subBankText = res.data.list[0].sub_name
-          subBankText = subBankText.replace(this.pickerText, '')
-          subBankText = subBankText.replace('股份有限公司', '')
-          this.pickSubBankText = subBankText
+          /*   var subBankText = res.data.list[0].sub_name.replace(this.pickerText, '')
+            subBankText = subBankText.replace('股份有限公司', '') 动态设置开户支行名*/
           let data1 = []
           this.sub_id = res.data.list[0].sub_id
           this.pickerSubBankArray = {}
@@ -298,7 +292,7 @@ export default {
         sub_id: this.sub_id,
         cardno: this.bankcardid,
         cardname: this.cardname,
-        sub_name: this.pickSubBankText,
+        sub_name: this.selfSubBank,
         city_id: this.city_cd,
         bank_id: this.bankid
       }
@@ -319,6 +313,8 @@ export default {
         } else {
           this.showErr = true
           this.tipContent = res.info
+          setTimeout(() => { this.showErr = false }, 2000)
+
         }
       })
     },
@@ -329,6 +325,11 @@ export default {
     // this.getsubbanklist('102', '110', '1000')
     if (!this.$route.query.bankinfo) {
       this.editdefault = true
+    }
+  },
+  watch: {
+    pickSubBankText(val) {
+      this.selfSubBank = this.pickerText+val
     }
   }
 }
@@ -371,6 +372,7 @@ div.wrap {
       flex-grow: 1;
       margin-right: 2em;
       margin-bottom: 2px;
+      color: #333;
     }
   }
   div.fixBottom {
@@ -388,7 +390,7 @@ div.chooseCount {
   font-size: 14px;
   font-family: Adobe Heiti Std R;
   font-weight: normal;
-  color: rgba(102, 102, 102, 1);
+  color: #333;
   line-height: 43px;
   // background: rgba(239, 239, 239, 1);
   border-radius: 0.08rem;

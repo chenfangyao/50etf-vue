@@ -1,5 +1,5 @@
 <template>
-  <div class="uni-flex root-el">
+  <div class="uni-flex root-el black2">
     <div class="left">
       <div class="title">
         <span>买</span>
@@ -75,39 +75,44 @@ export default {
 
   computed: {
     buyPrice1() {
-      if(this.hydetils.buyPrice1)return this.hydetils.buyPrice1.toFixed(4)
+      if (this.hydetils.buyPrice1) return this.hydetils.buyPrice1.toFixed(4)
     },
     buyPrice2() {
-      if(this.hydetils.buyPrice2)return this.hydetils.buyPrice2.toFixed(4)
+      if (this.hydetils.buyPrice2) return this.hydetils.buyPrice2.toFixed(4)
     },
     buyPrice3() {
-      if(this.hydetils.buyPrice3)return this.hydetils.buyPrice3.toFixed(4)
+      if (this.hydetils.buyPrice3) return this.hydetils.buyPrice3.toFixed(4)
     },
     buyPrice4() {
-      if(this.hydetils.buyPrice4)return this.hydetils.buyPrice4.toFixed(4)
+      if (this.hydetils.buyPrice4) return this.hydetils.buyPrice4.toFixed(4)
     },
     buyPrice5() {
-      if(this.hydetils.buyPrice5)return this.hydetils.buyPrice5.toFixed(4)
+      if (this.hydetils.buyPrice5) return this.hydetils.buyPrice5.toFixed(4)
     },
-    salePrice1() { if(this.hydetils.salePrice1)return this.hydetils.salePrice1.toFixed(4) },
-    salePrice2() { if(this.hydetils.salePrice2)return this.hydetils.salePrice2.toFixed(4) },
-    salePrice3() { if(this.hydetils.salePrice3)return this.hydetils.salePrice3.toFixed(4) },
-    salePrice4() { if(this.hydetils.salePrice4)return this.hydetils.salePrice4.toFixed(4) },
-    salePrice5() { if(this.hydetils.salePrice5)return this.hydetils.salePrice5.toFixed(4) },
+    salePrice1() { if (this.hydetils.salePrice1) return this.hydetils.salePrice1.toFixed(4) },
+    salePrice2() { if (this.hydetils.salePrice2) return this.hydetils.salePrice2.toFixed(4) },
+    salePrice3() { if (this.hydetils.salePrice3) return this.hydetils.salePrice3.toFixed(4) },
+    salePrice4() { if (this.hydetils.salePrice4) return this.hydetils.salePrice4.toFixed(4) },
+    salePrice5() { if (this.hydetils.salePrice5) return this.hydetils.salePrice5.toFixed(4) },
   },
   props: ["hydetils"]
 
 }
 </script>
 <style lang="scss" scoped>
-div#app.at-night div.title{
-  background-color: #1f2433;
+#app.at-night {
+  div.title {
+    background-color: #1f2433;
+  }
+  .datas {
+    border-color: $black1;
+  }
 }
 div.root-el {
-  padding:.26rem;
+  padding: 0.26rem;
   background-color: #fff;
   div.left {
-    margin-right:.18rem;
+    margin-right: 0.18rem;
     div.datas {
       span:first-child {
         color: #999;
@@ -124,7 +129,7 @@ div.root-el {
     div.datas {
       display: flex;
       justify-content: space-between;
-      padding: 0 .22rem;
+      padding: 0 0.22rem;
       border-bottom: 0.5px solid rgba(153, 153, 153, 0.5);
       font-size: 12px;
     }
@@ -147,7 +152,7 @@ div.root-el {
         color: #999;
       }
       span:first-child {
-        color: #ec605e;
+        color: $primary1;
       }
     }
   }

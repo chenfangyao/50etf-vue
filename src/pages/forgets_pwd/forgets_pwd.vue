@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <base-header has-back="1" title="忘记密码"></base-header>
+    <base-header has-back="1" title="重置密码"></base-header>
     <div class="title textc1"></div>
     <div class="container">
       <input-item placeholderTxt="手机号" what-icon="login_shouji" @now-blur="handleBlur" is-tel="1" v-model="tel"></input-item>
