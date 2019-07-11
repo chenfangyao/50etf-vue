@@ -364,7 +364,7 @@ div.wrap {
         background-color: white;
         border-bottom: 1px solid #ccc;
         #app.at-night &{
-          border-color: $black1
+          border-color: $blackTxt2
         }
         padding-left: 5px;
         background-color: #fff;

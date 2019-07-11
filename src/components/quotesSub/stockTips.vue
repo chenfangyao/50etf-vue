@@ -120,7 +120,7 @@ div.stock50 {
     display: flex;
     justify-content: space-between;
     line-height: 0.71rem;
-    color: rgba(240, 95, 92, 1);
+    color: $primary1;
     span{
       width: 51px;
       text-align: right;
@@ -152,7 +152,7 @@ div.stock50 {
     font-size: 17px;
     
     font-weight: 700;
-    color: rgba(240, 95, 92, 1);
+    color: $primary1;
     text-align: center;
     line-height: 0.71rem;
     padding:  0 0.23rem;

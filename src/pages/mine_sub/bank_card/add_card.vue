@@ -3,7 +3,7 @@
     <base-header title="添加银行卡" has-back="1"></base-header>
     <div class="list-row">
       <span>开户银行</span>
-      <div class="chooseCount">
+      <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker1}">
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
@@ -13,7 +13,7 @@
     </div>
     <div class="list-row">
       <span>开户省市</span>
-      <div class="chooseCount">
+      <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
@@ -23,7 +23,7 @@
     </div>
     <div class="list-row">
       <span>开户支行</span>
-      <div class="chooseCount">
+      <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker3}">
           {{pickSubBankText}}
           <span v-if="editdefault" class="arrowDown"></span>
@@ -341,11 +341,11 @@ div#app.at-night div.list-row {
   background-color: #181c28;
   border-color: #0f131f;
   > span:first-child {
-    color: #fff;
+    color: $blackTxt1;
   }
   input {
     background-color: #181c28;
-    color: #fff;
+    color: $blackTxt1;
   }
 }
 div.wrap {
@@ -355,8 +355,8 @@ div.wrap {
   div.list-row {
     width: 6.8rem;
     height: 1.1rem;
-    margin-left: 0.35rem;
-    margin-top: 0.2rem;
+    padding-left: 0.35rem;
+    margin: 0.2rem auto 0;
     background: rgba(255, 255, 255, 1);
     border-bottom: 1px solid #eee;
     line-height: 1rem;
@@ -370,8 +370,6 @@ div.wrap {
     }
     input {
       flex-grow: 1;
-      margin-right: 2em;
-      margin-bottom: 2px;
       color: #333;
     }
   }

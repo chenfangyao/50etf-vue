@@ -138,7 +138,7 @@ div.wrap {
       color: #3aba8f;
     }
     span.redColor {
-      color: #ec605e;
+      color: $primary1;
     }
   }
 }

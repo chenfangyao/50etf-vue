@@ -92,7 +92,7 @@ export default {
 div.leftPart {
   // margin:.30rem  0  0 .26rem;
   div.leftTop {
-    color: $red1;
+    color: $primary1;
     
     .price {
       font-size: 32px;

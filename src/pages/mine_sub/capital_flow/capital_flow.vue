@@ -146,6 +146,9 @@ div.Bigwrap {
   .listscrow {
     height: calc(100vh - 1.78rem);
     overflow: hidden;
+    >div{
+      padding-top: 1px;
+    }
   }
   div.listsContainer {
     background-color: #fff;

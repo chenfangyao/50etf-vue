@@ -2,7 +2,7 @@
   <div class="wrap">
     <base-header title="提现" has-back='1' right-txt='提现记录' @right-tap='rightTap'></base-header>
     <recharge-way v-if="hasBank" @change-wayi="changeWayI"></recharge-way>
-    <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户'  txt1='请绑定银行卡' to-addcard="1"></recharge-way>
+    <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' to-addcard="1"></recharge-way>
     <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">提现金额</div>
@@ -36,7 +36,8 @@ export default {
       hasBank: false,
       timmer: null,
       assetsObj: {},
-      withdrawId:''
+      withdrawId: '',
+      reqLock: false
     }
   },
   created() {
@@ -53,8 +54,8 @@ export default {
     rightTap() {
       this.$navigateTo({ url: '/pages/assets_sub/recording/recording', query: { type: 2 } })
     },
-    changeWayI(obj){
-      this.withdrawId=obj.id
+    changeWayI(obj) {
+      this.withdrawId = obj.id
     },
     doWhat() {
       var cash_money = this.assetsObj.cash_money.replace(/,/g, '')
@@ -63,14 +64,17 @@ export default {
         return
       }
       var options = {
-        url: '/Sapi/Ufund/cash', 
+        url: '/Sapi/Ufund/cash',
         method: 'POST',
         data: {
           money: this.money,
-          id:this.withdrawId,//提现到账银行卡标识
+          id: this.withdrawId,//提现到账银行卡标识
         }
       }
+      if (this.reqLock) return;
+      else this.reqLock = true;
       this.$httpReq(options).then((res) => {
+        this.reqLock = false
         if (res.status) {
           this.$router.push({
             path: '/pages/assets_sub/recording/recording',
@@ -102,13 +106,13 @@ export default {
           }
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', 
+        url: '/Sapi/User/asset',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -145,6 +149,9 @@ div.wrap {
         padding: 0 0 0.2rem 20px;
         /*height: 32px !important;*/
         width: 100%;
+        #app.at-night & {
+          border-color: $blackTxt2;
+        }
       }
       > span {
         font-size: 18px;

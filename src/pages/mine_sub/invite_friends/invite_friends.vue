@@ -1,10 +1,12 @@
 <template>
   <div class="wrap">
     <div class="topTitle" :style="{'padding-top':statusbarHeight+'px'}">
-      <div class="left commonStyle" v-vtap="{method:back}">
-        <s-icon icon-class="black_nav_left"></s-icon>
+      <div>
+        <div class="commonStyle" v-vtap="{method:back}">
+          <s-icon icon-class="black_nav_left"></s-icon>
+        </div>
+        <span>邀请好友</span>
       </div>
-      <span>邀请好友</span>
     </div>
     <s-icon icon-class="yaoqing_bg2" class='bg'></s-icon>
     <div>
@@ -36,7 +38,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userinfo', 'atNight', 'switchObj','statusbarHeight']),
+    ...mapState(['userinfo', 'atNight', 'switchObj', 'statusbarHeight']),
     realAddress() {
       return this.link + '?rel_user=' + this.userinfo.user_id
     }
@@ -74,19 +76,19 @@ div.wrap {
   min-height: 100vh;
   .topTitle {
     text-align: center;
-    height: 44px;
     font-size: 16px;
-    line-height: 44px;
     position: relative;
     z-index: 10;
     color: #fff;
+    > div {
+      line-height: 44px;
+      position: relative;
+    }
     .commonStyle {
       align-self: center;
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
-    }
-    div.left {
       padding: 13px 0.2rem 0 0.3rem;
       height: 44px;
       left: 0;
@@ -112,7 +114,7 @@ div.wrap {
     border-radius: 2px;
     width: 166px;
     height: 166px;
-        background-color: #fff;
+    background-color: #fff;
     margin: 3.46rem auto 0.4rem;
   }
   div.txt {

@@ -1,9 +1,9 @@
 <template>
   <div class="mask uni-flex">
-    <div :class="['container',{show}]">
-      <div class="title">一键平仓确认</div>
-      <div class="list uni-flex">
-        <div class="uni-flex">
+    <div :class="['container  black2',{show}]">
+      <div class="title textc1">一键平仓确认</div>
+      <div class="list uni-flex textc1">
+        <div class="uni-flex ">
           <span>合约名称</span>
           <span>合约代码</span>
           <span>委托价格</span>
@@ -44,7 +44,7 @@ export default {
     // 获取资金列表
     getassets() {
       var options = {
-        url: '/Sapi/User/asset', 
+        url: '/Sapi/User/asset',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
@@ -52,7 +52,7 @@ export default {
           this.enable_money = res.data.enable_money
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
@@ -64,7 +64,7 @@ export default {
         return
       }
       var options = {
-        url: '/Sapi/Stock/sell', 
+        url: '/Sapi/Stock/sell',
         method: 'POST',
         data: {
           price: this.resObj.last_price,
@@ -90,7 +90,7 @@ export default {
         }
 
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     }
@@ -133,20 +133,23 @@ export default {
       font-size: 16px;
       font-weight: bold;
       color: #333;
-      margin-bottom: 0.35rem;
-      border-bottom: solid 1px #ccc;
       padding-bottom: 10px;
     }
     div.list {
+      border-bottom: solid 1px #ccc;
+      border-top: solid 1px #ccc;
+      #app.at-night & {
+        border: 0;
+      }
       justify-content: space-between;
       color: #333;
-      padding-bottom: 0.33rem;
+      padding: 0.33rem 0;
       > div {
         flex-direction: column;
         font-size: 12px;
         flex-grow: 1;
         text-align: right;
-        span{
+        span {
           line-height: 2.6;
         }
       }
@@ -157,7 +160,6 @@ export default {
     div.btn2 {
       justify-content: space-between;
       padding: 0.53rem 0;
-      border-top: solid 1px #ccc;
       > div {
         flex-grow: 1;
         height: 0.88rem;
