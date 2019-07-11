@@ -5,15 +5,15 @@
       <div class="line1 textc1">上传身份证</div>
       <div class="line2 textc2">证件类型：中国大陆剧名身份证</div>
       <!-- 正面 -->
-      <div class="cardPhoto black2" >
+      <div class="cardPhoto black2">
         <div>点击上传身份证正面</div>
-        <img class="iconView" v-if="imgUrl[0]" :src="imgUrl[0]" :data-src="imgUrl[0]" v-vtap="{method:previewImage}">
+        <img class="iconView" v-if="imgUrl[0]" :src="imgUrl[0]" :data-src="imgUrl[0]" v-vtap="{method: chooseImage , params: 0}">
         <s-icon :icon-class="atNight?'idcard1black':'idcard1'" v-else class="iconView" v-vtap="{method: chooseImage , params: 0}"></s-icon>
       </div>
       <!-- 反面 -->
-      <div class="cardPhoto mt20 black2" >
+      <div class="cardPhoto mt20 black2">
         <div>点击上传身份证反面</div>
-        <img class="iconView imgView2" v-if="imgUrl[1]" :src="imgUrl[1]" :data-src="imgUrl[1]" v-vtap="{method:previewImage}">
+        <img class="iconView imgView2" v-if="imgUrl[1]" :src="imgUrl[1]" :data-src="imgUrl[1]" v-vtap="{method: chooseImage , params: 1}">
         <s-icon :icon-class="atNight?'idcard2black':'idcard2'" v-else class="iconView" v-vtap="{method: chooseImage , params: 1}"></s-icon>
       </div>
     </div>
@@ -27,7 +27,7 @@
 import btnBlock from '@/components/btnBlock.vue'
 import lrz from 'lrz'
 import Qs from 'qs'
-import { mapState,mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -92,7 +92,7 @@ export default {
         })
       }, e => { }, { filename: '_doc/gallery/', system: true });
     },
-    previewImage(e) {
+    previewImage(e) {//暂时弃用了
       if (process.env.NODE_ENV !== 'production') {
         this.$toast('请下载APP预览大图')
         return      }
@@ -109,7 +109,7 @@ export default {
     this.IDcard = opt.IDcard
     this.mobile = opt.telnum
   },
-  computed:mapState(['atNight'])
+  computed: mapState(['atNight'])
 }
 </script>
 

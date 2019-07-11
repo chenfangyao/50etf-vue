@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <base-header  :hasBack="true" :title="title+'设置'" :specialBack="true" @special-back="goBack"></base-header>
+    <base-header :hasBack="true" :title="title+'设置'" :specialBack="true" @special-back="goBack"></base-header>
     <!--<div class="border1"></div>-->
     <div class="wrap ">
       <div class="subTitle textc2">止{{isFull==1?'盈':'损'}}功能，当日有效！</div>
@@ -11,8 +11,8 @@
         <span>持仓数：{{resObj.own_amount}}</span>
       </div>
       <div class="inputContainer">
-        <input-item what-icon='' class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"  ></input-item>
-        <span class="inputspan">{{title}}值{{moreless}}于最新价成效</span>
+        <input-item what-icon='' class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"></input-item>
+        <span class="inputspan">{{title}}值{{moreless}}于最新价生效</span>
       </div>
       <div class="zyzsspan"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
       <div class="subTitle textc2 margin-bottom">当最新价{{isFull==1?'≥':'≤'}}止{{isFull==1?'盈':'损'}}价时，触发市价止{{isFull==1?'盈':'损'}}卖出</div>
@@ -30,21 +30,21 @@ export default {
       isFull: '',
       inputPrice: '',
       verifyYes: true,
-      title:'',
-      resObj:{},
-      singykprice:'0.00',
-      singykroute:'0.00',
-      valChange:false,
-      sureChange:false,
-      changePrice:'',
-      moreless:''
+      title: '',
+      resObj: {},
+      singykprice: '0.00',
+      singykroute: '0.00',
+      valChange: false,
+      sureChange: false,
+      changePrice: '',
+      moreless: ''
     };
   },
   watch: {
     inputPrice(val) {
       // 成交价
-      this.singykprice=parseFloat(this.inputPrice-this.resObj.avg_buy_price).toFixed(4)
-      this.singykroute=parseFloat(this.singykprice*100/this.resObj.avg_buy_price).toFixed(4)
+      this.singykprice = parseFloat(val - this.resObj.avg_buy_price).toFixed(4)
+      this.singykroute = parseFloat(this.singykprice * 100 / this.resObj.avg_buy_price).toFixed(4)
       // this.valChange=true
     },
 
@@ -52,24 +52,29 @@ export default {
   components: { submitBtn, inputItem },
   methods: {
     handleNext() {
-      let sltp_price_tp='',sltp_price_sl='',sltp_name=''
-      if(this.isFull==1){
-        sltp_price_tp=this.inputPrice
-        sltp_price_sl=this.resObj.sltp_price_sl
-        sltp_name='止盈'
-      }else{
-        sltp_price_tp=this.resObj.sltp_price_tp
-        sltp_price_sl=this.inputPrice
-        sltp_name='止损'
+      let sltp_price_tp = '', sltp_price_sl = '', sltp_name = '', toastTxt = ''
+      if (parseFloat(this.inputPrice) <= 0.001) {
+        toastTxt="价格设置不能低于0.001！"
       }
-      if(parseFloat(this.inputPrice)<=0.001){
-        this.$toast(""+sltp_name+"价格设置不能低于0.001！")
+      if (this.isFull == 1) {
+        if (this.inputPrice <= this.resObj.last_price) toastTxt = '价必须大于最新价'
+        sltp_price_tp = this.inputPrice
+        sltp_price_sl = this.resObj.sltp_price_sl
+        sltp_name = '止盈'
+      } else {
+        if (this.inputPrice >= this.resObj.last_price) toastTxt = '价必须小于最新价'
+        sltp_price_tp = this.resObj.sltp_price_tp
+        sltp_price_sl = this.inputPrice
+        sltp_name = '止损'
+      }
+      if (toastTxt) {
+        this.$toast(sltp_name + toastTxt)
         return
       }
-     // this.$router.goBack()
+      // this.$router.goBack()
       var options = {
-        url: '/Sapi/Hold/sltp_set', 
-        method: 'POST', 
+        url: '/Sapi/Hold/sltp_set',
+        method: 'POST',
         data: {
           hid: parseInt(this.resObj.id),
           // 止盈价
@@ -77,25 +82,24 @@ export default {
           // 止损价
           sltp_price_sl: parseFloat(sltp_price_sl)
         },
-        // header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
 
       this.$dialog.confirm({
-        title: '设置'+sltp_name+'',
-        message: ''+sltp_name+'价：'+this.inputPrice+''
+        title: '设置' + sltp_name + '',
+        message: '' + sltp_name + '价：' + this.inputPrice + ''
       }).then(() => {
         // on confirm
-        this.sureChange=true
+        this.sureChange = true
         this.$httpReq(options).then((res) => {
           if (res.status) {
-            this.$toast(res.info?res.info:'设置成功')
+            this.$toast(res.info ? res.info : '设置成功')
           }
           else {
             this.$toast(res.info ? res.info : '设置失败')
           }
         }).catch((err) => {
-          
-          console.error(err,'捕捉')
+
+          console.error(err, '捕捉')
           this.$toast('设置失败')
         })
       }).catch(() => {
@@ -103,46 +107,45 @@ export default {
       });
 
     },
-    goBack(){
-      if(this.changePrice!=this.inputPrice && !this.sureChange){
+    goBack() {
+      if (this.changePrice != this.inputPrice && !this.sureChange) {
         this.$dialog.confirm({
-          title: ''+this.title+'值未确认',
+          title: '' + this.title + '值未确认',
           message: '您设置的止盈值，未确认，是否直接返回上一级页面'
         }).then(() => {
           this.$router.goBack()
         }).catch(() => {
           // on cancel
         });
-      }else{
+      } else {
         this.$router.goBack()
       }
 
     }
   },
   mounted() {
-    this.resObj=this.$route.query.resObj
+    this.resObj = this.$route.query.resObj
     this.isFull = this.$route.query.isfull
-    this.price=this.$route.query.price
-    this.code=this.$route.query.code
-    if(this.isFull==1){
-      this.title='止盈'
-      this.moreless='大'
-      if(this.resObj.sltp_price_tp){
-        this.inputPrice=this.resObj.sltp_price_tp
-        this.changePrice=this.resObj.sltp_price_tp
-      }else{
-        this.inputPrice=this.resObj.avg_buy_price
-        this.changePrice=this.resObj.avg_buy_price
+    this.code = this.$route.query.code
+    if (this.isFull == 1) {
+      this.title = '止盈'
+      this.moreless = '大'
+      if (this.resObj.sltp_price_tp) {
+        this.inputPrice = this.resObj.sltp_price_tp
+        this.changePrice = this.resObj.sltp_price_tp
+      } else {
+        this.inputPrice = this.resObj.avg_buy_price
+        this.changePrice = this.resObj.avg_buy_price
       }
-    }else{
-      this.title='止损'
-      this.moreless='小'
-      if(this.resObj.sltp_price_sl){
-        this.inputPrice=this.resObj.sltp_price_sl
-        this.changePrice=this.resObj.sltp_price_sl
-      }else{
-        this.inputPrice=this.resObj.avg_buy_price
-        this.changePrice=this.resObj.avg_buy_price
+    } else {
+      this.title = '止损'
+      this.moreless = '小'
+      if (this.resObj.sltp_price_sl) {
+        this.inputPrice = this.resObj.sltp_price_sl
+        this.changePrice = this.resObj.sltp_price_sl
+      } else {
+        this.inputPrice = this.resObj.avg_buy_price
+        this.changePrice = this.resObj.avg_buy_price
       }
     }
   }
@@ -161,7 +164,7 @@ div.wrap {
     line-height: 20px;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
-    margin:.49rem 0.35rem;
+    margin: 0.49rem 0.35rem;
   }
   div.subTitle {
     font-size: 13px;
@@ -171,37 +174,37 @@ div.wrap {
   div.price {
     font-size: 24px;
     font-weight: bold;
-    margin:.33rem 0 0rem.12rem;
+    margin: 0.33rem 0 0rem.12rem;
 
     color: rgba(240, 95, 92, 1);
   }
-  div.inputContainer{
+  div.inputContainer {
     padding: 0.12rem;
-    margin-bottom:-0.1rem;
+    margin-bottom: -0.1rem;
   }
-  div.zyzsspan{
+  div.zyzsspan {
     padding-left: 0.12rem;
     /*margin-bottom:.8rem;*/
     span:nth-child(2) {
-     /*color: #fcd334;*/
-      margin-left: .5rem;
-     }
-  }
-div .margin-bottom{
-  margin-bottom:.8rem;
-}
-  div.inputContainer{
-    position: relative;
-   .partinput-style{
-    margin-bottom:.1rem;
-    margin-top: 1rem;
-   }
-    .inputspan{
-      position: absolute;
-      right:6px;
-      bottom:10px;
-      color:rgba(240, 95, 92, 1);
+      /*color: #fcd334;*/
+      margin-left: 0.5rem;
     }
-}
+  }
+  div .margin-bottom {
+    margin-bottom: 0.8rem;
+  }
+  div.inputContainer {
+    position: relative;
+    .partinput-style {
+      margin-bottom: 0.1rem;
+      margin-top: 1rem;
+    }
+    .inputspan {
+      position: absolute;
+      right: 6px;
+      bottom: 10px;
+      color: rgba(240, 95, 92, 1);
+    }
+  }
 }
 </style>

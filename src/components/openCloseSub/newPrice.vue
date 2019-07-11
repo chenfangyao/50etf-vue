@@ -182,7 +182,7 @@ export default {
         }
       } else {//合并的情况
         this.setstockamunt(this.maxprice.enable_amount)
-        this.sellnumber='全部'
+        this.sellnumber = '全部'
         var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
         this.setcctotalmoney(totalmoney.toFixed(2))
       }
@@ -195,25 +195,17 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      if (i == 0) {
-        this.setenttype(2)
-      } else if (i == 1) {
-        this.setenttype(1)
+      if (i == 0 && this.switchObj.ent_price_type == 0) {
+        this.setenttype(2)//市价
+      } else {
+        this.setenttype(1)//其他
       }
-      if (this.softconf.ent_price_type == 0) {
+      if (this.switchObj.ent_price_type == 1) {
         switch (i) {
           // 最新价
           case 0:
-            // 开仓
-            if (!this.onClose) {
-              this.pricevalue = this.qrysingle.latestPrice
-              this.setnewprice(this.pricevalue)
-            }
-            // 平仓
-            else {
-              this.pricevalue = this.qrysingle.latestPrice
-              this.setnewprice(this.pricevalue)
-            }
+            this.pricevalue = this.qrysingle.latestPrice
+            this.setnewprice(this.pricevalue)
             break;
           // 对手价
           case 1:
@@ -369,7 +361,7 @@ export default {
   watch: {
     qrysingle(val) {
       if (val) {
-        if (this.softconf.ent_price_type == 0) {
+        if (this.switchObj.ent_price_type == 1) {
           switch (this.btn3_i) {
             // 最新价
             case 0:
@@ -424,7 +416,7 @@ export default {
         this.fbcclength = this.fbcclist.length
         this.hbcclength = this.hbcclist.length
         // 设置默认分笔持仓id
-        this.entrusttype&&this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
+        this.entrusttype && this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         this.pickerText = '0'
         if (this.fbcclist[0]) {
           // 把分笔持仓第一笔持仓数量带到默认持仓数量中
@@ -469,10 +461,16 @@ export default {
   created() {
     // 初始化将合并分笔置空
     this.sethbfbcell([])
-    if (this.softconf.ent_price_type == 0) {
-      this.btn3Arr = ['市价', '对手', '排队']
-    } else {
-      this.btn3Arr = ['市价', '限价']
+    switch (this.switchObj.ent_price_type) {
+      case 0:
+        this.btn3Arr = ['市价', '限价']
+        break
+      case 1:
+        this.btn3Arr = ['最新', '对手', '排队']
+        break
+      case 2:
+        this.btn3Arr = ['限价']
+        break
     }
     this.pricetitle = this.btn3Arr[0]
     // 合并平仓默认设置卖出全部
@@ -486,12 +484,11 @@ export default {
   },
 
   computed: {
-    ...mapState(['softconf', 'maxbuy', 'stockamunt','entrusttype'])
+    ...mapState(['switchObj', 'maxbuy', 'stockamunt', 'entrusttype'])
   }
 }
 </script>
 <style lang="scss" scoped>
-
 div.root-el {
   padding: 0.1rem 0.32rem 0.3rem;
   background-color: #fff;
@@ -507,7 +504,7 @@ div.root-el {
     font-size: 12px !important;
     color: rgba(153, 153, 153, 1);
     line-height: 16px;
-    
+
     font-weight: normal !important;
   }
 
@@ -519,7 +516,7 @@ div.root-el {
     .newPrice {
       font-size: 24px;
       line-height: 0.6rem;
-      
+
       font-weight: bold;
       display: inline-block;
       width: 1.85rem;
@@ -575,7 +572,7 @@ div.root-el {
       font-size: 14px;
       color: #848689;
       background: rgba(239, 239, 239, 1);
-      .s-icon{
+      .s-icon {
         width: 10px;
         height: 10px;
       }
@@ -643,7 +640,7 @@ div.root-el {
     }
     span.countxt {
       font-size: 24px;
-      
+
       color: rgba(51, 51, 51, 1);
       line-height: 24px;
       width: 1.75rem;
@@ -663,7 +660,7 @@ div.root-el {
     }
   }
 
-  .s-icon{
+  .s-icon {
     width: 18px;
     height: 18px;
   }

@@ -133,7 +133,6 @@ export default {
             query: {
               isfull: i,
               code: this.resObj.stock_code,
-              price: this.resObj.last_price,
               resObj: this.resObj
             }          })
           break

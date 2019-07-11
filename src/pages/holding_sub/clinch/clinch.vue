@@ -32,7 +32,7 @@
                 </div>
                 <div class="uni-flex uni-column textc1">
                   <span>{{item.entrust_bs==2?'卖出':'买入'}}</span>
-                  <span>{{item.entrust_type==2?'市价':'现价'}}</span>
+                  <span>{{item.entrust_type==2?'市价':'限价'}}</span>
                 </div>
               </div>
             </div>

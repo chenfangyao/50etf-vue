@@ -111,7 +111,6 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
-          this.$store.commit('setsoftconf', res.data)
           var theme = localStorage.getItem('selfTheme')
           if (theme === null) {
             this.$store.commit('setatNight', res.data.default_skin === '0')

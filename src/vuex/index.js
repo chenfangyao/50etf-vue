@@ -30,8 +30,8 @@ const store = new Vuex.Store({
     newprice: '',
     // 开/平仓页面委托数量
     stockamunt: '0',
-    // 委托类型,默认为2
-    enttype: '2',
+    // 委托类型,默认为1
+    enttype: '1',
     // 委托类型
     entrusttype: false,
     // 个人持仓信息
@@ -44,13 +44,12 @@ const store = new Vuex.Store({
     taglist: null,
     // 委托的index
     weituoindex: 0,
-    // 软件配置信息
-    softconf: {},
     newlengths: 0,
     // 合并平仓
     hbfbcell: [],
     // 持仓合计
     cctotalmoney: 0,
+    // 软件配置信息
     switchObj: { home:0},
     statusbarHeight:0
   },
@@ -137,9 +136,6 @@ const store = new Vuex.Store({
     },
     setweituoindex(state, data) {
       state.weituoindex = data
-    },
-    setsoftconf(state, data) {
-      state.softconf = data
     },
     setnewlengths(state, data) {
       state.newlengths = data
