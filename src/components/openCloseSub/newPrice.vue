@@ -507,7 +507,7 @@ div.root-el {
     font-size: 12px !important;
     color: rgba(153, 153, 153, 1);
     line-height: 16px;
-    font-family: MicrosoftYaHei;
+    
     font-weight: normal !important;
   }
 
@@ -519,7 +519,7 @@ div.root-el {
     .newPrice {
       font-size: 24px;
       line-height: 0.6rem;
-      font-family: Arial-BoldMT;
+      
       font-weight: bold;
       display: inline-block;
       width: 1.85rem;
@@ -643,7 +643,7 @@ div.root-el {
     }
     span.countxt {
       font-size: 24px;
-      font-family: ArialMT;
+      
       color: rgba(51, 51, 51, 1);
       line-height: 24px;
       width: 1.75rem;

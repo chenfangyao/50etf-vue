@@ -5,10 +5,6 @@
       <span>修改密码</span>
       <img src="../../../assets/arrow/r.png">
     </div>
-    <div class="item1 uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'">
-      <span>夜间模式</span>
-      <van-switch size="20px" active-color='$primary1' :value="atNight" @input="changeTheme" />
-    </div>
     <div class="mb26 item1 uni-flex black2 textc1" v-hover-class="'self-hover'">
       <span>关于</span>
       <div class="uni-flex verView">
@@ -25,7 +21,7 @@
 <script>
 import btnBlock from '@/components/btnBlock.vue'
 import { mapMutations, mapState } from 'vuex';
-import { Switch ,ActionSheet} from 'vant';
+import { ActionSheet} from 'vant';
 export default {
   data() {
     return {
@@ -36,10 +32,10 @@ export default {
       ]
     };
   },
-  components: { btnBlock, [Switch.name]: Switch ,[ActionSheet.name]:ActionSheet},
+  components: { btnBlock, [ActionSheet.name]:ActionSheet},
   computed: mapState(['atNight', 'switchObj', 'appObj']),
   methods: {
-    ...mapMutations(['setuserinfo', 'setsid', 'setatNight']),
+    ...mapMutations(['setuserinfo', 'setsid', ]),
     logOut() {
       this.showConfirm=true
     },
@@ -75,19 +71,6 @@ export default {
       }
       this.$navigateTo({ url })
     },
-    changeTheme(val) {
-      this.$dialog.confirm({
-        title: '切换皮肤',
-        message: '确认切换皮肤吗？'
-      }).then(() => {
-        // on confirm
-        val ? localStorage.setItem('selfTheme', 0) : localStorage.setItem('selfTheme', 1)
-        this.setatNight(val)
-        location.reload()
-      }).catch(() => {
-        // on cancel
-      });
-    }
   },
 
 }
@@ -122,9 +105,6 @@ div.wrap {
     align-items: center;
     font-size: 15px;
     justify-content: space-between;
-    .van-switch--on{
-      background-color: $primary1;
-    }
     div.verView {
       align-items: center;
       span.verTxt {

@@ -79,7 +79,7 @@ div.root-el {
     }
     span.totalPrice {
       font-size: 20px;
-      font-family: Arial-BoldMT;
+      
       color: rgba(51, 51, 51, 1);
       line-height:.46rem;
     }

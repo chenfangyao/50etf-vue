@@ -180,7 +180,7 @@ div.wrap {
         }
         span.codeTxt {
           font-size: 12px;
-          font-family: ArialMT;
+          
           color: #999;
         }
         div.price {

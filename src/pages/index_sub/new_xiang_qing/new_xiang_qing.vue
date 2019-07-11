@@ -85,7 +85,7 @@ export default {
 div.newsViewTitle {
   justify-content: space-between;
   font-size: 14px;
-  font-family: MicrosoftYaHei;
+  
   color: #a8a8a8;
   margin: 0.2rem.38rem.24rem;
 
@@ -97,14 +97,14 @@ div.newsViewTitle {
 div.arttitle {
   justify-content: space-between;
   font-size: 18px;
-  font-family: MicrosoftYaHei;
+  
 }
 
 div.artwenan {
   font-size: 16px;
   text-align: left;
   text-indent: 2em;
-  font-family: MicrosoftYaHei;
+  
   color: #a8a8a8;
   margin: 0.4rem 0;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <base-header has-back='1' title="实名认证"></base-header>
-    <div class="title">设置成功后，可通过账号密码登录</div>
+    <!-- <div class="title">设置成功后，可通过账号密码登录</div> -->
     <div class="container black2">
       <input-item iconTxt='真实姓名' @now-blur='handleBlur' v-model="uName"></input-item>
       <input-item iconTxt='身份证号' @now-blur='handleBlur' v-model="IDcard"></input-item>

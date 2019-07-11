@@ -63,7 +63,7 @@ div.txt{
 	div.arttitle {
 		justify-content: space-between;
 		font-size: 18px;
-		font-family: MicrosoftYaHei;
+		
 		text-align: center;
 	}
 
@@ -71,7 +71,7 @@ div.txt{
 		font-size: 16px;
 		text-align: left;
 		text-indent: 2em;
-		font-family: MicrosoftYaHei;
+		
 		color: #a8a8a8;
 		margin:.40rem 0;
 	}

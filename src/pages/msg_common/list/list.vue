@@ -114,7 +114,7 @@ div.listItem {
     span {
       line-height: 0.47rem;
       font-size: 12px;
-      font-family: ArialMT;
+      
       color: rgba(130, 133, 151, 1);
     }
   }

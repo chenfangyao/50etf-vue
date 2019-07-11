@@ -166,11 +166,11 @@ div.Bigwrap {
       span.txt2 {
         line-height: 0.72rem;
         font-size: 13px;
-        font-family: ArialMT;
+        
       }
       div.timetxt {
         font-size: 13px;
-        font-family: ArialMT;
+        
         line-height: 0.72rem;
         span.mr5 {
           margin-right: 5px;

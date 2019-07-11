@@ -131,14 +131,14 @@ div.stock50 {
   }
   .stockNmae {
     font-size: 17px;
-    font-family: ArialMT;
+    
     line-height: 0.71rem;
     color: rgba(24, 28, 40, 1);
   }
   
   span {
     font-size: 14px;
-    font-family: ArialMT;
+    
     font-weight: 400;
   }
   div.df_wh {
@@ -150,7 +150,7 @@ div.stock50 {
 }
 .currentPrice {
     font-size: 17px;
-    font-family: ArialMT;
+    
     font-weight: 700;
     color: rgba(240, 95, 92, 1);
     text-align: center;

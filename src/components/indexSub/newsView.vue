@@ -61,7 +61,7 @@ export default {
 
   span {
     font-size: 10px;
-    font-family: MicrosoftYaHei;
+    
     color: rgba(168, 168, 168, 1);
   }
 

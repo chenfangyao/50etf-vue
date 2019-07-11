@@ -144,7 +144,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (process.env.API_HOST) vm.atNigh || plus.navigator.setStatusBarStyle("light");
+      if (process.env.API_HOST)plus.navigator.setStatusBarStyle("light");
       vm.tabI = vm.weituoindex
       vm.checkRevoke(vm.tabI)
       vm.titleList[vm.tabI].list.length || vm.getFenbiList(vm.tabI)
@@ -152,7 +152,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     // this.setweituoindex(0)
-    if (process.env.API_HOST) this.atNigh || plus.navigator.setStatusBarStyle("dark");
+    if (process.env.API_HOST) this.atNight || plus.navigator.setStatusBarStyle("dark");
 
     this.checkRevoke('leave')//清除撤单定时器
     next()

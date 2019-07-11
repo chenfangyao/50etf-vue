@@ -124,7 +124,7 @@ div.wrap {
   div.title {
     color: rgba(51, 51, 51, 1);
     font-size: 16px;
-    font-family: Arial-BoldMT;
+    
     font-weight: bold;
     margin: 0.12rem 0 1px;
     height: 0.9rem;

@@ -99,7 +99,7 @@ div.infoWrap {
   }
   div.uni-column:last-child {
     font-size: 13px;
-    font-family: ArialMT;
+    
     color: rgba(24, 28, 40, 1);
     line-height: 13px;
   }

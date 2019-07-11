@@ -318,7 +318,7 @@ div.uni-tab-bar {
     }
     .swiper-tab-list2 {
       font-size:.30rem;
-      font-family: MicrosoftYaHei;
+      
       font-weight: 400;
       color: #707680;
     }

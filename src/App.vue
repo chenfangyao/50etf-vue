@@ -9,9 +9,9 @@
     </template>
     <template v-else>
       <transition :name="transitionName">
-        <router-view ></router-view>
+        <router-view></router-view>
       </transition>
-    <!--   <transition :name="transitionName">
+      <!--   <transition :name="transitionName">
         <keep-alive>
           <router-view v-if="$route.meta.isKeepAlive"></router-view>
         </keep-alive>
@@ -29,29 +29,29 @@
 import etfTabbar from '@/components/other/etf-tabbar'
 import saveLogin from '@/common/saveLogin.js'
 import { Loading } from 'vant';
-import { mapState,mapMutations } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import articlePopup from '@/components/other/article-popup'
 
 export default {
   name: 'App',
-  components: { etfTabbar, [Loading.name]: Loading ,articlePopup,},
+  components: { etfTabbar, [Loading.name]: Loading, articlePopup, },
   data() {
     return {
       transitionName: '',
-      noticItem:false,
-      noticList:[],
+      noticItem: false,
+      noticList: [],
     }
   },
   created() {
     this.getConf()
     this.getNotic()
     document.addEventListener('plusready', () => {
-      this.$store.commit('setappReady',true)
+      this.$store.commit('setappReady', true)
       saveLogin()
       this.backEvent()
     }, false);
   },
-  computed: mapState(['atNight', 'loadingFlag','appReady','articlePop']),
+  computed: mapState(['atNight', 'loadingFlag', 'appReady', 'articlePop']),
   watch: {
     $route(to, from) {
       if (to.meta.tabbar) {
@@ -73,31 +73,31 @@ export default {
       if (!this.appReady) return;
       if (val) {
         plus.navigator.setStatusBarStyle("light");
-      }else{
+      } else {
         // plus.navigator.setStatusBarBackground("#f0f0f0");
         plus.navigator.setStatusBarStyle("dark");
       }
     },
-    articlePop(val){
-      if(val){
-        this.noticItem={...this.noticItem}
-        this.$store.commit('setarticlePop',false)
+    articlePop(val) {
+      if (val) {
+        this.noticItem = { ...this.noticItem }
+        this.$store.commit('setarticlePop', false)
       }
     }
   },
   methods: {
-    againPop(){
-      this.noticItem=this.noticList.shift()||false
+    againPop() {
+      this.noticItem = this.noticList.shift() || false
     },
-    getNotic(){
+    getNotic() {
       var options = {
-        url: '/Sapi/Article/popup', 
+        url: '/Sapi/Article/popup',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.data.list) {
-          this.noticList=res.data.list  
-          this.noticItem=this.noticList.shift()
+          this.noticList = res.data.list
+          this.noticItem = this.noticList.shift()
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -105,29 +105,32 @@ export default {
     },
     getConf() {
       var options = {
-        url: '/Sapi/Soft/conf', 
+        url: '/Sapi/Soft/conf',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
-          this.$store.commit('setsoftconf',res.data)
-          var theme=localStorage.getItem('selfTheme')
-          if(theme===null){
-            this.$store.commit('setatNight',res.data.default_skin==='0')
-          }else{
-            this.$store.commit('setatNight',theme==='0')
+          this.$store.commit('setsoftconf', res.data)
+          var theme = localStorage.getItem('selfTheme')
+          if (theme === null) {
+            this.$store.commit('setatNight', res.data.default_skin === '0')
+          } else {
+            this.$store.commit('setatNight', theme === '0')
           }
-          if(localStorage.getItem("user_pwd")===null){
-            res.data.is_need_login>0&&this.$redirectTo({url:'/pages/login/login'})
+          try{
+            plus.navigator.setStatusBarStyle(this.atNight?"light":"dark");
+          }catch(err){
+            console.log(err);
+          }
+          if (localStorage.getItem("user_pwd") === null) {
+            res.data.is_need_login > 0 && this.$redirectTo({ url: '/pages/login/login' })
           }
         }
-      }).catch((err) => {
-        console.error(err, '捕捉')
       })
     },
-   
-    backEvent(){
+
+    backEvent() {
       plus.key.addEventListener("backbutton", () => {
         if (!this.$route.meta.tabbar) {
           this.$router.goBack()
@@ -147,7 +150,6 @@ export default {
 
 <style lang='scss'>
 /* #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -156,6 +158,8 @@ export default {
 
 #app {
   font-size: 14px;
+  font-family: Arial, sans-serif;
+
 }
 .slide-right-enter-active,
 .slide-right-leave-active,

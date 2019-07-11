@@ -68,7 +68,7 @@ div.root-el {
   overflow: hidden;
   span:first-child {
     font-size: 12px;
-    font-family: MicrosoftYaHei;
+    
     color: rgba(112, 118, 128, 1);
     width: 48px;
   }
@@ -76,7 +76,7 @@ div.root-el {
     font-size: 12px;
     flex-grow: 1;
     margin-left:.15rem;
-    font-family: ArialMT;
+    
     color: rgba(24, 28, 40, 1);
   }
   div.uni-flex {

@@ -40,7 +40,7 @@ section {
   h5 {
     font-size: 19px;
     line-height: 19px;
-    font-family: ArialMT;
+    
     font-weight: 700;
     // color: rgba(240, 95, 92, 1);
     margin: 0;
@@ -48,7 +48,7 @@ section {
   > div {
     padding:.26rem 0;
     font-size: 11px;
-    font-family: ArialMT;
+    
     font-weight: 400;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 5px 5px 0px rgba(245, 245, 245, 0.6);

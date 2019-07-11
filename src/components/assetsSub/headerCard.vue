@@ -3,7 +3,7 @@
     <s-icon icon-class="zichan_bg"></s-icon>
     <article>
       <div class="panel1 ">
-        <h2 class="textc1">可用资金（元）</h2>
+        <h2 >可用资金（元）</h2>
         <h1>{{transmoney.enable_money||0.00}}</h1>
         <div class="h3">
           <!-- <span>总资产</span>
@@ -12,11 +12,11 @@
       </div>
       <div class="panel2  uni-flex">
         <div>
-          <h4 class="textc1">可买市值</h4>
+          <h4 >可买市值</h4>
           <h4>{{transmoney.stock_enable_money||0.00}}</h4>
         </div>
         <div>
-          <h4 class="textc1">总资产</h4>
+          <h4 >总资产</h4>
           <h4>{{transmoney.dta_money}}</h4>
           <h4 v-if='!transmoney.enable_money'>0.00</h4>
         </div>
@@ -113,7 +113,7 @@ div.subWrap {
     }
     h1 {
       font-size: 28px;
-      font-family: ArialMT;
+      
       line-height: 28px;
       font-weight: bold;
       margin: 0.1rem 0;

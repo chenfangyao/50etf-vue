@@ -93,7 +93,7 @@ div.leftPart {
   // margin:.30rem  0  0 .26rem;
   div.leftTop {
     color: $red1;
-    font-family: MicrosoftYaHei;
+    
     .price {
       font-size: 32px;
       font-weight: bold;
@@ -150,7 +150,7 @@ div.rightPart {
     }
     span:last-child {
       font-size: 14px;
-      font-family: ArialMT;
+      
       color: rgba(24, 28, 40, 1);
     }
     display: flex;

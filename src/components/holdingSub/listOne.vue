@@ -113,7 +113,7 @@ div.list1Item {
       line-height: 42px;
       flex-grow: 1;
       text-align: right;
-      font-family: Arial;
+      
     }
     .moneyTxt.green {
       color: $green1;

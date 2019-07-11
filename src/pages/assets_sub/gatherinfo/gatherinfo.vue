@@ -239,7 +239,7 @@ div.chooseCount {
   line-height: 0.5rem;
   /*text-align: center;*/
   font-size: 12px;
-  font-family: Adobe Heiti Std R;
+  
   font-weight: normal;
   color: rgba(102, 102, 102, 1);
   line-height: 43px;

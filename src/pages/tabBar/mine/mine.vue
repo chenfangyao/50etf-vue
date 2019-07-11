@@ -38,6 +38,11 @@
         <span class="tip" v-if="false"></span>
         <img src="../../../assets/mineImg/arrow.png" />
       </div>
+      <div class="uni-flex black2 textc1" v-if="switchObj.show_skin_btn==='1'">
+        <s-icon icon-class="moon"></s-icon>
+        <span>夜间模式</span>
+        <van-switch size="20px" active-color='$primary1' :value="atNight" @input="changeTheme" />
+      </div>
       <!-- <div class="uni-flex" v-hover-class="'self-hover'">
         <img src="/assets/mineImg/07.png" />
         <span>50ETF</span>
@@ -57,14 +62,16 @@
 <script>
 import headerCard from '@/components/mineSub/headerCard.vue'
 import { mapState, mapMutations } from 'vuex';
+import { Switch } from 'vant';
+
 export default {
   data() {
     return {
     }
   },
-  computed: mapState(['sid', 'indextimmer', 'newlengths', 'switchObj','statusbarHeight']),
+  computed: mapState(['sid', 'indextimmer', 'newlengths', 'switchObj', 'statusbarHeight', 'atNight']),
   methods: {
-    ...mapMutations(['setnewlengths']),
+    ...mapMutations(['setnewlengths','setatNight']),
     go(href) {
       if (!this.sid) {
         this.$tipLogin()
@@ -72,9 +79,14 @@ export default {
       }
       this.$navigateTo({ url: '/pages/mine_sub/' + href })
     },
+    changeTheme(val) {
+      val ? localStorage.setItem('selfTheme', 0) : localStorage.setItem('selfTheme', 1)
+      this.setatNight(val)
+      location.reload()
+    },
     getmymessage() {
       var options = {
-        url: '/Sapi/Ucenter/message_list', 
+        url: '/Sapi/Ucenter/message_list',
         method: 'GET',
         data: {
           page_index: 0,
@@ -94,13 +106,14 @@ export default {
     this.getmymessage()
   },
   components: {
-    headerCard
+    headerCard,
+    [Switch.name]: Switch
   },
-  activated(){
-      if (process.env.API_HOST) vm.atNigh || plus.navigator.setStatusBarStyle("light");
+  activated() {
+    if (process.env.API_HOST) plus.navigator.setStatusBarStyle("light");
   },
-  deactivated(){
-    if (process.env.API_HOST) this.atNigh || plus.navigator.setStatusBarStyle("dark");
+  deactivated() {
+    if (process.env.API_HOST) this.atNight || plus.navigator.setStatusBarStyle("dark");
   }
 }
 </script>
@@ -110,18 +123,18 @@ div.wrap {
   background-color: #f5f5f5;
   min-height: calc(100vh - 51px);
   div.items {
-    margin: 0 0.2rem ;
+    margin: 0 0.2rem;
     border-radius: 5px;
     overflow: hidden;
     position: relative;
     z-index: 50;
     background-color: #f5f5f5;
-    div {
+    >div {
       justify-content: space-between;
       background-color: #fff;
       font-size: 15px;
-      font-family: MicrosoftYaHei;
       font-weight: 400;
+      align-items: center;
       color: rgba(24, 28, 40, 1);
       margin-bottom: 1px;
       height: 0.96rem;
@@ -138,16 +151,18 @@ div.wrap {
         background-color: #f16164;
         margin: 0.4rem.20rem 0 0;
       }
-      img:first-child {
+      img:first-child,.s-icon {
         width: 0.48rem;
         height: 0.48rem;
-        margin: 0.24rem.46rem 0 0;
+        margin-right: 0.46rem ;
       }
       img:last-child {
         width: 0.3rem;
         height: 0.3rem;
-        margin-top: 0.32rem;
       }
+    }
+    .van-switch--on{
+      background-color: $primary1;
     }
     div.bb6 {
       margin-bottom: 0.12rem;
