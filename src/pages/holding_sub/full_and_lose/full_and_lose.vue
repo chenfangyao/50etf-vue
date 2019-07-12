@@ -7,7 +7,7 @@
       <div class="subTitle textc2">最新价：</div>
       <div class="price">{{resObj.last_price}}</div>
       <div class="subTitle textc2">
-        <span>成交价：{{resObj.cost_price}}</span>
+        <span>成交价：{{resObj.avg_buy_price}}</span>
         <span>持仓数：{{resObj.own_amount}}</span>
       </div>
       <div class="inputContainer">

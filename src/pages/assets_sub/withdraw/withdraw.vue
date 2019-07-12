@@ -17,7 +17,7 @@
     </div>
     <div class="fixView">
       <btn-block txt='确认提现' @v-tap='doWhat'></btn-block>
-      <div class="bottomTip">温馨提示：最小提现金额100元</div>
+      <div class="bottomTip">温馨提示：最小提现金额{{switchObj.cash_min}}元</div>
 
     </div>
   </div>
@@ -121,7 +121,9 @@ export default {
         }
       })
     },
-  }
+  },
+  computed: mapState(['switchObj'])
+
 }
 </script>
 <style lang="scss" scoped>
