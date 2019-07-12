@@ -4,10 +4,10 @@
     <recharge-way v-if="hasBank" @change-wayi="changeWayI"></recharge-way>
     <recharge-way v-else txt2='添加您的银行卡以便提现到您的账户' txt1='请绑定银行卡' to-addcard="1"></recharge-way>
     <div class="panel black2">
-      <div class="inputContainer">
-        <div class="moneyTitle textc1">提现金额</div>
-        <input type="number" class="black2 textc1" v-model="money">
+      <div class="moneyTitle textc1">提现金额</div>
+      <div class="inputContainer uni-flex">
         <span class="textc1">￥</span>
+        <input type="number" class="black2 textc1" v-model="money">
       </div>
       <div class="overage">
         <span>可提现余额：</span>
@@ -133,21 +133,23 @@ div.wrap {
   div.panel {
     padding: 0.1px.46rem;
     background-color: #fff;
+    div.moneyTitle {
+      font-size: 14px;
+      color: rgba(24, 28, 40, 1);
+      margin-bottom: 0.37rem;
+      padding-top: 20px;
+    }
     div.inputContainer {
-      padding-top: 0.36rem;
-      position: relative;
       margin-bottom: 0.29rem;
-      div.moneyTitle {
-        font-size: 14px;
-        color: rgba(24, 28, 40, 1);
-        margin-bottom: 0.37rem;
-      }
+      align-items: center;
       input {
         font-size: 32px;
         color: rgba(24, 28, 40, 1);
         border-bottom: 1px solid #ccc;
-        padding: 0 0 0.2rem 20px;
-        /*height: 32px !important;*/
+        padding: 0;
+        border-radius: 0;
+        margin-left: 15px;
+        height: 55px;
         width: 100%;
         #app.at-night & {
           border-color: $blackTxt2;
@@ -157,9 +159,6 @@ div.wrap {
         font-size: 18px;
         color: rgba(24, 28, 40, 1);
         line-height: 0.33rem;
-        position: absolute;
-        left: -3px;
-        top: 1.5rem;
       }
     }
     div.overage {

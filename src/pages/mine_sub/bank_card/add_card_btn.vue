@@ -86,6 +86,7 @@ export default {
 div.btnclass {
   padding-top: 50px;
   text-align: center;
+  color: #666;
   .plusBtn {
     font-size: 50px;
     margin-bottom: 5px;

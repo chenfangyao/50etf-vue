@@ -1,8 +1,8 @@
 <template>
-  <div class="allPage">
+  <div class="allPage black1">
     <base-header has-back='1' title="短信验证"></base-header>
-    <div class="subTitle ">我们已向 {{tel||userinfo.mobile}}发送验证码短信，请查看短信并输入验证码。</div>
-    <div class="uni-flex vcodeInput">
+    <div class="subTitle black2">我们已向 {{tel||userinfo.mobile}}发送验证码短信，请查看短信并输入验证码。</div>
+    <div class="uni-flex vcodeInput black2">
       <input-item icon-txt="验证码" placeholderTxt="输入验证码" v-model="vCode" style="width:70%"></input-item>
       <count-down init-txt='重新发送' @v-yzm="getverificacode" :countdown-ok='countdownOk'></count-down>
     </div>
@@ -104,7 +104,7 @@ export default {
     },
     unbindCard() {
       let options = {
-        url: ' /Sapi/Ubank/unbind',
+        url: '/Sapi/Ubank/unbind',
         method: 'POST',
         data: {
           ...this.$route.query,
@@ -160,9 +160,7 @@ div.subTitle {
     padding-bottom: 0;
    /deep/ input{
       padding-bottom: 0;
-    }
-    /deep/ .leftSvg {
-      top: 6px;
+      height: 17px;
     }
   }
 }

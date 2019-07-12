@@ -64,8 +64,12 @@ export default {
 
   },
 
-  created() {
+  mounted() {
     this.onApp = process.env.NODE_ENV === 'production'
+    if (process.env.API_HOST) plus.navigator.setStatusBarStyle("light");
+  },
+  beforeDestroy() {
+    if (process.env.API_HOST) this.atNight || plus.navigator.setStatusBarStyle("dark");
   }
 }
 </script>

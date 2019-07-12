@@ -363,14 +363,15 @@ div.wrap {
         color: rgba(24, 28, 40, 1);
         background-color: white;
         border-bottom: 1px solid #ccc;
+        border-radius: 0;
         #app.at-night &{
           border-color: $blackTxt2
         }
-        padding-left: 5px;
+        height: 55px;
+        padding: 0;
+        margin-left: 15px;
         background-color: #fff;
         width: 100%;
-        height: 38px !important;
-        line-height: 38px;
         display: inline-block;
       }
       > span {

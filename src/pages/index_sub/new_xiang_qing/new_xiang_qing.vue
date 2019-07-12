@@ -1,7 +1,6 @@
 <template>
   <div class="wrap">
     <base-header title="资讯详情" :hasBack="true"></base-header>
-    <div class="grayline"></div>
     <div class="artconent">
       <div>
         <div class="arttitle">
@@ -77,10 +76,6 @@ export default {
   margin: 10px 15px;
 }
 
-.grayline {
-  background-color: #a8a8a8;
-  height: 0.01rem;
-}
 
 div.newsViewTitle {
   justify-content: space-between;

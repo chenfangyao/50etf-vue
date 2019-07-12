@@ -60,7 +60,6 @@
         <s-icon v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_lower"></s-icon>
         <span class="newPrice">{{pricevalue}}</span>
         <s-icon v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_jia"></s-icon>
-
       </div>
 
       <div class="uni-flex btn3">
@@ -240,7 +239,7 @@ export default {
         }
       }
       this.$emit('price-step', {
-        num: this.sliderVal,
+        num: this.sliderVal || this.stockamunt,
         price: this.pricevalue
       })
     },
@@ -296,7 +295,7 @@ export default {
       this.pricevalue = Number(val / 10000).toFixed(4)
       this.setnewprice(this.pricevalue)
       this.$emit('price-step', {
-        num: this.sliderVal,
+        num: this.sliderVal ||this.stockamunt,
         price: this.pricevalue
       })
     },

@@ -135,7 +135,7 @@ div.root-el {
       }
     }
     div.line2 {
-      color: $red1;
+      color: $primary1;
       > div:first-child {
         font-size: 32px;
         font-weight: bold;

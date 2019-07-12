@@ -269,7 +269,7 @@ export default {
       }
       > div:first-child {
         color: #707680;
-        text-align-last: left;
+        text-align: left;
       }
     }
     div.btn2 {

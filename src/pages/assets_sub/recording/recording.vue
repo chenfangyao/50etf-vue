@@ -3,21 +3,21 @@
     <base-header has-back='1' :title="type==1?'充值记录':'提现记录'"></base-header>
     <div class="line1 uni-flex black2">
       <span>总计：{{total}}笔</span>
-      <img class="right" v-vtap="{method: switchDatepick , params: true}" src="../../../assets/mineImg/datePicker.png">
+      <s-icon class="right" :icon-class="'select_rili' | atNightIcon" v-vtap="{method: switchDatepick , params: true}" />
     </div>
     <scroll-view v-if='type==1' class='listscrow' ref="scroll10" lower-threshold='10' scroll-y @scrollToEnd="loadMore">
       <div>
         <div class="listsContainer  black2" v-for="(item,i) in recordlist" :key="i">
           <div class="uni-flex topPart">
-            <div class="time">{{formatetime[i]}}</div>
-            <div class="statusTxt" :class="{c1:item.order_status==1,c2:item.order_status==2}">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
+            <div class="time textc2">{{formatetime[i]}}</div>
+            <div class="statusTxt " :class="{c1:item.order_status==1,c2:item.order_status==2}">{{item.order_status==1?'成功':item.order_status==2?'失败':'充值中'}}</div>
           </div>
           <div class="uni-flex">
             <div class="staticTxt textc1">
               <div>人民币账户</div>
               <div>充值方式：平台充值</div>
             </div>
-            <div class="money">{{'+'+item.pay_money}}</div>
+            <div class="money textc1">{{'+'+item.pay_money}}</div>
           </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
@@ -27,15 +27,15 @@
       <div>
         <div class="listsContainer black2" v-for="(item,i) in recordlist" :key="i">
           <div class="uni-flex topPart">
-            <div class="time">{{formatetime[i]}}</div>
-            <div class="statusTxt" :class="{c1:item.status==='已付',c2:item.status==='拒付'}">{{item.status}}</div>
+            <div class="time textc2">{{formatetime[i]}}</div>
+            <div class="statusTxt " :class="{c1:item.status==='已付',c2:item.status==='拒付'}">{{item.status}}</div>
           </div>
           <div class="uni-flex">
             <div class="staticTxt textc1">
               <div>{{bank_code[i][0]}}</div>
               <div>{{bank_code[i][1]}}</div>
             </div>
-            <div class="money">{{item.money}}</div>
+            <div class="money textc1">{{item.money}}</div>
           </div>
         </div>
         <uni-load-more :loading-type="resquestState"></uni-load-more>
@@ -83,7 +83,7 @@ export default {
       this.resquestState = 1
       let url = this.type == 1 ? '/Sapi/Ufund/pay_list' : '/Sapi/Ufund/cash_list'
       var options = {
-        url, 
+        url,
         method: 'GET',
         data: {
           page_index: index || 0,
@@ -143,15 +143,19 @@ div.wrap {
     padding: 0 0.26rem;
     align-items: center;
     margin-top: 1px;
-    img.right {
-      width: 15px;
-      height: 17px;
+    .right {
+      width: 20px;
+      height: 20px;
     }
   }
   .listscrow {
     // height: calc(100vh -1.78rem - var(--status-bar-height));
     height: calc(100vh - 1.78rem);
     overflow: hidden;
+    >div{
+    padding-top: 1px;
+
+    }
     div.listsContainer {
       background-color: #fff;
       margin: 0.2rem 0.22rem;
@@ -159,6 +163,9 @@ div.wrap {
       padding: 0.08rem 0.32rem 0;
       .topPart {
         border-bottom: solid 1px #f5f5f5;
+        #app.at-night &{
+          border-color: $black1
+        }
         & + div {
           align-items: flex-end;
           height: 1.16rem;
@@ -180,12 +187,15 @@ div.wrap {
       div.statusTxt {
         &.c1 {
           color: #333;
+          #app.at-night &{
+            color: $blackTxt1;
+          }
         }
         &.c2 {
-          color: $primary1;
-          }
+          color: $primary1 ;
+        }
         font-size: 16px;
-          color: $blue1;
+        color: $blue1;
         font-weight: 500;
         letter-spacing: 1px;
       }

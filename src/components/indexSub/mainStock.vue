@@ -97,9 +97,13 @@ export default {
       }).join("")
     }
   },
-  activated() {
+  created() {
     this.getMainlist()
-    this.timmer = setInterval(this.getquoteList, 3000)
+    this.timmer||(this.timmer = setInterval(this.getquoteList, 3000))
+  },
+  activated(){//稍冗余
+    this.getMainlist()
+    this.timmer||(this.timmer = setInterval(this.getquoteList, 3000))
   },
   deactivated() {
     clearInterval(this.timmer)
@@ -122,7 +126,7 @@ export default {
     transform: translateX(5px);
   }
   .active::after {
-    background-color: $red1;
+    background-color: $primary1;
   }
   > div:first-child {
     margin-right: 29px;
@@ -187,10 +191,10 @@ export default {
       text-align: center;
     }
     .inUp:last-child {
-      background: $red1;
+      background: $primary1;
     }
     .price.inUp {
-      color: $red1;
+      color: $primary1;
     }
     .price {
       color: $green1;

@@ -71,7 +71,7 @@ export default {
   },
   computed: mapState(['sid', 'indextimmer', 'newlengths', 'switchObj', 'statusbarHeight', 'atNight']),
   methods: {
-    ...mapMutations(['setnewlengths','setatNight']),
+    ...mapMutations(['setnewlengths', 'setatNight']),
     go(href) {
       if (!this.sid) {
         this.$tipLogin()
@@ -129,7 +129,7 @@ div.wrap {
     position: relative;
     z-index: 50;
     background-color: #f5f5f5;
-    >div {
+    > div {
       justify-content: space-between;
       background-color: #fff;
       font-size: 15px;
@@ -151,17 +151,23 @@ div.wrap {
         background-color: #f16164;
         margin: 0.4rem.20rem 0 0;
       }
-      img:first-child,.s-icon {
+      img:first-child {
         width: 0.48rem;
         height: 0.48rem;
-        margin-right: 0.46rem ;
+        margin-right: 0.46rem;
+      }
+      .s-icon {
+        margin-right: 0.49rem;
+        margin-left: 2px;
+        width: 0.4rem;
+        height: 0.4rem;
       }
       img:last-child {
         width: 0.3rem;
         height: 0.3rem;
       }
     }
-    .van-switch--on{
+    .van-switch--on {
       background-color: $primary1;
     }
     div.bb6 {

@@ -47,7 +47,7 @@ export default {
   props: ['showAction'],
   watch: {
     paylist(val) {
-      if (Object.prototype.toString.call(val).indexOf('Array') != -1) {
+      if (Object.prototype.toString.call(val).indexOf('Array') != -1) {//提现
         this.wayLists = val
         this.$emit('calc-complete', this.wayLists)
         return

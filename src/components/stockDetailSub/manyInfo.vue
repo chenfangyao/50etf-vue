@@ -110,7 +110,7 @@ div.infoWrap {
   div.leftPart {
     div.line1 {
       font-size: 12px;
-      color: rgba(240, 95, 92, 1);
+      color: $primary1;
       line-height: 12px;
       margin-top: 0;
       div.bigTxt {

@@ -354,7 +354,7 @@ div.wrap {
 
   div.list-row {
     width: 6.8rem;
-    height: 1.1rem;
+    height: 56px;
     padding-left: 0.35rem;
     margin: 0.2rem auto 0;
     background: rgba(255, 255, 255, 1);
@@ -371,6 +371,8 @@ div.wrap {
     input {
       flex-grow: 1;
       color: #333;
+      height: 54px;
+      line-height: 56px;
     }
   }
   div.fixBottom {
