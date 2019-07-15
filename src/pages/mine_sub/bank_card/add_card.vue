@@ -6,7 +6,7 @@
       <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker1}">
           {{pickerText}}
-          <span v-if="editdefault" class="arrowDown"></span>
+          <span class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show1" :columns="1" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
@@ -16,7 +16,7 @@
       <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
-          <span v-if="editdefault" class="arrowDown"></span>
+          <span class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show2" :columns="2" :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div class="chooseCount textc1">
         <div v-vtap.self="{method:showpicker3}">
           {{pickSubBankText}}
-          <span v-if="editdefault" class="arrowDown"></span>
+          <span class="arrowDown"></span>
           <vue-pickers class="vuePickera" :show="show3" :columns="1" :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
@@ -78,7 +78,6 @@ export default {
       city_cd: '',
       sub_id: '',
       btntxt: '修改',
-      editdefault: true,
       show1: false,
       show2: false,
       show3: false,
@@ -96,21 +95,15 @@ export default {
     },
     showpicker1() {
       this.popindex = 0
-      if (this.editdefault) {
-        this.show1 = true
-      }
+      this.show1 = true
     },
     showpicker2() {
       this.popindex = 1
-      if (this.editdefault) {
-        this.show2 = true
-      }
+      this.show2 = true
     },
     showpicker3() {
       this.popindex = 2
-      if (this.editdefault) {
-        this.show3 = true
-      }
+      this.show3 = true
     },
     onCancelPicker() {
       this.show1 = false
@@ -323,9 +316,6 @@ export default {
     this.getbanklist()
     this.getprovlist()
     // this.getsubbanklist('102', '110', '1000')
-    if (!this.$route.query.bankinfo) {
-      this.editdefault = true
-    }
   },
   watch: {
     pickSubBankText(val) {

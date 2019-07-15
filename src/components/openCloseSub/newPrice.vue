@@ -57,9 +57,9 @@
     <div class="commonStyle1 textc1">{{pricetitle}}</div>
     <div class="uni-flex line2">
       <div>
-        <s-icon v-vtap="{method: plusStep2 , params: -1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_lower"></s-icon>
+        <s-icon v-vtap="{method: plusStep2 , params: -1}" :class="pricetitle==='限价'?'':'opacityclass'" icon-class="adjust_lower"></s-icon>
         <span class="newPrice">{{pricevalue}}</span>
-        <s-icon v-vtap="{method: plusStep2 , params: 1}" :class="!btn3_i?'opacityclass':''" icon-class="adjust_jia"></s-icon>
+        <s-icon v-vtap="{method: plusStep2 , params: 1}" :class="pricetitle==='限价'?'':'opacityclass'" icon-class="adjust_jia"></s-icon>
       </div>
 
       <div class="uni-flex btn3">
@@ -182,7 +182,9 @@ export default {
       } else {//合并的情况
         this.setstockamunt(this.maxprice.enable_amount)
         this.sellnumber = '全部'
-        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
+          let i = this.onClose ? -1 : 1
+
+        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)*i
         this.setcctotalmoney(totalmoney.toFixed(2))
       }
       this.$emit('hbfb-switch', {
@@ -221,13 +223,10 @@ export default {
             break;
           // 排队价
           case 2:
-            // 开仓
-            if (!this.onClose) {
+            if (!this.onClose) {// 开仓
               this.pricevalue = this.qrysingle.buyPrice1
               this.setnewprice(this.pricevalue)
-            }
-            // 平仓
-            else {
+            } else {// 平仓
               this.pricevalue = this.qrysingle.salePrice1
               this.setnewprice(this.pricevalue)
             }
@@ -282,8 +281,8 @@ export default {
       })
     },
     plusStep2(i) {
-      // 市价不允许修改
-      if (this.btn3_i == 0) {
+      // 非限价不允许修改
+      if (this.pricetitle !== '限价') {
         return
       }
       if (i == -1) {
@@ -295,7 +294,7 @@ export default {
       this.pricevalue = Number(val / 10000).toFixed(4)
       this.setnewprice(this.pricevalue)
       this.$emit('price-step', {
-        num: this.sliderVal ||this.stockamunt,
+        num: this.sliderVal || this.stockamunt,
         price: this.pricevalue
       })
     },
@@ -348,7 +347,9 @@ export default {
       }
       var hycsnum = this.maxbuy.volume_multiple
       var djmoney = parseFloat(totalhynum * parseFloat(this.pricevalue) * hycsnum)
-      this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)).toFixed(2))
+          let i = this.onClose ? -1 : 1//开仓时加手续费，平仓时减手续费
+
+      this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)*i).toFixed(2))
     },
     showPickers() {
       this.show1 = true
@@ -402,11 +403,9 @@ export default {
               }
               break;
           }
-        } else {
-          if (this.btn3_i == 0) {
-            this.pricevalue = this.qrysingle.latestPrice
-            this.setnewprice(this.pricevalue)
-          }
+        } else if (this.pricetitle !== '限价'||this.pricevalue==='') {
+          this.pricevalue = this.qrysingle.latestPrice
+          this.setnewprice(this.pricevalue)
         }
       }
     },
@@ -460,7 +459,7 @@ export default {
   created() {
     // 初始化将合并分笔置空
     this.sethbfbcell([])
-    switch (this.switchObj.ent_price_type) {
+    switch (~~this.switchObj.ent_price_type) {
       case 0:
         this.btn3Arr = ['市价', '限价']
         break
@@ -476,7 +475,9 @@ export default {
     setTimeout(() => {
       if (this.onClose == true && this.entrusttype == false) {
         this.setstockamunt(this.maxprice.enable_amount)
-        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)
+          let i = this.onClose ? -1 : 1
+
+        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)*i
         this.setcctotalmoney(totalmoney.toFixed(2))
       }
     }, 2000)

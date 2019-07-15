@@ -54,7 +54,7 @@ export default {
     handleNext() {
       let sltp_price_tp = '', sltp_price_sl = '', sltp_name = '', toastTxt = ''
       if (parseFloat(this.inputPrice) <= 0.001) {
-        toastTxt="价格设置不能低于0.001！"
+        toastTxt = "价格设置不能低于0.001！"
       }
       if (this.isFull == 1) {
         if (this.inputPrice <= this.resObj.last_price) toastTxt = '价必须大于最新价'
@@ -80,7 +80,9 @@ export default {
           // 止盈价
           sltp_price_tp: parseFloat(sltp_price_tp),
           // 止损价
-          sltp_price_sl: parseFloat(sltp_price_sl)
+          sltp_price_sl: parseFloat(sltp_price_sl),
+          /* sltp_effect_tp:'' ,
+          sltp_effect_sl: '' */
         },
       }
 

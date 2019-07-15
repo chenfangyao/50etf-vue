@@ -59,7 +59,7 @@
     <div class="uni-flex lastLine black2">
       <div class="uni-flex textc2">
         <span>合约乘数：</span>
-        <span>缴纳手续费：</span>
+        <span>平仓手续费：</span>
         <span>合约盈亏：</span>
         <span>缴纳保证金：</span>
         <span>总净值：</span>

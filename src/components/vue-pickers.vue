@@ -213,12 +213,12 @@ export default {
       this.$emit('touchend', this.pData1[endVal], type)
       // var timer=null
       // var timeindex=0
-
+      if (!this.link && type === 'provs') {
+        this.selects.select1 = this.pData1[endVal]
+      }
       setTimeout(() => {
         if (!this.link) {
           if (type === 'provs') {
-            this.selects.select1 = this.pData1[endVal]
-
           } else if (type === 'city') {
             this.selects.select2 = this.pData2[endVal]
           } else {
@@ -365,7 +365,7 @@ export default {
     // 暂时
     getcitylist(index, prov_cd, endVal) {
       var options = {
-        url: '/Sapi/Ubank/city_list', 
+        url: '/Sapi/Ubank/city_list',
         method: 'GET',
         data: {
           prov_cd: prov_cd
@@ -399,7 +399,7 @@ export default {
 
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },

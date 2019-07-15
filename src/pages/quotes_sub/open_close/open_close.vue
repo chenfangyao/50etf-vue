@@ -5,7 +5,7 @@
     <contain-chart :res-obj="QuotationMsg" :symbol-str='symbol'></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>
     <div class="h12 black1"></div>
-    <new-price :on-close="onClose"  :maxprice="maxprice" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @fb-num="fbNum" @hbfb-switch="hbfbSwitch"  @price-step="plusStepNum"></new-price>
+    <new-price :on-close="onClose" :maxprice="maxprice" :qrysingle="QuotationMsg" :fbcclist="fbcclist" :hbcclist="hbcclist" @fb-num="fbNum" @hbfb-switch="hbfbSwitch" @price-step="plusStepNum"></new-price>
     <div class="h12 black1"></div>
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
@@ -42,10 +42,10 @@ export default {
       bussinesdata: '',
     };
   },
-  computed: mapState(['sid', 'hycode','entrusttype']),
+  computed: mapState(['sid', 'hycode', 'entrusttype']),
   components: { headerTitle, containChart, miniTable, newPrice, totalCost, bottomBtn },
   methods: {
-    ...mapMutations(['setmaxbuy', 'setstockamunt','setentrusttype', 'setcctotalmoney']),
+    ...mapMutations(['setmaxbuy', 'setstockamunt', 'setentrusttype', 'setcctotalmoney']),
     // 合并、分笔
     hbfbSwitch(val) {
       this.fbnum = val.picktext
@@ -97,7 +97,7 @@ export default {
           this.setmaxbuy(res.data)
           if (!this.onClose) {// 开仓
             this.maxprice.maxcounts = parseInt(this.maxprice.maxcount)
-          }else {// 平仓
+          } else {// 平仓
             if (!this.entrusttype) {// 合并
               this.maxprice.maxcounts = parseInt(this.maxprice.own_amount)
             } else { // 分笔
@@ -112,7 +112,8 @@ export default {
             own_amount: res.data.own_amount,
             enable_amount: res.data.enable_amount
           }
-          this.totalmoney = (djmoney + parseFloat(res.data.fee_money)).toFixed(2)
+          let i = this.onClose ? -1 : 1
+          this.totalmoney = (djmoney + parseFloat(res.data.fee_money)*i).toFixed(2)
           this.setcctotalmoney(this.totalmoney)
         }
       }).catch((err) => {
