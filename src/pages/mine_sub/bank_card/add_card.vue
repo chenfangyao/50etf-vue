@@ -7,7 +7,7 @@
         <div v-vtap.self="{method:showpicker1}">
           {{pickerText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show1" :columns="1"  :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show1" :columns="1" :selectData="pickerValueArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
         <div v-vtap.self="{method:showpicker2}">
           {{pickerCityText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show2" :columns="2"  :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show2" :columns="2" :link="true" :selectData="pickerCityValueArray" v-on:cancel="onCancelPicker" v-on:confirm="onConfirm" @touchend="touchEnd"></vue-pickers>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
         <div v-vtap.self="{method:showpicker3}">
           {{pickSubBankText}}
           <span v-if="editdefault" class="arrowDown"></span>
-          <vue-pickers class="vuePickera" :show="show3" :columns="1"  :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
+          <vue-pickers class="vuePickera" :show="show3" :columns="1" :selectData="pickerSubBankArray" @cancel="onCancelPicker" @confirm="onConfirm"></vue-pickers>
         </div>
       </div>
     </div>
@@ -131,7 +131,7 @@ export default {
           this.getsubbanklist(this.bankid, this.prov_cd, this.city_cd)
           break
         case 2:
-          this.pickSubBankText =val.select1.text
+          this.pickSubBankText = val.select1.text
           this.sub_id = val.select1.value
           break
       }
@@ -329,7 +329,7 @@ export default {
   },
   watch: {
     pickSubBankText(val) {
-      this.selfSubBank = this.pickerText+val
+      this.selfSubBank = this.pickerText + val
     }
   }
 }
@@ -350,8 +350,8 @@ div#app.at-night div.list-row {
 }
 div.wrap {
   // background-color: #f5f5f5;
-  min-height: 100vh;
-
+  min-height: 600px;
+  height: 100vh;
   div.list-row {
     width: 6.8rem;
     height: 56px;
@@ -388,7 +388,7 @@ div.chooseCount {
   line-height: 0.5rem;
   // text-align: center;
   font-size: 14px;
-  
+
   font-weight: normal;
   color: #333;
   line-height: 43px;
