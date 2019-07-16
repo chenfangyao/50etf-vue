@@ -66,7 +66,7 @@
       </div>
       <div class="uni-flex textc1">
         <span>{{hynumber}}</span>
-        <span>{{pingCItem.fee}}</span>
+        <span>{{pingCItem.fee_sell}}</span>
         <span>{{pingCItem.all_income}}</span>
         <span>{{pingCItem.deposit}}</span>
         <span>{{pingCItem.all_realin}}</span>

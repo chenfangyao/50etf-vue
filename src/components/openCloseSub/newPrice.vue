@@ -196,12 +196,12 @@ export default {
     changePriceType(i, item) {
       this.btn3_i = i
       this.pricetitle = item
-      if (i == 0 && this.switchObj.ent_price_type == 0) {
+      if (i == 0 && this.switchObj.ent_price_type == 1) {
         this.setenttype(2)//市价
       } else {
         this.setenttype(1)//其他
       }
-      if (this.switchObj.ent_price_type == 1) {
+      if (this.switchObj.ent_price_type == 0) {
         switch (i) {
           // 最新价
           case 0:
@@ -361,7 +361,7 @@ export default {
   watch: {
     qrysingle(val) {
       if (val) {
-        if (this.switchObj.ent_price_type == 1) {
+        if (this.switchObj.ent_price_type == 0) {
           switch (this.btn3_i) {
             // 最新价
             case 0:
@@ -461,10 +461,10 @@ export default {
     this.sethbfbcell([])
     switch (~~this.switchObj.ent_price_type) {
       case 0:
-        this.btn3Arr = ['市价', '限价']
+        this.btn3Arr = ['最新', '对手', '排队']
         break
       case 1:
-        this.btn3Arr = ['最新', '对手', '排队']
+        this.btn3Arr = ['市价', '限价']
         break
       case 2:
         this.btn3Arr = ['限价']
