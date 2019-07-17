@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="btn2 uni-flex">
-        <div v-hover-class="'tap-hover'"  v-vtap="{method:closePop}">取消</div>
+        <div v-hover-class="'tap-hover'" v-vtap="{method:closePop}">取消</div>
         <div v-hover-class="'tap-hover'" v-vtap="{method:yesTap}">确定</div>
       </div>
     </div>
@@ -175,36 +175,20 @@ export default {
       })
     },
     priceshock() {
-      let shockprice = ''
+      let shockIndex = NaN
       let curruentPrice = parseFloat(this.newprice)
       if (curruentPrice > 0.3) {
-        if (this.onClose == false) {
-          shockprice = curruentPrice * 1.01;
-        } else {
-          shockprice = curruentPrice * 0.99;
-        }
+        shockIndex = this.onClose ? 0.99 : 1.01;
       } else if (0.1 < curruentPrice && curruentPrice <= 0.3) {
-        if (this.onClose == false) {
-          shockprice = curruentPrice * 1.025;
-        } else {
-          shockprice = curruentPrice * 0.975;
-        }
+        shockIndex = this.onClose ? 0.975 : 1.025;
+      } else if (0.01 < curruentPrice && curruentPrice <= 0.1) {
+        shockIndex = this.onClose ? 0.95 : 1.05;
+      } else if (0.001 < curruentPrice && curruentPrice <= 0.01) {
+        shockIndex = this.onClose ? 0.9 : 1.1;
+      } else {//<=0.001
+        shockIndex = this.onClose ? 0.0002 : 1.5;
       }
-      else if (0.01 < curruentPrice && curruentPrice <= 0.1) {
-        if (this.onClose == false) {
-          shockprice = curruentPrice * 1.05;
-        } else {
-          shockprice = curruentPrice * 0.95;
-        }
-      }
-      else {
-        if (this.onClose == false) {
-          shockprice = curruentPrice * 1.1;
-        } else {
-          shockprice = curruentPrice * 0.9;
-        }
-      }
-      return shockprice.toFixed(4)
+      return (curruentPrice * shockIndex).toFixed(4)
     }
   },
   props: ['onClose', 'holding', 'resObj', 'totalMoney'],
@@ -240,7 +224,7 @@ export default {
     background: #fff;
     border-radius: 0.1rem;
     z-index: 310;
-    padding: 0.28rem 0.8rem ;
+    padding: 0.28rem 0.8rem;
     .c_red {
       color: #f05f5c;
     }
@@ -285,7 +269,7 @@ export default {
         text-align: center;
       }
       > div:first-child {
-        border: solid 1px $primary1 ;
+        border: solid 1px $primary1;
         margin-right: 0.2rem;
         color: $primary1;
       }

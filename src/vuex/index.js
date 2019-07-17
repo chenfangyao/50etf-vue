@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     // 开/平仓页面委托数量
     stockamunt: '0',
     // 委托类型,默认为1
-    enttype: '1',
+    enttype: '2',
     // 委托类型
     entrusttype: false,
     // 个人持仓信息

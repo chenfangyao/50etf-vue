@@ -10,7 +10,7 @@
 
     <total-cost v-if="!onClose" :feemoney="feemoney"></total-cost>
     <div class="h12 black1" v-if="!onClose"></div>
-    <bottom-btn :on-close="onClose" :totalmoney="totalmoney" :res-obj="QuotationMsg"></bottom-btn>
+    <bottom-btn :on-close="onClose"  :res-obj="QuotationMsg"></bottom-btn>
   </div>
 </template>
 
@@ -35,7 +35,6 @@ export default {
       // hycode:'',
       hbcclist: [],
       fbcclist: [],
-      totalmoney: '',
       fbnum: '',
       // cclist:{},
       symbol: '',
@@ -69,10 +68,14 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.QuotationMsg = res.data[0]
-          firstReq && this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
+          if (firstReq) {
+            setTimeout(() => {//因为this.hbcclist是异步获取的，
+              let howMuch = !this.entrusttype && this.onClose ? this.hbcclist[0].enable_amount : 0//平仓且合并的时候
+              this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, howMuch)
+            }, 1000)
+          }
         }
       }).catch(err => {
-
         console.error(err, '捕捉')
       })
     },
@@ -113,8 +116,7 @@ export default {
             enable_amount: res.data.enable_amount
           }
           let i = this.onClose ? -1 : 1
-          this.totalmoney = (djmoney + parseFloat(res.data.fee_money)*i).toFixed(2)
-          this.setcctotalmoney(this.totalmoney)
+          this.setcctotalmoney((djmoney + parseFloat(res.data.fee_money.replace(',','')) * i).toFixed(2))
         }
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -159,7 +161,6 @@ export default {
           }
         }
       }).catch((err) => {
-
         console.error(err, '捕捉')
       })
     },
@@ -168,7 +169,8 @@ export default {
       // 合并持仓分笔持仓
       this.getfbchic()
       this.gethbchic()
-      this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, 0)
+      let howMuch = !this.entrusttype && this.onClose ? this.hbcclist[0].enable_amount : 0//平仓且合并的时候
+      this.getmaxbuy(this.symbol, this.QuotationMsg.latestPrice, howMuch)
     }
   },
   beforeRouteLeave(to, from, next) {

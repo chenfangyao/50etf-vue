@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="btn2 uni-flex" v-if="switchObj.show_sltp>=1">
-          <div class="uni-flex full" v-hover-class="'self-hover'" v-if="!(switchObj.show_sltp==3)" v-vtap="{method: go , params: 1}">
+          <div class="uni-flex full" v-hover-class="'self-hover'" v-if="switchObj.show_sltp!=3" v-vtap="{method: go , params: 1}">
             <div class="uni-flex uni-column">
               <span>止盈</span>
               <span>{{resObj.sltp_price_tp?resObj.sltp_price_tp:'添加止盈'}}</span>
@@ -47,7 +47,7 @@
               <img src="../../assets/holdingImg/setIcon.png">
             </div>
           </div>
-          <div class="uni-flex lose" v-hover-class="'self-hover'" v-if="!(switchObj.show_sltp==2)" v-vtap="{method: go , params: 0}">
+          <div class="uni-flex lose" v-hover-class="'self-hover'" v-if="switchObj.show_sltp!=2" v-vtap="{method: go , params: 0}">
             <div class="uni-flex uni-column">
               <span>止损</span>
               <span>{{resObj.sltp_price_sl?resObj.sltp_price_sl:'添加止损'}}</span>

@@ -4,7 +4,6 @@
     <div class="root-el uni-flex">
       <div class="txt black2 ">
         <span class="total textc2">合计</span>
-        <!-- <span class="totalPrice">￥{{totalmoney||0}}</span> -->
         <span class="totalPrice textc1">￥{{cctotalmoney||0}}</span>
       </div>
       <div class="buyBtn"  v-vtap="{method:showPop}" v-hover-class="'tap-hover'">{{onClose?'平仓':'开仓'}}</div>
@@ -23,7 +22,7 @@ export default {
       popShow: false
     }
   },
-  props: ['onClose', 'totalmoney','resObj'],
+  props: ['onClose','resObj'],
   components: { orderPop },
   computed: mapState(['sid','cctotalmoney','stockamunt']),
   methods: {

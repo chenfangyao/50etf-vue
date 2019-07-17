@@ -182,10 +182,10 @@ export default {
       } else {//合并的情况
         this.setstockamunt(this.maxprice.enable_amount)
         this.sellnumber = '全部'
-          let i = this.onClose ? -1 : 1
-
-        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)*i
-        this.setcctotalmoney(totalmoney.toFixed(2))
+        this.$emit('price-step', {
+          num: this.maxprice.enable_amount,
+          price: this.pricevalue
+        })
       }
       this.$emit('hbfb-switch', {
         val: val,
@@ -345,11 +345,10 @@ export default {
         this.setstockamunt(allNum)
         totalhynum = allNum
       }
-      var hycsnum = this.maxbuy.volume_multiple
-      var djmoney = parseFloat(totalhynum * parseFloat(this.pricevalue) * hycsnum)
-          let i = this.onClose ? -1 : 1//开仓时加手续费，平仓时减手续费
-
-      this.setcctotalmoney((djmoney + parseFloat(this.maxbuy.fee_money)*i).toFixed(2))
+      this.$emit('price-step', {
+        num: totalhynum,
+        price: this.pricevalue
+      })
     },
     showPickers() {
       this.show1 = true
@@ -403,7 +402,7 @@ export default {
               }
               break;
           }
-        } else if (this.pricetitle !== '限价'||this.pricevalue==='') {
+        } else if (this.pricetitle !== '限价' || this.pricevalue === '') {
           this.pricevalue = this.qrysingle.latestPrice
           this.setnewprice(this.pricevalue)
         }
@@ -458,6 +457,10 @@ export default {
   },
   created() {
     // 初始化将合并分笔置空
+    /* this.$emit('price-step', {
+        num: totalhynum,
+        price: this.pricevalue
+      }) */
     this.sethbfbcell([])
     switch (~~this.switchObj.ent_price_type) {
       case 0:
@@ -475,9 +478,9 @@ export default {
     setTimeout(() => {
       if (this.onClose == true && this.entrusttype == false) {
         this.setstockamunt(this.maxprice.enable_amount)
-          let i = this.onClose ? -1 : 1
+        let i = this.onClose ? -1 : 1
 
-        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money)*i
+        var totalmoney = this.maxprice.enable_amount * this.maxprice.volume_multiple * this.pricevalue + parseFloat(this.maxprice.fee_money) * i
         this.setcctotalmoney(totalmoney.toFixed(2))
       }
     }, 2000)
