@@ -413,7 +413,7 @@ export default {
         this.fbcclength = this.fbcclist.length
         this.hbcclength = this.hbcclist.length
         // 设置默认分笔持仓id
-        this.entrusttype && this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
+        this.setfbccid(this.fbcclist[0] ? this.fbcclist[0].id : '')
         this.pickerText = '0'
         if (this.fbcclist[0]) {
           // 把分笔持仓第一笔持仓数量带到默认持仓数量中
@@ -461,7 +461,6 @@ export default {
         num: totalhynum,
         price: this.pricevalue
       }) */
-    this.sethbfbcell([])
     switch (~~this.switchObj.ent_price_type) {
       case 0:
         this.btn3Arr = ['最新', '对手', '排队']

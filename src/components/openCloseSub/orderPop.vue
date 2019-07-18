@@ -65,7 +65,7 @@ export default {
           })
           return
         }
-        if (this.hbfbcell.length && !this.entrusttype) {
+        if (!this.entrusttype) {
           // 全部平仓
           if (this.stockamunt === this.maxbuy.enable_amount) {
             this.stocksell(null, this.maxbuy.enable_amount)
@@ -110,12 +110,14 @@ export default {
       })
     },
     stockbuy() {
+      let price = this.enttype == 1 && this.switchObj.ent_price_type == 1 ? parseFloat(this.newprice) : this.priceshock()
+
       var options = {
         url: '/Sapi/Stock/buy',
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: this.enttype == 2 ? this.priceshock() : parseFloat(this.newprice),
+          price,
           amount: parseInt(this.stockamunt),
           enttype: parseInt(this.enttype),
           is_pay_bean: 0
@@ -144,12 +146,13 @@ export default {
       /* if (this.entrusttype || this.hbfbcell.length) {
         hid = parseInt(hid)
       } */
+      let price = this.enttype == 1 && this.switchObj.ent_price_type == 1 ? parseFloat(this.newprice) : this.priceshock()
       var options = {
         url: '/Sapi/Stock/sell',
         method: 'POST',
         data: {
           code: parseInt(this.resObj.stockCode),
-          price: this.enttype == 2 ? this.priceshock() : parseFloat(this.newprice),
+          price,
           amount: number,
           enttype: parseInt(this.enttype),
           hid
@@ -175,20 +178,23 @@ export default {
       })
     },
     priceshock() {
+      // this.switchObj.ent_price_n
       let shockIndex = NaN
       let curruentPrice = parseFloat(this.newprice)
+      let i = this.onClose ? -1 : 1
       if (curruentPrice > 0.3) {
-        shockIndex = this.onClose ? 0.99 : 1.01;
+        shockIndex = 0.01
       } else if (0.1 < curruentPrice && curruentPrice <= 0.3) {
-        shockIndex = this.onClose ? 0.975 : 1.025;
+        shockIndex = 0.025
       } else if (0.01 < curruentPrice && curruentPrice <= 0.1) {
-        shockIndex = this.onClose ? 0.95 : 1.05;
+        shockIndex = 0.05
       } else if (0.001 < curruentPrice && curruentPrice <= 0.01) {
-        shockIndex = this.onClose ? 0.9 : 1.1;
+        shockIndex = 0.1
       } else {//<=0.001
         shockIndex = this.onClose ? 0.0002 : 1.5;
+        return (curruentPrice*shockIndex).toFixed(4)
       }
-      return (curruentPrice * shockIndex).toFixed(4)
+      return (curruentPrice * (1+i*this.switchObj.ent_price_n*shockIndex)).toFixed(4)
     }
   },
   props: ['onClose', 'holding', 'resObj', 'totalMoney'],
