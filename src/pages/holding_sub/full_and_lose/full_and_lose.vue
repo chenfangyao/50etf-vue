@@ -14,7 +14,7 @@
         <span>持仓数：{{resObj.own_amount}}</span>
       </div>
       <div class="inputContainer">
-        <input-item what-icon='' class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'"  v-model="inputPrice"></input-item>
+        <input-item what-icon='' class="partinput-style" :placeholderTxt="isFull==1?'止盈值':'止损值'" v-model="inputPrice"></input-item>
         <span class="inputspan">{{title}}值{{moreless}}于最新价生效</span>
       </div>
       <div class="zyzsspan textc2"><span>单张盈亏：{{singykprice}}</span><span>盈亏比：{{singykroute}}%</span></div>
@@ -63,20 +63,20 @@ export default {
         toastTxt = "价格设置不能低于0.001！"
       }
       if (this.isFull == 1) {
-        if (this.inputPrice <= this.resObj.last_price) toastTxt = '价必须大于最新价'
+        if (this.inputPrice <= this.resObj.last_price) toastTxt = '价必须大于最新价';
         sltp_price_tp = this.inputPrice
         sltp_price_sl = this.resObj.sltp_price_sl
         sltp_name = '止盈'
       } else {
-        if (this.inputPrice >= this.resObj.last_price) toastTxt = '价必须小于最新价'
+        if (this.inputPrice >= this.resObj.last_price) toastTxt = '价必须小于最新价';
         sltp_price_tp = this.resObj.sltp_price_tp
         sltp_price_sl = this.inputPrice
         sltp_name = '止损'
       }
-      if (toastTxt) {
-        this.$toast(sltp_name + toastTxt)
-        return
-      }
+       if (toastTxt) {
+         this.$toast(sltp_name + toastTxt)
+         return
+       }
       // this.$router.goBack()
       var options = {
         url: '/Sapi/Hold/sltp_set',
@@ -90,13 +90,13 @@ export default {
         },
       }
       if (this.isFull) {
-        options.data.sltp_effect_tp = this.isOpen?1:2
+        options.data.sltp_effect_tp = this.isOpen ? 1 : 2
       } else {
-        options.data.sltp_effect_sl = this.isOpen?1:2
+        options.data.sltp_effect_sl = this.isOpen ? 1 : 2
       }
       this.$dialog.confirm({
         title: '设置' + sltp_name,
-        message: sltp_name + '：' + (this.isOpen?this.inputPrice:'关' )
+        message: sltp_name + '：' + (this.isOpen ? this.inputPrice : '关')
       }).then(() => {
         // on confirm
         this.sureChange = true
@@ -118,18 +118,18 @@ export default {
 
     },
     goBack() {
-     /*  if (this.changePrice != this.inputPrice && !this.sureChange) {
-        this.$dialog.confirm({
-          title: '' + this.title + '值未确认',
-          message: '您设置的止盈值，未确认，是否直接返回上一级页面'
-        }).then(() => {
-          this.$router.goBack()
-        }).catch(() => {
-          // on cancel
-        });
-      } else {
-        } */
-        this.$router.goBack()
+      /*  if (this.changePrice != this.inputPrice && !this.sureChange) {
+         this.$dialog.confirm({
+           title: '' + this.title + '值未确认',
+           message: '您设置的止盈值，未确认，是否直接返回上一级页面'
+         }).then(() => {
+           this.$router.goBack()
+         }).catch(() => {
+           // on cancel
+         });
+       } else {
+         } */
+      this.$router.goBack()
 
     }
   },

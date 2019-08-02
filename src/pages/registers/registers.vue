@@ -18,7 +18,7 @@
       <input-item placeholderTxt="邀请人的邀请码" @now-blur="handleBlur" v-if='switchObj.show_reluser==1' v-model="inviteCode"></input-item>
 
       <!-- <submit-btn btnTxt='完成' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn> -->
-      <div class="bottom-part">
+      <div class="bottomPart">
         <submit-btn btnTxt="完成" @v-tap="handleLogin" :verify-ok="verifyYes"></submit-btn>
         <err-tip :err-class="showErr" :tip-content="tipContent"></err-tip>
         <div class="bottomTxt">
@@ -187,7 +187,6 @@ export default {
 div.wrap {
   height: 100vh;
   min-height: 550px;
-  position: absolute;
 }
 div.title {
   font-size: 28px;
@@ -226,12 +225,6 @@ div.container {
       color: #2e8ae5;
       text-decoration: underline;
     }
-  }
-  div.bottom-part {
-    position: absolute;
-    bottom: 10px;
-    left: 0.55rem;
-    right: 0.55rem;
   }
 }
 </style>

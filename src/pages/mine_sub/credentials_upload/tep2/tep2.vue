@@ -16,6 +16,12 @@
         <img class="iconView imgView2" v-if="imgUrl[1]" :src="imgUrl[1]" :data-src="imgUrl[1]" v-vtap="{method: chooseImage , params: 1}">
         <s-icon :icon-class="atNight?'idcard2black':'idcard2'" v-else class="iconView" v-vtap="{method: chooseImage , params: 1}"></s-icon>
       </div>
+      <!-- 正面 -->
+      <div class="cardPhoto black2" v-if="userinfo.is_certified==1">
+        <div>点击上传手持身份证照片</div>
+        <img class="iconView" v-if="imgUrl[2]" :src="imgUrl[2]" :data-src="imgUrl[2]" v-vtap="{method: chooseImage , params: 2}">
+        <s-icon :icon-class="atNight?'idcard1black':'idcard1'" v-else class="iconView" v-vtap="{method: chooseImage , params: 2}"></s-icon>
+      </div>
     </div>
 
     <btn-block txt="下一步" @v-tap="goNext"></btn-block>
@@ -67,7 +73,7 @@ export default {
         photo: {
           f0: this.f0,
           f1: this.f1,
-          f2: ""
+          f2: this.f2
         },
         mobile: this.mobile,
       }));
@@ -84,6 +90,8 @@ export default {
             this.f0 = rst.base64
           } else if (i == 1) {
             this.f1 = rst.base64
+          }else{
+            this.f2 = rst.base64
           }
           this.$set(this.imgUrl, i, path)
           this.$store.commit("setloadingFlag", false);
@@ -109,7 +117,7 @@ export default {
     this.IDcard = opt.IDcard
     this.mobile = opt.telnum
   },
-  computed: mapState(['atNight'])
+  computed: mapState(['atNight','userinfo'])
 }
 </script>
 

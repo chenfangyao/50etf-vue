@@ -10,7 +10,7 @@
       <submit-btn btnTxt='登录' @v-tap='handleLogin' :verify-ok='verifyYes'></submit-btn>
       <err-tip :err-class='showErr' :tip-content='tipContent'></err-tip>
       <div class="txt2 uni-flex">
-        <span v-vtap="{method: go , params: 1}">注册用户</span>
+        <span v-if="switchObj.show_home_reg==1" v-vtap="{method: go , params: 1}">注册用户</span>
         <span v-vtap="{method: go , params: 2}">忘记密码 ？</span>
       </div>
     </div>

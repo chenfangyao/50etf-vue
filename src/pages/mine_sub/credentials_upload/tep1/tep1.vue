@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
     <base-header has-back='1' title="实名认证"></base-header>
-    <!-- <div class="title">设置成功后，可通过账号密码登录</div> -->
+    <div class="title">设置成功后，可通过账号密码登录</div>
     <div class="container black2">
       <input-item iconTxt='真实姓名' @now-blur='handleBlur' v-model="uName"></input-item>
       <input-item iconTxt='身份证号' @now-blur='handleBlur' v-model="IDcard"></input-item>
-      <input-item iconTxt='手机号' v-if="userinfo.is_certified!=5" @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
+      <input-item iconTxt='手机号' v-if="userinfo.is_certified%5!=0" @now-blur='handleBlur' isTel='1' v-model="telnum"></input-item>
     </div>
     <div class="btn">
       <submit-btn btnTxt='下一步' @v-tap='handleNext' :verify-ok='verifyYes'></submit-btn>
@@ -44,14 +44,14 @@ export default {
         this.showErr = true
         this.tipContent = this.$validata(this.uName)
         return
-      } else if (this.userinfo.is_certified != 5 && this.$validata(this.telnum, 2) != 1) {
+      } else if (this.userinfo.is_certified%5!=0 && this.$validata(this.telnum, 2) != 1) {
         this.showErr = true
         this.tipContent = this.$validata(this.telnum, 2)
         return
       }//以上冗余
       
       this.showErr = false
-      if ([2, 3, 5,8,9].indexOf(this.userinfo.is_certified) != -1) {
+      if ([2, 3, 5,8,9,10].indexOf(this.userinfo.is_certified) != -1) {
         var options = {
           url: '/Sapi/User/realn',
           method: 'POST',
