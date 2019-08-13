@@ -103,6 +103,12 @@ export default {
         console.error(err, '捕捉')
       })
     },
+    creadIosLink(href){
+      var el=document.createElement('link')
+      el.rel="apple-touch-icon-precomposed"
+      el.href=href
+      document.head.appendChild(el)
+    },
     getConf() {
       var options = {
         url: '/Sapi/Soft/conf',
@@ -111,6 +117,7 @@ export default {
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.$store.commit('setswitchObj', res.data)
+          this.creadIosLink(res.data.logo)
           var theme = localStorage.getItem('selfTheme')
           if (theme === null) {
             this.$store.commit('setatNight', res.data.default_skin === '0')

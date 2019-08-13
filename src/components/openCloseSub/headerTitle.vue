@@ -3,13 +3,13 @@
     <div class="headerContainer">
       <div class="black2" :style="{height:statusbarHeight+'px'}"></div>
       <div class="root-el uni-flex">
-        <div class="leftPart" v-vtap="{method:back}">
+        <div class="leftPart" v-vtap="{method:back}" v-if="showBack">
           <s-icon :icon-class="'nav_left' | atNightIcon" ></s-icon>
         </div>
         <div class="tabOpen uni-flex" :class="{active:tabActive}">
-          <div v-vtap="{method:tapChange}">开仓</div>
-          <div v-vtap="{method:tapChange}">平仓</div>
-          <div class="slider">{{tabActive?'平仓':'开仓'}}</div>
+          <div v-vtap="{method:tapChange}">{{leftName}}</div>
+          <div v-vtap="{method:tapChange}">{{rightName}}</div>
+          <div class="slider">{{tabActive?rightName:leftName}}</div>
         </div>
       </div>
     </div>
@@ -20,11 +20,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 export default {
-  props: {
-    tabActive: {
-      require: true
-    }
-  },
+  props:['tabActive','leftName','rightName','showBack'],
   data() {
     return {
 

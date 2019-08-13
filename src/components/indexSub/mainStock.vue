@@ -1,8 +1,11 @@
 <template>
   <div class="">
-    <div class="tab2 black1">
+    <div class="tab2 black1" v-if="switchObj.home<3">
       <div v-vtap="{method:tabClick}" :class="{active:!activeI}">看涨</div>
       <div v-vtap="{method:tabClick}" :class="{active2:activeI}">看跌</div>
+    </div>
+    <div class="uni-flex newsViewTitle textc1" v-else>
+      <span>自选合约</span>
     </div>
     <div class="title uni-flex black2 textc2">
       <div>名称</div>
@@ -13,7 +16,7 @@
       </div>
       <div>涨幅比</div>
     </div>
-    <div class="list black2">
+    <div class="quotesList black2">
       <ul v-for="(item,i) in stockArr" :key="i" class="uni-flex" v-vtap="{method:go,params:i}">
         <li>
           <div class="textc1">{{item.stock_name.substr(5)}}</div>
@@ -29,6 +32,8 @@
 </template>
 <script>
 import { Tab, Tabs } from 'vant';
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -52,7 +57,7 @@ export default {
     getquoteList() {
       this.resquestState = 0
       var options = {
-        url: '/fiftyEtf/QryQuotationList', 
+        url: '/fiftyEtf/QryQuotationList',
         method: 'POST',
         data: {
           quotation_list: this.quotationStr
@@ -67,11 +72,12 @@ export default {
     },
     getMainlist() {
       var options = {
-        url: '/Sapi/Squery/main_stock_list',
+        url: this.switchObj.home < 3 ? '/Sapi/Squery/main_stock_list' : '/Sapi/Fav/list_fav',
         method: 'POST',
       }
       this.$httpReq(options).then((res) => {
-        this.stockItems = this.activeI ? res.data.down : res.data.up
+        if(this.switchObj.home < 3)this.stockItems = this.activeI ? res.data.down : res.data.up;
+        else this.stockItems=res.data.list
         this.getquoteList()
       }).catch((err) => {
         console.error(err, '捕捉')
@@ -95,15 +101,16 @@ export default {
       return this.stockItems.map(item => {
         return '?' + item.stock_code
       }).join("")
-    }
+    },
+    ...mapState(['switchObj'])
   },
   created() {
     this.getMainlist()
-    this.timmer||(this.timmer = setInterval(this.getquoteList, 3000))
+    this.timmer || (this.timmer = setInterval(this.getquoteList, 3000))
   },
-  activated(){//稍冗余
+  activated() {//稍冗余
     this.getMainlist()
-    this.timmer||(this.timmer = setInterval(this.getquoteList, 3000))
+    this.timmer || (this.timmer = setInterval(this.getquoteList, 3000))
   },
   deactivated() {
     clearInterval(this.timmer)
@@ -132,6 +139,17 @@ export default {
     margin-right: 29px;
   }
 }
+div.newsViewTitle {
+  justify-content: space-between;
+  font-size: 16px;
+  line-height: 16px;
+  color: #333;
+  margin: 0.32rem 0.1rem 0.24rem;
+  span {
+    border-left: solid $primary1 3px;
+    padding-left: 6px;
+  }
+}
 .title {
   justify-content: space-between;
   font-size: 12px;
@@ -155,12 +173,12 @@ export default {
     text-align: center;
   }
 }
-.list {
+.quotesList {
   background-color: #fff;
   border-radius: 5px;
-  min-height: 400px;
   margin-bottom: 20px;
   padding: 0 0.26rem;
+  min-height: 350px;
   ul {
     justify-content: space-between;
     align-items: center;

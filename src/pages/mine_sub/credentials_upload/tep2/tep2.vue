@@ -7,18 +7,21 @@
       <!-- 正面 -->
       <div class="cardPhoto black2">
         <div>点击上传身份证正面</div>
+        <input  class="replyFileid" v-if="env" type="file" @change="getfilename($event,0);" />
         <img class="iconView" v-if="imgUrl[0]" :src="imgUrl[0]" :data-src="imgUrl[0]" v-vtap="{method: chooseImage , params: 0}">
         <s-icon :icon-class="atNight?'idcard1black':'idcard1'" v-else class="iconView" v-vtap="{method: chooseImage , params: 0}"></s-icon>
       </div>
       <!-- 反面 -->
       <div class="cardPhoto mt20 black2">
         <div>点击上传身份证反面</div>
+        <input  class="replyFileid" v-if="env" type="file" @change="getfilename($event,1);" />
         <img class="iconView imgView2" v-if="imgUrl[1]" :src="imgUrl[1]" :data-src="imgUrl[1]" v-vtap="{method: chooseImage , params: 1}">
         <s-icon :icon-class="atNight?'idcard2black':'idcard2'" v-else class="iconView" v-vtap="{method: chooseImage , params: 1}"></s-icon>
       </div>
       <!-- 正面 -->
       <div class="cardPhoto black2" v-if="userinfo.is_certified==1">
         <div>点击上传手持身份证照片</div>
+        <input  class="replyFileid" v-if="env" type="file" @change="getfilename($event,2);" />
         <img class="iconView" v-if="imgUrl[2]" :src="imgUrl[2]" :data-src="imgUrl[2]" v-vtap="{method: chooseImage , params: 2}">
         <s-icon :icon-class="atNight?'idcard1black':'idcard1'" v-else class="iconView" v-vtap="{method: chooseImage , params: 2}"></s-icon>
       </div>
@@ -45,6 +48,7 @@ export default {
       f1: '',
       f2: '',
       mobile: '',
+      env: process.env.NODE_ENV !== 'production'
     };
   },
   components: { btnBlock },
@@ -78,11 +82,20 @@ export default {
         mobile: this.mobile,
       }));
     },
+    getfilename(e, i) {
+      lrz(e.target.files[0]).then(rst => {
+        if (i == 0) {
+          this.f0 = rst.base64
+        } else if (i == 1) {
+          this.f1 = rst.base64
+        } else {
+          this.f2 = rst.base64
+        }
+        this.$set(this.imgUrl, i, URL.createObjectURL(e.target.files[0]))
+      }).catch(err =>  console.error(err))
+    },
     chooseImage(i) {
-      if (process.env.NODE_ENV !== 'production') {
-        this.$toast('请使用APP上传图片')
-        return
-      }
+      if (this.env) return;
       plus.gallery.pick(path => {
         this.$store.commit("setloadingFlag", true);
         lrz(path).then(rst => {
@@ -90,7 +103,7 @@ export default {
             this.f0 = rst.base64
           } else if (i == 1) {
             this.f1 = rst.base64
-          }else{
+          } else {
             this.f2 = rst.base64
           }
           this.$set(this.imgUrl, i, path)
@@ -117,7 +130,7 @@ export default {
     this.IDcard = opt.IDcard
     this.mobile = opt.telnum
   },
-  computed: mapState(['atNight','userinfo'])
+  computed: mapState(['atNight', 'userinfo'])
 }
 </script>
 
@@ -146,6 +159,21 @@ div.wrap {
     background: rgba(255, 255, 255, 1);
     padding-top: 0.2rem;
     text-align: center;
+    position: relative;
+    .replyFileid {
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      overflow: hidden;
+      -moz-opacity: 0;
+      -khtml-opacity: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 20;
+      width: 5.06rem;
+      height: 3.22rem;
+    }
     .iconView {
       width: 5.06rem;
       height: 3.22rem;

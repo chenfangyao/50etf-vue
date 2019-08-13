@@ -1,25 +1,20 @@
 <template>
   <div>
-    <base-header title="行情"></base-header>
+    <header-title v-if="switchObj.show_fav" :tab-active="onMarket" @change-close="reGetSth" left-name="自选" right-name="市场"></header-title>
+    <base-header title="行情" v-else></base-header>
     <stock-tip-bar :commonstock="commonstock"></stock-tip-bar>
-    <div class="uni-tab-bar">
+    <div class="uni-tab-bar" v-show="onMarket">
       <div class="swiper-tab uni-flex black2 ">
         <div v-for="(tab,index) in taglist" :key="tab.id" class="swiper-tab-list2 textc1" :id="tab.id">
-          <span
-            :class="[tabIndex==index ? 'active' : '']"
-            v-vtap="{method:tapTab}"
-            :data-current="index"
-          >{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
+          <span :class="[tabIndex==index ? 'active' : '']" v-vtap="{method:tapTab}" :data-current="index">{{tab.tag_name}}{{'('+tab.tag_expiry+')'}}</span>
         </div>
       </div>
       <futures-title></futures-title>
       <scroll-view class="list2" :style="{height: clacHeight}" @scrollToEnd="loadMore(1)">
         <futures-datas :quote-list="quoteList" :code-list="codeList" :latest-price="commonstock"></futures-datas>
-        <!-- <div class="uni-tab-bar-loading">
-          <uni-load-more :loading-type="resquestState" ></uni-load-more>
-        </div>-->
       </scroll-view>
     </div>
+    <self-choose v-show="!onMarket" :un-active="onMarket"></self-choose>
   </div>
 </template>
 
@@ -27,6 +22,8 @@
 import stockTipBar from '@/components/quotesSub/stockTips.vue'
 import futuresTitle from '@/components/quotesSub/futuresTitle.vue'
 import futuresDatas from '@/components/quotesSub/futuresDatas.vue'
+import selfChoose from '@/components/quotesSub/selfChoose.vue'
+import headerTitle from '@/components/openCloseSub/headerTitle.vue'
 
 import uniLoadMore from '@/components/uni-load-more.vue';
 import { mapState, mapMutations } from 'vuex';
@@ -35,28 +32,29 @@ import scrollView from '@/components/other/scroll-view'
 
 export default {
   components: {
-    uniLoadMore, stockTipBar, futuresTitle, futuresDatas, scrollView
+    uniLoadMore, stockTipBar, futuresTitle, futuresDatas, scrollView, headerTitle, selfChoose
   },
   data() {
     return {
       scrollLeft: 0,
       tabIndex: 0,
+      onMarket: true,
       resquestState: 1,
       newsitems: [1, 2, 3, 4],
       quotationStr: '',//获取列表所需的拼接字符串
       codeList: [],
       timmer: null,
       quoteList: [],//行情页显示的涨跌数据列表
-      commonstock: [{priceChangeRate:0}],//50etf股票详情
+      commonstock: [{ priceChangeRate: 0 }],//50etf股票详情
       commonstocktimmer: null
     }
   },
-  computed:{
-    ... mapState(['taglist','statusbarHeight']),
-    clacHeight(){
-     return window.innerHeight-230-this.statusbarHeight+'px'
+  computed: {
+    ...mapState(['taglist', 'statusbarHeight', 'switchObj']),
+    clacHeight() {
+      return window.innerHeight - 230 - this.statusbarHeight + 'px'
     }
-    },
+  },
   beforeRouteLeave(to, from, next) {
     clearInterval(util.indextimmer.quotesQryQuotationList)
     clearInterval(util.indextimmer.quotesCommonSelectStock)
@@ -64,24 +62,34 @@ export default {
     util.indextimmer.quotesCommonSelectStock = null
     next()
   },
- /*  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      
-    })
-  }, */
-  activated(){
+  /*  beforeRouteEnter(to, from, next) {
+     next(vm => {
+       
+     })
+   }, */
+  activated() {
     this.quotationStr || this.getgroupLabel()//获取那一串股票码
-      this.getcommonselectstock([''])
-      if (!util.calcLegalTime()) return;
-      this.beginPolling()
-      if (util.indextimmer.quotesCommonSelectStock === null) {
-        util.indextimmer.quotesCommonSelectStock = setInterval(() => {
-          this.getcommonselectstock([this.commonstock[0].tradeMins])
-        }, 1500)
-      }
+    this.getcommonselectstock([''])
+    if (!util.calcLegalTime()) return;
+    this.beginPolling()
+    if (util.indextimmer.quotesCommonSelectStock === null) {
+      util.indextimmer.quotesCommonSelectStock = setInterval(() => {
+        this.getcommonselectstock([this.commonstock[0].tradeMins])
+      }, 1500)
+    }
   },
   methods: {
     ...mapMutations(['setcommonstock', 'settaglist']),
+    reGetSth() {
+      this.onMarket = !this.onMarket
+      if(this.onMarket){
+        this.beginPolling()
+      }else{
+        clearInterval(util.indextimmer.quotesQryQuotationList)
+        util.indextimmer.quotesQryQuotationList = null
+      }
+
+    },
     loadMore(e) {
       // this.resquestState = 1
       // setTimeout(() => {
@@ -90,15 +98,15 @@ export default {
       // }, 1200);
     },
     beginPolling() {
-      if (util.indextimmer.quotesQryQuotationList === null) {
+      if (util.indextimmer.quotesQryQuotationList === null&&this.onMarket) {
         util.indextimmer.quotesQryQuotationList = setInterval(() => this.resquestState && this.getquoteList(), 1000)
       }
     },
     getquoteList() {
       this.resquestState = 0
       var options = {
-        url: '/fiftyEtf/QryQuotationList', 
-        method: 'POST', 
+        url: '/fiftyEtf/QryQuotationList',
+        method: 'POST',
         data: {
           quotation_list: this.quotationStr
         },
@@ -108,16 +116,16 @@ export default {
         this.resquestState = 1//请求状态
         this.quoteList = res.data.list
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
     getgroupLabel() {
       var options = {
-        url: '/Sapi/Squery/list_tag', 
-        method: 'GET', 
+        url: '/Sapi/Squery/list_tag',
+        method: 'GET',
       }
-      if(this.taglist){
+      if (this.taglist) {
         this.startArtlelist()
         return
       }
@@ -126,7 +134,7 @@ export default {
         this.startArtlelist()
       })
     },
-    startArtlelist(){
+    startArtlelist() {
       this.getartlelist()
       util.calcLegalTime() && this.beginPolling()//启动轮询
     },
@@ -134,8 +142,8 @@ export default {
     getartlelist() {
       this.resquestState = 0
       var options = {
-        url: '/Sapi/Squery/list_stocks', 
-        method: 'GET', 
+        url: '/Sapi/Squery/list_stocks',
+        method: 'GET',
         data: {
           page_index: 0,
           page_size: 10000,
@@ -147,9 +155,9 @@ export default {
 
       this.$httpReq(options).then((res) => {
         this.codeList = res.data.list
-        this.codeList&&this.dealquotationStr()
+        this.codeList && this.dealquotationStr()
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     },
@@ -186,8 +194,8 @@ export default {
       var stockTradeMins = [{ "stockCodeInternal": "510050", "tradeMins": timestrs[0] }],
         stockTradeMins = JSON.stringify(stockTradeMins)
       var options = {
-        url: '/stockStat/getCommonSelectStock', 
-        method: 'POST', 
+        url: '/stockStat/getCommonSelectStock',
+        method: 'POST',
         data: { stockTradeMins: stockTradeMins },
         header: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
@@ -198,7 +206,7 @@ export default {
           this.setcommonstock(res.ldata)
         }
       }).catch((err) => {
-        
+
         console.error(err, '捕捉')
       })
     }

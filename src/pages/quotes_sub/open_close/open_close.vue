@@ -1,6 +1,6 @@
 <template>
   <div class="wrap_op black1">
-    <header-title :tab-active="onClose" @change-close="reGetSth"></header-title>
+    <header-title :tab-active="onClose" @change-close="reGetSth" showBack="1" left-name="开仓" right-name="平仓"></header-title>
     <div class="h1 black1"></div>
     <contain-chart :res-obj="QuotationMsg" :symbol-str='symbol'></contain-chart>
     <mini-table :hydetils="QuotationMsg"></mini-table>

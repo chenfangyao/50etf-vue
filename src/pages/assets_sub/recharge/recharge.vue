@@ -1,7 +1,7 @@
 <template>
   <div class="wrap" :class="showTable? 'mengban':''">
     <base-header title="账户充值" right-txt='充值记录' has-back='1' @right-tap='rightTap'></base-header>
-    <recharge-way  @calc-default='calcDefault' @change-wayi='changeWayI' ></recharge-way>
+    <recharge-way @calc-default='calcDefault' @change-wayi='changeWayI' :txt1="txt1"></recharge-way>
     <div class="panel black2">
       <div class="inputContainer">
         <div class="moneyTitle textc1">充值金额</div>
@@ -176,7 +176,8 @@ export default {
       showTable: false,
       alipayRes: '',
       pay_way: '',
-      alipayChannel: null
+      alipayChannel: null,
+      txt1: ''
     }
   },
   computed: mapState(['assets', 'userinfo']),
@@ -269,18 +270,20 @@ export default {
       this.payeeinfo = obj
       this.pay_way = obj.pay_way
       this.paytype = obj.pay_code
-      this.priceLists = obj.conf_set?obj.conf_set.money_selects:obj.money_selects
+      this.priceLists = obj.conf_set ? obj.conf_set.money_selects : obj.money_selects
       this.money = this.priceLists[0]
     },
     getpayway() {
       var options = {
-        url: '/Sapi/Ufund/payway', 
+        url: '/Sapi/Ufund/payway',
         method: 'GET',
       }
       this.$httpReq(options).then((res) => {
         if (res.status) {
           this.setpaylist(res.data)
-        } 
+        } else {
+          this.txt1 = res.info
+        }
       }).catch((err) => {
         console.error(err, '捕捉')
       })
@@ -320,7 +323,7 @@ export default {
       } else {
         this.inputDisabled = false
       }
-      this.priceLists = i.conf_set?i.conf_set.money_selects:i.money_selects
+      this.priceLists = i.conf_set ? i.conf_set.money_selects : i.money_selects
     },
     choosePriceItem(i) {
       this.priceItem_i = i
@@ -364,8 +367,8 @@ div.wrap {
         background-color: white;
         border-bottom: 1px solid #ccc;
         border-radius: 0;
-        #app.at-night &{
-          border-color: $blackTxt2
+        #app.at-night & {
+          border-color: $blackTxt2;
         }
         height: 55px;
         padding: 0;
@@ -389,7 +392,7 @@ div.wrap {
     div.priceItem {
       justify-content: space-between;
       flex-wrap: wrap;
-        color: #333;
+      color: #333;
       > div {
         width: 2rem;
         height: 0.82rem;
@@ -406,9 +409,8 @@ div.wrap {
         background-color: #ffe8e8;
         color: $primary1;
         border-color: $primary1;
-        #app.at-night &{
+        #app.at-night & {
           background-color: transparent;
-
         }
       }
     }
