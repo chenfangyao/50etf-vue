@@ -12,7 +12,7 @@
       </div>
       <div>涨幅比</div>
     </div>
-    <div class="list black2" v-if="stockArr">
+    <div class="list black2 textc1" v-if="stockArr">
       <div v-for="(item,i) in stockArr" :key="item.stock_code">
         <div class="singleItem">
           <ul class="uni-flex" v-vtap="{method:go}" :data-i="i">

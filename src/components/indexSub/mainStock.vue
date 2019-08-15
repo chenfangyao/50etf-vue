@@ -24,8 +24,8 @@
         </li>
         <li>{{item.trade_volume | judgeLength}}</li>
         <li>{{item.open_interest | judgeLength}}</li>
-        <li :class="{inUp:!activeI}" class="price">{{item.last_price}}</li>
-        <li :class="{inUp:!activeI}">{{item.incr_percent | percent}}</li>
+        <li :class="{inUp:item.incr_percent>0}" class="price">{{item.last_price}}</li>
+        <li :class="{inUp:item.incr_percent>0}">{{item.incr_percent | percent}}</li>
       </ul>
     </div>
   </div>

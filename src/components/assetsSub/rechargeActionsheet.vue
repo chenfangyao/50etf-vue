@@ -55,7 +55,7 @@ export default {
       let online = []
       for (let i = 0; i < val['online'].length; i++) {
         val.online[i].pay_way = 'online'
-        if (["alipay_wap", 'aliauto'].indexOf(val['online'][i].pay_code) >= 0) {
+        if (["alipay_wap", 'aliauto','ysfpay'].indexOf(val['online'][i].pay_code) >= 0) {
           online.push(val['online'][i])
         }
       }
